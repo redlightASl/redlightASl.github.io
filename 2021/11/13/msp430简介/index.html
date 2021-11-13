@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
-  <title>我的新博客 | Note</title>
+  <title>MSP430简介 | Note</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="MSP430该MCU是由德州仪器TI生产的16位低功耗单片机 主要分以下型号：  专注低功耗的1xx通用型，配备1KB-60KB FLASH、512B-10KB RAM，工作时耗电仅达200uA&#x2F;MIPS，RAM保持模式耗电0.1uA，RTC模式耗电0.7uA；可在6us之内快速唤醒。搭载10&#x2F;12位斜率SAR ADC，集成模拟比较器、DMA、硬件乘法器、BOR、SVS、12位DAC 能耗比高的F">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的新博客">
+<meta property="og:title" content="MSP430简介">
 <meta property="og:url" content="https://redlightasl.github.io/2021/11/13/msp430%E7%AE%80%E4%BB%8B/">
 <meta property="og:site_name" content="Note">
 <meta property="og:description" content="MSP430该MCU是由德州仪器TI生产的16位低功耗单片机 主要分以下型号：  专注低功耗的1xx通用型，配备1KB-60KB FLASH、512B-10KB RAM，工作时耗电仅达200uA&#x2F;MIPS，RAM保持模式耗电0.1uA，RTC模式耗电0.7uA；可在6us之内快速唤醒。搭载10&#x2F;12位斜率SAR ADC，集成模拟比较器、DMA、硬件乘法器、BOR、SVS、12位DAC 能耗比高的F">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-13T09:47:22.000Z">
-<meta property="article:modified_time" content="2021-11-13T09:50:36.872Z">
+<meta property="article:modified_time" content="2021-11-13T09:51:59.253Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="电赛笔记">
 <meta name="twitter:card" content="summary">
@@ -171,7 +171,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      我的新博客
+      MSP430简介
     </h1>
   
 
@@ -201,13 +201,13 @@
 <p>主要分以下型号：</p>
 <ul>
 <li>专注低功耗的<strong>1xx</strong>通用型，配备1KB-60KB FLASH、512B-10KB RAM，工作时耗电仅达200uA/MIPS，RAM保持模式耗电0.1uA，RTC模式耗电0.7uA；可在6us之内快速唤醒。搭载10/12位斜率SAR ADC，集成模拟比较器、DMA、硬件乘法器、BOR、SVS、12位DAC</li>
-<li>能耗比高的<strong>F2xx</strong>通用型，性能<a href="mailto:&#x31;&#54;&#77;&#73;&#x50;&#83;&#64;&#51;&#46;&#x33;&#86;">&#x31;&#54;&#77;&#73;&#x50;&#83;&#64;&#51;&#46;&#x33;&#86;</a>，配备1-120KB FLASH，8-128KB RAM，工作耗电220uA，配备10/12位斜率SAR ADC，集成16位Σ-ΔADC，基本上等于1xx的升级版</li>
-<li><strong>性价比</strong>高的<strong>G2xx</strong>经济型，性能<a href="mailto:&#x31;&#x36;&#x4d;&#x49;&#80;&#83;&#64;&#x33;&#x2e;&#x33;&#x56;">&#x31;&#x36;&#x4d;&#x49;&#80;&#83;&#64;&#x33;&#x2e;&#x33;&#x56;</a>，对标友商stm32l，主打模拟外设和低功耗</li>
+<li>能耗比高的<strong>F2xx</strong>通用型，性能<a href="mailto:&#x31;&#x36;&#77;&#73;&#x50;&#83;&#x40;&#51;&#x2e;&#x33;&#86;">&#x31;&#x36;&#77;&#73;&#x50;&#83;&#x40;&#51;&#x2e;&#x33;&#86;</a>，配备1-120KB FLASH，8-128KB RAM，工作耗电220uA，配备10/12位斜率SAR ADC，集成16位Σ-ΔADC，基本上等于1xx的升级版</li>
+<li><strong>性价比</strong>高的<strong>G2xx</strong>经济型，性能<a href="mailto:&#x31;&#54;&#x4d;&#x49;&#x50;&#83;&#64;&#x33;&#46;&#51;&#x56;">&#x31;&#54;&#x4d;&#x49;&#x50;&#83;&#64;&#x33;&#46;&#51;&#x56;</a>，对标友商stm32l，主打模拟外设和低功耗</li>
 <li>面向计量和智能电网的AFE2xx专用型：性能略低于以上两个2xx系列，但是集成了1-3个独立的24位Σ-ΔADC，一个16位定时器、一个16位硬件乘法器、USART控制器、看门狗和GPIO</li>
 <li>停产的老型号3xx</li>
 <li>面向低功耗<strong>多媒体</strong>的<strong>4xx</strong>控制型，8-16MIPS处理性能，<strong>配备LCD控制器</strong>、<strong>FLL、SVS</strong>，针对低功耗测量和医疗应用，功耗和1xx相近，4-120KB FLASH、8-256KB RAM，引脚丰富最多可达80Pin，配备10/12位斜率SAR、16位Σ-ΔADC，同样集成了12位ADC、DMA、硬件乘法器、运放、USCI模块等</li>
-<li><strong>超高能耗比的5xx超低功耗型</strong>，能达到<a href="mailto:&#50;&#53;&#x4d;&#x49;&#80;&#83;&#x40;&#51;&#x2e;&#x33;&#x56;">&#50;&#53;&#x4d;&#x49;&#80;&#83;&#x40;&#51;&#x2e;&#x33;&#x56;</a>，工作模式功耗165uA/MIPS，RTC模式2.5uA，RAM保持模式可达1uA，待机唤醒时间极短，小于5ms，配备256KB FLASH、18KB RAM，额外集成了USB、模拟比较器</li>
-<li>高性能、低功耗的6xx系列旗舰型，达到<a href="mailto:&#50;&#53;&#77;&#73;&#80;&#83;&#x40;&#51;&#46;&#51;&#x56;">&#50;&#53;&#77;&#73;&#80;&#83;&#x40;&#51;&#46;&#51;&#x56;</a>，配备功耗优化的创新电源管理模块和USB控制器，配备LCD控制器，有256KB FLASH、18KB RAM，74Pin引脚，功耗与5xx系列相同，还额外集成了电压管理模块</li>
+<li><strong>超高能耗比的5xx超低功耗型</strong>，能达到<a href="mailto:&#x32;&#x35;&#77;&#x49;&#x50;&#x53;&#64;&#x33;&#46;&#x33;&#86;">&#x32;&#x35;&#77;&#x49;&#x50;&#x53;&#64;&#x33;&#46;&#x33;&#86;</a>，工作模式功耗165uA/MIPS，RTC模式2.5uA，RAM保持模式可达1uA，待机唤醒时间极短，小于5ms，配备256KB FLASH、18KB RAM，额外集成了USB、模拟比较器</li>
+<li>高性能、低功耗的6xx系列旗舰型，达到<a href="mailto:&#50;&#53;&#77;&#x49;&#80;&#x53;&#64;&#x33;&#x2e;&#51;&#86;">&#50;&#53;&#77;&#x49;&#80;&#x53;&#64;&#x33;&#x2e;&#51;&#86;</a>，配备功耗优化的创新电源管理模块和USB控制器，配备LCD控制器，有256KB FLASH、18KB RAM，74Pin引脚，功耗与5xx系列相同，还额外集成了电压管理模块</li>
 <li>基于<strong>FRAM</strong>技术的<strong>FRxx</strong>系列，和主要的F系列差别在于使用了FRAM存储技术，能够达到更快的FLASH访问速度并在所有功率模式下实现零功率状态保持，即使发生功率损耗的情况也可以保证写入操作，写入寿命能达到100M个周期，不再需要EEPROM</li>
 <li>低电压C、L系列，两个谢列都可以在0.9-1.65V电压范围内工作并提供4MIPS的性能</li>
 <li>集成射频基带的CC无线系列，具有低于1GHz的片上射频收发器，工作电压为1.8-3.3V，处理性能20MIPS</li>
@@ -741,11 +741,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/11/13/%E6%88%91%E7%9A%84%E6%96%B0%E5%8D%9A%E5%AE%A2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/11/13/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E7%94%B5%E8%B7%AF%E6%A6%82%E8%AE%BA%E3%80%91/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          我的新博客
+          电路设计从入门到弃坑0【电路概论】
         
       </div>
     </a>

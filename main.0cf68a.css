@@ -787,14 +787,14 @@ html {
   border-bottom: 1px solid color-border;
 }
 .left-col #header a {
-  color: #696969;
+  color: #f074f5ad;
 }
 .left-col #header a:hover {
-  color: #b0a0aa;
+  color: #e647a9;
 }
 .left-col #header .header-subtitle {
   text-align: center;
-  color: #999;
+  color: rgb(115, 41, 117);
   font-size: 14px;
   line-height: 25px;
   overflow: hidden;
@@ -2651,10 +2651,10 @@ pre .id {
 }
 @media screen and (max-width: 800px) {
   #container,
-  /* body, */
-  body {
+  body,
+  /* body {
       background: url('https://redlightasl.github.io/assets/bg_mobile_800') no-repeat fixed top;
-  }
+  } */
   html {
     height: auto;
     overflow-x: hidden;

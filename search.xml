@@ -1,9 +1,388 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Markdown基本语法</title>
+    <url>/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
+
+<p>例：</p>
+<h1 id="你好"><a href="#你好" class="headerlink" title="你好"></a>你好</h1><h2 id="你好-1"><a href="#你好-1" class="headerlink" title="你好"></a>你好</h2><h3 id="你好-2"><a href="#你好-2" class="headerlink" title="你好"></a>你好</h3><h4 id="你好-3"><a href="#你好-3" class="headerlink" title="你好"></a>你好</h4><h5 id="你好-4"><a href="#你好-4" class="headerlink" title="你好"></a>你好</h5><h6 id="你不好"><a href="#你不好" class="headerlink" title="你不好"></a>你不好</h6><h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>Markdown 可以使用以下几种字体：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*斜体*</span><br><span class="line">_斜体_</span><br><span class="line">**粗体**</span><br><span class="line">__粗体__</span><br><span class="line">***粗斜体***</span><br><span class="line">___粗斜体___</span><br></pre></td></tr></table></figure>
+
+<p>为了方便可以统一记为*是强调符号，一对为斜体，两对为更加强调的粗体，三对是非常强调的粗斜体</p>
+<p>例：<br><em>苍茫的天涯是我的爱</em><br><em>月亮之上</em><br><strong>无他，唯手熟耳</strong><br><strong>1d100=100【大失败】</strong><br><em><strong>提桶跑路</strong></em><br><em><strong>讲个笑话，钓鱼佬今天没空军</strong></em></p>
+<h2 id="高亮强调"><a href="#高亮强调" class="headerlink" title="高亮强调"></a>高亮强调</h2><p>用四个等于号=包围需要强调的内容即可实现</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">==独轮车 tskk 独轮车==</span><br></pre></td></tr></table></figure>
+
+<p>例：</p>
+<p>==独轮车 tskk 独轮车==</p>
+<h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><p>用三个或以上*号单独成行表示分割线</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">***</span><br></pre></td></tr></table></figure>
+<p>例：</p>
+<hr>
+<p>下面是【数据删除】个星号*写的，猜猜有什么特殊的地方？</p>
+<hr>
+<p>显然 用很多*写出分割线可以在代码层面增加你文章的气势，具体原因留给读者自行证明</p>
+<h2 id="上标与下标"><a href="#上标与下标" class="headerlink" title="上标与下标"></a>上标与下标</h2><p>用两个^表示上标<br>用两个~表示下标</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1919^114514^</span><br><span class="line"> 今天~也是好天气~</span><br></pre></td></tr></table></figure>
+<p>例：<br>1919^114514^<br>今天<del>也是好天气</del></p>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!--注释内容--&gt;</span><br></pre></td></tr></table></figure>
+<p>表示注释<br>例：</p>
+<!--肖战必糊-->
+<p>虽然什么也没有显示<br>但这里确实有注释，我也并没有在注释里骂人</p>
+<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>Markdown 支持有序列表和无序列表。</p>
+<p>无序列表使用星号(*)、加号(+)或是减号(-)作为列表标记，这些标记后面要添加一个空格，然后再填写内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">* 第二项</span><br><span class="line">* 第三项</span><br><span class="line"></span><br><span class="line">+ 第一项</span><br><span class="line">+ 第二项</span><br><span class="line">+ 第三项</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 第一项</span><br><span class="line">- 第二项</span><br><span class="line">- 第三项</span><br></pre></td></tr></table></figure>
+<p>例：</p>
+<ul>
+<li>第一项</li>
+</ul>
+<ul>
+<li>第二项</li>
+</ul>
+<ul>
+<li>第三项</li>
+</ul>
+<p>为了记忆简单，可统一记为*后面接空格意味着一个无序列表项</p>
+<hr>
+<p>有序列表使用数字并加上 . 号来表示，如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 第一项</span><br><span class="line">2. 第二项</span><br><span class="line">3. 第三项</span><br></pre></td></tr></table></figure>
+<p>例：</p>
+<ol>
+<li>amdyes!</li>
+<li>nvidia!fxxkyou!</li>
+<li>intel还在做cpu？</li>
+</ol>
+<h2 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h2><p>Markdown 区块引用是在段落开头使用 &gt; 符号 ，然后后面紧跟一个<strong>空格</strong>符号：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; 区块引用</span><br><span class="line">&gt; 衬衫的价格是9镑15便士</span><br><span class="line">&gt; 下面你将听到</span><br></pre></td></tr></table></figure>
+
+<p>另外区块是可以嵌套的，一个 &gt; 符号是最外层，两个 &gt; 符号是第一层嵌套，以此类推：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; 最外层</span><br><span class="line">&gt;&gt; 第一层嵌套</span><br><span class="line">&gt;&gt;&gt; 第二层嵌套</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表中使用区块"><a href="#列表中使用区块" class="headerlink" title="列表中使用区块"></a>列表中使用区块</h3><p>如果要在列表项目内放进区块，那么就需要在 &gt; 前添加四个空格的缩进</p>
+<p>例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">    &gt; 传统markdown要讲码德</span><br><span class="line">    &gt; 在这里劝这位年轻码农耗子尾汁</span><br><span class="line">* 第二项</span><br><span class="line">	&gt; 芜湖</span><br><span class="line">	&gt; &gt; 起飞 &lt;!--中间加不加空格都行--&gt;</span><br><span class="line">	&gt;&gt;&gt; 飞飞飞</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一项<blockquote>
+<p>传统markdown要讲码德<br>在这里劝这位年轻码农耗子尾汁</p>
+</blockquote>
+</li>
+<li>第二项<blockquote>
+<p>芜湖</p>
+<blockquote>
+<p>起飞<!--中间加不加空格都行--><br>are u good 马来西亚</p>
+<blockquote>
+<p>飞飞飞</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
+</ul>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>如果是段落上的一个函数或片段的代码可以用反引号把它包起来（`），例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">`printf()` 函数</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h3><p>代码区块使用 <strong>4 个空格</strong>或者一个<strong>制表符（Tab 键）</strong>。</p>
+<p>也可以用 ```包裹一段代码，并指定一种语言（也可以不指定）：</p>
+<p>在大多数Markdown编辑器中，```旁边可以加语言名字添加对应的语法高亮</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">```javascript</span><br><span class="line">$(document).ready(function () &#123;</span><br><span class="line">    alert(&#x27;RUNOOB&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 链接</span><br><span class="line"></span><br><span class="line">链接使用方法如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接名称</a></p>
+<p>或者</p>
+<p>&lt;链接地址&gt;</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p> 哦我的老伙计，瞧瞧这条链接<br>  <a href="https://www.runoob.com/">感谢菜鸟教程提供部分资料（其实是大部分）</a><br> 或<a href="https://wosuibianzhaogewangzhan.com/">https://wosuibianzhaogewangzhan.com</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[感谢菜鸟教程提供部分资料（其实是大部分）](https://www.runoob.com)</span><br><span class="line"></span><br><span class="line">或&lt;https://wosuibianzhaogewangzhan.com&gt;</span><br><span class="line"></span><br><span class="line">### 高级链接</span><br><span class="line"></span><br><span class="line">可以通过变量来设置一个链接，变量赋值在文档末尾进行：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>用 1 作为网址变量 <a href="http://www.pornhub.com/">pxxnhub</a><br>用 rua 作为网址变量 <a href="https://space.bilibili.com/15810">Rua</a><br>然后在文档的结尾为变量赋值（网址）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">[pxxnhub][1]</span><br><span class="line">[Rua][rua]</span><br><span class="line"></span><br><span class="line">[1]: http://www.pornhub.com/</span><br><span class="line">[rua]: https://space.bilibili.com/15810</span><br><span class="line">## 图片</span><br><span class="line"></span><br><span class="line">Markdown 图片语法格式如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%88%91%E4%B9%9F%E4%B8%8D%E7%9F%A5%E9%81%93%E8%AF%A5%E6%94%BE%E4%BB%80%E4%B9%88%EF%BC%8C%E7%9E%8E%E5%86%99%E5%90%A7" alt="介写了个嘛玩意"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 开头一个感叹号 !</span><br><span class="line">- 接着一个方括号，里面放上图片的替代文字</span><br><span class="line">- 接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上选择性的 &#x27;title&#x27; 属性的文字。</span><br><span class="line"></span><br><span class="line">//抱歉没有例子，奇怪的图片发出来的话，人生就要结束了（悲）</span><br><span class="line"></span><br><span class="line">Markdown 还没有办法指定图片的高度与宽度，如果需要的话，可以使用普通的 \&lt;img\&gt; 标签。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/原文这里是runoob的一张图" width="50%">
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 表格</span><br><span class="line"></span><br><span class="line">Markdown 制作表格使用 | 来分隔不同的单元格，使用 - 来分隔表头和其他行。</span><br><span class="line"></span><br><span class="line">语法格式如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+| 表头   | 表头   |
+| ------ | ------ |
+| 单元格 | 单元格 |
+| 单元格 | 单元格 |
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 对齐方式</span><br><span class="line"></span><br><span class="line">**我们可以设置表格的对齐方式：**</span><br><span class="line"></span><br><span class="line">* -: 设置内容和标题栏居右对齐。</span><br><span class="line">* :- 设置内容和标题栏居左对齐。</span><br><span class="line">* :-: 设置内容和标题栏居中对齐。</span><br><span class="line">例：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+| 左对齐 | 右对齐 | 居中对齐 |
+| :----- | -----: | :------: |
+| 单元格 | 单元格 |  单元格  |
+| 单元格 | 单元格 |  单元格  |
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :-----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## HTML 元素</span><br><span class="line"></span><br><span class="line">不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。</span><br><span class="line"></span><br><span class="line">目前支持的 HTML 元素有：`&lt;kbd&gt; &lt;b&gt; &lt;i&gt; &lt;em&gt; &lt;sup&gt; &lt;sub&gt; &lt;br&gt;`等 ，如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+使用 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd> 重启电脑
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用 &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;Del&lt;/kbd&gt; 重启电脑</span><br><span class="line"></span><br><span class="line">## 转义</span><br><span class="line"></span><br><span class="line">Markdown 使用了很多特殊符号来表示特定的意义，如果需要显示特定的符号则需要使用转义字符，Markdown 使用反斜杠转义特殊字符：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+**文本加粗** 
+\*\* 正常显示星号 \*\*
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+\   反斜线
+`   反引号
+*   星号
+_   下划线
+{}  花括号
+[]  方括号
+()  小括号
+#   井字号
++   加号
+-   减号
+.   英文句点
+!   感叹号
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 公式</span><br><span class="line"></span><br><span class="line">当你需要在编辑器中插入数学公式时，可以使用两个美元符 $$ 包裹 TeX 或 LaTeX 格式的数学公式来实现。提交后，问答和文章页会根据需要加载 Mathjax 对数学公式进行渲染。</span><br><span class="line"></span><br><span class="line">不过这个东西和渲染器有关，对于不同编辑器可能会不支持某些latex特性</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+$$
+思考题：\lim_{x\rarr 0}\frac{tanx}{x+sinx} =?
+$$
+
+<p>$$<br>\frac{dx}{dt}=v<br>\mathbf{V}_1 \times \mathbf{V}_2<br>$$</p>
+<pre><code>
+$$
+思考题：\lim_&#123;x\rarr 0&#125;\frac&#123;tanx&#125;&#123;x+sinx&#125; =?
+$$
+
+$$
+\frac&#123;dx&#125;&#123;dt&#125;=v
+\mathbf&#123;V&#125;_1 \times \mathbf&#123;V&#125;_2
+$$
+
+## 非常感谢菜鸟教程runoob.com提供了好多代码，本人也是在这学的markdown
+ 链接如下：
+
+[菜鸟教程](https://www.runoob.com)
+ 十分适合新手学习各种语言和开发技巧，虽然讲解思路比较跳跃，但胜在详细
+</code></pre>
+]]></content>
+      <tags>
+        <tag>杂项</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Tcl脚本基础</title>
+    <url>/2021/11/14/Tcl%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p>[TOC]</p>
+<h1 id="Tcl脚本在IC领域的主要用途"><a href="#Tcl脚本在IC领域的主要用途" class="headerlink" title="Tcl脚本在IC领域的主要用途"></a>Tcl脚本在IC领域的主要用途</h1><h2 id="复杂文本处理"><a href="#复杂文本处理" class="headerlink" title="复杂文本处理"></a>复杂文本处理</h2><p>Tcl可以把文本中的每一行变为一个<strong>列表</strong>，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容</p>
+<p>Tcl也支持正则表达式</p>
+<h2 id="自动化执行flow"><a href="#自动化执行flow" class="headerlink" title="自动化执行flow"></a>自动化执行flow</h2><p>对于一些流程化的flow，可以编写Tcl脚本来自动执行，一键得到结果和report</p>
+<h2 id="辅助EDA开发"><a href="#辅助EDA开发" class="headerlink" title="辅助EDA开发"></a>辅助EDA开发</h2><p>Tcl易上手、使用简便，可以简便地设计图形化界面；也可以针对大型项目设计EDA辅助工具</p>
+<h1 id="Tcl脚本简介"><a href="#Tcl脚本简介" class="headerlink" title="Tcl脚本简介"></a>Tcl脚本简介</h1><p>Tcl即Tool command language工具控制语言，读作Tickle</p>
+<p>Tcl包含了一个脚本语言和一个库包：Tcl脚本主要用于发布命令给交互程序，语法简单、扩展性强；Tcl库可以被嵌入应用程序，它包含了一个分析器、用于执行内建命令的例程和一个可以允许用户扩充的库函数。使用Tcl库，应用程序可以产生Tcl命令并执行，命令可以由用户产生，也可以从用户接口的输入中读取，Tcl库收到命令后将他分解并执行内建的命令。</p>
+<p>目前大部分EDA工具都支持Tcl语言，如Design Complier、quartus、Synplify、modesim、finesim等，Tcl在IC设计中非常常用</p>
+<p>Tcl程序有两种运行方式，一种是将程序写入脚本中，通常以.tcl命名；另一种是在tcl命令行中直接执行</p>
+<h2 id="Tcl解释器"><a href="#Tcl解释器" class="headerlink" title="Tcl解释器"></a>Tcl解释器</h2><p>Tcl是解释型语言，与Python、Perl等类似，它依靠Tcl脚本语言解释器工作，逐行执行Tcl命令，遇到错误时它会停止运行</p>
+<p>helloworld程序如下：</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"><span class="keyword">puts</span> <span class="string">&quot;helloworld&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>在shell中如下执行：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tclsh hello.tcl <span class="comment"># Unix</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> tclsh hello.tcl <span class="comment"># Windows</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Tcl数据类型"><a href="#Tcl数据类型" class="headerlink" title="Tcl数据类型"></a>Tcl数据类型</h2><p>Tcl只支持<strong>字符串</strong>数据类型：所有命令、参数、命令结果、变量等都是字符串</p>
+<p>==字符串的实际解释依赖于上下文==</p>
+<p>Tcl允许使用字符串组合出多种高级数据类型</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> a hello</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$a</span></span><br><span class="line"><span class="keyword">set</span> b <span class="string">&quot;hello world&quot;</span></span><br><span class="line"><span class="keyword">set</span> c &#123;hello world&#125;</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$b</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$c</span> # 这里b和c打印的值都是 hello world</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p><strong>使用一组单词与双引号、中括号或者大括号的组合表示列表</strong>，如下所示：</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> myVariable &#123;red green blue&#125; # <span class="keyword">set</span> listName [<span class="keyword">list</span> item1 item2 item3] 中括号、大括号都可以</span><br><span class="line"><span class="keyword">puts</span> [<span class="keyword">lindex</span> <span class="variable">$myVariable</span> <span class="number">2</span>]</span><br><span class="line"><span class="keyword">set</span> myVariable <span class="string">&quot;red green blue&quot;</span></span><br><span class="line"><span class="keyword">puts</span> [<span class="keyword">lindex</span> <span class="variable">$myVariable</span> <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>注意：==Tcl的列表以0为第一个元素的坐标==，所以以上输出为</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> blue</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> green</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<code>append</code>或<code>lappend</code>命令追加项目到列表</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">append</span> 列表名 原来的项目 追加项目 # 或 <span class="keyword">lappend</span> 列表名 追加项目</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>llength</code>变量控制列表的长度</p>
+<p>使用<code>lsort</code>命令排序列表</p>
+<p>使用<code>lreplace</code>替换列表项，如下所示</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> var &#123;orange blue red green&#125;</span><br><span class="line"><span class="keyword">set</span> var [<span class="keyword">lreplace</span> <span class="variable">$var</span> <span class="number">2</span> <span class="number">3</span> black white]</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$var</span> # 输出 orange blue black white （第<span class="number">3</span>、<span class="number">4</span>个列表项被替换为了black、white）</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>lassign</code>将列表的值赋值给变量，如下所示</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> var &#123;orange blue red green&#125;</span><br><span class="line"><span class="keyword">lassign</span> <span class="variable">$var</span> colour1 colour2</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$colour1</span> # 输出 orange</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$colour2</span> # 输出 blue</span><br></pre></td></tr></table></figure>
+
+<h3 id="关联数组（字典）"><a href="#关联数组（字典）" class="headerlink" title="关联数组（字典）"></a>关联数组（字典）</h3><p>可以使用以下形式创建关联数组，或者说<strong>键值对（字典）</strong></p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>  marks(english) <span class="number">80</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$marks</span>(english) # 输出 <span class="number">80</span></span><br><span class="line"><span class="keyword">set</span>  marks(mathematics) <span class="number">90</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$marks</span>(mathematics) # 输出 <span class="number">90</span></span><br></pre></td></tr></table></figure>
+
+<p>特别地，==Tcl的键值对不要求索引（键）是整数==</p>
+<p>使用<code>dict set 字典名 键 值</code>来格式化创建字典</p>
+<p>使用<code>dict size</code>获取字典的大小</p>
+<p>使用以下方法遍历字典</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> colours [<span class="keyword">dict</span> create colour1 <span class="string">&quot;black&quot;</span> colour2 <span class="string">&quot;white&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> item [<span class="keyword">dict</span> keys <span class="variable">$colours</span>] &#123;</span><br><span class="line">    <span class="keyword">set</span> value [<span class="keyword">dict</span> get <span class="variable">$colours</span> <span class="variable">$item</span>]</span><br><span class="line">    <span class="keyword">puts</span> <span class="variable">$value</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或以下方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> colours [<span class="keyword">dict</span> create colour1 <span class="string">&quot;black&quot;</span> colour2 <span class="string">&quot;white&quot;</span>]</span><br><span class="line"><span class="keyword">set</span> values [<span class="keyword">dict</span> values <span class="variable">$colours</span>]</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$values</span></span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> black</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> white</span></span><br></pre></td></tr></table></figure>
+
+<p>使用以下方法(<code>dict exists</code>)检索字典</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> colours [<span class="keyword">dict</span> create colour1 <span class="string">&quot;black&quot;</span> colour2 <span class="string">&quot;white&quot;</span>]</span><br><span class="line"><span class="keyword">set</span> result [<span class="keyword">dict</span> exists <span class="variable">$colours</span> colour1]</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$result</span> # 输出 <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="句柄"><a href="#句柄" class="headerlink" title="句柄"></a>句柄</h3><p>TCL句柄通常用于表示文件和图形对象，也可以包括句柄网络请求以及其它流设备，如串口、套接字或I/O设备</p>
+<p>使用例如下</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">set</span> myfile [<span class="keyword">open</span> <span class="string">&quot;filename&quot;</span> r]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Tcl基本语法"><a href="#Tcl基本语法" class="headerlink" title="Tcl基本语法"></a>Tcl基本语法</h2><h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>使用<code>#</code>作为单行注释</p>
+<p>如果第一个非空字符是<code>#</code>，这一行的所有东西都是注释</p>
+<p>特别地，可以使用条件判断语句作为多行注释，不过这样会影响代码可读性</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 下面是多行注释</span></span><br><span class="line"><span class="keyword">if</span> <span class="number">0</span> &#123;</span><br><span class="line">这里是注释</span><br><span class="line">这里也是注释</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">puts</span> <span class="string">&quot;test&quot;</span> <span class="comment">;# 这里是行内注释</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这是单行注释</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="标示符"><a href="#标示符" class="headerlink" title="标示符"></a>标示符</h3><p>Tcl标识符是用来标识变量，函数，或任何其它用户定义的项目的名称。标识符开始以字母A到Z或a〜z或后跟零个或多个字母下划线（_），下划线，美元（$）和数字（0〜9），Tcl不允许标点字符，如@和％标识符，但可以使用转义或<code>&#123;&#125;</code>括起来使用标点字符；<strong>Tcl大小写敏感</strong></p>
+<p><strong>Tcl的保留字不能用做变量名</strong></p>
+<h3 id="空格与分隔"><a href="#空格与分隔" class="headerlink" title="空格与分隔"></a>空格与分隔</h3><p>Tcl解释器会忽略多余的<strong>空白格</strong>与注释行</p>
+<p>Tcl中将<strong>空格、制表符</strong>、换行符、注释统称为<strong>空白格</strong>。空格分开声明中的一个组成部分，使解释器来识别</p>
+<p>总体与shell脚本类似，格式自由</p>
+<p><strong>Tcl中句与句之间以换行或分号分隔。如果每行只有一个语句，则分号不是必须的；如果一行中只包含空白格、注释，解释器则会忽略该行；在一个语句中，通过空格来分隔语句的不同部分</strong></p>
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><p>Tcl命令实际上是词语的列表。使用要执行表示该命令的第一个字</p>
+<p>Tcl命令有以下特点：</p>
+<ul>
+<li>一个命令就是一个字符串</li>
+<li><strong>命令用换行符或分号来分隔</strong></li>
+<li>一个命令由许多的<strong>域</strong>组成，第一个域是命令名，剩下的域作为参数</li>
+<li><strong>域通常由空格或制表符分割</strong></li>
+</ul>
+<h3 id="引用与替换"><a href="#引用与替换" class="headerlink" title="引用与替换"></a>引用与替换</h3><p>如下方法引用变量：</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">$变量名</span><br></pre></td></tr></table></figure>
+
+<p>如下方法展开命令或调用过程的值</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">[命令或调用过程]</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>\</code>将特殊字符转义</p>
+<p>使用如下方法展开<code>[]</code>、<code>$</code>、<code>\</code>语句的内容</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;要展开使用内容&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用如下方法将内容作为一个整体使用（但内部的特殊字符不会被展开或转义）</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line">&#123;作为整体使用的内容&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><p>使用<code>expr</code>表示后面的式子是数学表达式</p>
+<p><strong>Tcl默认精度是12位</strong>，可以使用<code>tcl_precision</code>改变精度</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> variableA <span class="string">&quot;10&quot;</span></span><br><span class="line"><span class="keyword">set</span> tcl_precision <span class="number">5</span></span><br><span class="line"><span class="keyword">set</span> result [<span class="keyword">expr</span> <span class="variable">$variableA</span> / <span class="number">9.0</span>];</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$result</span> # 输出 <span class="number">1.1111</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>使用<code>set</code>对变量进行赋值，使用<code>$</code>引用变量</p>
+<p>综合示例如下：</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"><span class="keyword">set</span> a <span class="number">114514</span><span class="comment">; # 把114514赋值给a</span></span><br><span class="line"><span class="keyword">set</span> b &#123;<span class="variable">$a</span>&#125;<span class="comment">; # 把$a赋值给b</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">puts</span> <span class="string">&quot;test!&quot;</span><span class="comment">; # 打印出test!</span></span><br><span class="line"><span class="keyword">puts</span> a<span class="comment">; # 打印出字符a</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$a</span><span class="comment">; # 打印出114514</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$b</span><span class="comment">; #打印出$a 注意并不是114514</span></span><br></pre></td></tr></table></figure>
+
+<p>字符串赋值见Tcl数据类型</p>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><ol>
+<li>算术运算符</li>
+</ol>
+<p>支持+ - * / %</p>
+<p>与c一样</p>
+<ol start="2">
+<li>关系运算符</li>
+</ol>
+<p>与c一样</p>
+<ol start="3">
+<li>逻辑运算符</li>
+</ol>
+<p>与c一样</p>
+<ol start="4">
+<li>位运算符</li>
+</ol>
+<p>与c一样</p>
+<ol start="5">
+<li>三元运算符</li>
+</ol>
+<p>与c一样</p>
+<ol start="6">
+<li>运算符优先级</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>运算符</th>
+<th>结合性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>正负号</td>
+<td>+ -</td>
+<td>Right to left</td>
+</tr>
+<tr>
+<td>乘除法</td>
+<td>* / %</td>
+<td>Left to right</td>
+</tr>
+<tr>
+<td>加减法</td>
+<td>+ -</td>
+<td>Left to right</td>
+</tr>
+<tr>
+<td>移位</td>
+<td>&lt;&lt; &gt;&gt;</td>
+<td>Left to right</td>
+</tr>
+<tr>
+<td>关系</td>
+<td>&lt; &lt;= &gt; &gt;=</td>
+<td>Left to right</td>
+</tr>
+<tr>
+<td>位与</td>
+<td>&amp;</td>
+<td>Left to right</td>
+</tr>
+<tr>
+<td>位异或</td>
+<td>^</td>
+<td>Left to right</td>
+</tr>
+<tr>
+<td>位或</td>
+<td>|</td>
+<td>Left to right</td>
+</tr>
+<tr>
+<td>Logical AND</td>
+<td>&amp;&amp;</td>
+<td>Left to right</td>
+</tr>
+<tr>
+<td>逻辑或</td>
+<td>||</td>
+<td>Left to right</td>
+</tr>
+<tr>
+<td>三元</td>
+<td>?:</td>
+<td>Right to left</td>
+</tr>
+</tbody></table>
+<p>总体上来说和c语言运算符一致</p>
+<h3 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h3><p>Tcl的if语法如下：</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> &#123;布尔表达式&#125; &#123;</span><br><span class="line"><span class="comment">	# 表达式</span></span><br><span class="line">&#125; else <span class="keyword">if</span> &#123;布尔表达式&#125; &#123;</span><br><span class="line"><span class="comment">	# 表达式</span></span><br><span class="line">&#125; else <span class="keyword">if</span> &#123;布尔表达式&#125; &#123;</span><br><span class="line"><span class="comment">	# 表达式</span></span><br><span class="line">&#125; else <span class="keyword">if</span> &#123;布尔表达式&#125; &#123;</span><br><span class="line"><span class="comment">	# 表达式</span></span><br><span class="line">&#125; else &#123;</span><br><span class="line"><span class="comment">	# 表达式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>和c语言不能说差别不大，只能说完全一样</p>
+<p>甚至也可以使用switch语句</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> switchingString &#123;</span><br><span class="line">   matchString1 &#123;</span><br><span class="line">      body1</span><br><span class="line">   &#125;</span><br><span class="line">   matchString2 &#123;</span><br><span class="line">      body2</span><br><span class="line">   &#125;</span><br><span class="line">...</span><br><span class="line">   matchStringn &#123;</span><br><span class="line">      bodyn</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>switch语句也可以嵌套</p>
+<p>循环语句则分成2种，和c语言一样的for与while，但是没有do while</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> &#123;condition&#125; &#123;</span><br><span class="line">   statement(s)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> &#123;initialization&#125; &#123;condition&#125; &#123;increment&#125; &#123;</span><br><span class="line">   statement(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>Tcl支持自定义函数，称为<strong>过程</strong>，语法如下</p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">proc</span> 过程名 &#123;参数<span class="number">1</span> 参数<span class="number">2</span> ...&#125;</span><br><span class="line">&#123;	过程体</span><br><span class="line"><span class="keyword">return</span> 返回值&#125;</span><br></pre></td></tr></table></figure>
+
+<p>参数之间用空白格分开</p>
+<p>函数支持递归调用</p>
+<p>不支持在函数内部定义函数</p>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><p>Tcl支持内嵌正则表达式，<strong>正则表达式以命令形式使用</strong></p>
+<figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">regexp</span> &#123;([A-Z,a-z]*)&#125; <span class="string">&quot;Tcl Tutorial&quot;</span> a b </span><br><span class="line"><span class="keyword">puts</span> <span class="string">&quot;Full Match: $a&quot;</span></span><br><span class="line"><span class="keyword">puts</span> <span class="string">&quot;Sub Match1: $b&quot;</span></span><br><span class="line"><span class="comment"># 输出如下</span></span><br><span class="line">Full Match:Tcl</span><br><span class="line">Sub Match1:Tcl</span><br></pre></td></tr></table></figure>
+
+<p>Tcl提供了一些参数用于简便使用正则表达式</p>
+<ul>
+<li>-nocase 忽略大小写</li>
+<li>-indices 匹配子模式，而不是匹配字符存储的位置</li>
+<li>-line 新行敏感匹配。换行后忽略字符</li>
+<li>-start index 搜索模式开始设置偏移</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>杂项</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《可定制计算》阅读笔记</title>
     <url>/2021/11/14/%E3%80%8A%E5%8F%AF%E5%AE%9A%E5%88%B6%E8%AE%A1%E7%AE%97%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="《可定制计算》阅读笔记"><a href="#《可定制计算》阅读笔记" class="headerlink" title="《可定制计算》阅读笔记"></a>《可定制计算》阅读笔记</h1><p>本笔记以基础概念为线索编写，黑体部分是关键字</p>
+<span id="more"></span>
+
 <ul>
 <li><p><strong>登纳德缩放定律</strong>：晶体管在满足内电场恒定（即每代芯片的供电电压降低30%）条件下，晶体管尺寸每代（约两年）减少30%。</p>
 <p>  结合该定律和摩尔定律可得推论：晶体管密度每代翻倍，同时晶体管延时降低30%，功耗降低50%，能耗降低65%</p>
@@ -88,6 +467,8 @@
     <title>多级放大器简介</title>
     <url>/2021/11/14/%E5%A4%9A%E7%BA%A7%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<h1 id="多级放大器"><a href="#多级放大器" class="headerlink" title="多级放大器"></a>多级放大器</h1><p>常见的共射放大电路放大系数$\beta_V=-\frac{\beta R_{C}}{R_{b1}}$</p>
+<span id="more"></span>
+
 <h2 id="耦合方式"><a href="#耦合方式" class="headerlink" title="耦合方式"></a>耦合方式</h2><p>将多个单级基本放大电路合理连接即构成多级放大电路</p>
 <p>组成多级放大电路的每个基本电路称为一<strong>级</strong>，级与级之间的连接称为<strong>级间耦合</strong></p>
 <p>有下列四种常见的耦合方式</p>
@@ -183,7 +564,9 @@
     <url>/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<h1 id="数模转换与模数转换"><a href="#数模转换与模数转换" class="headerlink" title="数模转换与模数转换"></a>数模转换与模数转换</h1><p>这里以STM32G474为例来介绍STM32中的ADC与DAC编程</p>
 <p>主要作为电赛的笔记</p>
-<h2 id="模数转换ADC"><a href="#模数转换ADC" class="headerlink" title="模数转换ADC"></a>模数转换ADC</h2><h3 id="四个基本部分"><a href="#四个基本部分" class="headerlink" title="四个基本部分"></a>四个基本部分</h3><ul>
+<h2 id="模数转换ADC"><a href="#模数转换ADC" class="headerlink" title="模数转换ADC"></a>模数转换ADC</h2><span id="more"></span>
+
+<h3 id="四个基本部分"><a href="#四个基本部分" class="headerlink" title="四个基本部分"></a>四个基本部分</h3><ul>
 <li>采样：定时对连续变化的模拟信号进行测量得到的瞬时值</li>
 <li>保持：采样结束后将得到信号保持一段时间，使ADC有充分时间进行ADC转换。一般采样脉冲频率越高、采样越密，采样值就越多，采样保持电路的输出信号就越接近输入信号的波形。对采样频率要求（满足采样定理）：采样频率F<del>s</del> &gt;= 2*输入模拟信号频谱中最高频率F<del>max</del></li>
 <li>量化：将采样电压转换为某个最小单位电压的整数倍</li>
@@ -298,6 +681,8 @@
 <h2 id="直流电机调速"><a href="#直流电机调速" class="headerlink" title="直流电机调速"></a>直流电机调速</h2><p>直流电机的调速思路就是“力大砖飞”，在电机控制线两端加适当电压，电压越高转速越快。可以通过功率半导体器件产生恒定的电压供给电机；对于数字器件而言很难控制电压精准保持在某一模拟值，因此使用PWM进行调速。</p>
 <p>无论是模拟方法还是数字方法，都需要使用功率半导体器件，只不过使用方式有所不同。模拟电路通过线性放大的驱动方式，输出波动小、线性好，对临近电路干扰小，但存在效率低和散热问题；而数字电路通过耦合器件发出PWM使功率器件输出方波加在电机两端，通过改变方波的占空比来实现调节电机转速，往往对临近电路存在干扰，但是更易于实现。</p>
 <p>基于PWM调速的电路往往包含三个部分</p>
+<span id="more"></span>
+
 <h3 id="驱动电路"><a href="#驱动电路" class="headerlink" title="驱动电路"></a>驱动电路</h3><p>一般使用晶体管或场效应管构成的半桥、全桥、三相桥电路，或直接使用护照那用的电机驱动功率IC。</p>
 <p>常见的电机驱动芯片有L298N、ULN2003等</p>
 <p>半桥拓扑采用推挽输出，<strong>需要保证两晶体管不同时开合</strong></p>
@@ -358,7 +743,7 @@
 <p>  DRV8825是TI的集成步进电机驱动芯片。芯片内部集成了2个H桥和1/32微步进分度器，可以驱动一个双极型电机或两个直流有刷电机。输入电压范围8.2~45V，可以提供1.75A的驱动电流， 芯片在24V、25°C的工作状态下可提供2.5A的峰值电流。芯片还集成了短路、过热、欠压及交叉传导保护电路，能够检测故障状况并迅速切断H桥，从而保护电机</p>
 <p>  适用的电机类型：DRV8825驱动电机的类型主要与电机工作电流有关，理论上工作电流小于2A的步进电机都可以驱动。基于安全考虑，芯片上不加散热片，电流最好控制在1.5A以下；如果加散热片，电流峰值可到2.5A。</p>
 <p>  模块接线如下：</p>
-<p>  <img src="/2021/11/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B/DRV8824_DRV8825_pinout.png" alt="DRV8825引脚连线图"></p>
+<p>  <img src="/2021/11/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B/DRV8824_DRV8825_pinout.png" alt="DRV8824_DRV8825_pinout"></p>
 <p>  其中需要<strong>数字、模拟部分分别接地</strong>，一般来说VMOT旁边的GND是功率地，另一个GND则是数字地。同时<strong>功率电源需要接入100uF的旁路电容</strong>来减轻对数字部分的影响</p>
 <p>  <strong>ENABLE引脚用于控制该模块是否启用，默认该引脚拉低，模块始终启用；RESET负责复位模块；SLEEP用于控制进入低功耗睡眠模式，当不使用电机时可以下拉该引脚来将功耗降到最低；三个引脚都是低电平有效，所以正常使用时都应接VCC（数字电源）</strong></p>
 <p>  <strong>FAULT引脚（FLT）用于指示故障，一旦由于过电流保护或热关断，IC内部禁用H桥FET时，该引脚就会输出低电平，一般来说该引脚会在模块内部与SLEEP引脚短路，起到自动故障复位的效果</strong></p>
@@ -540,6 +925,16 @@
       </tags>
   </entry>
   <entry>
+    <title>随笔</title>
+    <url>/2021/11/13/%E9%9A%8F%E7%AC%94/</url>
+    <content><![CDATA[<h1 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h1><p>所有的随笔都会放在这里OvO</p>
+<p>可能还会扔些沙雕图……</p>
+]]></content>
+      <tags>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>集成运放简介</title>
     <url>/2021/11/14/%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<h1 id="集成运放概述"><a href="#集成运放概述" class="headerlink" title="集成运放概述"></a>集成运放概述</h1><p>常见的模拟集成电路类型</p>
@@ -556,6 +951,8 @@
 <h3 id="模拟集成电路的特性"><a href="#模拟集成电路的特性" class="headerlink" title="模拟集成电路的特性"></a>模拟集成电路的特性</h3><p>集成电路中一般使用三极管组成恒流源电路来部分替代电阻</p>
 <p>硅片上难以制作大电容、大电感，因此电路常常使用直接耦合的方式</p>
 <p>常采用复合管的方式制作较大放大倍数的三极管</p>
+<span id="more"></span>
+
 <h2 id="集成运放的基本组成"><a href="#集成运放的基本组成" class="headerlink" title="集成运放的基本组成"></a>集成运放的基本组成</h2><h3 id="输入级"><a href="#输入级" class="headerlink" title="输入级"></a>输入级</h3><p>输入级要求高阻抗，常使用射随器与差分放大器减少温漂和增大输入电阻</p>
 <p>一般使用复合管构成差分放大器，配合共集-共基放大器，用额外三极管的基极输出信号，可以实现很大的输入电阻和很大的共模抑制比</p>
 <p>将复合管共基接法可以改善频率响应</p>
@@ -591,19 +988,151 @@
       </tags>
   </entry>
   <entry>
-    <title>随笔</title>
-    <url>/2021/11/13/%E9%9A%8F%E7%AC%94/</url>
-    <content><![CDATA[<h1 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h1><p>所有的随笔都会放在这里OvO</p>
-<p>可能还会扔些沙雕图……</p>
+    <title>STM32深入学习【GPIO】</title>
+    <url>/2021/11/14/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90GPIO%E3%80%91/</url>
+    <content><![CDATA[<p>本文章根据stm32f4xx中文参考手册整理，可供学习其他arm内核单片机/stm32系列单片机参考</p>
+<p>如果对其中的内容有疑问，可以参考RCC、定时器、中断相关部分的解析</p>
+<p>以下内容使用SPL库（标准库）作为代码示例，HAL库是更高层的封装，想HAL库的使用可以查看其他教程</p>
+<h1 id="GPIO电路"><a href="#GPIO电路" class="headerlink" title="GPIO电路"></a>GPIO电路</h1><p>每个GPIO端口包括4个32位配置寄存器、2个32位数据寄存器、1个32位置位/复位寄存器、1个32位锁定寄存器和2个32位复用功能寄存器。每个IO端口位均可自由编程，但IO端口寄存器必须按32位字、半字或字节进行访问</p>
+<p>基本电路图如下所示：</p>
+<p><img src="/2021/11/14/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90GPIO%E3%80%91/image-20210415214054864.png" alt="image-20210415214054864"></p>
+<p>主要分为以下几个部分</p>
+<h2 id="输入电路"><a href="#输入电路" class="headerlink" title="输入电路"></a>输入电路</h2><p>输入部分通过两个<strong>保护二极管</strong>进行钳位，保证GPIO容忍电压对V<del>SS</del>为5V，注意这里的V<del>SS</del>指的是电源地，而不是V<del>DD</del>信号地</p>
+<p>输入信号经过可编程的<strong>上拉/下拉电阻</strong>后进入<strong>输入驱动器</strong>。</p>
+<ul>
+<li>如果使能了ADC等接入外部模拟信号的片上外设，就能从GPIO直接读取模拟信号</li>
+<li>如果使能了复用功能，外部信号则会通过一个TTL<strong>施密特触发器</strong>，直接缓冲进入相关数字信号外设</li>
+<li>如果正常使用GPIO的读功能，外部信号会在被施密特触发器变为数字信号后进入<strong>输入数据寄存器</strong></li>
+</ul>
+<p>这里的施密特触发器相当于一个FIFO，能够保存外部模拟信号的快照，以此作为数字量供给片上外设</p>
+<p><strong>引脚配置为输入模式后，输入数据寄存器会每1个AHB1时钟周期捕获以此GPIO外部数据</strong></p>
+<h2 id="输出电路"><a href="#输出电路" class="headerlink" title="输出电路"></a>输出电路</h2><p>输出部分通过两个MOSFET控制，PMOS、NMOS以图腾柱方式组合，形成<strong>推挽输出</strong>结构。为了保证输出的速度，使用专用的驱动电路控制MOSFET，输出速率就由该驱动电路决定</p>
+<ul>
+<li>如果正常使用GPIO的写功能，来自CPU的配置数据会先保存在<strong>置位/复位寄存器</strong>，之后转换保存在<strong>输出数据寄存器</strong>中，驱动电路根据输出数据寄存器的值实时控制输出，这就起到了内部时钟和外设操作频率的退耦</li>
+<li>如果使用了其他能读写GPIO的外设，会由外设直接向输出数据寄存器中写值，这样就简轻了CPU的控制负担</li>
+<li>如果使能了复用功能，来自复用外设的控制信号会直接绕过输出数据寄存器，直接通过一个两路选择器操作输出控制电路</li>
+</ul>
+<p>所有来自MOSFET输出的信号会经过<strong>上/下拉电路</strong>，这就能将片内CMOS电压转换为片外TTL电压进行输出</p>
+<p>同样输出也经过钳位二极管保护，防止出现电流倒灌等问题</p>
+<p><strong>引脚配置为输出模式后，写入到输出数据寄存器的值会在GPIO上输出</strong></p>
+<h2 id="时序控制电路"><a href="#时序控制电路" class="headerlink" title="时序控制电路"></a>时序控制电路</h2><p>大多数GPIO的寄存器都是基于时序电路实现（D触发器、锁存器等）</p>
+<p>最重要的就是置位复位寄存器 (GPIOx_BSRR)：这是一个32位寄存器，它允许应用程序在输出数据寄存器(GPIOx_ODR) 中对各个单独的数据位执行置位和复位操作。</p>
+<blockquote>
+<p>置位复位寄存器的大小是GPIOx_ODR的二倍，所以GPIOx_ODR中的每个数据位都能对应于GPIOx_BSRR中的两个控制位：BSRR(i) 和<br>BSRR(i+SIZE)。当写入1时，BSRR(i)位会置位对应的ODR(i) 位；同时BSRR(i+SIZE) 位会清零ODR(i)对应的位；在GPIOx_BSRR中向任何位写入0都不会对GPIOx_ODR中的对应位产生任何影响。如果在GPIOx_BSRR中同时尝试对某个位执行置位和清零操作，则<strong>置位操作优先</strong>。</p>
+<p>注意使用GPIOx_BSRR寄存器更改GPIOx_ODR中各个位的值是一个“单次”操作，不会锁定GPIOx_ODR位。用户随时都可以直接访问GPIOx_ODR位</p>
+<p>特别地，对GPIOx_ODR进行位操作是原子操作，软件无需禁止中断，且在一次原子AHB1写访问中，可以修改一个或多个位</p>
+</blockquote>
+<h2 id="GPIO复位"><a href="#GPIO复位" class="headerlink" title="GPIO复位"></a>GPIO复位</h2><h3 id="调试引脚复位"><a href="#调试引脚复位" class="headerlink" title="调试引脚复位"></a>调试引脚复位</h3><p>复位后调试引脚处于复位功能上拉/下拉状态：</p>
+<ul>
+<li>PA15-JTDI上拉</li>
+<li>PA14-JTCK/SWCLK下拉</li>
+<li>PA13-JTMS/SWDAT下拉</li>
+<li>PB4-NJTRST上拉</li>
+<li>PB3-JTDO浮空</li>
+</ul>
+<h3 id="其他复位"><a href="#其他复位" class="headerlink" title="其他复位"></a>其他复位</h3><p>在复位期间及复位刚刚完成后，复用功能尚未激活，GPIO端口被配置为输入浮空模式</p>
+<p>完成复位后，所有GPIO都会连接到系统的复用功能 0 (AF0)</p>
+<h1 id="GPIO外设控制寄存器及配置"><a href="#GPIO外设控制寄存器及配置" class="headerlink" title="GPIO外设控制寄存器及配置"></a>GPIO外设控制寄存器及配置</h1><p>可通过字节（8 位）、半字（16 位）或字（32 位）对 GPIO 寄存器进行访问</p>
+<p><strong>寄存器地址见参考手册</strong></p>
+<p>GPIOx_MODER模式控制寄存器：选择 I/O 方向与模式</p>
+<p>GPIOx_PUPDR上下拉数据寄存器：控制内部上拉/下拉电阻</p>
+<p>GPIOx_OTYPER输出类型寄存器：选择输出类型</p>
+<p>GPIOx_OSPEEDR输出速度寄存器：选择输出速度</p>
+<p>GPIOx_IDR输入数据寄存器：通过 I/O 输入的数据存储到该寄存器，这是个只读寄存器</p>
+<p>GPIOx_ODR输出数据寄存器：存储待输出数据，可对其进行读写访问</p>
+<p>GPIOx_AFRL复用功能寄存器低8位：根据应用程序的要求将某个复用功能连接到其它某个引脚</p>
+<p>GPIOx_AFRH复用功能寄存器高8位：根据应用程序的要求将某个复用功能连接到其它某个引脚</p>
+<p>通过将特定的写序列应用到GPIOx_LCKR寄存器，可以冻结GPIO外设控制寄存器</p>
+<h2 id="配置输入"><a href="#配置输入" class="headerlink" title="配置输入"></a>配置输入</h2><p>输入数据寄存器GPIOx_IDR是一个只读的寄存器，在使用时只要将GPIO通过GPIOx_MODER设置为输入模式后访问该寄存器就可以读取到当前采样值，输入数据寄存器会在每个时钟频率对外界信号进行一次采样</p>
+<p>所有端口都具有外部中断功能。<strong>要使用外部中断线，必须将端口配置为输入模式</strong></p>
+<p>使用库函数配置如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PA4_PE0_Init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	GPIO_InitTypeDef GPIO_InitStructure;<span class="comment">//这里是stm32库定义的外设初始化结构体，在此进行“例化”</span></span><br><span class="line">	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA|RCC_AHB1Periph_GPIOE, ENABLE);<span class="comment">//使能GPIOA,GPIOE时钟</span></span><br><span class="line"></span><br><span class="line">	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;<span class="comment">//配置P4</span></span><br><span class="line">	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;<span class="comment">//配置为普通输入模式</span></span><br><span class="line">	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;<span class="comment">//速度设置为100M</span></span><br><span class="line">	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;<span class="comment">//配置为内部下拉</span></span><br><span class="line">    </span><br><span class="line">	GPIO_Init(GPIOE, &amp;GPIO_InitStructure);<span class="comment">//初始化GPIOE4</span></span><br><span class="line">	 </span><br><span class="line">	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;<span class="comment">//修改为Pin0</span></span><br><span class="line">	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;<span class="comment">//内部下拉</span></span><br><span class="line">    </span><br><span class="line">	GPIO_Init(GPIOA, &amp;GPIO_InitStructure);<span class="comment">//初始化GPIOE0</span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>外部中断的配置可以参考【NVIC中断控制】相关文章，这里不列出</p>
+<p>使用下面的函数读取GPIO输入值</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">uint8_t</span> <span class="title">GPIO_ReadInputDataBit</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="keyword">uint16_t</span> GPIO_Pin)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  	<span class="keyword">uint8_t</span> bitstatus = <span class="number">0x00</span>;</span><br><span class="line"></span><br><span class="line">  	<span class="comment">/* Check the parameters */</span></span><br><span class="line">  	assert_param(IS_GPIO_ALL_PERIPH(GPIOx));</span><br><span class="line">  	assert_param(IS_GET_GPIO_PIN(GPIO_Pin));</span><br><span class="line"></span><br><span class="line">  	<span class="keyword">if</span> ((GPIOx-&gt;IDR &amp; GPIO_Pin) != (<span class="keyword">uint32_t</span>)Bit_RESET)</span><br><span class="line">  	&#123;</span><br><span class="line">   	 	bitstatus = (<span class="keyword">uint8_t</span>)Bit_SET;<span class="comment">//通过读取判断寄存器的值来获取当前输入值</span></span><br><span class="line">  	&#125;</span><br><span class="line">  	<span class="keyword">else</span></span><br><span class="line">  	&#123;</span><br><span class="line">    	bitstatus = (<span class="keyword">uint8_t</span>)Bit_RESET;</span><br><span class="line">  	&#125;</span><br><span class="line">  	<span class="keyword">return</span> bitstatus;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置输出"><a href="#配置输出" class="headerlink" title="配置输出"></a>配置输出</h2><p>输出数据寄存器 GPIOx_ODR</p>
+<p>使用库函数配置如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PF9_Init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;    	 </span><br><span class="line">  	GPIO_InitTypeDef GPIO_InitStructure;</span><br><span class="line">  	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF, ENABLE);<span class="comment">//使能GPIOF时钟</span></span><br><span class="line"></span><br><span class="line">  	<span class="comment">//GPIOF9初始化设置</span></span><br><span class="line">  	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;<span class="comment">//要配置的位是第9位</span></span><br><span class="line">  	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;<span class="comment">//普通输出模式</span></span><br><span class="line">  	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;<span class="comment">//推挽输出</span></span><br><span class="line">  	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;<span class="comment">//速度配置位100MHz</span></span><br><span class="line">  	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;<span class="comment">//配置上拉</span></span><br><span class="line">    </span><br><span class="line">  	GPIO_Init(GPIOF, &amp;GPIO_InitStructure);<span class="comment">//对GPIOF按照上面的配置进行初始化</span></span><br><span class="line">	</span><br><span class="line">    GPIO_SetBits(GPIOF,GPIO_Pin_9 | GPIO_Pin_10);<span class="comment">//GPIOF9,F10设置高，灯灭</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>库函数的底层都是对寄存器的操作，摘录如下：</p>
+<p>时钟控制库函数是对RCC寄存器进行操作</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RCC_APB2PeriphClockCmd</span><span class="params">(<span class="keyword">uint32_t</span> RCC_APB2Periph, FunctionalState NewState)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  	assert_param(IS_RCC_APB2_PERIPH(RCC_APB2Periph));<span class="comment">//这里检查是否使用了正确的参数</span></span><br><span class="line">  	assert_param(IS_FUNCTIONAL_STATE(NewState));</span><br><span class="line"></span><br><span class="line">  	<span class="keyword">if</span> (NewState != DISABLE)</span><br><span class="line">  	&#123;</span><br><span class="line">    	RCC-&gt;APB2ENR |= RCC_APB2Periph;</span><br><span class="line">        <span class="comment">//参数设置为ENABLE时就使用上面提供的参数开启RCC寄存器下属APB2使能寄存器中的相关外设时钟控制位</span></span><br><span class="line">  	&#125;</span><br><span class="line">  	<span class="keyword">else</span></span><br><span class="line">  	&#123;</span><br><span class="line">    	RCC-&gt;APB2ENR &amp;= ~RCC_APB2Periph;</span><br><span class="line">        <span class="comment">//否则关闭相对应的控制位</span></span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>初始化结构体是对GPIO控制寄存器的封装</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  	<span class="keyword">uint32_t</span> GPIO_Pin;</span><br><span class="line">  	GPIOMode_TypeDef GPIO_Mode;</span><br><span class="line">  	GPIOSpeed_TypeDef GPIO_Speed;</span><br><span class="line">  	GPIOOType_TypeDef GPIO_OType;</span><br><span class="line">  	GPIOPuPd_TypeDef GPIO_PuPd;</span><br><span class="line">&#125;GPIO_InitTypeDef;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span></span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">  	GPIO_Mode_IN   = <span class="number">0x00</span>, <span class="comment">/*!&lt; GPIO Input Mode */</span></span><br><span class="line">  	GPIO_Mode_OUT  = <span class="number">0x01</span>, <span class="comment">/*!&lt; GPIO Output Mode */</span></span><br><span class="line">  	GPIO_Mode_AF   = <span class="number">0x02</span>, <span class="comment">/*!&lt; GPIO Alternate function Mode */</span></span><br><span class="line">  	GPIO_Mode_AN   = <span class="number">0x03</span>  <span class="comment">/*!&lt; GPIO Analog Mode */</span></span><br><span class="line">&#125;GPIOMode_TypeDef;<span class="comment">//对应GPIO_Mode的枚举量</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span></span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">  	GPIO_OType_PP = <span class="number">0x00</span>,</span><br><span class="line">  	GPIO_OType_OD = <span class="number">0x01</span></span><br><span class="line">&#125;GPIOOType_TypeDef;<span class="comment">//对应GPIO_OType的枚举量</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span></span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">  	GPIO_Low_Speed     = <span class="number">0x00</span>, <span class="comment">/*!&lt; Low speed    */</span></span><br><span class="line">  	GPIO_Medium_Speed  = <span class="number">0x01</span>, <span class="comment">/*!&lt; Medium speed */</span></span><br><span class="line">  	GPIO_Fast_Speed    = <span class="number">0x02</span>, <span class="comment">/*!&lt; Fast speed   */</span></span><br><span class="line">  	GPIO_High_Speed    = <span class="number">0x03</span>  <span class="comment">/*!&lt; High speed   */</span></span><br><span class="line">&#125;GPIOSpeed_TypeDef;<span class="comment">//对应GPIO_Speed的枚举量</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  GPIO_Speed_2MHz    GPIO_Low_Speed    </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  GPIO_Speed_25MHz   GPIO_Medium_Speed </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  GPIO_Speed_50MHz   GPIO_Fast_Speed </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  GPIO_Speed_100MHz  GPIO_High_Speed</span></span><br><span class="line"><span class="comment">//再对枚举量封装一遍，便于直观设置GPIO速度</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span></span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">  	GPIO_PuPd_NOPULL = <span class="number">0x00</span>,</span><br><span class="line">  	GPIO_PuPd_UP     = <span class="number">0x01</span>,</span><br><span class="line">  	GPIO_PuPd_DOWN   = <span class="number">0x02</span></span><br><span class="line">&#125;GPIOPuPd_TypeDef;</span><br><span class="line"><span class="comment">//对应GPIO_PuPd的枚举量</span></span><br></pre></td></tr></table></figure>
+
+<p>GPIO初始化函数如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GPIO_Init</span><span class="params">(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">uint32_t</span> pinpos = <span class="number">0x00</span>, pos = <span class="number">0x00</span> , currentpin = <span class="number">0x00</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Check the parameters */</span></span><br><span class="line">  assert_param(IS_GPIO_ALL_PERIPH(GPIOx));</span><br><span class="line">  assert_param(IS_GPIO_PIN(GPIO_InitStruct-&gt;GPIO_Pin));</span><br><span class="line">  assert_param(IS_GPIO_MODE(GPIO_InitStruct-&gt;GPIO_Mode));</span><br><span class="line">  assert_param(IS_GPIO_PUPD(GPIO_InitStruct-&gt;GPIO_PuPd));</span><br><span class="line">  </span><br><span class="line">  	<span class="keyword">for</span> (pinpos = <span class="number">0x00</span>; pinpos &lt; <span class="number">0x10</span>; pinpos++)</span><br><span class="line">  	&#123;</span><br><span class="line">    	pos = ((<span class="keyword">uint32_t</span>)<span class="number">0x01</span>) &lt;&lt; pinpos;</span><br><span class="line">    	<span class="comment">//从参数获取GPIO引脚位</span></span><br><span class="line">    	currentpin = (GPIO_InitStruct-&gt;GPIO_Pin) &amp; pos;</span><br><span class="line"></span><br><span class="line">    	<span class="keyword">if</span> (currentpin == pos)</span><br><span class="line">    	&#123;</span><br><span class="line">            <span class="comment">//配置输入/输出模式参数</span></span><br><span class="line">      		GPIOx-&gt;MODER  &amp;= ~(GPIO_MODER_MODER0 &lt;&lt; (pinpos * <span class="number">2</span>));</span><br><span class="line">      		GPIOx-&gt;MODER |= (((<span class="keyword">uint32_t</span>)GPIO_InitStruct-&gt;GPIO_Mode) &lt;&lt; (pinpos * <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">      <span class="comment">//如果是输出或复用模式，则可以配置下面几个参数，否则在初始化结构体中无论怎么配置都不会生效</span></span><br><span class="line">      <span class="keyword">if</span> ((GPIO_InitStruct-&gt;GPIO_Mode == GPIO_Mode_OUT) || (GPIO_InitStruct-&gt;GPIO_Mode == GPIO_Mode_AF))</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">/* Check Speed mode parameters */</span></span><br><span class="line">        assert_param(IS_GPIO_SPEED(GPIO_InitStruct-&gt;GPIO_Speed));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//配置速度参数</span></span><br><span class="line">        GPIOx-&gt;OSPEEDR &amp;= ~(GPIO_OSPEEDER_OSPEEDR0 &lt;&lt; (pinpos * <span class="number">2</span>));</span><br><span class="line">        GPIOx-&gt;OSPEEDR |= ((<span class="keyword">uint32_t</span>)(GPIO_InitStruct-&gt;GPIO_Speed) &lt;&lt; (pinpos * <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Check Output mode parameters */</span></span><br><span class="line">        assert_param(IS_GPIO_OTYPE(GPIO_InitStruct-&gt;GPIO_OType));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//配置输出方式参数</span></span><br><span class="line">        GPIOx-&gt;OTYPER  &amp;= ~((GPIO_OTYPER_OT_0) &lt;&lt; ((<span class="keyword">uint16_t</span>)pinpos)) ;</span><br><span class="line">        GPIOx-&gt;OTYPER |= (<span class="keyword">uint16_t</span>)(((<span class="keyword">uint16_t</span>)GPIO_InitStruct-&gt;GPIO_OType) &lt;&lt; ((<span class="keyword">uint16_t</span>)pinpos));</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      	<span class="comment">//上拉/下拉寄存器设置</span></span><br><span class="line">      	GPIOx-&gt;PUPDR &amp;= ~(GPIO_PUPDR_PUPDR0 &lt;&lt; ((<span class="keyword">uint16_t</span>)pinpos * <span class="number">2</span>));</span><br><span class="line">      	GPIOx-&gt;PUPDR |= (((<span class="keyword">uint32_t</span>)GPIO_InitStruct-&gt;GPIO_PuPd) &lt;&lt; (pinpos * <span class="number">2</span>));</span><br><span class="line">    	&#125;</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>GPIO输出控制函数</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GPIO_SetBits</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="keyword">uint16_t</span> GPIO_Pin)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  	<span class="comment">/* Check the parameters */</span></span><br><span class="line">  	assert_param(IS_GPIO_ALL_PERIPH(GPIOx));</span><br><span class="line">  	assert_param(IS_GPIO_PIN(GPIO_Pin));</span><br><span class="line"></span><br><span class="line">  	GPIOx-&gt;BSRRL = GPIO_Pin;<span class="comment">//直接对GPIO引脚置位</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GPIO_ResetBits</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="keyword">uint16_t</span> GPIO_Pin)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  	<span class="comment">/* Check the parameters */</span></span><br><span class="line">  	assert_param(IS_GPIO_ALL_PERIPH(GPIOx));</span><br><span class="line">  	assert_param(IS_GPIO_PIN(GPIO_Pin));</span><br><span class="line"></span><br><span class="line">  	GPIOx-&gt;BSRRH = GPIO_Pin;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GPIO_WriteBit</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="keyword">uint16_t</span> GPIO_Pin, BitAction BitVal)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  	<span class="comment">/* Check the parameters */</span></span><br><span class="line">  	assert_param(IS_GPIO_ALL_PERIPH(GPIOx));</span><br><span class="line">  	assert_param(IS_GET_GPIO_PIN(GPIO_Pin));</span><br><span class="line">  	assert_param(IS_GPIO_BIT_ACTION(BitVal));</span><br><span class="line"></span><br><span class="line">  	<span class="keyword">if</span> (BitVal != Bit_RESET)</span><br><span class="line">  	&#123;</span><br><span class="line">    	GPIOx-&gt;BSRRL = GPIO_Pin;</span><br><span class="line">  	&#125;</span><br><span class="line">  	<span class="keyword">else</span></span><br><span class="line">  	&#123;</span><br><span class="line">    	GPIOx-&gt;BSRRH = GPIO_Pin ;</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span></span></span><br><span class="line"><span class="class">&#123;</span> </span><br><span class="line">  	Bit_RESET = <span class="number">0</span>,</span><br><span class="line">  	Bit_SET</span><br><span class="line">&#125;BitAction;</span><br><span class="line"><span class="comment">//对应BitVal的枚举量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//还有一个比较方便的翻转输出值函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GPIO_ToggleBits</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="keyword">uint16_t</span> GPIO_Pin)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  	<span class="comment">/* Check the parameters */</span></span><br><span class="line">  	assert_param(IS_GPIO_ALL_PERIPH(GPIOx));</span><br><span class="line"></span><br><span class="line">  	GPIOx-&gt;ODR ^= GPIO_Pin;<span class="comment">//异或运算，如果和之前的值相同，则反转；可以通过多次使用该函数反转输出</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//很莽的一个函数，直接设置GPIO端口值</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GPIO_Write</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="keyword">uint16_t</span> PortVal)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  	<span class="comment">/* Check the parameters */</span></span><br><span class="line">  	assert_param(IS_GPIO_ALL_PERIPH(GPIOx));</span><br><span class="line"></span><br><span class="line">  	GPIOx-&gt;ODR = PortVal;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="开漏模式与推挽模式"><a href="#开漏模式与推挽模式" class="headerlink" title="开漏模式与推挽模式"></a>开漏模式与推挽模式</h3><p>开漏模式：输出寄存器中置0位可激活连接到V<del>SS</del>的N-MOS，而输出寄存器中置1会使端口保持高阻态z，连接到V<del>DD</del>的P-MOS始终不会开启，也就是说配置寄存器只会控制GPIO的开漏<br>推挽模式：输出寄存器中置0位可激活N-MOS，而输出寄存器中置1可激活P-MOS，达到推挽输出的效果</p>
+<h2 id="模拟配置"><a href="#模拟配置" class="headerlink" title="模拟配置"></a>模拟配置</h2><p>一下内容摘自参考手册原文</p>
+<blockquote>
+<p>对 I/O 端口进行编程作为模拟配置时</p>
+<p>● 输出缓冲器被禁止</p>
+<p>● 施密特触发器输入停用，I/O 引脚的每个模拟输入的功耗变为零。施密特触发器的输出被强制处理为恒定值 (0)</p>
+<p>● 弱上拉和下拉电阻被关闭</p>
+<p>● 对输入数据寄存器的读访问值为“0”</p>
+</blockquote>
+<p>注意：<strong>在模拟配置中，I/O引脚不能为5V容忍</strong></p>
+<h2 id="振荡器引脚和RTC引脚作为GPIO"><a href="#振荡器引脚和RTC引脚作为GPIO" class="headerlink" title="振荡器引脚和RTC引脚作为GPIO"></a>振荡器引脚和RTC引脚作为GPIO</h2><p>当LSE振荡器处于关闭状态时，可分别将LSE引脚OSC32_IN和OSC32_OUT用作普通的PC14和PC15引脚</p>
+<p>但当LSE开启时，两个引脚只能作为LSE引脚，LSE的优先级是高于GPIO配置的，所以程序中对这两个引脚的GPIO配置会被无效</p>
+<p>当HSE振荡器处于关闭状态时，可分别将HSE振荡器引脚OSC_IN和OSC_OUT用作PH0和PH1引脚</p>
+<p>但当HSE振荡器处于开启状态时，PH0/PH1只能被配置为OSC_IN/OSC_OUT HSE振荡器引脚，也是优先于GPIO配置</p>
+<p>另外还有RTC_AF1和RTC_AF2两个引脚，可以用来检测入侵或时间戳时间、RTC_ALARM或RTC_CALIB RTC输出</p>
+<p>设置为RTC_ALARM输出时可用于两个RTC输出或RTC的唤醒，有RTC_CR寄存器中的OSEL[1:0]位配置</p>
+<p>其他功能查看参数手册即可</p>
+<h2 id="锁定GPIO"><a href="#锁定GPIO" class="headerlink" title="锁定GPIO"></a>锁定GPIO</h2><p>在库函数中提供了锁定GPIO的函数，摘录如下</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GPIO_PinLockConfig</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="keyword">uint16_t</span> GPIO_Pin)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  __IO <span class="keyword">uint32_t</span> tmp = <span class="number">0x00010000</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Check the parameters */</span></span><br><span class="line">  assert_param(IS_GPIO_ALL_PERIPH(GPIOx));</span><br><span class="line">  assert_param(IS_GPIO_PIN(GPIO_Pin));</span><br><span class="line"></span><br><span class="line">  tmp |= GPIO_Pin;</span><br><span class="line">  <span class="comment">/* Set LCKK bit */</span></span><br><span class="line">  GPIOx-&gt;LCKR = tmp;</span><br><span class="line">  <span class="comment">/* Reset LCKK bit */</span></span><br><span class="line">  GPIOx-&gt;LCKR =  GPIO_Pin;</span><br><span class="line">  <span class="comment">/* Set LCKK bit */</span></span><br><span class="line">  GPIOx-&gt;LCKR = tmp;</span><br><span class="line">  <span class="comment">/* Read LCKK bit*/</span></span><br><span class="line">  tmp = GPIOx-&gt;LCKR;</span><br><span class="line">  <span class="comment">/* Read LCKK bit*/</span></span><br><span class="line">  tmp = GPIOx-&gt;LCKR;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>直接输入GPIOx和要锁定的引脚就可以进行锁定</p>
+<h1 id="GPIO复用"><a href="#GPIO复用" class="headerlink" title="GPIO复用"></a>GPIO复用</h1><h2 id="GPIO复用器"><a href="#GPIO复用器" class="headerlink" title="GPIO复用器"></a>GPIO复用器</h2><p><strong>每个GPIO引脚都有一个采用16路复用功能输入的复用器</strong>，GPIO通过这些复用器连接到片上外设，这个复用器一次仅允许一个外设的复用功能连接到GPIO引脚，确保共用同一个GPIO引脚的外设之间不会发生冲突</p>
+<p>复用器输入从AF0到AF15，通过引脚复用寄存器的低8位GPIOx_AFRL和高8位GPIOx_AFRH分别设置</p>
+<p>外设的复用功能映射到AF1至AF13，AF0是悬空状态，AF15则是系统的EVENTOUT接入</p>
+<h3 id="EVENTOUT"><a href="#EVENTOUT" class="headerlink" title="EVENTOUT"></a>EVENTOUT</h3><p>参考ARM内核部分内容</p>
+<h2 id="GPIO复用输入输出"><a href="#GPIO复用输入输出" class="headerlink" title="GPIO复用输入输出"></a>GPIO复用输入输出</h2><p>在库函数中使用以下方式设置GPIO连接到复用器</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">GPIO_PinAFConfig(GPIOF,GPIO_PinSource9,GPIO_AF_TIM14);<span class="comment">//GPIOF9通过复用器连接到定时器14</span></span><br><span class="line">GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;<span class="comment">//在初始化结构体中配置为复用</span></span><br><span class="line"><span class="comment">//开启GPIO时钟同时也要开启所要复用外设的时钟</span></span><br><span class="line"><span class="comment">//不要忘记使能外设</span></span><br><span class="line"><span class="comment">//GPIO的其他功能按照正常配置即可</span></span><br></pre></td></tr></table></figure>
+
+<p>复用功能设置库函数</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GPIO_PinAFConfig</span><span class="params">(GPIO_TypeDef* GPIOx, <span class="keyword">uint16_t</span> GPIO_PinSource, <span class="keyword">uint8_t</span> GPIO_AF)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  	<span class="keyword">uint32_t</span> temp = <span class="number">0x00</span>;</span><br><span class="line">  	<span class="keyword">uint32_t</span> temp_2 = <span class="number">0x00</span>;</span><br><span class="line">  </span><br><span class="line">  	<span class="comment">/* Check the parameters */</span></span><br><span class="line">  	assert_param(IS_GPIO_ALL_PERIPH(GPIOx));</span><br><span class="line">  	assert_param(IS_GPIO_PIN_SOURCE(GPIO_PinSource));</span><br><span class="line">  	assert_param(IS_GPIO_AF(GPIO_AF));</span><br><span class="line">  </span><br><span class="line">  	temp = ((<span class="keyword">uint32_t</span>)(GPIO_AF) &lt;&lt; ((<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)GPIO_PinSource &amp; (<span class="keyword">uint32_t</span>)<span class="number">0x07</span>) * <span class="number">4</span>)) ;</span><br><span class="line">  	GPIOx-&gt;AFR[GPIO_PinSource &gt;&gt; <span class="number">0x03</span>] &amp;= ~((<span class="keyword">uint32_t</span>)<span class="number">0xF</span> &lt;&lt; ((<span class="keyword">uint32_t</span>)((<span class="keyword">uint32_t</span>)GPIO_PinSource &amp; (<span class="keyword">uint32_t</span>)<span class="number">0x07</span>) * <span class="number">4</span>)) ;</span><br><span class="line">    <span class="comment">//设置复用寄存器</span></span><br><span class="line">    </span><br><span class="line">  	temp_2 = GPIOx-&gt;AFR[GPIO_PinSource &gt;&gt; <span class="number">0x03</span>] | temp;</span><br><span class="line">  	GPIOx-&gt;AFR[GPIO_PinSource &gt;&gt; <span class="number">0x03</span>] = temp_2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在库函数中提供的参考表</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* GPIO_AFSelection: 选择被用于复用的引脚</span></span><br><span class="line"><span class="comment">  *          This parameter can be one of the following values:</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_RTC_50Hz: Connect RTC_50Hz pin to AF0 (default after reset) </span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_MCO: Connect MCO pin (MCO1 and MCO2) to AF0 (default after reset) </span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TAMPER: Connect TAMPER pins (TAMPER_1 and TAMPER_2) to AF0 (default after reset) </span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_SWJ: Connect SWJ pins (SWD and JTAG)to AF0 (default after reset) </span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TRACE: Connect TRACE pins to AF0 (default after reset)</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM1: Connect TIM1 pins to AF1</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM2: Connect TIM2 pins to AF1</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM3: Connect TIM3 pins to AF2</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM4: Connect TIM4 pins to AF2</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM5: Connect TIM5 pins to AF2</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM8: Connect TIM8 pins to AF3</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM9: Connect TIM9 pins to AF3</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM10: Connect TIM10 pins to AF3</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM11: Connect TIM11 pins to AF3</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_I2C1: Connect I2C1 pins to AF4</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_I2C2: Connect I2C2 pins to AF4</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_I2C3: Connect I2C3 pins to AF4</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_SPI1: Connect SPI1 pins to AF5</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_SPI2: Connect SPI2/I2S2 pins to AF5</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_SPI4: Connect SPI4 pins to AF5 </span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_SPI5: Connect SPI5 pins to AF5 </span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_SPI6: Connect SPI6 pins to AF5</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_SAI1: Connect SAI1 pins to AF6 for STM32F42xxx/43xxx devices.       </span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_SPI3: Connect SPI3/I2S3 pins to AF6</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_I2S3ext: Connect I2S3ext pins to AF7</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_USART1: Connect USART1 pins to AF7</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_USART2: Connect USART2 pins to AF7</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_USART3: Connect USART3 pins to AF7</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_UART4: Connect UART4 pins to AF8</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_UART5: Connect UART5 pins to AF8</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_USART6: Connect USART6 pins to AF8</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_UART7: Connect UART7 pins to AF8</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_UART8: Connect UART8 pins to AF8</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_CAN1: Connect CAN1 pins to AF9</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_CAN2: Connect CAN2 pins to AF9</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM12: Connect TIM12 pins to AF9</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM13: Connect TIM13 pins to AF9</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_TIM14: Connect TIM14 pins to AF9</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_OTG_FS: Connect OTG_FS pins to AF10</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_OTG_HS: Connect OTG_HS pins to AF10</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_ETH: Connect ETHERNET pins to AF11</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_FSMC: Connect FSMC pins to AF12 </span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_FMC: Connect FMC pins to AF12 for STM32F42xxx/43xxx devices.   </span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_OTG_HS_FS: Connect OTG HS (configured in FS) pins to AF12</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_SDIO: Connect SDIO pins to AF12</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_DCMI: Connect DCMI pins to AF13</span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_LTDC: Connect LTDC pins to AF14 for STM32F429xx/439xx devices. </span></span><br><span class="line"><span class="comment">  *            @arg GPIO_AF_EVENTOUT: Connect EVENTOUT pins to AF15</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="使用GPIO的步骤"><a href="#使用GPIO的步骤" class="headerlink" title="使用GPIO的步骤"></a>使用GPIO的步骤</h1><ol>
+<li><p>系统功能</p>
+<p>复位后GPIO自动连接AF0，然后会根据寄存器配置进行初始化，在这个阶段会进行JTAG/SWD、RTC参考输入、MCO1、MCO2等系统功能的引脚初始化</p>
+</li>
+<li><p>GPIO输入输出配置</p>
+<p>在GPIOx_MODER寄存器中将所需 I/O 配置为输出或输入即可进行独立的输入输出</p>
+<p>注意需要打开GPIO时钟！</p>
+</li>
+<li><p>外设复用使能</p>
+<p>对于ADC和DAC，需要在GPIOx_MODER寄存器中将所需 I/O 配置为模拟输入/输出</p>
+<p>对其他外设则需要在GPIOx_MODER寄存器中使能复用</p>
+</li>
+<li><p>其他选项</p>
+<p>通过GPIOx_OTYPER、GPIOx_PUPDR和GPIOx_OSPEEDER寄存器，分别选择类型、上拉/下拉以及输出速度</p>
+<p>在GPIOx_AFRL或GPIOx_AFRH寄存器中选择连接的具体复用外设</p>
+<p>外设能复用的GPIO是唯一的，应该使用CubeMX或查阅芯片参考手册来设置</p>
+</li>
+<li><p>配置EVENTOUT</p>
+<p>通过将复用器连接到AF15来配置用于输出Cortex-M4内核EVENTOUT信号的GPIO引脚</p>
+<p>注意：对于stm32f407，EVENTOUT不会映射到PC13、PC14、PC15、PH0、PH1、PI8引脚</p>
+</li>
+</ol>
 ]]></content>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
   </entry>
   <entry>
     <title>常用控制算法</title>
     <url>/2021/11/14/%E5%B8%B8%E7%94%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<h1 id="硬件控制算法"><a href="#硬件控制算法" class="headerlink" title="硬件控制算法"></a>硬件控制算法</h1><p>可应用的电路系统一般由模拟电路和数字电路组成。模拟电路用于电信号的处理和提供电源；数字电路则用于采集非电信号数据和控制系统。一般来说系统控制使用MCU、DSP或FPGA通过软件编程实现，在其中常使用用于控制系统的各种算法。</p>
+<span id="more"></span>
+
 <h2 id="PID算法"><a href="#PID算法" class="headerlink" title="PID算法"></a>PID算法</h2><h3 id="PID算法简介"><a href="#PID算法简介" class="headerlink" title="PID算法简介"></a>PID算法简介</h3><p>PID算法是一种很成熟、应用广泛的连续时间控制系统算法，最突出优点在于：</p>
 <ul>
 <li>结构典型</li>
@@ -771,6 +1300,8 @@
 <p>特别地，加州大学伯克利分校的一些黑客们对UNIX进行了几乎翻天覆地的改进（重写UNIX的基础代码），产生了伯克利软件发行版（Berkeley Software istribution）BSD——苹果的MacOS正建立在这一发行版上</p>
 <h3 id="GNU"><a href="#GNU" class="headerlink" title="GNU"></a>GNU</h3><p>GNU工程即GNU’s Not UNIX工程，由笔者很敬佩的理查德斯托曼主持开工，大多数的Linux发行版都使用了GNU工具（这就是为什么Linux的全称是GNU/Linux），GNU工程下所有软件都是“自由软件”（想了解自由软件或“Free Software”的详情，推荐阅读理查德斯托曼传记《若为自由故》），这就意味着GPL！</p>
 <p>GNU工程下属的GNU C Compiler就是为大家所熟知的C编译器gcc</p>
+<span id="more"></span>
+
 <h2 id="K-amp-R-C"><a href="#K-amp-R-C" class="headerlink" title="K&amp;R C"></a>K&amp;R C</h2><p>由Dennis Ritchie和Ken Thompson以及其他的开发者共同发明的<strong>最原始的C标准</strong></p>
 <h2 id="ANSI-C89"><a href="#ANSI-C89" class="headerlink" title="ANSI C89"></a>ANSI C89</h2><p>更被人所熟知的名字是简称“<strong>ANSI C</strong>”，这个版本是C的第一个成熟、统一的版本</p>
 <p>在ANSI C成为主流这段时间内，分离出了C++</p>
@@ -977,13 +1508,13 @@
 <p>主要分以下型号：</p>
 <ul>
 <li>专注低功耗的<strong>1xx</strong>通用型，配备1KB-60KB FLASH、512B-10KB RAM，工作时耗电仅达200uA/MIPS，RAM保持模式耗电0.1uA，RTC模式耗电0.7uA；可在6us之内快速唤醒。搭载10/12位斜率SAR ADC，集成模拟比较器、DMA、硬件乘法器、BOR、SVS、12位DAC</li>
-<li>能耗比高的<strong>F2xx</strong>通用型，性能<a href="mailto:&#49;&#54;&#x4d;&#73;&#80;&#83;&#64;&#51;&#x2e;&#51;&#x56;">&#49;&#54;&#x4d;&#73;&#80;&#83;&#64;&#51;&#x2e;&#51;&#x56;</a>，配备1-120KB FLASH，8-128KB RAM，工作耗电220uA，配备10/12位斜率SAR ADC，集成16位Σ-ΔADC，基本上等于1xx的升级版</li>
-<li><strong>性价比</strong>高的<strong>G2xx</strong>经济型，性能<a href="mailto:&#49;&#x36;&#77;&#x49;&#80;&#x53;&#64;&#51;&#x2e;&#51;&#x56;">&#49;&#x36;&#77;&#x49;&#80;&#x53;&#64;&#51;&#x2e;&#51;&#x56;</a>，对标友商stm32l，主打模拟外设和低功耗</li>
+<li>能耗比高的<strong>F2xx</strong>通用型，性能<a href="mailto:&#49;&#54;&#77;&#73;&#80;&#x53;&#x40;&#51;&#x2e;&#51;&#86;">&#49;&#54;&#77;&#73;&#80;&#x53;&#x40;&#51;&#x2e;&#51;&#86;</a>，配备1-120KB FLASH，8-128KB RAM，工作耗电220uA，配备10/12位斜率SAR ADC，集成16位Σ-ΔADC，基本上等于1xx的升级版</li>
+<li><strong>性价比</strong>高的<strong>G2xx</strong>经济型，性能<a href="mailto:&#49;&#x36;&#x4d;&#x49;&#80;&#83;&#x40;&#x33;&#46;&#x33;&#x56;">&#49;&#x36;&#x4d;&#x49;&#80;&#83;&#x40;&#x33;&#46;&#x33;&#x56;</a>，对标友商stm32l，主打模拟外设和低功耗</li>
 <li>面向计量和智能电网的AFE2xx专用型：性能略低于以上两个2xx系列，但是集成了1-3个独立的24位Σ-ΔADC，一个16位定时器、一个16位硬件乘法器、USART控制器、看门狗和GPIO</li>
 <li>停产的老型号3xx</li>
 <li>面向低功耗<strong>多媒体</strong>的<strong>4xx</strong>控制型，8-16MIPS处理性能，<strong>配备LCD控制器</strong>、<strong>FLL、SVS</strong>，针对低功耗测量和医疗应用，功耗和1xx相近，4-120KB FLASH、8-256KB RAM，引脚丰富最多可达80Pin，配备10/12位斜率SAR、16位Σ-ΔADC，同样集成了12位ADC、DMA、硬件乘法器、运放、USCI模块等</li>
-<li><strong>超高能耗比的5xx超低功耗型</strong>，能达到<a href="mailto:&#50;&#x35;&#77;&#x49;&#80;&#x53;&#64;&#x33;&#46;&#x33;&#86;">&#50;&#x35;&#77;&#x49;&#80;&#x53;&#64;&#x33;&#46;&#x33;&#86;</a>，工作模式功耗165uA/MIPS，RTC模式2.5uA，RAM保持模式可达1uA，待机唤醒时间极短，小于5ms，配备256KB FLASH、18KB RAM，额外集成了USB、模拟比较器</li>
-<li>高性能、低功耗的6xx系列旗舰型，达到<a href="mailto:&#x32;&#x35;&#x4d;&#x49;&#80;&#x53;&#x40;&#x33;&#46;&#x33;&#x56;">&#x32;&#x35;&#x4d;&#x49;&#80;&#x53;&#x40;&#x33;&#46;&#x33;&#x56;</a>，配备功耗优化的创新电源管理模块和USB控制器，配备LCD控制器，有256KB FLASH、18KB RAM，74Pin引脚，功耗与5xx系列相同，还额外集成了电压管理模块</li>
+<li><strong>超高能耗比的5xx超低功耗型</strong>，能达到<a href="mailto:&#50;&#x35;&#77;&#73;&#x50;&#83;&#x40;&#51;&#46;&#x33;&#x56;">&#50;&#x35;&#77;&#73;&#x50;&#83;&#x40;&#51;&#46;&#x33;&#x56;</a>，工作模式功耗165uA/MIPS，RTC模式2.5uA，RAM保持模式可达1uA，待机唤醒时间极短，小于5ms，配备256KB FLASH、18KB RAM，额外集成了USB、模拟比较器</li>
+<li>高性能、低功耗的6xx系列旗舰型，达到<a href="mailto:&#x32;&#53;&#x4d;&#73;&#x50;&#x53;&#x40;&#x33;&#46;&#x33;&#x56;">&#x32;&#53;&#x4d;&#73;&#x50;&#x53;&#x40;&#x33;&#46;&#x33;&#x56;</a>，配备功耗优化的创新电源管理模块和USB控制器，配备LCD控制器，有256KB FLASH、18KB RAM，74Pin引脚，功耗与5xx系列相同，还额外集成了电压管理模块</li>
 <li>基于<strong>FRAM</strong>技术的<strong>FRxx</strong>系列，和主要的F系列差别在于使用了FRAM存储技术，能够达到更快的FLASH访问速度并在所有功率模式下实现零功率状态保持，即使发生功率损耗的情况也可以保证写入操作，写入寿命能达到100M个周期，不再需要EEPROM</li>
 <li>低电压C、L系列，两个谢列都可以在0.9-1.65V电压范围内工作并提供4MIPS的性能</li>
 <li>集成射频基带的CC无线系列，具有低于1GHz的片上射频收发器，工作电压为1.8-3.3V，处理性能20MIPS</li>
@@ -1423,6 +1954,8 @@
     <url>/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%802/</url>
     <content><![CDATA[<h1 id="C语言语法拾遗"><a href="#C语言语法拾遗" class="headerlink" title="C语言语法拾遗"></a>C语言语法拾遗</h1><p>专门总结了一些C语言C99/C11之后的新语法或冷门语法</p>
 <h2 id="预处理和宏——灵魂"><a href="#预处理和宏——灵魂" class="headerlink" title="预处理和宏——灵魂"></a>预处理和宏——灵魂</h2><p>预处理器和宏可以说是面向对象语言<em>独有</em>的东西，<strong>这些特性发生在编译这个过程之前</strong>，使得C语言的编译过程变得“可控”，甚至可以说C语言编译本身就是一个开发者可编程的过程——或许这样说比较抽象，举个例子：java的宏并不对一般开发者开放，一般只有OpenJDK的开发者才会面对java宏和相关预编译指令；但是C语言的宏直接出现在hello world程序中：“#include”指令本身就意味着对链接器进行调用——这些宏严格来说并不属于C语言的语法学习范畴，但是如果想靠C语言造轮子，这就是无法避开的</p>
+<span id="more"></span>
+
 <p>C预处理器就是C语言的灵魂，上能干涉程序实现，下能检查编译原理</p>
 <h3 id="预处理指令的特殊用法"><a href="#预处理指令的特殊用法" class="headerlink" title="预处理指令的特殊用法"></a>预处理指令的特殊用法</h3><ol>
 <li><h1 id><a href="#" class="headerlink" title></a></h1><p>预处理器对井号标记<code>#</code>有三种不同的用法：</p>
@@ -1899,13 +2432,15 @@
 </ol>
 ]]></content>
       <tags>
-        <tag>现代C语言</tag>
+        <tag>C语言进阶</tag>
       </tags>
   </entry>
   <entry>
     <title>电路设计从入门到弃坑1【基础晶体管】</title>
     <url>/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/</url>
     <content><![CDATA[<h1 id="电路设计从入门到弃坑1【基础晶体管】"><a href="#电路设计从入门到弃坑1【基础晶体管】" class="headerlink" title="电路设计从入门到弃坑1【基础晶体管】"></a>电路设计从入门到弃坑1【基础晶体管】</h1><p>最基础的电路是由无源元件，即电阻、电容、电感三者构成的电路，两端通电后可以产生一个暂时稳定的电信号。不论是机缘巧合还是为了验证实验，曾经的物理学家开始注意到电的特殊性质，并加以研究，他们最先对电的性质进行探寻，从风筝实验到电磁感应定律一点点理解了电磁运作的原理，于是电气工程就出现了。然而到19世纪末为止，一直都只有无源电路的存在，电路的分析理论也仅有基础的电磁感应定律和由麦克斯韦方程组衍生出的基尔霍夫定律——直到20世纪的工程师发明出真空管，开启电子电路的时代。电路从最初使用电能和磁场能来控制、转化其他能量这个单一用途，进一步拓展出使用电信号来描述、控制其他信号，乃至使用电信号进行计算的用途。实现这些功能的基础就是具有控制功能的有源器件，也就是常说的二极管、三极管等元件。现代的半导体晶体管在20世纪中期才被发明出来，在此之前承担电子信号变换作用的元件一直是真空管。</p>
+<span id="more"></span>
+
 <h2 id="真空管"><a href="#真空管" class="headerlink" title="真空管"></a>真空管</h2><p>在半导体材料被发明之前，人们都使用电子管或者说真空管对电路进行操控，现代的半导体技术实质上还是在使用半导体达到真空管的用途，只不过因为半导体材料可以在硅片上进行制造，大大缩小了电路体积——但是它们的用途是相似的</p>
 <p>现在真空管已经被市场淘汰，剩下的也不过成了爱好者们的玩具，不过理解真空管有助于了解二极管、三极管等基本的晶体管在电路中起到的作用</p>
 <p>电子管主要分为：二极管、三极管、五极管、束射管、复合管等，听上去和半导体器件很相似</p>

@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>数模转换原理 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="数模转换与模数转换这里以STM32G474为例来介绍STM32中的ADC与DAC编程 主要作为电赛的笔记 模数转换ADC四个基本部分 采样：定时对连续变化的模拟信号进行测量得到的瞬时值 保持：采样结束后将得到信号保持一段时间，使ADC有充分时间进行ADC转换。一般采样脉冲频率越高、采样越密，采样值就越多，采样保持电路的输出信号就越接近输入信号的波形。对采样频率要求（满足采样定理）：采样频率Fs &amp;">
+  <meta name="description" content="数模转换与模数转换这里以STM32G474为例来介绍STM32中的ADC与DAC编程 主要作为电赛的笔记 模数转换ADC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数模转换原理">
 <meta property="og:url" content="https://redlightasl.github.io/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="数模转换与模数转换这里以STM32G474为例来介绍STM32中的ADC与DAC编程 主要作为电赛的笔记 模数转换ADC四个基本部分 采样：定时对连续变化的模拟信号进行测量得到的瞬时值 保持：采样结束后将得到信号保持一段时间，使ADC有充分时间进行ADC转换。一般采样脉冲频率越高、采样越密，采样值就越多，采样保持电路的输出信号就越接近输入信号的波形。对采样频率要求（满足采样定理）：采样频率Fs &amp;">
+<meta property="og:description" content="数模转换与模数转换这里以STM32G474为例来介绍STM32中的ADC与DAC编程 主要作为电赛的笔记 模数转换ADC">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-14T09:29:38.000Z">
-<meta property="article:modified_time" content="2021-11-14T09:29:47.832Z">
+<meta property="article:modified_time" content="2021-11-14T09:44:38.797Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="电赛笔记">
 <meta name="twitter:card" content="summary">
@@ -67,7 +67,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 13 -->
+			<!-- 总文章数 16 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -199,7 +199,9 @@
       
         <h1 id="数模转换与模数转换"><a href="#数模转换与模数转换" class="headerlink" title="数模转换与模数转换"></a>数模转换与模数转换</h1><p>这里以STM32G474为例来介绍STM32中的ADC与DAC编程</p>
 <p>主要作为电赛的笔记</p>
-<h2 id="模数转换ADC"><a href="#模数转换ADC" class="headerlink" title="模数转换ADC"></a>模数转换ADC</h2><h3 id="四个基本部分"><a href="#四个基本部分" class="headerlink" title="四个基本部分"></a>四个基本部分</h3><ul>
+<h2 id="模数转换ADC"><a href="#模数转换ADC" class="headerlink" title="模数转换ADC"></a>模数转换ADC</h2><span id="more"></span>
+
+<h3 id="四个基本部分"><a href="#四个基本部分" class="headerlink" title="四个基本部分"></a>四个基本部分</h3><ul>
 <li>采样：定时对连续变化的模拟信号进行测量得到的瞬时值</li>
 <li>保持：采样结束后将得到信号保持一段时间，使ADC有充分时间进行ADC转换。一般采样脉冲频率越高、采样越密，采样值就越多，采样保持电路的输出信号就越接近输入信号的波形。对采样频率要求（满足采样定理）：采样频率F<del>s</del> &gt;= 2*输入模拟信号频谱中最高频率F<del>max</del></li>
 <li>量化：将采样电压转换为某个最小单位电压的整数倍</li>
@@ -536,6 +538,10 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">机器学习与机器视觉</a>
               </li>
              
@@ -557,10 +563,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">C语言进阶</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">现代C语言</a>
               </li>
             
             <div class="clearfix"></div>

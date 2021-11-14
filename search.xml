@@ -3,7 +3,9 @@
   <entry>
     <title>Markdown基本语法</title>
     <url>/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推。</p>
+    <content><![CDATA[<span id="more"></span>
+
+<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
 
 <p>例：</p>
@@ -151,6 +153,8 @@ $$
     <url>/2021/11/14/Tcl%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="Tcl脚本在IC领域的主要用途"><a href="#Tcl脚本在IC领域的主要用途" class="headerlink" title="Tcl脚本在IC领域的主要用途"></a>Tcl脚本在IC领域的主要用途</h1><h2 id="复杂文本处理"><a href="#复杂文本处理" class="headerlink" title="复杂文本处理"></a>复杂文本处理</h2><p>Tcl可以把文本中的每一行变为一个<strong>列表</strong>，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容</p>
 <p>Tcl也支持正则表达式</p>
+<span id="more"></span>
+
 <h2 id="自动化执行flow"><a href="#自动化执行flow" class="headerlink" title="自动化执行flow"></a>自动化执行flow</h2><p>对于一些流程化的flow，可以编写Tcl脚本来自动执行，一键得到结果和report</p>
 <h2 id="辅助EDA开发"><a href="#辅助EDA开发" class="headerlink" title="辅助EDA开发"></a>辅助EDA开发</h2><p>Tcl易上手、使用简便，可以简便地设计图形化界面；也可以针对大型项目设计EDA辅助工具</p>
 <h1 id="Tcl脚本简介"><a href="#Tcl脚本简介" class="headerlink" title="Tcl脚本简介"></a>Tcl脚本简介</h1><p>Tcl即Tool command language工具控制语言，读作Tickle</p>
@@ -984,6 +988,8 @@ $$
     <content><![CDATA[<p>本文章根据stm32f4xx中文参考手册整理，可供学习其他arm内核单片机/stm32系列单片机参考</p>
 <p>如果对其中的内容有疑问，可以参考RCC、定时器、中断相关部分的解析</p>
 <p>以下内容使用SPL库（标准库）作为代码示例，HAL库是更高层的封装，想HAL库的使用可以查看其他教程</p>
+<span id="more"></span>
+
 <h1 id="GPIO电路"><a href="#GPIO电路" class="headerlink" title="GPIO电路"></a>GPIO电路</h1><p>每个GPIO端口包括4个32位配置寄存器、2个32位数据寄存器、1个32位置位/复位寄存器、1个32位锁定寄存器和2个32位复用功能寄存器。每个IO端口位均可自由编程，但IO端口寄存器必须按32位字、半字或字节进行访问</p>
 <p>基本电路图如下所示：</p>
 <p><img src="/2021/11/14/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90GPIO%E3%80%91/image-20210415214054864.png" alt="image-20210415214054864"></p>

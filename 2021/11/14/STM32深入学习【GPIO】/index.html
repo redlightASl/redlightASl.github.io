@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>STM32深入学习【GPIO】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文章根据stm32f4xx中文参考手册整理，可供学习其他arm内核单片机&#x2F;stm32系列单片机参考 如果对其中的内容有疑问，可以参考RCC、定时器、中断相关部分的解析 以下内容使用SPL库（标准库）作为代码示例，HAL库是更高层的封装，想HAL库的使用可以查看其他教程 GPIO电路每个GPIO端口包括4个32位配置寄存器、2个32位数据寄存器、1个32位置位&#x2F;复位寄存器、1个32位锁定寄存器和2">
+  <meta name="description" content="本文章根据stm32f4xx中文参考手册整理，可供学习其他arm内核单片机&#x2F;stm32系列单片机参考 如果对其中的内容有疑问，可以参考RCC、定时器、中断相关部分的解析 以下内容使用SPL库（标准库）作为代码示例，HAL库是更高层的封装，想HAL库的使用可以查看其他教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="STM32深入学习【GPIO】">
 <meta property="og:url" content="https://redlightasl.github.io/2021/11/14/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90GPIO%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="本文章根据stm32f4xx中文参考手册整理，可供学习其他arm内核单片机&#x2F;stm32系列单片机参考 如果对其中的内容有疑问，可以参考RCC、定时器、中断相关部分的解析 以下内容使用SPL库（标准库）作为代码示例，HAL库是更高层的封装，想HAL库的使用可以查看其他教程 GPIO电路每个GPIO端口包括4个32位配置寄存器、2个32位数据寄存器、1个32位置位&#x2F;复位寄存器、1个32位锁定寄存器和2">
+<meta property="og:description" content="本文章根据stm32f4xx中文参考手册整理，可供学习其他arm内核单片机&#x2F;stm32系列单片机参考 如果对其中的内容有疑问，可以参考RCC、定时器、中断相关部分的解析 以下内容使用SPL库（标准库）作为代码示例，HAL库是更高层的封装，想HAL库的使用可以查看其他教程">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/14/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90GPIO%E3%80%91/image-20210415214054864.png">
 <meta property="article:published_time" content="2021-11-14T09:48:31.000Z">
-<meta property="article:modified_time" content="2021-11-14T09:53:08.619Z">
+<meta property="article:modified_time" content="2021-11-14T10:17:12.046Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary">
@@ -202,6 +202,8 @@
         <p>本文章根据stm32f4xx中文参考手册整理，可供学习其他arm内核单片机/stm32系列单片机参考</p>
 <p>如果对其中的内容有疑问，可以参考RCC、定时器、中断相关部分的解析</p>
 <p>以下内容使用SPL库（标准库）作为代码示例，HAL库是更高层的封装，想HAL库的使用可以查看其他教程</p>
+<span id="more"></span>
+
 <h1 id="GPIO电路"><a href="#GPIO电路" class="headerlink" title="GPIO电路"></a>GPIO电路</h1><p>每个GPIO端口包括4个32位配置寄存器、2个32位数据寄存器、1个32位置位/复位寄存器、1个32位锁定寄存器和2个32位复用功能寄存器。每个IO端口位均可自由编程，但IO端口寄存器必须按32位字、半字或字节进行访问</p>
 <p>基本电路图如下所示：</p>
 <p><img src="/2021/11/14/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90GPIO%E3%80%91/image-20210415214054864.png" alt="image-20210415214054864"></p>

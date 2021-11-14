@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>Tcl脚本基础 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] Tcl脚本在IC领域的主要用途复杂文本处理Tcl可以把文本中的每一行变为一个列表，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容 Tcl也支持正则表达式 自动化执行flow对于一些流程化的flow，可以编写Tcl脚本来自动执行，一键得到结果和report 辅助EDA开发Tcl易上手、使用简便，可以简便地设计图形化界面；">
+  <meta name="description" content="Tcl脚本在IC领域的主要用途复杂文本处理Tcl可以把文本中的每一行变为一个列表，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容 Tcl也支持正则表达式 自动化执行flow对于一些流程化的flow，可以编写Tcl脚本来自动执行，一键得到结果和report 辅助EDA开发Tcl易上手、使用简便，可以简便地设计图形化界面；也可以针对大">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tcl脚本基础">
 <meta property="og:url" content="https://redlightasl.github.io/2021/11/14/Tcl%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="[TOC] Tcl脚本在IC领域的主要用途复杂文本处理Tcl可以把文本中的每一行变为一个列表，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容 Tcl也支持正则表达式 自动化执行flow对于一些流程化的flow，可以编写Tcl脚本来自动执行，一键得到结果和report 辅助EDA开发Tcl易上手、使用简便，可以简便地设计图形化界面；">
+<meta property="og:description" content="Tcl脚本在IC领域的主要用途复杂文本处理Tcl可以把文本中的每一行变为一个列表，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容 Tcl也支持正则表达式 自动化执行flow对于一些流程化的flow，可以编写Tcl脚本来自动执行，一键得到结果和report 辅助EDA开发Tcl易上手、使用简便，可以简便地设计图形化界面；也可以针对大">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-14T09:46:14.000Z">
-<meta property="article:modified_time" content="2021-11-14T09:46:26.769Z">
+<meta property="article:modified_time" content="2021-11-14T10:00:20.967Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="杂项">
 <meta name="twitter:card" content="summary">
@@ -197,8 +197,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<h1 id="Tcl脚本在IC领域的主要用途"><a href="#Tcl脚本在IC领域的主要用途" class="headerlink" title="Tcl脚本在IC领域的主要用途"></a>Tcl脚本在IC领域的主要用途</h1><h2 id="复杂文本处理"><a href="#复杂文本处理" class="headerlink" title="复杂文本处理"></a>复杂文本处理</h2><p>Tcl可以把文本中的每一行变为一个<strong>列表</strong>，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容</p>
+        <h1 id="Tcl脚本在IC领域的主要用途"><a href="#Tcl脚本在IC领域的主要用途" class="headerlink" title="Tcl脚本在IC领域的主要用途"></a>Tcl脚本在IC领域的主要用途</h1><h2 id="复杂文本处理"><a href="#复杂文本处理" class="headerlink" title="复杂文本处理"></a>复杂文本处理</h2><p>Tcl可以把文本中的每一行变为一个<strong>列表</strong>，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容</p>
 <p>Tcl也支持正则表达式</p>
 <h2 id="自动化执行flow"><a href="#自动化执行flow" class="headerlink" title="自动化执行flow"></a>自动化执行flow</h2><p>对于一些流程化的flow，可以编写Tcl脚本来自动执行，一键得到结果和report</p>
 <h2 id="辅助EDA开发"><a href="#辅助EDA开发" class="headerlink" title="辅助EDA开发"></a>辅助EDA开发</h2><p>Tcl易上手、使用简便，可以简便地设计图形化界面；也可以针对大型项目设计EDA辅助工具</p>
@@ -214,14 +213,14 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tclsh hello.tcl <span class="comment"># Unix</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> tclsh hello.tcl <span class="comment"># Windows</span></span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Tcl数据类型"><a href="#Tcl数据类型" class="headerlink" title="Tcl数据类型"></a>Tcl数据类型</h2><p>Tcl只支持<strong>字符串</strong>数据类型：所有命令、参数、命令结果、变量等都是字符串</p>
-<p>==字符串的实际解释依赖于上下文==</p>
+<p><strong>字符串的实际解释依赖于上下文</strong></p>
 <p>Tcl允许使用字符串组合出多种高级数据类型</p>
 <figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> a hello</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$a</span></span><br><span class="line"><span class="keyword">set</span> b <span class="string">&quot;hello world&quot;</span></span><br><span class="line"><span class="keyword">set</span> c &#123;hello world&#125;</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$b</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$c</span> # 这里b和c打印的值都是 hello world</span><br></pre></td></tr></table></figure>
 
 <h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p><strong>使用一组单词与双引号、中括号或者大括号的组合表示列表</strong>，如下所示：</p>
 <figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> myVariable &#123;red green blue&#125; # <span class="keyword">set</span> listName [<span class="keyword">list</span> item1 item2 item3] 中括号、大括号都可以</span><br><span class="line"><span class="keyword">puts</span> [<span class="keyword">lindex</span> <span class="variable">$myVariable</span> <span class="number">2</span>]</span><br><span class="line"><span class="keyword">set</span> myVariable <span class="string">&quot;red green blue&quot;</span></span><br><span class="line"><span class="keyword">puts</span> [<span class="keyword">lindex</span> <span class="variable">$myVariable</span> <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 
-<p>注意：==Tcl的列表以0为第一个元素的坐标==，所以以上输出为</p>
+<p>注意：<strong>Tcl的列表以0为第一个元素的坐标</strong>，所以以上输出为</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> blue</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> green</span></span><br></pre></td></tr></table></figure>
 
 <p>使用<code>append</code>或<code>lappend</code>命令追加项目到列表</p>
@@ -238,7 +237,7 @@
 <h3 id="关联数组（字典）"><a href="#关联数组（字典）" class="headerlink" title="关联数组（字典）"></a>关联数组（字典）</h3><p>可以使用以下形式创建关联数组，或者说<strong>键值对（字典）</strong></p>
 <figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>  marks(english) <span class="number">80</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$marks</span>(english) # 输出 <span class="number">80</span></span><br><span class="line"><span class="keyword">set</span>  marks(mathematics) <span class="number">90</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$marks</span>(mathematics) # 输出 <span class="number">90</span></span><br></pre></td></tr></table></figure>
 
-<p>特别地，==Tcl的键值对不要求索引（键）是整数==</p>
+<p>特别地，<strong>Tcl的键值对不要求索引（键）是整数</strong></p>
 <p>使用<code>dict set 字典名 键 值</code>来格式化创建字典</p>
 <p>使用<code>dict size</code>获取字典的大小</p>
 <p>使用以下方法遍历字典</p>
@@ -673,6 +672,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">

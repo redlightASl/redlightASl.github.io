@@ -331,6 +331,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -404,6 +415,8 @@
 
 <p>例：</p>
 <p>==独轮车 tskk 独轮车==</p>
+<p>注意：Hexo暂不支持高亮强调功能，所以上面的内容会显示错误，实际内容应该是下图所示</p>
+<p><img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/image-20211114175616156.png" alt="image-20211114175616156"></p>
 <h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><p>用三个或以上*号单独成行表示分割线</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">***</span><br></pre></td></tr></table></figure>
 <p>例：</p>
@@ -413,7 +426,7 @@
 <p>显然 用很多*写出分割线可以在代码层面增加你文章的气势，具体原因留给读者自行证明</p>
 <h2 id="上标与下标"><a href="#上标与下标" class="headerlink" title="上标与下标"></a>上标与下标</h2><p>用两个^表示上标<br>用两个~表示下标</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1919^114514^</span><br><span class="line"> 今天~也是好天气~</span><br></pre></td></tr></table></figure>
-<p>例：<br>1919^114514^<br>今天<del>也是好天气</del></p>
+<p>例：<br><img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/image-20211114180249618.png" alt="image-20211114180249618"></p>
 <h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>用</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--注释内容--&gt;</span><br></pre></td></tr></table></figure>
 <p>表示注释<br>例：</p>
@@ -488,38 +501,27 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 开头一个感叹号 !</span><br><span class="line">- 接着一个方括号，里面放上图片的替代文字</span><br><span class="line">- 接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上选择性的 &#x27;title&#x27; 属性的文字。</span><br><span class="line"></span><br><span class="line">//抱歉没有例子，奇怪的图片发出来的话，人生就要结束了（悲）</span><br><span class="line"></span><br><span class="line">Markdown 还没有办法指定图片的高度与宽度，如果需要的话，可以使用普通的 \&lt;img\&gt; 标签。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/原文这里是runoob的一张图" width="50%">
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 表格</span><br><span class="line"></span><br><span class="line">Markdown 制作表格使用 | 来分隔不同的单元格，使用 - 来分隔表头和其他行。</span><br><span class="line"></span><br><span class="line">语法格式如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-| 表头   | 表头   |
-| ------ | ------ |
-| 单元格 | 单元格 |
-| 单元格 | 单元格 |
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 对齐方式</span><br><span class="line"></span><br><span class="line">**我们可以设置表格的对齐方式：**</span><br><span class="line"></span><br><span class="line">* -: 设置内容和标题栏居右对齐。</span><br><span class="line">* :- 设置内容和标题栏居左对齐。</span><br><span class="line">* :-: 设置内容和标题栏居中对齐。</span><br><span class="line">例：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-| 左对齐 | 右对齐 | 居中对齐 |
-| :----- | -----: | :------: |
-| 单元格 | 单元格 |  单元格  |
-| 单元格 | 单元格 |  单元格  |
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :-----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## HTML 元素</span><br><span class="line"></span><br><span class="line">不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。</span><br><span class="line"></span><br><span class="line">目前支持的 HTML 元素有：`&lt;kbd&gt; &lt;b&gt; &lt;i&gt; &lt;em&gt; &lt;sup&gt; &lt;sub&gt; &lt;br&gt;`等 ，如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-使用 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd> 重启电脑
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">使用 &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;Del&lt;/kbd&gt; 重启电脑</span><br><span class="line"></span><br><span class="line">## 转义</span><br><span class="line"></span><br><span class="line">Markdown 使用了很多特殊符号来表示特定的意义，如果需要显示特定的符号则需要使用转义字符，Markdown 使用反斜杠转义特殊字符：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-**文本加粗** 
-\*\* 正常显示星号 \*\*
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-\   反斜线
-`   反引号
-*   星号
-_   下划线
-{}  花括号
-[]  方括号
-()  小括号
-#   井字号
-+   加号
--   减号
-.   英文句点
-!   感叹号
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 公式</span><br><span class="line"></span><br><span class="line">当你需要在编辑器中插入数学公式时，可以使用两个美元符 $$ 包裹 TeX 或 LaTeX 格式的数学公式来实现。提交后，问答和文章页会根据需要加载 Mathjax 对数学公式进行渲染。</span><br><span class="line"></span><br><span class="line">不过这个东西和渲染器有关，对于不同编辑器可能会不支持某些latex特性</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-$$
-思考题：\lim_{x\rarr 0}\frac{tanx}{x+sinx} =?
-$$
+![image-20211114180218183](Markdown基本语法.assets/image-20211114180218183.png)
 
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 对齐方式</span><br><span class="line"></span><br><span class="line">**我们可以设置表格的对齐方式：**</span><br><span class="line"></span><br><span class="line">* -: 设置内容和标题栏居右对齐。</span><br><span class="line">* :- 设置内容和标题栏居左对齐。</span><br><span class="line">* :-: 设置内容和标题栏居中对齐。</span><br><span class="line">例：</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/image-20211114180140933.png" alt="image-20211114180140933"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :-----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## HTML 元素</span><br><span class="line"></span><br><span class="line">不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。</span><br><span class="line"></span><br><span class="line">目前支持的 HTML 元素有：`&lt;kbd&gt; &lt;b&gt; &lt;i&gt; &lt;em&gt; &lt;sup&gt; &lt;sub&gt; &lt;br&gt;`等 ，如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>使用 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd> 重启电脑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">使用 &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;Del&lt;/kbd&gt; 重启电脑</span><br><span class="line"></span><br><span class="line">## 转义</span><br><span class="line"></span><br><span class="line">Markdown 使用了很多特殊符号来表示特定的意义，如果需要显示特定的符号则需要使用转义字符，Markdown 使用反斜杠转义特殊字符：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>文本加粗</strong><br>** 正常显示星号 **</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>\   反斜线<br>`   反引号</p>
+<ul>
+<li>  星号<br>_   下划线<br>{}  花括号<br>[]  方括号<br>()  小括号<h1 id="井字号"><a href="#井字号" class="headerlink" title="井字号"></a>井字号</h1></li>
+</ul>
+<ul>
+<li>  加号</li>
+</ul>
+<ul>
+<li>  减号<br>.   英文句点<br>!   感叹号<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 公式</span><br><span class="line"></span><br><span class="line">当你需要在编辑器中插入数学公式时，可以使用两个美元符 $$ 包裹 TeX 或 LaTeX 格式的数学公式来实现。提交后，问答和文章页会根据需要加载 Mathjax 对数学公式进行渲染。</span><br><span class="line"></span><br><span class="line">不过这个东西和渲染器有关，对于不同编辑器可能会不支持某些latex特性</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+$$<br>思考题：\lim_{x\rarr 0}\frac{tanx}{x+sinx} =?<br>$$</li>
+</ul>
 <p>$$<br>\frac{dx}{dt}=v<br>\mathbf{V}_1 \times \mathbf{V}_2<br>$$</p>
 <pre><code>
 $$
@@ -615,8 +617,7 @@ $$
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<h1 id="Tcl脚本在IC领域的主要用途"><a href="#Tcl脚本在IC领域的主要用途" class="headerlink" title="Tcl脚本在IC领域的主要用途"></a>Tcl脚本在IC领域的主要用途</h1><h2 id="复杂文本处理"><a href="#复杂文本处理" class="headerlink" title="复杂文本处理"></a>复杂文本处理</h2><p>Tcl可以把文本中的每一行变为一个<strong>列表</strong>，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容</p>
+        <h1 id="Tcl脚本在IC领域的主要用途"><a href="#Tcl脚本在IC领域的主要用途" class="headerlink" title="Tcl脚本在IC领域的主要用途"></a>Tcl脚本在IC领域的主要用途</h1><h2 id="复杂文本处理"><a href="#复杂文本处理" class="headerlink" title="复杂文本处理"></a>复杂文本处理</h2><p>Tcl可以把文本中的每一行变为一个<strong>列表</strong>，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容</p>
 <p>Tcl也支持正则表达式</p>
 <h2 id="自动化执行flow"><a href="#自动化执行flow" class="headerlink" title="自动化执行flow"></a>自动化执行flow</h2><p>对于一些流程化的flow，可以编写Tcl脚本来自动执行，一键得到结果和report</p>
 <h2 id="辅助EDA开发"><a href="#辅助EDA开发" class="headerlink" title="辅助EDA开发"></a>辅助EDA开发</h2><p>Tcl易上手、使用简便，可以简便地设计图形化界面；也可以针对大型项目设计EDA辅助工具</p>
@@ -632,14 +633,14 @@ $$
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> tclsh hello.tcl <span class="comment"># Unix</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> tclsh hello.tcl <span class="comment"># Windows</span></span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Tcl数据类型"><a href="#Tcl数据类型" class="headerlink" title="Tcl数据类型"></a>Tcl数据类型</h2><p>Tcl只支持<strong>字符串</strong>数据类型：所有命令、参数、命令结果、变量等都是字符串</p>
-<p>==字符串的实际解释依赖于上下文==</p>
+<p><strong>字符串的实际解释依赖于上下文</strong></p>
 <p>Tcl允许使用字符串组合出多种高级数据类型</p>
 <figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> a hello</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$a</span></span><br><span class="line"><span class="keyword">set</span> b <span class="string">&quot;hello world&quot;</span></span><br><span class="line"><span class="keyword">set</span> c &#123;hello world&#125;</span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$b</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$c</span> # 这里b和c打印的值都是 hello world</span><br></pre></td></tr></table></figure>
 
 <h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p><strong>使用一组单词与双引号、中括号或者大括号的组合表示列表</strong>，如下所示：</p>
 <figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> myVariable &#123;red green blue&#125; # <span class="keyword">set</span> listName [<span class="keyword">list</span> item1 item2 item3] 中括号、大括号都可以</span><br><span class="line"><span class="keyword">puts</span> [<span class="keyword">lindex</span> <span class="variable">$myVariable</span> <span class="number">2</span>]</span><br><span class="line"><span class="keyword">set</span> myVariable <span class="string">&quot;red green blue&quot;</span></span><br><span class="line"><span class="keyword">puts</span> [<span class="keyword">lindex</span> <span class="variable">$myVariable</span> <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
 
-<p>注意：==Tcl的列表以0为第一个元素的坐标==，所以以上输出为</p>
+<p>注意：<strong>Tcl的列表以0为第一个元素的坐标</strong>，所以以上输出为</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> blue</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> green</span></span><br></pre></td></tr></table></figure>
 
 <p>使用<code>append</code>或<code>lappend</code>命令追加项目到列表</p>
@@ -656,7 +657,7 @@ $$
 <h3 id="关联数组（字典）"><a href="#关联数组（字典）" class="headerlink" title="关联数组（字典）"></a>关联数组（字典）</h3><p>可以使用以下形式创建关联数组，或者说<strong>键值对（字典）</strong></p>
 <figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/tclsh</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>  marks(english) <span class="number">80</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$marks</span>(english) # 输出 <span class="number">80</span></span><br><span class="line"><span class="keyword">set</span>  marks(mathematics) <span class="number">90</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$marks</span>(mathematics) # 输出 <span class="number">90</span></span><br></pre></td></tr></table></figure>
 
-<p>特别地，==Tcl的键值对不要求索引（键）是整数==</p>
+<p>特别地，<strong>Tcl的键值对不要求索引（键）是整数</strong></p>
 <p>使用<code>dict set 字典名 键 值</code>来格式化创建字典</p>
 <p>使用<code>dict size</code>获取字典的大小</p>
 <p>使用以下方法遍历字典</p>
@@ -1621,6 +1622,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
               </li>
              
               <li class="article-tag-list-item">

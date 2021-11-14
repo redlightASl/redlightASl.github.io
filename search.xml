@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>多级放大器简介</title>
+    <url>/2021/11/14/%E5%A4%9A%E7%BA%A7%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h1 id="多级放大器"><a href="#多级放大器" class="headerlink" title="多级放大器"></a>多级放大器</h1><p>常见的共射放大电路放大系数$\beta_V=-\frac{\beta R_{C}}{R_{b1}}$</p>
+<h2 id="耦合方式"><a href="#耦合方式" class="headerlink" title="耦合方式"></a>耦合方式</h2><p>将多个单级基本放大电路合理连接即构成多级放大电路</p>
+<p>组成多级放大电路的每个基本电路称为一<strong>级</strong>，级与级之间的连接称为<strong>级间耦合</strong></p>
+<p>有下列四种常见的耦合方式</p>
+<ul>
+<li><p>直接耦合</p>
+<p>  可以放大交流和缓慢变化的直流信号，便于集成化</p>
+<p>  但是各级静态工作点会互相影响——基极和集电极电位会随着级数增加而上升；并且存在<strong>零点漂移</strong></p>
+<p>  改进方法：</p>
+<ol>
+<li>在后级的射极接入电阻，提高后级基极电位，但是会导致第二级的放大倍数下降</li>
+<li>在后级的射极接入稳压二极管并上拉电阻（启动电阻）到Vcc，可以使后级的放大倍数损失减小，但是会导致集电极电压的变化范围减小</li>
+<li>在前级和后级之间使用反接的稳压二极管耦合，并在后级的基极接入下拉电阻到地，可以做到不损失放大倍数，但是稳压管噪声较大，会对输出信号造成影响</li>
+<li>混合使用NPN管和PNP管（对管）直接耦合，可以较完美地实现需求，实际经常使用的电路就是这种</li>
+</ol>
+</li>
+<li><p>阻容耦合</p>
+<p>  在前级和后级之间使用电容进行耦合</p>
+<p>  静态工作点相互独立，在分立元件电路中广泛使用；但集成电路中难以制造大容量电容，不便于集成化</p>
+</li>
+<li><p>变压器耦合</p>
+<p>  过去广泛采用的耦合方式，利用变压器的阻抗变换功能，但是难以高频工作，过去经常使用这种方式实现收音机放大电路</p>
+</li>
+<li><p>光电耦合</p>
+<p>  使用光耦器件进行前后级耦合，耦合效果好、抗干扰能力强，但是难以做到良好的线性放大</p>
+</li>
+</ul>
+<h2 id="多级放大器动态分析"><a href="#多级放大器动态分析" class="headerlink" title="多级放大器动态分析"></a>多级放大器动态分析</h2><h3 id="性能参数"><a href="#性能参数" class="headerlink" title="性能参数"></a>性能参数</h3><ol>
+<li><p>电压放大倍数</p>
+<p> 总电压放大倍数等于各级电压放大倍数的乘积</p>
+<p> $\beta_A=\beta_1\times\beta_2\times\cdots\times\beta_n$</p>
+<p> 各级的放大倍数、静态值等可以独立计算</p>
+</li>
+<li><p>输入电阻、输出电阻等同于从输入端口、输出端口分别看入电路的总电阻</p>
+</li>
+</ol>
+<h3 id="直接耦合放大电路的零点漂移问题"><a href="#直接耦合放大电路的零点漂移问题" class="headerlink" title="直接耦合放大电路的零点漂移问题"></a>直接耦合放大电路的零点漂移问题</h3><p><strong>零点漂移</strong>：直接耦合时，输入电压为0，但输出电压离开零点，并缓慢地发生不规则变化的现象</p>
+<p>原因：放大器件的参数受温度影响而使Q点不稳定，所以零点漂移也称为温度漂移</p>
+<p><em>多级放大器会使零点漂移更加严重</em></p>
+<p>抑制零点漂移的方法：</p>
+<ol>
+<li>引入直流负反馈</li>
+<li>利用热敏元件补偿放大器零漂</li>
+<li>使用差分放大电路，放大差分信号（只有这种方法可以达到完美抑制零点漂移）</li>
+</ol>
+<h2 id="差分放大电路"><a href="#差分放大电路" class="headerlink" title="差分放大电路"></a>差分放大电路</h2><p>核心思想：构造电压源补偿由于零点漂移带来的电压不稳定</p>
+<p>差分放大电路也称为差动放大电路，电路以两只并联的三极管集电极电位差为输出，以共模或差模信号为输入，其中共模信号会被直接忽略，由于零点漂移造成的信号也是一种共模信号，所以会被去除</p>
+<p>差分放大电路中构造了两个“虚地”——负载电阻的中点电位在差模信号作用下不变，相当于“接地”；对管射极相连节点的电位由于差分信号而不变，构造了另一个“接地点”</p>
+<p>差分放大器具有四种接法</p>
+<ul>
+<li>双入双出</li>
+<li>双入单出</li>
+<li>单入双出</li>
+<li>单入单出</li>
+</ul>
+<p>单端情况下还是具有一定的共模抑制比，但是不如双端效果好</p>
+<p>差模电压放大倍数、共模电压放大倍数与单端输入或双端输入无关，只与输出方式有关</p>
+<p>双端输出时，共模电压放大倍数$A_{VC}=0$</p>
+<p>差模输入电阻始终是基本放大电路的两倍</p>
+<p>输出电阻双端输出时为$2R_C$，单端输出时为$R_C$</p>
+<p>双端输出时共模抑制比K<del>CMR</del>可认为等于无穷大，单端输出时为有限值</p>
+<p>可搭配恒流源电路构造改进的差分放大电路</p>
+<h2 id="互补放大电路"><a href="#互补放大电路" class="headerlink" title="互补放大电路"></a>互补放大电路</h2><p>基本要求：输出电阻低、最大不失真输出电压尽可能大</p>
+<p>使用NPN、PNP对管采用图腾柱连接，实现推挽输出，一个三极管放大正半周信号，另一个放大负半周信号；但这种方案存在<strong>交越失真</strong></p>
+<p>解决方案如下：</p>
+<ol>
+<li>使用两个二极管钳位输入，并使用射极-基极并联电阻给三极管提供静态电压</li>
+<li>使用压敏电阻、NPN-PNP对管、构建U<del>BE</del>倍增电路等方式为对管提供静态电压</li>
+<li>使用复合管结构，增大对管电流放大倍数，减小前级驱动电流</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>电路设计</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>我的新博客</title>
     <url>/2021/11/13/%E6%88%91%E7%9A%84%E6%96%B0%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h1 id="搬家了！"><a href="#搬家了！" class="headerlink" title="搬家了！"></a>搬家了！</h1><p>准备逐步把博客写作从CSDN换到基于Github Pages和Hexo的自建站上（笑）</p>
@@ -14,6 +92,289 @@
 ]]></content>
       <tags>
         <tag>测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数模转换原理</title>
+    <url>/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<h1 id="数模转换与模数转换"><a href="#数模转换与模数转换" class="headerlink" title="数模转换与模数转换"></a>数模转换与模数转换</h1><p>这里以STM32G474为例来介绍STM32中的ADC与DAC编程</p>
+<p>主要作为电赛的笔记</p>
+<h2 id="模数转换ADC"><a href="#模数转换ADC" class="headerlink" title="模数转换ADC"></a>模数转换ADC</h2><h3 id="四个基本部分"><a href="#四个基本部分" class="headerlink" title="四个基本部分"></a>四个基本部分</h3><ul>
+<li>采样：定时对连续变化的模拟信号进行测量得到的瞬时值</li>
+<li>保持：采样结束后将得到信号保持一段时间，使ADC有充分时间进行ADC转换。一般采样脉冲频率越高、采样越密，采样值就越多，采样保持电路的输出信号就越接近输入信号的波形。对采样频率要求（满足采样定理）：采样频率F<del>s</del> &gt;= 2*输入模拟信号频谱中最高频率F<del>max</del></li>
+<li>量化：将采样电压转换为某个最小单位电压的整数倍</li>
+<li>编码：用二进制代码表示量化后的量化电平</li>
+</ul>
+<p>量化级越细，量化误差就越小，所用二进制代码的位数就越多，电路也越复杂</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>常见的ADC主要分成三种：</p>
+<ul>
+<li><p>积分型：将输入电压转换成脉冲宽度信号或脉冲频率，使用定时器/计数器获取数字值</p>
+<ul>
+<li>优点：电路简单、分辨率高</li>
+<li>缺点：转换精度依赖于积分时间，转换速率较低</li>
+</ul>
+</li>
+<li><p>逐次比较型：由一个比较器和DAC转换器通过逐次比较逻辑构成，从最高位开始顺序地对每一位将输入电压与内置DAC转换器的输出进行比较，经过n次比较来输出数字值</p>
+<p>  这个类型的ADC可以看作使用快速逼近-快速排序的方法来让DAC输出值靠近模拟值来实现ADC</p>
+<ul>
+<li>优点：速度高，功耗低，在低分辨率（12位）式具有性价比优势</li>
+<li>缺点：转换速率一般，电路规模中等</li>
+</ul>
+</li>
+<li><p>Σ-Δ调制型：使用积分器、比较器、1位DAC转换器和数字滤波器等构成，将输入电压转换成脉冲宽度信号，使用数字滤波器处理后得到数字值</p>
+<ul>
+<li>优点：可以容易地做到高分辨率测量</li>
+<li>缺点：转换速率低、电路规模大</li>
+</ul>
+</li>
+</ul>
+<h3 id="主要参数"><a href="#主要参数" class="headerlink" title="主要参数"></a>主要参数</h3><ol>
+<li>分辨率：输出数字量变化一个相邻数值所需输入模拟电压的变化量，一般用二进制的位数表示，分辨率为n表示是满刻度F<del>s</del>的2的n次方分之一</li>
+<li>量化误差：ADC的有限位数对模拟量进行量化而引起的误差。要准确表示模拟量，ADC的位数需要很大甚至无穷大，所以ADC器件都有量化误差。一个分辨率有限的ADC的阶梯状转换特性曲线与具有无限分辨率的ADC转化特性曲线之间的最大偏差就是量化误差</li>
+<li>转换速率：每秒进行转换的次数</li>
+<li>转换量程：ADC所能测量的最大电压，一般等于参考电压，超过此电压有可能损毁ADC。当信号较小时可以考虑降低参考电压来提高分辨率，<strong>改变参考电压后，对应的转换值也会改变，计算实际电压时需要将参考电压考虑进去</strong>，所以说一般参考电压都要做到很稳定且不带有高次谐波</li>
+<li>偏移误差：ADC输入信号为0时，但ADC转换输出信号不为0的值</li>
+<li>满刻度误差：ADC满刻度输出时对应的输入信号与理想输入信号值之差</li>
+<li>线性度：实际ADC的转移函数和理想直线的最大偏移</li>
+</ol>
+<h3 id="STM32G4中的ADC"><a href="#STM32G4中的ADC" class="headerlink" title="STM32G4中的ADC"></a>STM32G4中的ADC</h3><p>基本特性：</p>
+<ul>
+<li>五路12/10/8/6位可编程分辨率ADC，内置自动校准</li>
+<li><strong>ADC转换时间与AHB总线时钟频率无关，只能通过降低分辨率加快转换时间</strong></li>
+<li>4Msps最大转化率与全分辨率</li>
+<li>每个ADC有多达19路通道，各通道AD转换可以以单一、连续、扫描或不连续方式进行，ADC结果存储在左对齐/右对齐的16位数据寄存器中</li>
+<li>有外部参考引脚，允许输入电压范围独立于电源</li>
+<li>可调的单端和差分模式输入</li>
+<li>ADC1和ADC2紧密耦合，ADC3和ADC4紧密耦合，可以分别以ADC1、ADC3作master模式进行双模式运行；ADC5独立控制</li>
+<li>允许DMA控制</li>
+</ul>
+<p>程序可以通过轮询、中断、定时器中断、同步、DMA等等方式来获取ADC值</p>
+<p>使用函数<code>HAL_ADC_Start()</code>启动一次ADC转换，同理可使用<code>HAL_ADC_Start_IT()</code>和<code>HAL_ADC_Start_DMA()</code>来以中断或DMA的方式使用ADC</p>
+<p>使用函数<code>HAL_ADC_GetValue()</code>在启动ADC转换一定延时时间后获取上次转换得到的ADC值</p>
+<p>使用<code>HAL_ADC_Stop()</code>、<code>HAL_ADC_Stop_IT()</code>、<code>HAL_ADC_Stop_DMA()</code>停止使用ADC</p>
+<h2 id="数模转换DAC"><a href="#数模转换DAC" class="headerlink" title="数模转换DAC"></a>数模转换DAC</h2><h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><p>数字寄存器：寄存输入的数字量和控制信号</p>
+<p>模拟开关和转换网络：转换网络一般由一列电阻构成，模拟开关和对应的电阻按位加权</p>
+<p>参考电压源：用于确定转换系数</p>
+<p>求和放大器：对来自转换网络的模拟量进行相加</p>
+<p>DAC的操作过程类似积分</p>
+<h3 id="分类-1"><a href="#分类-1" class="headerlink" title="分类"></a>分类</h3><ul>
+<li><p>电压输出型：从电阻网络直接输出电压，通常会在输出端加放大器来降低输出阻抗。</p>
+</li>
+<li><p>在输出端不加放大器的电压输出型：减少了输出端部分的延迟，常用于高速场合</p>
+</li>
+<li><p>电流输出型：一般很少直接利用电流输出，大多数会外接电流-电压转换电路得到电压输出。根据如何进行电流-电压转换又分成两类：</p>
+<ul>
+<li>在输出引脚上接负载电阻<ul>
+<li>缺点：输出阻抗高、必须在规定的输出电流范围内使用，否则可能损坏DAC</li>
+</ul>
+</li>
+<li>外接运算放大器<ul>
+<li>缺点：加入了外接运放和导线的延迟，响应变慢</li>
+</ul>
+</li>
+</ul>
+<p>  电流输出型很少用，一般使用电压输出型</p>
+</li>
+</ul>
+<h3 id="主要参数-1"><a href="#主要参数-1" class="headerlink" title="主要参数"></a>主要参数</h3><ol>
+<li>分辨率：最小输出电压（也就是输入数字量为1时的电压）与最大输出电压（也就是输入数字量为最大（每一位都是1）时的电压）之比。一般通过输入数字量的位数来表示</li>
+<li>转换量程：DAC能输出的最大电压，一般的关于参考电压或其倍数</li>
+<li>建立时间：从输入数字量到输出模拟量之间的延时时间</li>
+<li>转换精度：与ADC的转换精度类似</li>
+</ol>
+<h3 id="STM32G4中的DAC"><a href="#STM32G4中的DAC" class="headerlink" title="STM32G4中的DAC"></a>STM32G4中的DAC</h3><p>基本特性：</p>
+<ul>
+<li>4路配置为8位/12位的电压输出DAC，3个1MHz速率的DAC外部输出通道；4个15MHz速率的DAC内部输出通道</li>
+<li>可生成噪声、三角波、锯齿波</li>
+<li>可实现双DAC通道，两个通道组合在一起进行同步更新操作，转换可以独立或同步地完成</li>
+<li>可通过设置独立的输入参考电压VREF+来获得更好的分辨率（注意该引脚和其他模拟外设如ADC、OPAMP等共用）</li>
+<li>DAC1、DAC2引脚由GPIO复用；DAC3、DAC4仅用于内部输出</li>
+<li>可开启输出缓冲</li>
+<li>可单独启用的DAC输出缓冲器来输出高电流</li>
+<li>支持低功耗模式、采样模式、保持模式，支持独立校准</li>
+</ul>
+<p>可直接使用<code>HAL_DAC_SetValue()</code>来设置DAC输出值</p>
+<p>一般将某个波形的所有输出值保存在一个数组中并传给函数来输出特定波形；可以配合定时器来输出方波、三角波等</p>
+]]></content>
+      <tags>
+        <tag>电赛笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>电机控制简介</title>
+    <url>/2021/11/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<p>本篇博文主要使用HAL库和CubeMX进行代码示例，毕竟电赛时间那么紧张，写STP库的时间都够CubeMX重开一局了</p>
+<h1 id="直流电机控制"><a href="#直流电机控制" class="headerlink" title="直流电机控制"></a>直流电机控制</h1><p>根据电机学，直流电机转速<br>$$<br>n=\frac{U-IR}{K\phi}<br>$$<br>其中U为电枢端电压，I为电枢电流，R为电枢电路总电阻，Φ为每极磁通量，K为电机结构参数</p>
+<p>直流电动机的转速控制方法有两种</p>
+<ul>
+<li>励磁控制法：对励磁磁通进行控制</li>
+<li>电枢控制法：对电枢电压进行控制</li>
+</ul>
+<p>励磁控制阀在低速状态下收到磁极饱和限制，在高速时受换向火花和换向器结构强度的限制，动态响应较差，因此很少使用；大多数应用场合都使用电枢电压控制法，在保证励磁恒定的情况下使用单片机或相关电子器件输出<strong>PWM</strong>来直接实现直流电动机调速</p>
+<h2 id="直流电机调速"><a href="#直流电机调速" class="headerlink" title="直流电机调速"></a>直流电机调速</h2><p>直流电机的调速思路就是“力大砖飞”，在电机控制线两端加适当电压，电压越高转速越快。可以通过功率半导体器件产生恒定的电压供给电机；对于数字器件而言很难控制电压精准保持在某一模拟值，因此使用PWM进行调速。</p>
+<p>无论是模拟方法还是数字方法，都需要使用功率半导体器件，只不过使用方式有所不同。模拟电路通过线性放大的驱动方式，输出波动小、线性好，对临近电路干扰小，但存在效率低和散热问题；而数字电路通过耦合器件发出PWM使功率器件输出方波加在电机两端，通过改变方波的占空比来实现调节电机转速，往往对临近电路存在干扰，但是更易于实现。</p>
+<p>基于PWM调速的电路往往包含三个部分</p>
+<h3 id="驱动电路"><a href="#驱动电路" class="headerlink" title="驱动电路"></a>驱动电路</h3><p>一般使用晶体管或场效应管构成的半桥、全桥、三相桥电路，或直接使用护照那用的电机驱动功率IC。</p>
+<p>常见的电机驱动芯片有L298N、ULN2003等</p>
+<p>半桥拓扑采用推挽输出，<strong>需要保证两晶体管不同时开合</strong></p>
+<p>全桥拓扑又称H桥，需要确定一个死区时间，在同一时间只有两个对称的桥臂晶体管导通，<strong>绝对不能让四路晶体管同时导通</strong></p>
+<p>三相桥需要更严谨的时间控制，如果出现桥臂同时导通的情况很可能导致炸管</p>
+<p>三者适用的功率逐次增大</p>
+<p>还要注意电机两端应跨接续流二极管</p>
+<h3 id="隔离电路"><a href="#隔离电路" class="headerlink" title="隔离电路"></a>隔离电路</h3><p>一般来说直流电机的驱动电压都在6V及以上，而常见的MCU供电、输出电压都在3.3V-5V，因此二者之间通常需要隔离</p>
+<p>隔离器件可以是光耦、数字隔离器等</p>
+<p>通常由于隔离设备的驱动能力不足，还需要在输出端加入三极管、场效应管放大电路或图腾柱推挽输出电路。比较方便的解决方案是直接使用达林顿管对电机进行控制，但是需要考虑达林顿管的耐压和发热</p>
+<h3 id="控制电路"><a href="#控制电路" class="headerlink" title="控制电路"></a>控制电路</h3><p>大多数MCU都具有PWM输出功能，高性能的MCU往往还会配备控制死区时间、可以快速调节占空比、实现多路PWM同步/反相的高级控制功能；低端MCU也往往可以通过延时程序配合GPIO输出实现不精确的PWM功能</p>
+<p>改变占空比的基本控制方法有：</p>
+<ul>
+<li>定宽调频法：保持PWM占空比不变，改变输出频率</li>
+<li>定频调宽法：保持PWM频率不变，改变占空比</li>
+<li>调频调宽法：不常用，同时改变频率和占空比</li>
+</ul>
+<h3 id="基于stm32f407的HAL库实现"><a href="#基于stm32f407的HAL库实现" class="headerlink" title="基于stm32f407的HAL库实现"></a>基于stm32f407的HAL库实现</h3><p>首先需要设置CubeMX或自己编写的外设初始化代码，配置好PSC寄存器和ARR寄存器，保证恒定的PWM频率</p>
+<p>如果使用CubeMX只要可视化地调节选项即可；如果自己编写可以参考如下代码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">htim1.Instance = TIM1; <span class="comment">//选择定时器实例</span></span><br><span class="line">htim1.Init.Prescaler = <span class="number">0</span>; <span class="comment">//这里设置PSC寄存器值</span></span><br><span class="line">htim1.Init.CounterMode = TIM_COUNTERMODE_UP; <span class="comment">//这里设置定时器模式</span></span><br><span class="line">htim1.Init.Period = <span class="number">65535</span>; <span class="comment">//这里设置ARR寄存器值</span></span><br><span class="line">htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1; <span class="comment">//这里设置分频值</span></span><br><span class="line">htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE; <span class="comment">//这里设置是否使能自动重装计数器</span></span><br></pre></td></tr></table></figure>
+
+<p>使用定时器前需要先开启PWM通道</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">HAL_TIM_PWM_Start(&amp;htimx, TIM_CHANNEL_x);</span><br><span class="line"><span class="comment">//函数原型如下</span></span><br><span class="line"><span class="function">HAL_StatusTypeDef <span class="title">HAL_TIM_PWM_Start</span><span class="params">(TIM_HandleTypeDef *htim, <span class="keyword">uint32_t</span> Channel)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>然后通过在应用程序内修改比较值来实现定频调宽法</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">__HAL_TIM_SetCompare(&amp;htimx, TIM_CHANNEL_x, PWM_CompareValue);</span><br><span class="line"><span class="comment">//宏函数原型如下</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HAL_TIM_SetCompare            __HAL_TIM_SET_COMPARE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __HAL_TIM_SET_COMPARE(__HANDLE__, __CHANNEL__, __COMPARE__) \</span></span><br><span class="line"><span class="meta">  (((__CHANNEL__) == TIM_CHANNEL_1) ? ((__HANDLE__)-&gt;Instance-&gt;CCR1 = (__COMPARE__)) :\</span></span><br><span class="line"><span class="meta">   ((__CHANNEL__) == TIM_CHANNEL_2) ? ((__HANDLE__)-&gt;Instance-&gt;CCR2 = (__COMPARE__)) :\</span></span><br><span class="line"><span class="meta">   ((__CHANNEL__) == TIM_CHANNEL_3) ? ((__HANDLE__)-&gt;Instance-&gt;CCR3 = (__COMPARE__)) :\</span></span><br><span class="line"><span class="meta">   ((__HANDLE__)-&gt;Instance-&gt;CCR4 = (__COMPARE__)))</span></span><br><span class="line"><span class="comment">//__HAL_TIM_SetCompare是老版本HAL库用法，新版本里为了统一宏函数，使用了lagency.h文件来对__HAL_TIM_SetCompare进行重定向，它和新版本的函数__HAL_TIM_SET_COMPARE等效</span></span><br></pre></td></tr></table></figure>
+
+<p>特别地，HAL库允许直接修改CCR来改变定时器比较值</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">htimx.Instance-&gt;CCRn = PWM_CompareValue;</span><br></pre></td></tr></table></figure>
+
+<h1 id="步进电机控制"><a href="#步进电机控制" class="headerlink" title="步进电机控制"></a>步进电机控制</h1><p>步进电机是一种将电脉冲转化为角位移的电机机构。当它收到一个脉冲信号，就会按照设定的方向转动一个固定的角度，该角度称为电机的<strong>步距角</strong>。可以通过控制脉冲个数来控制角位移量；可以通过控制脉冲频率实现步进电机的调速</p>
+<p>步进电机的转子一般为多极分布，定子上嵌有多相星形连接的控制绕组，每输入一次电脉冲信号，转子就旋转一步。步进电机的种类很多，可大致分成：</p>
+<ul>
+<li>反应式</li>
+<li>永磁式</li>
+<li>混合式</li>
+</ul>
+<p>还可以按相数分为单相、两相、三相三种</p>
+<p><strong>如果给处于错齿状态的相通电</strong>，则转子会向磁导率最大、磁阻最小的位置转动，也就是<strong>趋于齿运动</strong></p>
+<p>一个步进电机中往往还会加入减速装置来让其达到更高的精度，获得更高的转动力矩。</p>
+<h3 id="基于stm32f407的HAL库实现-1"><a href="#基于stm32f407的HAL库实现-1" class="headerlink" title="基于stm32f407的HAL库实现"></a>基于stm32f407的HAL库实现</h3><p>首先使用CubeMX或自行编写初始化代码对外设进行配置 ，主要配置的参数如下所示</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">htim8.Instance = TIM8; <span class="comment">//选择合适的定时器</span></span><br><span class="line">htim8.Init.Prescaler = <span class="number">500</span>; <span class="comment">//配置预分频器</span></span><br><span class="line">htim8.Init.CounterMode = TIM_COUNTERMODE_UP; <span class="comment">//设置计数模式</span></span><br><span class="line">htim8.Init.Period = <span class="number">2000</span>; <span class="comment">//配置重装载值</span></span><br><span class="line">htim8.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;</span><br><span class="line">htim8.Init.RepetitionCounter = <span class="number">0</span>;</span><br><span class="line">htim8.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;</span><br><span class="line"></span><br><span class="line">sConfigOC.Pulse = <span class="number">1000</span>; <span class="comment">//设置预定频数</span></span><br></pre></td></tr></table></figure>
+
+<p>使用以下函数开启PWM输出</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">HAL_TIM_PWM_Start(&amp;htimx, TIM_CHANNEL_x);</span><br></pre></td></tr></table></figure>
+
+<p>一般来说使用步进电机的基本方式是精准控制其行进步数，可以通过中断回调函数实现功能</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">HAL_TIM_PWM_Start_IT(&amp;htim8, TIM_CHANNEL_1); <span class="comment">//初始化时开启中断</span></span><br><span class="line"></span><br><span class="line">HAL_TIM_PWM_Stop_IT(&amp;htim8, TIM_CHANNEL_1); <span class="comment">//要设置频率参数前必须关闭中断</span></span><br><span class="line">TIM8-&gt;PSC = <span class="number">71</span>; <span class="comment">//将目标定时器8修改为72分频</span></span><br><span class="line"><span class="comment">//在之后的回调函数里再次打开中断</span></span><br></pre></td></tr></table></figure>
+
+<p>通过定义中断回调函数即可实现步数控制功能</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_TIM_PWM_PulseFinishedCallback</span><span class="params">(TIM_HandleTypeDef *htim)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(htim-&gt;Instance == TIM8)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(count &lt; <span class="number">100</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			count++; <span class="comment">//计算步数</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">            count = <span class="number">0</span>;</span><br><span class="line">			HAL_TIM_PWM_Stop_IT(&amp;htim8, TIM_CHANNEL_1); <span class="comment">//再次打开中断</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以通过输出不同引脚的信号到电机控制器来控制步进电机的正反转</p>
+<h3 id="基于步进电机专用控制IC的实现"><a href="#基于步进电机专用控制IC的实现" class="headerlink" title="基于步进电机专用控制IC的实现"></a>基于步进电机专用控制IC的实现</h3><p>为了更简便、精准地控制步进电机，常使用MCU搭配专用的电机控制IC来驱动电机——TI生产的DRV8824/8825以及更为常见的A4988都可以用来驱动常见的两相步进电机。一般根据datasheet中的典型应用设计出专用于控制步进电机的模块电路来实现控制功能。除了一般的正反转外，模块还提供了步进细分功能。下面分别以<strong>DRV8825</strong>和<strong>A4988</strong>步进电机驱动模块为例说明</p>
+<p>步进电机的<strong>步进细分</strong>控制是由驱动器精确控制步进电机的相电流来实现的，细分会让电机运转更加平滑；换句话说，细分控制就是让驱动电路在输出脉冲的同时控制输出电压来实现电机的平滑启动和步进停止</p>
+<ul>
+<li><p>DRV8825模块</p>
+<p>  DRV8825是TI的集成步进电机驱动芯片。芯片内部集成了2个H桥和1/32微步进分度器，可以驱动一个双极型电机或两个直流有刷电机。输入电压范围8.2~45V，可以提供1.75A的驱动电流， 芯片在24V、25°C的工作状态下可提供2.5A的峰值电流。芯片还集成了短路、过热、欠压及交叉传导保护电路，能够检测故障状况并迅速切断H桥，从而保护电机</p>
+<p>  适用的电机类型：DRV8825驱动电机的类型主要与电机工作电流有关，理论上工作电流小于2A的步进电机都可以驱动。基于安全考虑，芯片上不加散热片，电流最好控制在1.5A以下；如果加散热片，电流峰值可到2.5A。</p>
+<p>  模块接线如下：</p>
+<p>  <img src="/2021/11/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B/DRV8824_DRV8825_pinout.png" alt="DRV8825引脚连线图"></p>
+<p>  其中需要<strong>数字、模拟部分分别接地</strong>，一般来说VMOT旁边的GND是功率地，另一个GND则是数字地。同时<strong>功率电源需要接入100uF的旁路电容</strong>来减轻对数字部分的影响</p>
+<p>  <strong>ENABLE引脚用于控制该模块是否启用，默认该引脚拉低，模块始终启用；RESET负责复位模块；SLEEP用于控制进入低功耗睡眠模式，当不使用电机时可以下拉该引脚来将功耗降到最低；三个引脚都是低电平有效，所以正常使用时都应接VCC（数字电源）</strong></p>
+<p>  <strong>FAULT引脚（FLT）用于指示故障，一旦由于过电流保护或热关断，IC内部禁用H桥FET时，该引脚就会输出低电平，一般来说该引脚会在模块内部与SLEEP引脚短路，起到自动故障复位的效果</strong></p>
+<p>  <strong>STEP引脚用于驱动电机转动，需要输入PWM波，频率越高，电机转动越快</strong></p>
+<p>  <strong>DIR引脚用于控制电机转动方向，高电平正转，低电平反转</strong></p>
+<p>  步进电机可以对应连接1B-1A-2A-2B、2B-2A-1A-1B、1A-1B-2B-2A、2A-2B-1B-1A，主要取决于需要的转动方向，总之只要<strong>同一相的两根线接到对应相的驱动引脚</strong>即可；特别地，如果电机不能正常运行，抖动严重，有可能是驱动板没有焊接好或某一相断开或两相接错导致缺相、错相；如果步进电机没有按照正确的顺序进行连接，可能导致无法工作或转动方向异常；如果步进电机扭力不足乃至丢步，可以尝试加大DRV8825的输出电流。驱动板上一般会搭配一个精密电位器用于调节输出电流，尝试调节该电位器来获取更好的输出效果，精密电位器与输出电流限制的计算公式为：<em>限制电流 = 电位器电压 * 2</em>，单位A</p>
+<p>  <strong>通过控制M0、M1、M2的接地和接VCC（数字电源），可以根据下表来实现不同精密度的步进细分控制</strong></p>
+<table>
+<thead>
+<tr>
+<th>M0</th>
+<th>M1</th>
+<th>M2</th>
+<th>细分类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Low</td>
+<td>Low</td>
+<td>Low</td>
+<td>Full step</td>
+</tr>
+<tr>
+<td>High</td>
+<td>Low</td>
+<td>Low</td>
+<td>1/2 step</td>
+</tr>
+<tr>
+<td>Low</td>
+<td>High</td>
+<td>Low</td>
+<td>1/4 step</td>
+</tr>
+<tr>
+<td>High</td>
+<td>High</td>
+<td>Low</td>
+<td>1/8 step</td>
+</tr>
+<tr>
+<td>Low</td>
+<td>Low</td>
+<td>High</td>
+<td>1/16 step</td>
+</tr>
+<tr>
+<td>High</td>
+<td>Low</td>
+<td>High</td>
+<td>1/32 step</td>
+</tr>
+<tr>
+<td>Low</td>
+<td>High</td>
+<td>High</td>
+<td>1/32 step</td>
+</tr>
+<tr>
+<td>High</td>
+<td>High</td>
+<td>High</td>
+<td>1/32 step</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>A4988模块</p>
+<p>  相关控制方法与DRV8825基本一致，引脚也同理，两者最大的差别在于驱动电流和价格</p>
+<p>  A4988价格更低，但是峰值驱动电流只有2A，内阻典型值为320Ω，最大耐压35V，所以DRV8825可以用来取代A4988，但是A4988不能取代DRV8825</p>
+</li>
+</ul>
+<h1 id="舵机控制"><a href="#舵机控制" class="headerlink" title="舵机控制"></a>舵机控制</h1><p>舵机也称伺服电机、伺服驱动器，它接受一定的控制信号，输出一定的角度，适用于需要角度不断变化并可以保持的控制系统</p>
+<p>舵机实际上是一个独立的闭环控制系统，通过其内部的机械或电路反馈控制其角度</p>
+<p>工作过程如下：</p>
+<ol>
+<li>控制器向舵机发出控制信号</li>
+<li>内部电路判断转动方向</li>
+<li>驱动电路控制无核心马达转动</li>
+<li>动力通过减速齿轮传送到摆臂</li>
+<li>位置检测器回传摆臂数据</li>
+<li>如果未达到指定位置则继续运动，否则停止</li>
+</ol>
+<p>其中位置检测器一般使用可变电阻，当舵机转动时电阻值会跟着改变，由此可以判断舵机是否达到指定位置</p>
+<h2 id="舵机控制方法"><a href="#舵机控制方法" class="headerlink" title="舵机控制方法"></a>舵机控制方法</h2><p>标准舵机由电源、地线、控制线三条连接线，电源电压通常为4-6V，一般使用5V供电即可，但是需要电源带载能力够强。控制线一般输入方波信号，周期一般为20ms（频率50Hz）即可，具体情况应查看舵机生产商的说明。<strong>通过改变方波的占空比来改变舵机的角度</strong>，舵机角度和脉冲宽度成正比</p>
+<p>舵机一般可以提供相当强的扭力，所以可以选择大扭力舵机用在机械臂等需要高强度的地方</p>
+<h3 id="基于stm32f407的HAL库实现-2"><a href="#基于stm32f407的HAL库实现-2" class="headerlink" title="基于stm32f407的HAL库实现"></a>基于stm32f407的HAL库实现</h3><p>数字舵机依靠PWM进行控制。<strong>对于180°的舵机，一般周期为20ms（频率为50Hz）</strong>，脉宽为500–2500us。其中为1500us使得舵机转轮处于中间位置，即90°位置，如果在500-1500us和1500–2500us之间则分别会朝着0–90°和90–180°的方向旋转。给定固定占空比，舵机则会转到相应的角度，计算公式如下：</p>
+<p>$$<br>占空比D =\frac{1}{90} *角度\theta + 0.5<br>$$<br>对应HAL库实现如下</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Servo_Control</span><span class="params">(<span class="keyword">uint16_t</span> angle)</span> <span class="comment">//angle为角度值，0~180</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">float</span> temp;</span><br><span class="line">	temp = (<span class="number">1.0</span> / <span class="number">90.0</span>) * angle + <span class="number">0.5</span>;<span class="comment">//占空比值 = 1/9 * 角度 + 5</span></span><br><span class="line">	__HAL_TIM_SET_COMPARE(&amp;htimx, TIM_CHANNEL_n, (<span class="keyword">uint16_t</span>)temp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用下面的代码使能定时器时基单元和PWM输出</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">HAL_TIM_Base_Start(&amp;htimx);</span><br><span class="line">HAL_TIM_PWM_Start(&amp;htimx, TIM_CHANNEL_n);</span><br></pre></td></tr></table></figure>
+
+<p>使用下面的代码关闭定时器时基单元和PWM输出</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">HAL_TIM_Base_Stop(&amp;htimx);</span><br><span class="line">HAL_TIM_PWM_Stop(&amp;htimx, TIM_CHANNEL_n);</span><br></pre></td></tr></table></figure>
+
+<p>还可以直接通过改变CCR寄存器的值来控制舵机</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">TIMx-&gt;CCRn = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>电赛笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -105,6 +466,217 @@
       </tags>
   </entry>
   <entry>
+    <title>集成运放简介</title>
+    <url>/2021/11/14/%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h1 id="集成运放概述"><a href="#集成运放概述" class="headerlink" title="集成运放概述"></a>集成运放概述</h1><p>常见的模拟集成电路类型</p>
+<ul>
+<li>集成运算放大器OP</li>
+<li>集成功率放大器</li>
+<li>集成高频放大器</li>
+<li>集成中频放大器</li>
+<li>集成比较器</li>
+<li>集成乘法器</li>
+<li>集成稳压器</li>
+<li>集成数模/模数转换器ADC/DAC</li>
+</ul>
+<h3 id="模拟集成电路的特性"><a href="#模拟集成电路的特性" class="headerlink" title="模拟集成电路的特性"></a>模拟集成电路的特性</h3><p>集成电路中一般使用三极管组成恒流源电路来部分替代电阻</p>
+<p>硅片上难以制作大电容、大电感，因此电路常常使用直接耦合的方式</p>
+<p>常采用复合管的方式制作较大放大倍数的三极管</p>
+<h2 id="集成运放的基本组成"><a href="#集成运放的基本组成" class="headerlink" title="集成运放的基本组成"></a>集成运放的基本组成</h2><h3 id="输入级"><a href="#输入级" class="headerlink" title="输入级"></a>输入级</h3><p>输入级要求高阻抗，常使用射随器与差分放大器减少温漂和增大输入电阻</p>
+<p>一般使用复合管构成差分放大器，配合共集-共基放大器，用额外三极管的基极输出信号，可以实现很大的输入电阻和很大的共模抑制比</p>
+<p>将复合管共基接法可以改善频率响应</p>
+<p>使用<strong>共模负反馈</strong>减小温漂、提高共模抑制比</p>
+<h3 id="中间级"><a href="#中间级" class="headerlink" title="中间级"></a>中间级</h3><p>常采用共射放大器配合复合管获得高增益</p>
+<p>使用互补放大电路实现高放大倍数并提高带载能力</p>
+<p>也存在放大器两端外接矫正电容来提高电路容性，防止自激振荡的措施（抑制过高的放大倍数、抑制正反馈）</p>
+<h3 id="输出级"><a href="#输出级" class="headerlink" title="输出级"></a>输出级</h3><p>要求低阻抗，常使用射随器减小输出电阻</p>
+<p>可以使用准互补OCD电路来提高带载能力，并引入电阻-二极管<strong>过载保护电路</strong></p>
+<h3 id="偏置电路"><a href="#偏置电路" class="headerlink" title="偏置电路"></a>偏置电路</h3><p>使用恒流源电路给予三极管合适的偏置电压电流</p>
+<p>多使用<strong>镜像恒流源</strong>配合跨接在VCC、VEE之间的电阻来提供标准偏置电流</p>
+<h2 id="集成运放的特性"><a href="#集成运放的特性" class="headerlink" title="集成运放的特性"></a>集成运放的特性</h2><p>集成运放的开环放大倍数$A_{od}$非常大，一般使用负反馈的方式构造可控倍数的放大器或使用深度正反馈构造自激振荡电路</p>
+<h3 id="开环差模电压增益"><a href="#开环差模电压增益" class="headerlink" title="开环差模电压增益"></a>开环差模电压增益</h3><p>直观上的运放开环情况下对差模信号的电压增益</p>
+<p>用$A_{od}$表示，一般用对数表示，单位分贝</p>
+<p>实际情况下运放A<del>od</del>在100到140之间</p>
+<h3 id="输入失调电压、电流"><a href="#输入失调电压、电流" class="headerlink" title="输入失调电压、电流"></a>输入失调电压、电流</h3><p>为了使输出电压为0，在输入端需要加的补偿电压</p>
+<p>一般运放在1-10mV</p>
+<p>高端运放要保证在1mV以下</p>
+<h3 id="输入失调电压、电流温漂"><a href="#输入失调电压、电流温漂" class="headerlink" title="输入失调电压、电流温漂"></a>输入失调电压、电流温漂</h3><p>由于温漂导致的输入失调电压增高情况</p>
+<h3 id="输入偏置电流"><a href="#输入偏置电流" class="headerlink" title="输入偏置电流"></a>输入偏置电流</h3><p>输出电压为0时，两个输入端偏置电流的平均值</p>
+<h3 id="差模输入电阻"><a href="#差模输入电阻" class="headerlink" title="差模输入电阻"></a>差模输入电阻</h3><p>一般要求很大，在几十MΩ</p>
+<h3 id="共模抑制比"><a href="#共模抑制比" class="headerlink" title="共模抑制比"></a>共模抑制比</h3><p>多数运放在80-160dB之间</p>
+<h3 id="最大共模、差模输入电压"><a href="#最大共模、差模输入电压" class="headerlink" title="最大共模、差模输入电压"></a>最大共模、差模输入电压</h3><p>直观上就是集成运放的耐压</p>
+<p>一定程度上表征运放的耐静电程度</p>
+<h3 id="3dB带宽fH"><a href="#3dB带宽fH" class="headerlink" title="-3dB带宽fH"></a>-3dB带宽f<del>H</del></h3><p>表示A<del>od</del>下降3dB时的频率。一般集成运放的f<del>H</del>在几H到几千Hz</p>
+<h3 id="单位增益带宽"><a href="#单位增益带宽" class="headerlink" title="单位增益带宽"></a>单位增益带宽</h3><p>A<del>od</del>降低到0时的频率，此时运放开环差模电压放大倍数=1</p>
+<h3 id="转换速率"><a href="#转换速率" class="headerlink" title="转换速率"></a>转换速率</h3><p>集成运放对输入-输入信号的转换速率</p>
+<h2 id="单极型集成运放"><a href="#单极型集成运放" class="headerlink" title="单极型集成运放"></a>单极型集成运放</h2><p>三极管又称为BJT（双结型晶体管），组成双极型集成运放；也可以使用MOSFET组成单极型集成运放</p>
+<p>采用耗尽型NMOS组成双入双出差分放大电路、使用增强型NMOS组成有源负载，并使用电流源组成偏置电路</p>
+]]></content>
+      <tags>
+        <tag>电赛笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用控制算法</title>
+    <url>/2021/11/14/%E5%B8%B8%E7%94%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="硬件控制算法"><a href="#硬件控制算法" class="headerlink" title="硬件控制算法"></a>硬件控制算法</h1><p>可应用的电路系统一般由模拟电路和数字电路组成。模拟电路用于电信号的处理和提供电源；数字电路则用于采集非电信号数据和控制系统。一般来说系统控制使用MCU、DSP或FPGA通过软件编程实现，在其中常使用用于控制系统的各种算法。</p>
+<h2 id="PID算法"><a href="#PID算法" class="headerlink" title="PID算法"></a>PID算法</h2><h3 id="PID算法简介"><a href="#PID算法简介" class="headerlink" title="PID算法简介"></a>PID算法简介</h3><p>PID算法是一种很成熟、应用广泛的连续时间控制系统算法，最突出优点在于：</p>
+<ul>
+<li>结构典型</li>
+<li>方便参数整定</li>
+<li>可以灵活更改结构</li>
+</ul>
+<p>除了数字PID，还存在使用电阻、电容反馈与集成运放配合实现的模拟PID，但是因为其不便于修改和调参，适用范围不广</p>
+<p>PID是一种典型的闭环控制算法，使用PID控制器<em>D(s)<em>来完成控制，该控制器读取输出量</em>y(t)<em>和给定量</em>r(t)<em>，计算得到二者之间的误差</em>e(t)=r(t)-t(t)<em>，并获取其比例、积分、微分的线性组合来构成控制量</em>u(t)<em>，通过改变调节器参数</em>K<del>p</del>，K<del>i</del>，K<del>d</del><em>来实现控制，计算公式如下<br>$$<br>u(t)=K_P[e(t)+\frac{1}{T_I} \int_0^t e(t)dt+T_D \frac{de(t)}{dt}]<br>$$<br>或者可以采用变形公式<br>$$<br>u(t)=K_P\ e(t)+K_I \int_0^t e(t)dt+K_D \frac{de(t)}{dt}<br>$$<br>其中**三个参数P、I、D分别表示比例、积分、微分</em></em></p>
+<p>实际应用中最常使用PI甚至只使用P参数来进行控制。因为D参数常常会引入不确定性，增大调参的难度。</p>
+<p>三个参数的特性如下：</p>
+<ul>
+<li><p>比例调节参数K<del>P</del></p>
+<p>  按比例反映系统的误差，一旦系统出现偏差比例调节就会进行，<strong>比例调节是主要的控制部分</strong>。但是过大的比例会使系统稳定性下降，系统反应更灵敏、速度加快、稳态误差更小，但是震荡次数会显著增多，调节时间也会加长；过小的比例则会导致系统很难回到稳态</p>
+</li>
+<li><p>积分调节参数K<del>I</del></p>
+<p>  这个参数本质上是通过给定量和输出量之间稳态值的差来消除系统稳态误差，<strong>用于提高系统的控制精度</strong>。但过高的调节参数会导致系统稳定性下降，动态响应变慢，超调增大，该参数一般不单独作用，至少需要和P参数共用</p>
+</li>
+<li><p>微分调节参数K<del>D</del></p>
+<p>  用于反映系统偏差信号的变化率，可以一定程度上预测偏差的变化趋势，<strong>起到超前控制作用</strong>。但是该参数难以整定，且过强的微分调节会使系统剧烈震荡，且对噪声干扰有放大作用，对抗干扰不利</p>
+</li>
+</ul>
+<h3 id="数字PID控制"><a href="#数字PID控制" class="headerlink" title="数字PID控制"></a>数字PID控制</h3><p>数字控制系统大多数是采样数据控制系统，进入系统的连续时间信号必须经过采样和量化后转换为数字量才能进行相应的计算和处理，所以其中的参数需要使用数字计算去逼近，当采样周期短时可以使用求和代替积分，使用差商代替微商，<strong>将描述连续时间的PID算法微分方程变成描述离散时间的差分方程</strong></p>
+<p>实际使用时有两种思路：</p>
+<ol>
+<li><p>位置式PID</p>
+<p> 差分方程为<br> $$<br> u_n=K_P+[e_n+\frac{T_S}{T_I} \sum_{i=0}^n e_i+\frac{T_D}{T_S} (e_n - e_{n-1})]+u_0=K_P e_n +K_I \sum_{i=0}^n e_i+K_D(e_n - e_{n-1})+u_0<br> $$<br> 此式即数字PID算法的非递推形式——全量算法，$u_0$为控制量基准值，n=0时将会采用该值；$u_n$是第n个采样时刻的控制量；$T_S$为采样周期，在算法中为了实现求和，必须存储系统偏差的全部值$e_i$，该式求得全量输出$u_n$是控制量的绝对数值，决定了执行机构在控制系统中的位置</p>
+<p> 因此称这种算法为位置算法</p>
+</li>
+<li><p>增量式PID</p>
+<p> 当驱动步进电机这样需要控制量的增量的执行机构时，需要用增量算法，差分方程为<br> $$<br> \Delta u_n=u_n-u_{n-1}=K_P[e_n - e_{n-1}+\frac{T_S}{T_I}e_n +\frac{T_D}{T_S}(e_n -2e_{n-1}+e_{n-2})]<br> $$<br> 这时的输出值能体现各次误差量对控制作用的影响，计算时只需要存储最近的三个误差采样值$e_n,e_{n-1},e_{n-2}$</p>
+</li>
+</ol>
+<h3 id="PID算法的饱和特性"><a href="#PID算法的饱和特性" class="headerlink" title="PID算法的饱和特性"></a>PID算法的饱和特性</h3><p>实际的控制系统存在这样的特性：当控制变量达到一定值后，系统的输出变量便不再增长，系统进入饱和区，称为<strong>饱和特性</strong>，这就要求系统的控制变量必须限制在某个范围之内$u_{min}\le u\le u_{max}$。有时对于控制量的变化率也有限制$|\frac{du}{dt}|\le|\frac{du_{max}}{dt}| $，为了能让控制系统更加稳定，需要对位置算法进行改进；虽然增量算法中没有累加和项，不会出现积分饱和，但是可能出现比例和微分饱和，需要使用积累补偿法，将因为饱和而未能执行的控制增量信息累积起来，一旦可能时再补充执行</p>
+<p>位置算法的饱和主要由积分项引起，称为<strong>积分饱和</strong>，可以使用三种方法必免积分积累过大</p>
+<ol>
+<li><p>积分分离法</p>
+<p> 在误差量较大时不进行积分，直到误差在一定值之内时才在控制量的计算中加入积分累积，差分方程为<br> $$<br> u_n=K_P e_n + K_I \sum_{i=0}^n K_i e_i +K_D(e_n -e_{n-1})<br> $$<br> 其中K<del>i</del>在$e_x\le \epsilon$时为1，在$e_x\ge \epsilon$时为0，以$\epsilon$作为门限值可以有效削减积分饱和</p>
+</li>
+<li><p>遇限削弱积分法</p>
+<p> 当<strong>控制进入饱和区后便不再进行积分项的累加</strong>，只执行削弱积分的运算，使用该算法可以避免控制量长时间停留在饱和区</p>
+</li>
+<li><p>有效偏差法</p>
+<p> 将<strong>实际执行的控制量对应的误差值</strong>作为有效误差值进行积分累加，而不是使用实际的误差值进行积分累加</p>
+</li>
+</ol>
+<h3 id="PID调参（参数整定）"><a href="#PID调参（参数整定）" class="headerlink" title="PID调参（参数整定）"></a>PID调参（参数整定）</h3><ol>
+<li><p>确定PID控制器结构</p>
+<ul>
+<li>控制结果比较宽松且要求稳定性的控制系统：P或PD控制器</li>
+<li>必须消除稳态误差且要求精度的控制系统：PI或PID控制器</li>
+<li>存在滞后的对象：PI控制器或PID控制器</li>
+</ul>
+<p> 一般情况下，P、PI、PID控制器应用较多，ID控制器可以说根本不用</p>
+</li>
+<li><p>调参</p>
+<p> 参数选择要根据受控对象的具体特性和对控制系统的性能要求进行，工程上一般要求整个闭环系统是稳定的，对给定量的变化能迅速响应并平滑跟踪，超调量小；要求抗干扰性较高；总体上遵循解决主要问题，统筹兼顾其他方面，适量折中的思路</p>
+<p> PID三个参数一般通过玄学调参或者经验公式确定</p>
+<p> 采样周期选择可以通过以下方面进行确定：</p>
+<ol>
+<li>香农采样定理：$T_S \le \frac{\pi}{\omega_{max}}$（ω为被采样信号的上限角频率），用于确定采样周期的上限</li>
+<li>有跟踪要求的闭环系统要适量减小采样周期</li>
+<li>要求采样周期有一定宽度来确定计算精度，减少系统算力成本</li>
+<li>通过经验公式和玄学调参来确定</li>
+</ol>
+<p> PID参数的基本调整方法如下：</p>
+<ol>
+<li>比例项逐次独立实验，取其中反应最快、超调最小的曲线</li>
+<li>加入积分项，将之前选择的比例系数减小为50%到80%，再将积分时间置为较大值，观测响应曲线，再逐次减小积分时间，选择其中响应震荡次数较少、能快速趋近结果的参数</li>
+<li>加入微分项减小超调和震荡，先设置T<del>D</del>=0，再逐渐加大微分项，在此基础上维持比例项80%到120%调节范围，积分项50%到150%调节范围</li>
+<li>如果出现玄学问题可以直接随机调参，运气是实力的一部分</li>
+</ol>
+</li>
+<li><p>特殊调参方法</p>
+<ol>
+<li><p>选足够短的采样周期，先使用P控制器，逐渐加大比例放大系数逐次实验直到系统对输入的阶跃信号响应出现稳定边缘的临界震荡，将此时的比例放大系数记为$K_r$，临界震荡周期记为$T_r$</p>
+</li>
+<li><p>以连续时间PID控制器为基准，使用误差平方积分作为评价函数，控制度<br> $$<br> \frac{min \int_0^{\inf} e^2(t)dt（数字控制）}{min\int_0^\inf e^2(t)dt（模拟控制）}<br> $$<br> 保证其必定大于1的前提下，选定一个合适的控制度</p>
+</li>
+<li><p>查经验公式表获取对应参数</p>
+</li>
+<li><p>实际检验参数并进行微调</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="运动调节算法"><a href="#运动调节算法" class="headerlink" title="运动调节算法"></a>运动调节算法</h2><h3 id="大林算法"><a href="#大林算法" class="headerlink" title="大林算法"></a>大林算法</h3><p>许多工程中会遇到纯滞后调节系统，要求系统具有以下特征：</p>
+<ul>
+<li>滞后时间长</li>
+<li>系统动态特性和稳定性高</li>
+<li>没有或很少超调量</li>
+</ul>
+<p>一般使用大林算法处理这类问题。该算法由IBM的大林（Dahlin）设计，专用于处理带有纯滞后的一阶或二阶惯性环节，其传递函数分别为<br>$$<br>G_c(s)=\frac{Ke^{-\theta s}}{\tau_1 s +1}<br>$$<br>或<br>$$<br>G_c(s)=\frac{Ke^{-\theta s}}{(\tau_1 s+1)(\tau_2 s +1)}<br>$$<br>其中τ1和2都是对象的时间常数，θ=Nτ是对象的纯滞后时间，N为正整数，K为对象的放大倍数</p>
+<p>该算法适合对ADC、DAC等需要一定时间的转换器或带有硬件运算电路的设备进行控制，使得整个闭环系统的传递参数为带有纯滞后时间的一阶惯性环节，即<br>$$<br>\Phi(s)=\frac{e^{-\theta s}}{\tau_1 s +1}<br>$$<br>算法数字控制器的最终表达式：<br>$$<br>U(k)=a_1 E(k)-a_2E(k-1)+b_1 U(k-1) +(1-b_1)U(k-N-1)<br>$$<br>U(k)为k时刻的输出值，E(k)是k时刻的误差值，E(k-1)是k-1时刻的误差值，U(k-N-1)是k-N-1时刻的输出值</p>
+<p>该算法调参依旧很玄学，但是没有PID那么玄学，只要根据系统飞升曲线确定对象的纯滞后时间θ和系统时间常数τ，微调选取采样周期再不断调整τ值一般就能获得理想效果</p>
+<p>该算法最大的优势就是消除了由于超调引起的系统不稳定因素</p>
+<h3 id="模糊控制算法"><a href="#模糊控制算法" class="headerlink" title="模糊控制算法"></a>模糊控制算法</h3><p>当系统影响因素极度复杂，难以建立数学模型时，需要使用模糊控制算法。这是一种鲁棒性强、抗干扰、抗参数变化的非线性控制算法，适用于非线性、动态特征不易掌握及纯滞后系统的控制。模糊控制不受数学模型的束缚，采用模糊控制表，在调试过程中反复经过人工修正，建立模糊控制算法、确立模糊规则是设计模糊控制系统中最重要的环节。模糊控制算法的问题在于稳态精度低、易饱和、适应能力有限、没有形成完整的理论体系。</p>
+<p>这一算法需要以下步骤实现建模：</p>
+<ol>
+<li><p>归纳实验经验：将经验公式归结为一组条件语句，称为<strong>模糊控制规则</strong>或模糊控制模型</p>
+</li>
+<li><p>将误差e和误差变化率de/dt进行模糊化处理：将输入变量映射到一个合适的响应领域或模糊集合的标识符</p>
+<p> 本人接盘的一个项目代码里存在以下代码（关键数据已经模糊替换处理）</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (condition == <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	u8 AFlag = (RotateNum &gt; StraightNum);</span><br><span class="line">	u8 BFlag = ((RotateNum + StraightNum) &gt; Magicnumber);</span><br><span class="line">	u8 CFlag = (RotateNum &gt; Magicnumber);</span><br><span class="line">	u8 DFlag = (StraightNum &gt; Magicnumber);</span><br><span class="line">	u8 SFlag = AFlag * Magicnumber + BFlag * Magicnumber + CFlag * Magicnumber + DFlag;</span><br><span class="line">	<span class="keyword">switch</span> (condition)</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="keyword">case</span> Magicnumber:</span><br><span class="line">	<span class="keyword">case</span> Magicnumber:</span><br><span class="line">		*MoveThruster[<span class="number">0</span>] = (u32) (RotateNum);</span><br><span class="line">		*MoveThruster[<span class="number">1</span>] = (u32) (RotateNum);</span><br><span class="line">		*MoveThruster[<span class="number">2</span>] = (u32) ((Magicnumber - RotateNum + StraightNum));</span><br><span class="line">		*MoveThruster[<span class="number">3</span>] = (u32) ((Magicnumber - RotateNum + StraightNum));</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> Magicnumber:</span><br><span class="line">	<span class="keyword">case</span> Magicnumber:</span><br><span class="line">		*MoveThruster[<span class="number">0</span>] = (u32) (StraightNum);</span><br><span class="line">		*MoveThruster[<span class="number">1</span>] = (u32) (StraightNum);</span><br><span class="line">		*MoveThruster[<span class="number">2</span>] = (u32) ((Magicnumber - RotateNum + StraightNum));</span><br><span class="line">		*MoveThruster[<span class="number">3</span>] = (u32) ((Magicnumber - RotateNum + StraightNum));</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> Magicnumber:</span><br><span class="line">	<span class="keyword">case</span> Magicnumber:</span><br><span class="line">		*MoveThruster[<span class="number">0</span>] = (u32) ((RotateNum + StraightNum - Magicnumber));</span><br><span class="line">		*MoveThruster[<span class="number">1</span>] = (u32) ((RotateNum + StraightNum - Magicnumber));</span><br><span class="line">		*MoveThruster[<span class="number">2</span>] = (u32) (StraightNum);</span><br><span class="line">		*MoveThruster[<span class="number">3</span>] = (u32) (StraightNum);</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> Magicnumber:</span><br><span class="line">	<span class="keyword">case</span> Magicnumber:</span><br><span class="line">		*MoveThruster[<span class="number">0</span>] = (u32) ((RotateNum + StraightNum - Magicnumber));</span><br><span class="line">		*MoveThruster[<span class="number">1</span>] = (u32) ((RotateNum + StraightNum - Magicnumber));</span><br><span class="line">		*MoveThruster[<span class="number">2</span>] = (u32) ((Magicnumber - RotateNum));</span><br><span class="line">		*MoveThruster[<span class="number">3</span>] = (u32) ((Magicnumber - RotateNum));</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	*MoveThruster[<span class="number">4</span>] = (u32) (VerticalNum);</span><br><span class="line">	*MoveThruster[<span class="number">5</span>] = (u32) (VerticalNum);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (condition == <span class="number">1</span>)</span><br><span class="line">&#123;</span><br><span class="line">	*MoveThruster[<span class="number">0</span>] = (u32) (*PDRotate);</span><br><span class="line">	*MoveThruster[<span class="number">1</span>] = (u32) ((Magicnumber - *PDRotate));</span><br><span class="line">	*MoveThruster[<span class="number">2</span>] = (u32) (*PDRotate);</span><br><span class="line">	*MoveThruster[<span class="number">3</span>] = (u32) (Magicnumber - *PDRotate);</span><br><span class="line">	*MoveThruster[<span class="number">4</span>] = (u32) (VerticalNum);</span><br><span class="line">	*MoveThruster[<span class="number">5</span>] = (u32) (VerticalNum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 就是一个模糊控制算法的例子，其中的Magicnumber都是经过大量实验确定的控制数据。使用python自带的map函数可以很好地对数据进行映射。</p>
+</li>
+<li><p>应用模糊算法：根据控制规则计算出模糊控制量C，之后通过多次实验校准模糊控制规则</p>
+</li>
+<li><p>构造基本模糊控制器查询表：将之前的一整套控制方法写成库或表</p>
+</li>
+</ol>
+<p>其中确定控制数据的步骤最为关键，称为<strong>解模糊化</strong></p>
+<h3 id="神经网络算法"><a href="#神经网络算法" class="headerlink" title="神经网络算法"></a>神经网络算法</h3><p>自动调准控制模型，适应性极强，但算法较复杂，需求算力高，一般的MCU难以实现，一般使用专门的硬件加速单元配合高性能嵌入式处理器实现</p>
+<p>算法原理比较复杂，我一个辣鸡电工的也不是很懂（悲）</p>
+<h2 id="运动姿态控制算法"><a href="#运动姿态控制算法" class="headerlink" title="运动姿态控制算法"></a>运动姿态控制算法</h2><p>Bresenhan算法是常用的图形扫描算法，只使用整数加法和乘2运算即可实现，可以在低算力水平的MCU中搭载，实现控制物体按规律运动的效果</p>
+<h3 id="产生线段的整数Bresenham算法"><a href="#产生线段的整数Bresenham算法" class="headerlink" title="产生线段的整数Bresenham算法"></a>产生线段的整数Bresenham算法</h3><p>直线方程$y=mx+b$，在现实中位于(x0,y0)的物体运动可能有多种趋势，但总体上可以分为以下两种：</p>
+<ul>
+<li>靠近(x0+1,y0)</li>
+<li>靠近(x0+1,y0+1)</li>
+</ul>
+<p>根据这两种趋势分别计算他们到直线$y=mx+b$的距离d1、d2，在求出两距离之差$\Delta d=d_1-d_2=2m(x_i +1)-2y_i +2b-1$</p>
+<p>根据Δd&gt;0，直线上点离(x0+1,y0+1)较近；Δd&lt;0，直线上点离(x0+1,y0)较近，再用该式乘Δx即可得到一般的判别式<br>$$<br>p_1=2\Delta y-\Delta x，x_{i+1}=x_i+1 \<br>y_{i+1}=y_i +1,p_{i+1}=p_i +2(\Delta y-\Delta x)，当p_i\ge 0 \<br>y_{i+1}=y_i,p_{i+1}=p_i +2\Delta y，当p_i&lt; 0<br>$$<br>只需将原公式适当修正，用$|\Delta y|$、$|\Delta x|$替换$\Delta y$、$\Delta x$就能轻易得到向后方运动的线段</p>
+<h3 id="产生圆的整数Bresenham算法"><a href="#产生圆的整数Bresenham算法" class="headerlink" title="产生圆的整数Bresenham算法"></a>产生圆的整数Bresenham算法</h3><p>对于圆来说需要用尽可能多的点表示出控制对象需要经过的轨迹点，Bresenham算法也有与上面求直线类似的公式<br>$$<br>p_i=2(x_i+1)^2 +2y_i^2 -2y_i -2R^2 +1 \<br>x_{i+1}=x_i +1 \<br>y_{i+1}=y_i,p_{i+1}=p_i+4x_i+6，若p_i&lt;0 \<br>y_{i+1}=y_i-1,p_{i+1}=p_i +4(x_i-y_i)+10 ，若p_i\ge 0<br>$$<br>将圆分成八个方位，将上式镜像对称即可获得其他七个方位的公式，显而易见计算它需要消耗大量算力资源有两种解决方案：</p>
+<ol>
+<li>使用RAM存储前1/8的坐标数据，然后通过镜像对称求出剩下的1/8坐标，然后调整顺序输出。这种方法可以节省算力，但是需要耗费大量RAM空间，可能还需要扩展片外RAM</li>
+<li>按顺时针求出8组1/8圆的Bresenham算法表达式，在接下来的控制过程中依次切换使用。这种方法不需要额外扩充RAM，但是需要花费经历处理控制-运算衔接问题。在一些性能足够的MCU上可以使用RTOS来减少需要的处理精力，因此这种方法可以有效平衡硬件和需求</li>
+</ol>
+<h2 id="数字滤波"><a href="#数字滤波" class="headerlink" title="数字滤波"></a>数字滤波</h2><p>数字滤波指使用数值运算达到改变输入信号中所含频率分量的相对比例，或滤除某些频率分量的目的。常用于处理坏点数据、对信号进行平滑处理、消除毛刺等用途</p>
+<p>最简单的滤波其实就是按钮软件消抖</p>
+<h3 id="限幅滤波"><a href="#限幅滤波" class="headerlink" title="限幅滤波"></a>限幅滤波</h3><p>又叫程序判断滤波，根据多次采集到的数据，如果当前采集值和前一次采集值维持在一定偏差ΔD之内，则将每次采集到的数据和前一次数据进行比较，如果它们差的绝对值小于ΔD，则本次采集到的数据有效，否则舍弃</p>
+<p>这种滤波器可以克服偶然因素引入的脉冲干扰和波形上的尖峰毛刺，但是难以抑制周期性干扰且对于波形处理的平滑度较差，只能算作一种最简单的基本滤波</p>
+<h3 id="中值滤波"><a href="#中值滤波" class="headerlink" title="中值滤波"></a>中值滤波</h3><p>将原来的采样间隔进行细分，在原有基础上采样N次，然后把N次采样值按照大小排序，取中位数为本次采样值。</p>
+<p>能够有效克服偶然因素带来的干扰，对于变化缓慢的被测参数有良好的滤波效果，但对于快速变化的信号则不太适用。算法实现方面，一般采用冒泡排序、选择排序、快速排序等算法，由于引入了排序算法，该方法不能处理速度要求很高的信号，算法的运算速度和占用RAM直接受所选择的N值决定</p>
+<h3 id="算术平均滤波"><a href="#算术平均滤波" class="headerlink" title="算术平均滤波"></a>算术平均滤波</h3><p>和中值滤波的实现思路类似，但是需要取N次采样的算术平均值。</p>
+<p>该算法难以对高速信号使用（除非搭配死贵的高速FPGA和烦到爆炸的等长走线进行硬件级别的算法滤波）</p>
+<h3 id="递推平均滤波"><a href="#递推平均滤波" class="headerlink" title="递推平均滤波"></a>递推平均滤波</h3><p>又称为滑动平均滤波，将连续的N个采样值设为一个FIFO（先入先出队列），队长就为N，将队列中的N个数据进行算术平均滤波</p>
+<p>这种方法对于周期性干扰具有非常好的抑制作用，具有很高的平滑度，但是灵敏度较低，对于偶然出现的脉冲干扰抑制作用较差，不适用于脉冲干扰较严重的场合。</p>
+<p>该算法原理也可以应用在<strong>软件陷波器</strong>上。取N=S/f。其中S是美妙的采样次数，即采样率；f是要消除的谐波的频率，S、N都要取整数，这样最终就能实现对于f频率谐波的定向消除（采样平均值Y=Σ1/N，最终获得Y-C）</p>
+<h3 id="中值平均滤波"><a href="#中值平均滤波" class="headerlink" title="中值平均滤波"></a>中值平均滤波</h3><p>选取N个采样，去掉其中最大值和最小值，再进行算术平均滤波，融合了中值滤波和平均滤波的特点，但也继承了二者的缺点</p>
+<h3 id="限幅平均滤波"><a href="#限幅平均滤波" class="headerlink" title="限幅平均滤波"></a>限幅平均滤波</h3><p>先限幅滤波，再进行算术平均滤波</p>
+<p>可以有效抑制偶然出现的脉冲干扰并消除采样偏差，但仍旧不适合高速信号处理</p>
+<h3 id="一阶滞后滤波"><a href="#一阶滞后滤波" class="headerlink" title="一阶滞后滤波"></a>一阶滞后滤波</h3><p>取用一个比例常数0&lt;k&lt;1，使用以下公式计算本次输出结果：<br>$$<br>Output=k*T_n +(1-k)*T_{n-1}<br>$$<br>其中T<del>n</del>为本次采样值，T<del>n-1</del>为上次输出值</p>
+<p>该方法类似PID，但是会造成相位滞后，灵敏度较低，难以消除频率高于采样频率一半的干扰信号</p>
+<p>不过对于周期性干扰具有良好的抑制作用且运算量不大，适用于频率较高、相位要求不高的场合</p>
+<h3 id="加权递推平均滤波"><a href="#加权递推平均滤波" class="headerlink" title="加权递推平均滤波"></a>加权递推平均滤波</h3><p>赋予不同时刻的FIFO采样值不同的权重，在对其进行递推平均滤波</p>
+<p>适合在有较大纯滞后时间常数的对象和采样周期短的情况；难以反映变化较慢、采样周期长的情况，且占用RAM较多</p>
+<h3 id="消抖滤波"><a href="#消抖滤波" class="headerlink" title="消抖滤波"></a>消抖滤波</h3><p>又称为数字消抖，通过设置一个滤波计数器，将每次采样值与当前有效值比较，如果采样值和有效值相等则清零，否则计数器+1并判断计数器是否达到上限，如果计数器溢出则将本次值替换为当前有效值，再清零计数器</p>
+<p>常用于对变化缓慢的被测参数进行滤波，可避免系统在临界值附近时的波动跳变，但并不适用于快速变化的参数测量控制</p>
+<h3 id="限幅消抖滤波"><a href="#限幅消抖滤波" class="headerlink" title="限幅消抖滤波"></a>限幅消抖滤波</h3><p>先使用限幅滤波，再进行消抖滤波</p>
+<p>避免将干扰值导入系统，但不适用于快速变化的参数</p>
+<h3 id="复杂数字滤波"><a href="#复杂数字滤波" class="headerlink" title="复杂数字滤波"></a>复杂数字滤波</h3><p>卡尔曼滤波、IIR滤波、高阶滤波等都需要复杂的运算过程，经常需要使用浮点运算，因此需要搭载的MCU具有一定的算力才能使用</p>
+]]></content>
+      <tags>
+        <tag>电赛笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MSP430简介</title>
     <url>/2021/11/13/msp430%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<h1 id="MSP430"><a href="#MSP430" class="headerlink" title="MSP430"></a>MSP430</h1><p>该MCU是由德州仪器TI生产的16位低功耗单片机</p>
@@ -113,13 +685,13 @@
 <p>主要分以下型号：</p>
 <ul>
 <li>专注低功耗的<strong>1xx</strong>通用型，配备1KB-60KB FLASH、512B-10KB RAM，工作时耗电仅达200uA/MIPS，RAM保持模式耗电0.1uA，RTC模式耗电0.7uA；可在6us之内快速唤醒。搭载10/12位斜率SAR ADC，集成模拟比较器、DMA、硬件乘法器、BOR、SVS、12位DAC</li>
-<li>能耗比高的<strong>F2xx</strong>通用型，性能<a href="mailto:&#x31;&#54;&#x4d;&#x49;&#x50;&#x53;&#x40;&#51;&#x2e;&#x33;&#x56;">&#x31;&#54;&#x4d;&#x49;&#x50;&#x53;&#x40;&#51;&#x2e;&#x33;&#x56;</a>，配备1-120KB FLASH，8-128KB RAM，工作耗电220uA，配备10/12位斜率SAR ADC，集成16位Σ-ΔADC，基本上等于1xx的升级版</li>
-<li><strong>性价比</strong>高的<strong>G2xx</strong>经济型，性能<a href="mailto:&#x31;&#54;&#x4d;&#73;&#x50;&#83;&#x40;&#51;&#x2e;&#x33;&#86;">&#x31;&#54;&#x4d;&#73;&#x50;&#83;&#x40;&#51;&#x2e;&#x33;&#86;</a>，对标友商stm32l，主打模拟外设和低功耗</li>
+<li>能耗比高的<strong>F2xx</strong>通用型，性能<a href="mailto:&#49;&#54;&#77;&#73;&#80;&#x53;&#x40;&#51;&#46;&#51;&#86;">&#49;&#54;&#77;&#73;&#80;&#x53;&#x40;&#51;&#46;&#51;&#86;</a>，配备1-120KB FLASH，8-128KB RAM，工作耗电220uA，配备10/12位斜率SAR ADC，集成16位Σ-ΔADC，基本上等于1xx的升级版</li>
+<li><strong>性价比</strong>高的<strong>G2xx</strong>经济型，性能<a href="mailto:&#49;&#x36;&#x4d;&#73;&#x50;&#x53;&#x40;&#51;&#46;&#51;&#86;">&#49;&#x36;&#x4d;&#73;&#x50;&#x53;&#x40;&#51;&#46;&#51;&#86;</a>，对标友商stm32l，主打模拟外设和低功耗</li>
 <li>面向计量和智能电网的AFE2xx专用型：性能略低于以上两个2xx系列，但是集成了1-3个独立的24位Σ-ΔADC，一个16位定时器、一个16位硬件乘法器、USART控制器、看门狗和GPIO</li>
 <li>停产的老型号3xx</li>
 <li>面向低功耗<strong>多媒体</strong>的<strong>4xx</strong>控制型，8-16MIPS处理性能，<strong>配备LCD控制器</strong>、<strong>FLL、SVS</strong>，针对低功耗测量和医疗应用，功耗和1xx相近，4-120KB FLASH、8-256KB RAM，引脚丰富最多可达80Pin，配备10/12位斜率SAR、16位Σ-ΔADC，同样集成了12位ADC、DMA、硬件乘法器、运放、USCI模块等</li>
-<li><strong>超高能耗比的5xx超低功耗型</strong>，能达到<a href="mailto:&#50;&#53;&#77;&#x49;&#x50;&#x53;&#x40;&#x33;&#x2e;&#51;&#86;">&#50;&#53;&#77;&#x49;&#x50;&#x53;&#x40;&#x33;&#x2e;&#51;&#86;</a>，工作模式功耗165uA/MIPS，RTC模式2.5uA，RAM保持模式可达1uA，待机唤醒时间极短，小于5ms，配备256KB FLASH、18KB RAM，额外集成了USB、模拟比较器</li>
-<li>高性能、低功耗的6xx系列旗舰型，达到<a href="mailto:&#x32;&#x35;&#x4d;&#x49;&#x50;&#x53;&#x40;&#x33;&#x2e;&#x33;&#86;">&#x32;&#x35;&#x4d;&#x49;&#x50;&#x53;&#x40;&#x33;&#x2e;&#x33;&#86;</a>，配备功耗优化的创新电源管理模块和USB控制器，配备LCD控制器，有256KB FLASH、18KB RAM，74Pin引脚，功耗与5xx系列相同，还额外集成了电压管理模块</li>
+<li><strong>超高能耗比的5xx超低功耗型</strong>，能达到<a href="mailto:&#x32;&#53;&#x4d;&#73;&#x50;&#83;&#64;&#x33;&#x2e;&#x33;&#86;">&#x32;&#53;&#x4d;&#73;&#x50;&#83;&#64;&#x33;&#x2e;&#x33;&#86;</a>，工作模式功耗165uA/MIPS，RTC模式2.5uA，RAM保持模式可达1uA，待机唤醒时间极短，小于5ms，配备256KB FLASH、18KB RAM，额外集成了USB、模拟比较器</li>
+<li>高性能、低功耗的6xx系列旗舰型，达到<a href="mailto:&#x32;&#53;&#77;&#73;&#80;&#x53;&#x40;&#51;&#x2e;&#51;&#86;">&#x32;&#53;&#77;&#73;&#80;&#x53;&#x40;&#51;&#x2e;&#51;&#86;</a>，配备功耗优化的创新电源管理模块和USB控制器，配备LCD控制器，有256KB FLASH、18KB RAM，74Pin引脚，功耗与5xx系列相同，还额外集成了电压管理模块</li>
 <li>基于<strong>FRAM</strong>技术的<strong>FRxx</strong>系列，和主要的F系列差别在于使用了FRAM存储技术，能够达到更快的FLASH访问速度并在所有功率模式下实现零功率状态保持，即使发生功率损耗的情况也可以保证写入操作，写入寿命能达到100M个周期，不再需要EEPROM</li>
 <li>低电压C、L系列，两个谢列都可以在0.9-1.65V电压范围内工作并提供4MIPS的性能</li>
 <li>集成射频基带的CC无线系列，具有低于1GHz的片上射频收发器，工作电压为1.8-3.3V，处理性能20MIPS</li>

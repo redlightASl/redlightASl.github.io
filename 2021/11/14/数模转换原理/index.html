@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
-  <title>Archives: 2021/11 | 红光今天吃什么</title>
+  <title>数模转换原理 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="想搞FPGA的微电人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="红光今天吃什么">
-<meta property="og:url" content="https://redlightasl.github.io/archives/2021/11/">
+  <meta name="description" content="数模转换与模数转换这里以STM32G474为例来介绍STM32中的ADC与DAC编程 主要作为电赛的笔记 模数转换ADC四个基本部分 采样：定时对连续变化的模拟信号进行测量得到的瞬时值 保持：采样结束后将得到信号保持一段时间，使ADC有充分时间进行ADC转换。一般采样脉冲频率越高、采样越密，采样值就越多，采样保持电路的输出信号就越接近输入信号的波形。对采样频率要求（满足采样定理）：采样频率Fs &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数模转换原理">
+<meta property="og:url" content="https://redlightasl.github.io/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="想搞FPGA的微电人博客">
+<meta property="og:description" content="数模转换与模数转换这里以STM32G474为例来介绍STM32中的ADC与DAC编程 主要作为电赛的笔记 模数转换ADC四个基本部分 采样：定时对连续变化的模拟信号进行测量得到的瞬时值 保持：采样结束后将得到信号保持一段时间，使ADC有充分时间进行ADC转换。一般采样脉冲频率越高、采样越密，采样值就越多，采样保持电路的输出信号就越接近输入信号的波形。对采样频率要求（满足采样定理）：采样频率Fs &amp;">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-14T09:29:38.000Z">
+<meta property="article:modified_time" content="2021-11-14T09:29:47.832Z">
 <meta property="article:author" content="RedlightASl">
+<meta property="article:tag" content="电赛笔记">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="红光今天吃什么" type="application/atom+xml">
@@ -161,36 +164,145 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-数模转换原理" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      数模转换原理
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/" class="archive-article-date">
+
+        
+<!-- 显示阅读次数-->
+<!-- 
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+  </span>
+  </a>
+ -->
+<!--显示阅读次数完毕 -->
+
+        
+        <a href="/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/" class="archive-article-date">
   	<time datetime="2021-11-14T09:29:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/">数模转换原理</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="数模转换与模数转换"><a href="#数模转换与模数转换" class="headerlink" title="数模转换与模数转换"></a>数模转换与模数转换</h1><p>这里以STM32G474为例来介绍STM32中的ADC与DAC编程</p>
+<p>主要作为电赛的笔记</p>
+<h2 id="模数转换ADC"><a href="#模数转换ADC" class="headerlink" title="模数转换ADC"></a>模数转换ADC</h2><h3 id="四个基本部分"><a href="#四个基本部分" class="headerlink" title="四个基本部分"></a>四个基本部分</h3><ul>
+<li>采样：定时对连续变化的模拟信号进行测量得到的瞬时值</li>
+<li>保持：采样结束后将得到信号保持一段时间，使ADC有充分时间进行ADC转换。一般采样脉冲频率越高、采样越密，采样值就越多，采样保持电路的输出信号就越接近输入信号的波形。对采样频率要求（满足采样定理）：采样频率F<del>s</del> &gt;= 2*输入模拟信号频谱中最高频率F<del>max</del></li>
+<li>量化：将采样电压转换为某个最小单位电压的整数倍</li>
+<li>编码：用二进制代码表示量化后的量化电平</li>
+</ul>
+<p>量化级越细，量化误差就越小，所用二进制代码的位数就越多，电路也越复杂</p>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>常见的ADC主要分成三种：</p>
+<ul>
+<li><p>积分型：将输入电压转换成脉冲宽度信号或脉冲频率，使用定时器/计数器获取数字值</p>
+<ul>
+<li>优点：电路简单、分辨率高</li>
+<li>缺点：转换精度依赖于积分时间，转换速率较低</li>
+</ul>
+</li>
+<li><p>逐次比较型：由一个比较器和DAC转换器通过逐次比较逻辑构成，从最高位开始顺序地对每一位将输入电压与内置DAC转换器的输出进行比较，经过n次比较来输出数字值</p>
+<p>  这个类型的ADC可以看作使用快速逼近-快速排序的方法来让DAC输出值靠近模拟值来实现ADC</p>
+<ul>
+<li>优点：速度高，功耗低，在低分辨率（12位）式具有性价比优势</li>
+<li>缺点：转换速率一般，电路规模中等</li>
+</ul>
+</li>
+<li><p>Σ-Δ调制型：使用积分器、比较器、1位DAC转换器和数字滤波器等构成，将输入电压转换成脉冲宽度信号，使用数字滤波器处理后得到数字值</p>
+<ul>
+<li>优点：可以容易地做到高分辨率测量</li>
+<li>缺点：转换速率低、电路规模大</li>
+</ul>
+</li>
+</ul>
+<h3 id="主要参数"><a href="#主要参数" class="headerlink" title="主要参数"></a>主要参数</h3><ol>
+<li>分辨率：输出数字量变化一个相邻数值所需输入模拟电压的变化量，一般用二进制的位数表示，分辨率为n表示是满刻度F<del>s</del>的2的n次方分之一</li>
+<li>量化误差：ADC的有限位数对模拟量进行量化而引起的误差。要准确表示模拟量，ADC的位数需要很大甚至无穷大，所以ADC器件都有量化误差。一个分辨率有限的ADC的阶梯状转换特性曲线与具有无限分辨率的ADC转化特性曲线之间的最大偏差就是量化误差</li>
+<li>转换速率：每秒进行转换的次数</li>
+<li>转换量程：ADC所能测量的最大电压，一般等于参考电压，超过此电压有可能损毁ADC。当信号较小时可以考虑降低参考电压来提高分辨率，<strong>改变参考电压后，对应的转换值也会改变，计算实际电压时需要将参考电压考虑进去</strong>，所以说一般参考电压都要做到很稳定且不带有高次谐波</li>
+<li>偏移误差：ADC输入信号为0时，但ADC转换输出信号不为0的值</li>
+<li>满刻度误差：ADC满刻度输出时对应的输入信号与理想输入信号值之差</li>
+<li>线性度：实际ADC的转移函数和理想直线的最大偏移</li>
+</ol>
+<h3 id="STM32G4中的ADC"><a href="#STM32G4中的ADC" class="headerlink" title="STM32G4中的ADC"></a>STM32G4中的ADC</h3><p>基本特性：</p>
+<ul>
+<li>五路12/10/8/6位可编程分辨率ADC，内置自动校准</li>
+<li><strong>ADC转换时间与AHB总线时钟频率无关，只能通过降低分辨率加快转换时间</strong></li>
+<li>4Msps最大转化率与全分辨率</li>
+<li>每个ADC有多达19路通道，各通道AD转换可以以单一、连续、扫描或不连续方式进行，ADC结果存储在左对齐/右对齐的16位数据寄存器中</li>
+<li>有外部参考引脚，允许输入电压范围独立于电源</li>
+<li>可调的单端和差分模式输入</li>
+<li>ADC1和ADC2紧密耦合，ADC3和ADC4紧密耦合，可以分别以ADC1、ADC3作master模式进行双模式运行；ADC5独立控制</li>
+<li>允许DMA控制</li>
+</ul>
+<p>程序可以通过轮询、中断、定时器中断、同步、DMA等等方式来获取ADC值</p>
+<p>使用函数<code>HAL_ADC_Start()</code>启动一次ADC转换，同理可使用<code>HAL_ADC_Start_IT()</code>和<code>HAL_ADC_Start_DMA()</code>来以中断或DMA的方式使用ADC</p>
+<p>使用函数<code>HAL_ADC_GetValue()</code>在启动ADC转换一定延时时间后获取上次转换得到的ADC值</p>
+<p>使用<code>HAL_ADC_Stop()</code>、<code>HAL_ADC_Stop_IT()</code>、<code>HAL_ADC_Stop_DMA()</code>停止使用ADC</p>
+<h2 id="数模转换DAC"><a href="#数模转换DAC" class="headerlink" title="数模转换DAC"></a>数模转换DAC</h2><h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><p>数字寄存器：寄存输入的数字量和控制信号</p>
+<p>模拟开关和转换网络：转换网络一般由一列电阻构成，模拟开关和对应的电阻按位加权</p>
+<p>参考电压源：用于确定转换系数</p>
+<p>求和放大器：对来自转换网络的模拟量进行相加</p>
+<p>DAC的操作过程类似积分</p>
+<h3 id="分类-1"><a href="#分类-1" class="headerlink" title="分类"></a>分类</h3><ul>
+<li><p>电压输出型：从电阻网络直接输出电压，通常会在输出端加放大器来降低输出阻抗。</p>
+</li>
+<li><p>在输出端不加放大器的电压输出型：减少了输出端部分的延迟，常用于高速场合</p>
+</li>
+<li><p>电流输出型：一般很少直接利用电流输出，大多数会外接电流-电压转换电路得到电压输出。根据如何进行电流-电压转换又分成两类：</p>
+<ul>
+<li>在输出引脚上接负载电阻<ul>
+<li>缺点：输出阻抗高、必须在规定的输出电流范围内使用，否则可能损坏DAC</li>
+</ul>
+</li>
+<li>外接运算放大器<ul>
+<li>缺点：加入了外接运放和导线的延迟，响应变慢</li>
+</ul>
+</li>
+</ul>
+<p>  电流输出型很少用，一般使用电压输出型</p>
+</li>
+</ul>
+<h3 id="主要参数-1"><a href="#主要参数-1" class="headerlink" title="主要参数"></a>主要参数</h3><ol>
+<li>分辨率：最小输出电压（也就是输入数字量为1时的电压）与最大输出电压（也就是输入数字量为最大（每一位都是1）时的电压）之比。一般通过输入数字量的位数来表示</li>
+<li>转换量程：DAC能输出的最大电压，一般的关于参考电压或其倍数</li>
+<li>建立时间：从输入数字量到输出模拟量之间的延时时间</li>
+<li>转换精度：与ADC的转换精度类似</li>
+</ol>
+<h3 id="STM32G4中的DAC"><a href="#STM32G4中的DAC" class="headerlink" title="STM32G4中的DAC"></a>STM32G4中的DAC</h3><p>基本特性：</p>
+<ul>
+<li>4路配置为8位/12位的电压输出DAC，3个1MHz速率的DAC外部输出通道；4个15MHz速率的DAC内部输出通道</li>
+<li>可生成噪声、三角波、锯齿波</li>
+<li>可实现双DAC通道，两个通道组合在一起进行同步更新操作，转换可以独立或同步地完成</li>
+<li>可通过设置独立的输入参考电压VREF+来获得更好的分辨率（注意该引脚和其他模拟外设如ADC、OPAMP等共用）</li>
+<li>DAC1、DAC2引脚由GPIO复用；DAC3、DAC4仅用于内部输出</li>
+<li>可开启输出缓冲</li>
+<li>可单独启用的DAC输出缓冲器来输出高电流</li>
+<li>支持低功耗模式、采样模式、保持模式，支持独立校准</li>
+</ul>
+<p>可直接使用<code>HAL_DAC_SetValue()</code>来设置DAC输出值</p>
+<p>一般将某个波形的所有输出值保存在一个数组中并传给函数来输出特定波形；可以配合定时器来输出方波、三角波等</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -202,361 +314,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/14/%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE%E7%AE%80%E4%BB%8B/" class="archive-article-date">
-  	<time datetime="2021-11-14T09:29:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/11/14/%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE%E7%AE%80%E4%BB%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">集成运放简介</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/14/%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE%E7%AE%80%E4%BB%8B/">集成运放简介</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电赛笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B/" class="archive-article-date">
-  	<time datetime="2021-11-14T09:28:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B/">电机控制简介</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电赛笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/14/%E5%B8%B8%E7%94%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2021-11-14T09:27:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/14/%E5%B8%B8%E7%94%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95/">常用控制算法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电赛笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/14/%E5%A4%9A%E7%BA%A7%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B/" class="archive-article-date">
-  	<time datetime="2021-11-14T09:26:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/14/%E5%A4%9A%E7%BA%A7%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B/">多级放大器简介</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-14T08:54:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/">电路设计从入门到弃坑1【基础晶体管】</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/13/%E9%9A%8F%E7%AC%94/" class="archive-article-date">
-  	<time datetime="2021-11-13T14:49:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/13/%E9%9A%8F%E7%AC%94/">随笔</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/13/%E6%88%91%E7%9A%84%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2021-11-13T09:56:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/13/%E6%88%91%E7%9A%84%E6%96%B0%E5%8D%9A%E5%AE%A2/">我的新博客</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/13/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E7%94%B5%E8%B7%AF%E6%A6%82%E8%AE%BA%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-13T09:47:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/13/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E7%94%B5%E8%B7%AF%E6%A6%82%E8%AE%BA%E3%80%91/">电路设计从入门到弃坑0【电路概论】</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2021/11/13/msp430%E7%AE%80%E4%BB%8B/" class="archive-article-date">
-  	<time datetime="2021-11-13T09:47:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/11/13/msp430%E7%AE%80%E4%BB%8B/">MSP430简介</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电赛笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -579,8 +436,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,

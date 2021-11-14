@@ -1,6 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>《可定制计算》阅读笔记</title>
+    <url>/2021/11/14/%E3%80%8A%E5%8F%AF%E5%AE%9A%E5%88%B6%E8%AE%A1%E7%AE%97%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="《可定制计算》阅读笔记"><a href="#《可定制计算》阅读笔记" class="headerlink" title="《可定制计算》阅读笔记"></a>《可定制计算》阅读笔记</h1><p>本笔记以基础概念为线索编写，黑体部分是关键字</p>
+<ul>
+<li><p><strong>登纳德缩放定律</strong>：晶体管在满足内电场恒定（即每代芯片的供电电压降低30%）条件下，晶体管尺寸每代（约两年）减少30%。</p>
+<p>  结合该定律和摩尔定律可得推论：晶体管密度每代翻倍，同时晶体管延时降低30%，功耗降低50%，能耗降低65%</p>
+<p>  换句话说，同面积下能集成晶体管的数目翻倍，带来功耗和频率的翻倍，就好像同面积的电路被缩放到原来的1/4</p>
+<p>  但是到21世纪早期，由于量子效应，晶体管漏电功耗显著增加，登纳德定律逐渐失效</p>
+</li>
+<li><p><strong>定制计算</strong>：调整处理器结构以使其适应于某种特定应用领域的技术</p>
+<p>  面对登纳德缩放定律失效、摩尔定律放缓，定制计算技术成为提高计算效率的关键技术之一</p>
+<p>  往往可重构的定制计算电路可以使得能效得到1~2个数量级提升；而专用于某个领域的定制计算电路有时能够实现数百万倍的能效提升；同时引入<em>可重构性</em>并利用<em>可整合</em>的硬件加速其可以解决适用范围过窄的问题，现在常见的DSA（异构计算）就是这个思路的延伸</p>
+</li>
+<li><p><strong>暗硅</strong>：在多核cpu中并不是所有核心都会被使用，往往同时工作的只有其中小部分核心，其他核心因为功耗、发热等问题往往得不到应用，这部分电路被称为暗硅</p>
+</li>
+<li><p><strong>通用片上多处理器</strong>（Chip MultProcessor，CMP）：具有通用性的计算处理器，常见的CPU，如i9 11900k、r5 5600x等具有多核心的桌面级cpu都属于这个类型</p>
+</li>
+<li><p><strong>可定制异构平台</strong>（Customizable Heterogeneous Platform，CHP）：用于提供定制化计算服务的可定制的SoC</p>
+<p>  一般CHP中包含四个部件：</p>
+<ul>
+<li>用于通用计算和控制逻辑的<strong>处理器核</strong></li>
+<li>用于定制计算的硬件<strong>加速器</strong></li>
+<li>用于辅助计算和低功耗控制的<strong>协处理器</strong></li>
+<li>存储数据和程序的<strong>片上存储部件</strong></li>
+</ul>
+</li>
+<li><p><strong>可重构硬件</strong>：流片之后依然可以被灵活调整的硬件</p>
+<p>  硬件可以被重构的程度取决于重构的粒度，越小的重构粒度灵活性越大，但一般会造成性能下降和能效降低等额外开销</p>
+<p>  传统的可重构硬件只有FPGA一种，它算作可细粒度重构的硬件，因此会比同算法的ASIC实现有更低的速率和更高的开销</p>
+</li>
+<li><p><strong>专用加速器</strong>：针对特定领域内有限的一组应用或算法进行优化的硬件</p>
+<p>  早期的GPU、图像数据编解码器、加解密加速器等都属于加速器</p>
+</li>
+<li><p><strong>动态处理器核缩放和去特征化</strong>：选择性停用处理器核中的部件来节省能耗</p>
+<p>  通用的做法是在内核中引入特定机器的寄存器，用来指示特定部件是否激活</p>
+<p>  stm32f4的dsp和fpu就使用了这样的技术</p>
+</li>
+<li><p><strong>处理器核融合</strong>：使一个大核能够像真正的许多小核叠加工作一样的体系结构，可以动态适应不同数量的线程级或指令级的并行处理</p>
+<p>  通过将处理器核拆成两部分实现：一个是窄发射宽度的常规处理器核，但是它的取指模块（Fetch Module）会被舍弃；另一部分是充当模块化的取指/译码/派发模块的额外部件，负责为每个处理器核心执行取指指令，或统一为多个处理器核提供指令。取指模块会使用宽读取引擎读取整个指令块并将它们分发给各个核心，流水线结束后，通过一个排序流水线步骤来让指令顺序写回</p>
+</li>
+<li><p><strong>定制指令集扩展</strong>：用特定工作负载中的新指令来让处理器快速分派任务到计算模块</p>
+<p>  intel的AVX-512指令集就是这样增强CPU性能的（可惜并不怎么实用）</p>
+<p>  商用处理器常使用的就是像SSE和AVX这种专用<em>向量指令</em>形式，允许简单的指令操作大量数据。现代高性能处理器一般都采用超标量架构，它能够实现指令集层面的并行化处理，利用的是<strong>单指令多数据流</strong>（SIMD）指令，也就是所谓的向量指令。为了通过一个指令控制多个数据的处理，需要引入一组新的寄存器和一组用于执行向量并行计算的ALU。x86指令集中，向量指令在4~16个元素的小向量上运行，主要用于执行浮点运算。超标量处理器还引入了基于通道的设计：多个小型计算引擎和寄存器元素并行参与计算，发出一条向量指令，所有通道都会接收该指令，因此可以并行化地执行大量重复计算的任务</p>
+<p>  定制扩展指令集还可以通过<em>定制计算引擎</em>实现——一般的ALU只有乘法、加法、移位等功能，但是可以通过改变流水线的方式塞进乘除法器乃至专用的矩阵点乘叉乘电路</p>
+<p>  <em>可重构指令集</em>也是其中一个解决方案，它允许程序编写自己的指令，但是往往需要编译器对定制指令支持才可行</p>
+</li>
+<li><p><strong>松耦合加速器</strong>：独立于处理器内核运行的粗粒度加速器，是与核心交互但是不固定在核上的粗粒度计算引擎，简称LCA</p>
+<p>  LCA可以部署在片上或片外，PC上的cpu+显卡组合就是一个广义上的LCA架构；片上LCA没有物理邻接某个特定核心，但是可以被系统中所有核心共享，LCA通过一个简单快速的控制逻辑电路（最常见的就是DMA）拉控制数据输入输出。但是LCA只能使用ASIC方式实现，这就导致LCA必须具有以下特性：1. 算法足够成熟；2. 算法需要算力较大或比较重要。DPU、APU等针对AIoT领域的SoC就可以理解成采用了LCA架构</p>
+<p>  多核共享的LCA需要加入仲裁开销，一般存在软件和硬件两种仲裁方法。</p>
+<p>  特别地，LCA不依赖编译器，而依赖开放给开发者的API，比如OpenCL就是一种面向通用计算的API架构；而Cuda-C++是NVidia开发的针对自家GPU的API接口；其他的硬件加速设备也会有针对性的接口，最大的阻碍就是它们往往不兼容</p>
+<p>  LCA最大的缺点不在于因为不耦合于内核，往往存在较大延时；而在于只能使用ASIC形式实现，导致它的功能固定。</p>
+<p>  IBM推出的线速处理器（WSP）就是一种含有LCA的处理器</p>
+</li>
+<li><p><strong>现场可编程硬件</strong>：为通用性牺牲一些效率和性能的超细粒度可重构电路</p>
+<p>  使用FPGA可以实现类似LCA的功能，但它们往往更加灵活，但相对应的性能和效率有所损失。因为HLS技术的成熟，现在FPGA硬件加速的开发变得相对快捷不少。Zynq平台上的高带宽硬件加速也是当前发展方向之一</p>
+</li>
+<li><p><strong>粗粒度可重构阵列</strong>：具有接近ASIC性能和具有一定可重构性的组合加速器，也就是CGRA组合加速器</p>
+<p>  它试图中和LCA和FPGA，通过一组粗粒度部件及其互联机制，能够使得CGRA在可编程的基础上实现接近LCA的效率和开销。从概念上说，CGRA是含有小型加速器，而不是LUT（查找表）的FPGA</p>
+<p>  许多CGRA的工作聚焦于资源的<em>静态映射</em>：计算单元之间的互联通信通过离线计算完成，或作为编译过程的一部分，这样可以尽可能提高运行效率；同时CGRA还具有硬件加速器资源虚拟化的特点——在编写程序时可以直接使用高级语言，编译器负责将其直接映射到具体器件的连接。从程序映射的角度，CGRA是一个全连接的计算引擎集，将计算映射到这样的一个体系架构上非常简单</p>
+<p>  不过这也使得它难以用Cuda或Verilog的思路编程——电路是不能修改的，开发者只能通过配置CGRA中加速引擎的互联逻辑实现编程；反过来讲，它可以高效实现算法加速，并且由于组成加速器的部件较少，这些部件到硬件按资源的映射过成也相对容易，更可贵的是内部空间利用率达到较高的程度。<em>动态映射</em>可以在运算时实现较高的效率——计算引擎根据需要实现的算法动态更改计算模块之间的连接拓扑，这是基于CGRA具有<em>全连接特性</em></p>
+<blockquote>
+<p>CGRA计算架构通过空域硬件结构组织不同粒度和不同功能的计算资源，通过硬件运行时配置，调整硬件功能，根据数据流的特点，让功能配置好的硬件资源互连形成相对固定的计算通路，从而以接近“专用电路”的方式进行数据驱动下的计算</p>
+<p>CGRA的全连接特性是指计算模块可以在任意邻接模块之间建立动态连接</p>
+</blockquote>
+<p>  CGRA的实现还处在起步阶段，现在的开发主要依靠实验室，主要原因在于比起FPGA，CGRA更加依赖生态和编译器。目前一个典型的CGRA架构被称为CHARM，它使用一种称为加速器块设计（ABC）的硬件资源管理机制，它管理一些小的计算模块，被称为ABB（加速器构建模块），ABB以类似FPGA的岛形分布在片上，每个岛内部包含DMA、便签式存储器SPM、实现岛内互联的内部网络和实现岛间通信的网络接口。传统核心通过将描述ABB非循环通信图的配置写入普通共享内存中以调用加速器，然后ABC会根据ABB图最大限度提高新实例化的加速器性能，并为每个参与的ABB分配一些任务。为了进一步提升性能，ABB会继续调度加速器的其他实例直到资源用完或任务完成</p>
+</li>
+<li><p><strong>高速缓存</strong>：现代处理器中往往使用高速缓存（cache）来降低数据访问延时，并通过数据重用提高系统存储带宽。具有较高空间/时间局部性的数据块可以保存在高速缓存中，它通常使用硬件自动管理。高速缓存主要由两个块构成：<em>标签阵列</em>和<em>数据阵列</em>。</p>
+<p>  标签阵列用于检查请求的数据块是否位于数据阵列中，数据阵列用于存储具体数据。</p>
+</li>
+<li><p><strong>便签式存储器</strong>：由软件管理的缓冲区（buffer），缓冲区是指能够使用硬件或软件进行管理的FIFO、堆栈或RAM组</p>
+<p>  便签式存储器具有高速缓存不具有的以下优势：</p>
+<ul>
+<li><em>可编程性</em>：方便软件开发者使用，可以作为处理器核的近存储器（near memory）进行软件编程；也可作为专用处理器核或者硬件加速器的近存储器，使得程序员不需要担心底层的管理策略（由硬件状态机完成），只需要通过软件进行性能优化就可以提供更高自由度的缓冲区管理策略</li>
+<li>可预测的访问延迟：由于高速缓存块是由通用的替换策略管理的，因此高速缓存的访问延迟很难预测，以至于经常出现<code>cache miss</code>的情况；但是便签式存储器可以保证在编译器优化下实现优化的数据重用来避免下一级存储器访问造成的性能下降</li>
+<li>低功耗、小面积：高速缓存所使用的标签阵列和比较逻辑电路往往需要更大的面积；但便签式存储器只需要一个状态机进行控制，因此它能够减小使用的面积并减小动态功耗</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>机器学习与机器视觉</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>多级放大器简介</title>
     <url>/2021/11/14/%E5%A4%9A%E7%BA%A7%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<h1 id="多级放大器"><a href="#多级放大器" class="headerlink" title="多级放大器"></a>多级放大器</h1><p>常见的共射放大电路放大系数$\beta_V=-\frac{\beta R_{C}}{R_{b1}}$</p>
@@ -456,16 +540,6 @@
       </tags>
   </entry>
   <entry>
-    <title>随笔</title>
-    <url>/2021/11/13/%E9%9A%8F%E7%AC%94/</url>
-    <content><![CDATA[<h1 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h1><p>所有的随笔都会放在这里OvO</p>
-<p>可能还会扔些沙雕图……</p>
-]]></content>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>集成运放简介</title>
     <url>/2021/11/14/%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<h1 id="集成运放概述"><a href="#集成运放概述" class="headerlink" title="集成运放概述"></a>集成运放概述</h1><p>常见的模拟集成电路类型</p>
@@ -514,6 +588,16 @@
 ]]></content>
       <tags>
         <tag>电赛笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>随笔</title>
+    <url>/2021/11/13/%E9%9A%8F%E7%AC%94/</url>
+    <content><![CDATA[<h1 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h1><p>所有的随笔都会放在这里OvO</p>
+<p>可能还会扔些沙雕图……</p>
+]]></content>
+      <tags>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>
@@ -677,6 +761,214 @@
       </tags>
   </entry>
   <entry>
+    <title>现代C语言1</title>
+    <url>/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%801/</url>
+    <content><![CDATA[<p>本篇内容根据《C程序设计新思维》编写，作者水平有限，难免存在疏漏和错误，有问题请指出</p>
+<h1 id="C与POSIX的历史"><a href="#C与POSIX的历史" class="headerlink" title="C与POSIX的历史"></a>C与POSIX的历史</h1><p><strong>C、UNIX、POSIX的存在是紧密相连的</strong></p>
+<p>C和UNIX都是在20世纪70年代由贝尔实验室的设计，而贝尔有一项与美国政府达成的协议：贝尔将不会把自身的研究扩张到软件领域，所以UNIX被免费发放给学者进行研究、重建；UNIX商标则被在数家公司之间专卖。在这个过程中，一些黑客们改进了UNIX，并增加了很多变体，于是在<strong>1988年IEEE建立了POSIX标准</strong>，提供了一个类UNIX操作系统的公共基础</p>
+<h3 id="POSIX"><a href="#POSIX" class="headerlink" title="POSIX"></a>POSIX</h3><p>规定了shell script如何工作、常用的命令行工具如何工作、能够提供哪些C库等等</p>
+<p>除了微软的Windows系列操作系统，<strong>几乎所有操作系统都建立在POSIX兼容的基础上</strong></p>
+<p>特别地，加州大学伯克利分校的一些黑客们对UNIX进行了几乎翻天覆地的改进（重写UNIX的基础代码），产生了伯克利软件发行版（Berkeley Software istribution）BSD——苹果的MacOS正建立在这一发行版上</p>
+<h3 id="GNU"><a href="#GNU" class="headerlink" title="GNU"></a>GNU</h3><p>GNU工程即GNU’s Not UNIX工程，由笔者很敬佩的理查德斯托曼主持开工，大多数的Linux发行版都使用了GNU工具（这就是为什么Linux的全称是GNU/Linux），GNU工程下所有软件都是“自由软件”（想了解自由软件或“Free Software”的详情，推荐阅读理查德斯托曼传记《若为自由故》），这就意味着GPL！</p>
+<p>GNU工程下属的GNU C Compiler就是为大家所熟知的C编译器gcc</p>
+<h2 id="K-amp-R-C"><a href="#K-amp-R-C" class="headerlink" title="K&amp;R C"></a>K&amp;R C</h2><p>由Dennis Ritchie和Ken Thompson以及其他的开发者共同发明的<strong>最原始的C标准</strong></p>
+<h2 id="ANSI-C89"><a href="#ANSI-C89" class="headerlink" title="ANSI C89"></a>ANSI C89</h2><p>更被人所熟知的名字是简称“<strong>ANSI C</strong>”，这个版本是C的第一个成熟、统一的版本</p>
+<p>在ANSI C成为主流这段时间内，分离出了C++</p>
+<p>当下的POSIX规定了必须通过提供C99命令来提供C编译器</p>
+<h2 id="ANSI-C99"><a href="#ANSI-C99" class="headerlink" title="ANSI C99"></a>ANSI C99</h2><p>吸收了<strong>单行注释、for(int i=0;i&lt;N;i++)格式</strong>等源自C++特性的ISO标准化版本</p>
+<h2 id="C11"><a href="#C11" class="headerlink" title="C11"></a>C11</h2><p>在2011年新定义的版本，做出了泛型函数、安全性提升等<strong>“离经叛道”的改变</strong></p>
+<p>GCC以光速支持了这个标准</p>
+<h1 id="C开发环境搭建"><a href="#C开发环境搭建" class="headerlink" title="C开发环境搭建"></a>C开发环境搭建</h1><p>C开发环境=包管理器+C库+C编译器+调试器+代码编辑器+C编译器辅助工具+打包工具+shell脚本控制工具+版本控制工具+C接口</p>
+<p>看上去很复杂，实际上也很复杂=)</p>
+<p>为什么不用IDE呢？当你用C开发某些小众嵌入式设备程序时就明白了（包括但不仅限于目前的MIPS、xtensa、RISC-V、你自己花三年用verilog写出来的CPU（可能还莫名其妙移植了一个操作系统和对应的C编译器，也许会有这样的dalao吧）），IDE？TMD！</p>
+<h2 id="包管理器与编译环境"><a href="#包管理器与编译环境" class="headerlink" title="包管理器与编译环境"></a>包管理器与编译环境</h2><blockquote>
+<p>IDE？狗都不用！真男人都是记事本+编译器！</p>
+</blockquote>
+<h3 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h3><p>每个系统都具有不同的软件包组织方式，所以你的软件很可能被安装在某个犄角旮旯，这就需要包管理器来帮助安装软件；虽然说很奇怪，但windows下也有包管理器</p>
+<p>安装完包管理器后，就能用它安装gcc或clang这种编译器、GDB调试器、Valgrind内存使用错误检测器、Gprof（一个运行效率评测软件）、make工具、（如果你很nb还可以安装cmake工具）、Pkg-config（查找库的工具）、Doxygen（用于生成程序文档的工具）、你喜欢的文本编辑器（包括但不仅限于Emacs、Vim、VSCode、Sublime、记事本），除此之外，还能安装一些跨平台的IDE（虽然不太推荐，但eclipse就是最大众的选择，XCode需要有钱人才能买得起（指苹果电脑），Code::blocks在win下工作有点拉跨），还有必要的git工具、autoconf、automake、libtool，以及最重要的增加程序猿B格的Z shell、oh-my-zsh</p>
+<p>包管理器还能管理C库，用一些新C库（libcURL、libGLib、libGSL、libSQLite3、libXML2），你可以实现很炫酷的现代C语言开发以及防止重新造轮子</p>
+<p>对于一个包管理器，常会提供供用户使用的包和供开发者使用的包，在安装时应该选择带有-dev或-devel的包</p>
+<h3 id="包管理器的安装"><a href="#包管理器的安装" class="headerlink" title="包管理器的安装"></a>包管理器的安装</h3><p>在Linux下，包管理器分为两大阵营：</p>
+<ul>
+<li>Debian系的apt</li>
+<li>Red hat系的yum</li>
+</ul>
+<p>目前而言，两边其实都很好用、易上手，不过根据程序猿的性格不同，选择yum的程序猿多少沾点（我使用apt，就是要引战！），另外还有一个叫的Arch的发行版，因为我一直没有能把它安装上，所以不知道那个<code>pacman -S</code>是什么东西</p>
+<p>在Windows下，微软很nt（逆天，指微软很厉害）地提供了方便的软件安装方式：让你的C盘变红。不过Windows还是勉为其难地提供了一个POSIX兼容的东西——Cygwin是许多自由软件的集合，最初由Cygnus Solutions开发，用于各种版本的Microsoft  Windows上，运行UNIX类系统。Cygwin的主要目的是通过重新编译，将POSIX系统（例如Linux、BSD，以及其他Unix系统）上的软件移植到Windows上，可以在Cygwin网站上下载包管理工具，配合一个终端（Terminal）即可实现在Win下进行Linux开发（虽然很蛋疼）。安装方法参考百度（笑）</p>
+<p>微软最近还开发了一个叫WSL（Windows Subsystem of Linux，最新版本是跑在windows自带虚拟机Hyper-V上的WSL2）的东西，这个东西可以让你在windows下进行不完全的linux使用（用的发行版是ubuntu），笔者目前使用的就是这个软件，安装很方便——开启Hyper-V和虚拟化、打开Microsoft应用商店搜索WSL点击下载安装即可，不过所有东西就被塞进了C盘。</p>
+<h3 id="搭建C编译器并执行编译"><a href="#搭建C编译器并执行编译" class="headerlink" title="搭建C编译器并执行编译"></a>搭建C编译器并执行编译</h3><p>在POSIX环境下，一切都很方便，apt install能解决一切问题，想安装什么就<code>sudo apt install xxx</code></p>
+<p>非POSIX环境下，可以使用MinGW来实现标准C编译器和一些基础工具，或者使用很好用的WSL</p>
+<p>可以使用命令行下的编译器执行编译：</p>
+<ol>
+<li>设置一个变量，代表编译器使用的编译选项</li>
+<li>设置变量代表要链接的库，一般要分开指出编译时和运行时链接的库</li>
+<li>设置一个使用这些变量来协调编译的系统</li>
+</ol>
+<p>完整的gcc编译器命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc test.c -o test -lm -g -Wall -O3 -std=gnu11</span><br></pre></td></tr></table></figure>
+
+<p>该命令告诉编译器通过程序中的#include包含库函数，并告诉链接器通过命令行中的-lm链接库文件</p>
+<p>-o用于指定输出文件的名字，否则会得到一个默认的a.out作为可执行文件名</p>
+<p>-g表示加入调试负好，如果没有这个选项，调试器就不会显示变量或者函数的名字</p>
+<p>-std=gnu11是gcc的特有选项，允许使用c11和POSIX标准的代码；同理可以使用-std=gnu99来使用c99标准</p>
+<p>-O3表示优化等级为3级，尝试已知的所有方法去建立更快的代码</p>
+<p>-Wall用于添加编译器警告</p>
+<h4 id="Windows下的编译"><a href="#Windows下的编译" class="headerlink" title="Windows下的编译"></a>Windows下的编译</h4><p>微软顽强地抗拒C语言，所以一般在Windows下编译c程序都使用MinGW或cygwin环境，在这些环境中编译后可以得到Windows本地的二进制代码（当然也可以使用宇宙第一IDE VS，在此不讨论）</p>
+<p>但伴随的缺点就是缺少使用体验很爽的C库！</p>
+<h3 id="链接函数库"><a href="#链接函数库" class="headerlink" title="链接函数库"></a>链接函数库</h3><p>安装编译器后，链接工具会被自动安装好</p>
+<p>GCC可以自动完成优化-编译-链接一条龙</p>
+<p>连接函数库之前需要注意的就是路径：编译器需要知道在哪个目录去查找正确的头文件和目标文件。典型的库存放位置可能有三种：</p>
+<ul>
+<li>由操作系统预定义某个目录来安装操作系统需要的库文件</li>
+<li>本地系统管理员可能会准备一个用于安装包的目录</li>
+<li>用户从操作系统给出路径中查询到库并具有使用权限</li>
+</ul>
+<p>使用以下命令行来指定头文件搜索目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc -I 头文件所在目录 需要链接的.c文件名 -o 生成的.o文件名 -L 某个库所在的目录</span><br></pre></td></tr></table></figure>
+
+<p>参数-I用于添加指定的路径到头文件的搜索路径范围内，编译器会在这个路径范围内搜索放在代码中用<code>#include</code>指定的头文件</p>
+<p>参数-L用于添加指定的路径到库的搜索路径范围内</p>
+<p>注意：<strong>最原始的依赖库放在参数最后面，引用了很多库且被当前编译文件引用的子库紧跟在-L之后</strong></p>
+<p>因为链接器的工作方式是：</p>
+<ol>
+<li>查看-L参数后的第一个目标，将其中无法解析的函数、结构体、变量记入一个列表，然后查看下一个目标</li>
+<li>在下一个目标中寻找未知元素列表中的项目并删去已经得知的项目或继续添加未知元素</li>
+<li>重复上述过程，直到搜索完最后的文件</li>
+<li>如果仍存在为解析的符号，则终止运行并报错</li>
+</ol>
+<p>正是因为这种工作方式，很多时候安装依赖库的顺序和编译的顺序不当就会导致“玄学错误”</p>
+<p>以上方式就是常规的静态库链接方式，当然现在的软件没什么用静态库的了，嵌入式软件倒是个例外（不过也有些RTOS在嵌入式设备上应用了动态链接极制）。共享库用于动态链接，使用以下Makefile参数来告诉编译器从哪里寻找共享库来进行动态链接</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">LDADD=-L libpath: xxxxxx -Wl,-R libpath: xxxxxx</span><br></pre></td></tr></table></figure>
+
+<p>-L参数告诉编译器到哪里找到库来解析符号</p>
+<p>-Wl参数从编译器传递后面的路径到链接器，链接器会将给定的-R嵌入到所连接的库的运行时搜索路径</p>
+<h2 id="Makefile简介"><a href="#Makefile简介" class="headerlink" title="Makefile简介"></a>Makefile简介</h2><blockquote>
+<p>Make工具就是天！——沃·兹基硕德</p>
+</blockquote>
+<p>Make工具是一个可以自动执行编译、链接等工作的程序，它也有POSIX标准化，需要通过读入Makefile作为指令和变量，很多嵌入式开发（包括交叉编译和底层软件编译）都要和它打交道</p>
+<p>一般来说使用gcc编译一个文件需要像下面这样：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc hello.c -o hello.o</span><br></pre></td></tr></table></figure>
+
+<p>对于几个文件的编译还算简单，但是如果是一个很大的工程，包含了数不清的文件，每个文件都互相依赖，那么写shell script就会很绝望了；使用makefile就会让编译工作轻松一点</p>
+<p>最小的Makefile如下所示</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line">P=helloworld</span><br><span class="line">OBJECTS=</span><br><span class="line">CFLAGS = -g -Wall -O3</span><br><span class="line">LDLIBS=</span><br><span class="line">CC=c99</span><br><span class="line"></span><br><span class="line"><span class="variable">$(P)</span>:<span class="variable">$(OBJECTS)</span></span><br></pre></td></tr></table></figure>
+
+<p>现在一般都使用GNU Make工具（GNU：没错还是我），需要将编写的Makefile命名为<code>Makefile</code>并将其与.c文件放在同一目录下，在命令行中输入</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+
+<p>就可以进行自动化编译了</p>
+<p>当然可以在后面添加参数<code>-jn</code>其中n表示你使用的cpu线程数——这就是多线程编译，可以提高编译速度；但是相对应的就不会生成每个.c文件对应的warning，并且会自动在第一个error处停下，并且不会告诉你error发生在哪里，所以如果是第一次编译请不要使用这个参数</p>
+<h3 id="make语法"><a href="#make语法" class="headerlink" title="make语法"></a>make语法</h3><p>makefile的语法有两种流派：POSIX型和C shell型，现在的makefile大多使用POSIX型或其近似的语法；而CMake工具的cmakelist则选择了类似C shell的语法</p>
+<p>make和shell一样使用$指代变量的值，但shell要求使用<code>$var</code>，make则要求使用<code>$(var)</code>形式</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="variable">$(P)</span>:<span class="variable">$(OBJECTS)</span> <span class="comment">#相当于program_name=</span></span><br></pre></td></tr></table></figure>
+
+<p>有以下几种方法让make工具识别变量：</p>
+<ul>
+<li>调用make之前在shell中设定变量并使用export命令导出</li>
+<li>将export命令写入shell启动脚本中，就可以在启动shell时自动完成变量加载</li>
+<li>在一个命令前放置赋值操作，这将把变量设置为一个环境变量</li>
+<li>在Makefile的头部设定变量</li>
+<li>在命令行中使用make指令后接要设置的变量，这些变量会独立于shell作为make工具的变量存在</li>
+</ul>
+<p>在C代码中可以使用getenv函数获取环境变量信息，这需要调用stdlib.h库</p>
+<p>make工具也提供了一些内置的变量，如下所示：</p>
+<ul>
+<li><p>$@</p>
+<p>返回完整的目标文件名（目标文件就是从.c文件中编译得到的.o文件）</p>
+</li>
+<li><p>$*</p>
+<p>返回不带文件名后缀的目标文件</p>
+</li>
+<li><p>$&lt;</p>
+<p>返回触发和制作该目标文件的文件的名称</p>
+</li>
+</ul>
+<p>Makefile的标准形式如下：</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="section">target:dependencies</span></span><br><span class="line">	script</span><br></pre></td></tr></table></figure>
+
+<p>输入命令<code>make target</code>时，对应的target就会被调用，检查dependencies是否是较早（target文件比dependencies更新）的文件，如果检查通过则运行所有的dependencies，结束后再运行target部分的脚本；如果检查不通过则对script的处理会被暂停</p>
+<p>Makefile基本上就是目标target、依赖dependencies、脚本script三者所组成的一系列规则。make工具就是根据Makefile的规则决定如何编译和链接程序或者执行其它操作（包括但不仅限于自动下载远程程序、解压缩包、打补丁、设定参数、编译并将软件安装到系统中指定位置等）</p>
+<h3 id="Make的本质"><a href="#Make的本质" class="headerlink" title="Make的本质"></a>Make的本质</h3><p>在编写小工程，特别是只有不多文件的情况下，在shell里使用gcc就可以了，如果工程数量继续增长，自行编写Shell Script也很简单；但是如果是依赖条件复杂的大工程，直接使用编译器就会很繁琐，这时候通常使用<strong>构建工具</strong>来辅助</p>
+<blockquote>
+<p>构建工具 (software construction tool)  是一种软件，它可以根据一定的规则或指令，将源代码编译成可执行的二进制程序。这是构建工具最基本也是最重要的功能。实际上构建工具的功能不止于此，通常这些规则有一定的语法，并组织成文件。这些文件用来控制构建工具的行为，在完成软件构建之外，也可以做其他事情。</p>
+</blockquote>
+<p>Linux的内核、Linux上运行的大多数Qt软件、洗衣机的主控、ESP32的底层文件……都是用Make工具完成构建的，这是历史最为悠久的开源构建工具，但是正因如此它的语法比较混乱，且不被Windows支持（除非使用上文提到的Cygwin环境）。除此之外，只要外部条件稍微变化一些，就需要修改软件的Makefile。为了让安装软件更加容易，程序员开发出了几个神奇的生成工具：Ninja、Automake、SCons、CMake。利用这些改善过的工具，编程者只需要写一些预先定义好的宏，提交给程序自动处理，就会生成一个可以供Make工具使用的Makefile文件，再配合使用工具产生的自动配置文件configure即可产生一份符合GNU-Makefile规定的Makefile；或者直接通过自己独有的软件编译方式对工程进行生成。</p>
+<h2 id="Ninja简介"><a href="#Ninja简介" class="headerlink" title="Ninja简介"></a>Ninja简介</h2><p>除了Make工具外，Ninja也是一个自动化编译的构建工具。它由Google的一名程序员开发，通过将编译任务并行化大大提高编译速度</p>
+<p>它并不使用Makefile，而是用一套自己组织的<code>.ninja</code>脚本</p>
+<p>现在Android Studio等都选用了Ninja作为编译工具，也有许多嵌入式设备厂商自己的SDK使用了ninja</p>
+<p>ninja的安装方法和make一样</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install ninja</span><br></pre></td></tr></table></figure>
+
+<p>或者可以从github上拉取最新版本的ninja源码，然后自行编译安装</p>
+<p>只不过make支持POSIX标准，可以直接在linux上运行；但是ninja需要事先安装一些依赖，具体情况可以参考<a href="https://ninja-build.org/">官网</a></p>
+<p>这里不多介绍ninja的使用方法</p>
+<h2 id="SCons简介"><a href="#SCons简介" class="headerlink" title="SCons简介"></a>SCons简介</h2><p>SCons是另一套由Python编写的开源构建系统，它和Make、Ninja一样可以生成脚本进行快速编译，但是SCons有一个最厉害的地方：<strong>它使用的是python脚本，能够使用标准的Python语法编写构建工程</strong></p>
+<p>详情可以参考<a href="https://www.scons.org/">官网</a></p>
+<p>SCons的脚本称为<em>SConscript</em>，支持多种编译器，包括但不仅限于gcc、clang，甚至支持很多公司专有的交叉编译工具</p>
+<p>它的安装也比较简单：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo apt install python #安装依赖——这玩意是用python写的</span><br><span class="line">sudo apt install scons</span><br></pre></td></tr></table></figure>
+
+<p>直接在程序目录使用下面的指令就可以轻松完成很多原本需要Makefile写很多才能完成的任务</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">scons #相当于make</span><br><span class="line">scons -c #相当于make clean</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 上面的就是个开胃菜，和make没差很多；下面才是scons的神奇之处</span></span><br><span class="line">touch SConstruct</span><br><span class="line">vim SConstruct #新建一个SCons脚本</span><br><span class="line">Program(&#x27;testPro1&#x27;, Glob(&#x27;*.cpp&#x27;)) #写完以后直接保存退出</span><br><span class="line">scons #直接回到shell来一个执的行，testPro1就构建完毕了</span><br></pre></td></tr></table></figure>
+
+<p>除了直接使用<code>scons</code>命令生成外，SCons还支持一些扩展功能</p>
+<p>RT-Thread就将它扩展为了keil MDK/IAR/VS/CubeIDE工程生成器：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">scons --target=xxx #生成某个IDE的工程</span><br></pre></td></tr></table></figure>
+
+<p>SConscript还能执行一些方便的内置函数</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">GetCurrentDir() <span class="comment">#获取当前路径</span></span><br><span class="line">Glob() <span class="comment">#获取当前目录下的所有文件，支持在里面使用表达式匹配</span></span><br><span class="line">Glob(&#x27;*.c&#x27;) <span class="comment">#获取当前目录下的.c文件</span></span><br><span class="line">Split(str) <span class="comment">#将字符串str分割成一个列表</span></span><br></pre></td></tr></table></figure>
+
+<p>具体的SCons使用还要更复杂一些，所有使用方法都可以参考官网或者使用到SCons的SDK说明，即用即查，不需要特意学习</p>
+<h2 id="Automake简介"><a href="#Automake简介" class="headerlink" title="Automake简介"></a>Automake简介</h2><p>Automake是正统的GNU软件，它用来生成Make构建系统。</p>
+<p>这是一个套娃：gcc/clang是编译器，或者说构建工具；Make/Ninja/SCons是构建系统；Automake/CMake则是<strong>生成构建系统的系统</strong></p>
+<h2 id="CMake简介"><a href="#CMake简介" class="headerlink" title="CMake简介"></a>CMake简介</h2><p>CMake是比Automake更常用一些的系统，它通过读取<code>CMakeLists.txt</code>中的规则来构建编译系统</p>
+<p>它的脚本格式大致如下：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.9</span>) <span class="comment">#注明需要的cmake工具版本</span></span><br><span class="line"><span class="keyword">project</span>(HelloWorld) <span class="comment">#工程名</span></span><br><span class="line"><span class="keyword">set</span>(CMAKE_CXX_STANDARD <span class="number">11</span>) <span class="comment">#设置要使用编译器版本</span></span><br><span class="line"><span class="keyword">add_executable</span>(HelloWorld main.cpp) <span class="comment">#指定源文件</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#下面是负责程序安装的指令</span></span><br><span class="line"><span class="keyword">install</span>(TARGETS HelloWorld DESTINATION bin) <span class="comment">#指定将生成的程序文件安装到/usr/local/bin</span></span><br><span class="line"><span class="keyword">install</span>(FILES HelloWorld.h DESTINATION <span class="keyword">include</span>) <span class="comment">#指定将库文件保存到/usr/local/include</span></span><br></pre></td></tr></table></figure>
+
+<p>在shell中使用</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir build #惯用方式，将所有生成的文件保存至build目录</span><br><span class="line">cd build</span><br><span class="line">cmake .. #对上一级也就是工程项目主目录执行cmake，前提是CMakeLists.txt保存在工程项目主目录</span><br><span class="line"><span class="meta">#</span><span class="bash">所有生成的文件会被保存到build目录，包括Makefile</span></span><br><span class="line">make #执行make</span><br></pre></td></tr></table></figure>
+
+<p>就可以完成所有编译任务</p>
+<p><strong>它可以将Makefile的编写完全转化成CMakeLists的编写</strong>，虽然看上去多此一举，但实际上增强了编译时的可靠性和程序的可移植性</p>
+<h2 id="Kconfig简介"><a href="#Kconfig简介" class="headerlink" title="Kconfig简介"></a>Kconfig简介</h2><blockquote>
+<p>半个可视化也是可视化——伽利略（？）</p>
+</blockquote>
+<p>一般来说一个工程完全可以依靠CMake-Make-GCC的工具链完成编译，但实际上很多与c语言打交道的底层程序需要适配各种不同的情况，这就需要使用<strong>代码模块化</strong>思想：将一套代码分成多个模块以适应不同情景</p>
+<p>最典型的就是Linux内核了：有的设备是嵌入式的，有的设备是高性能的，有的设备带摄像头、网口，有的设备只有WiFi，有的设备自带一堆硬件加速器，有的设备使用RISC-V架构——而Linux内核需要针对这些情况进行优化，因此它使用了“宏内核”思想，内核接管一切驱动程序的管理，将底层所有设备归类交给不同的驱动程序管理。这时Linux的内核编译就需要事先确定目标设备上都有什么，预先选好要加入工程的组件再生成源代码（这也使用了C预编译器的一部分功能）</p>
+<p>负责灵活配置编译单元——说人话就是从一堆预先写好的代码里挑选出合适的代码的工具就是<strong>Kconfig</strong></p>
+<p>Kconfig工具生成CMakeList的设置参数；之后调用<code>make menuconfig</code>配置<code>.cmake</code>文件用于将Kconfig生成的参数赋值给CMake变量、<code>.mk</code>配置文件用于保存make工具的编译变量、<code>.h</code>文件用于提供C语言的编译基础；再然后使用CMake工具生成Makefile；最后使用Make工具进行编译，就可以生成一个bin文件了</p>
+<p>这里着重强调一下Kconfig的使用——因为它是Linux内核编译的最重要辅助工具之一——在编译内核时，需要用到<code>make menuconfig</code>指令，而这个指令并没有直接调用make、cmake工具，而是先借助Kconfig工具打开一个蓝色的配置菜单界面，如下所示</p>
+<p><img src="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%801/image-20210820192752213.png" alt="image-20210820192752213"></p>
+<p>这个蓝色的菜单可以说是最经典的多级菜单程序，但这里我们不说多级菜单的实现，仅仅谈它使用的脚本工具<strong>Kconfig</strong></p>
+<p>使用<strong>config</strong>语句定义一组新的配置选项</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">config CONFIG_A</span><br><span class="line">    <span class="keyword">bool</span> <span class="string">&quot;Enable MyConfig&quot;</span></span><br><span class="line">    select SELECTED</span><br><span class="line">    <span class="keyword">default</span> y</span><br><span class="line">    help</span><br><span class="line">    My Config</span><br></pre></td></tr></table></figure>
+
+<p><strong>bool</strong>表示配置<strong>选项的类型</strong>，每个config菜单项都要有类型定义，变量有5种类型：<code>bool</code>布尔，也就是二选一（y或n）、<code>tristate</code>三态，也就是三选一、<code>string</code>字符串，也就是用户从给出的一堆字符串里选择一个、<code>hex</code>十六进制，也就是用户要选择一个十六进制数、<code>int</code>整型，也就是用户需要选择一个整数，需要注意：这里的<em>用户选择</em>是不严谨的，实际上==选项类型决定了Kconfig会生成什么样的#define语句提供给C源代码==；**”Enable MyConfig”<strong>表示该</strong>选项的名称<strong>；</strong>select<strong>表示如果当前配置选项被</strong>选中<strong>，则SELECTED就会被选中；</strong>default<strong>后面跟的参数表示配置选项的</strong>默认值**；help后面跟的语句会作为帮助信息提供给用户</p>
+<p>使用<strong>menu/endmenu块</strong>来生成一个菜单，这个菜单里面可以包含复数个config语句，也可以包含子菜单</p>
+<p>使用<strong>if/endif块</strong>来实现条件判断</p>
+<p>使用<strong>menuconfig</strong>语句表示带菜单的配置项，也就是可展开的菜单</p>
+<p>使用<strong>choice/endchoice</strong>语句将多个类似的配置选项组合在一起，供用户选择一组配置项，也就是“弹窗”子菜单</p>
+<p>使用<strong>comment</strong>语句定义帮助信息，这些东西会出现在界面第一行</p>
+<p>使用<strong>source</strong>语句读取另一个文件中的Kconfig文件</p>
+<h2 id="以上软件的组织架构"><a href="#以上软件的组织架构" class="headerlink" title="以上软件的组织架构"></a>以上软件的组织架构</h2><h3 id="半可视化编译配置工具"><a href="#半可视化编译配置工具" class="headerlink" title="半可视化编译配置工具"></a>半可视化编译配置工具</h3><p>Kconfig</p>
+<h4 id="构建工具生成器"><a href="#构建工具生成器" class="headerlink" title="构建工具生成器"></a>构建工具生成器</h4><p>CMake</p>
+<p>Automake</p>
+<h5 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h5><p>Make</p>
+<p>Ninja</p>
+<p>SCons</p>
+<h2 id="调试器GDB"><a href="#调试器GDB" class="headerlink" title="调试器GDB"></a>调试器GDB</h2><p>GDB是目前最常用的调试器（没有之一），它支持多平台、多目标的调试过程。</p>
+<p>调试器，顾名思义就是用于调试程序的软件。它能够给出底层的变量变化和回溯的信息，同时可以追踪内存和寄存器中数值的变化，一般的调试器可以提供<strong>断点</strong>功能和<strong>追踪</strong>功能。编译时，在gcc指令后加入-g参数即可启用调试功能，不过这会导致程序变大一些</p>
+<p>gdb可以直接在命令行模式中使用，但是一般来说各种代码编辑器和IDE会将gdb嵌入，并提供可视化的调试功能，下面是一些使用命令行模式gdb时会用到的指令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gdb &lt;file&gt; # 使用gdb调试文件</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash">--下面会进入gdb命令行--</span></span><br><span class="line">(gdb) r # 正常执行程序直到遇到错误或断点</span><br><span class="line">(gdb) l # 显示运行到的那一行代码</span><br><span class="line">(gdb) l &lt;部分代码&gt; # 显示以某行为中心的部分代码</span><br><span class="line">(gdb) b &lt;部分代码&gt; # 在某行代码处打断点</span><br><span class="line">(gdb) p &lt;变量/指针&gt; # 输出某变量/指针的值</span><br><span class="line">(gdb) bt # 列举出堆栈帧</span><br><span class="line">(gdb) info threads # 获取程序使用线程列表</span><br><span class="line">(gdb) n # 重复单步运行程序</span><br><span class="line">(gdb) b &lt;行号&gt; # 在某一行打断点</span><br><span class="line">(gdb) r # 重新开始一个循环</span><br><span class="line">(gdb) c # 继续运行程序直到完成当前循环或运行到return</span><br><span class="line">(gdb) disp &lt;变量&gt; # 将某变量的变化在调试过程中自动显示</span><br><span class="line">(gdb) &lt;Enter&gt; # 重复上一步命令</span><br><span class="line">(gdb) f &lt;帧号&gt; # 查看某一帧</span><br></pre></td></tr></table></figure>
+
+<p>任何函数都会在内存中占据一个空间，称为函数<strong>帧</strong>，函数帧会使用特殊的数据结构保存与这个函数有关的所有信息，gdb则可以直接查阅堆栈帧并获取信息。</p>
+<p>现在的调试过程已经基本不需要使用gdb的命令行模式了（除非是对跑在某些极少有人使用的、没有开源社区提供gdb调试工具的莫名其妙的cpu上的程序），VSCode、Sublime、Vim、Emacs里面都内置了gdb的（半）图形化调试只需要知道如何打断点、单步调试、查看汇编等基本操作就可以进行有效调试了</p>
+]]></content>
+      <tags>
+        <tag>C语言进阶</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>MSP430简介</title>
     <url>/2021/11/13/msp430%E7%AE%80%E4%BB%8B/</url>
     <content><![CDATA[<h1 id="MSP430"><a href="#MSP430" class="headerlink" title="MSP430"></a>MSP430</h1><p>该MCU是由德州仪器TI生产的16位低功耗单片机</p>
@@ -685,13 +977,13 @@
 <p>主要分以下型号：</p>
 <ul>
 <li>专注低功耗的<strong>1xx</strong>通用型，配备1KB-60KB FLASH、512B-10KB RAM，工作时耗电仅达200uA/MIPS，RAM保持模式耗电0.1uA，RTC模式耗电0.7uA；可在6us之内快速唤醒。搭载10/12位斜率SAR ADC，集成模拟比较器、DMA、硬件乘法器、BOR、SVS、12位DAC</li>
-<li>能耗比高的<strong>F2xx</strong>通用型，性能<a href="mailto:&#49;&#54;&#77;&#73;&#80;&#x53;&#x40;&#51;&#46;&#51;&#86;">&#49;&#54;&#77;&#73;&#80;&#x53;&#x40;&#51;&#46;&#51;&#86;</a>，配备1-120KB FLASH，8-128KB RAM，工作耗电220uA，配备10/12位斜率SAR ADC，集成16位Σ-ΔADC，基本上等于1xx的升级版</li>
-<li><strong>性价比</strong>高的<strong>G2xx</strong>经济型，性能<a href="mailto:&#49;&#x36;&#x4d;&#73;&#x50;&#x53;&#x40;&#51;&#46;&#51;&#86;">&#49;&#x36;&#x4d;&#73;&#x50;&#x53;&#x40;&#51;&#46;&#51;&#86;</a>，对标友商stm32l，主打模拟外设和低功耗</li>
+<li>能耗比高的<strong>F2xx</strong>通用型，性能<a href="mailto:&#49;&#54;&#x4d;&#73;&#80;&#83;&#64;&#51;&#x2e;&#51;&#x56;">&#49;&#54;&#x4d;&#73;&#80;&#83;&#64;&#51;&#x2e;&#51;&#x56;</a>，配备1-120KB FLASH，8-128KB RAM，工作耗电220uA，配备10/12位斜率SAR ADC，集成16位Σ-ΔADC，基本上等于1xx的升级版</li>
+<li><strong>性价比</strong>高的<strong>G2xx</strong>经济型，性能<a href="mailto:&#49;&#x36;&#77;&#x49;&#80;&#x53;&#64;&#51;&#x2e;&#51;&#x56;">&#49;&#x36;&#77;&#x49;&#80;&#x53;&#64;&#51;&#x2e;&#51;&#x56;</a>，对标友商stm32l，主打模拟外设和低功耗</li>
 <li>面向计量和智能电网的AFE2xx专用型：性能略低于以上两个2xx系列，但是集成了1-3个独立的24位Σ-ΔADC，一个16位定时器、一个16位硬件乘法器、USART控制器、看门狗和GPIO</li>
 <li>停产的老型号3xx</li>
 <li>面向低功耗<strong>多媒体</strong>的<strong>4xx</strong>控制型，8-16MIPS处理性能，<strong>配备LCD控制器</strong>、<strong>FLL、SVS</strong>，针对低功耗测量和医疗应用，功耗和1xx相近，4-120KB FLASH、8-256KB RAM，引脚丰富最多可达80Pin，配备10/12位斜率SAR、16位Σ-ΔADC，同样集成了12位ADC、DMA、硬件乘法器、运放、USCI模块等</li>
-<li><strong>超高能耗比的5xx超低功耗型</strong>，能达到<a href="mailto:&#x32;&#53;&#x4d;&#73;&#x50;&#83;&#64;&#x33;&#x2e;&#x33;&#86;">&#x32;&#53;&#x4d;&#73;&#x50;&#83;&#64;&#x33;&#x2e;&#x33;&#86;</a>，工作模式功耗165uA/MIPS，RTC模式2.5uA，RAM保持模式可达1uA，待机唤醒时间极短，小于5ms，配备256KB FLASH、18KB RAM，额外集成了USB、模拟比较器</li>
-<li>高性能、低功耗的6xx系列旗舰型，达到<a href="mailto:&#x32;&#53;&#77;&#73;&#80;&#x53;&#x40;&#51;&#x2e;&#51;&#86;">&#x32;&#53;&#77;&#73;&#80;&#x53;&#x40;&#51;&#x2e;&#51;&#86;</a>，配备功耗优化的创新电源管理模块和USB控制器，配备LCD控制器，有256KB FLASH、18KB RAM，74Pin引脚，功耗与5xx系列相同，还额外集成了电压管理模块</li>
+<li><strong>超高能耗比的5xx超低功耗型</strong>，能达到<a href="mailto:&#50;&#x35;&#77;&#x49;&#80;&#x53;&#64;&#x33;&#46;&#x33;&#86;">&#50;&#x35;&#77;&#x49;&#80;&#x53;&#64;&#x33;&#46;&#x33;&#86;</a>，工作模式功耗165uA/MIPS，RTC模式2.5uA，RAM保持模式可达1uA，待机唤醒时间极短，小于5ms，配备256KB FLASH、18KB RAM，额外集成了USB、模拟比较器</li>
+<li>高性能、低功耗的6xx系列旗舰型，达到<a href="mailto:&#x32;&#x35;&#x4d;&#x49;&#80;&#x53;&#x40;&#x33;&#46;&#x33;&#x56;">&#x32;&#x35;&#x4d;&#x49;&#80;&#x53;&#x40;&#x33;&#46;&#x33;&#x56;</a>，配备功耗优化的创新电源管理模块和USB控制器，配备LCD控制器，有256KB FLASH、18KB RAM，74Pin引脚，功耗与5xx系列相同，还额外集成了电压管理模块</li>
 <li>基于<strong>FRAM</strong>技术的<strong>FRxx</strong>系列，和主要的F系列差别在于使用了FRAM存储技术，能够达到更快的FLASH访问速度并在所有功率模式下实现零功率状态保持，即使发生功率损耗的情况也可以保证写入操作，写入寿命能达到100M个周期，不再需要EEPROM</li>
 <li>低电压C、L系列，两个谢列都可以在0.9-1.65V电压范围内工作并提供4MIPS的性能</li>
 <li>集成射频基带的CC无线系列，具有低于1GHz的片上射频收发器，工作电压为1.8-3.3V，处理性能20MIPS</li>
@@ -1124,6 +1416,490 @@
 ]]></content>
       <tags>
         <tag>电赛笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>现代C语言2</title>
+    <url>/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%802/</url>
+    <content><![CDATA[<h1 id="C语言语法拾遗"><a href="#C语言语法拾遗" class="headerlink" title="C语言语法拾遗"></a>C语言语法拾遗</h1><p>专门总结了一些C语言C99/C11之后的新语法或冷门语法</p>
+<h2 id="预处理和宏——灵魂"><a href="#预处理和宏——灵魂" class="headerlink" title="预处理和宏——灵魂"></a>预处理和宏——灵魂</h2><p>预处理器和宏可以说是面向对象语言<em>独有</em>的东西，<strong>这些特性发生在编译这个过程之前</strong>，使得C语言的编译过程变得“可控”，甚至可以说C语言编译本身就是一个开发者可编程的过程——或许这样说比较抽象，举个例子：java的宏并不对一般开发者开放，一般只有OpenJDK的开发者才会面对java宏和相关预编译指令；但是C语言的宏直接出现在hello world程序中：“#include”指令本身就意味着对链接器进行调用——这些宏严格来说并不属于C语言的语法学习范畴，但是如果想靠C语言造轮子，这就是无法避开的</p>
+<p>C预处理器就是C语言的灵魂，上能干涉程序实现，下能检查编译原理</p>
+<h3 id="预处理指令的特殊用法"><a href="#预处理指令的特殊用法" class="headerlink" title="预处理指令的特殊用法"></a>预处理指令的特殊用法</h3><ol>
+<li><h1 id><a href="#" class="headerlink" title></a></h1><p>预处理器对井号标记<code>#</code>有三种不同的用法：</p>
+<ol>
+<li><p>标记一个指令</p>
+<p>这是最常用的方法，#之前的空白会被忽略，因此各种头文件的格式总是防止重复包含-引用-宏定义-变量定义-函数定义</p>
+</li>
+<li><p>输入的字符串化</p>
+<p><strong>使用#可以将一个变量转义为字符串，并且如果旁边有其它字符串相邻，会将他们合并在一起</strong></p>
+<p>这就是很多c程序处理字符串IO的方法</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Pevel(cmd) printf(#cmd <span class="meta-string">&quot;:%g\n&quot;</span>,cmd);</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的代码会将输入的变量cmd转换成字符串，输出变量名并输出对应的值</p>
+</li>
+<li><p>把符号连接起来</p>
+<p>使用两个##就可以将不是字符串的东西拼接在一起</p>
+<p>比如</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">name = LL;</span><br><span class="line">name##_list</span><br><span class="line"><span class="comment">//等效于</span></span><br><span class="line">LL_list</span><br></pre></td></tr></table></figure>
+
+<p>往往使用这种编程方法实现C语言的键值对（字典）轮子</p>
+</li>
+</ol>
+</li>
+<li><p>避免头文件包含</p>
+<p>这个用法很重要，懂得都懂。不懂的话自己写两个一模一样的.h文件碰几次报错就懂了</p>
+<p>使用方法有两种：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __THIS_DOCUMENT</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __THIS_DOCUMENT</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 这里是头文件内容 */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br></pre></td></tr></table></figure>
+
+<p>这行语句只要加在文件开头即可通知编译器不进行二次包含，它实际上依赖于编译器，但每个主流的编译器都支持该指令</p>
+</li>
+<li><p>static和extern保护</p>
+<p>在.c库文件内的所有函数前使用static，并在.h文件中进行声明，可以对函数和变量进行一定的保护</p>
+<p>在含有很多全局变量，会被多处包含的.h头文件中使用extern声明全局变量可以防止多次重复编译；但是要注意：只在其中一个包含了该头文件的.c文件中进行变量定义</p>
+</li>
+</ol>
+<h3 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h3><p>使用typedef可以提高代码可读性、化简声明复杂度</p>
+<p>还可以把一个结构体封装成一个“类”或封装出一个“方法”</p>
+<p>这里要强调的是：<strong>typedef</strong>本身是一个C语言指令，<strong>并不是宏</strong>——它在编译阶段才会执行，并为某个数据类型声明一个别名，并且你也可以继续使用这个数据类型原来的名字。typedef并不会在编译阶段就得到执行，虽然现代的C编译器会对其做出优化，但是它的运行还可能会占据微不足道的一段程序运行时间——特别是在某些优化不好的冷门嵌入式设备编译器中，这也有可能导致一些莫名其妙的底层bug</p>
+<h3 id="可变参数宏"><a href="#可变参数宏" class="headerlink" title="可变参数宏"></a>可变参数宏</h3><p>宏用于执行文本替换，但其思路和函数并不相同，并且它最大的特点就是：在预处理阶段完成替换，且遵循相对严格的替换原则</p>
+<p>因此如果不仔细地写宏很容易造成错误！</p>
+<p>宏一般能分成两类，一类是<strong>表达式展开宏</strong>：可以对这类宏进行求值，或宏干脆就是个数值，如下所示</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14159265</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> T 2-1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> one_to_ten 1/10</span></span><br></pre></td></tr></table></figure>
+
+<p>另一类是<strong>指令展开宏</strong>：一条甚至一系列指令，有可用的未知量，如下所示</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> max m&gt;n?m:n</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> u(x) x&gt;0?x:0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> t=t+1</span></span><br></pre></td></tr></table></figure>
+
+<p>为了编写鲁棒性更高（人话：更不容易出bug、易于移植）的宏，应遵循以下三条规则</p>
+<ul>
+<li><p><strong>多用括号</strong>：把所有容易出bug的东西都括起来，防止重复错误和过度替换错误</p>
+</li>
+<li><p><strong>代码块两端加入花括号</strong></p>
+<p>示例如下</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> doubleincrement(a, b) \</span></span><br><span class="line"><span class="meta">		(a)++;				  \</span></span><br><span class="line"><span class="meta">		(b)++;</span></span><br><span class="line"><span class="comment">//上面这个例子容易出错，应该如下修改</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> doubleincrement(a, b) \</span></span><br><span class="line"><span class="meta">		&#123;(a)++;				  \</span></span><br><span class="line"><span class="meta">		(b)++;&#125;</span></span><br><span class="line"><span class="comment">//还有另外的方法，可以相当程度上保证代码块的安全</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> doubleincrement(a,b) do&#123;(a)++;(b)++;&#125;while(0)</span></span><br><span class="line"><span class="comment">//但是这种方法并不是万能的，要注意灵活变通！</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>避免重复作用</strong>：使用注释等方法提醒用户不要做出越界的使用方法以免过度替换，并使用较少数量的参数，尽量防止参数过多导致bug</p>
+</li>
+</ul>
+<p>现代编译器中往往都会带有宏替换指示功能，Vim、Emacs甚至提供了一整套插件用于纠错，应该合理应用这些插件</p>
+<p>这里要介绍的是一个特殊的宏：<strong>可变参数宏</strong></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">__VA_ARGS__</span><br></pre></td></tr></table></figure>
+
+<p>它的展开是给定元素的集合</p>
+<p>可以使用这个宏来实现<strong>宏输入任意多的参数</strong></p>
+<p>著名的<code>printf</code>函数使用了可变参数表，但是可变参数表并不是万能的，它无法使用在宏中，因此一般使用可变参数宏来实现类似的功能</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">printf</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *__format, ...)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> __retval;</span><br><span class="line">  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );</span><br><span class="line">  __retval = __mingw_vfprintf( <span class="built_in">stdout</span>, __format, __local_argv );</span><br><span class="line">  __builtin_va_end( __local_argv );</span><br><span class="line">  <span class="keyword">return</span> __retval;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEBUG(...) printf(__VA_ARGS__)</span></span><br><span class="line"></span><br><span class="line">DEBUG(<span class="string">&quot;%d&quot;</span>, a);</span><br><span class="line"><span class="comment">//展开成</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>, a);</span><br></pre></td></tr></table></figure>
+
+<p>其中省略号表示可变的参数表，使用<code>__VA_ARGS__</code>就可以把参数传递给宏</p>
+<p>特别地，C++并不支持这一手段</p>
+<p>使用该手段可以构造出某些面向对象语言的遍历语句</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> foreach(__c_object, ...) \</span></span><br><span class="line"><span class="meta">for(char** __c_object = (char* []) &#123;__VA_ARGS__, NULL&#125;; *__c_object; __c_object++)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用例</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>** str = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    foreach(i, <span class="string">&quot;test&quot;</span>, str, <span class="string">&quot;over&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//该函数用于遍历并输出test、hello、over三个字符串，就像是python的for一样!</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="指针与数组——C语言的底层"><a href="#指针与数组——C语言的底层" class="headerlink" title="指针与数组——C语言的底层"></a>指针与数组——C语言的底层</h2><h3 id="内存与变量"><a href="#内存与变量" class="headerlink" title="内存与变量"></a>内存与变量</h3><p>C语言提供了三种内存分配方式：</p>
+<ul>
+<li><p><strong>自动</strong></p>
+<p>一般的变量都是自动类型变量，显式或隐式使用auto标注地变量都使用自动内存分配</p>
+<p>在变量作用域中分配得内存，离开作用域后变量对应的内存区域被删除</p>
+</li>
+<li><p><strong>静态</strong></p>
+<p>文件作用域内或函数中使用static声明的变量使用静态分配方式</p>
+<p>静态程序在整个生命周期内一直存在</p>
+<p>特别地，如果忘记对一个静态变量进行初始化，它会默认初始化为0或NULL</p>
+</li>
+<li><p><strong>手动</strong></p>
+<p>使用free或malloc等C库函数进行手动分配内存</p>
+<p>如果手动分配内存出问题，很可能导致<strong>段错误</strong></p>
+</li>
+</ul>
+<h3 id="C程序的底层结构"><a href="#C程序的底层结构" class="headerlink" title="C程序的底层结构"></a>C程序的底层结构</h3><p>C程序经过编译后会形成如下几个结构（注意这几个结构都是C生成目标文件的一部分）进行保存：</p>
+<ul>
+<li><p>堆栈段</p>
+<p>用于存储程序中的局部变量<strong>名</strong>，因此占据空间一般比较小（毕竟只是存名字）</p>
+</li>
+<li><p>BSS段</p>
+<p>用于存储程序中的全局变量和静态变量，包括变量名和变量初值</p>
+</li>
+<li><p>代码段</p>
+<p>用于存储程序中的指令，所有C语句都会被编译成汇编指令再进行汇编得到二进制格式的指令，用于驱动CPU运行（突然想到一个特殊的看待文件的视角：操作系统就是CPU的驱动程序，指令被封装在可执行文件里，操作系统负责驱动CPU执行这些文件描述的指令；对于裸机编程并不需要将指令封装成文件，而是根据CPU的架构分装指令和数据（哈佛架构）或将指令和数据送到CPU之内后再进行区分并执行（冯诺依曼架构），也就是说此时CPU并不需要一个特别的驱动程序）</p>
+</li>
+</ul>
+<p>程序被加载进入内存后则会映射出一个类似的空间，任何函数都会在内存中占据空间中的一部分，称为函数帧，函数帧会独立使用上面的结构保存与这个函数有关的所有信息。</p>
+<blockquote>
+<p>比如下面这个程序</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> r=<span class="number">114</span>;</span><br><span class="line"><span class="keyword">int</span> q=<span class="number">514</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    	<span class="keyword">int</span> a=<span class="number">0</span>;</span><br><span class="line">    	<span class="keyword">double</span> b=<span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;r;i++)</span><br><span class="line">    	&#123;</span><br><span class="line">        	foo();</span><br><span class="line">    	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    	<span class="keyword">int</span> k=<span class="number">1919</span>;</span><br><span class="line">    	k++;</span><br><span class="line">    	<span class="built_in">printf</span>(<span class="string">&quot;hello!\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>会在运行时被分成两个函数帧——main和foo进行保存</p>
+<p>其中变量q和r会被作为全局变量保存在BSS段，a、b会被保存在main函数对应的堆栈段，i会被保存在for循环专属的堆栈段或程序堆栈段（根据编译器实现而不同），k会被保存在foo函数对应的堆栈段，两个函数中涉及到的操作指令都会保存在代码段</p>
+<p>从main跳转到foo的步骤如下：</p>
+<ol>
+<li>保护现场，将main函数中属于堆栈段的变量（当前保存在寄存器）都压入main函数栈</li>
+<li>在执行for循环时根据条件/分支跳转指令确定跳转到foo，PS指向foo所在的代码段地址</li>
+<li>将foo中的变量k的值从foo函数栈中弹出，并加载到寄存器</li>
+<li>执行foo中的指令，执行完毕后执行保护现场操作</li>
+<li>执行恢复现场，继续执行main函数中的指令</li>
+</ol>
+</blockquote>
+<p>在操作系统进行函数跳转时一般会采用分支跳转指令。更底层的实现可以参考计算机组成原理相关教程</p>
+<p><strong>堆栈</strong></p>
+<p>要注意：堆栈并不是堆+栈，堆栈就是堆栈</p>
+<p>堆栈是内存中一块专门的区域，特点是<em>先入后出</em></p>
+<p>长度限制比一般内存小得多，专门用于保存自动变量，也用于临时保存寄存器中的值（保护现场）</p>
+<p>堆栈段的内存分配一般由硬件/编译器/操作系统内存分配算法等底层处理系统实现</p>
+<p><strong>堆</strong></p>
+<p>通过手动方式分配的内存都会保存在堆空间，堆的实现根据操作系统或内存分配算法有所不同</p>
+<p>堆是内存分配算法在内存中创建的内存池状数据结构</p>
+<p>一般来说堆的大小就是可用内存的剩余大小</p>
+<h3 id="C语言中的数据内存分配"><a href="#C语言中的数据内存分配" class="headerlink" title="C语言中的数据内存分配"></a>C语言中的数据内存分配</h3><p>C语言中的数据在进行内存分配时往往会遵循以下原则：</p>
+<ul>
+<li>在函数外部声明或在函数内部使用static关键字声明一个变量，这个变量就是静态变量</li>
+<li>在函数内部使用auto或无额外的关键字声明一个变量，这个变量就是动态变量</li>
+<li>声明指针也遵循以上两种原则</li>
+</ul>
+<p>在声明指针时虽然也遵守基本原则——指针会被保存为“指针变量”（一般的实现中，指针和long long或double具有相同的大小，8字节），但是它指向的东西可以是自动、静态、手动三种类型中的任意一种。这就是为什么需要使用malloc函数对指针指向的内容进行分配内存</p>
+<p>这就要谈到指针和数组的不同：指针指向的是需要手工分配的内存区域；数组名则指向已经在数组初始化阶段完成自动分配的内存区域。初始化一个数组的实际过程如下：</p>
+<ol>
+<li>在栈上分配出一个空间，这个空间就等于数组的大小</li>
+<li>将数组名初始化为指针</li>
+<li>将该指针指向新分配的地址头部</li>
+</ol>
+<h3 id="状态机和静态变量"><a href="#状态机和静态变量" class="headerlink" title="状态机和静态变量"></a>状态机和静态变量</h3><p>看如下的经典的递归计算斐波那契数列函数</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fibonacci</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;=<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//错误输入</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(n == <span class="number">1</span> || n == <span class="number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> result = Fibonacci(n - <span class="number">2</span>) + Fibonacci(n - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它可以被用静态变量的方法替代</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fibonacci</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a1 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> a2 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> out = a1 + a2;</span><br><span class="line">    </span><br><span class="line">    a1 = a2;</span><br><span class="line">    a2 = out;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这就将一个递归函数转化成了一个<strong>状态机</strong></p>
+<p>在C语言中实现状态机的关键就在于静态变量，它可以让一个函数内部的参数保持存在，从而达到多次调用、多次计数的效果</p>
+<p>甚至在多线程程序中也可以使用<code>_Thread_local</code>关键字来实现单线程的静态变量</p>
+<h3 id="指针定向运算"><a href="#指针定向运算" class="headerlink" title="指针定向运算"></a>指针定向运算</h3><p>声明一个数组实际上就是将指针进行了重定向的运算</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> buf[<span class="number">4</span>];</span><br><span class="line">buf[<span class="number">0</span>]=<span class="number">3</span>;</span><br><span class="line">buf[<span class="number">2</span>]=<span class="number">8</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//可以等价于</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *buf = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="number">4</span> * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">*(buf+<span class="number">0</span>)=<span class="number">3</span>;</span><br><span class="line">*(buf+<span class="number">2</span>)=<span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+
+<p>因此可以使用类似的方法实现数据“重定向”</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">bit[<span class="number">0</span>]=*(a);</span><br><span class="line">bit[<span class="number">2</span>]=*(a+<span class="number">2</span>);</span><br><span class="line">bit[<span class="number">3</span>]=<span class="number">0x08</span>;</span><br><span class="line">bit[<span class="number">4</span>]=*(b);</span><br><span class="line">bit[<span class="number">6</span>]=*(b+<span class="number">2</span>);</span><br><span class="line">bit[<span class="number">8</span>]=*(b+<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+
+<p>使用该方式可以提高代码可读性</p>
+<p>同时也可以使用这种方法提高算法效率</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span>* <span class="built_in">list</span>[] = &#123;</span><br><span class="line">    <span class="string">&quot;first&quot;</span>,</span><br><span class="line">    <span class="string">&quot;second&quot;</span>,</span><br><span class="line">    <span class="string">&quot;third&quot;</span>,</span><br><span class="line">    <span class="literal">NULL</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">char</span>** p = <span class="built_in">list</span>; *p != <span class="literal">NULL</span>; p++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>,p[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用上述方法可以对字符串数组进行快速解析</p>
+<p>也可以化简多维数组，这个应该算是老生常谈——<strong>数组的数组就是指向指针的指针</strong></p>
+<h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><p><strong>回调函数指被传递给另一个函数来进行内部使用的函数</strong></p>
+<p>一般使用函数指针来实现</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">callback1</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;callback 1\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">callback2</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;callback 2\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">callback3</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;callback 3\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Handle</span><span class="params">(<span class="keyword">int</span> (*callback)())</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;ENTERING HANDLE FUNC\n&quot;</span>);</span><br><span class="line">	callback(); <span class="comment">//在函数内部执行另一个函数</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;LEAVING HANDLE FUNC\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;MAINI\n&quot;</span>);</span><br><span class="line">	Handle(callback1); <span class="comment">//传递回调函数</span></span><br><span class="line">	Handle(callback2);</span><br><span class="line">	Handle(callback3);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;MAINL\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数名本身被视作一个指针，它指向函数程序的首地址，因此可以被当作一般的函数进行传递</p>
+<p>下面就是指一个无输入，输出int的函数callback</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> (*callback)(<span class="keyword">void</span>)</span><br></pre></td></tr></table></figure>
+
+<p>对应的也可以创造出各种复杂的回调函数，回调函数本质上只会被输入和输出的数据类型所限定，其名字并没有决定性意义</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function">struct <span class="title">ReturnClass</span> <span class="params">(*MyLocalFunction)</span><span class="params">(struct PassClass, <span class="keyword">void</span>* parameter, <span class="keyword">uint8_t</span> nums)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">OS_ReturnState</span> <span class="params">(*TaskFunctionHandle)</span><span class="params">(<span class="keyword">void</span>* parameter)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>习惯上将回调函数的名字称为回调函数<strong>句柄</strong>（Handle）</p>
+<h3 id="void指针"><a href="#void指针" class="headerlink" title="void指针"></a>void指针</h3><p>void指针可以指向任何东西，而使用void指针指向一个结构体可以让大型程序的编写中的传参和调用更加容易，这也是C面向对象的一个基础</p>
+<p>下面的函数是FreeRTOS中的任务函数（线程）的原型</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*TaskFunction_t)</span><span class="params">( <span class="keyword">void</span> * )</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>它输入一个参数，并没有返回值。<em>其中的输入参数可以是任何数据类型</em>，这正是<code>void*</code>的妙用：将任意类型适配到当前函数或数据</p>
+<p>使用void指针还可以写出完备的高可移植性数据结构，并且它也是实现C泛型的基础</p>
+<h2 id="变量和数据类型——骨干"><a href="#变量和数据类型——骨干" class="headerlink" title="变量和数据类型——骨干"></a>变量和数据类型——骨干</h2><p>C变量与数据类型完全基于面向过程思想，也正因此C语言可以通过指针对内存进行操作，或是基于顺序存储的数组、结构体、指针等构建出顺序表、链表等数据结构，甚至构建出面向对象的“类”。因为C变量面向过程的性质，导致它们在使用中存在很多误区或不被注意的问题，这里简单梳理一下C变量的常见问题和基于基本数据类型实现的数据结构</p>
+<h3 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h3><p>类型转换常常会导致一些隐蔽的错误，尤其是在缺少编译器自动纠错辅助的情况下（某些逆大天的嵌入式编程IDE就是这样），下面列举一些常常会导致出错的问题和对应的解决方案</p>
+<ol>
+<li><p>两个整数相除总是返回整数</p>
+<p>可以使用“加0”的方法</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">4</span>/<span class="number">3</span> == <span class="number">2</span>;</span><br><span class="line"><span class="number">4</span>/(<span class="number">3</span>+<span class="number">0.0</span>) == <span class="number">1.3333</span>;</span><br><span class="line"><span class="number">4</span>/<span class="number">3.</span> == <span class="number">1.3333</span>;</span><br></pre></td></tr></table></figure>
+
+<p>或直接显式进行类型转换</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="number">4</span>/(<span class="keyword">double</span>)<span class="number">3</span> == <span class="number">1.3333</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>数组的索引必须是整数</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">4</span>];</span><br><span class="line">a[<span class="number">3.3</span>]; <span class="comment">//错误</span></span><br><span class="line">a[(<span class="keyword">int</span>)<span class="number">3.3</span>] == a[<span class="number">3</span>]; <span class="comment">//避免错误</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="复合常量"><a href="#复合常量" class="headerlink" title="复合常量"></a>复合常量</h3><p>C99标准引入了符合常量</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">double</span> double_value = <span class="number">3.7</span>;</span><br><span class="line"></span><br><span class="line">(<span class="keyword">double</span>[]) &#123;</span><br><span class="line">    <span class="number">20.38</span>,</span><br><span class="line">    double_value,</span><br><span class="line">	<span class="number">9.6</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这就是一个典型例子，复合常量就是包含了同类型已赋值变量的常量，它会自动分配内存，<strong>常用来绕过临时变量</strong></p>
+<h3 id="指定初始化器"><a href="#指定初始化器" class="headerlink" title="指定初始化器"></a>指定初始化器</h3><p>指定初始化器是C99引入的新特性，可以像以下方式初始化一个结构体</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">gpio</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">uint8_t</span> direction;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">uint8_t</span> pin;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">uint8_t</span> special;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">uint8_t</span> value;</span><br><span class="line">    <span class="keyword">volatile</span> <span class="keyword">uint8_t</span> speed;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">gpio</span> <span class="title">GPIO_InitStruct</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    GPIO_InitStruct MyGPIO;</span><br><span class="line">    MyGPIO = &#123;</span><br><span class="line">        .direction = OUTPUT;</span><br><span class="line">        .pin = <span class="number">5</span>;</span><br><span class="line">        .special = PullUp;</span><br><span class="line">        .value = GPIO_Pin_HIGH;</span><br><span class="line">        .speed = GPIO_Speed_100MHz;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>相比于</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">MyGPIO = &#123;OUTPUT, <span class="number">5</span>, PullUp, GPIO_Pin_HIGH, GPIO_Speed_100MHz&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//或</span></span><br><span class="line">MyGPIO.direction = OUTPUT;</span><br><span class="line">......</span><br><span class="line">MyGPIO.speed = GPIO_Speed_100MHz;</span><br></pre></td></tr></table></figure>
+
+<p>这种方法可以有效减少劳动量——因为大多数IDE都集成了这种初始化器的代码提示功能，可以只打出一个<code>.</code>，再从待选列表中选出要赋值的量</p>
+<h3 id="C面向对象"><a href="#C面向对象" class="headerlink" title="C面向对象"></a>C面向对象</h3><p>在说明C面向对象编程方法之前需要强调几点：</p>
+<ul>
+<li>typedef是面向对象编程中用于减少代码书写量的重要工具</li>
+<li>C使用结构体和回调函数来实现多种功能</li>
+<li>不要害怕阅读很长的数据类型</li>
+<li><strong>在使用面向对象编写C之前，应该想想你的需求能否用面向过程的方式解决，再想想使用面向对象后获得的开发思路、可移植性提升比起效率损失而言是否值得，如果感觉有些问题，尽早放弃使用面向对象编写C程序的想法</strong></li>
+</ul>
+<p>C语言的一般库格式如下：</p>
+<ul>
+<li>一组数据结构，用于代表库所针对领域的关键概念，并对库针对的问题进行代码结构上的描述</li>
+<li>一组函数，用于处理数据结构</li>
+</ul>
+<p>这也就是经典的数据结构+算法</p>
+<p>但是面向对象的语言则不这样处理，它们通常：</p>
+<ul>
+<li>定义一个或多个类，用于描述问题本身</li>
+<li>定义这些类的方法，用于处理问题并建立问题之间的联系</li>
+</ul>
+<p>同时OOP语言（比如C++）还会进行以下扩展来方便用户进行各种处理：</p>
+<ul>
+<li>继承：用于扩展已有的类结构</li>
+<li>虚函数：规定了一个类中所有对象都默认，但对不同对象的实例都有所限制的行为</li>
+<li>私有和公有：用于划分类与方法要处理的范围</li>
+<li>运算符重载：让一个运算符能够处理不同但有所类似的数据类型/对象</li>
+<li>引用计数：用于自动化地分配和回收内存空间</li>
+</ul>
+<p>下面将从几个不同的方面阐述C语言实现面向对象编程机制的方法</p>
+<h3 id="C实现的类"><a href="#C实现的类" class="headerlink" title="C实现的类"></a>C实现的类</h3><p>先从计算机的底层讲起吧——说起来，计算机的底层是哪里？汇编？CPU？逻辑门？晶体管？答案是数学！</p>
+<p>图灵机和lambda代数是等价的两种描述计算机原理的模型</p>
+<p>图灵机描述了一个可以在纸带上到处移动并修改其中值的读写头模型；lambda代数则描述了一个使用描述来处理参数列表的表达式</p>
+<p>这两者分别就是面向过程和面向对象思想的数学原理</p>
+<p>c语言使用下面的结构体来描述一个人的信息</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">person</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span>* name;</span><br><span class="line">    <span class="keyword">bool</span> sex;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> age;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">double</span> height;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>并使用下面的函数来输出一个人的名字</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span>* <span class="title">output_name</span><span class="params">(struct person)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> person.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这些信息被放在内存中，按顺序保存，当函数执行到的时候，CPU寻址到对应的位置，从对应的位置读取数据并输出</p>
+<p>而面向对象语言中，使用类似字典（键值对）的方式保存人的数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">person = &#123;<span class="string">&quot;name&quot;</span>:<span class="number">10</span>, <span class="string">&quot;sex&quot;</span>:<span class="string">&quot;?&quot;</span>, <span class="string">&quot;age&quot;</span>:<span class="number">18</span>, <span class="string">&quot;height&quot;</span>:<span class="number">1.7</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>更进一步，将其封装成一个<strong>类</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span>:</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;描述人属性的类&quot;&quot;&quot;</span></span><br><span class="line">    person_number = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name, sex, age, height</span>):</span></span><br><span class="line">        self.name = name</span><br><span class="line">        self.sex = sex</span><br><span class="line">        self.age = age</span><br><span class="line">        self.height = height</span><br><span class="line">   	 	person_number += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">displayName</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(self.name)</span><br></pre></td></tr></table></figure>
+
+<p>调用时只需要按照<code>初始化一个对象-对象.方法</code>就可以对数据进行处理</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Person a_person</span><br><span class="line">a_person.displayName()</span><br></pre></td></tr></table></figure>
+
+<p>C++、Java这些OOP语言都可以快速扩展现有类型，但是处理速度一般没有C快；同样Python更加直接的扩展命名列表思路只需要向其添加成员，就可以扩展当前数据类型，然而很难得到注册功能来检查代码正确性——有得必有失。然而在很多情况下需要我们实现既快速又便于扩展的代码，尤其是在嵌入式设备上，这时候就需要使用到<strong>C面向对象</strong>编程思想了</p>
+<p>面向对象基于类；类是结构体的延伸；C面向对象基于结构体</p>
+<p>最简单的，使用结构体就可以实现基于C的字典（基于键值对）</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">key_value</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span>* key;</span><br><span class="line">    <span class="keyword">void</span>* value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">key_value</span> <span class="title">key_value</span>;</span></span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">dictionary</span>&#123;</span></span><br><span class="line">    key_value **pairs;</span><br><span class="line">    <span class="keyword">int</span> length;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">dictionary</span> <span class="title">dictionary</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> dictionary* Dictionary;</span><br></pre></td></tr></table></figure>
+
+<p>然而附加问题出现了：</p>
+<p>这个字典基于C指针实现；C指针需要使用malloc、free来管理内存；字典管理内存会具有很大不便</p>
+<p>对于一般的应用实现来说，开发者手动分配内存并将其封装在大的函数里就足够了，但是总有一些特殊的时候（比如操作系统编写）用户会需要使用到大量的字典操作，因此就应该创造“虚函数”用来管理内存</p>
+<p>为了安全起见，也应该设置找不到字典的标志来防止溢出/过放问题</p>
+<p>最后应该实现添加和遍历字典的方法</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="keyword">void</span>* dictionary_not_found;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 新建键值对 */</span></span><br><span class="line"><span class="function">key_value* <span class="title">new_key_val</span><span class="params">(<span class="keyword">char</span>* key, <span class="keyword">void</span>* value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    key_value* out = (key_value*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(key_value));</span><br><span class="line">    *out = (key_val)&#123;.key = key, .value = value&#125;;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 复制键值对 */</span></span><br><span class="line"><span class="function">key_value* <span class="title">copy_key_val</span><span class="params">(key_value <span class="keyword">const</span>* in)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    key_value* out = (key_value*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(key_value));</span><br><span class="line">    *out = *in;</span><br><span class="line">	<span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 删除键值对 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">free_key_val</span><span class="params">(key_value* in)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">free</span>(in);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 判断当前键值对的键值是否和给出的键值对应 */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">match_key_val</span><span class="params">(key_value <span class="keyword">const</span>* in, <span class="keyword">char</span> <span class="keyword">const</span>* key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> !(strcasecmp(in-&gt;key, key));    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 为字典添加键值对 */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Dictionary_add_key_val</span><span class="params">(Dictionary in,<span class="keyword">char</span>* key, <span class="keyword">void</span>* value key_value kv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    in-&gt;length ++;</span><br><span class="line">    in-&gt;pairs = (key_value *)<span class="built_in">realloc</span>(in-&gt;pairs, <span class="keyword">sizeof</span>(key_value*) * (in-&gt;length));</span><br><span class="line">    in-&gt;pairs[(in-&gt;length) - <span class="number">1</span>] = kv;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 新建字典 */</span></span><br><span class="line"><span class="function">Dictionary <span class="title">newDictionary</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> dnf;</span><br><span class="line">    <span class="keyword">if</span>(!dictionary_not_found)</span><br><span class="line">        dictionary_not_found = &amp;dnf; <span class="comment">//处理找不到字典的情况</span></span><br><span class="line">    Dictionary out = (Dictionary)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(dictionary));</span><br><span class="line">    *out = (dictionary)&#123; &#125;;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteDictionary</span><span class="params">(Dictionary in)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; in-&gt;length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        deleteDictionary(in-&gt;pairs[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(in);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 添加新键值对到字典 */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">addDictionary</span><span class="params">(Dictionary in,<span class="keyword">char</span>* key, <span class="keyword">void</span>* value key_value kv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!key)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;NULL is no a valid key.\n&quot;</span>);</span><br><span class="line">        <span class="built_in">abort</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Dictionary_add_key_value(in, new_key_val(key,value));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 在字典中找到某个键值对，根据健输出对应值 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span>* <span class="title">findDictionary</span><span class="params">(<span class="keyword">const</span> Dictionary in, <span class="keyword">char</span> <span class="keyword">const</span> *key)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; in-&gt;length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">		<span class="keyword">if</span>(match_key_val(in-&gt;pairs[i], key))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> in-&gt;pairs[i]-&gt;value; <span class="comment">//遍历字典并找到键值对的值输出</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dictionary_not_found; <span class="comment">//未找到字典</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 复制字典 */</span></span><br><span class="line"><span class="function">Dictionary <span class="title">copyDictionary</span><span class="params">(Dictionary in)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Dictionary out = newDictionary();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; in-&gt;length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        Dictionary_add_key_val(out, copy_key_val(in-&gt;pais[i]));</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">return</span> out;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类似这样就可以编写一个C实现的“宏”及其实现操作的“方法”了。</p>
+<p>但是这种实现方式仅仅是对C结构体的进一步封装，就连C Primer Plus都把这种操作摆在书里（就在最后一章）</p>
+<p>最关键的，如何实现继承？</p>
+<p>老版本的C使用非常复杂的结构传递机制实现，而C11给出了更简单的答案：<strong>匿名结构体成员</strong></p>
+<p>C11允许在结构中包含匿名的成员，gcc和clang通过*-fms-extensions<em>的命令行选项来使用<strong>强模式</strong>：新结构声明中的某处包含另一个结构；如果不使用这个选项，编译器会自动使用<strong>弱模式</strong>，它不允许开发者使用匿名的结构标识符来引用之前定义过的结构，二是要求结构必须在本地定义。这段话很明显不是地球人能说的，所以*<em>直接看例子</em></em></p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 强模式 */</span></span><br><span class="line"><span class="comment">//可以无缝地实现继承</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">point</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">double</span> x;</span><br><span class="line">    <span class="keyword">double</span> y;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">point</span> <span class="title">Point</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">three_point</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    Point; <span class="comment">//匿名的结构体</span></span><br><span class="line">    <span class="keyword">double</span> z;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">three_point</span> <span class="title">ThreePoint</span>;</span></span><br><span class="line"><span class="comment">//以上程序将二维的点扩展为三维点</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用时和一般的结构体一致</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo_1</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ThreePoint p =&#123;</span><br><span class="line">        .x = <span class="number">1</span>;</span><br><span class="line">        .y = <span class="number">2</span>;</span><br><span class="line">        .z = <span class="number">3</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, (p.x)*(p.y)*(p.z));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 弱模式 */</span></span><br><span class="line"><span class="comment">//要求结构在本地定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">            <span class="keyword">double</span> x;</span><br><span class="line">            <span class="keyword">double</span> y;</span><br><span class="line">        &#125;; <span class="comment">//在本地定义的匿名结构体</span></span><br><span class="line">        Point p2; <span class="comment">//上面的匿名结构体就记作p2</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">double</span> z;</span><br><span class="line">&#125; ThreePoint;</span><br></pre></td></tr></table></figure>
+
+<p>弱模式的处理方式不太好易用，所以一般都会使用强模式实现继承</p>
+<p>但是一般在处理老旧代码的时候需要整体搬运结构体，这种情况下为了避免“牵一发而动全身”的情况，应保证使用弱模式——因为<strong>远古编译器并不支持强模式</strong></p>
+<p>对于一个典型的C<strong>对象句柄</strong>，更适合使用指针而不是基本的结构体。</p>
+<p>使用指针能带来以下好处：</p>
+<ul>
+<li>指针本身的内存空间会被自动管理，它指向的对象可以使用统一的malloc函数来动态管理内存或使用静态数据变量在程序执行之初进行内存初始化</li>
+<li>使用<code>=</code>即可完成指针指向对象的复制</li>
+<li>操作指针比直接操作完整的结构体更节省时间</li>
+<li>表、栈、FIFO、树、图等数据结构都可以通过指针快速构建和管理</li>
+<li>永远使用结构指针就不会对使用结构参数-指针参数二者之间造成困扰</li>
+<li>使用专用的free函数和malloc函数操作指针可以更安全地处理对象内存</li>
+</ul>
+<p>对于越庞大的系统，越适合使用指针实现，特别是编译器、操作系统等不得不用C语言完成的东西</p>
+<h3 id="C实现的方法"><a href="#C实现的方法" class="headerlink" title="C实现的方法"></a>C实现的方法</h3><p>C面向对象中，使用<strong>回调函数</strong>实现<strong>方法</strong>，回调函数则基于<strong>函数指针</strong></p>
+<p>下面是一个包含了方法的C类</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">myclass</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> name;</span><br><span class="line">    <span class="keyword">double</span> num;</span><br><span class="line">    <span class="keyword">double</span> (*calculateMyClass) (<span class="keyword">int</span> <span class="keyword">const</span> *in);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> _myclass MyClass;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意：在本博文的代码中采用类Qt的方法命名法（或者说比较通用的C++方法命名法），即<code>小写动词+驼峰类名</code>的形式</p>
+<p>这种方法的特色就是“简明易懂”，便于写出自解释的代码；不过相较于<code>类名+动词</code>的命名法，它更难以进行检索，哪种方法好就见仁见智吧</p>
+<p><code>calculateMyClass</code>就是一个典型的函数指针，初始化时可以通过以下代码：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> <span class="keyword">const</span> *in)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">4.7</span> * in;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyClass a;</span><br><span class="line"></span><br><span class="line">a.name = <span class="number">3</span>;</span><br><span class="line">a.num = <span class="number">5.5</span>;</span><br><span class="line">a.calculateMyClass = cal;</span><br></pre></td></tr></table></figure>
+
+<p>下面的代码演示了之前所说键值对类对应的方法</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">key_value</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span>* key;</span><br><span class="line">    <span class="keyword">void</span>* value; <span class="comment">//这两个都是原有的私有变量</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//新增的方法</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> _<span class="title">key_value</span> * (*<span class="title">copy_key_val</span>) (<span class="title">key_value</span> <span class="title">const</span>* <span class="title">in</span>);</span></span><br><span class="line">    <span class="keyword">void</span> (*free_key_val) (key_value* in);</span><br><span class="line">    <span class="keyword">int</span> (*match_key_val) (key_value <span class="keyword">const</span>* in, <span class="keyword">char</span> <span class="keyword">const</span>* key);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">key_value</span> <span class="title">key_value</span>;</span></span><br><span class="line"><span class="function">key_value* <span class="title">new_key_val</span><span class="params">(<span class="keyword">char</span>* key, <span class="keyword">void</span>* value)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>能够注意到：new_key_val并没有作为一个方法实现，因为它用于创建一个键值对对象，需要被用户直接调用，这就涉及到了私有变量和公有变量——这些按下不表，急不可耐的读者可以直接跳到下一节</p>
+<p>众所周知，C++有个this，Python有个self，这两个变量都可以很方便地定义出函数的默认值；然而C并不提供这些，如果你见到了C22或者C114514里提供了这些东西，请大声呵斥（笑）</p>
+<p>不过C提供了更加高级的实现——预编译器</p>
+<p>使用预编译器可以像以下代码一样写出代替this的功能</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Typelist_print(in) (in).estimate(&amp;in)</span></span><br></pre></td></tr></table></figure>
+
+<p>这段代码实现了打印一个默认值（in本身）的效果</p>
+<h3 id="private和public"><a href="#private和public" class="headerlink" title="private和public"></a>private和public</h3><p>从作用域说起，C语言中只有三条关于变量作用域的准则：</p>
+<ul>
+<li><p>变量在未被声明前不在作用域内</p>
+</li>
+<li><p>如果变量在一对花括号内定义，那么结束花括号（<code>&#125;</code>之后），变量就会处于作用域之外</p>
+<p>有一个特例：for循环和函数可以有变量定义在开始的花括号前的一对括弧内——在一对括弧内定义的变量，其作用域等同于在花括号内定义</p>
+</li>
+<li><p>如果一个变量不在任何花括号内，它的作用域就会从它的声明持续到文件结尾</p>
+</li>
+</ul>
+<p>确实，C语言的作用域限制少得可怜——友元、类作用域、原型作用域、动态作用域、扩展作用域、命名空间……全都没有；或许可以强行称使用malloc的作用域为动态作用域</p>
+<p>特别需要说明一下#include包含文件的变量作用域——它们也遵循以上三条规则，<strong>在包含头文件时，就相当于将整个头文件复制粘贴到了 源文件里</strong></p>
+<p>在OOP中，<strong>私有数据</strong>表示不应被外界直接调用的数据，函数可以通过直接在.c文件内声明、定义，而不是挂在头文件中实现私有——上面所说的<strong>私有方法</strong>也类似，直接把函数指针封在结构体中就可以实现私有方法；如果想要更严格的限制，还可以在函数前使用static关键字；全局变量同理。不过有得必有失，<strong>局部变量</strong>想要实现<strong>私有</strong>的话，就只能在命名上加上<code>_private</code>后缀并祈求你的用户不会瞎用这个变量吧</p>
+<h3 id="有限的运算符重载"><a href="#有限的运算符重载" class="headerlink" title="有限的运算符重载"></a>有限的运算符重载</h3><p>虽然说很难用，但C11标准确实提供了一套使用<strong>宏</strong>来处理运算符重载的机制</p>
+<p>个人不是很推荐对C语言进行这样的修改——很明显，这完全不是C所擅长的领域！到目前为止也很少有代码使用C11的**_Generic**，就连Linux内核中也没有出现多少这样的语句</p>
+<p>这个预编译语句用法比较复杂，但是GLibC中的很多运算符（复数乘法、矩阵乘法）都通过这个语句进行重载，详细内容可以查看官方文档和库的使用说明，这里处于<em>个人能力所限</em>和篇幅所限不再介绍</p>
+<h3 id="C面向对象举例"><a href="#C面向对象举例" class="headerlink" title="C面向对象举例"></a>C面向对象举例</h3><p>这里引用RT-Thread实时操作系统的源码作为例子，这是一个使用了典型的C面向对象编写的大型程序</p>
+<p>下面摘录的是其内核实现</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 内核对象接口</span></span><br><span class="line"><span class="comment"> * 这部分方法用于处理内核对象</span></span><br><span class="line"><span class="comment"> * 所谓内核对象就是RT-Thread抽象出的内核组成部分</span></span><br><span class="line"><span class="comment"> * 包括但不限于 线程（进程）结构、信号量、互斥量、消息队列、驱动设备等</span></span><br><span class="line"><span class="comment"> * 这些对象都为上层应用程序提供服务，并且它们都是从内核对象类衍生而来</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_system_object_init</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function">struct rt_object_information *</span></span><br><span class="line"><span class="function"><span class="title">rt_object_get_information</span><span class="params">(<span class="keyword">enum</span> rt_object_class_type type)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_object_init</span><span class="params">(struct rt_object         *object,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="keyword">enum</span> rt_object_class_type type,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="keyword">const</span> <span class="keyword">char</span>               *name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_object_detach</span><span class="params">(<span class="keyword">rt_object_t</span> object)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">rt_object_t</span> <span class="title">rt_object_allocate</span><span class="params">(<span class="keyword">enum</span> rt_object_class_type type,</span></span></span><br><span class="line"><span class="params"><span class="function">                               <span class="keyword">const</span> <span class="keyword">char</span>               *name)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_object_delete</span><span class="params">(<span class="keyword">rt_object_t</span> object)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">rt_bool_t</span> <span class="title">rt_object_is_systemobject</span><span class="params">(<span class="keyword">rt_object_t</span> object)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">rt_uint8_t</span> <span class="title">rt_object_get_type</span><span class="params">(<span class="keyword">rt_object_t</span> object)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">rt_object_t</span> <span class="title">rt_object_find</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *name, <span class="keyword">rt_uint8_t</span> type)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//相关的方法内容出于篇幅不再列出，如有兴趣可以自行翻阅官方文档</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 内核对象结构体</span></span><br><span class="line"><span class="comment"> * 它继承自一个称为内核对象链表的类，内核对象使用这个链表来进行连接</span></span><br><span class="line"><span class="comment"> * 这样遍历内核对象并进行操作就等价于对链表进行遍历</span></span><br><span class="line"><span class="comment"> * 实际上RT-Thread使用的是一种效率更高的跳表，它可以在多个链表（数量可编程）之间跳转</span></span><br><span class="line"><span class="comment"> * 这样做大大提高了操作系统的效率</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_object</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span>       name[RT_NAME_MAX];                       <span class="comment">/**&lt; name of kernel object */</span></span><br><span class="line">    <span class="keyword">rt_uint8_t</span> type;                                    <span class="comment">/**&lt; type of kernel object */</span></span><br><span class="line">    <span class="keyword">rt_uint8_t</span> flag;                                    <span class="comment">/**&lt; flag of kernel object */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RT_USING_MODULE</span></span><br><span class="line">    <span class="keyword">void</span>      *module_id;                               <span class="comment">/**&lt; id of application module */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">rt_list_t</span>  <span class="built_in">list</span>;                                    <span class="comment">/**&lt; list node of kernel object */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//内核对象类</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_object</span> *<span class="title">rt_object_t</span>;</span>                  <span class="comment">/**&lt; Type for kernel objects. */</span></span><br><span class="line"><span class="comment">//可以看到RT-Thread将内核对象结构体指针定义为了一个类，这样便于发挥指针的优势</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//内核对象链表类</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 双链表结构体</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span> *<span class="title">next</span>;</span>                          <span class="comment">/**&lt; point to next node. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span> *<span class="title">prev</span>;</span>                          <span class="comment">/**&lt; point to prev node. */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span> <span class="title">rt_list_t</span>;</span>                  <span class="comment">/**&lt; Type for lists. */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 单链表结构体</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_slist_node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_slist_node</span> *<span class="title">next</span>;</span>                         <span class="comment">/**&lt; point to next node. */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_slist_node</span> <span class="title">rt_slist_t</span>;</span>                <span class="comment">/**&lt; Type for single list. */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//RT-Thread使用枚举对内核对象类型进行标记，这是一种常用的做法，用来提高程序可读性</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">rt_object_class_type</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    RT_Object_Class_Null   = <span class="number">0</span>,                         <span class="comment">/**&lt; The object is not used. */</span></span><br><span class="line">    RT_Object_Class_Thread,                             <span class="comment">/**&lt; The object is a thread. */</span></span><br><span class="line">    RT_Object_Class_Semaphore,                          <span class="comment">/**&lt; The object is a semaphore. */</span></span><br><span class="line">    RT_Object_Class_Mutex,                              <span class="comment">/**&lt; The object is a mutex. */</span></span><br><span class="line">    RT_Object_Class_Event,                              <span class="comment">/**&lt; The object is a event. */</span></span><br><span class="line">    RT_Object_Class_MailBox,                            <span class="comment">/**&lt; The object is a mail box. */</span></span><br><span class="line">    RT_Object_Class_MessageQueue,                       <span class="comment">/**&lt; The object is a message queue. */</span></span><br><span class="line">    RT_Object_Class_MemHeap,                            <span class="comment">/**&lt; The object is a memory heap */</span></span><br><span class="line">    RT_Object_Class_MemPool,                            <span class="comment">/**&lt; The object is a memory pool. */</span></span><br><span class="line">    RT_Object_Class_Device,                             <span class="comment">/**&lt; The object is a device */</span></span><br><span class="line">    RT_Object_Class_Timer,                              <span class="comment">/**&lt; The object is a timer. */</span></span><br><span class="line">    RT_Object_Class_Module,                             <span class="comment">/**&lt; The object is a module. */</span></span><br><span class="line">    RT_Object_Class_Unknown,                            <span class="comment">/**&lt; The object is unknown. */</span></span><br><span class="line">    RT_Object_Class_Static = <span class="number">0x80</span>                       <span class="comment">/**&lt; The object is a static object. */</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 软件定时器类</span></span><br><span class="line"><span class="comment"> * 从内核对象类中继承而来，用于处理线程调度中的时间片轮转</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rt_timer</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_object</span> <span class="title">parent</span>;</span>                            <span class="comment">/**&lt; inherit from rt_object */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_list_t</span>        row[RT_TIMER_SKIP_LIST_LEVEL];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> (*timeout_func)(<span class="keyword">void</span> *parameter);              <span class="comment">/**&lt; timeout function */</span>  <span class="comment">//这是一个典型的方法</span></span><br><span class="line">    <span class="keyword">void</span>            *parameter;                         <span class="comment">/**&lt; timeout function&#x27;s parameter */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">rt_tick_t</span>        init_tick;                         <span class="comment">/**&lt; timer timeout tick */</span></span><br><span class="line">    <span class="keyword">rt_tick_t</span>        timeout_tick;                      <span class="comment">/**&lt; timeout tick */</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">rt_timer</span> *<span class="title">rt_timer_t</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 用于处理内核对象初始化的方法</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * @param object the specified object to be initialized.</span></span><br><span class="line"><span class="comment"> * @param type the object type.</span></span><br><span class="line"><span class="comment"> * @param name the object name. In system, the object&#x27;s name must be unique.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rt_object_init</span><span class="params">(struct rt_object         *object,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="keyword">enum</span> rt_object_class_type type,</span></span></span><br><span class="line"><span class="params"><span class="function">                    <span class="keyword">const</span> <span class="keyword">char</span>               *name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="keyword">rt_base_t</span> temp;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_list_node</span> *<span class="title">node</span> =</span> RT_NULL;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_object_information</span> *<span class="title">information</span>;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RT_USING_MODULE</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">rt_dlmodule</span> *<span class="title">module</span> =</span> dlmodule_self();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* get object information */</span></span><br><span class="line">    information = rt_object_get_information(type);</span><br><span class="line">    RT_ASSERT(information != RT_NULL);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* check object type to avoid re-initialization */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* enter critical */</span></span><br><span class="line">    rt_enter_critical();</span><br><span class="line">    <span class="comment">/* try to find object */</span></span><br><span class="line">    <span class="keyword">for</span> (node  = information-&gt;object_list.next;</span><br><span class="line">            node != &amp;(information-&gt;object_list);</span><br><span class="line">            node  = node-&gt;next)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">rt_object</span> *<span class="title">obj</span>;</span></span><br><span class="line"></span><br><span class="line">        obj = rt_list_entry(node, struct rt_object, <span class="built_in">list</span>);</span><br><span class="line">        <span class="keyword">if</span> (obj) <span class="comment">/* skip warning when disable debug */</span></span><br><span class="line">        &#123;</span><br><span class="line">            RT_ASSERT(obj != object);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/* leave critical */</span></span><br><span class="line">    rt_exit_critical();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* initialize object&#x27;s parameters */</span></span><br><span class="line">    <span class="comment">/* set object type to static */</span></span><br><span class="line">    object-&gt;type = type | RT_Object_Class_Static;</span><br><span class="line">    <span class="comment">/* copy name */</span></span><br><span class="line">    rt_strncpy(object-&gt;name, name, RT_NAME_MAX);</span><br><span class="line"></span><br><span class="line">    RT_OBJECT_HOOK_CALL(rt_object_attach_hook, (object));</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* lock interrupt */</span></span><br><span class="line">    temp = rt_hw_interrupt_disable();</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> RT_USING_MODULE</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">module</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        rt_list_insert_after(&amp;(<span class="keyword">module</span>-&gt;object_list), &amp;(object-&gt;<span class="built_in">list</span>));</span><br><span class="line">        object-&gt;module_id = (<span class="keyword">void</span> *)<span class="keyword">module</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/* insert object into information object list */</span></span><br><span class="line">        rt_list_insert_after(&amp;(information-&gt;object_list), &amp;(object-&gt;<span class="built_in">list</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* unlock interrupt */</span></span><br><span class="line">    rt_hw_interrupt_enable(temp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//上面的这个方法非常典型，它用于完备地初始化一个内核对象，规定它的内存空间占用</span></span><br><span class="line"><span class="comment">//将一个内核对象作为参数传入即可完成初始化</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//能够注意到所有操作到类，并且能够被用户使用的方法都并没有作为一个“私有的”方法放置在结构体内，而是直接放在头文件中</span></span><br><span class="line"><span class="comment">//这就是上文所说通过变量作用域控制私有/公有变量的操作</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="一些经常被遗忘但在嵌入式编程中仍有作用的关键字"><a href="#一些经常被遗忘但在嵌入式编程中仍有作用的关键字" class="headerlink" title="一些经常被遗忘但在嵌入式编程中仍有作用的关键字"></a>一些经常被遗忘但在嵌入式编程中仍有作用的关键字</h3><ul>
+<li><p>volatile</p>
+<blockquote>
+<p>一个定义为volatile的变量是说这变量可能随时会被改变，这样编译器就不会去假设这个变量的值——优化器在用到这个变量时必须每次都会重新读取这个变量的值，而不是使用保存在寄存器里的备份</p>
+</blockquote>
+<p>这个关键字常被用于下面的场合：</p>
+<ul>
+<li><p>并行设备的硬件寄存器</p>
+<p>说人话就是<strong>MCU的外设控制寄存器地址需要用volatile指明</strong></p>
+</li>
+<li><p>一个中断服务子程序中会访问到的非自动变量</p>
+<p>这个就很明显了，<strong>用于指示中断的全局变量</strong></p>
+</li>
+<li><p>多线程应用中被几个任务共享的变量</p>
+<p>这种情况一般会在SMP设备或多核的高性能嵌入式设备中出现，<strong>多核执行任务中一定将全局变量设为volatile</strong>，否则可能导致跑飞。如果有双核并行化需求且对效率没有极致的需求，尽量使用RTOS甚至嵌入式Linux，并在分配任务的时候尽量使用RTOS自带的信号量或消息队列可以减少出现问题的可能性</p>
+</li>
+</ul>
+<p>事实上volatile应该解释为“<em>直接存取原始内存地址</em>”，正因如此，<strong>volatile是可以和const一起使用的</strong>，这表示对于某个只读变量始终直接存取原始内存地址</p>
+<p>下面给一个网上随处可见的例子：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">//下面的函数有什么错误?</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">square</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> *ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> *ptr * *ptr;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>这段代码的目的是用来返回指针ptr指向值的平方，但由于ptr指向一个volatile型参数，这个参数的值随时可能变化，编译器可能会将其优化为以下代码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">square</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> *ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a,b;</span><br><span class="line">	a = *ptr;</span><br><span class="line">	b = *ptr;</span><br><span class="line">	<span class="keyword">return</span> a * b;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>实际上编译器生成的是汇编指令，a、b并不影响存取变量，但是会消耗额外的内存空间、让CPU执行不必要的取址甚至分支跳转指令，并且如果外界因素导致ptr指向的变量变化，就会实实在在地影响函数的返回值——会从理论上的a*a变成a*b</p>
+<p>正确的代码应该像下面这样</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">square</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> *ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a;</span><br><span class="line">	a = *ptr;</span><br><span class="line">	<span class="keyword">return</span> a * a;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>使用一个普通变量a来暂存ptr指向的值，虽然这样看似浪费了内存，但是和上面那段代码的内存占用实际上是一样的，并且能够避免出错</p>
+</li>
+<li><p>extern</p>
+<p>在c语言中最不被重视但确实是最重要的关键字</p>
+<p>用于<strong>在头文件中声明已在对应.c库文件中定义过的变量</strong></p>
+<p>也常用于<strong>在多任务文件中定义main文件中的全局变量</strong></p>
+<p>没有这个关键字，编译器必报错，一改就是半天</p>
+</li>
+<li><p>static</p>
+<p>static在不同作用域中有不同的含义</p>
+<ul>
+<li><p>全局变量static</p>
+<p>用于指示这个全局变量只在单文件中起作用，可以用于在.c文件中声明常量来提高文件的可移植性</p>
+</li>
+<li><p>局部变量static</p>
+<p>用于指示静态局部变量，这个学过C语言的人应该都比较熟悉了</p>
+<p>最常见的用法是在MCU的按键扫描函数中使用，如下所示</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">char</span> <span class="title">KEY_Scan</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> mode)</span></span></span><br><span class="line"><span class="function"></span>&#123;	 </span><br><span class="line">	<span class="keyword">static</span> u8 key_up=<span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(mode)</span><br><span class="line">        key_up=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(key_up &amp;&amp; ( KEY0==<span class="number">1</span> || WK_UP==<span class="number">1</span> ))</span><br><span class="line">	&#123;</span><br><span class="line">		delay_ms(<span class="number">10</span>); <span class="comment">//软件消抖</span></span><br><span class="line">		key_up=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(KEY0==<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> KEY0_PRES;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(WK_UP==<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> WKUP_PRES;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(KEY0==<span class="number">0</span> &amp;&amp; WK_UP==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">		key_up=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>函数static</p>
+<p>用于声明某个函数是本文件内有效的函数</p>
+<p>同样用于在.c文件中声明常量来提高文件的可移植性</p>
+<p>一般来说会在.h文件中再写一条extern static标明的函数</p>
+<p><strong>static函数在内存中只有一份，普通函数会在每次调用中生成一份拷贝</strong></p>
+</li>
+</ul>
+</li>
+<li><p>register</p>
+<p>这个关键字确实很少使用，但是一旦用上就十有八九是需要硬优化算法的地方，如果实在需要使用这种方法优化，可以使用内联汇编来进行替代，不仅可以稳定”寄存器命中“，还可以更好地强调代码的执行速度优先</p>
+</li>
+</ul>
+<h2 id="库函数与轮子——顶层"><a href="#库函数与轮子——顶层" class="headerlink" title="库函数与轮子——顶层"></a>库函数与轮子——顶层</h2><p>C库函数可以说是编写C程序的重中之重，从基本的stdio到高级的glibc，这些库中的函数都由大师编写，高效、简洁，而一般的开发者至少要学会使用这些库函数和基于C实现的轮子，它们除了在C程序中发挥作用，还能借助辅助工具和其他语言实现共同编译运行以提升其他语言代码的效率</p>
+<h3 id="使用C库函数进行字符串处理"><a href="#使用C库函数进行字符串处理" class="headerlink" title="使用C库函数进行字符串处理"></a>使用C库函数进行字符串处理</h3><ol>
+<li><p>将字符串转换为数字</p>
+<p>最基本的方法是使用<code>atoi</code>和<code>atof</code></p>
+<p>使用方法如下</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> a = <span class="string">&quot;42&quot;</span>;</span><br><span class="line"><span class="keyword">int</span> x = atoi(a);</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> million[] = <span class="string">&quot;1e6&quot;</span>;</span><br><span class="line"><span class="keyword">double</span> m = atof(million);</span><br></pre></td></tr></table></figure>
+
+<p>更安全一点的库函数如下所示</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> a = strtod(<span class="keyword">char</span> <span class="built_in">string</span>[],<span class="keyword">char</span> *p);</span><br><span class="line"><span class="comment">//里面的指针p会被指向第一个不能被解析成数字的字母</span></span><br></pre></td></tr></table></figure></li>
+<li><p>asprintf函数</p>
+<p>该函数需要使用支持GNU或BSD标准库的系统，但也可以使用vsnprintf函数快速实现asprintf函数</p>
+<p>该函数可以让字符串处理更方便</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 一般的字符串处理方法 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_strings</span><span class="params">(<span class="keyword">char</span> <span class="keyword">const</span> *in)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* cmd;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(<span class="string">&quot;strings &quot;</span>) + <span class="built_in">strlen</span>(in) + <span class="number">1</span>;</span><br><span class="line">    cmd = <span class="built_in">malloc</span>(len);</span><br><span class="line">    <span class="built_in">snprintf</span>(cmd, len, <span class="string">&quot;strings %s&quot;</span>, in);</span><br><span class="line">    <span class="keyword">if</span>(system(cmd))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;something went wrong running %s.\n&quot;</span>, cmd);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(cmd);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 使用asprintf的字符串处理方法 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _GNU_SOURCE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_strings</span><span class="params">(<span class="keyword">char</span> <span class="keyword">const</span> *in)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* cmd;</span><br><span class="line">    asprintf(&amp;cmd, <span class="string">&quot;strings %s&quot;</span>, in);</span><br><span class="line">    <span class="keyword">if</span>(system(cmd))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;something went wrong running %s.\n&quot;</span>, cmd);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(cmd);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    get_strings(argv[<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>asprintf和sprintf很相似，但是它需要传入的是字符串在内存中的位置而不是字符串本身，因为这个函数会为字符串分配新的空间</p>
+<p>可以通过运行两次vsnprintf来实现asprintf</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __ASPRINTF_EX_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> __ASPRINTF_EX_</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdarg.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">asprintf</span><span class="params">(<span class="keyword">char</span> **str, <span class="keyword">char</span> *format, ...)</span> __<span class="title">attribute__</span> <span class="params">((format(prntf,<span class="number">2</span>,<span class="number">3</span>)))</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">asprintf</span><span class="params">(<span class="keyword">char</span> **str, <span class="keyword">char</span> *format, ...)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    va_list argp;</span><br><span class="line">    va_start(argp, format);</span><br><span class="line">    <span class="keyword">char</span> one_char[<span class="number">1</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> len = vanprintf(one_char, <span class="number">1</span>, format, argp); </span><br><span class="line">    <span class="keyword">if</span> (len &lt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;An encoding error occurred. Setting the input pointer to NULL.\r\n&quot;</span>);</span><br><span class="line">        *str = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">return</span> len;</span><br><span class="line">    &#125;</span><br><span class="line">    va_end(argp);</span><br><span class="line">    </span><br><span class="line">    *str = <span class="built_in">malloc</span>(len + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (!str)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;Couldn&#x27;t allocate %i bytes.\r\n&quot;</span>, len + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    va_start(argp, format);</span><br><span class="line">    vsnprintf(*str, len + <span class="number">1</span>, format, argp);</span><br><span class="line">    va_end(argp);</span><br><span class="line">    <span class="keyword">return</span> len</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>该函数具有防止数据越界、自动分配内存、自动控制内存大小的安全特性，同时可以使用该函数来实现连接字符串的功能</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line">asprintf(&amp;q, <span class="string">&quot;%s and another clause %s&quot;</span>, q, add);</span><br></pre></td></tr></table></figure>
+
+<p>这个特性可以用来实现数据库查询的底层</p>
+</li>
+<li><p>字符串解析</p>
+<p>一般的字符串解析需要根据分隔符，配合正则表达式来抽取出子字符串。但是简单情况下只要使用c库函数strtok就可以完成使用分隔符划分字符串的任务：它会对输入的字符串进行迭代，直到遇到第一个分隔符，然后用一个<code>&#39;\0&#39;</code>来覆盖它，并返回一个指向这个子字符串头部的指针；当再次调用时，它会检索到下一个标记的尾部，并以合法的字符串形式返回这个标记。可以使用<code>strto_s</code>版本来实现多线程保护和提高安全性，它支持一个额外的参数：提供输入字符串的长度，并在后续的调用过程中不断缩短，表示每次调用时剩余字符串的长度，示例代码如下：</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">size_t</span> len = <span class="built_in">strlen</span>(instring);</span><br><span class="line">    </span><br><span class="line"><span class="comment">//第一次使用</span></span><br><span class="line">txt = strtok_s(instring, &amp;len, delimiter, &amp;scratch);</span><br><span class="line"></span><br><span class="line"><span class="comment">//第二次使用</span></span><br><span class="line">txt = strtok_s(<span class="literal">NULL</span>, &amp;len, delimiter, &amp;scratch);</span><br></pre></td></tr></table></figure>
+
+<p><strong>特别注意</strong>：如果有连续的两个或更多分隔符被当作单个分隔符，那么空白标记会被忽略</p>
+</li>
+<li><p>Unicode解析</p>
+<p>ASCII已经不适合这个版本了，大家都在用Unicode：为每个用于人类通信的字符设置一个单独的十六进制数值，一般是从0x0000到0xffff之间。Unicode具有以下几个流行的编码格式，他们之间的区别子啊与设置几个字节作为分析单位</p>
+<ul>
+<li>UTF-32：指定4字节（32位二进制位）作为基本单位，每个字符都可以用1个单位进行编码，但需要使用很多空白填充</li>
+<li>UTF-16：使用2字节（16位二进制位）作为基本单位，有些字符需要使用2个单位来表示，但大多数字符都能用1个单位表示</li>
+<li>UTF-8：使用1字节（8位二进制位）作为基本单位，许多字符需要使用多个单位来表示</li>
+</ul>
+<p>这三种方式中的字符序列不一定相关，特定的用于解析Unicode字符的c函数也应运而生</p>
+<p>超过73%的网站使用了UTF-8，Mac和Linux操作系统在默认情况下使用UTF-8表示任何文本。作为程序开发者，需要进行以下操作：</p>
+<ul>
+<li>确定宿主系统的编码方式</li>
+<li>按照合适的编码存储文本</li>
+<li>认识到一个字符并不占据固定数量的字节，防止以基地址+偏移量表示的代码不会产生编码点的碎片</li>
+<li>用便利的工具函数完成任何类型的文本理解</li>
+</ul>
+<p>UTF-8的内部编码对于C语言来说可以轻松处理，但是具有一些需要注意的隐患，因为：</p>
+<ul>
+<li>单位是8个二进制位，即一个char型，因此可以把一个UTF-8字符串写成char*字符串，与ASCII类似</li>
+<li>前128个UTF-8和ASCII完全匹配；非ASCII的Unicode字符则无法和ASCII匹配</li>
+<li>U+0000是一个合法的编码点，可以写成<code>&#39;\0&#39;</code>；但是这也导致把UTF-16或UTF-32赋值给char*变量时很可能出现一个充满NULL字节的字符串</li>
+</ul>
+<p>大多数POSIX和c-string库标准函数都可以对UTF-8编码生效</p>
+<p>GNU还提供了一个可移植的libiconv函数库，指定了一个命令行的iconv程序，用于c函数上传至shell</p>
+<p>对于UTF-16字符，C标准可以使用wchar_t来进行处理（windows将wchar_t置为16位），C11还提供了char16_t和char32_t的类型，分别对应16位和32位字符，但是目前还不太常用</p>
+</li>
+</ol>
+<h3 id="多线程与原子操作"><a href="#多线程与原子操作" class="headerlink" title="多线程与原子操作"></a>多线程与原子操作</h3><p>现在是2201年了，不会有人还在用单核的PC吧——就连MCU都在搭载双核乃至四核处理器，C语言也与时俱进，利用POSIX和现有的C库实现多线程-原子操作！</p>
+<p>借助POSIX或者OpenMP编译器命令，可以很轻松的将命令转到多线程执行</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> omp parallel for</span></span><br></pre></td></tr></table></figure>
+
+<p>使用上面一行语句即可将单线程程序变成多线程的。OpenMP会自动计算系统可用线程数，并将工作拆分</p>
+<p>如果你在嵌入式设备上移植了RTOS，应该会很熟悉借助互斥量、消息队列实现的线程（任务）间同步与消息传输，不过要在PC上使用C进行多线程编译，还应该调整编译器指令</p>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line">CFLAGS = -g -Wall -O3 -fopenmp -pthread <span class="comment">#同时使用fopenmp pthread atomic支持</span></span><br><span class="line">LDLIBS = -fopenmp -latomic</span><br></pre></td></tr></table></figure>
+
+<p>不过虽然多线程能让任务效率提高，但是也可能会导致代码出现某些玄学bug</p>
+<p><strong>多线程Bug比单线程Bug更难处理</strong></p>
+<p>这时候就需要利用经验Debug了，加油吧</p>
+<p>OpenMP和POSIX还有其他的一些指令，可以提供更完善的多线程支持，可以查看官方文档来了解它们，这里不再介绍</p>
+<p><strong>原子操作，即不能被中断的操作</strong>——这是嵌入式编程的专有术语？不，多线程编程中的原子操作也指不能被线程切换打断的操作，使用以下命令高速OpenMP原子操作</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> omp atomic read <span class="comment">//原子读数据</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> omp atomic write seq_cst <span class="comment">//原子写数据（赋值）</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> omp atomic update seq_cst <span class="comment">//原子自增/自减1</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> omp atomic update <span class="comment">//原子自增/自减一定值</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> omp atomic capture seq_cst <span class="comment">//原子改变自己的值并进行读数据操作</span></span></span><br></pre></td></tr></table></figure>
+
+<p>可以使用高频的原子操作在某种程度上替代互斥操作；然而请不要一直使用它——否则这和单线程编程又有什么区别呢</p>
+<p>使用POSIX的pthread机制可以更标准地对Linux程序进行移植/多线程修改</p>
+<p>如果你读过C Primer Plus，那么里面简要介绍的<code>_Atomic</code>关键字应该会让你懵一会，这个东西其实也是C11标准为了更好兼容多线程编程而创建的关键字，可以用于保护变量在多线程执行中不被额外的线程改变，各种各样的变量都可以修改成原子的——从int到struct</p>
+<h3 id="SQLite"><a href="#SQLite" class="headerlink" title="SQLite"></a>SQLite</h3><p>SQL即结构化查询语言，这是一个大体上人类可阅读的与数据库交互的语言。一个SQL数据库可以抽取一个数据集合的子集，也可以合并多个数据集合。C程序可以使用<strong>SQLite</strong>提供的接口来实现数据库搭建和使用，而这个东西本体仅包括一个C文件和一个头文件。</p>
+<p>这个库使用了多种宏和C预编译指令来实现SQL的操作，并将API封装到了 统一的接口上</p>
+<p>相关内容可以参考<a href="www.sqlite.org">SQLite简介</a></p>
+<h3 id="cJSON"><a href="#cJSON" class="headerlink" title="cJSON"></a>cJSON</h3><p>c语言中，没有直接的字典、字符串数组等数据结构，所以要借助结构体处理json。cJSON就是一个为json数据解析而生的高效率c库</p>
+<p>类似的，也存在用于XML（扩展标记语言）、HTML（超文本标记语言）等数据解析的C库libxml和cURL</p>
+<p>cJSON使用称为cJSON的数据结构负责JSON数据的编解码</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span> &#123;</span></span><br><span class="line">     <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span> *<span class="title">next</span>, *<span class="title">prev</span>;</span> <span class="comment">//链表指针域</span></span><br><span class="line">     <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span> *<span class="title">child</span>;</span> <span class="comment">//子对象</span></span><br><span class="line">     <span class="keyword">int</span> type; <span class="comment">//类型</span></span><br><span class="line">     <span class="keyword">char</span> *valuestring; <span class="comment">//指向值的字符串</span></span><br><span class="line">     <span class="keyword">int</span> valueint; <span class="comment">//存放整型</span></span><br><span class="line">     <span class="keyword">double</span> valuedouble; <span class="comment">//存放浮点型</span></span><br><span class="line">     <span class="keyword">char</span> *<span class="built_in">string</span>; <span class="comment">//键</span></span><br><span class="line">&#125; cJSON;</span><br></pre></td></tr></table></figure>
+
+<p>使用顺序如下：</p>
+<ol>
+<li><p>包含头文件</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;cJSON.h&quot;</span></span></span><br><span class="line"><span class="comment">//上面是必须的几个头文件</span></span><br></pre></td></tr></table></figure></li>
+<li><p>JSON解析</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">cJSON *root_json = cJSON_Parse(data); <span class="comment">//将字符串解析成json结构体</span></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">NULL</span> == root_json)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;error:%s\n&quot;</span>, cJSON_GetErrorPtr());</span><br><span class="line">    cJSON_Delete(root_json);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//&quot;name&quot;:&quot;EVDI&quot;</span></span><br><span class="line">cJSON *name_json = cJSON_GetObjectItem(root_json, <span class="string">&quot;name&quot;</span>);</span><br><span class="line"><span class="keyword">if</span> (name_json != <span class="literal">NULL</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">char</span> *name = cJSON_Print(name_json); <span class="comment">//将JSON结构体打印到字符串中</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;name:%s\n&quot;</span>, name);</span><br><span class="line">	<span class="built_in">free</span>(name); <span class="comment">//自行处理内存</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>获取JSON数据</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">cJSON *data_json = cJSON_GetObjectItem(root_json, <span class="string">&quot;data&quot;</span>); <span class="comment">//获取data键对应的值</span></span><br><span class="line"><span class="keyword">int</span> id = cJSON_GetObjectItem(data_json, <span class="string">&quot;id&quot;</span>)-&gt;valueint;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;id:%d\n&quot;</span>, id); <span class="comment">//输出</span></span><br></pre></td></tr></table></figure></li>
+<li><p>输出JSON数据</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="keyword">char</span> *username = cJSON_Print(cJSON_GetObjectItem(data_json, <span class="string">&quot;username&quot;</span>));</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;username:%s\n&quot;</span>, username);</span><br><span class="line"><span class="built_in">free</span>(username);</span><br></pre></td></tr></table></figure></li>
+<li><p>创建JSON并添加值</p>
+ <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">cJSON *root_json = cJSON_CreateObject(); <span class="comment">//创建一个JSON串</span></span><br><span class="line">cJSON_AddItemToObject(data_json, <span class="string">&quot;id&quot;</span>, cJSON_CreateNumber(<span class="number">1</span>)); <span class="comment">//数字值</span></span><br><span class="line">cJSON_AddItemToObject(data_json, <span class="string">&quot;userpass&quot;</span>, cJSON_CreateString(<span class="string">&quot;123456&quot;</span>)); <span class="comment">//字符串值</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <tags>
+        <tag>现代C语言</tag>
       </tags>
   </entry>
   <entry>

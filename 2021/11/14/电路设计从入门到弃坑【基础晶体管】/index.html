@@ -15,39 +15,39 @@
 <meta property="og:site_name" content="红光今天吃什么">
 <meta property="og:description" content="电路设计从入门到弃坑1【基础晶体管】最基础的电路是由无源元件，即电阻、电容、电感三者构成的电路，两端通电后可以产生一个暂时稳定的电信号。不论是机缘巧合还是为了验证实验，曾经的物理学家开始注意到电的特殊性质，并加以研究，他们最先对电的性质进行探寻，从风筝实验到电磁感应定律一点点理解了电磁运作的原理，于是电气工程就出现了。然而到19世纪末为止，一直都只有无源电路的存在，电路的分析理论也仅有基础的电磁感">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210814022541069.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210814023224226.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828014723118.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828014716192.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828013041349.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828023423864.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828021027904.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828021038170.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828021047611.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828021054300.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831003431811.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831004908286.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831013945373.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831014034027.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831014222806.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831014318634.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901010858481.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901020726001.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901021103401.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901021550063.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901022016180.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901231358388.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901235023213.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901235011715.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901235247565.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210902000134796.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210930000527652.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210814022541069.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210814023224226.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828014723118.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828014716192.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828013041349.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828023423864.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828021027904.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828021038170.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828021047611.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828021054300.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831003431811.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831004908286.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831013945373.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831014034027.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831014222806.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831014318634.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901010858481.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901020726001.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901021103401.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901021550063.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901022016180.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901231358388.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901235023213.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901235011715.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901235247565.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210902000134796.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210930000527652.png">
 <meta property="article:published_time" content="2021-11-14T08:54:13.000Z">
 <meta property="article:modified_time" content="2021-11-14T08:55:16.817Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="电路设计">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210814022541069.png">
+<meta name="twitter:image" content="https://redlightasl.github.io/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210814022541069.png">
   
     <link rel="alternative" href="/atom.xml" title="红光今天吃什么" type="application/atom+xml">
   
@@ -231,11 +231,11 @@
 <p>电子管主要分为：二极管、三极管、五极管、束射管、复合管等，听上去和半导体器件很相似</p>
 <p>二极管是其中最简单的，它中间装有两个电极，一个是由金属丝制成用于发射电子的阴极，另一个是接收电子的屏极。给阴极通电，电流会将金属加热，管内已经被抽成了真空，因此金属丝就能发射电子，屏极则负责将这些电子接收。</p>
 <p>在屏极接高电势，阴极接低电势时，屏极会主动吸引阴极发出的电子。一般来说二极管的加热部件是独立的，围绕在阴极周围，如下图所示（图b为电路符号，K为阴极，a为屏极，两个f表示加热部件）</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210814022541069.png" alt="image-20210814022541069"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210814022541069.png" alt="image-20210814022541069"></p>
 <p>因此实际上会有很多（效率懂得都懂，但是当时能用就行）电子从阴极到达屏极；反之在屏极接低电势，阴极接高电势时，电子的发射会被抑制——这就造成了二极管具有<strong>单向导电性</strong></p>
 <p>基于PN结的二极管实际上也是起到单向导电性的作用，只不过由于引入了半导体技术，它的功能更加丰富、复杂了（实际上前人们也使用了很多方法改进真空管让它们做到现在半导体二极管的功能——毕竟第一台电子计算机都是用真空管制造的）</p>
 <p>容易看出，这个大二极管具有一个致命的问题：功耗大得离谱，这玩意实际上就是个电灯泡——工作时常常能达到外壳100多度，用手摸一下就能烫熟的那种……这就是真空管的通病了：它们都需要使用额外的电热丝来让金属发出电子，而半导体管则不需要这些</p>
-<p>再来看三极管：<img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210814023224226.png" alt="image-20210814023224226"></p>
+<p>再来看三极管：<img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210814023224226.png" alt="image-20210814023224226"></p>
 <p>它中间多了一个栅极g——这个称呼也被保留到了后来的场效应管中——可以通过控制栅极来实现控制阴极-屏极电流，这也是双极结型晶体管和场效应管的共同原理和要达到的目的：<strong>用一个电流/电压控制另一个电流/电压</strong></p>
 <p>值得指出的是：真空三极管的很多特性与专有名词被移植到了晶体三级管上，如果学完了三极管/晶体管再来学另一个，会感到很熟悉</p>
 <p>真空管中还有一个较三极管更复杂的分支——五极管。他在三极管的栅极和屏极之间插入另外两个电极，于是栅极被分成了<em>控制栅极</em>、<em>帘栅极</em>和<em>抑制栅极</em>，这个器件主要用于减少的真空三极管中超大寄生电容和超量漂移电流的影响，从而能够实现“<strong>高频开关和放大</strong>”（在当时确实是高频）的开关，第一台电子计算机中也大多用了五极管配合继电器进行开关</p>
@@ -276,12 +276,12 @@
 <p>虽然二极管耗尽区的这个电场（一般称为内建势垒或内电场）很强，能抑制多子的运动，但是P区的少子电子会因此漂移到N区；N区的少子空穴也会穿过PN结到达P区，二者引起的电流分别称为正向扩散电流和反向漂移电流，二者大小相等、方向相反</p>
 <p>因此，PN结也就是二极管的最根本、最基础特性就是<strong>单向导电性</strong></p>
 <h3 id="从伏安特性出发"><a href="#从伏安特性出发" class="headerlink" title="从伏安特性出发"></a>从伏安特性出发</h3><p>回想一下真空管时代我们都用真空二极管干了什么？拿它单向导电和反向稳压！当年肖克利老爷子准备了一份真空管的伏安特性，然后对着面前的硅片就开始研究：怎么让这破玩意弄得像真空管一样？我们也先从伏安特性出发，理解二极管的性质</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828014723118.png" alt="image-20210828014723118"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828014723118.png" alt="image-20210828014723118"></p>
 <ul>
 <li><p>正偏曲线</p>
 <p>  二极管的P极接高电势、N极接低电势，即<strong>正偏</strong>，在这个情况下二极管的伏安特性曲线近似于指数函数</p>
 <p>  二极管正偏伏安特性曲线如下所示：</p>
-<p>  <img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828014716192.png" alt="image-20210828014716192"></p>
+<p>  <img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828014716192.png" alt="image-20210828014716192"></p>
 <p>  U<del>ON</del>为<strong>二极管导通电压，硅管约为0.7V，锗管约为0.3V</strong>。因为二极管导通电压相对较低，而导通后电流升高速度很快，在$2 * U_{ON}$后就可以看作是短路状态，因此也常使用二极管的简化模型：当电压&lt;0V（或导通电压）时二极管关断，当电压&gt;0V（或导通电压）时二极管导通且为短路</p>
 <blockquote>
 <p>顺带一提，锗二极管虽然导通电压更低，但是已经基本被市场淘汰了，因为</p>
@@ -301,7 +301,7 @@
 <p>而在<strong>材料掺杂浓度较高的PN结中</strong>，耗尽区本来就比较薄，而在此时反偏一个强电场，这就是的耗尽层内中性原子的价电子会被快速拉出，成为自由电子，同时产生空穴，这个过程被称为<strong>场致激发</strong>。在场致激发的影响下二极管内会产生大量载流子，因此出现反向击穿的现象，这种击穿一般需要的外部能量较雪崩击穿更少，被称为<strong>齐纳击穿</strong></p>
 </blockquote>
 <p>  事实上能够损坏二极管的只有高温和外部破坏。因为<strong>导带中热平衡的电子浓度会随着导带能级与温度变化而变化</strong>，温度越高，热平衡电子浓度越高，越难以导电，而当反向击穿积聚的热量无法被释放时，二极管会被烧毁。二极管的反偏伏安特性如下所示：</p>
-<p>  <img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828013041349.png" alt="image-20210828013041349"></p>
+<p>  <img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828013041349.png" alt="image-20210828013041349"></p>
 <p>  U<del>BR</del>表示<strong>击穿电压</strong>（分为<strong>雪崩电压</strong>和<strong>齐纳电压</strong>），I<del>S</del>为漏电流（反向饱和电流），可见当二极管反偏时，在击穿电压范围内电流会达到很小，而超过击穿电压后，通过二极管的电流就会迅速增大（一般雪崩击穿电流增大速率比齐纳击穿更快）</p>
 </li>
 <li><p>特别的，可以使用公式<br>  $$<br>  i=I_s(e^{\frac{u}{U_T}}-1)<br>  $$<br>  近似表示二极管的伏安特性</p>
@@ -313,7 +313,7 @@
 <p> 还可以利用这个性质实现<strong>boost电路</strong>（倍压整流）来进行DC-DC升压；对于高频信号则可以使用类似的电路（二极管后接电阻和并联的电容，前接激励源）实现<strong>包络检测</strong>，从高频调制的信号中提取低频信号</p>
 <p> 在一般电路中应用比较多的就是<strong>钳位电路</strong>和<strong>削波电路</strong>，可以通过两个二极管分别连到VCC和GND端防止某个节点的电压偏高/过低，但是应该注意要在二极管同一支路串接保护电阻防止泄放电流过大</p>
 <p> 因为二极管可以起到改变高频信号偏置电流的作用（因为它的正向电容可以在一定程度上滤除高频信号），所以可以使用它和分压电阻、电容实现压控衰减器，示例电路如下</p>
-<p> <img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828023423864.png" alt="image-20210828023423864"></p>
+<p> <img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828023423864.png" alt="image-20210828023423864"></p>
 </li>
 <li><p>反偏稳压性</p>
 <p> 如果二极管反向电压超过击穿电压时，它会工作在击穿去，反向电流迅速增加，但电压基本不变，因此可以在保证二极管不过热的情况下让二极管在击穿区实现稳压功能，通过专门设计的，在击穿区内有着陡峭特性曲线（利用齐纳击穿特性）的二极管成为齐纳二极管，也就是俗称的稳压二极管</p>
@@ -335,10 +335,10 @@
 </ol>
 <p>其实还有发光二极管、肖特基二极管等多种结构的二极管，它们都有自己的特点，但是暂且不作介绍</p>
 <h3 id="电路应用"><a href="#电路应用" class="headerlink" title="电路应用"></a>电路应用</h3><p>下面给出1n4148二极管（来自安森美）的datasheet</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828021027904.png" alt="image-20210828021027904"></p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828021038170.png" alt="image-20210828021038170"></p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828021047611.png" alt="image-20210828021047611"></p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210828021054300.png" alt="image-20210828021054300"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828021027904.png" alt="image-20210828021027904"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828021038170.png" alt="image-20210828021038170"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828021047611.png" alt="image-20210828021047611"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210828021054300.png" alt="image-20210828021054300"></p>
 <p>常见的参数都已给出，1n4148是通用性的开关二极管，电路设计中主要需要参考其击穿电压（100V）、最大正向电流（200mA）、峰值电流（400mA）、工作温度（-55到175）、功率（500mW）、漏电流（0.025uA-5uA）、开关频率（或者说恢复时间）（4ns）</p>
 <p>可见它的开关频率比较高，但耐压相对一般，也缺少反向击穿稳压的能力，因此适合用作开关二极管或检波二极管的替代品</p>
 <h2 id="三极管"><a href="#三极管" class="headerlink" title="三极管"></a>三极管</h2><blockquote>
@@ -351,11 +351,11 @@
 <p>这就能解释三极管是水龙头这个比喻了：通过扭动水龙头把手可以可以控制水流的大小</p>
 <p>对于三极管来说，他正是使用电流控制电流，A端被称为<strong>基极</strong>，记为<strong>b</strong>（<strong>B</strong>ase），B端称为<strong>发射极e</strong>极（<strong>E</strong>mitter），C端称为<strong>集电极c</strong>极（<strong>C</strong>ollector）。<strong>be电流控制ce电流</strong>。以下部分都会使用e、b、c三个极的简写形式</p>
 <h3 id="一点简单的原理"><a href="#一点简单的原理" class="headerlink" title="一点简单的原理"></a>一点简单的原理</h3><p>三极管有两种大类型：<strong>NPN</strong>和<strong>PNP</strong>。它们的名字来源于其中“结”的排列顺序。它们的大致结构和电路符号如下所示：</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831003431811.png" alt="image-20210831003431811"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831003431811.png" alt="image-20210831003431811"></p>
 <p>BJT使用c和e极作为电流源端，b作为电流控制端，<strong>电路符号中的箭头表示器件处于正向有源状态时的电流方向</strong></p>
 <p>目前PNP和NPN两种晶体管都被大量生产，但是相对而言NPN型生产效果更好——半导体中电子的流动性比空穴流动性更强，NPN的内部具有两个N型半导体区，所以它内部的电子浓度更高，可以达到更高的工作速度和承载更大电流。对于NPN管而言，共e极模式下，c极将基极注入的小电流放大输出；其他条件下，<strong>当E<del>b</del>&gt;E<del>e</del>时，晶体管c、e导通</strong>；PNP管与其相反，共射模式下，c极将离开b极的小电流放大输出，而<strong>当E<del>b</del>&lt;E<del>e</del>时，晶体管c、e导通</strong></p>
 <p>实际上三极管的原理比较复杂，但在这里我们主要讨论的是其电气性质，所以只用NPN举例简单解释一下。正如其命名，BJT是由两个PN结构成的，其中电荷载流子穿过两个不同电荷浓度区域PN结时会发生双向扩散，这就导致了BJT的内电流。一个BJT的剖面图如下所示</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831004908286.png" alt="image-20210831004908286"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831004908286.png" alt="image-20210831004908286"></p>
 <blockquote>
 <p>原谅我的灵魂画作</p>
 </blockquote>
@@ -397,13 +397,13 @@
 <p>自证不难</p>
 </blockquote>
 <p>下面是经典的小信号通用三极管S8050的datasheet</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831013945373.png" alt="image-20210831013945373"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831013945373.png" alt="image-20210831013945373"></p>
 <p>它使用了经典的TO-92封装，在很多收音机里都能见到这个NPN开关管的身影。</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831014034027.png" alt="image-20210831014034027"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831014034027.png" alt="image-20210831014034027"></p>
 <p>耐压be 5V；ce 20V；cb 30V。也就是说最好驱动电压不要超过5V，如果使用独立电源为三极管供电，电源也不能超过20V</p>
 <p>c极电流700mA，算是开关管里面比较大的，能够驱动一些小型的功率设备了</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831014222806.png" alt="image-20210831014222806"></p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210831014318634.png" alt="image-20210831014318634"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831014222806.png" alt="image-20210831014222806"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210831014318634.png" alt="image-20210831014318634"></p>
 <p><strong>开关管是指用于充当开关元件的三极管</strong>，也就是说它会工作在截止-导通两个状态下，因此其最重要属性就是开关频率，其次才是增益</p>
 <p>而<strong>功率管是指专门用于功率放大的三极管</strong>，它会一直工作在正偏状态下，其最重要属性是增益</p>
 <p><strong>通用管是指介于二者之间，能够在一定范围内通用使用的三极管</strong>，在各种各样的电路里都能见到这种三极管，它们的性能指标比较均衡，一般来说两个不同型号的通用管是很有可能相互取代的</p>
@@ -418,7 +418,7 @@
 <p>你知道吗？高铁、电磁炮、<del>御坂美琴</del>常用于控制电流的绝缘栅双极型晶体管IGBT就是用三极管和MOSFET复合而成的，其中三极管负责对信号进行放大，通过特制的续流二极管芯片进行隔离，驱动负责导通/关断大电流的MOSFET，兼顾了MOSFET的高输入阻抗和BJT的低导通压降，同时由于是复合管，增益直接爆炸。将其与外围电路封装成模块，常用于控制400V、100A及以上的强电系统！</p>
 </blockquote>
 <p>MOSFET分为四种：N沟道-P沟道、增强型-耗尽型。这里先不解释它们的含义，我们先来看它的结构：</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901010858481.png" alt="image-20210901010858481"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901010858481.png" alt="image-20210901010858481"></p>
 <p>MOSFET就是一个沿用了真空管三极称呼的器件：因为它本质上就是一个使用电场效应替代电子射线的真空管。解释一下它的名称由来：</p>
 <ul>
 <li>M代表Metal金属，曾经MOSFET使用金属材料制作栅极，但是现在处于生产便利考虑使用<strong>多晶硅</strong>，因为它能生成自对齐的栅极。现在只有高频MOSFET才会使用金属栅极来提高工作速度（事实上当前速度最快的FINFET工艺采用的仍是硅晶体，在某种程度上说金属应该是个“误解”）</li>
@@ -438,7 +438,7 @@
 <li>耗尽型PMOS</li>
 </ul>
 <p>它们的电路符号如下所示：</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901020726001.png" alt="image-20210901020726001"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901020726001.png" alt="image-20210901020726001"></p>
 <p>用一条竖线表示导电沟道，另一条短竖线表示g极的半导体</p>
 <p>需要注意的是g极呈现“L”型，它的输入引脚更靠近s极，用来显著地指示方向——如果使用简化的图标，也要用箭头标明s极</p>
 <p><strong>b极（s极）上会注明一个箭头，它永远指向从P到N的方向</strong>，因此它用来指示PMOS/NMOS（<strong>PMOS向外指；NMOS向内指</strong>，具体原因留给读者自行考虑）</p>
@@ -446,18 +446,18 @@
 <p>思考题答案：因为箭头永远指向N，只要沟道是N，那箭头就会指向沟道，也就是向内指了；P沟道则相反</p>
 </blockquote>
 <p>一般来说MOSFET会通过一个竖线将衬底和s极连在一起，如下图所示</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901021103401.png" alt="image-20210901021103401"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901021103401.png" alt="image-20210901021103401"></p>
 <p>这就表示衬底和源极连在一起引出。</p>
 <p>有的时候MOSFET会在d极和s极之间跨接一个二极管标识，这常用于开关电路或者高频电路中的MOSFET表示</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901021550063.png" alt="image-20210901021550063"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901021550063.png" alt="image-20210901021550063"></p>
 <p>实际上这个二极管指的是MOSFET的<strong>寄生二极管</strong>，正是因为这个二极管，导致大功率下MOSFET具有一定的单向导电性和复杂电气特性</p>
 <blockquote>
 <p>大功率MOS管d极从硅片衬底底部引出，而s极被放在衬底底部的另一半，d极和s极都由不同种类的半导体材料制成，如下图所示</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901022016180.png" alt="image-20210901022016180"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901022016180.png" alt="image-20210901022016180"></p>
 <p>这就导致了N-P-N之间出现了PN结，上图中左侧的PN结由于b-s短接而无效，右侧的b-&gt;d的PN结则相当于一个从b极接到d极的二极管，对于NMOS来说也是如此，<strong>总会存在一个与箭头方向（箭头指示P-&gt;N）相同的寄生二极管</strong></p>
 </blockquote>
 <p>寄生二极管并不是大功率MOSFET独有的，只要是NPN或PNP型的MOSFET都会存在PN结，只要有PN结就会或多或少存在寄生二极管。上图中s、d区是由不同于衬底的掺杂半导体制成的，这个工艺的原理在下面讲述</p>
-<h3 id="增强型MOSFET"><a href="#增强型MOSFET" class="headerlink" title="增强型MOSFET"></a>增强型MOSFET</h3><p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901231358388.png" alt="image-20210901231358388"></p>
+<h3 id="增强型MOSFET"><a href="#增强型MOSFET" class="headerlink" title="增强型MOSFET"></a>增强型MOSFET</h3><p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901231358388.png" alt="image-20210901231358388"></p>
 <p>上图是增强型N沟道MOS的结构，将N和P型半导体调换，即可得到增强型P沟道MOS的结构</p>
 <p>一般使用W表示栅极宽度，使用L表示栅极长度，因为绝缘层非常薄，所以栅极长度和沟道长度近似相等，它也称为沟道宽度。<strong>栅极、源极、漏极之间的重叠区域要求保证反转层可以在源极和漏极之间形成连续的导电通道，为了减少寄生电容，这个重叠区域要尽量小</strong>。现代的NMOS与传统MOSFET的最大不同就是通过引入两个P型半导体电极降低了沟道开启所需电压。</p>
 <p>需要注意：一般N型半导体上方引出电极使用金属铝</p>
@@ -480,23 +480,23 @@
 <li><p>转移特性    </p>
 <p> s-d电压恒定时，测量g-s两端电压和d极电流之间的关系</p>
 <p> 实际上就是二端口网络的转移特性矩阵实例</p>
-<p> <img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901235023213.png" alt="image-20210901235023213"></p>
+<p> <img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901235023213.png" alt="image-20210901235023213"></p>
 </li>
 <li><p>输出特性</p>
 <p> g-s电压恒定时，s-d电压和d极电流之间的关系（输出特性矩阵实例）</p>
-<p> <img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901235011715.png" alt="image-20210901235011715"></p>
+<p> <img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901235011715.png" alt="image-20210901235011715"></p>
 </li>
 <li><p>温度特性</p>
 <p> 随温度升高，流经d极的电流会逐渐下降</p>
 </li>
 </ol>
 <h3 id="耗尽型MOSFET"><a href="#耗尽型MOSFET" class="headerlink" title="耗尽型MOSFET"></a>耗尽型MOSFET</h3><p>耗尽型MOSFET与增强型MOSFET原理上最大的不同就是它使用了实实在在的“沟道”</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210901235247565.png" alt="image-20210901235247565"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210901235247565.png" alt="image-20210901235247565"></p>
 <p>如上图，耗尽型PMOS的两个P型半导体之间额外沉积了一层薄薄的P半导体沟道，因此PN结的耗尽层在沟道下方出现，当V<del>GS</del>&lt;0时，沟道中的空穴会被排斥出沟道进入耗尽层，并与其中的电子中和，这样使得P型半导体沟道中的载流子浓度大减，沟道会变窄——如果更进一步，沟道附近的衬底会称为缺P型，导电能力增强，但<strong>沟道的导电能力会变得近乎没有</strong>。这就实现了“耗尽”的目的。沟道失去导电性的瞬间称为“<strong>沟道夹断</strong>”</p>
 <p>从应用上看，耗尽型MOSFET相当于对增强型MOSFET进行了“非运算”，高V<del>GS</del>会开启增强型MOS，但是会夹断耗尽型MOSFET</p>
 <blockquote>
 <p>利用增强型-耗尽型MOSFET的互补性可以实现MOSFET图腾柱电路：两个MOSFET的d-s极首尾相连，最上面的MOSFET的s极引出到电源，下面的MOSFET则引到地，这样使用一个“不高不低”的电压就能够实现放大作用；使用高/低电平则会让二者之一导通，实现最大的开关性能。该电路也可以使用NPN-PNP三极管对管或者NMOS-PMOS对管实现</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210902000134796.png" alt="image-20210902000134796"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210902000134796.png" alt="image-20210902000134796"></p>
 <p>这个电路常常被用来作为电机、功率设备的驱动电路，三个相同的电路接到三相电上还可以实现H桥架构，进而驱动三相电机</p>
 </blockquote>
 <h3 id="小号继电器"><a href="#小号继电器" class="headerlink" title="小号继电器"></a>小号继电器</h3><p>MOSFET因为较低的启动电压和高输入阻抗，常常被用来<strong>作为继电器在非隔离情形下的替代品</strong></p>
@@ -508,7 +508,7 @@
 <p>实际上的达林顿管是使用集成电路工艺制造的，将多个三极管制造在同一片晶圆上。但是还会针对PN结的性能进行优化。比较特殊的就是<strong>达林顿管的极性和前面三极管的极性保持一致</strong>，而不管后续接入的三极管是什么极性。因此前面的小管被称为达林顿<strong>基管</strong>；后面的小管被称为达林顿<strong>放大管</strong>。达林顿管以最前面小管的基极为整管基极，以最后接入的三极管发射极为整管发射极，<strong>最后的放大倍数是所有叠加的三极管放大倍数的乘积</strong><br>$$<br>\beta = \beta_1 \beta_2<br>$$<br>因此，达林顿管的功率、发热都会非常大，常用于驱动小型继电器、舵机、直流电机等等</p>
 <p>IGBT则是典型的模拟集成电路结晶。博采众长，结合了三极管的低导通压降和MOS管的高输入阻抗，在不超过限制电压电流的情况下可以直接作为继电器使用——不过还是要注意，它的输出和输入之间还是存在耦合电阻的！</p>
 <p>IGBT的结构就是一个三极管和一个MOSFET竖向叠起来，从MOSFET最上层两个隔开的栅极上引出IGBT的E极，MOSFET的P区同时作为三极管的B极P区，但是在三极管基础上多增加了一层B极N区和N缓冲区，主要用于存储电子，最下面一层是P+层，从它上面引出IGBT的C极</p>
-<p><img src="%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91.assets/image-20210930000527652.png" alt="image-20210930000527652"></p>
+<p><img src="/2021/11/14/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E7%A1%80%E6%99%B6%E4%BD%93%E7%AE%A1%E3%80%91/image-20210930000527652.png" alt="image-20210930000527652"></p>
 <p>如上图所示（N沟道增强型IGBT），MOSFET部分的N+区称为<strong>源区</strong>，附于其上的电极称为源极，被引出作为IGBT的发射极E；N基极又称<strong>漏区</strong>D。为了区分IGBT和MOSFET，将同位置引出的G极翻译成<strong>门极</strong>，与MOSFET不同，IGBT的门极是悬浮在绝缘介质中的，并直接引出。沟道会在紧靠门极的边界形成。C、E两极之间的P型区（包括P+和P-区）被称为亚沟道区，事实上的沟道在这个区域形成。在漏区另一侧的P+区称为<strong>漏注入区</strong>，它是IGBT特有的功能区，与漏区和亚沟道区一起形成PNP双极型晶体管，起到其中发射极E的作用，向漏极注入空穴，进行导电调制，以降低器件的导通电压。最后，附于漏注入区上的电极称为漏极（也就是对应三极管的集电极C）。</p>
 <p>IGBT的开关作用是通过<strong>加正向栅极电压形成沟道</strong>，<strong>给PNP</strong>（原来为NPN，但经过与IGBT耦合后，极性反转）<strong>晶体管提供基极电流，使IGBT导通</strong>。反之，可以加反向门极电压消除沟道，切断基极电流，使IGBT关断。IGBT的驱动方法和MOSFET基本相同，只需控制输入极N-沟道MOSFET即可，毕竟它控制的电流的第一步就是驱动一个栅极,所以IGBT具有高输入阻抗特性。当MOSFET的沟道形成后，从P+基极注入到N-层的空穴（少子）对N-层进行电导调制，减小N-层的电阻，使IGBT在高电压时也具有相对较低的导通电压</p>
 
@@ -747,11 +747,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">电路设计</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color5">电路设计</a>
               </li>
              
               <li class="article-tag-list-item">

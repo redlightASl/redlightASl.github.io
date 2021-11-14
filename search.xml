@@ -3,7 +3,10 @@
   <entry>
     <title>Markdown基本语法</title>
     <url>/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<span id="more"></span>
+    <content><![CDATA[<h1 id="Markdown-基础语法"><a href="#Markdown-基础语法" class="headerlink" title="Markdown 基础语法"></a>Markdown 基础语法</h1><p>简单介绍一下Markdown的语法</p>
+<p>可能需要一些latex基础来理解后面的Markdown内嵌LaTeX公式</p>
+<p>部分hexo默认不支持的语法使用截图予以呈现</p>
+<span id="more"></span>
 
 <h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>

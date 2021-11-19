@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 16 -->
+			<!-- 总文章数 24 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,688 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-Tcl脚本基础" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/Tcl%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80/">Tcl脚本基础</a>
+    </h1>
+  
+
+        
+<!-- 显示阅读次数-->
+<!--  -->
+<!--显示阅读次数完毕 -->
+
+        
+        <a href="/2021/11/14/Tcl%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80/" class="archive-article-date">
+  	<time datetime="2021-11-14T09:46:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Tcl脚本在IC领域的主要用途"><a href="#Tcl脚本在IC领域的主要用途" class="headerlink" title="Tcl脚本在IC领域的主要用途"></a>Tcl脚本在IC领域的主要用途</h1><h2 id="复杂文本处理"><a href="#复杂文本处理" class="headerlink" title="复杂文本处理"></a>复杂文本处理</h2><p>Tcl可以把文本中的每一行变为一个<strong>列表</strong>，最简单的列表就是包含由任意个空格、制表符、换行符分隔开的任意多个元素的字符串，可以直接根据元素编号来获取字符串内容</p>
+<p>Tcl也支持正则表达式</p>
+        
+          <a class="article-more-a" href="/2021/11/14/Tcl%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/Tcl%E8%84%9A%E6%9C%AC%E5%9F%BA%E7%A1%80/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-现代C语言2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%802/">现代C语言2</a>
+    </h1>
+  
+
+        
+<!-- 显示阅读次数-->
+<!--  -->
+<!--显示阅读次数完毕 -->
+
+        
+        <a href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%802/" class="archive-article-date">
+  	<time datetime="2021-11-14T09:36:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="C语言语法拾遗"><a href="#C语言语法拾遗" class="headerlink" title="C语言语法拾遗"></a>C语言语法拾遗</h1><p>专门总结了一些C语言C99/C11之后的新语法或冷门语法</p>
+<h2 id="预处理和宏——灵魂"><a href="#预处理和宏——灵魂" class="headerlink" title="预处理和宏——灵魂"></a>预处理和宏——灵魂</h2><p>预处理器和宏可以说是面向对象语言<em>独有</em>的东西，<strong>这些特性发生在编译这个过程之前</strong>，使得C语言的编译过程变得“可控”，甚至可以说C语言编译本身就是一个开发者可编程的过程——或许这样说比较抽象，举个例子：java的宏并不对一般开发者开放，一般只有OpenJDK的开发者才会面对java宏和相关预编译指令；但是C语言的宏直接出现在hello world程序中：“#include”指令本身就意味着对链接器进行调用——这些宏严格来说并不属于C语言的语法学习范畴，但是如果想靠C语言造轮子，这就是无法避开的</p>
+        
+          <a class="article-more-a" href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%802/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C语言进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%802/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-现代C语言1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%801/">现代C语言1</a>
+    </h1>
+  
+
+        
+<!-- 显示阅读次数-->
+<!--  -->
+<!--显示阅读次数完毕 -->
+
+        
+        <a href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%801/" class="archive-article-date">
+  	<time datetime="2021-11-14T09:36:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇内容根据《C程序设计新思维》编写，作者水平有限，难免存在疏漏和错误，有问题请指出</p>
+<h1 id="C与POSIX的历史"><a href="#C与POSIX的历史" class="headerlink" title="C与POSIX的历史"></a>C与POSIX的历史</h1><p><strong>C、UNIX、POSIX的存在是紧密相连的</strong></p>
+<p>C和UNIX都是在20世纪70年代由贝尔实验室的设计，而贝尔有一项与美国政府达成的协议：贝尔将不会把自身的研究扩张到软件领域，所以UNIX被免费发放给学者进行研究、重建；UNIX商标则被在数家公司之间专卖。在这个过程中，一些黑客们改进了UNIX，并增加了很多变体，于是在<strong>1988年IEEE建立了POSIX标准</strong>，提供了一个类UNIX操作系统的公共基础</p>
+<h3 id="POSIX"><a href="#POSIX" class="headerlink" title="POSIX"></a>POSIX</h3><p>规定了shell script如何工作、常用的命令行工具如何工作、能够提供哪些C库等等</p>
+<p>除了微软的Windows系列操作系统，<strong>几乎所有操作系统都建立在POSIX兼容的基础上</strong></p>
+<p>特别地，加州大学伯克利分校的一些黑客们对UNIX进行了几乎翻天覆地的改进（重写UNIX的基础代码），产生了伯克利软件发行版（Berkeley Software istribution）BSD——苹果的MacOS正建立在这一发行版上</p>
+<h3 id="GNU"><a href="#GNU" class="headerlink" title="GNU"></a>GNU</h3><p>GNU工程即GNU’s Not UNIX工程，由笔者很敬佩的理查德斯托曼主持开工，大多数的Linux发行版都使用了GNU工具（这就是为什么Linux的全称是GNU/Linux），GNU工程下所有软件都是“自由软件”（想了解自由软件或“Free Software”的详情，推荐阅读理查德斯托曼传记《若为自由故》），这就意味着GPL！</p>
+<p>GNU工程下属的GNU C Compiler就是为大家所熟知的C编译器gcc</p>
+        
+          <a class="article-more-a" href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%801/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C语言进阶</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%801/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-《可定制计算》阅读笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/%E3%80%8A%E5%8F%AF%E5%AE%9A%E5%88%B6%E8%AE%A1%E7%AE%97%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">《可定制计算》阅读笔记</a>
+    </h1>
+  
+
+        
+<!-- 显示阅读次数-->
+<!--  -->
+<!--显示阅读次数完毕 -->
+
+        
+        <a href="/2021/11/14/%E3%80%8A%E5%8F%AF%E5%AE%9A%E5%88%B6%E8%AE%A1%E7%AE%97%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="archive-article-date">
+  	<time datetime="2021-11-14T09:34:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="《可定制计算》阅读笔记"><a href="#《可定制计算》阅读笔记" class="headerlink" title="《可定制计算》阅读笔记"></a>《可定制计算》阅读笔记</h1><p>本笔记以基础概念为线索编写，黑体部分是关键字</p>
+        
+          <a class="article-more-a" href="/2021/11/14/%E3%80%8A%E5%8F%AF%E5%AE%9A%E5%88%B6%E8%AE%A1%E7%AE%97%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习与机器视觉</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/%E3%80%8A%E5%8F%AF%E5%AE%9A%E5%88%B6%E8%AE%A1%E7%AE%97%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-数模转换原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/">数模转换原理</a>
+    </h1>
+  
+
+        
+<!-- 显示阅读次数-->
+<!--  -->
+<!--显示阅读次数完毕 -->
+
+        
+        <a href="/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/" class="archive-article-date">
+  	<time datetime="2021-11-14T09:29:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="数模转换与模数转换"><a href="#数模转换与模数转换" class="headerlink" title="数模转换与模数转换"></a>数模转换与模数转换</h1><p>这里以STM32G474为例来介绍STM32中的ADC与DAC编程</p>
+<p>主要作为电赛的笔记</p>
+<h2 id="模数转换ADC"><a href="#模数转换ADC" class="headerlink" title="模数转换ADC"></a>模数转换ADC</h2>
+        
+          <a class="article-more-a" href="/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电赛笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-集成运放简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE%E7%AE%80%E4%BB%8B/">集成运放简介</a>
+    </h1>
+  
+
+        
+<!-- 显示阅读次数-->
+<!--  -->
+<!--显示阅读次数完毕 -->
+
+        
+        <a href="/2021/11/14/%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE%E7%AE%80%E4%BB%8B/" class="archive-article-date">
+  	<time datetime="2021-11-14T09:29:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="集成运放概述"><a href="#集成运放概述" class="headerlink" title="集成运放概述"></a>集成运放概述</h1><p>常见的模拟集成电路类型</p>
+<ul>
+<li>集成运算放大器OP</li>
+<li>集成功率放大器</li>
+<li>集成高频放大器</li>
+<li>集成中频放大器</li>
+<li>集成比较器</li>
+<li>集成乘法器</li>
+<li>集成稳压器</li>
+<li>集成数模/模数转换器ADC/DAC</li>
+</ul>
+<h3 id="模拟集成电路的特性"><a href="#模拟集成电路的特性" class="headerlink" title="模拟集成电路的特性"></a>模拟集成电路的特性</h3><p>集成电路中一般使用三极管组成恒流源电路来部分替代电阻</p>
+<p>硅片上难以制作大电容、大电感，因此电路常常使用直接耦合的方式</p>
+<p>常采用复合管的方式制作较大放大倍数的三极管</p>
+        
+          <a class="article-more-a" href="/2021/11/14/%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE%E7%AE%80%E4%BB%8B/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电赛笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/%E9%9B%86%E6%88%90%E8%BF%90%E6%94%BE%E7%AE%80%E4%BB%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-电机控制简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B/">电机控制简介</a>
+    </h1>
+  
+
+        
+<!-- 显示阅读次数-->
+<!--  -->
+<!--显示阅读次数完毕 -->
+
+        
+        <a href="/2021/11/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B/" class="archive-article-date">
+  	<time datetime="2021-11-14T09:28:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本篇博文主要使用HAL库和CubeMX进行代码示例，毕竟电赛时间那么紧张，写STP库的时间都够CubeMX重开一局了</p>
+<h1 id="直流电机控制"><a href="#直流电机控制" class="headerlink" title="直流电机控制"></a>直流电机控制</h1><p>根据电机学，直流电机转速<br>$$<br>n=\frac{U-IR}{K\phi}<br>$$<br>其中U为电枢端电压，I为电枢电流，R为电枢电路总电阻，Φ为每极磁通量，K为电机结构参数</p>
+<p>直流电动机的转速控制方法有两种</p>
+<ul>
+<li>励磁控制法：对励磁磁通进行控制</li>
+<li>电枢控制法：对电枢电压进行控制</li>
+</ul>
+<p>励磁控制阀在低速状态下收到磁极饱和限制，在高速时受换向火花和换向器结构强度的限制，动态响应较差，因此很少使用；大多数应用场合都使用电枢电压控制法，在保证励磁恒定的情况下使用单片机或相关电子器件输出<strong>PWM</strong>来直接实现直流电动机调速</p>
+<h2 id="直流电机调速"><a href="#直流电机调速" class="headerlink" title="直流电机调速"></a>直流电机调速</h2><p>直流电机的调速思路就是“力大砖飞”，在电机控制线两端加适当电压，电压越高转速越快。可以通过功率半导体器件产生恒定的电压供给电机；对于数字器件而言很难控制电压精准保持在某一模拟值，因此使用PWM进行调速。</p>
+<p>无论是模拟方法还是数字方法，都需要使用功率半导体器件，只不过使用方式有所不同。模拟电路通过线性放大的驱动方式，输出波动小、线性好，对临近电路干扰小，但存在效率低和散热问题；而数字电路通过耦合器件发出PWM使功率器件输出方波加在电机两端，通过改变方波的占空比来实现调节电机转速，往往对临近电路存在干扰，但是更易于实现。</p>
+<p>基于PWM调速的电路往往包含三个部分</p>
+        
+          <a class="article-more-a" href="/2021/11/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电赛笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/%E7%94%B5%E6%9C%BA%E6%8E%A7%E5%88%B6%E7%AE%80%E4%BB%8B/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-常用控制算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/14/%E5%B8%B8%E7%94%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95/">常用控制算法</a>
+    </h1>
+  
+
+        
+<!-- 显示阅读次数-->
+<!--  -->
+<!--显示阅读次数完毕 -->
+
+        
+        <a href="/2021/11/14/%E5%B8%B8%E7%94%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2021-11-14T09:27:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="硬件控制算法"><a href="#硬件控制算法" class="headerlink" title="硬件控制算法"></a>硬件控制算法</h1><p>可应用的电路系统一般由模拟电路和数字电路组成。模拟电路用于电信号的处理和提供电源；数字电路则用于采集非电信号数据和控制系统。一般来说系统控制使用MCU、DSP或FPGA通过软件编程实现，在其中常使用用于控制系统的各种算法。</p>
+        
+          <a class="article-more-a" href="/2021/11/14/%E5%B8%B8%E7%94%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电赛笔记</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/14/%E5%B8%B8%E7%94%A8%E6%8E%A7%E5%88%B6%E7%AE%97%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-多级放大器简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -325,350 +1007,9 @@
 
 
   
-    <article id="post-随笔" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/13/%E9%9A%8F%E7%AC%94/">随笔</a>
-    </h1>
-  
-
-        
-<!-- 显示阅读次数-->
-<!--  -->
-<!--显示阅读次数完毕 -->
-
-        
-        <a href="/2021/11/13/%E9%9A%8F%E7%AC%94/" class="archive-article-date">
-  	<time datetime="2021-11-13T14:49:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h1><p>所有的随笔都会放在这里OvO</p>
-<p>可能还会扔些沙雕图……</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/13/%E9%9A%8F%E7%AC%94/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的新博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/13/%E6%88%91%E7%9A%84%E6%96%B0%E5%8D%9A%E5%AE%A2/">我的新博客</a>
-    </h1>
-  
-
-        
-<!-- 显示阅读次数-->
-<!--  -->
-<!--显示阅读次数完毕 -->
-
-        
-        <a href="/2021/11/13/%E6%88%91%E7%9A%84%E6%96%B0%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2021-11-13T09:56:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="搬家了！"><a href="#搬家了！" class="headerlink" title="搬家了！"></a>搬家了！</h1><p>准备逐步把博客写作从CSDN换到基于Github Pages和Hexo的自建站上（笑）</p>
-<p>CSDN😅</p>
-<p>顺便以后推广公众号恰烂钱（？）</p>
-<p>总之，不定期更新</p>
-<p>保障一个月两次的保底更新（大概）</p>
-<p><strong>Hexo还没用熟</strong></p>
-<p>支持Markdown和$\LaTeX$公式，至少比b乎那个好多了</p>
-<p>以后应该会再多整点活</p>
-<p>欢迎dalao们指出博文的问题，同时欢迎大家提供整活思路</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">测试</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/13/%E6%88%91%E7%9A%84%E6%96%B0%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-电路设计从入门到弃坑【电路概论】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/13/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E7%94%B5%E8%B7%AF%E6%A6%82%E8%AE%BA%E3%80%91/">电路设计从入门到弃坑0【电路概论】</a>
-    </h1>
-  
-
-        
-<!-- 显示阅读次数-->
-<!--  -->
-<!--显示阅读次数完毕 -->
-
-        
-        <a href="/2021/11/13/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E7%94%B5%E8%B7%AF%E6%A6%82%E8%AE%BA%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-13T09:47:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="电路设计从入门到弃坑0【电路概论】"><a href="#电路设计从入门到弃坑0【电路概论】" class="headerlink" title="电路设计从入门到弃坑0【电路概论】"></a>电路设计从入门到弃坑0【电路概论】</h1><p>在本系列博客中，将遵循以下缩写/简写</p>
-<ul>
-<li>电路原理：电子线路、电子线路分析基础等基础电路课</li>
-<li>模电：模拟电子电路、模拟电路、模拟电子技术、模拟电子线路等模拟电路课</li>
-<li>数电：数字电子电路、数字电路、数字电子技术、数字电子线路等数字电路课</li>
-<li>通信原理：通信原理、通信电子线路、通信电子电路、高频电子电路、高频电子线路等高频电路及通信理论课</li>
-<li>强电：功率电子电路、功率电子线路、电力电子电路、电力电路等电力电子系统及理论课</li>
-</ul>
-<p>电路原理阐述了电路运行的基本规律：使用抽象电路模型、电磁学、图论、高等数学、线性代数、拉普拉斯变换等基础学科知识描述电路，提供一般的电路分析方法</p>
-<p>模电则是从半导体器件的性质介绍如何使用这些器件构建能够对电信号或功率电压电流进行处理的电路</p>
-<p>数电针对逻辑电路进行分析，结合布尔代数引入了晶体管在导通、截至两状态下的应用，并提炼出使用硬件描述语言对数字电路进行设计、分析、仿真的基本方法</p>
-<p>通信原理则从分布参数电路与谐振、傅里叶分析角度解释模拟电路工作在高频情况下的状态与应用，并根据电磁场与电磁波理论介绍如何对通信信号进行调制-解调，以实现远距离电通信</p>
-<p>强电则结合电机学、电工学相关知识，阐明功率半导体器件的工作原理和应用，主要关注功率、效率、质量三个要素</p>
-        
-          <a class="article-more-a" href="/2021/11/13/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E7%94%B5%E8%B7%AF%E6%A6%82%E8%AE%BA%E3%80%91/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/13/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E7%94%B5%E8%B7%AF%E6%A6%82%E8%AE%BA%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-msp430简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/13/msp430%E7%AE%80%E4%BB%8B/">MSP430简介</a>
-    </h1>
-  
-
-        
-<!-- 显示阅读次数-->
-<!--  -->
-<!--显示阅读次数完毕 -->
-
-        
-        <a href="/2021/11/13/msp430%E7%AE%80%E4%BB%8B/" class="archive-article-date">
-  	<time datetime="2021-11-13T09:47:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="MSP430"><a href="#MSP430" class="headerlink" title="MSP430"></a>MSP430</h1><p>该MCU是由德州仪器TI生产的16位低功耗单片机</p>
-        
-          <a class="article-more-a" href="/2021/11/13/msp430%E7%AE%80%E4%BB%8B/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电赛笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/13/msp430%E7%AE%80%E4%BB%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -813,6 +1154,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">C语言进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
               </li>
             
             <div class="clearfix"></div>

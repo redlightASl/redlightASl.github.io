@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="https://redlightasl.github.io">
+  <title>FPGA学习笔记1【FPGA原理与结构】 | 红光今天吃什么</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="注意：本篇内容根据《FPGA原理和结构》（[日]天野英晴 著 赵谦 译）一书整理，作者也是初学者，有错漏请见谅 基础知识FPGA即现场可编程门阵列（Field Programmable Gate Arry），与之对应的是FPAA现场可编程模拟阵列（Field Programmable Analog Array）。这是一种可以通过重新编程来实现用户所需逻辑电路的半导体器件 布尔代数布尔运算是一种二值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FPGA学习笔记1【FPGA原理与结构】">
+<meta property="og:url" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/">
+<meta property="og:site_name" content="红光今天吃什么">
+<meta property="og:description" content="注意：本篇内容根据《FPGA原理和结构》（[日]天野英晴 著 赵谦 译）一书整理，作者也是初学者，有错漏请见谅 基础知识FPGA即现场可编程门阵列（Field Programmable Gate Arry），与之对应的是FPAA现场可编程模拟阵列（Field Programmable Analog Array）。这是一种可以通过重新编程来实现用户所需逻辑电路的半导体器件 布尔代数布尔运算是一种二值">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20210404102541269.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20210404103243188.png">
+<meta property="article:published_time" content="2021-11-19T08:09:18.000Z">
+<meta property="article:modified_time" content="2021-11-19T08:11:39.604Z">
+<meta property="article:author" content="RedlightASl">
+<meta property="article:tag" content="FPGA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20210404102541269.png">
+  
+    <link rel="alternative" href="/atom.xml" title="红光今天吃什么" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/assets/favicon.png">
+  
+  <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#f3c4ef,#a0cfe4);
+    }
+  </style>
+  
+
+  
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #9400d3"></div>
+<!-- 左侧边栏（上半部分）不设置背景颜色 -->
+<!-- <div class="overlay" > -->
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/assets/Patchouli.jpg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/"></a></h1>
+		</hgroup>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+	        
+			</ul>
+		</nav>
+		<!-- <nav> -->
+			<!-- 总文章数 37 -->
+		<!-- </nav>		 -->
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/redlightASl" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/redlightasl" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+					<a class="bilibili" target="_blank" href="https://space.bilibili.com/12073240" title="bilibili"><i class="icon-bilibili"></i></a>
+		        
+					<a class="mail" target="_blank" href="http://dddbbbdd@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+		        
+					<a class="twitter" target="_blank" href="https://twitter.com/Redligh34025775" title="twitter"><i class="icon-twitter"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #9400d3"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/assets/Patchouli.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author"></h1>
+			</hgroup>
+			
+			
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/redlightASl" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/redlightasl" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+						<a class="bilibili" target="_blank" href="https://space.bilibili.com/12073240" title="bilibili"><i class="icon-bilibili"></i></a>
+			        
+						<a class="mail" target="_blank" href="http://dddbbbdd@foxmail.com" title="mail"><i class="icon-mail"></i></a>
+			        
+						<a class="twitter" target="_blank" href="https://twitter.com/Redligh34025775" title="twitter"><i class="icon-twitter"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 50%">
+				
+				
+					<li style="width: 50%"><a href="/">主页</a></li>
+		        
+					<li style="width: 50%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-FPGA学习笔记1【FPGA原理与结构】" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      FPGA学习笔记1【FPGA原理与结构】
+    </h1>
+  
+
+        
+<!-- 显示阅读次数-->
+<!-- 
+  <br/>
+  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+  <span class="icon-sort"></span>
+  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+  </span>
+  </a>
+ -->
+<!--显示阅读次数完毕 -->
+
+        
+        <a href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-11-19T08:09:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>注意：本篇内容根据《FPGA原理和结构》（[日]天野英晴 著 赵谦 译）一书整理，作者也是初学者，有错漏请见谅</p>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>FPGA即<strong>现场可编程门阵列</strong>（Field Programmable Gate Arry），与之对应的是FPAA<strong>现场可编程模拟阵列</strong>（Field Programmable Analog Array）。这是一种可以通过重新编程来实现用户所需<strong>逻辑电路</strong>的半导体器件</p>
+<h2 id="布尔代数"><a href="#布尔代数" class="headerlink" title="布尔代数"></a>布尔代数</h2><p>布尔运算是一种二值运算，在布尔运算中，运算数只有0或1，基本运算有<strong>与 ·</strong>、**或 +<strong>、</strong>非 ~**三种，可以通过这三种基本运算构造出异或、与非等等运算</p>
+<p>布尔运算遵循的定理如下：</p>
+<ul>
+<li>零元：x·0=0，x+1=1</li>
+<li>单位元：x·1=x，x+0=x</li>
+<li>幂等律：x·x=x，x+x=x</li>
+<li>补余律：x·(~x)=0，x+(~x)=1</li>
+<li>互反律：~(~x)=x</li>
+<li>常见的交换律、结合律、分配律</li>
+<li>吸收律：x+(x·y)=x，x·(x+y)=x</li>
+<li>德摩根定律：~(x+y)=(~x)·(~y)，~(x·y)=(~x)+(~y)</li>
+</ul>
+<p>布尔代数中的函数用<strong>逻辑表达式</strong>来描述，描述同一逻辑函数的逻辑表达式可能有多个。逻辑表达式中，逻辑变量以原变量或反变量的形式出现，原变量和反变量统称<strong>字面量</strong>，字面量的逻辑与称为<strong>与项</strong>，与项的逻辑或运算叫做<strong>积之和</strong>，包含所有字面量的与项称为最小项，由最小项构成的积之和称为标准积之和（<strong>标准积</strong>），类似的存在或项（字面量的逻辑或）、和之积、最大项、标准和的概念</p>
+<p>逻辑函数还能通过<strong>真值表</strong>描述，针对逻辑函数所有可能的输入组合一一列出输出值就可以得到真值表。==一个逻辑函数的真值表唯一==，实现真值表定义的功能的电路称为<strong>查找表</strong>（LUT，Look-up Table），这就是FPGA的基本单元</p>
+<p>写FPGA逻辑就是写其中的查找表逻辑</p>
+<h2 id="数字电路"><a href="#数字电路" class="headerlink" title="数字电路"></a>数字电路</h2><p>数字电路也可以叫做逻辑电路</p>
+<p>本质是用电路描述数字布尔逻辑。</p>
+<p><strong>所有逻辑电路都能用积之和表达式来描述</strong></p>
+<h3 id="组合逻辑电路"><a href="#组合逻辑电路" class="headerlink" title="组合逻辑电路"></a>组合逻辑电路</h3><p>不包含记忆元件，某时刻输出（逻辑函数值）仅取决于该时刻输入的数字电路就是组合逻辑电路</p>
+<p>使用与-或-非三种门电路组合成的组合逻辑电路可以实现任何逻辑函数。这种方式被称为与-或逻辑电路或者是<strong>与-或阵列</strong></p>
+<p>PLA（可编程逻辑阵列Programmable Logic Array）就是使用与-或阵列</p>
+<h3 id="时序逻辑电路"><a href="#时序逻辑电路" class="headerlink" title="时序逻辑电路"></a>时序逻辑电路</h3><p>含有记忆元件，某时刻输出取决于该时刻输入及系统过去的电路状态的逻辑电路就是时序逻辑电路</p>
+<p>时序逻辑电路分为同步和异步两种</p>
+<p>同步时序电路的输入状态和内部状态的变化由时钟信号控制同步进行，但异步时序电路不需要时钟信号</p>
+<p>异步时序电路设计需要考虑临界资源、亚稳态等诸多因素，FPGA很少涉及异步时序电路。一般地，FPGA使用有限状态机模型来实现同步时序电路，同步状态机将会在之后的硬件算法部分介绍</p>
+<p>同步状态机分为Moore和Mealy两类，Mealy模型的状态数一般比Moore模型的少，电路规模一般也更小，但输入会立刻反映到输出，容易造成信号竞争导致非预期的错误输出，这种情况称为竞争<strong>冒险</strong>。Moore电路速度快且不易发生冒险，但是电路规模较大</p>
+<h2 id="同步电路设计"><a href="#同步电路设计" class="headerlink" title="同步电路设计"></a>同步电路设计</h2><p>同步电路让系统状态的变化和时钟信号同步，从而降低电路设计难度</p>
+<p><strong>同步电路设计是FPGA设计的基础</strong></p>
+<p>触发器（Flip Flop，FF）是一种只能存储一个二进制位的存储单元，一般用作时序电路的记忆元件。FPGA内一般使用D触发器（D-FF）在时钟跳变沿将输入信号的变化传送至输出</p>
+<p>它的真值表如下所示</p>
+<table>
+<thead>
+<tr>
+<th>输入 D</th>
+<th>时钟 CLK</th>
+<th>输出 Q</th>
+<th>反相输出 Q</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x</td>
+<td>0</td>
+<td>保持之前状态</td>
+<td>保持之前状态</td>
+</tr>
+<tr>
+<td>0</td>
+<td>上升沿</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>上升沿</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>x</td>
+<td>1</td>
+<td>保持之前状态</td>
+<td>保持之前状态</td>
+</tr>
+<tr>
+<td>x</td>
+<td>下降沿</td>
+<td>保持之前状态</td>
+<td>保持之前状态</td>
+</tr>
+<tr>
+<td>无论输入如何</td>
+<td>当且仅当上升沿时</td>
+<td>Q&lt;=D</td>
+<td>Q&lt;=(~D)</td>
+</tr>
+<tr>
+<td></td>
+<td>任何其他情况</td>
+<td>保持之前状态</td>
+<td>保持之前状态</td>
+</tr>
+</tbody></table>
+<h3 id="D触发器的局限性"><a href="#D触发器的局限性" class="headerlink" title="D触发器的局限性"></a>D触发器的局限性</h3><p>CMOS工艺下，D-FF由传输门1、主锁存器、传输门2、从锁存器串联组成</p>
+<p>传输们起开关作用，会随CLK的状态变化切换开关，外部信号先被锁存在主锁存器，一个时钟周期后，信号会被再次锁存在从锁存器。这里传输门1和传输门2的时钟相位相反。</p>
+<p>然而由于寄生电容、寄生电阻的存在，在时钟信号变化过快时，如果读取到还没有稳定下来而是在0和1之间摇摆的中间电位就会导致读取错误，这被称为<strong>亚稳态</strong>。所以一般会通过<strong>建立时间</strong>（Setup Time）来约束在时钟上升沿到来前输入D保持稳定的时间</p>
+<p>对于下降沿的情况下，若输入在传输门变为高阻态之前就发生变化也会出现反相器环路震荡的隐患，所以使用<strong>保持时间</strong>（Hold Time）约束</p>
+<p>由于这两个约束的存在，时钟频率需要受到限制，FPGA设计中使用静态时序分析STA来评估性能，静态时序分析主要评估FPGA上设计电路的延迟是否满足时序约束。此外还需要使用DRC约束和DC约束来保证电路的结构无误</p>
+<p>STA验证具有验证速度高的特点，但对电路结构有要求：</p>
+<ul>
+<li>延迟分析的起点和终点必须是基于同一时钟的FF，从而能够通过累加延迟来计算、验证每条路径的总延迟</li>
+</ul>
+<p>所以FPGA一般来说都会使用单相同步时钟来设计</p>
+<p>由于时钟信号驱动的负载（扇出数）、布线延迟等导致的时间差称为<strong>时钟偏移</strong>（skew）</p>
+<p>由于时钟振荡器或PLL器件的输出变形或信号变形导致时钟边沿偏离平均位置的情况称为<strong>时钟抖动</strong>（jitter）</p>
+<p>在实际ASIC设计中，需要控制时钟偏移和抖动在一定范围之内；FPGA上已经提前实现好了多层时钟树结构，并通过驱动能力强的专用布线（global buffer）将时钟低偏移地连接到全芯片的FF上，所以在时钟设计上比ASIC简便很多</p>
+<h2 id="CPLD"><a href="#CPLD" class="headerlink" title="CPLD"></a>CPLD</h2><p>所有可编程逻辑器件统称PLD，而其中有CPLD（Complex PLD）一个特殊的分支，与FPGA相反，它基于ROM技术制造，基本结构是乘积项。由与阵列和或阵列组成的与-或构造就称为乘积项形式，这一结构的特点就是成本低廉、掉电后不会丢失逻辑</p>
+<h1 id="FPGA简介"><a href="#FPGA简介" class="headerlink" title="FPGA简介"></a>FPGA简介</h1><p>FPGA是PLD的一种。实际上它并不是单纯由”门“形成的结构。</p>
+<h2 id="FPGA结构简介"><a href="#FPGA结构简介" class="headerlink" title="FPGA结构简介"></a>FPGA结构简介</h2><p>FPGA大致由三部分构成：</p>
+<ul>
+<li>实现逻辑电路的逻辑要素：<strong>逻辑块</strong></li>
+</ul>
+<p>一般由查找表LUT、乘积项PT、数据选择器MUX等组成，不管什么方式，都应该是由实现FF等器件的数据存储电路和数据选择器MUX组成的</p>
+<ul>
+<li>和外部进行信号输入/输出的要素：<strong>I/O块</strong></li>
+</ul>
+<p>连接IO引脚和内部布线要素的模块，其中通常包括控制上拉下拉、输入输出、极性、速率、开漏等模式的控制电路和触发器等数据存储电路。一般会支持TTL、PCI、PCIE、SSTL等等单端标准IO和LVDS等差分标准IO</p>
+<ul>
+<li>连接前两种元素的布线要素：包括<strong>布线通道、开关块SB、连接块CB</strong></li>
+</ul>
+<p>可以通过布线资源形成任意的布线通路，其中主要通过开关的编程配置决定选择哪个布线通道</p>
+<p>实际电路中还可能加入硬核处理器、DSP模块、块存储器等等其他具有固定功能的硬核电路</p>
+<p><strong>硬核</strong>：具有固定结构、无法使用硬件描述语言编程的电路</p>
+<p><strong>软核</strong>：具有一定结构，可以使用硬件描述语言编程的电路</p>
+<p>这三个部分一般呈==岛型==排布，每个“岛“占据一个格子，格子之间是布线要素</p>
+<h2 id="FPGA可编程技术"><a href="#FPGA可编程技术" class="headerlink" title="FPGA可编程技术"></a>FPGA可编程技术</h2><p>FPGA通过闪存、反熔丝和静态存储器作为可编程的基础，目前市面上的FPGA多使用SRAM技术（静态存储器）制造，这三种技术各有特点</p>
+<h3 id="闪存"><a href="#闪存" class="headerlink" title="闪存"></a>闪存</h3><p>闪存（FLASH）是EEPROM的一种，属于非易失存储器，采用MOSFET（Metal-Oxide-Semiconductor Field Effect Transistor金属-氧化物-半导体场效应管）技术制造</p>
+<blockquote>
+<p>MOSFET是一种以<strong>金属栅极</strong>隔着<strong>氧化层</strong>利用电场效应来控制<strong>半导体</strong>的场效应晶体管。而与之相对的还有JFET，即结型场效应管，在N型半导体（这里以N沟道为例）两端加入P型半导体，并在其中P型半导体较少的一端引出源极和漏极，另一边的P型半导体引出栅极，用栅极电压产生的静电效应来控制漏极电流。MOSFET则是以P型半导体为基底，两个小块N型半导体嵌入，通过引脚引出作为源极和漏极，在基底上有一个二氧化硅薄片，上面固定了金属铝制造的栅极，当栅极加适当电压时，在两个N型半导体之间会出现导电沟道，即源-漏极电流出现（这里以增强型NMOSFET为例，PMOS的导通电流方向相反，耗尽型为不加栅极电压时才会导通）</p>
+<p>无论P类型还是N类型的MOSFET都分为增强型和耗尽型两种，增强型的特点是“常开”，耗尽型的特点是“常闭”，这里的增强和耗尽指的是栅极电压控制漏极电流的“增强”或“耗尽”</p>
+</blockquote>
+<p>闪存根据写入方式不同可以分成两种：NAND型和NOR型，NAND型在写入时需要高电压，而NOR型在写入时需要大电流</p>
+<p>NAND FLASH的MOSFET表现为耗尽型，源极、漏极之间存在一个栅极G，这里就和普通的DRAM构造相同（MOSFET结构），但是在栅极下方的二氧化硅中埋藏了一个多晶硅构成的浮栅。初始状态下浮栅不带电，根据耗尽型MOSFET的特点，栅极零偏压时电流可以通过；但当将栅极加高电压后，浮栅会由于电场效应（实际是产生了隧道电流）带电（负电），此时在低电压范围内，无论栅极加不加电压，导电沟道都关闭，电流无法通过，也就是说浮栅上存有电荷时表现为无电流通过；而只有再次在源极S上加高电压时，电流才能通过。由于浮栅中的电荷没有逃脱路径，因此可以半永久保存数据；当在源极加高电压时，可以将浮栅中的电子以隧道电流的形式引出。对于NOR FLASH的情况，通过在源极和漏极之间通大电流后，一部分电子作为热电子注入浮栅来完成写入</p>
+<p>NAND FLASH的结构特点导致了它能够以位（比特）为单位写入（控制单个栅极电压），但只能以块为单位擦除（源极并联在一起，难以单个控制）</p>
+<h3 id="基于闪存的可编程开关"><a href="#基于闪存的可编程开关" class="headerlink" title="基于闪存的可编程开关"></a>基于闪存的可编程开关</h3><p>FPGA内的可编程开关由两个晶体管组成，一个负责编程信号的写入/擦除，另一个用于控制用户电路的开关，两个晶体管共用控制栅极G和浮栅，从编程用开关管注入电子就可以直接决定用户所使用开关的状态</p>
+<p>使用步骤如下：</p>
+<ol>
+<li>在编程晶体管S-D之间加5V</li>
+<li>在G加-11V电压，电子自动流入G（G-D电压为-16V），开关开启</li>
+<li>正常工作时，栅极保持2.5V，浮栅电位会大致维持在4.5V</li>
+<li>擦除时，编程晶体管S、D接地，G极加16V电压后浮栅电位会降到0V以下，开关关闭</li>
+</ol>
+<p>可编程开关的以上特性决定了它存在一些缺点：</p>
+<ul>
+<li>无法使用CMOS工艺（最大硬伤，不过这也导致其成本较低）</li>
+<li>重写次数有限制</li>
+<li>接通电阻和负载电容较大</li>
+</ul>
+<p>它的优点如下：</p>
+<ul>
+<li>非易失、可重编程</li>
+<li>对软性错误容错强、上电后立即工作（Live At Power-Up，LAPU）</li>
+<li>尺寸较小（至少比SRAM工艺小，但是对于先进的FinFET优势就不大了）</li>
+</ul>
+<p>目前的CPLD很多都是基于该工艺制造</p>
+<h3 id="反熔丝"><a href="#反熔丝" class="headerlink" title="反熔丝"></a>反熔丝</h3><p>熔丝是在电流过大时对电路进行保护或防止事故的元件，当有大电流流过时会自行发热并熔断。反熔丝的特性和熔丝正好相反：初始状态为开路，当通电后会发生熔合</p>
+<p>一种反熔丝使用多晶硅和n^+^扩散层作为导体，在他们中甲插入ONO氧化物-氮化物-氧化物的电介质作为绝缘体的构造，ONO电介质厚度在10nm以下，通常在10V-5mA情况下可以形成上下连接的通路。其直径大约和接触孔（为了连接硅基底上的门电路和金属层或上下两层金属层而设置的通孔）相当，其导通电阻大概在300~500Ω</p>
+<p>还有Metal-to-Metal设计的反熔丝，用于连接布线层，在上下两层金属布线层间插入绝缘的非晶硅和钨插塞等导体，在为编程时处于高阻抗状态，而在编程处理后可以变为几乎和金属层连线同等程度的低阻抗状态，导通电阻大约50~80Ω。在编程中需要约15mA电流</p>
+<p>因为Metal-to-Metal反熔丝面积较小、导通电阻低，构造上不可能将配置信息直接读取出来，难以实行逆向工程，安全性很高，所以成为现代反熔丝技术的主流</p>
+<p>反熔丝优点如下：</p>
+<ul>
+<li>尺寸小、密度高、非易失</li>
+<li>接通电阻和负载电容小</li>
+<li>安全性高、对软性错误容错性强</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>无法重写</li>
+<li>每根线都需要额外的晶体管用于编程</li>
+<li>需要使用专用编程器且编程时间长</li>
+<li>难以debug、出错率较高</li>
+</ul>
+<h3 id="静态存储器"><a href="#静态存储器" class="headerlink" title="静态存储器"></a>静态存储器</h3><p>静态存储器由两个CMOS反相器构成的触发器和两个传输晶体管（Pass-Transistor，PT）组成。他利用触发器的双稳态0和1记录数据，通过NMOS型的PT执行写入</p>
+<p>静态存储器通常使用地址信号来驱动字线（读取地址信号所控字线上的多位数据），数据的读取也通过PT进行。由于FPGA需要一直读取数据，所以在FPGA中数据直接从触发器读取而不通过PT。</p>
+<p>基于静态存储器的FPGA大多使用LUT，并使用MUX等来切换布线连接，真值表本身由多位静态存储器构成，这种FPGA一般称为SRAM型FPGA。说人话就是使用SRAM技术存储真值表来实现编程信息的存储</p>
+<p>优点如下：</p>
+<ul>
+<li>能够使用先进的CMOS工艺</li>
+<li>可重配置</li>
+<li>重写次数没有限制（一片spartan传祖孙三辈人没问题）</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>存储器尺寸大（可以通过FinFET工艺缓解）</li>
+<li>易失性存储器</li>
+<li>难以保证电路信息安全</li>
+<li>对软性错误敏感</li>
+<li>导通电阻、负载电容较大</li>
+</ul>
+<p>目前SRAM型FPGA占据市场主流，因为CMOS和FinFET就是无敌的存在，制程碾压一切</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>反熔丝待机耗电低、连接开关的接通电阻小、速度快，并且保密性高、无法进行重写，比较适用于军工等不要求最先进工艺但对可靠性要求高的场合</p>
+<p>静态存储器工艺制程先进、性能强大，但存在易失性且安全性不高、待机功耗大（这一点正在逐渐改善）、耐放射线能力弱，但是很适合民用与实验，符合FPGA的定位，所以成为市场的主流</p>
+<p>闪存工艺是静态存储器和反熔丝之间的平衡点，成本低廉且可以重写、可靠性较高，但是性能较劣势，说的难听点就是鸡肋，所以市场上基于闪存的FPGA已经越来越少</p>
+<h2 id="FPGA的逻辑实现"><a href="#FPGA的逻辑实现" class="headerlink" title="FPGA的逻辑实现"></a>FPGA的逻辑实现</h2><p>基于LUT的FPGA逻辑块可以实现任何<strong>输入数在查找表电路输入数量之内</strong>的逻辑函数；基于乘积项方式实现的CPLD则需要先将表达式转换为标准积之和的形式</p>
+<p>一个小型的电路至少需要通过IO PAD（输入信号）、FPGA内部布线、可编程逻辑块、FPGA内部布线、输出缓冲器、IO PAD（输出信号）这几个硬件资源才能实现</p>
+<p>可编程逻辑块内的主要资源就是LUT，<strong>LUT是1个字只有1位的内存表</strong>，字数取决于地址的位数，FPGA中的查找表存储单元大多使用SRAM实现。一般k输入的LUT由2^k^个SRAM单元和一个2^k^输入的数据选择器组成，<strong>查找表的输入就是内存表的地址信号，输出就是该地址所选字的1位数据</strong>。k输入的查找表可以实现$2^{2^k}$种逻辑函数。</p>
+<p>使用查找表时，先根据查找表的输入值对真值表进行转换，然后将函数值直接写入配置内存，当所要实现的逻辑函数的输入数比查找表的输入数多时，可以并联使用多个查找表来实现</p>
+<h3 id="查找表的实现"><a href="#查找表的实现" class="headerlink" title="查找表的实现"></a>查找表的实现</h3><p>早期FPGA使用过5晶体管结构（两个晶体管构成一个非门，两个非门和一个额外的晶体管构成一个SRAM单元）存储单元，因为LUT中的SRAM总是在输出数据，所以查找表只需要以5晶体管存储单元为基础配合选择信号就可以实现了；在此之后Xilinx的Freeman改良了LUT的配置存储器，让其可以作为FPGA上的分散存储器使用，此时SRAM具有了独立的写入端口，该结构可以复用为存储器和查找表，使用两个输入信号作为控制——需要注意：存储器的读取端口和查找表的输出是通用的</p>
+<p>随后，查找表又被改良可以作为移位寄存器使用；当前的查找表已经能够支持簇结构（cluster）和自适应（可以将一个8输入查找表分割为2个7输入查找表或1个7输入查找表和2个6输入查找表等小型查找表簇的方式使用，更加灵活）</p>
+<h1 id="FPGA的结构"><a href="#FPGA的结构" class="headerlink" title="FPGA的结构"></a>FPGA的结构</h1><p>岛型FPGA由逻辑块、IO块、布线要素等组成，<strong>相邻的逻辑块、开关块、连接块组成了一个可重复逻辑模块</strong>，模块呈阵列型排列最终形成岛型FPGA</p>
+<p>FPGA中具有专门用途的电路称为“硬核”，可编程的部分称为“软核”。Xilinx将逻辑块称为CLB（Configurable Logic Block可编辑逻辑块），Altera则将其称为LAB（Logic Array Block逻辑阵列块），但他们的基本原理一样</p>
+<p>除了主要部件之外，现代FPGA通常还包括很多其他部件</p>
+<h2 id="逻辑块结构"><a href="#逻辑块结构" class="headerlink" title="逻辑块结构"></a>逻辑块结构</h2><p>对于逻辑块架构，最重要的设计问题就是权衡逻辑块的功能和自身面积</p>
+<blockquote>
+<p>集成电路领域著名的AT^2^定律指的是对于某个给定的半导体工艺流程，如果其相关的某数字设计的面积是A，而执行时间是T，则存在一个下限边界B，使得AT^2^=B，也就是说面积和效率不可兼得</p>
+</blockquote>
+<p>这一点同样适用于FPGA</p>
+<p>其中对逻辑块功能影响最大的是查找表的大小，因为k输入查找表可以实现任意k输入的函数，采用较大的查找表有助于减少逻辑块的使用数量，但k-LUT需要使用2^k^个配置存储单元，因此逻辑块自身的面积会增大，而且增加的输入/输出引脚数量会导致布线面积增大。</p>
+<p>此外，FPGA运行速度还受到以下影响：如果增加每个逻辑块的功能，所实现电路的逻辑深度就更小；但同时也会增加逻辑块自身的内部延迟</p>
+<p>逻辑深度指通过关键路径的逻辑块数量，它由FPGA设计环节中的技术映射过程决定（参考后面FPGA设计与ASIC设计的区别与原理部分），降低逻辑深度可以减少布线、提高电路速度，同时也会增加内部延迟，导致降低逻辑深度的效果大打折扣</p>
+<p>综上所述，查找表的输入大小和FPGA的面积、延迟有密切关系</p>
+<p><strong>现代的商用FPGA都倾向于采用6-LUT</strong></p>
+<h3 id="专用进位逻辑"><a href="#专用进位逻辑" class="headerlink" title="专用进位逻辑"></a>专用进位逻辑</h3><p>为了提高算术运算电路的性能，现代FPGA逻辑块中还含有专用的进位电路，可以使用这些专用进位逻辑来获得更高集成度和运行速度</p>
+<p>Xilinx没有设计专用的全加器电路，而是使用查找表和进位生成电路的组合来实现加法。全加器的加法运算用两个2输入EXOR实现，进位输出电路由1个EXOR和1个MUX组成</p>
+<p>可以通过这种单元的不断组合实现多位加法器甚至加法器矩阵</p>
+<h3 id="逻辑簇"><a href="#逻辑簇" class="headerlink" title="逻辑簇"></a>逻辑簇</h3><p>逻辑簇是由多个BLE群组化形成的逻辑块结构，逻辑簇内部局部布线采用硬连线连接，比外部的通用布线速度更快；逻辑簇内部局部布线的负载电容比外部通用布线小很多，因此对FPGA的耗电（特别是动态功耗）的削减有效果；逻辑簇内部BLE可以共享输入信号，有助于减少局部连接块的开关数量</p>
+<p><strong>含有多BLE的逻辑块最大的优势就是在增加逻辑块功能性的同时又不会大幅影响FPGA的整体面积</strong></p>
+<p>逻辑块面积随输入k的增大呈指数级增大；而增加逻辑簇中BLE的数量N会导致逻辑块的面积只按二次函数增长</p>
+<p>计算逻辑块输入数量$I=\frac{k(N+1)}{2}$</p>
+<p>根据上面的经验公式，逻辑块面积的增长得到了抑制</p>
+<p>一般来说，面积延迟乘积性能最优的结构参数为：N=3~10,k=4~6</p>
+<p>也就是说一个逻辑簇中设置3到10个输入、4到6个BLE比较好</p>
+<h3 id="自适应查找表"><a href="#自适应查找表" class="headerlink" title="自适应查找表"></a>自适应查找表</h3><p>Xilinx在XC40000系列的逻辑块中推出了早期的不同输入数查找表结构</p>
+<p>而现代的FPGA多支持将较多输入的查找表分解使用的机制，也就是<strong>自适应查找表</strong></p>
+<h2 id="全局布线架构"><a href="#全局布线架构" class="headerlink" title="全局布线架构"></a>全局布线架构</h2><p>布线架构分为全局布线和详细布线，全局布线主要解决逻辑块的连接、布线通道的宽度等高层次问题；而详细布线则决定具体的连接方式</p>
+<p>层次型FPGA使用UCB的HSRA布线构造，将FPGA内部布线分成多个层次，布线的交叉点上包含各层的开关，一般层次越高通道里连线的数量就越多。目前层次型FPGA已经不再适用</p>
+<p>岛型FPGA就是一直在介绍的FPGA类型，下面的详细布线架构也将围绕岛型FPGA说明</p>
+<h2 id="详细布线架构"><a href="#详细布线架构" class="headerlink" title="详细布线架构"></a>详细布线架构</h2><p>详细布线架构中需要确定逻辑块和布线通道之间的开关布置和布线的线段长度，以此来确定电路延迟</p>
+<p>由连接块和开关块组成的布线要素对FPGA面积和电路延迟的影响很大，在决定详细布线架构时要注意：</p>
+<ol>
+<li>逻辑块和晶体管参数</li>
+<li>布线线段长度的种类和比例</li>
+<li>布线开关的晶体管参数</li>
+</ol>
+<p>还应该考虑传输晶体管和三态缓冲器使用上的平衡</p>
+<p>现代FPGA为了更好的性能，通常使用较多单向连线和辅助的双向连线，并正在加大单向连线的比重；同时还提供了各种不同长度的连线，从短线到长距离布线，以此增强设备的时序表现</p>
+<h2 id="开关块"><a href="#开关块" class="headerlink" title="开关块"></a>开关块</h2><p><strong>所有开关块均由可编程开关管构成，以下简称开关管，注意不要和晶体管意义上的开关管弄混</strong></p>
+<h3 id="开关块的拓扑"><a href="#开关块的拓扑" class="headerlink" title="开关块的拓扑"></a>开关块的拓扑</h3><p>开关块位于横向和纵向布线通道的交叉处，通过可编程开关来控制布线路径，一般开关块的拓扑分为三种</p>
+<p>对于一个开关块中的一个控制晶体管，负责三条交叉路经的通断，因此开关快都是从三个输入中选择一个输出，自由度F<del>s</del>=3</p>
+<h4 id="不相交型"><a href="#不相交型" class="headerlink" title="不相交型"></a>不相交型</h4><p>Xilinx的特色拓扑，因此也被称为赛灵思型开关块</p>
+<p>由6个开关管构成</p>
+<p>将四个方向上序号相同的进行连接，相邻两个方向呈斜45度或15度连接</p>
+<p>自由度较低</p>
+<h4 id="通用型"><a href="#通用型" class="headerlink" title="通用型"></a>通用型</h4><p>同样由6个开关管构成，但两个成对的连线可以在开关块内互联</p>
+<p>总体上可实现斜对角45度全连接</p>
+<p>但是这种技术只能对应单倍线，无法应用在其他长度的布线上</p>
+<h4 id="威尔顿型"><a href="#威尔顿型" class="headerlink" title="威尔顿型"></a>威尔顿型</h4><p>采用6*n个开关管连接序号不同的连线</p>
+<p>自由度更高，可以实现顺时针、逆时针的闭环路径，可以提高FPGA的测试效率</p>
+<h3 id="数据选择器结构"><a href="#数据选择器结构" class="headerlink" title="数据选择器结构"></a>数据选择器结构</h3><p>一般使用4输入的数据选择器延迟最优，8输入的数据选择器面积延迟乘积最优</p>
+<h2 id="连接块与IO块"><a href="#连接块与IO块" class="headerlink" title="连接块与IO块"></a>连接块与IO块</h2><p>连接块也由可编程开关构成</p>
+<p>连接块负责连接布线通道和逻辑块的输入/输出</p>
+<p>由于需要考虑到连接块的面积，所以很少使用全交叉开关矩阵实现，而是使用节省掉一些开关的<strong>稀疏开关矩阵</strong></p>
+<p>IO块则负责器件的IO引脚和逻辑块之间的接口部分</p>
+<p>一般FPGA的IO除了固定用途的电源、时钟等专用引脚，还有用户可以配置的用户IO，用户IO具有输入/输出缓冲、输出驱动、信号方向控制、高阻抗控制等功能，和现代MCU的GPIO结构相似</p>
+<p>一般具有以下特点：</p>
+<ul>
+<li>可配置的上拉、下拉电阻</li>
+<li>输出使能信号可以控制输出缓冲器</li>
+<li>输入/输出出啊其，可用于调整信号延迟</li>
+<li>可编程的输出缓存器转换速率</li>
+<li>可以调整使用TTL、CMOS、PCIE等多种输出电压标准或输入缓冲器阈值</li>
+<li>专用延时电路，用于保证输入的保持时间</li>
+<li>可适用于高速通信的差分信号LVDS</li>
+<li>配置有钳位二极管</li>
+</ul>
+<p>总体而言连接块与IO块类似MCU中的总线桥和GPIO</p>
+<h2 id="嵌入式硬核"><a href="#嵌入式硬核" class="headerlink" title="嵌入式硬核"></a>嵌入式硬核</h2><h3 id="DSP块"><a href="#DSP块" class="headerlink" title="DSP块"></a>DSP块</h3><p>现代FPGA被普遍用于数字信号处理DSP、人工智能加速AIA、硬件算法实现等场景，因此出现了搭载大量乘法器、浮点运算电路的FPGA</p>
+<p>这些内嵌DSP块的结构大致如下：</p>
+<p>输入</p>
+<p>前置加法器</p>
+<p>乘法器</p>
+<p>累加运算单元</p>
+<p>模式检测器与控制电路</p>
+<p>输出</p>
+<p>很多DSP块支持粒度调节和浮点运算支持</p>
+<p>在FPGA厂商提供的IP生成工具中设置好相关IP就可以选择是否在DSP块上实现，同时使用FPGA厂商推荐的硬件描述语言使用方式，综合工具就可以自动识别并使用DSP块，也可以在代码中直接实例化并使用DSP块的模块，但这种方法缺乏可移植性</p>
+<h3 id="硬宏"><a href="#硬宏" class="headerlink" title="硬宏"></a>硬宏</h3><p><strong>硬宏</strong>：商用FPGA中嵌入的专用硬件电路</p>
+<p>硬件乘法器和DSP块都属于硬宏，但都比较常见，当前已经被视为商用FPGA的“标配”</p>
+<p>除此之外，很多中高端产品都会搭载PCIE接口、USB接口、SPI接口、外部DRAM接口、专用DAC、ADC等硬宏</p>
+<p>一般来说硬宏化的接口电路不多，需要考虑硬宏的位置再进行布局布线</p>
+<h3 id="硬核处理器"><a href="#硬核处理器" class="headerlink" title="硬核处理器"></a>硬核处理器</h3><p>FPGA厂商已经越来越多地在高端品牌上搭载硬核处理器，也就是作为硬宏的嵌入式处理器</p>
+<p>比较著名的就是Xilinx的Zynq系列，搭载ARM Cortex A系列处理器，可以运行Linux等通用OS或RT-Thread等大型RTOS，同时可以按照标准设计电路接口，让FPGA部分的用户电路与硬核处理器通过AMBA交换模块连接，以定制硬件的方式实现加速</p>
+<h3 id="嵌入式存储器"><a href="#嵌入式存储器" class="headerlink" title="嵌入式存储器"></a>嵌入式存储器</h3><p>部分商用FPGA为了解决存储器总线带宽问题，直接将存储器嵌入到FPGA内部</p>
+<p>这样的嵌入式存储器分为两种类型</p>
+<ol>
+<li><p>存储器块硬宏</p>
+<p> 以硬宏的形式在架构中嵌入存储器块，在Xilinx的架构中，这种存储器被称为块存储器（Block RAM，BRAM），支持一分多、多合一</p>
+<p> BRAM既可以作为单端口存储器也可以作为双端口存储器使用，可以方便的使用它作为FIFO存储器</p>
+<p> 需要注意：BRAM不支持异步访问，想要同步两个时钟域还是应该使用传统的异步时钟FIFO</p>
+</li>
+<li><p>查找表存储器</p>
+<p> 也可以使用逻辑块内部的查找表实现存储器</p>
+<p> Xilinx的架构中，这种由查找表构成的存储器称为分布式RAM（distributed RAM），但只有被称为SLICEM的逻辑块中的查找表才能够作为分布式RAM使用。此外，为了不挤占查找表的存储资源，一般在需要小规模存储器时再使用这种方法</p>
+</li>
+</ol>
+<p>嵌入式存储器一般和DSP块一样，只要按照FPGA厂商的说明编写HDL程序，综合后就能够调用</p>
+<p>它的优点在于大，能有效节省外部总线资源和时序损耗</p>
+<h3 id="配置链"><a href="#配置链" class="headerlink" title="配置链"></a>配置链</h3><p>把电路编程到FPGA上的过程叫做配置，向FPGA写入的电路信息叫做配置数据。配置数据包含在FPGA上实现电路的所有信息，包括但不仅限于查找表中的真值表数据和开关块中各个开关的状态等</p>
+<p>一般地，FPGA可以分为三种类型</p>
+<ul>
+<li>SRAM型：掉电信息即丢失，所以一般在上电时使用内部或外部的自动配置器件将配置信息写入</li>
+<li>闪存型：非易失，一般闪存写入次数的限制都比较大，虽然没有SRAM那样的永久寿命，但用十几年也没有问题，只是写入速度较慢</li>
+<li>反熔丝型：写入一次后就不能再修改</li>
+</ul>
+<p>一般在调试过程中使用JTAG接口，可以实时观测FPGA内部信号的变化：先将观测信号的变化写入嵌入式存储器，再通过JTAG读取到上位机，这样就能直观地看到信号波形，称为<strong>虚拟逻辑分析仪</strong></p>
+<p>这样对于配置流程就能有更好的把控</p>
+<h3 id="PLL与MMCM"><a href="#PLL与MMCM" class="headerlink" title="PLL与MMCM"></a>PLL与MMCM</h3><p>过去的FPGA一般使用外部晶振，在内部的时钟信号频率受到限制</p>
+<p>现代FPGA大多配置有PLL电路，可以将外部输入的基准时钟进行进一步处理</p>
+<p>PLL即Phase Locked Loop锁相环，外部基准时钟输入<strong>鉴相器</strong>，鉴相器就是一个精密的时钟相位比较器，将PLL内部<strong>压控振荡器</strong>（Votage-Controlled Oscillator，VCO，可以根据所加的电压调整输出频率）生成的时钟与外部输入的基准时钟进行比较，如果两个时钟一致则维持VCO电压，否则调整控制电路对VCO电压进行调整（VCO主频过高则降低电压；反之升高电压），经过鉴相器得到的电压还存在一定的高频谐波，通过一个低通滤波器后输入VCO即可实现效果。整个电路呈现为</p>
+<p>基准时钟输入-鉴相器-低通滤波器-VCO-反馈输入-标准输出</p>
+<p>的状态。整个电路使用模拟电路实现，高频谐波由于反馈电路和后级电路耦合而产生</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line"></span><br><span class="line">A[输入]--&gt;B(鉴相器)</span><br><span class="line">C[反馈]--&gt;B</span><br><span class="line">B--&gt;D[低通滤波器]</span><br><span class="line">D--&gt;E[VCO]</span><br><span class="line">E--&gt;C</span><br><span class="line">E--&gt;F[输出]</span><br></pre></td></tr></table></figure>
+
+<p>除了基本结构之外，PLL通常还会在输入输出阶段添加额外的分频器用于削减输出频率；同时在反馈阶段加入分频器用于增加输出频率</p>
+<p>流程框图如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line"></span><br><span class="line">INPUT(输入)--&gt;A[基准时钟预分频器N]</span><br><span class="line">A--&gt;B(鉴相器)</span><br><span class="line">C[反馈时钟分频器M]--&gt;B</span><br><span class="line">D--&gt;E[VCO]</span><br><span class="line">E--&gt;C</span><br><span class="line">B--&gt;D[低通滤波器]</span><br><span class="line">E--&gt;F[输出时钟分频器1]</span><br><span class="line">F--&gt;OUTPUTA(输出时钟1)</span><br><span class="line">E--&gt;G[输出时钟分频器2]</span><br><span class="line">G--&gt;OUTPUTB(输出时钟2)</span><br><span class="line">E--&gt;H[输出时钟分频器i]</span><br><span class="line">H--&gt;OUTPUTC(输出时钟i)</span><br></pre></td></tr></table></figure>
+
+<p>可以得到输出频率控制公式<br>$$<br>F_{vco}=\frac{M}{N \cdot K_i} F_{ref}<br>$$<br>式中M为反馈时钟分频器分频系数，N为基准时钟预分频器分频系数，K<del>i</del>为输出时钟分频器分频系数，最后对应输出时钟F<del>i</del></p>
+<p>虽然可以通过有限个预分频器调节时钟，但事实上各个分频器的分频比是有限制的，设定值不能超出规定</p>
+<p><strong>PLL实质上是一个以外部输入基准信号为目标，使用VCO为控制对象的线性反馈控制系统</strong>，在启动、复位或基准时钟大幅度变动时，无法做到立即响应，所以在PLL的输出时钟稳定前，由该时钟同步的用户电路可能会发生无法预测的动作。为了避免这种情况，常常使用PLL锁定机制，PLL通常会设置1位输出信号来表示PLL是否为锁定状态，外部电路可以利用该寄存器位来判断是否能使用时钟</p>
+<p>使用数字方式也可以实现PLL类似的功能，称为DLL，具有响应速度快的优势。但是因为PLL的自由度更高、稳定性更好、成本更低，所以大多使用PLL或其升级版本MMCM</p>
+<h1 id="FPGA设计流程与原理"><a href="#FPGA设计流程与原理" class="headerlink" title="FPGA设计流程与原理"></a>FPGA设计流程与原理</h1><h2 id="基于HDL"><a href="#基于HDL" class="headerlink" title="基于HDL"></a>基于HDL</h2><ol>
+<li><p>使用FPGA厂商提供IDE创建工程</p>
+</li>
+<li><p>约束设定</p>
+<p> 设置物理约束、引脚约束</p>
+</li>
+<li><p>创建源文件</p>
+<p> 依次编写RTL级描述，可以按照自顶向下/自底向上设计方法，先编写顶层文件（系统级）或底层模块；通过模块例化进行层次连接</p>
+</li>
+<li><p>创建仿真源文件</p>
+<p> 可以使用SystemVerilog等语言创建仿真用的源文件testbench</p>
+</li>
+<li><p>逻辑综合和技术映射</p>
+<p> 对于Xilinx系FPGA来说需要先进行RTL文件的<strong>逻辑综合</strong>，如果使用了Verilog HDL则会先生成门级Verilog文件，随后生成网表文件，这些网表文件描述了逻辑门、触发器等逻辑元素的集合以及它们的连接关系。综合后在进行<strong>技术映射</strong>，将逻辑映射到FPGA实际的逻辑元素。</p>
+<p> 一般在执行这两步时，厂商IDE会提供DRC、网表、逻辑分析报告，可以借此初步判断bug</p>
+</li>
+<li><p>RTL仿真</p>
+<p> 使用testbench对电路进行仿真，这一步可以使用厂商提供的仿真软件或仿真器，也可以使用集成电路设计中常用的modelsim等仿真软件。通过对输入输出波形的仿真判断电路是否存在问题</p>
+</li>
+<li><p>布局布线</p>
+<p> 利用片上逻辑和布线等资源实现网表。先进行逻辑元素再进行网络布线。布局过程中可以对信号拥挤度和传输延迟进行初步预测，不过并不一定准确，目前业界多使用STA静态时序分析进行仿真。需要特别注意的是，布局布线需要耗费很长时间，规模越大、逻辑资源使用率越高的电路耗时越长，且布线失败的可能性越大。当前的IDE中虽然有自动布局布线功能，但是也可能发生问题，这就需要换用硬件或重新设计架构、算法等</p>
+</li>
+<li><p>配置FPGA</p>
+<p> 可以通过以下方法将编程数据烧录到FPGA：</p>
+<ul>
+<li><p>JTAG烧录比特流文件</p>
+<p>  JTAG是面向器件编程和板卡调试的一种通用标准，FPGA厂商都提供了对应FPGA的JTAG烧录器/调试器</p>
+<p>  但是JTAG烧录后如果FPGA断电或重置，配置信息就会丢失</p>
+<p>  一般使用bit格式</p>
+</li>
+<li><p>自动从片外ROM中读取文件</p>
+<p>  在上电或重置时可以让特殊配置过的FPGA从片外ROM中读取配置数据或使用其他控制器将片外文件数据加载到FPGA上</p>
+<p>  一般使用mcs或pof格式</p>
+</li>
+<li><p>通过储存卡等写入</p>
+</li>
+<li><p>使用专用IC或总线协议配置FPGA</p>
+</li>
+</ul>
+<p> 特别地，一些FPGA配备了处理器硬核，可以使用SD卡或专用总线，可以用这种方式自动加载FPGA</p>
+</li>
+<li><p>实机功能验证</p>
+</li>
+<li><p>优化</p>
+<p>在实现功能后，可以考虑更改设计来让器件达到更高的工作频率或获得更高的效率</p>
+</li>
+</ol>
+<h2 id="基于HLS"><a href="#基于HLS" class="headerlink" title="基于HLS"></a>基于HLS</h2><p>使用FPGA厂商专用的HLS工具可以将高级语言代码转换为HDL代码，进而实现方便的电路设计</p>
+<p>详细内容可以查看其它关于HLS的介绍</p>
+<h2 id="基于已有IP"><a href="#基于已有IP" class="headerlink" title="基于已有IP"></a>基于已有IP</h2><p>往往可以从厂商或开源社区获取到某些器件的RTL代码并加以修改融入当前设计</p>
+<p>使用这种开发方式可以</p>
+<ul>
+<li>使用开源的处理器RTL代码实现软核处理器</li>
+<li>构建SoC</li>
+<li>整合软硬件开发</li>
+</ul>
+<h2 id="FPGA设计与ASIC设计的区别与原理"><a href="#FPGA设计与ASIC设计的区别与原理" class="headerlink" title="FPGA设计与ASIC设计的区别与原理"></a>FPGA设计与ASIC设计的区别与原理</h2><p>FPGA设计自由度较低，无法实现对硬件的定制，且无法在器件内集成模拟集成电路元件，但成本较低；而ASIC可以有更高的自由度，但成本高昂；FPGA也常常被用于ASIC设计中的原型验证</p>
+<p>除此之外，FPGA与ASIC设计的不同点还体现在如下方面</p>
+<h3 id="工艺映射"><a href="#工艺映射" class="headerlink" title="工艺映射"></a>工艺映射</h3><p><strong>工艺映射</strong>：将不依赖于任何工艺的门级网表转换为由特定FPGA逻辑单元所表示的网表的过程</p>
+<p>人话：把网表翻译成用FPGA内部逻辑单元组成的电路</p>
+<p>ASIC设计中并不需要这一步，而是直接将综合后的RTL文件映射为器件，之后就是版图设计师的任务了</p>
+<p>工艺映射的步骤有两个：</p>
+<h4 id="分解"><a href="#分解" class="headerlink" title="分解"></a>分解</h4><p><strong>门级网络实际上是用布尔网络</strong>（基于<em>有向图DAG</em>的门级网表的表现方式，各个节点表示逻辑门或逻辑门的组合逻辑，有向边则表示输入/输出信号）<strong>的形式来表示的，在这一步里要将布尔网络的各个节点分解直到输入数小于查找表的输入数k</strong></p>
+<h4 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a>覆盖</h4><p>使用某种基准对分解得到的布尔网络进行切分，使用k-LUT覆盖多个节点</p>
+<p>实际上这个过程是一种可以在多项式时间内找到逻辑层数最优解的方法^[1]^</p>
+<p>一种执行覆盖的方法<strong>FlowMap</strong>如下：</p>
+<ol>
+<li>获取分解得到的最小电路</li>
+<li>获取输出信号对应的最后一个器件，该器件被抽象为有2个输入、1个输出的节点</li>
+<li>将所有输入节点标号为0</li>
+<li>从输出节点开始，以遍历树的方式寻找对应的上一层节点，将其输入切分出来</li>
+<li>在上一层中标注标签最大的数字，再加上当前节点的层数（以最后一层的遍历为例，上一层标签为0+1=1）</li>
+<li>顺序计算已经标注节点的相邻节点，如果遇到还未标注的节点，先对其进行计算标注</li>
+<li>在当前层（切分点以下）所有相关标签都计算完毕后，再计算第二层节点的标签</li>
+<li>反复计算所有结点的标签</li>
+<li>每一层的逻辑都可以让单个查找表实现</li>
+<li>执行逻辑打包</li>
+</ol>
+<p>术语介绍：</p>
+<ul>
+<li><p>节点（node）：使用布尔网络表示DAG时基于2输入逻辑门模型表示的基本构成要素——电路网络中的逻辑门全部用2输入1输出的节点来建模表示</p>
+</li>
+<li><p>标签：标签的数值用于表示网络的深度，即从各个节点到主输入按照最小深度映射时的逻辑层数</p>
+</li>
+<li><p>切分集：按照k输入进行工艺映射时可能实现的切分集合</p>
+<p>  切分：将节点划分为总输入在k之内、可以使用查找表实现的节点集合</p>
+</li>
+</ul>
+<h3 id="逻辑打包"><a href="#逻辑打包" class="headerlink" title="逻辑打包"></a>逻辑打包</h3><p><strong>逻辑打包</strong>：将多个查找表和触发器集合到同一个逻辑块的过程</p>
+<p>目前主流的FPGA逻辑块都有多个查找表，所以需要高效地将查找表打包到逻辑块</p>
+<p>逻辑打包的要点如下：</p>
+<ol>
+<li>逻辑块内部布线（局部布线）和逻辑块外部布线（布线通道）的延迟相差较大，所以需要平衡并缩短延迟</li>
+<li>如果逻辑块中有查找表空闲，资源使用率就会降低，所以需要增加逻辑块使用量</li>
+</ol>
+<p>一种早期的执行逻辑打包的方法^[2]^如下：</p>
+<ol>
+<li>选择输入占用最多的LUT作为逻辑块的种子</li>
+<li>将具有最多共同输入信号的LUT装填到当前逻辑块</li>
+</ol>
+<p>这种方法无法考虑逻辑布线的延时差，所以有以下改进版本^[3]^：</p>
+<p>采用Timing-driven（延时驱动）的装箱算法<strong>T-VPack</strong></p>
+<ol>
+<li><p>选择关键路径上输入最多的LUT作为逻辑块的种子</p>
+</li>
+<li><p>考虑连接重要度和影响路径数</p>
+<p> 连接重要度使用slack（延迟余裕）值计算而来，用于判断当前路径对时序影响的大小和是否是关键路径</p>
+<p> slack值越小，该路径就越接近关键路径</p>
+<p> 影响路径数指的是当前LUT所影响的关键路径的数目，即输入和当前LUT之间关键路径的总和，该指标表明了当前查找表的延迟一旦改善，总共会有多少路径可以随之得到改善</p>
+</li>
+<li><p>考虑共同信号数量</p>
+</li>
+<li><p>连接重要度大、延迟余裕小、共同信号数量多的逻辑打包到同一个查找表</p>
+</li>
+</ol>
+<p>这种算法很好的考虑到布线延迟和逻辑块使用量的均衡</p>
+<p>近年来的自适应查找表也对装箱算法有很大影响</p>
+<p>较为现代化的算法有AAPack等</p>
+<h3 id="布局布线"><a href="#布局布线" class="headerlink" title="布局布线"></a>布局布线</h3><p><strong>布局</strong>：决定逻辑块的物理位置</p>
+<p><strong>布线</strong>：决定逻辑块的信号连接路径</p>
+<p>多数FPGA的逻辑块都成二维阵列状排列，因此<strong>逻辑块布局问题可以被视为二次分配问题</strong>，这类问题也被公认为NP问题（具有和计算复杂度理论中的NP（Non-deterministic Polynomial Time，非确定性多项式时间）类问题同等或同等以上难度的问题，二次分配问题是具有NP难度的组合优化问题中非常难解的一种问题），通常只能使用SA（Simulated Annealing）等算法获取近似解</p>
+<p>布线过程中主要使用两种布线方法：全局布线和详细布线</p>
+<p>全局布线主要决定线网的布线路径；详细布线则基于全局布线所得信息确定路径具体使用了哪些布线资源、通过了哪些开关等</p>
+<p>这一步FPGA开发和ASIC设计采用的思路都差不多：==瞎蒙==</p>
+<p>具体来说使用VPR工具步骤如下：</p>
+<ol>
+<li>随机放置逻辑块、IO块</li>
+<li>计算当前布局的布线拥挤度</li>
+<li>随机选择两个逻辑块并对调位置</li>
+<li>比较对调后的布线拥挤度</li>
+<li>比较对调前后拥挤度的数指，决定是否接受新的布局</li>
+</ol>
+<h1 id="硬件算法简介"><a href="#硬件算法简介" class="headerlink" title="硬件算法简介"></a>硬件算法简介</h1><p>对于FPGA，或者说ASIC而言，对比CPU最大的优势就是可以实现并行计算，同时能够针对特定问题、特定算法进行优化</p>
+<h2 id="流水线"><a href="#流水线" class="headerlink" title="流水线"></a>流水线</h2><p>将一个连续的硬件电路拆分为n个均等的阶段，每个阶段的输出作为下一个阶段的输入，下一个阶段执行必须等待前一个阶段完成，每个阶段称为流水线的“级”。对于一个非流水线结构中的运算，完成时间为L，则加入n级流水线后，每L/n个单位时间就可以完成1个运算，这样就将同时在电路运算中的数据量增大了n倍，即<strong>吞吐量</strong>增大了n倍。</p>
+<p>实际运算中，n级流水线并不一定能够得到n倍的速度提升</p>
+<p>对于n级流水线结构，完成N个运算所需时间为<br>$$<br>T_{pipe}(N)=L+\frac{(N-1)L}{n}=\frac{n+N-1}{n}<br>$$<br>其中完成一个运算所需时间为L</p>
+<p>速度提升率为<br>$$<br>S_{pipe}(N)=\frac{T(N)}{T_{pipe}(N)}=\frac{nN}{n+N-1}=\frac{n}{1+\frac{n-1}{N}}<br>$$<br>当$n\ll N$时，有$S_{pipe}(N)\cong n$</p>
+<p>流水线结构和非流水线结构相比所得的速度提升和级数成正比，系数为n</p>
+<p>这里要注意的是：全部N个运算的时间被缩短，但每个运算从刚开始到结束的时间没有变化，且在刚开始计算时，也就是流水线没有完全开始工作时的<strong>载入过程</strong>，还有结束计算时的<strong>清空过程</strong>无法省略且难以获得吞吐量增益。</p>
+<p>流水线结构设计中，还要注意时钟周期限制，在寄存器与寄存器之间存在传输延迟、关键电路延迟。当将非流水线硬件改为流水线结构设计时，需要考虑各个部分的延迟。考虑不周很可能发生前一级完成传输时后一级的传输还在进行，就会产生电路错误</p>
+<p>对于两个寄存器之间的延迟，$时钟周期&gt;传输延迟+组合逻辑电路的关键电路延迟+建立时间$，这一时钟周期对应频率的极限就是电路时钟频率的最大值</p>
+<p>当级数增多时，流水线寄存器延迟、建立时间、寄存器输入时钟信号偏移、各级之间处理延迟的不同导致的问题越发显著，虽然引入流水线可以在一定程度上增加总体处理速率，增大吞吐量，但是会引入更多需要考虑的因素</p>
+<h2 id="并行计算与Flynn"><a href="#并行计算与Flynn" class="headerlink" title="并行计算与Flynn"></a>并行计算与Flynn</h2><p>Michel.J.Flynn在1965年提出了称为<strong>Flynn分类</strong>的并行计算架构分类方法</p>
+<p>在通用计算机架构中存在用于控制的<em>指令流</em>和作为运算对象的<em>数据流</em>，Flynn根据基于指令流和数据流的并行度对架构进行分类，分成SISD、SIMD、MISD、MIMD四类，将计算机模型抽象为运算单元PU、控制单元CU、数据存储器、指令存储器四个部分</p>
+<ul>
+<li><p>SISD架构</p>
+<p>  单一CU从指令存储器读取指令流来控制单一的PU，PU受CU控制，从数据存储器读取单一数据流进行计算处理</p>
+<p>  这一架构代表基本的顺序计算，不具备并行计算能力</p>
+</li>
+<li><p>SIMD架构</p>
+<p>  单一CU读取指令流的同时控制多个PU，<strong>各个PU接受相同的控制，各自对不同的数据流进行相同的计算处理</strong>，各个PU可以有自己的本地存储器，也可以所有PU访问同一个共享存储器</p>
+<p>  该架构中的PU常常被用于图像处理等ASIC中</p>
+<p>  通常处理器还会提供SIMD指令来实现数据并行计算，经典的浮点数SIMD指令就是其中之一</p>
+</li>
+<li><p>MISD架构</p>
+<p>  多个CU各自读取不同的指令流并控制多个PU，各个PU根据不同的控制指令对单一数据流进行操作，操作完成后前一阶段的PU将计算结果交付给下一阶段的PU，这样就形成了类似流水线的结构。通过每个CU各自控制一个不同功能的PU来实现并行计算，一般和SIMD架构同时使用来提高效率</p>
+</li>
+<li><p>MIMD架构</p>
+<p>  多个CU各自读取不同的指令流并控制多个PU，各个独立受控的PU对不同的数据流并行处理</p>
+<p>  该架构通常应用于具有SMP等多个核心紧密结合的处理器，可以实现共享数据存储器或独立存储器的计算</p>
+</li>
+</ul>
+<h2 id="脉动算法"><a href="#脉动算法" class="headerlink" title="脉动算法"></a>脉动算法</h2><p><strong>脉动算法</strong>：基于H.T.Kung所提倡的脉动阵列所实现并行处理算法的简称</p>
+<p><strong>脉动阵列</strong>：由大量单一或多种构造的运算元件（PE）按规律排列的硬件架构，其中只有相邻的运算元件互相连接，运算元件只重复进行简单的数据处理和必要的数据收发，且由统一的时钟同步工作，数据每次只能在相邻运算原件之间移动；使用了总线等连接方式的架构称为半脉动阵列</p>
+<p>脉动阵列中的运算元件也可以称为单元</p>
+<p><strong>这种架构的系统性能可以随阵列规模扩大而成比例增加，非常适合在集成电路上实现</strong></p>
+<h3 id="基于一维脉动阵列的部分排序"><a href="#基于一维脉动阵列的部分排序" class="headerlink" title="基于一维脉动阵列的部分排序"></a>基于一维脉动阵列的部分排序</h3><p>排序：将数据按照某种顺序重新排列的过程</p>
+<p>一维排列上设计N个具有寄存器的PE，用于对N个数据进行排序</p>
+<p>PE的寄存器用于保存临时最大值X<del>MAX</del>，当输入比临时最大值大时将临时最大值更新为输入值（使用两路数据选择器，输出较大的数据），在PE之间不断重复这个过程直到所有N个数据进入PE，数值最大的N个数据就会依次存储在各个PE的寄存器中，最后一起输出就完成了比较步骤</p>
+<p>一般的硬件排序电路一般还具有_rst复位输入、mode模式选择输入、shiftRead从大到小逐次读出等输入端</p>
+<p>这样的电路一般也可以当作移位寄存器</p>
+<h3 id="基于一维和二维脉动阵列的矩阵向量相乘"><a href="#基于一维和二维脉动阵列的矩阵向量相乘" class="headerlink" title="基于一维和二维脉动阵列的矩阵向量相乘"></a>基于一维和二维脉动阵列的矩阵向量相乘</h3><p>矩阵向量相乘<strong>Y=AX</strong>的计算也可以采用一维脉动阵列实现，呈网格状排列的二位脉动阵列可以更直观地体现计算思路</p>
+<ul>
+<li><p>一维</p>
+<p>  需要N个PE来实现N x N的矩阵运算，每个PE都是独立的加法器，矩阵X和A分别从左和从上输入阵列，PE会将两矩阵的对应行、列元素相加，并将结果暂存在各自的寄存器中。每个时钟周期都会进行运算并输出当前寄存器内的值</p>
+<p>  需要注意在运算开始前应将寄存器初始化为0，即实现如下算法（C语言形式）</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>  每一步都会执行如下算法（C语言形式）</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y=y+a*x;</span><br></pre></td></tr></table></figure>
+
+<p>  最后完成运算所需总步数为2N-1</p>
+</li>
+<li><p>二维</p>
+<p>  二维矩阵只需要将两个输入矩阵错位，每个时钟周期输入一次即可</p>
+<p>  运算所需总步数为3N-2</p>
+</li>
+</ul>
+<h3 id="实现任意模板计算的可编程脉动阵列"><a href="#实现任意模板计算的可编程脉动阵列" class="headerlink" title="实现任意模板计算的可编程脉动阵列"></a>实现任意模板计算的可编程脉动阵列</h3><p>由</p>
+<ul>
+<li><p>运算器</p>
+<p>  用于进行浮点数乘法和加法</p>
+</li>
+<li><p>本地存储器</p>
+<p>  用于在脉动阵列电路内存储一部分运算数据</p>
+</li>
+<li><p>交换电路</p>
+<p>  将当前位置的运算器和本地存储器中的数据运输到其他地方</p>
+</li>
+<li><p>可编程序列发生器</p>
+<p>  控制整个脉动阵列，使用微程序进行操纵</p>
+</li>
+</ul>
+<p>组成</p>
+<p>通常一个脉动计算存储器阵列分为多个控制组，各控制组内的PE由统一序列发生器控制，按照SIMD架构并行处理</p>
+<p>结合微程序控制交换电路对数据进行搬运，就可以实现任意模板计算</p>
+<h2 id="数据流机"><a href="#数据流机" class="headerlink" title="数据流机"></a>数据流机</h2><p><strong>数据流机</strong>是一种只要输入数据就能进行计算的非冯诺依曼架构的计算机。这种运行方式被称为数据驱动方式</p>
+<p>他将对象程序转化为数据流图后执行处理。一个典型的数据流机有以下节点：</p>
+<ul>
+<li>Fork复制数据到另一支路</li>
+<li>Primitive Operation按描述进行两个数据的算术运算并输出结果</li>
+<li>Branch控制数据流向多个分支中的哪一个分支</li>
+<li>Merge根据条件信号的值选择输入数据并输出</li>
+<li>令牌：被操作的数据</li>
+</ul>
+<p>数据流机可以简单地实现条件分支和循环</p>
+<p>其中条件分支可以使用Branch和Merge的组合来实现，而循环则有两类实现方式</p>
+<h3 id="静态数据流机"><a href="#静态数据流机" class="headerlink" title="静态数据流机"></a>静态数据流机</h3><p>将循环完全展开，全部以数据流的形式实现</p>
+<p>优点：并行性很高</p>
+<p>缺点：数据流图的规模庞大，对应的电路结构也无法避免地变大</p>
+<p>常用于节点运算功能和运算数混合存在的场合，电路中一个命令单元对应一个运算器，运算器会通过控制网络向命令单元传输当前状态。处理完毕的数据进入分发网络送至命令单元，命令通过仲裁网络以操作包的形式发送到运算器，这样就实现了循环的控制</p>
+<h3 id="动态数据流机"><a href="#动态数据流机" class="headerlink" title="动态数据流机"></a>动态数据流机</h3><p>只实现循环体的数据流，在之后的循环中复用同一组硬件搭配条件分支来实现</p>
+<p>优点：</p>
+<p>缺点：需要设置额外的控制电路，如果发生循环间令牌混乱的情况就难以保证计算的正确性</p>
+<p>常用于节点运算功能和运算数分离的场合，可以使用<em>带标号的令牌</em>来实现循环处理</p>
+<p>典型的电路结构如下：</p>
+<p><img src="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20210404102541269.png" alt="image-20210404102541269"></p>
+<p>其中每个PE的结构如下：</p>
+<p><img src="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20210404103243188.png" alt="image-20210404103243188"></p>
+<p>运算数据由标号令牌表示，程序和数据完全分离，每个PE都可以视作一个小型的冯诺依曼架构计算机，数据令牌则由存储位置指令的状态编号、自己的标号、存储位置指令的入口编号、存储位置指令的运算数组成，控制不同标号的运算数据进入不同的PE即可实现循环</p>
+<p>PE中的I结构是一个为数组等简单数据结构提供等待功能的模块，在按数据驱动方式处理数组访问时，需要保证数据在写入之后再次被读取。一般的解决方法是对每一个元素设置一个存在标志位，指示数据是否已经被写入，I结构一般要内置该功能以加速简单数据结构的运算。</p>
+<h3 id="Petri网"><a href="#Petri网" class="headerlink" title="Petri网"></a>Petri网</h3><p>表示信号输入/输出的图被称为Petri网，<strong>信号转换图</strong>是它的一个子类。可以用于描述并行系统和异步系统</p>
+<p>Petri网是由<em>库所</em>（place）和<em>变迁</em>（transition）两类节点和有向弧组成的二分图</p>
+<p>系统的状态或条件由库所表示，系统状态迁移的发生和完成等事件用变迁表示，库所-&gt;变迁的有向弧表示现象的发生及其前提条件，变迁-&gt;库所表示事件发生后的状态和成立条件的关系。</p>
+<p>Petri网可以表示以下基本状态行为：</p>
+<ul>
+<li>并发</li>
+<li>冲突</li>
+<li>困惑</li>
+<li>同步</li>
+<li>资源共享</li>
+<li>读取</li>
+<li>有限容量</li>
+</ul>
+<p>常使用Petri网和数据流机共同描述一个算法，以便在HDL中进行有效的算法优化</p>
+<h2 id="流处理思想及其实现"><a href="#流处理思想及其实现" class="headerlink" title="流处理思想及其实现"></a>流处理思想及其实现</h2><p><strong>流处理</strong>：针对逐个输入的数据序列，持续依次处理其中各个元素的方式</p>
+<p>数据元素可以是单一标量数据，也可以是包含多个字的向量数据，但流处理每次只能处理一个元素，这就导致元素增多（数据流增长）时的处理时间会成比例增加，不过这也相当于<strong>只要付出时间就可以处理巨大的数据集</strong></p>
+<p>流处理数据元素的处理单元称为处理核（kernal），流处理中可以只包含一个处理核也可以包含多个处理核</p>
+<h3 id="硬件实现"><a href="#硬件实现" class="headerlink" title="硬件实现"></a>硬件实现</h3><p>如果有充足的硬件资源，可以实现多个处理核，每个处理核作为一级流水线相互连接，最终形成一个大型流水线设计，这样的系统能够达到吞吐量为1的流处理，每个时钟周期都可以进行数据的输入/输出；当硬件资源不充足时，可以将原数据流图折叠变小后映射到硬件，这种方法称为<strong>折叠法</strong>，该设计会导致处理周期增加，吞吐量降低，但可以节省硬件资源或在硬件资源有限的情况下实现流处理</p>
+<p>对于某些硬件使用率不到100%的电路，也可以考虑使用折叠法来提高硬件使用率：在运算器输入处插入数据选择器，在需要提高硬件使用率的情况下将正常的流处理程序改变为折叠过后的流处理程序；如果连续处理的多个数据之间存在依赖关系，可以在流处理过程中插入延迟缓冲存储器，将上一步运算的结果暂存，在下一个时钟周期进行处理来实现流处理效果</p>
+<h2 id="元胞自动机"><a href="#元胞自动机" class="headerlink" title="元胞自动机"></a>元胞自动机</h2><p><strong>元胞自动机</strong>是基于网格状单元核简单规则的离散计算模型，于冯诺依曼等人在20世纪40年代提出。</p>
+<p>元胞自动机由具有有限个状态的元胞组成，经过离散时间后每个细胞的状态都会发生变化，某时刻t元胞的状态会受到上一个时刻元胞状态和其邻居元胞状态的影响。按照考虑邻居元胞的个数，分为冯诺依曼型（只考虑上下左右四个元胞的状态）和摩尔型（考虑全部八个周边元胞状态）</p>
+<p>最著名的元胞自动机就是<em>生命游戏</em>，它的一种简单C语言实现如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//简单的状态机练习</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;LifeGame.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//开始菜单</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">CtrlGame</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> input=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Welcome to play LifeGame!\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n\n\n&quot;</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Enter p to start\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        input=getch();</span><br><span class="line">        <span class="keyword">if</span>(input==<span class="string">&#x27;p&#x27;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//游戏数据初始化</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitGame</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    srand((<span class="keyword">unsigned</span>)time(<span class="literal">NULL</span>)); <span class="comment">//生成种子</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;HIGH;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;WIDTH;j++)</span><br><span class="line">            cell_map[i][j]=rand()%<span class="number">2</span>;<span class="comment">//细胞初始状态随机</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//进行游戏</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RunGame</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cell_num=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        system(<span class="string">&quot;cls&quot;</span>);<span class="comment">//清屏</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;HIGH;i++) <span class="comment">//打印本迭代细胞地图</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;WIDTH;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(cell_map[i][j]==<span class="number">1</span>)</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot; # &quot;</span>);</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(cell_map[i][j]==<span class="number">0</span>)</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">&quot; * &quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//计算1个细胞周围8个格子内的活细胞总量并进行下一步判断</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;HIGH;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;WIDTH;j++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(i==<span class="number">0</span>) <span class="comment">//最上一行</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(j==<span class="number">0</span>) <span class="comment">//左上角</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        cell_num=</span><br><span class="line">                                                         cell_map[i][j+<span class="number">1</span>]+</span><br><span class="line">                                      cell_map[i+<span class="number">1</span>][j]+ cell_map[i+<span class="number">1</span>][j+<span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span>(j==WIDTH<span class="number">-1</span>) <span class="comment">//右上角</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        cell_num=</span><br><span class="line">                                     cell_map[i][j<span class="number">-1</span>]+                     </span><br><span class="line">                                     cell_map[i+<span class="number">1</span>][j<span class="number">-1</span>]+ cell_map[i+<span class="number">1</span>][j];</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="comment">//其他</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        cell_num=</span><br><span class="line">                                     cell_map[i][j<span class="number">-1</span>]+                     cell_map[i][j+<span class="number">1</span>]+</span><br><span class="line">                                     cell_map[i+<span class="number">1</span>][j<span class="number">-1</span>]+ cell_map[i+<span class="number">1</span>][j]+ cell_map[i+<span class="number">1</span>][j+<span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(i==HIGH<span class="number">-1</span>) <span class="comment">//最下一行</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(j==<span class="number">0</span>) <span class="comment">//左下角</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        cell_num= cell_map[i<span class="number">-1</span>][j]+ cell_map[i<span class="number">-1</span>][j+<span class="number">1</span>]+</span><br><span class="line">                                                    cell_map[i][j+<span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span>(j==WIDTH<span class="number">-1</span>) <span class="comment">//右下角</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        cell_num=cell_map[i<span class="number">-1</span>][j<span class="number">-1</span>]+ cell_map[i<span class="number">-1</span>][j]+ </span><br><span class="line">                                 cell_map[i][j<span class="number">-1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> <span class="comment">//其他</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        cell_num=cell_map[i<span class="number">-1</span>][j<span class="number">-1</span>]+ cell_map[i<span class="number">-1</span>][j]+ cell_map[i<span class="number">-1</span>][j+<span class="number">1</span>]+</span><br><span class="line">                                 cell_map[i][j<span class="number">-1</span>]+                     cell_map[i][j+<span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(j==<span class="number">0</span>) <span class="comment">//除左上角和左下角的最左一列</span></span><br><span class="line">                &#123;</span><br><span class="line">                    cell_num=cell_map[i<span class="number">-1</span>][j]+ cell_map[i<span class="number">-1</span>][j+<span class="number">1</span>]+</span><br><span class="line">                                               cell_map[i][j+<span class="number">1</span>]+</span><br><span class="line">                             cell_map[i+<span class="number">1</span>][j]+ cell_map[i+<span class="number">1</span>][j+<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(j==WIDTH<span class="number">-1</span>) <span class="comment">//除右上角和右下角的最右一列</span></span><br><span class="line">                &#123;</span><br><span class="line">                    cell_num=cell_map[i<span class="number">-1</span>][j<span class="number">-1</span>]+ cell_map[i<span class="number">-1</span>][j]+</span><br><span class="line">                             cell_map[i][j<span class="number">-1</span>]+</span><br><span class="line">                             cell_map[i+<span class="number">1</span>][j<span class="number">-1</span>]+ cell_map[i+<span class="number">1</span>][j];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="comment">//其他位置</span></span><br><span class="line">                &#123;</span><br><span class="line">                    cell_num=cell_map[i<span class="number">-1</span>][j<span class="number">-1</span>]+ cell_map[i<span class="number">-1</span>][j]+ cell_map[i<span class="number">-1</span>][j+<span class="number">1</span>]+</span><br><span class="line">                             cell_map[i][j<span class="number">-1</span>]+                     cell_map[i][j+<span class="number">1</span>]+</span><br><span class="line">                             cell_map[i+<span class="number">1</span>][j<span class="number">-1</span>]+ cell_map[i+<span class="number">1</span>][j]+ cell_map[i+<span class="number">1</span>][j+<span class="number">1</span>];</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span>(cell_num==<span class="number">3</span>) <span class="comment">//当周围有3个活细胞时,该细胞下一代为活细胞</span></span><br><span class="line">                    new_cell_map[i][j]=<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(cell_num==<span class="number">2</span>) <span class="comment">//周围有2个活细胞时，该细胞下一代状态不变</span></span><br><span class="line">                    new_cell_map[i][j]=cell_map[i][j];</span><br><span class="line">                <span class="keyword">else</span> <span class="comment">//其它情况时，该细胞下一代转为死细胞</span></span><br><span class="line">                    new_cell_map[i][j]=<span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;HIGH;i++) <span class="comment">//创建下一迭代</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;WIDTH;j++)</span><br><span class="line">                cell_map[i][j]=new_cell_map[i][j];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Sleep(<span class="number">1000</span>);</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(CtrlGame()==<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        InitGame();</span><br><span class="line">        RunGame();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>LifeGame.h</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;windows.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//游戏尺寸</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HIGH 10</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WIDTH 10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> cell_map[HIGH][WIDTH]; <span class="comment">//初始状态细胞地图</span></span><br><span class="line"><span class="keyword">int</span> new_cell_map[HIGH][WIDTH]; <span class="comment">//下一代细胞地图</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">CtrlGame</span><span class="params">(<span class="keyword">void</span>)</span></span>;<span class="comment">//开始菜单</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitGame</span><span class="params">(<span class="keyword">void</span>)</span></span>;<span class="comment">//游戏数据初始化</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RunLifeGame</span><span class="params">(<span class="keyword">void</span>)</span></span>;<span class="comment">//进行游戏</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="硬件排序算法"><a href="#硬件排序算法" class="headerlink" title="硬件排序算法"></a>硬件排序算法</h2><p><strong>排序</strong>：将由n个元素组成的乱序数列按升序或降序重新排列的过程</p>
+<p>硬件上常常使用<strong>排序网络</strong>和<strong>归并排序树</strong></p>
+<h3 id="基于冒泡排序的排序网络"><a href="#基于冒泡排序的排序网络" class="headerlink" title="基于冒泡排序的排序网络"></a>基于冒泡排序的排序网络</h3><p>特点：可以并行地对相邻两个元素进行排序</p>
+<p>排序网络由连线和用于排序相邻元素的交换单元EU组成</p>
+<p>连线的数量和元素的数量一致，每个元素最多通过n-1级EU，使用流水线可以提升吞吐量</p>
+<p>缺点：面积大，占用硬件资源</p>
+<p>在此基础上换用Batcher奇偶排序网络可实现高效排序</p>
+<h3 id="归并排序树"><a href="#归并排序树" class="headerlink" title="归并排序树"></a>归并排序树</h3><p>使用二叉树结构连接各个EU，使用FIFO进行输入/输出实现电路内部和外部去耦</p>
+<p>全部EU的排序处理可以并行执行，待排列的数列并行输入归并排序树，每层EU选出两个元素中较大（较小）的那个，每层EU将排序后的数列送到下一层的输入FIFO，依次执行最后可以串行输出排序后的数列</p>
+<h2 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h2><p><strong>模式匹配</strong>：在数据中按照给定的模式进行搜索</p>
+<h3 id="精确匹配"><a href="#精确匹配" class="headerlink" title="精确匹配"></a>精确匹配</h3><p>精确匹配中的模式长度固定，分成0、1、’dont care‘三种状态</p>
+<p>可以使用CAM（Content Addressable Memory）存储器实现。在FPGA上常常实现CAM的索引生成单元（Index Generation Unit，IGU）</p>
+<p>总体思路是将输入数据p存储到<em>主存储器</em>，主存储器输出索引生成函数f，使用辅助存储器存储f，将其和匹配输入X进行比较，输出q，使用q在辅助存储器查询得到X’，将X和X‘进行逻辑与运算，如果两者相同就输出q，否则输出0</p>
+<p>IGU可以将2^n^个元素的集合映射到k+1个集合，内存占用量从O(2^n^)缩减到O(2^p^)，其中p是输入数据p的位数</p>
+<h3 id="正则表达式匹配"><a href="#正则表达式匹配" class="headerlink" title="正则表达式匹配"></a>正则表达式匹配</h3><p>正则表达式由字符和描述字符集合的元字符组成。正则表达式匹配等价于使用同等功能的有穷自动机对字符串进行处理</p>
+<p>对于确定的输入无法确定迁移状态的自动机称为<strong>非确定性有穷自动机（NFA）</strong>；对确定的输入能够确定迁移状态的自动机称为<strong>确定性有穷自动机（DFA）</strong>。采用DFA的硬件加速实现一般基于Aho-Corasick算法；采用NFA的硬件加速一般使用Prasanna方法</p>
+<p>下面仅介绍NFA实现：</p>
+<ul>
+<li>电路使用存储器对单个字符进行检索，并将结果送入匹配单元ME</li>
+<li>ME会模拟状态迁移过程并输出匹配信号</li>
+</ul>
+<p>总体上是利用一个解析元字符的ME来控制对整个字符串的检索</p>
+<p>NFA和DFA两种并行硬件的比较如下</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>按位分割DFA</th>
+<th>Prasanna-NFA</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空间复杂度</td>
+<td>查找表数</td>
+<td>O(1)</td>
+<td>O(ms)</td>
+</tr>
+<tr>
+<td>空间复杂度</td>
+<td>存储器使用量</td>
+<td>$O(\sum ^{ms})$</td>
+<td>O(ms)</td>
+</tr>
+<tr>
+<td>时间复杂度</td>
+<td>处理周期</td>
+<td>O(1)</td>
+<td>O(1)</td>
+</tr>
+</tbody></table>
+<p>对于FPGA来说更适合NFA实现，因为DFA方法的存储器使用量呈指数型增加，而NFA方法的空间复杂度恒定</p>
+<h3 id="近似匹配"><a href="#近似匹配" class="headerlink" title="近似匹配"></a>近似匹配</h3><p>近似字符串匹配：在文本中查找和模式相似的字符串的问题</p>
+<p>近似匹配过程中往往伴随着对模式进行删除、置换、插入等处理</p>
+<p>一个典型的近似匹配硬件加速架构如下：</p>
+<ul>
+<li>宿主PC将文本和模式发送到硬件部分</li>
+<li>文本被发送到缓冲存储器，模式被发送到编辑距离运算电路</li>
+<li>编辑距离运算电路从缓冲存储器读取一部分文本，并计算文本和模式的编辑距离。当且仅当编辑距离最小时，控制电路会将最小编辑距离和表示文本位置的地址输出到FIFO保存</li>
+<li>文本每次移动一个字符并重复上一步</li>
+<li>所有文本匹配完成时，会将结果发回宿主PC</li>
+</ul>
+<p>所有步骤中最复杂的就是计算编辑距离，在这里常常需要实现特殊的<strong>动态规划</strong>硬件算法</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>[1]Jason Cong,Yuzheng Ding. FlowMap: an optimal technology mapping  algorithm for delay optimization in lookup-table based FPGA designs.[J]. IEEE Trans. on CAD of Integrated Circuits and Systems,1994,13(1).</p>
+<p>[2]VPack-Jonathan Rose.UToronto</p>
+<p>[3]Alexander (Sandy) Marquardt,Vaughn Betz,Jonathan Rose. Using  cluster-based logic blocks and timing-driven packing to improve FPGA  speed and density[P]. Field programmable gate arrays,1999.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          FPGA学习笔记2【基础概念】
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">STM32外设配置速查【QSPI】</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2021 RedlightASl
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true,
+		toc_hide_index: true,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script>!function(t){function n(e){if(r[e])return r[e].exports;var i=r[e]={exports:{},id:e,loaded:!1};return t[e].call(i.exports,i,i.exports,n),i.loaded=!0,i.exports}var r={};n.m=t,n.c=r,n.p="./",n(0)}([function(t,n,r){r(195),t.exports=r(191)},function(t,n,r){var e=r(3),i=r(52),o=r(27),u=r(28),c=r(53),f="prototype",a=function(t,n,r){var s,l,h,v,p=t&a.F,d=t&a.G,y=t&a.S,g=t&a.P,b=t&a.B,m=d?e:y?e[n]||(e[n]={}):(e[n]||{})[f],x=d?i:i[n]||(i[n]={}),w=x[f]||(x[f]={});d&&(r=n);for(s in r)l=!p&&m&&void 0!==m[s],h=(l?m:r)[s],v=b&&l?c(h,e):g&&"function"==typeof h?c(Function.call,h):h,m&&u(m,s,h,t&a.U),x[s]!=h&&o(x,s,v),g&&w[s]!=h&&(w[s]=h)};e.core=i,a.F=1,a.G=2,a.S=4,a.P=8,a.B=16,a.W=32,a.U=64,a.R=128,t.exports=a},function(t,n,r){var e=r(6);t.exports=function(t){if(!e(t))throw TypeError(t+" is not an object!");return t}},function(t,n){var r=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=r)},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n){var r=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=r)},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n,r){var e=r(126)("wks"),i=r(76),o=r(3).Symbol,u="function"==typeof o;(t.exports=function(t){return e[t]||(e[t]=u&&o[t]||(u?o:i)("Symbol."+t))}).store=e},function(t,n){var r={}.hasOwnProperty;t.exports=function(t,n){return r.call(t,n)}},function(t,n,r){var e=r(94),i=r(33);t.exports=function(t){return e(i(t))}},function(t,n,r){t.exports=!r(4)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n,r){var e=r(2),i=r(167),o=r(50),u=Object.defineProperty;n.f=r(10)?Object.defineProperty:function(t,n,r){if(e(t),n=o(n,!0),e(r),i)try{return u(t,n,r)}catch(t){}if("get"in r||"set"in r)throw TypeError("Accessors not supported!");return"value"in r&&(t[n]=r.value),t}},function(t,n,r){t.exports=!r(18)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n,r){var e=r(14),i=r(22);t.exports=r(12)?function(t,n,r){return e.f(t,n,i(1,r))}:function(t,n,r){return t[n]=r,t}},function(t,n,r){var e=r(20),i=r(58),o=r(42),u=Object.defineProperty;n.f=r(12)?Object.defineProperty:function(t,n,r){if(e(t),n=o(n,!0),e(r),i)try{return u(t,n,r)}catch(t){}if("get"in r||"set"in r)throw TypeError("Accessors not supported!");return"value"in r&&(t[n]=r.value),t}},function(t,n,r){var e=r(40)("wks"),i=r(23),o=r(5).Symbol,u="function"==typeof o;(t.exports=function(t){return e[t]||(e[t]=u&&o[t]||(u?o:i)("Symbol."+t))}).store=e},function(t,n,r){var e=r(67),i=Math.min;t.exports=function(t){return t>0?i(e(t),9007199254740991):0}},function(t,n,r){var e=r(46);t.exports=function(t){return Object(e(t))}},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n,r){var e=r(63),i=r(34);t.exports=Object.keys||function(t){return e(t,i)}},function(t,n,r){var e=r(21);t.exports=function(t){if(!e(t))throw TypeError(t+" is not an object!");return t}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n){var r=0,e=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++r+e).toString(36))}},function(t,n){var r={}.hasOwnProperty;t.exports=function(t,n){return r.call(t,n)}},function(t,n){var r=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=r)},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n,r){var e=r(11),i=r(66);t.exports=r(10)?function(t,n,r){return e.f(t,n,i(1,r))}:function(t,n,r){return t[n]=r,t}},function(t,n,r){var e=r(3),i=r(27),o=r(24),u=r(76)("src"),c="toString",f=Function[c],a=(""+f).split(c);r(52).inspectSource=function(t){return f.call(t)},(t.exports=function(t,n,r,c){var f="function"==typeof r;f&&(o(r,"name")||i(r,"name",n)),t[n]!==r&&(f&&(o(r,u)||i(r,u,t[n]?""+t[n]:a.join(String(n)))),t===e?t[n]=r:c?t[n]?t[n]=r:i(t,n,r):(delete t[n],i(t,n,r)))})(Function.prototype,c,function(){return"function"==typeof this&&this[u]||f.call(this)})},function(t,n,r){var e=r(1),i=r(4),o=r(46),u=function(t,n,r,e){var i=String(o(t)),u="<"+n;return""!==r&&(u+=" "+r+'="'+String(e).replace(/"/g,"&quot;")+'"'),u+">"+i+"</"+n+">"};t.exports=function(t,n){var r={};r[t]=n(u),e(e.P+e.F*i(function(){var n=""[t]('"');return n!==n.toLowerCase()||n.split('"').length>3}),"String",r)}},function(t,n,r){var e=r(115),i=r(46);t.exports=function(t){return e(i(t))}},function(t,n,r){var e=r(116),i=r(66),o=r(30),u=r(50),c=r(24),f=r(167),a=Object.getOwnPropertyDescriptor;n.f=r(10)?a:function(t,n){if(t=o(t),n=u(n,!0),f)try{return a(t,n)}catch(t){}if(c(t,n))return i(!e.f.call(t,n),t[n])}},function(t,n,r){var e=r(24),i=r(17),o=r(145)("IE_PROTO"),u=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=i(t),e(t,o)?t[o]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?u:null}},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n){t.exports={}},function(t,n){t.exports=!0},function(t,n){n.f={}.propertyIsEnumerable},function(t,n,r){var e=r(14).f,i=r(8),o=r(15)("toStringTag");t.exports=function(t,n,r){t&&!i(t=r?t:t.prototype,o)&&e(t,o,{configurable:!0,value:n})}},function(t,n,r){var e=r(40)("keys"),i=r(23);t.exports=function(t){return e[t]||(e[t]=i(t))}},function(t,n,r){var e=r(5),i="__core-js_shared__",o=e[i]||(e[i]={});t.exports=function(t){return o[t]||(o[t]={})}},function(t,n){var r=Math.ceil,e=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?e:r)(t)}},function(t,n,r){var e=r(21);t.exports=function(t,n){if(!e(t))return t;var r,i;if(n&&"function"==typeof(r=t.toString)&&!e(i=r.call(t)))return i;if("function"==typeof(r=t.valueOf)&&!e(i=r.call(t)))return i;if(!n&&"function"==typeof(r=t.toString)&&!e(i=r.call(t)))return i;throw TypeError("Can't convert object to primitive value")}},function(t,n,r){var e=r(5),i=r(25),o=r(36),u=r(44),c=r(14).f;t.exports=function(t){var n=i.Symbol||(i.Symbol=o?{}:e.Symbol||{});"_"==t.charAt(0)||t in n||c(n,t,{value:u.f(t)})}},function(t,n,r){n.f=r(15)},function(t,n){var r={}.toString;t.exports=function(t){return r.call(t).slice(8,-1)}},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n,r){var e=r(4);t.exports=function(t,n){return!!t&&e(function(){n?t.call(null,function(){},1):t.call(null)})}},function(t,n,r){var e=r(53),i=r(115),o=r(17),u=r(16),c=r(203);t.exports=function(t,n){var r=1==t,f=2==t,a=3==t,s=4==t,l=6==t,h=5==t||l,v=n||c;return function(n,c,p){for(var d,y,g=o(n),b=i(g),m=e(c,p,3),x=u(b.length),w=0,S=r?v(n,x):f?v(n,0):void 0;x>w;w++)if((h||w in b)&&(d=b[w],y=m(d,w,g),t))if(r)S[w]=y;else if(y)switch(t){case 3:return!0;case 5:return d;case 6:return w;case 2:S.push(d)}else if(s)return!1;return l?-1:a||s?s:S}}},function(t,n,r){var e=r(1),i=r(52),o=r(4);t.exports=function(t,n){var r=(i.Object||{})[t]||Object[t],u={};u[t]=n(r),e(e.S+e.F*o(function(){r(1)}),"Object",u)}},function(t,n,r){var e=r(6);t.exports=function(t,n){if(!e(t))return t;var r,i;if(n&&"function"==typeof(r=t.toString)&&!e(i=r.call(t)))return i;if("function"==typeof(r=t.valueOf)&&!e(i=r.call(t)))return i;if(!n&&"function"==typeof(r=t.toString)&&!e(i=r.call(t)))return i;throw TypeError("Can't convert object to primitive value")}},function(t,n,r){var e=r(5),i=r(25),o=r(91),u=r(13),c="prototype",f=function(t,n,r){var a,s,l,h=t&f.F,v=t&f.G,p=t&f.S,d=t&f.P,y=t&f.B,g=t&f.W,b=v?i:i[n]||(i[n]={}),m=b[c],x=v?e:p?e[n]:(e[n]||{})[c];v&&(r=n);for(a in r)(s=!h&&x&&void 0!==x[a])&&a in b||(l=s?x[a]:r[a],b[a]=v&&"function"!=typeof x[a]?r[a]:y&&s?o(l,e):g&&x[a]==l?function(t){var n=function(n,r,e){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,r)}return new t(n,r,e)}return t.apply(this,arguments)};return n[c]=t[c],n}(l):d&&"function"==typeof l?o(Function.call,l):l,d&&((b.virtual||(b.virtual={}))[a]=l,t&f.R&&m&&!m[a]&&u(m,a,l)))};f.F=1,f.G=2,f.S=4,f.P=8,f.B=16,f.W=32,f.U=64,f.R=128,t.exports=f},function(t,n){var r=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=r)},function(t,n,r){var e=r(26);t.exports=function(t,n,r){if(e(t),void 0===n)return t;switch(r){case 1:return function(r){return t.call(n,r)};case 2:return function(r,e){return t.call(n,r,e)};case 3:return function(r,e,i){return t.call(n,r,e,i)}}return function(){return t.apply(n,arguments)}}},function(t,n,r){var e=r(183),i=r(1),o=r(126)("metadata"),u=o.store||(o.store=new(r(186))),c=function(t,n,r){var i=u.get(t);if(!i){if(!r)return;u.set(t,i=new e)}var o=i.get(n);if(!o){if(!r)return;i.set(n,o=new e)}return o},f=function(t,n,r){var e=c(n,r,!1);return void 0!==e&&e.has(t)},a=function(t,n,r){var e=c(n,r,!1);return void 0===e?void 0:e.get(t)},s=function(t,n,r,e){c(r,e,!0).set(t,n)},l=function(t,n){var r=c(t,n,!1),e=[];return r&&r.forEach(function(t,n){e.push(n)}),e},h=function(t){return void 0===t||"symbol"==typeof t?t:String(t)},v=function(t){i(i.S,"Reflect",t)};t.exports={store:u,map:c,has:f,get:a,set:s,keys:l,key:h,exp:v}},function(t,n,r){"use strict";if(r(10)){var e=r(69),i=r(3),o=r(4),u=r(1),c=r(127),f=r(152),a=r(53),s=r(68),l=r(66),h=r(27),v=r(73),p=r(67),d=r(16),y=r(75),g=r(50),b=r(24),m=r(180),x=r(114),w=r(6),S=r(17),_=r(137),O=r(70),E=r(32),P=r(71).f,j=r(154),F=r(76),M=r(7),A=r(48),N=r(117),T=r(146),I=r(155),k=r(80),L=r(123),R=r(74),C=r(130),D=r(160),U=r(11),W=r(31),G=U.f,B=W.f,V=i.RangeError,z=i.TypeError,q=i.Uint8Array,K="ArrayBuffer",J="Shared"+K,Y="BYTES_PER_ELEMENT",H="prototype",$=Array[H],X=f.ArrayBuffer,Q=f.DataView,Z=A(0),tt=A(2),nt=A(3),rt=A(4),et=A(5),it=A(6),ot=N(!0),ut=N(!1),ct=I.values,ft=I.keys,at=I.entries,st=$.lastIndexOf,lt=$.reduce,ht=$.reduceRight,vt=$.join,pt=$.sort,dt=$.slice,yt=$.toString,gt=$.toLocaleString,bt=M("iterator"),mt=M("toStringTag"),xt=F("typed_constructor"),wt=F("def_constructor"),St=c.CONSTR,_t=c.TYPED,Ot=c.VIEW,Et="Wrong length!",Pt=A(1,function(t,n){return Tt(T(t,t[wt]),n)}),jt=o(function(){return 1===new q(new Uint16Array([1]).buffer)[0]}),Ft=!!q&&!!q[H].set&&o(function(){new q(1).set({})}),Mt=function(t,n){if(void 0===t)throw z(Et);var r=+t,e=d(t);if(n&&!m(r,e))throw V(Et);return e},At=function(t,n){var r=p(t);if(r<0||r%n)throw V("Wrong offset!");return r},Nt=function(t){if(w(t)&&_t in t)return t;throw z(t+" is not a typed array!")},Tt=function(t,n){if(!(w(t)&&xt in t))throw z("It is not a typed array constructor!");return new t(n)},It=function(t,n){return kt(T(t,t[wt]),n)},kt=function(t,n){for(var r=0,e=n.length,i=Tt(t,e);e>r;)i[r]=n[r++];return i},Lt=function(t,n,r){G(t,n,{get:function(){return this._d[r]}})},Rt=function(t){var n,r,e,i,o,u,c=S(t),f=arguments.length,s=f>1?arguments[1]:void 0,l=void 0!==s,h=j(c);if(void 0!=h&&!_(h)){for(u=h.call(c),e=[],n=0;!(o=u.next()).done;n++)e.push(o.value);c=e}for(l&&f>2&&(s=a(s,arguments[2],2)),n=0,r=d(c.length),i=Tt(this,r);r>n;n++)i[n]=l?s(c[n],n):c[n];return i},Ct=function(){for(var t=0,n=arguments.length,r=Tt(this,n);n>t;)r[t]=arguments[t++];return r},Dt=!!q&&o(function(){gt.call(new q(1))}),Ut=function(){return gt.apply(Dt?dt.call(Nt(this)):Nt(this),arguments)},Wt={copyWithin:function(t,n){return D.call(Nt(this),t,n,arguments.length>2?arguments[2]:void 0)},every:function(t){return rt(Nt(this),t,arguments.length>1?arguments[1]:void 0)},fill:function(t){return C.apply(Nt(this),arguments)},filter:function(t){return It(this,tt(Nt(this),t,arguments.length>1?arguments[1]:void 0))},find:function(t){return et(Nt(this),t,arguments.length>1?arguments[1]:void 0)},findIndex:function(t){return it(Nt(this),t,arguments.length>1?arguments[1]:void 0)},forEach:function(t){Z(Nt(this),t,arguments.length>1?arguments[1]:void 0)},indexOf:function(t){return ut(Nt(this),t,arguments.length>1?arguments[1]:void 0)},includes:function(t){return ot(Nt(this),t,arguments.length>1?arguments[1]:void 0)},join:function(t){return vt.apply(Nt(this),arguments)},lastIndexOf:function(t){return st.apply(Nt(this),arguments)},map:function(t){return Pt(Nt(this),t,arguments.length>1?arguments[1]:void 0)},reduce:function(t){return lt.apply(Nt(this),arguments)},reduceRight:function(t){return ht.apply(Nt(this),arguments)},reverse:function(){for(var t,n=this,r=Nt(n).length,e=Math.floor(r/2),i=0;i<e;)t=n[i],n[i++]=n[--r],n[r]=t;return n},some:function(t){return nt(Nt(this),t,arguments.length>1?arguments[1]:void 0)},sort:function(t){return pt.call(Nt(this),t)},subarray:function(t,n){var r=Nt(this),e=r.length,i=y(t,e);return new(T(r,r[wt]))(r.buffer,r.byteOffset+i*r.BYTES_PER_ELEMENT,d((void 0===n?e:y(n,e))-i))}},Gt=function(t,n){return It(this,dt.call(Nt(this),t,n))},Bt=function(t){Nt(this);var n=At(arguments[1],1),r=this.length,e=S(t),i=d(e.length),o=0;if(i+n>r)throw V(Et);for(;o<i;)this[n+o]=e[o++]},Vt={entries:function(){return at.call(Nt(this))},keys:function(){return ft.call(Nt(this))},values:function(){return ct.call(Nt(this))}},zt=function(t,n){return w(t)&&t[_t]&&"symbol"!=typeof n&&n in t&&String(+n)==String(n)},qt=function(t,n){return zt(t,n=g(n,!0))?l(2,t[n]):B(t,n)},Kt=function(t,n,r){return!(zt(t,n=g(n,!0))&&w(r)&&b(r,"value"))||b(r,"get")||b(r,"set")||r.configurable||b(r,"writable")&&!r.writable||b(r,"enumerable")&&!r.enumerable?G(t,n,r):(t[n]=r.value,t)};St||(W.f=qt,U.f=Kt),u(u.S+u.F*!St,"Object",{getOwnPropertyDescriptor:qt,defineProperty:Kt}),o(function(){yt.call({})})&&(yt=gt=function(){return vt.call(this)});var Jt=v({},Wt);v(Jt,Vt),h(Jt,bt,Vt.values),v(Jt,{slice:Gt,set:Bt,constructor:function(){},toString:yt,toLocaleString:Ut}),Lt(Jt,"buffer","b"),Lt(Jt,"byteOffset","o"),Lt(Jt,"byteLength","l"),Lt(Jt,"length","e"),G(Jt,mt,{get:function(){return this[_t]}}),t.exports=function(t,n,r,f){f=!!f;var a=t+(f?"Clamped":"")+"Array",l="Uint8Array"!=a,v="get"+t,p="set"+t,y=i[a],g=y||{},b=y&&E(y),m=!y||!c.ABV,S={},_=y&&y[H],j=function(t,r){var e=t._d;return e.v[v](r*n+e.o,jt)},F=function(t,r,e){var i=t._d;f&&(e=(e=Math.round(e))<0?0:e>255?255:255&e),i.v[p](r*n+i.o,e,jt)},M=function(t,n){G(t,n,{get:function(){return j(this,n)},set:function(t){return F(this,n,t)},enumerable:!0})};m?(y=r(function(t,r,e,i){s(t,y,a,"_d");var o,u,c,f,l=0,v=0;if(w(r)){if(!(r instanceof X||(f=x(r))==K||f==J))return _t in r?kt(y,r):Rt.call(y,r);o=r,v=At(e,n);var p=r.byteLength;if(void 0===i){if(p%n)throw V(Et);if((u=p-v)<0)throw V(Et)}else if((u=d(i)*n)+v>p)throw V(Et);c=u/n}else c=Mt(r,!0),u=c*n,o=new X(u);for(h(t,"_d",{b:o,o:v,l:u,e:c,v:new Q(o)});l<c;)M(t,l++)}),_=y[H]=O(Jt),h(_,"constructor",y)):L(function(t){new y(null),new y(t)},!0)||(y=r(function(t,r,e,i){s(t,y,a);var o;return w(r)?r instanceof X||(o=x(r))==K||o==J?void 0!==i?new g(r,At(e,n),i):void 0!==e?new g(r,At(e,n)):new g(r):_t in r?kt(y,r):Rt.call(y,r):new g(Mt(r,l))}),Z(b!==Function.prototype?P(g).concat(P(b)):P(g),function(t){t in y||h(y,t,g[t])}),y[H]=_,e||(_.constructor=y));var A=_[bt],N=!!A&&("values"==A.name||void 0==A.name),T=Vt.values;h(y,xt,!0),h(_,_t,a),h(_,Ot,!0),h(_,wt,y),(f?new y(1)[mt]==a:mt in _)||G(_,mt,{get:function(){return a}}),S[a]=y,u(u.G+u.W+u.F*(y!=g),S),u(u.S,a,{BYTES_PER_ELEMENT:n,from:Rt,of:Ct}),Y in _||h(_,Y,n),u(u.P,a,Wt),R(a),u(u.P+u.F*Ft,a,{set:Bt}),u(u.P+u.F*!N,a,Vt),u(u.P+u.F*(_.toString!=yt),a,{toString:yt}),u(u.P+u.F*o(function(){new y(1).slice()}),a,{slice:Gt}),u(u.P+u.F*(o(function(){return[1,2].toLocaleString()!=new y([1,2]).toLocaleString()})||!o(function(){_.toLocaleString.call([1,2])})),a,{toLocaleString:Ut}),k[a]=N?A:T,e||N||h(_,bt,T)}}else t.exports=function(){}},function(t,n){var r={}.toString;t.exports=function(t){return r.call(t).slice(8,-1)}},function(t,n,r){var e=r(21),i=r(5).document,o=e(i)&&e(i.createElement);t.exports=function(t){return o?i.createElement(t):{}}},function(t,n,r){t.exports=!r(12)&&!r(18)(function(){return 7!=Object.defineProperty(r(57)("div"),"a",{get:function(){return 7}}).a})},function(t,n,r){"use strict";var e=r(36),i=r(51),o=r(64),u=r(13),c=r(8),f=r(35),a=r(96),s=r(38),l=r(103),h=r(15)("iterator"),v=!([].keys&&"next"in[].keys()),p="keys",d="values",y=function(){return this};t.exports=function(t,n,r,g,b,m,x){a(r,n,g);var w,S,_,O=function(t){if(!v&&t in F)return F[t];switch(t){case p:case d:return function(){return new r(this,t)}}return function(){return new r(this,t)}},E=n+" Iterator",P=b==d,j=!1,F=t.prototype,M=F[h]||F["@@iterator"]||b&&F[b],A=M||O(b),N=b?P?O("entries"):A:void 0,T="Array"==n?F.entries||M:M;if(T&&(_=l(T.call(new t)))!==Object.prototype&&(s(_,E,!0),e||c(_,h)||u(_,h,y)),P&&M&&M.name!==d&&(j=!0,A=function(){return M.call(this)}),e&&!x||!v&&!j&&F[h]||u(F,h,A),f[n]=A,f[E]=y,b)if(w={values:P?A:O(d),keys:m?A:O(p),entries:N},x)for(S in w)S in F||o(F,S,w[S]);else i(i.P+i.F*(v||j),n,w);return w}},function(t,n,r){var e=r(20),i=r(100),o=r(34),u=r(39)("IE_PROTO"),c=function(){},f="prototype",a=function(){var t,n=r(57)("iframe"),e=o.length;for(n.style.display="none",r(93).appendChild(n),n.src="javascript:",t=n.contentWindow.document,t.open(),t.write("<script>document.F=Object<\/script>"),t.close(),a=t.F;e--;)delete a[f][o[e]];return a()};t.exports=Object.create||function(t,n){var r;return null!==t?(c[f]=e(t),r=new c,c[f]=null,r[u]=t):r=a(),void 0===n?r:i(r,n)}},function(t,n,r){var e=r(63),i=r(34).concat("length","prototype");n.f=Object.getOwnPropertyNames||function(t){return e(t,i)}},function(t,n){n.f=Object.getOwnPropertySymbols},function(t,n,r){var e=r(8),i=r(9),o=r(90)(!1),u=r(39)("IE_PROTO");t.exports=function(t,n){var r,c=i(t),f=0,a=[];for(r in c)r!=u&&e(c,r)&&a.push(r);for(;n.length>f;)e(c,r=n[f++])&&(~o(a,r)||a.push(r));return a}},function(t,n,r){t.exports=r(13)},function(t,n,r){var e=r(76)("meta"),i=r(6),o=r(24),u=r(11).f,c=0,f=Object.isExtensible||function(){return!0},a=!r(4)(function(){return f(Object.preventExtensions({}))}),s=function(t){u(t,e,{value:{i:"O"+ ++c,w:{}}})},l=function(t,n){if(!i(t))return"symbol"==typeof t?t:("string"==typeof t?"S":"P")+t;if(!o(t,e)){if(!f(t))return"F";if(!n)return"E";s(t)}return t[e].i},h=function(t,n){if(!o(t,e)){if(!f(t))return!0;if(!n)return!1;s(t)}return t[e].w},v=function(t){return a&&p.NEED&&f(t)&&!o(t,e)&&s(t),t},p=t.exports={KEY:e,NEED:!1,fastKey:l,getWeak:h,onFreeze:v}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n){var r=Math.ceil,e=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?e:r)(t)}},function(t,n){t.exports=function(t,n,r,e){if(!(t instanceof n)||void 0!==e&&e in t)throw TypeError(r+": incorrect invocation!");return t}},function(t,n){t.exports=!1},function(t,n,r){var e=r(2),i=r(173),o=r(133),u=r(145)("IE_PROTO"),c=function(){},f="prototype",a=function(){var t,n=r(132)("iframe"),e=o.length;for(n.style.display="none",r(135).appendChild(n),n.src="javascript:",t=n.contentWindow.document,t.open(),t.write("<script>document.F=Object<\/script>"),t.close(),a=t.F;e--;)delete a[f][o[e]];return a()};t.exports=Object.create||function(t,n){var r;return null!==t?(c[f]=e(t),r=new c,c[f]=null,r[u]=t):r=a(),void 0===n?r:i(r,n)}},function(t,n,r){var e=r(175),i=r(133).concat("length","prototype");n.f=Object.getOwnPropertyNames||function(t){return e(t,i)}},function(t,n,r){var e=r(175),i=r(133);t.exports=Object.keys||function(t){return e(t,i)}},function(t,n,r){var e=r(28);t.exports=function(t,n,r){for(var i in n)e(t,i,n[i],r);return t}},function(t,n,r){"use strict";var e=r(3),i=r(11),o=r(10),u=r(7)("species");t.exports=function(t){var n=e[t];o&&n&&!n[u]&&i.f(n,u,{configurable:!0,get:function(){return this}})}},function(t,n,r){var e=r(67),i=Math.max,o=Math.min;t.exports=function(t,n){return t=e(t),t<0?i(t+n,0):o(t,n)}},function(t,n){var r=0,e=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++r+e).toString(36))}},function(t,n,r){var e=r(33);t.exports=function(t){return Object(e(t))}},function(t,n,r){var e=r(7)("unscopables"),i=Array.prototype;void 0==i[e]&&r(27)(i,e,{}),t.exports=function(t){i[e][t]=!0}},function(t,n,r){var e=r(53),i=r(169),o=r(137),u=r(2),c=r(16),f=r(154),a={},s={},n=t.exports=function(t,n,r,l,h){var v,p,d,y,g=h?function(){return t}:f(t),b=e(r,l,n?2:1),m=0;if("function"!=typeof g)throw TypeError(t+" is not iterable!");if(o(g)){for(v=c(t.length);v>m;m++)if((y=n?b(u(p=t[m])[0],p[1]):b(t[m]))===a||y===s)return y}else for(d=g.call(t);!(p=d.next()).done;)if((y=i(d,b,p.value,n))===a||y===s)return y};n.BREAK=a,n.RETURN=s},function(t,n){t.exports={}},function(t,n,r){var e=r(11).f,i=r(24),o=r(7)("toStringTag");t.exports=function(t,n,r){t&&!i(t=r?t:t.prototype,o)&&e(t,o,{configurable:!0,value:n})}},function(t,n,r){var e=r(1),i=r(46),o=r(4),u=r(150),c="["+u+"]",f="​",a=RegExp("^"+c+c+"*"),s=RegExp(c+c+"*$"),l=function(t,n,r){var i={},c=o(function(){return!!u[t]()||f[t]()!=f}),a=i[t]=c?n(h):u[t];r&&(i[r]=a),e(e.P+e.F*c,"String",i)},h=l.trim=function(t,n){return t=String(i(t)),1&n&&(t=t.replace(a,"")),2&n&&(t=t.replace(s,"")),t};t.exports=l},function(t,n,r){t.exports={default:r(86),__esModule:!0}},function(t,n,r){t.exports={default:r(87),__esModule:!0}},function(t,n,r){"use strict";function e(t){return t&&t.__esModule?t:{default:t}}n.__esModule=!0;var i=r(84),o=e(i),u=r(83),c=e(u),f="function"==typeof c.default&&"symbol"==typeof o.default?function(t){return typeof t}:function(t){return t&&"function"==typeof c.default&&t.constructor===c.default&&t!==c.default.prototype?"symbol":typeof t};n.default="function"==typeof c.default&&"symbol"===f(o.default)?function(t){return void 0===t?"undefined":f(t)}:function(t){return t&&"function"==typeof c.default&&t.constructor===c.default&&t!==c.default.prototype?"symbol":void 0===t?"undefined":f(t)}},function(t,n,r){r(110),r(108),r(111),r(112),t.exports=r(25).Symbol},function(t,n,r){r(109),r(113),t.exports=r(44).f("iterator")},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){t.exports=function(){}},function(t,n,r){var e=r(9),i=r(106),o=r(105);t.exports=function(t){return function(n,r,u){var c,f=e(n),a=i(f.length),s=o(u,a);if(t&&r!=r){for(;a>s;)if((c=f[s++])!=c)return!0}else for(;a>s;s++)if((t||s in f)&&f[s]===r)return t||s||0;return!t&&-1}}},function(t,n,r){var e=r(88);t.exports=function(t,n,r){if(e(t),void 0===n)return t;switch(r){case 1:return function(r){return t.call(n,r)};case 2:return function(r,e){return t.call(n,r,e)};case 3:return function(r,e,i){return t.call(n,r,e,i)}}return function(){return t.apply(n,arguments)}}},function(t,n,r){var e=r(19),i=r(62),o=r(37);t.exports=function(t){var n=e(t),r=i.f;if(r)for(var u,c=r(t),f=o.f,a=0;c.length>a;)f.call(t,u=c[a++])&&n.push(u);return n}},function(t,n,r){t.exports=r(5).document&&document.documentElement},function(t,n,r){var e=r(56);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==e(t)?t.split(""):Object(t)}},function(t,n,r){var e=r(56);t.exports=Array.isArray||function(t){return"Array"==e(t)}},function(t,n,r){"use strict";var e=r(60),i=r(22),o=r(38),u={};r(13)(u,r(15)("iterator"),function(){return this}),t.exports=function(t,n,r){t.prototype=e(u,{next:i(1,r)}),o(t,n+" Iterator")}},function(t,n){t.exports=function(t,n){return{value:n,done:!!t}}},function(t,n,r){var e=r(19),i=r(9);t.exports=function(t,n){for(var r,o=i(t),u=e(o),c=u.length,f=0;c>f;)if(o[r=u[f++]]===n)return r}},function(t,n,r){var e=r(23)("meta"),i=r(21),o=r(8),u=r(14).f,c=0,f=Object.isExtensible||function(){return!0},a=!r(18)(function(){return f(Object.preventExtensions({}))}),s=function(t){u(t,e,{value:{i:"O"+ ++c,w:{}}})},l=function(t,n){if(!i(t))return"symbol"==typeof t?t:("string"==typeof t?"S":"P")+t;if(!o(t,e)){if(!f(t))return"F";if(!n)return"E";s(t)}return t[e].i},h=function(t,n){if(!o(t,e)){if(!f(t))return!0;if(!n)return!1;s(t)}return t[e].w},v=function(t){return a&&p.NEED&&f(t)&&!o(t,e)&&s(t),t},p=t.exports={KEY:e,NEED:!1,fastKey:l,getWeak:h,onFreeze:v}},function(t,n,r){var e=r(14),i=r(20),o=r(19);t.exports=r(12)?Object.defineProperties:function(t,n){i(t);for(var r,u=o(n),c=u.length,f=0;c>f;)e.f(t,r=u[f++],n[r]);return t}},function(t,n,r){var e=r(37),i=r(22),o=r(9),u=r(42),c=r(8),f=r(58),a=Object.getOwnPropertyDescriptor;n.f=r(12)?a:function(t,n){if(t=o(t),n=u(n,!0),f)try{return a(t,n)}catch(t){}if(c(t,n))return i(!e.f.call(t,n),t[n])}},function(t,n,r){var e=r(9),i=r(61).f,o={}.toString,u="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],c=function(t){try{return i(t)}catch(t){return u.slice()}};t.exports.f=function(t){return u&&"[object Window]"==o.call(t)?c(t):i(e(t))}},function(t,n,r){var e=r(8),i=r(77),o=r(39)("IE_PROTO"),u=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=i(t),e(t,o)?t[o]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?u:null}},function(t,n,r){var e=r(41),i=r(33);t.exports=function(t){return function(n,r){var o,u,c=String(i(n)),f=e(r),a=c.length;return f<0||f>=a?t?"":void 0:(o=c.charCodeAt(f),o<55296||o>56319||f+1===a||(u=c.charCodeAt(f+1))<56320||u>57343?t?c.charAt(f):o:t?c.slice(f,f+2):u-56320+(o-55296<<10)+65536)}}},function(t,n,r){var e=r(41),i=Math.max,o=Math.min;t.exports=function(t,n){return t=e(t),t<0?i(t+n,0):o(t,n)}},function(t,n,r){var e=r(41),i=Math.min;t.exports=function(t){return t>0?i(e(t),9007199254740991):0}},function(t,n,r){"use strict";var e=r(89),i=r(97),o=r(35),u=r(9);t.exports=r(59)(Array,"Array",function(t,n){this._t=u(t),this._i=0,this._k=n},function(){var t=this._t,n=this._k,r=this._i++;return!t||r>=t.length?(this._t=void 0,i(1)):"keys"==n?i(0,r):"values"==n?i(0,t[r]):i(0,[r,t[r]])},"values"),o.Arguments=o.Array,e("keys"),e("values"),e("entries")},function(t,n){},function(t,n,r){"use strict";var e=r(104)(!0);r(59)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,n=this._t,r=this._i;return r>=n.length?{value:void 0,done:!0}:(t=e(n,r),this._i+=t.length,{value:t,done:!1})})},function(t,n,r){"use strict";var e=r(5),i=r(8),o=r(12),u=r(51),c=r(64),f=r(99).KEY,a=r(18),s=r(40),l=r(38),h=r(23),v=r(15),p=r(44),d=r(43),y=r(98),g=r(92),b=r(95),m=r(20),x=r(9),w=r(42),S=r(22),_=r(60),O=r(102),E=r(101),P=r(14),j=r(19),F=E.f,M=P.f,A=O.f,N=e.Symbol,T=e.JSON,I=T&&T.stringify,k="prototype",L=v("_hidden"),R=v("toPrimitive"),C={}.propertyIsEnumerable,D=s("symbol-registry"),U=s("symbols"),W=s("op-symbols"),G=Object[k],B="function"==typeof N,V=e.QObject,z=!V||!V[k]||!V[k].findChild,q=o&&a(function(){return 7!=_(M({},"a",{get:function(){return M(this,"a",{value:7}).a}})).a})?function(t,n,r){var e=F(G,n);e&&delete G[n],M(t,n,r),e&&t!==G&&M(G,n,e)}:M,K=function(t){var n=U[t]=_(N[k]);return n._k=t,n},J=B&&"symbol"==typeof N.iterator?function(t){return"symbol"==typeof t}:function(t){return t instanceof N},Y=function(t,n,r){return t===G&&Y(W,n,r),m(t),n=w(n,!0),m(r),i(U,n)?(r.enumerable?(i(t,L)&&t[L][n]&&(t[L][n]=!1),r=_(r,{enumerable:S(0,!1)})):(i(t,L)||M(t,L,S(1,{})),t[L][n]=!0),q(t,n,r)):M(t,n,r)},H=function(t,n){m(t);for(var r,e=g(n=x(n)),i=0,o=e.length;o>i;)Y(t,r=e[i++],n[r]);return t},$=function(t,n){return void 0===n?_(t):H(_(t),n)},X=function(t){var n=C.call(this,t=w(t,!0));return!(this===G&&i(U,t)&&!i(W,t))&&(!(n||!i(this,t)||!i(U,t)||i(this,L)&&this[L][t])||n)},Q=function(t,n){if(t=x(t),n=w(n,!0),t!==G||!i(U,n)||i(W,n)){var r=F(t,n);return!r||!i(U,n)||i(t,L)&&t[L][n]||(r.enumerable=!0),r}},Z=function(t){for(var n,r=A(x(t)),e=[],o=0;r.length>o;)i(U,n=r[o++])||n==L||n==f||e.push(n);return e},tt=function(t){for(var n,r=t===G,e=A(r?W:x(t)),o=[],u=0;e.length>u;)!i(U,n=e[u++])||r&&!i(G,n)||o.push(U[n]);return o};B||(N=function(){if(this instanceof N)throw TypeError("Symbol is not a constructor!");var t=h(arguments.length>0?arguments[0]:void 0),n=function(r){this===G&&n.call(W,r),i(this,L)&&i(this[L],t)&&(this[L][t]=!1),q(this,t,S(1,r))};return o&&z&&q(G,t,{configurable:!0,set:n}),K(t)},c(N[k],"toString",function(){return this._k}),E.f=Q,P.f=Y,r(61).f=O.f=Z,r(37).f=X,r(62).f=tt,o&&!r(36)&&c(G,"propertyIsEnumerable",X,!0),p.f=function(t){return K(v(t))}),u(u.G+u.W+u.F*!B,{Symbol:N});for(var nt="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),rt=0;nt.length>rt;)v(nt[rt++]);for(var nt=j(v.store),rt=0;nt.length>rt;)d(nt[rt++]);u(u.S+u.F*!B,"Symbol",{for:function(t){return i(D,t+="")?D[t]:D[t]=N(t)},keyFor:function(t){if(J(t))return y(D,t);throw TypeError(t+" is not a symbol!")},useSetter:function(){z=!0},useSimple:function(){z=!1}}),u(u.S+u.F*!B,"Object",{create:$,defineProperty:Y,defineProperties:H,getOwnPropertyDescriptor:Q,getOwnPropertyNames:Z,getOwnPropertySymbols:tt}),T&&u(u.S+u.F*(!B||a(function(){var t=N();return"[null]"!=I([t])||"{}"!=I({a:t})||"{}"!=I(Object(t))})),"JSON",{stringify:function(t){if(void 0!==t&&!J(t)){for(var n,r,e=[t],i=1;arguments.length>i;)e.push(arguments[i++]);return n=e[1],"function"==typeof n&&(r=n),!r&&b(n)||(n=function(t,n){if(r&&(n=r.call(this,t,n)),!J(n))return n}),e[1]=n,I.apply(T,e)}}}),N[k][R]||r(13)(N[k],R,N[k].valueOf),l(N,"Symbol"),l(Math,"Math",!0),l(e.JSON,"JSON",!0)},function(t,n,r){r(43)("asyncIterator")},function(t,n,r){r(43)("observable")},function(t,n,r){r(107);for(var e=r(5),i=r(13),o=r(35),u=r(15)("toStringTag"),c=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],f=0;f<5;f++){var a=c[f],s=e[a],l=s&&s.prototype;l&&!l[u]&&i(l,u,a),o[a]=o.Array}},function(t,n,r){var e=r(45),i=r(7)("toStringTag"),o="Arguments"==e(function(){return arguments}()),u=function(t,n){try{return t[n]}catch(t){}};t.exports=function(t){var n,r,c;return void 0===t?"Undefined":null===t?"Null":"string"==typeof(r=u(n=Object(t),i))?r:o?e(n):"Object"==(c=e(n))&&"function"==typeof n.callee?"Arguments":c}},function(t,n,r){var e=r(45);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==e(t)?t.split(""):Object(t)}},function(t,n){n.f={}.propertyIsEnumerable},function(t,n,r){var e=r(30),i=r(16),o=r(75);t.exports=function(t){return function(n,r,u){var c,f=e(n),a=i(f.length),s=o(u,a);if(t&&r!=r){for(;a>s;)if((c=f[s++])!=c)return!0}else for(;a>s;s++)if((t||s in f)&&f[s]===r)return t||s||0;return!t&&-1}}},function(t,n,r){"use strict";var e=r(3),i=r(1),o=r(28),u=r(73),c=r(65),f=r(79),a=r(68),s=r(6),l=r(4),h=r(123),v=r(81),p=r(136);t.exports=function(t,n,r,d,y,g){var b=e[t],m=b,x=y?"set":"add",w=m&&m.prototype,S={},_=function(t){var n=w[t];o(w,t,"delete"==t?function(t){return!(g&&!s(t))&&n.call(this,0===t?0:t)}:"has"==t?function(t){return!(g&&!s(t))&&n.call(this,0===t?0:t)}:"get"==t?function(t){return g&&!s(t)?void 0:n.call(this,0===t?0:t)}:"add"==t?function(t){return n.call(this,0===t?0:t),this}:function(t,r){return n.call(this,0===t?0:t,r),this})};if("function"==typeof m&&(g||w.forEach&&!l(function(){(new m).entries().next()}))){var O=new m,E=O[x](g?{}:-0,1)!=O,P=l(function(){O.has(1)}),j=h(function(t){new m(t)}),F=!g&&l(function(){for(var t=new m,n=5;n--;)t[x](n,n);return!t.has(-0)});j||(m=n(function(n,r){a(n,m,t);var e=p(new b,n,m);return void 0!=r&&f(r,y,e[x],e),e}),m.prototype=w,w.constructor=m),(P||F)&&(_("delete"),_("has"),y&&_("get")),(F||E)&&_(x),g&&w.clear&&delete w.clear}else m=d.getConstructor(n,t,y,x),u(m.prototype,r),c.NEED=!0;return v(m,t),S[t]=m,i(i.G+i.W+i.F*(m!=b),S),g||d.setStrong(m,t,y),m}},function(t,n,r){"use strict";var e=r(27),i=r(28),o=r(4),u=r(46),c=r(7);t.exports=function(t,n,r){var f=c(t),a=r(u,f,""[t]),s=a[0],l=a[1];o(function(){var n={};return n[f]=function(){return 7},7!=""[t](n)})&&(i(String.prototype,t,s),e(RegExp.prototype,f,2==n?function(t,n){return l.call(t,this,n)}:function(t){return l.call(t,this)}))}
+},function(t,n,r){"use strict";var e=r(2);t.exports=function(){var t=e(this),n="";return t.global&&(n+="g"),t.ignoreCase&&(n+="i"),t.multiline&&(n+="m"),t.unicode&&(n+="u"),t.sticky&&(n+="y"),n}},function(t,n){t.exports=function(t,n,r){var e=void 0===r;switch(n.length){case 0:return e?t():t.call(r);case 1:return e?t(n[0]):t.call(r,n[0]);case 2:return e?t(n[0],n[1]):t.call(r,n[0],n[1]);case 3:return e?t(n[0],n[1],n[2]):t.call(r,n[0],n[1],n[2]);case 4:return e?t(n[0],n[1],n[2],n[3]):t.call(r,n[0],n[1],n[2],n[3])}return t.apply(r,n)}},function(t,n,r){var e=r(6),i=r(45),o=r(7)("match");t.exports=function(t){var n;return e(t)&&(void 0!==(n=t[o])?!!n:"RegExp"==i(t))}},function(t,n,r){var e=r(7)("iterator"),i=!1;try{var o=[7][e]();o.return=function(){i=!0},Array.from(o,function(){throw 2})}catch(t){}t.exports=function(t,n){if(!n&&!i)return!1;var r=!1;try{var o=[7],u=o[e]();u.next=function(){return{done:r=!0}},o[e]=function(){return u},t(o)}catch(t){}return r}},function(t,n,r){t.exports=r(69)||!r(4)(function(){var t=Math.random();__defineSetter__.call(null,t,function(){}),delete r(3)[t]})},function(t,n){n.f=Object.getOwnPropertySymbols},function(t,n,r){var e=r(3),i="__core-js_shared__",o=e[i]||(e[i]={});t.exports=function(t){return o[t]||(o[t]={})}},function(t,n,r){for(var e,i=r(3),o=r(27),u=r(76),c=u("typed_array"),f=u("view"),a=!(!i.ArrayBuffer||!i.DataView),s=a,l=0,h="Int8Array,Uint8Array,Uint8ClampedArray,Int16Array,Uint16Array,Int32Array,Uint32Array,Float32Array,Float64Array".split(",");l<9;)(e=i[h[l++]])?(o(e.prototype,c,!0),o(e.prototype,f,!0)):s=!1;t.exports={ABV:a,CONSTR:s,TYPED:c,VIEW:f}},function(t,n){"use strict";var r={versions:function(){var t=window.navigator.userAgent;return{trident:t.indexOf("Trident")>-1,presto:t.indexOf("Presto")>-1,webKit:t.indexOf("AppleWebKit")>-1,gecko:t.indexOf("Gecko")>-1&&-1==t.indexOf("KHTML"),mobile:!!t.match(/AppleWebKit.*Mobile.*/),ios:!!t.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),android:t.indexOf("Android")>-1||t.indexOf("Linux")>-1,iPhone:t.indexOf("iPhone")>-1||t.indexOf("Mac")>-1,iPad:t.indexOf("iPad")>-1,webApp:-1==t.indexOf("Safari"),weixin:-1==t.indexOf("MicroMessenger")}}()};t.exports=r},function(t,n,r){"use strict";var e=r(85),i=function(t){return t&&t.__esModule?t:{default:t}}(e),o=function(){function t(t,n,e){return n||e?String.fromCharCode(n||e):r[t]||t}function n(t){return e[t]}var r={"&quot;":'"',"&lt;":"<","&gt;":">","&amp;":"&","&nbsp;":" "},e={};for(var u in r)e[r[u]]=u;return r["&apos;"]="'",e["'"]="&#39;",{encode:function(t){return t?(""+t).replace(/['<> "&]/g,n).replace(/\r?\n/g,"<br/>").replace(/\s/g,"&nbsp;"):""},decode:function(n){return n?(""+n).replace(/<br\s*\/?>/gi,"\n").replace(/&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g,t).replace(/\u00a0/g," "):""},encodeBase16:function(t){if(!t)return t;t+="";for(var n=[],r=0,e=t.length;e>r;r++)n.push(t.charCodeAt(r).toString(16).toUpperCase());return n.join("")},encodeBase16forJSON:function(t){if(!t)return t;t=t.replace(/[\u4E00-\u9FBF]/gi,function(t){return escape(t).replace("%u","\\u")});for(var n=[],r=0,e=t.length;e>r;r++)n.push(t.charCodeAt(r).toString(16).toUpperCase());return n.join("")},decodeBase16:function(t){if(!t)return t;t+="";for(var n=[],r=0,e=t.length;e>r;r+=2)n.push(String.fromCharCode("0x"+t.slice(r,r+2)));return n.join("")},encodeObject:function(t){if(t instanceof Array)for(var n=0,r=t.length;r>n;n++)t[n]=o.encodeObject(t[n]);else if("object"==(void 0===t?"undefined":(0,i.default)(t)))for(var e in t)t[e]=o.encodeObject(t[e]);else if("string"==typeof t)return o.encode(t);return t},loadScript:function(t){var n=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(n),n.setAttribute("src",t)},addLoadEvent:function(t){var n=window.onload;"function"!=typeof window.onload?window.onload=t:window.onload=function(){n(),t()}}}}();t.exports=o},function(t,n,r){"use strict";var e=r(17),i=r(75),o=r(16);t.exports=function(t){for(var n=e(this),r=o(n.length),u=arguments.length,c=i(u>1?arguments[1]:void 0,r),f=u>2?arguments[2]:void 0,a=void 0===f?r:i(f,r);a>c;)n[c++]=t;return n}},function(t,n,r){"use strict";var e=r(11),i=r(66);t.exports=function(t,n,r){n in t?e.f(t,n,i(0,r)):t[n]=r}},function(t,n,r){var e=r(6),i=r(3).document,o=e(i)&&e(i.createElement);t.exports=function(t){return o?i.createElement(t):{}}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n,r){var e=r(7)("match");t.exports=function(t){var n=/./;try{"/./"[t](n)}catch(r){try{return n[e]=!1,!"/./"[t](n)}catch(t){}}return!0}},function(t,n,r){t.exports=r(3).document&&document.documentElement},function(t,n,r){var e=r(6),i=r(144).set;t.exports=function(t,n,r){var o,u=n.constructor;return u!==r&&"function"==typeof u&&(o=u.prototype)!==r.prototype&&e(o)&&i&&i(t,o),t}},function(t,n,r){var e=r(80),i=r(7)("iterator"),o=Array.prototype;t.exports=function(t){return void 0!==t&&(e.Array===t||o[i]===t)}},function(t,n,r){var e=r(45);t.exports=Array.isArray||function(t){return"Array"==e(t)}},function(t,n,r){"use strict";var e=r(70),i=r(66),o=r(81),u={};r(27)(u,r(7)("iterator"),function(){return this}),t.exports=function(t,n,r){t.prototype=e(u,{next:i(1,r)}),o(t,n+" Iterator")}},function(t,n,r){"use strict";var e=r(69),i=r(1),o=r(28),u=r(27),c=r(24),f=r(80),a=r(139),s=r(81),l=r(32),h=r(7)("iterator"),v=!([].keys&&"next"in[].keys()),p="keys",d="values",y=function(){return this};t.exports=function(t,n,r,g,b,m,x){a(r,n,g);var w,S,_,O=function(t){if(!v&&t in F)return F[t];switch(t){case p:case d:return function(){return new r(this,t)}}return function(){return new r(this,t)}},E=n+" Iterator",P=b==d,j=!1,F=t.prototype,M=F[h]||F["@@iterator"]||b&&F[b],A=M||O(b),N=b?P?O("entries"):A:void 0,T="Array"==n?F.entries||M:M;if(T&&(_=l(T.call(new t)))!==Object.prototype&&(s(_,E,!0),e||c(_,h)||u(_,h,y)),P&&M&&M.name!==d&&(j=!0,A=function(){return M.call(this)}),e&&!x||!v&&!j&&F[h]||u(F,h,A),f[n]=A,f[E]=y,b)if(w={values:P?A:O(d),keys:m?A:O(p),entries:N},x)for(S in w)S in F||o(F,S,w[S]);else i(i.P+i.F*(v||j),n,w);return w}},function(t,n){var r=Math.expm1;t.exports=!r||r(10)>22025.465794806718||r(10)<22025.465794806718||-2e-17!=r(-2e-17)?function(t){return 0==(t=+t)?t:t>-1e-6&&t<1e-6?t+t*t/2:Math.exp(t)-1}:r},function(t,n){t.exports=Math.sign||function(t){return 0==(t=+t)||t!=t?t:t<0?-1:1}},function(t,n,r){var e=r(3),i=r(151).set,o=e.MutationObserver||e.WebKitMutationObserver,u=e.process,c=e.Promise,f="process"==r(45)(u);t.exports=function(){var t,n,r,a=function(){var e,i;for(f&&(e=u.domain)&&e.exit();t;){i=t.fn,t=t.next;try{i()}catch(e){throw t?r():n=void 0,e}}n=void 0,e&&e.enter()};if(f)r=function(){u.nextTick(a)};else if(o){var s=!0,l=document.createTextNode("");new o(a).observe(l,{characterData:!0}),r=function(){l.data=s=!s}}else if(c&&c.resolve){var h=c.resolve();r=function(){h.then(a)}}else r=function(){i.call(e,a)};return function(e){var i={fn:e,next:void 0};n&&(n.next=i),t||(t=i,r()),n=i}}},function(t,n,r){var e=r(6),i=r(2),o=function(t,n){if(i(t),!e(n)&&null!==n)throw TypeError(n+": can't set as prototype!")};t.exports={set:Object.setPrototypeOf||("__proto__"in{}?function(t,n,e){try{e=r(53)(Function.call,r(31).f(Object.prototype,"__proto__").set,2),e(t,[]),n=!(t instanceof Array)}catch(t){n=!0}return function(t,r){return o(t,r),n?t.__proto__=r:e(t,r),t}}({},!1):void 0),check:o}},function(t,n,r){var e=r(126)("keys"),i=r(76);t.exports=function(t){return e[t]||(e[t]=i(t))}},function(t,n,r){var e=r(2),i=r(26),o=r(7)("species");t.exports=function(t,n){var r,u=e(t).constructor;return void 0===u||void 0==(r=e(u)[o])?n:i(r)}},function(t,n,r){var e=r(67),i=r(46);t.exports=function(t){return function(n,r){var o,u,c=String(i(n)),f=e(r),a=c.length;return f<0||f>=a?t?"":void 0:(o=c.charCodeAt(f),o<55296||o>56319||f+1===a||(u=c.charCodeAt(f+1))<56320||u>57343?t?c.charAt(f):o:t?c.slice(f,f+2):u-56320+(o-55296<<10)+65536)}}},function(t,n,r){var e=r(122),i=r(46);t.exports=function(t,n,r){if(e(n))throw TypeError("String#"+r+" doesn't accept regex!");return String(i(t))}},function(t,n,r){"use strict";var e=r(67),i=r(46);t.exports=function(t){var n=String(i(this)),r="",o=e(t);if(o<0||o==1/0)throw RangeError("Count can't be negative");for(;o>0;(o>>>=1)&&(n+=n))1&o&&(r+=n);return r}},function(t,n){t.exports="\t\n\v\f\r   ᠎             　\u2028\u2029\ufeff"},function(t,n,r){var e,i,o,u=r(53),c=r(121),f=r(135),a=r(132),s=r(3),l=s.process,h=s.setImmediate,v=s.clearImmediate,p=s.MessageChannel,d=0,y={},g="onreadystatechange",b=function(){var t=+this;if(y.hasOwnProperty(t)){var n=y[t];delete y[t],n()}},m=function(t){b.call(t.data)};h&&v||(h=function(t){for(var n=[],r=1;arguments.length>r;)n.push(arguments[r++]);return y[++d]=function(){c("function"==typeof t?t:Function(t),n)},e(d),d},v=function(t){delete y[t]},"process"==r(45)(l)?e=function(t){l.nextTick(u(b,t,1))}:p?(i=new p,o=i.port2,i.port1.onmessage=m,e=u(o.postMessage,o,1)):s.addEventListener&&"function"==typeof postMessage&&!s.importScripts?(e=function(t){s.postMessage(t+"","*")},s.addEventListener("message",m,!1)):e=g in a("script")?function(t){f.appendChild(a("script"))[g]=function(){f.removeChild(this),b.call(t)}}:function(t){setTimeout(u(b,t,1),0)}),t.exports={set:h,clear:v}},function(t,n,r){"use strict";var e=r(3),i=r(10),o=r(69),u=r(127),c=r(27),f=r(73),a=r(4),s=r(68),l=r(67),h=r(16),v=r(71).f,p=r(11).f,d=r(130),y=r(81),g="ArrayBuffer",b="DataView",m="prototype",x="Wrong length!",w="Wrong index!",S=e[g],_=e[b],O=e.Math,E=e.RangeError,P=e.Infinity,j=S,F=O.abs,M=O.pow,A=O.floor,N=O.log,T=O.LN2,I="buffer",k="byteLength",L="byteOffset",R=i?"_b":I,C=i?"_l":k,D=i?"_o":L,U=function(t,n,r){var e,i,o,u=Array(r),c=8*r-n-1,f=(1<<c)-1,a=f>>1,s=23===n?M(2,-24)-M(2,-77):0,l=0,h=t<0||0===t&&1/t<0?1:0;for(t=F(t),t!=t||t===P?(i=t!=t?1:0,e=f):(e=A(N(t)/T),t*(o=M(2,-e))<1&&(e--,o*=2),t+=e+a>=1?s/o:s*M(2,1-a),t*o>=2&&(e++,o/=2),e+a>=f?(i=0,e=f):e+a>=1?(i=(t*o-1)*M(2,n),e+=a):(i=t*M(2,a-1)*M(2,n),e=0));n>=8;u[l++]=255&i,i/=256,n-=8);for(e=e<<n|i,c+=n;c>0;u[l++]=255&e,e/=256,c-=8);return u[--l]|=128*h,u},W=function(t,n,r){var e,i=8*r-n-1,o=(1<<i)-1,u=o>>1,c=i-7,f=r-1,a=t[f--],s=127&a;for(a>>=7;c>0;s=256*s+t[f],f--,c-=8);for(e=s&(1<<-c)-1,s>>=-c,c+=n;c>0;e=256*e+t[f],f--,c-=8);if(0===s)s=1-u;else{if(s===o)return e?NaN:a?-P:P;e+=M(2,n),s-=u}return(a?-1:1)*e*M(2,s-n)},G=function(t){return t[3]<<24|t[2]<<16|t[1]<<8|t[0]},B=function(t){return[255&t]},V=function(t){return[255&t,t>>8&255]},z=function(t){return[255&t,t>>8&255,t>>16&255,t>>24&255]},q=function(t){return U(t,52,8)},K=function(t){return U(t,23,4)},J=function(t,n,r){p(t[m],n,{get:function(){return this[r]}})},Y=function(t,n,r,e){var i=+r,o=l(i);if(i!=o||o<0||o+n>t[C])throw E(w);var u=t[R]._b,c=o+t[D],f=u.slice(c,c+n);return e?f:f.reverse()},H=function(t,n,r,e,i,o){var u=+r,c=l(u);if(u!=c||c<0||c+n>t[C])throw E(w);for(var f=t[R]._b,a=c+t[D],s=e(+i),h=0;h<n;h++)f[a+h]=s[o?h:n-h-1]},$=function(t,n){s(t,S,g);var r=+n,e=h(r);if(r!=e)throw E(x);return e};if(u.ABV){if(!a(function(){new S})||!a(function(){new S(.5)})){S=function(t){return new j($(this,t))};for(var X,Q=S[m]=j[m],Z=v(j),tt=0;Z.length>tt;)(X=Z[tt++])in S||c(S,X,j[X]);o||(Q.constructor=S)}var nt=new _(new S(2)),rt=_[m].setInt8;nt.setInt8(0,2147483648),nt.setInt8(1,2147483649),!nt.getInt8(0)&&nt.getInt8(1)||f(_[m],{setInt8:function(t,n){rt.call(this,t,n<<24>>24)},setUint8:function(t,n){rt.call(this,t,n<<24>>24)}},!0)}else S=function(t){var n=$(this,t);this._b=d.call(Array(n),0),this[C]=n},_=function(t,n,r){s(this,_,b),s(t,S,b);var e=t[C],i=l(n);if(i<0||i>e)throw E("Wrong offset!");if(r=void 0===r?e-i:h(r),i+r>e)throw E(x);this[R]=t,this[D]=i,this[C]=r},i&&(J(S,k,"_l"),J(_,I,"_b"),J(_,k,"_l"),J(_,L,"_o")),f(_[m],{getInt8:function(t){return Y(this,1,t)[0]<<24>>24},getUint8:function(t){return Y(this,1,t)[0]},getInt16:function(t){var n=Y(this,2,t,arguments[1]);return(n[1]<<8|n[0])<<16>>16},getUint16:function(t){var n=Y(this,2,t,arguments[1]);return n[1]<<8|n[0]},getInt32:function(t){return G(Y(this,4,t,arguments[1]))},getUint32:function(t){return G(Y(this,4,t,arguments[1]))>>>0},getFloat32:function(t){return W(Y(this,4,t,arguments[1]),23,4)},getFloat64:function(t){return W(Y(this,8,t,arguments[1]),52,8)},setInt8:function(t,n){H(this,1,t,B,n)},setUint8:function(t,n){H(this,1,t,B,n)},setInt16:function(t,n){H(this,2,t,V,n,arguments[2])},setUint16:function(t,n){H(this,2,t,V,n,arguments[2])},setInt32:function(t,n){H(this,4,t,z,n,arguments[2])},setUint32:function(t,n){H(this,4,t,z,n,arguments[2])},setFloat32:function(t,n){H(this,4,t,K,n,arguments[2])},setFloat64:function(t,n){H(this,8,t,q,n,arguments[2])}});y(S,g),y(_,b),c(_[m],u.VIEW,!0),n[g]=S,n[b]=_},function(t,n,r){var e=r(3),i=r(52),o=r(69),u=r(182),c=r(11).f;t.exports=function(t){var n=i.Symbol||(i.Symbol=o?{}:e.Symbol||{});"_"==t.charAt(0)||t in n||c(n,t,{value:u.f(t)})}},function(t,n,r){var e=r(114),i=r(7)("iterator"),o=r(80);t.exports=r(52).getIteratorMethod=function(t){if(void 0!=t)return t[i]||t["@@iterator"]||o[e(t)]}},function(t,n,r){"use strict";var e=r(78),i=r(170),o=r(80),u=r(30);t.exports=r(140)(Array,"Array",function(t,n){this._t=u(t),this._i=0,this._k=n},function(){var t=this._t,n=this._k,r=this._i++;return!t||r>=t.length?(this._t=void 0,i(1)):"keys"==n?i(0,r):"values"==n?i(0,t[r]):i(0,[r,t[r]])},"values"),o.Arguments=o.Array,e("keys"),e("values"),e("entries")},function(t,n){function r(t,n){t.classList?t.classList.add(n):t.className+=" "+n}t.exports=r},function(t,n){function r(t,n){if(t.classList)t.classList.remove(n);else{var r=new RegExp("(^|\\b)"+n.split(" ").join("|")+"(\\b|$)","gi");t.className=t.className.replace(r," ")}}t.exports=r},function(t,n){function r(){throw new Error("setTimeout has not been defined")}function e(){throw new Error("clearTimeout has not been defined")}function i(t){if(s===setTimeout)return setTimeout(t,0);if((s===r||!s)&&setTimeout)return s=setTimeout,setTimeout(t,0);try{return s(t,0)}catch(n){try{return s.call(null,t,0)}catch(n){return s.call(this,t,0)}}}function o(t){if(l===clearTimeout)return clearTimeout(t);if((l===e||!l)&&clearTimeout)return l=clearTimeout,clearTimeout(t);try{return l(t)}catch(n){try{return l.call(null,t)}catch(n){return l.call(this,t)}}}function u(){d&&v&&(d=!1,v.length?p=v.concat(p):y=-1,p.length&&c())}function c(){if(!d){var t=i(u);d=!0;for(var n=p.length;n;){for(v=p,p=[];++y<n;)v&&v[y].run();y=-1,n=p.length}v=null,d=!1,o(t)}}function f(t,n){this.fun=t,this.array=n}function a(){}var s,l,h=t.exports={};!function(){try{s="function"==typeof setTimeout?setTimeout:r}catch(t){s=r}try{l="function"==typeof clearTimeout?clearTimeout:e}catch(t){l=e}}();var v,p=[],d=!1,y=-1;h.nextTick=function(t){var n=new Array(arguments.length-1);if(arguments.length>1)for(var r=1;r<arguments.length;r++)n[r-1]=arguments[r];p.push(new f(t,n)),1!==p.length||d||i(c)},f.prototype.run=function(){this.fun.apply(null,this.array)},h.title="browser",h.browser=!0,h.env={},h.argv=[],h.version="",h.versions={},h.on=a,h.addListener=a,h.once=a,h.off=a,h.removeListener=a,h.removeAllListeners=a,h.emit=a,h.prependListener=a,h.prependOnceListener=a,h.listeners=function(t){return[]},h.binding=function(t){throw new Error("process.binding is not supported")},h.cwd=function(){return"/"},h.chdir=function(t){throw new Error("process.chdir is not supported")},h.umask=function(){return 0}},function(t,n,r){var e=r(45);t.exports=function(t,n){if("number"!=typeof t&&"Number"!=e(t))throw TypeError(n);return+t}},function(t,n,r){"use strict";var e=r(17),i=r(75),o=r(16);t.exports=[].copyWithin||function(t,n){var r=e(this),u=o(r.length),c=i(t,u),f=i(n,u),a=arguments.length>2?arguments[2]:void 0,s=Math.min((void 0===a?u:i(a,u))-f,u-c),l=1;for(f<c&&c<f+s&&(l=-1,f+=s-1,c+=s-1);s-- >0;)f in r?r[c]=r[f]:delete r[c],c+=l,f+=l;return r}},function(t,n,r){var e=r(79);t.exports=function(t,n){var r=[];return e(t,!1,r.push,r,n),r}},function(t,n,r){var e=r(26),i=r(17),o=r(115),u=r(16);t.exports=function(t,n,r,c,f){e(n);var a=i(t),s=o(a),l=u(a.length),h=f?l-1:0,v=f?-1:1;if(r<2)for(;;){if(h in s){c=s[h],h+=v;break}if(h+=v,f?h<0:l<=h)throw TypeError("Reduce of empty array with no initial value")}for(;f?h>=0:l>h;h+=v)h in s&&(c=n(c,s[h],h,a));return c}},function(t,n,r){"use strict";var e=r(26),i=r(6),o=r(121),u=[].slice,c={},f=function(t,n,r){if(!(n in c)){for(var e=[],i=0;i<n;i++)e[i]="a["+i+"]";c[n]=Function("F,a","return new F("+e.join(",")+")")}return c[n](t,r)};t.exports=Function.bind||function(t){var n=e(this),r=u.call(arguments,1),c=function(){var e=r.concat(u.call(arguments));return this instanceof c?f(n,e.length,e):o(n,e,t)};return i(n.prototype)&&(c.prototype=n.prototype),c}},function(t,n,r){"use strict";var e=r(11).f,i=r(70),o=r(73),u=r(53),c=r(68),f=r(46),a=r(79),s=r(140),l=r(170),h=r(74),v=r(10),p=r(65).fastKey,d=v?"_s":"size",y=function(t,n){var r,e=p(n);if("F"!==e)return t._i[e];for(r=t._f;r;r=r.n)if(r.k==n)return r};t.exports={getConstructor:function(t,n,r,s){var l=t(function(t,e){c(t,l,n,"_i"),t._i=i(null),t._f=void 0,t._l=void 0,t[d]=0,void 0!=e&&a(e,r,t[s],t)});return o(l.prototype,{clear:function(){for(var t=this,n=t._i,r=t._f;r;r=r.n)r.r=!0,r.p&&(r.p=r.p.n=void 0),delete n[r.i];t._f=t._l=void 0,t[d]=0},delete:function(t){var n=this,r=y(n,t);if(r){var e=r.n,i=r.p;delete n._i[r.i],r.r=!0,i&&(i.n=e),e&&(e.p=i),n._f==r&&(n._f=e),n._l==r&&(n._l=i),n[d]--}return!!r},forEach:function(t){c(this,l,"forEach");for(var n,r=u(t,arguments.length>1?arguments[1]:void 0,3);n=n?n.n:this._f;)for(r(n.v,n.k,this);n&&n.r;)n=n.p},has:function(t){return!!y(this,t)}}),v&&e(l.prototype,"size",{get:function(){return f(this[d])}}),l},def:function(t,n,r){var e,i,o=y(t,n);return o?o.v=r:(t._l=o={i:i=p(n,!0),k:n,v:r,p:e=t._l,n:void 0,r:!1},t._f||(t._f=o),e&&(e.n=o),t[d]++,"F"!==i&&(t._i[i]=o)),t},getEntry:y,setStrong:function(t,n,r){s(t,n,function(t,n){this._t=t,this._k=n,this._l=void 0},function(){for(var t=this,n=t._k,r=t._l;r&&r.r;)r=r.p;return t._t&&(t._l=r=r?r.n:t._t._f)?"keys"==n?l(0,r.k):"values"==n?l(0,r.v):l(0,[r.k,r.v]):(t._t=void 0,l(1))},r?"entries":"values",!r,!0),h(n)}}},function(t,n,r){var e=r(114),i=r(161);t.exports=function(t){return function(){if(e(this)!=t)throw TypeError(t+"#toJSON isn't generic");return i(this)}}},function(t,n,r){"use strict";var e=r(73),i=r(65).getWeak,o=r(2),u=r(6),c=r(68),f=r(79),a=r(48),s=r(24),l=a(5),h=a(6),v=0,p=function(t){return t._l||(t._l=new d)},d=function(){this.a=[]},y=function(t,n){return l(t.a,function(t){return t[0]===n})};d.prototype={get:function(t){var n=y(this,t);if(n)return n[1]},has:function(t){return!!y(this,t)},set:function(t,n){var r=y(this,t);r?r[1]=n:this.a.push([t,n])},delete:function(t){var n=h(this.a,function(n){return n[0]===t});return~n&&this.a.splice(n,1),!!~n}},t.exports={getConstructor:function(t,n,r,o){var a=t(function(t,e){c(t,a,n,"_i"),t._i=v++,t._l=void 0,void 0!=e&&f(e,r,t[o],t)});return e(a.prototype,{delete:function(t){if(!u(t))return!1;var n=i(t);return!0===n?p(this).delete(t):n&&s(n,this._i)&&delete n[this._i]},has:function(t){if(!u(t))return!1;var n=i(t);return!0===n?p(this).has(t):n&&s(n,this._i)}}),a},def:function(t,n,r){var e=i(o(n),!0);return!0===e?p(t).set(n,r):e[t._i]=r,t},ufstore:p}},function(t,n,r){t.exports=!r(10)&&!r(4)(function(){return 7!=Object.defineProperty(r(132)("div"),"a",{get:function(){return 7}}).a})},function(t,n,r){var e=r(6),i=Math.floor;t.exports=function(t){return!e(t)&&isFinite(t)&&i(t)===t}},function(t,n,r){var e=r(2);t.exports=function(t,n,r,i){try{return i?n(e(r)[0],r[1]):n(r)}catch(n){var o=t.return;throw void 0!==o&&e(o.call(t)),n}}},function(t,n){t.exports=function(t,n){return{value:n,done:!!t}}},function(t,n){t.exports=Math.log1p||function(t){return(t=+t)>-1e-8&&t<1e-8?t-t*t/2:Math.log(1+t)}},function(t,n,r){"use strict";var e=r(72),i=r(125),o=r(116),u=r(17),c=r(115),f=Object.assign;t.exports=!f||r(4)(function(){var t={},n={},r=Symbol(),e="abcdefghijklmnopqrst";return t[r]=7,e.split("").forEach(function(t){n[t]=t}),7!=f({},t)[r]||Object.keys(f({},n)).join("")!=e})?function(t,n){for(var r=u(t),f=arguments.length,a=1,s=i.f,l=o.f;f>a;)for(var h,v=c(arguments[a++]),p=s?e(v).concat(s(v)):e(v),d=p.length,y=0;d>y;)l.call(v,h=p[y++])&&(r[h]=v[h]);return r}:f},function(t,n,r){var e=r(11),i=r(2),o=r(72);t.exports=r(10)?Object.defineProperties:function(t,n){i(t);for(var r,u=o(n),c=u.length,f=0;c>f;)e.f(t,r=u[f++],n[r]);return t}},function(t,n,r){var e=r(30),i=r(71).f,o={}.toString,u="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],c=function(t){try{return i(t)}catch(t){return u.slice()}};t.exports.f=function(t){return u&&"[object Window]"==o.call(t)?c(t):i(e(t))}},function(t,n,r){var e=r(24),i=r(30),o=r(117)(!1),u=r(145)("IE_PROTO");t.exports=function(t,n){var r,c=i(t),f=0,a=[];for(r in c)r!=u&&e(c,r)&&a.push(r);for(;n.length>f;)e(c,r=n[f++])&&(~o(a,r)||a.push(r));return a}},function(t,n,r){var e=r(72),i=r(30),o=r(116).f;t.exports=function(t){return function(n){for(var r,u=i(n),c=e(u),f=c.length,a=0,s=[];f>a;)o.call(u,r=c[a++])&&s.push(t?[r,u[r]]:u[r]);return s}}},function(t,n,r){var e=r(71),i=r(125),o=r(2),u=r(3).Reflect;t.exports=u&&u.ownKeys||function(t){var n=e.f(o(t)),r=i.f;return r?n.concat(r(t)):n}},function(t,n,r){var e=r(3).parseFloat,i=r(82).trim;t.exports=1/e(r(150)+"-0")!=-1/0?function(t){var n=i(String(t),3),r=e(n);return 0===r&&"-"==n.charAt(0)?-0:r}:e},function(t,n,r){var e=r(3).parseInt,i=r(82).trim,o=r(150),u=/^[\-+]?0[xX]/;t.exports=8!==e(o+"08")||22!==e(o+"0x16")?function(t,n){var r=i(String(t),3);return e(r,n>>>0||(u.test(r)?16:10))}:e},function(t,n){t.exports=Object.is||function(t,n){return t===n?0!==t||1/t==1/n:t!=t&&n!=n}},function(t,n,r){var e=r(16),i=r(149),o=r(46);t.exports=function(t,n,r,u){var c=String(o(t)),f=c.length,a=void 0===r?" ":String(r),s=e(n);if(s<=f||""==a)return c;var l=s-f,h=i.call(a,Math.ceil(l/a.length));return h.length>l&&(h=h.slice(0,l)),u?h+c:c+h}},function(t,n,r){n.f=r(7)},function(t,n,r){"use strict";var e=r(164);t.exports=r(118)("Map",function(t){return function(){return t(this,arguments.length>0?arguments[0]:void 0)}},{get:function(t){var n=e.getEntry(this,t);return n&&n.v},set:function(t,n){return e.def(this,0===t?0:t,n)}},e,!0)},function(t,n,r){r(10)&&"g"!=/./g.flags&&r(11).f(RegExp.prototype,"flags",{configurable:!0,get:r(120)})},function(t,n,r){"use strict";var e=r(164);t.exports=r(118)("Set",function(t){return function(){return t(this,arguments.length>0?arguments[0]:void 0)}},{add:function(t){return e.def(this,t=0===t?0:t,t)}},e)},function(t,n,r){"use strict";var e,i=r(48)(0),o=r(28),u=r(65),c=r(172),f=r(166),a=r(6),s=u.getWeak,l=Object.isExtensible,h=f.ufstore,v={},p=function(t){return function(){return t(this,arguments.length>0?arguments[0]:void 0)}},d={get:function(t){if(a(t)){var n=s(t);return!0===n?h(this).get(t):n?n[this._i]:void 0}},set:function(t,n){return f.def(this,t,n)}},y=t.exports=r(118)("WeakMap",p,d,f,!0,!0);7!=(new y).set((Object.freeze||Object)(v),7).get(v)&&(e=f.getConstructor(p),c(e.prototype,d),u.NEED=!0,i(["delete","has","get","set"],function(t){var n=y.prototype,r=n[t];o(n,t,function(n,i){if(a(n)&&!l(n)){this._f||(this._f=new e);var o=this._f[t](n,i);return"set"==t?this:o}return r.call(this,n,i)})}))},,,,function(t,n){"use strict";function r(){var t=document.querySelector("#page-nav");if(t&&!document.querySelector("#page-nav .extend.prev")&&(t.innerHTML='<a class="extend prev disabled" rel="prev">&laquo; Prev</a>'+t.innerHTML),t&&!document.querySelector("#page-nav .extend.next")&&(t.innerHTML=t.innerHTML+'<a class="extend next disabled" rel="next">Next &raquo;</a>'),yiliaConfig&&yiliaConfig.open_in_new){document.querySelectorAll(".article-entry a:not(.article-more-a)").forEach(function(t){var n=t.getAttribute("target");n&&""!==n||t.setAttribute("target","_blank")})}if(yiliaConfig&&yiliaConfig.toc_hide_index){document.querySelectorAll(".toc-number").forEach(function(t){t.style.display="none"})}var n=document.querySelector("#js-aboutme");n&&0!==n.length&&(n.innerHTML=n.innerText)}t.exports={init:r}},function(t,n,r){"use strict";function e(t){return t&&t.__esModule?t:{default:t}}function i(t,n){var r=/\/|index.html/g;return t.replace(r,"")===n.replace(r,"")}function o(){for(var t=document.querySelectorAll(".js-header-menu li a"),n=window.location.pathname,r=0,e=t.length;r<e;r++){var o=t[r];i(n,o.getAttribute("href"))&&(0,h.default)(o,"active")}}function u(t){for(var n=t.offsetLeft,r=t.offsetParent;null!==r;)n+=r.offsetLeft,r=r.offsetParent;return n}function c(t){for(var n=t.offsetTop,r=t.offsetParent;null!==r;)n+=r.offsetTop,r=r.offsetParent;return n}function f(t,n,r,e,i){var o=u(t),f=c(t)-n;if(f-r<=i){var a=t.$newDom;a||(a=t.cloneNode(!0),(0,d.default)(t,a),t.$newDom=a,a.style.position="fixed",a.style.top=(r||f)+"px",a.style.left=o+"px",a.style.zIndex=e||2,a.style.width="100%",a.style.color="#fff"),a.style.visibility="visible",t.style.visibility="hidden"}else{t.style.visibility="visible";var s=t.$newDom;s&&(s.style.visibility="hidden")}}function a(){var t=document.querySelector(".js-overlay"),n=document.querySelector(".js-header-menu");f(t,document.body.scrollTop,-63,2,0),f(n,document.body.scrollTop,1,3,0)}function s(){document.querySelector("#container").addEventListener("scroll",function(t){a()}),window.addEventListener("scroll",function(t){a()}),a()}var l=r(156),h=e(l),v=r(157),p=(e(v),r(382)),d=e(p),y=r(128),g=e(y),b=r(190),m=e(b),x=r(129);(function(){g.default.versions.mobile&&window.screen.width<800&&(o(),s())})(),(0,x.addLoadEvent)(function(){m.default.init()}),t.exports={}},,,,function(t,n,r){(function(t){"use strict";function n(t,n,r){t[n]||Object[e](t,n,{writable:!0,configurable:!0,value:r})}if(r(381),r(391),r(198),t._babelPolyfill)throw new Error("only one instance of babel-polyfill is allowed");t._babelPolyfill=!0;var e="defineProperty";n(String.prototype,"padLeft","".padStart),n(String.prototype,"padRight","".padEnd),"pop,reverse,shift,keys,values,entries,indexOf,every,some,forEach,map,filter,find,findIndex,includes,join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill".split(",").forEach(function(t){[][t]&&n(Array,t,Function.call.bind([][t]))})}).call(n,function(){return this}())},,,function(t,n,r){r(210),t.exports=r(52).RegExp.escape},,,,function(t,n,r){var e=r(6),i=r(138),o=r(7)("species");t.exports=function(t){var n;return i(t)&&(n=t.constructor,"function"!=typeof n||n!==Array&&!i(n.prototype)||(n=void 0),e(n)&&null===(n=n[o])&&(n=void 0)),void 0===n?Array:n}},function(t,n,r){var e=r(202);t.exports=function(t,n){return new(e(t))(n)}},function(t,n,r){"use strict";var e=r(2),i=r(50),o="number";t.exports=function(t){if("string"!==t&&t!==o&&"default"!==t)throw TypeError("Incorrect hint");return i(e(this),t!=o)}},function(t,n,r){var e=r(72),i=r(125),o=r(116);t.exports=function(t){var n=e(t),r=i.f;if(r)for(var u,c=r(t),f=o.f,a=0;c.length>a;)f.call(t,u=c[a++])&&n.push(u);return n}},function(t,n,r){var e=r(72),i=r(30);t.exports=function(t,n){for(var r,o=i(t),u=e(o),c=u.length,f=0;c>f;)if(o[r=u[f++]]===n)return r}},function(t,n,r){"use strict";var e=r(208),i=r(121),o=r(26);t.exports=function(){for(var t=o(this),n=arguments.length,r=Array(n),u=0,c=e._,f=!1;n>u;)(r[u]=arguments[u++])===c&&(f=!0);return function(){var e,o=this,u=arguments.length,a=0,s=0;if(!f&&!u)return i(t,r,o);if(e=r.slice(),f)for(;n>a;a++)e[a]===c&&(e[a]=arguments[s++]);for(;u>s;)e.push(arguments[s++]);return i(t,e,o)}}},function(t,n,r){t.exports=r(3)},function(t,n){t.exports=function(t,n){var r=n===Object(n)?function(t){return n[t]}:n;return function(n){return String(n).replace(t,r)}}},function(t,n,r){var e=r(1),i=r(209)(/[\\^$*+?.()|[\]{}]/g,"\\$&");e(e.S,"RegExp",{escape:function(t){return i(t)}})},function(t,n,r){var e=r(1);e(e.P,"Array",{copyWithin:r(160)}),r(78)("copyWithin")},function(t,n,r){"use strict";var e=r(1),i=r(48)(4);e(e.P+e.F*!r(47)([].every,!0),"Array",{every:function(t){return i(this,t,arguments[1])}})},function(t,n,r){var e=r(1);e(e.P,"Array",{fill:r(130)}),r(78)("fill")},function(t,n,r){"use strict";var e=r(1),i=r(48)(2);e(e.P+e.F*!r(47)([].filter,!0),"Array",{filter:function(t){return i(this,t,arguments[1])}})},function(t,n,r){"use strict";var e=r(1),i=r(48)(6),o="findIndex",u=!0;o in[]&&Array(1)[o](function(){u=!1}),e(e.P+e.F*u,"Array",{findIndex:function(t){return i(this,t,arguments.length>1?arguments[1]:void 0)}}),r(78)(o)},function(t,n,r){"use strict";var e=r(1),i=r(48)(5),o="find",u=!0;o in[]&&Array(1)[o](function(){u=!1}),e(e.P+e.F*u,"Array",{find:function(t){return i(this,t,arguments.length>1?arguments[1]:void 0)}}),r(78)(o)},function(t,n,r){"use strict";var e=r(1),i=r(48)(0),o=r(47)([].forEach,!0);e(e.P+e.F*!o,"Array",{forEach:function(t){return i(this,t,arguments[1])}})},function(t,n,r){"use strict";var e=r(53),i=r(1),o=r(17),u=r(169),c=r(137),f=r(16),a=r(131),s=r(154);i(i.S+i.F*!r(123)(function(t){Array.from(t)}),"Array",{from:function(t){var n,r,i,l,h=o(t),v="function"==typeof this?this:Array,p=arguments.length,d=p>1?arguments[1]:void 0,y=void 0!==d,g=0,b=s(h);if(y&&(d=e(d,p>2?arguments[2]:void 0,2)),void 0==b||v==Array&&c(b))for(n=f(h.length),r=new v(n);n>g;g++)a(r,g,y?d(h[g],g):h[g]);else for(l=b.call(h),r=new v;!(i=l.next()).done;g++)a(r,g,y?u(l,d,[i.value,g],!0):i.value);return r.length=g,r}})},function(t,n,r){"use strict";var e=r(1),i=r(117)(!1),o=[].indexOf,u=!!o&&1/[1].indexOf(1,-0)<0;e(e.P+e.F*(u||!r(47)(o)),"Array",{indexOf:function(t){return u?o.apply(this,arguments)||0:i(this,t,arguments[1])}})},function(t,n,r){var e=r(1);e(e.S,"Array",{isArray:r(138)})},function(t,n,r){"use strict";var e=r(1),i=r(30),o=[].join;e(e.P+e.F*(r(115)!=Object||!r(47)(o)),"Array",{join:function(t){return o.call(i(this),void 0===t?",":t)}})},function(t,n,r){"use strict";var e=r(1),i=r(30),o=r(67),u=r(16),c=[].lastIndexOf,f=!!c&&1/[1].lastIndexOf(1,-0)<0;e(e.P+e.F*(f||!r(47)(c)),"Array",{lastIndexOf:function(t){if(f)return c.apply(this,arguments)||0;var n=i(this),r=u(n.length),e=r-1;for(arguments.length>1&&(e=Math.min(e,o(arguments[1]))),e<0&&(e=r+e);e>=0;e--)if(e in n&&n[e]===t)return e||0;return-1}})},function(t,n,r){"use strict";var e=r(1),i=r(48)(1);e(e.P+e.F*!r(47)([].map,!0),"Array",{map:function(t){return i(this,t,arguments[1])}})},function(t,n,r){"use strict";var e=r(1),i=r(131);e(e.S+e.F*r(4)(function(){function t(){}return!(Array.of.call(t)instanceof t)}),"Array",{of:function(){for(var t=0,n=arguments.length,r=new("function"==typeof this?this:Array)(n);n>t;)i(r,t,arguments[t++]);return r.length=n,r}})},function(t,n,r){"use strict";var e=r(1),i=r(162);e(e.P+e.F*!r(47)([].reduceRight,!0),"Array",{reduceRight:function(t){return i(this,t,arguments.length,arguments[1],!0)}})},function(t,n,r){"use strict";var e=r(1),i=r(162);e(e.P+e.F*!r(47)([].reduce,!0),"Array",{reduce:function(t){return i(this,t,arguments.length,arguments[1],!1)}})},function(t,n,r){"use strict";var e=r(1),i=r(135),o=r(45),u=r(75),c=r(16),f=[].slice;e(e.P+e.F*r(4)(function(){i&&f.call(i)}),"Array",{slice:function(t,n){var r=c(this.length),e=o(this);if(n=void 0===n?r:n,"Array"==e)return f.call(this,t,n);for(var i=u(t,r),a=u(n,r),s=c(a-i),l=Array(s),h=0;h<s;h++)l[h]="String"==e?this.charAt(i+h):this[i+h];return l}})},function(t,n,r){"use strict";var e=r(1),i=r(48)(3);e(e.P+e.F*!r(47)([].some,!0),"Array",{some:function(t){return i(this,t,arguments[1])}})},function(t,n,r){"use strict";var e=r(1),i=r(26),o=r(17),u=r(4),c=[].sort,f=[1,2,3];e(e.P+e.F*(u(function(){f.sort(void 0)})||!u(function(){f.sort(null)})||!r(47)(c)),"Array",{sort:function(t){return void 0===t?c.call(o(this)):c.call(o(this),i(t))}})},function(t,n,r){r(74)("Array")},function(t,n,r){var e=r(1);e(e.S,"Date",{now:function(){return(new Date).getTime()}})},function(t,n,r){"use strict";var e=r(1),i=r(4),o=Date.prototype.getTime,u=function(t){return t>9?t:"0"+t};e(e.P+e.F*(i(function(){return"0385-07-25T07:06:39.999Z"!=new Date(-5e13-1).toISOString()})||!i(function(){new Date(NaN).toISOString()})),"Date",{toISOString:function(){
+if(!isFinite(o.call(this)))throw RangeError("Invalid time value");var t=this,n=t.getUTCFullYear(),r=t.getUTCMilliseconds(),e=n<0?"-":n>9999?"+":"";return e+("00000"+Math.abs(n)).slice(e?-6:-4)+"-"+u(t.getUTCMonth()+1)+"-"+u(t.getUTCDate())+"T"+u(t.getUTCHours())+":"+u(t.getUTCMinutes())+":"+u(t.getUTCSeconds())+"."+(r>99?r:"0"+u(r))+"Z"}})},function(t,n,r){"use strict";var e=r(1),i=r(17),o=r(50);e(e.P+e.F*r(4)(function(){return null!==new Date(NaN).toJSON()||1!==Date.prototype.toJSON.call({toISOString:function(){return 1}})}),"Date",{toJSON:function(t){var n=i(this),r=o(n);return"number"!=typeof r||isFinite(r)?n.toISOString():null}})},function(t,n,r){var e=r(7)("toPrimitive"),i=Date.prototype;e in i||r(27)(i,e,r(204))},function(t,n,r){var e=Date.prototype,i="Invalid Date",o="toString",u=e[o],c=e.getTime;new Date(NaN)+""!=i&&r(28)(e,o,function(){var t=c.call(this);return t===t?u.call(this):i})},function(t,n,r){var e=r(1);e(e.P,"Function",{bind:r(163)})},function(t,n,r){"use strict";var e=r(6),i=r(32),o=r(7)("hasInstance"),u=Function.prototype;o in u||r(11).f(u,o,{value:function(t){if("function"!=typeof this||!e(t))return!1;if(!e(this.prototype))return t instanceof this;for(;t=i(t);)if(this.prototype===t)return!0;return!1}})},function(t,n,r){var e=r(11).f,i=r(66),o=r(24),u=Function.prototype,c="name",f=Object.isExtensible||function(){return!0};c in u||r(10)&&e(u,c,{configurable:!0,get:function(){try{var t=this,n=(""+t).match(/^\s*function ([^ (]*)/)[1];return o(t,c)||!f(t)||e(t,c,i(5,n)),n}catch(t){return""}}})},function(t,n,r){var e=r(1),i=r(171),o=Math.sqrt,u=Math.acosh;e(e.S+e.F*!(u&&710==Math.floor(u(Number.MAX_VALUE))&&u(1/0)==1/0),"Math",{acosh:function(t){return(t=+t)<1?NaN:t>94906265.62425156?Math.log(t)+Math.LN2:i(t-1+o(t-1)*o(t+1))}})},function(t,n,r){function e(t){return isFinite(t=+t)&&0!=t?t<0?-e(-t):Math.log(t+Math.sqrt(t*t+1)):t}var i=r(1),o=Math.asinh;i(i.S+i.F*!(o&&1/o(0)>0),"Math",{asinh:e})},function(t,n,r){var e=r(1),i=Math.atanh;e(e.S+e.F*!(i&&1/i(-0)<0),"Math",{atanh:function(t){return 0==(t=+t)?t:Math.log((1+t)/(1-t))/2}})},function(t,n,r){var e=r(1),i=r(142);e(e.S,"Math",{cbrt:function(t){return i(t=+t)*Math.pow(Math.abs(t),1/3)}})},function(t,n,r){var e=r(1);e(e.S,"Math",{clz32:function(t){return(t>>>=0)?31-Math.floor(Math.log(t+.5)*Math.LOG2E):32}})},function(t,n,r){var e=r(1),i=Math.exp;e(e.S,"Math",{cosh:function(t){return(i(t=+t)+i(-t))/2}})},function(t,n,r){var e=r(1),i=r(141);e(e.S+e.F*(i!=Math.expm1),"Math",{expm1:i})},function(t,n,r){var e=r(1),i=r(142),o=Math.pow,u=o(2,-52),c=o(2,-23),f=o(2,127)*(2-c),a=o(2,-126),s=function(t){return t+1/u-1/u};e(e.S,"Math",{fround:function(t){var n,r,e=Math.abs(t),o=i(t);return e<a?o*s(e/a/c)*a*c:(n=(1+c/u)*e,r=n-(n-e),r>f||r!=r?o*(1/0):o*r)}})},function(t,n,r){var e=r(1),i=Math.abs;e(e.S,"Math",{hypot:function(t,n){for(var r,e,o=0,u=0,c=arguments.length,f=0;u<c;)r=i(arguments[u++]),f<r?(e=f/r,o=o*e*e+1,f=r):r>0?(e=r/f,o+=e*e):o+=r;return f===1/0?1/0:f*Math.sqrt(o)}})},function(t,n,r){var e=r(1),i=Math.imul;e(e.S+e.F*r(4)(function(){return-5!=i(4294967295,5)||2!=i.length}),"Math",{imul:function(t,n){var r=65535,e=+t,i=+n,o=r&e,u=r&i;return 0|o*u+((r&e>>>16)*u+o*(r&i>>>16)<<16>>>0)}})},function(t,n,r){var e=r(1);e(e.S,"Math",{log10:function(t){return Math.log(t)/Math.LN10}})},function(t,n,r){var e=r(1);e(e.S,"Math",{log1p:r(171)})},function(t,n,r){var e=r(1);e(e.S,"Math",{log2:function(t){return Math.log(t)/Math.LN2}})},function(t,n,r){var e=r(1);e(e.S,"Math",{sign:r(142)})},function(t,n,r){var e=r(1),i=r(141),o=Math.exp;e(e.S+e.F*r(4)(function(){return-2e-17!=!Math.sinh(-2e-17)}),"Math",{sinh:function(t){return Math.abs(t=+t)<1?(i(t)-i(-t))/2:(o(t-1)-o(-t-1))*(Math.E/2)}})},function(t,n,r){var e=r(1),i=r(141),o=Math.exp;e(e.S,"Math",{tanh:function(t){var n=i(t=+t),r=i(-t);return n==1/0?1:r==1/0?-1:(n-r)/(o(t)+o(-t))}})},function(t,n,r){var e=r(1);e(e.S,"Math",{trunc:function(t){return(t>0?Math.floor:Math.ceil)(t)}})},function(t,n,r){"use strict";var e=r(3),i=r(24),o=r(45),u=r(136),c=r(50),f=r(4),a=r(71).f,s=r(31).f,l=r(11).f,h=r(82).trim,v="Number",p=e[v],d=p,y=p.prototype,g=o(r(70)(y))==v,b="trim"in String.prototype,m=function(t){var n=c(t,!1);if("string"==typeof n&&n.length>2){n=b?n.trim():h(n,3);var r,e,i,o=n.charCodeAt(0);if(43===o||45===o){if(88===(r=n.charCodeAt(2))||120===r)return NaN}else if(48===o){switch(n.charCodeAt(1)){case 66:case 98:e=2,i=49;break;case 79:case 111:e=8,i=55;break;default:return+n}for(var u,f=n.slice(2),a=0,s=f.length;a<s;a++)if((u=f.charCodeAt(a))<48||u>i)return NaN;return parseInt(f,e)}}return+n};if(!p(" 0o1")||!p("0b1")||p("+0x1")){p=function(t){var n=arguments.length<1?0:t,r=this;return r instanceof p&&(g?f(function(){y.valueOf.call(r)}):o(r)!=v)?u(new d(m(n)),r,p):m(n)};for(var x,w=r(10)?a(d):"MAX_VALUE,MIN_VALUE,NaN,NEGATIVE_INFINITY,POSITIVE_INFINITY,EPSILON,isFinite,isInteger,isNaN,isSafeInteger,MAX_SAFE_INTEGER,MIN_SAFE_INTEGER,parseFloat,parseInt,isInteger".split(","),S=0;w.length>S;S++)i(d,x=w[S])&&!i(p,x)&&l(p,x,s(d,x));p.prototype=y,y.constructor=p,r(28)(e,v,p)}},function(t,n,r){var e=r(1);e(e.S,"Number",{EPSILON:Math.pow(2,-52)})},function(t,n,r){var e=r(1),i=r(3).isFinite;e(e.S,"Number",{isFinite:function(t){return"number"==typeof t&&i(t)}})},function(t,n,r){var e=r(1);e(e.S,"Number",{isInteger:r(168)})},function(t,n,r){var e=r(1);e(e.S,"Number",{isNaN:function(t){return t!=t}})},function(t,n,r){var e=r(1),i=r(168),o=Math.abs;e(e.S,"Number",{isSafeInteger:function(t){return i(t)&&o(t)<=9007199254740991}})},function(t,n,r){var e=r(1);e(e.S,"Number",{MAX_SAFE_INTEGER:9007199254740991})},function(t,n,r){var e=r(1);e(e.S,"Number",{MIN_SAFE_INTEGER:-9007199254740991})},function(t,n,r){var e=r(1),i=r(178);e(e.S+e.F*(Number.parseFloat!=i),"Number",{parseFloat:i})},function(t,n,r){var e=r(1),i=r(179);e(e.S+e.F*(Number.parseInt!=i),"Number",{parseInt:i})},function(t,n,r){"use strict";var e=r(1),i=r(67),o=r(159),u=r(149),c=1..toFixed,f=Math.floor,a=[0,0,0,0,0,0],s="Number.toFixed: incorrect invocation!",l="0",h=function(t,n){for(var r=-1,e=n;++r<6;)e+=t*a[r],a[r]=e%1e7,e=f(e/1e7)},v=function(t){for(var n=6,r=0;--n>=0;)r+=a[n],a[n]=f(r/t),r=r%t*1e7},p=function(){for(var t=6,n="";--t>=0;)if(""!==n||0===t||0!==a[t]){var r=String(a[t]);n=""===n?r:n+u.call(l,7-r.length)+r}return n},d=function(t,n,r){return 0===n?r:n%2==1?d(t,n-1,r*t):d(t*t,n/2,r)},y=function(t){for(var n=0,r=t;r>=4096;)n+=12,r/=4096;for(;r>=2;)n+=1,r/=2;return n};e(e.P+e.F*(!!c&&("0.000"!==8e-5.toFixed(3)||"1"!==.9.toFixed(0)||"1.25"!==1.255.toFixed(2)||"1000000000000000128"!==(0xde0b6b3a7640080).toFixed(0))||!r(4)(function(){c.call({})})),"Number",{toFixed:function(t){var n,r,e,c,f=o(this,s),a=i(t),g="",b=l;if(a<0||a>20)throw RangeError(s);if(f!=f)return"NaN";if(f<=-1e21||f>=1e21)return String(f);if(f<0&&(g="-",f=-f),f>1e-21)if(n=y(f*d(2,69,1))-69,r=n<0?f*d(2,-n,1):f/d(2,n,1),r*=4503599627370496,(n=52-n)>0){for(h(0,r),e=a;e>=7;)h(1e7,0),e-=7;for(h(d(10,e,1),0),e=n-1;e>=23;)v(1<<23),e-=23;v(1<<e),h(1,1),v(2),b=p()}else h(0,r),h(1<<-n,0),b=p()+u.call(l,a);return a>0?(c=b.length,b=g+(c<=a?"0."+u.call(l,a-c)+b:b.slice(0,c-a)+"."+b.slice(c-a))):b=g+b,b}})},function(t,n,r){"use strict";var e=r(1),i=r(4),o=r(159),u=1..toPrecision;e(e.P+e.F*(i(function(){return"1"!==u.call(1,void 0)})||!i(function(){u.call({})})),"Number",{toPrecision:function(t){var n=o(this,"Number#toPrecision: incorrect invocation!");return void 0===t?u.call(n):u.call(n,t)}})},function(t,n,r){var e=r(1);e(e.S+e.F,"Object",{assign:r(172)})},function(t,n,r){var e=r(1);e(e.S,"Object",{create:r(70)})},function(t,n,r){var e=r(1);e(e.S+e.F*!r(10),"Object",{defineProperties:r(173)})},function(t,n,r){var e=r(1);e(e.S+e.F*!r(10),"Object",{defineProperty:r(11).f})},function(t,n,r){var e=r(6),i=r(65).onFreeze;r(49)("freeze",function(t){return function(n){return t&&e(n)?t(i(n)):n}})},function(t,n,r){var e=r(30),i=r(31).f;r(49)("getOwnPropertyDescriptor",function(){return function(t,n){return i(e(t),n)}})},function(t,n,r){r(49)("getOwnPropertyNames",function(){return r(174).f})},function(t,n,r){var e=r(17),i=r(32);r(49)("getPrototypeOf",function(){return function(t){return i(e(t))}})},function(t,n,r){var e=r(6);r(49)("isExtensible",function(t){return function(n){return!!e(n)&&(!t||t(n))}})},function(t,n,r){var e=r(6);r(49)("isFrozen",function(t){return function(n){return!e(n)||!!t&&t(n)}})},function(t,n,r){var e=r(6);r(49)("isSealed",function(t){return function(n){return!e(n)||!!t&&t(n)}})},function(t,n,r){var e=r(1);e(e.S,"Object",{is:r(180)})},function(t,n,r){var e=r(17),i=r(72);r(49)("keys",function(){return function(t){return i(e(t))}})},function(t,n,r){var e=r(6),i=r(65).onFreeze;r(49)("preventExtensions",function(t){return function(n){return t&&e(n)?t(i(n)):n}})},function(t,n,r){var e=r(6),i=r(65).onFreeze;r(49)("seal",function(t){return function(n){return t&&e(n)?t(i(n)):n}})},function(t,n,r){var e=r(1);e(e.S,"Object",{setPrototypeOf:r(144).set})},function(t,n,r){"use strict";var e=r(114),i={};i[r(7)("toStringTag")]="z",i+""!="[object z]"&&r(28)(Object.prototype,"toString",function(){return"[object "+e(this)+"]"},!0)},function(t,n,r){var e=r(1),i=r(178);e(e.G+e.F*(parseFloat!=i),{parseFloat:i})},function(t,n,r){var e=r(1),i=r(179);e(e.G+e.F*(parseInt!=i),{parseInt:i})},function(t,n,r){"use strict";var e,i,o,u=r(69),c=r(3),f=r(53),a=r(114),s=r(1),l=r(6),h=r(26),v=r(68),p=r(79),d=r(146),y=r(151).set,g=r(143)(),b="Promise",m=c.TypeError,x=c.process,w=c[b],x=c.process,S="process"==a(x),_=function(){},O=!!function(){try{var t=w.resolve(1),n=(t.constructor={})[r(7)("species")]=function(t){t(_,_)};return(S||"function"==typeof PromiseRejectionEvent)&&t.then(_)instanceof n}catch(t){}}(),E=function(t,n){return t===n||t===w&&n===o},P=function(t){var n;return!(!l(t)||"function"!=typeof(n=t.then))&&n},j=function(t){return E(w,t)?new F(t):new i(t)},F=i=function(t){var n,r;this.promise=new t(function(t,e){if(void 0!==n||void 0!==r)throw m("Bad Promise constructor");n=t,r=e}),this.resolve=h(n),this.reject=h(r)},M=function(t){try{t()}catch(t){return{error:t}}},A=function(t,n){if(!t._n){t._n=!0;var r=t._c;g(function(){for(var e=t._v,i=1==t._s,o=0;r.length>o;)!function(n){var r,o,u=i?n.ok:n.fail,c=n.resolve,f=n.reject,a=n.domain;try{u?(i||(2==t._h&&I(t),t._h=1),!0===u?r=e:(a&&a.enter(),r=u(e),a&&a.exit()),r===n.promise?f(m("Promise-chain cycle")):(o=P(r))?o.call(r,c,f):c(r)):f(e)}catch(t){f(t)}}(r[o++]);t._c=[],t._n=!1,n&&!t._h&&N(t)})}},N=function(t){y.call(c,function(){var n,r,e,i=t._v;if(T(t)&&(n=M(function(){S?x.emit("unhandledRejection",i,t):(r=c.onunhandledrejection)?r({promise:t,reason:i}):(e=c.console)&&e.error&&e.error("Unhandled promise rejection",i)}),t._h=S||T(t)?2:1),t._a=void 0,n)throw n.error})},T=function(t){if(1==t._h)return!1;for(var n,r=t._a||t._c,e=0;r.length>e;)if(n=r[e++],n.fail||!T(n.promise))return!1;return!0},I=function(t){y.call(c,function(){var n;S?x.emit("rejectionHandled",t):(n=c.onrejectionhandled)&&n({promise:t,reason:t._v})})},k=function(t){var n=this;n._d||(n._d=!0,n=n._w||n,n._v=t,n._s=2,n._a||(n._a=n._c.slice()),A(n,!0))},L=function(t){var n,r=this;if(!r._d){r._d=!0,r=r._w||r;try{if(r===t)throw m("Promise can't be resolved itself");(n=P(t))?g(function(){var e={_w:r,_d:!1};try{n.call(t,f(L,e,1),f(k,e,1))}catch(t){k.call(e,t)}}):(r._v=t,r._s=1,A(r,!1))}catch(t){k.call({_w:r,_d:!1},t)}}};O||(w=function(t){v(this,w,b,"_h"),h(t),e.call(this);try{t(f(L,this,1),f(k,this,1))}catch(t){k.call(this,t)}},e=function(t){this._c=[],this._a=void 0,this._s=0,this._d=!1,this._v=void 0,this._h=0,this._n=!1},e.prototype=r(73)(w.prototype,{then:function(t,n){var r=j(d(this,w));return r.ok="function"!=typeof t||t,r.fail="function"==typeof n&&n,r.domain=S?x.domain:void 0,this._c.push(r),this._a&&this._a.push(r),this._s&&A(this,!1),r.promise},catch:function(t){return this.then(void 0,t)}}),F=function(){var t=new e;this.promise=t,this.resolve=f(L,t,1),this.reject=f(k,t,1)}),s(s.G+s.W+s.F*!O,{Promise:w}),r(81)(w,b),r(74)(b),o=r(52)[b],s(s.S+s.F*!O,b,{reject:function(t){var n=j(this);return(0,n.reject)(t),n.promise}}),s(s.S+s.F*(u||!O),b,{resolve:function(t){if(t instanceof w&&E(t.constructor,this))return t;var n=j(this);return(0,n.resolve)(t),n.promise}}),s(s.S+s.F*!(O&&r(123)(function(t){w.all(t).catch(_)})),b,{all:function(t){var n=this,r=j(n),e=r.resolve,i=r.reject,o=M(function(){var r=[],o=0,u=1;p(t,!1,function(t){var c=o++,f=!1;r.push(void 0),u++,n.resolve(t).then(function(t){f||(f=!0,r[c]=t,--u||e(r))},i)}),--u||e(r)});return o&&i(o.error),r.promise},race:function(t){var n=this,r=j(n),e=r.reject,i=M(function(){p(t,!1,function(t){n.resolve(t).then(r.resolve,e)})});return i&&e(i.error),r.promise}})},function(t,n,r){var e=r(1),i=r(26),o=r(2),u=(r(3).Reflect||{}).apply,c=Function.apply;e(e.S+e.F*!r(4)(function(){u(function(){})}),"Reflect",{apply:function(t,n,r){var e=i(t),f=o(r);return u?u(e,n,f):c.call(e,n,f)}})},function(t,n,r){var e=r(1),i=r(70),o=r(26),u=r(2),c=r(6),f=r(4),a=r(163),s=(r(3).Reflect||{}).construct,l=f(function(){function t(){}return!(s(function(){},[],t)instanceof t)}),h=!f(function(){s(function(){})});e(e.S+e.F*(l||h),"Reflect",{construct:function(t,n){o(t),u(n);var r=arguments.length<3?t:o(arguments[2]);if(h&&!l)return s(t,n,r);if(t==r){switch(n.length){case 0:return new t;case 1:return new t(n[0]);case 2:return new t(n[0],n[1]);case 3:return new t(n[0],n[1],n[2]);case 4:return new t(n[0],n[1],n[2],n[3])}var e=[null];return e.push.apply(e,n),new(a.apply(t,e))}var f=r.prototype,v=i(c(f)?f:Object.prototype),p=Function.apply.call(t,v,n);return c(p)?p:v}})},function(t,n,r){var e=r(11),i=r(1),o=r(2),u=r(50);i(i.S+i.F*r(4)(function(){Reflect.defineProperty(e.f({},1,{value:1}),1,{value:2})}),"Reflect",{defineProperty:function(t,n,r){o(t),n=u(n,!0),o(r);try{return e.f(t,n,r),!0}catch(t){return!1}}})},function(t,n,r){var e=r(1),i=r(31).f,o=r(2);e(e.S,"Reflect",{deleteProperty:function(t,n){var r=i(o(t),n);return!(r&&!r.configurable)&&delete t[n]}})},function(t,n,r){"use strict";var e=r(1),i=r(2),o=function(t){this._t=i(t),this._i=0;var n,r=this._k=[];for(n in t)r.push(n)};r(139)(o,"Object",function(){var t,n=this,r=n._k;do{if(n._i>=r.length)return{value:void 0,done:!0}}while(!((t=r[n._i++])in n._t));return{value:t,done:!1}}),e(e.S,"Reflect",{enumerate:function(t){return new o(t)}})},function(t,n,r){var e=r(31),i=r(1),o=r(2);i(i.S,"Reflect",{getOwnPropertyDescriptor:function(t,n){return e.f(o(t),n)}})},function(t,n,r){var e=r(1),i=r(32),o=r(2);e(e.S,"Reflect",{getPrototypeOf:function(t){return i(o(t))}})},function(t,n,r){function e(t,n){var r,c,s=arguments.length<3?t:arguments[2];return a(t)===s?t[n]:(r=i.f(t,n))?u(r,"value")?r.value:void 0!==r.get?r.get.call(s):void 0:f(c=o(t))?e(c,n,s):void 0}var i=r(31),o=r(32),u=r(24),c=r(1),f=r(6),a=r(2);c(c.S,"Reflect",{get:e})},function(t,n,r){var e=r(1);e(e.S,"Reflect",{has:function(t,n){return n in t}})},function(t,n,r){var e=r(1),i=r(2),o=Object.isExtensible;e(e.S,"Reflect",{isExtensible:function(t){return i(t),!o||o(t)}})},function(t,n,r){var e=r(1);e(e.S,"Reflect",{ownKeys:r(177)})},function(t,n,r){var e=r(1),i=r(2),o=Object.preventExtensions;e(e.S,"Reflect",{preventExtensions:function(t){i(t);try{return o&&o(t),!0}catch(t){return!1}}})},function(t,n,r){var e=r(1),i=r(144);i&&e(e.S,"Reflect",{setPrototypeOf:function(t,n){i.check(t,n);try{return i.set(t,n),!0}catch(t){return!1}}})},function(t,n,r){function e(t,n,r){var f,h,v=arguments.length<4?t:arguments[3],p=o.f(s(t),n);if(!p){if(l(h=u(t)))return e(h,n,r,v);p=a(0)}return c(p,"value")?!(!1===p.writable||!l(v)||(f=o.f(v,n)||a(0),f.value=r,i.f(v,n,f),0)):void 0!==p.set&&(p.set.call(v,r),!0)}var i=r(11),o=r(31),u=r(32),c=r(24),f=r(1),a=r(66),s=r(2),l=r(6);f(f.S,"Reflect",{set:e})},function(t,n,r){var e=r(3),i=r(136),o=r(11).f,u=r(71).f,c=r(122),f=r(120),a=e.RegExp,s=a,l=a.prototype,h=/a/g,v=/a/g,p=new a(h)!==h;if(r(10)&&(!p||r(4)(function(){return v[r(7)("match")]=!1,a(h)!=h||a(v)==v||"/a/i"!=a(h,"i")}))){a=function(t,n){var r=this instanceof a,e=c(t),o=void 0===n;return!r&&e&&t.constructor===a&&o?t:i(p?new s(e&&!o?t.source:t,n):s((e=t instanceof a)?t.source:t,e&&o?f.call(t):n),r?this:l,a)};for(var d=u(s),y=0;d.length>y;)!function(t){t in a||o(a,t,{configurable:!0,get:function(){return s[t]},set:function(n){s[t]=n}})}(d[y++]);l.constructor=a,a.prototype=l,r(28)(e,"RegExp",a)}r(74)("RegExp")},function(t,n,r){r(119)("match",1,function(t,n,r){return[function(r){"use strict";var e=t(this),i=void 0==r?void 0:r[n];return void 0!==i?i.call(r,e):new RegExp(r)[n](String(e))},r]})},function(t,n,r){r(119)("replace",2,function(t,n,r){return[function(e,i){"use strict";var o=t(this),u=void 0==e?void 0:e[n];return void 0!==u?u.call(e,o,i):r.call(String(o),e,i)},r]})},function(t,n,r){r(119)("search",1,function(t,n,r){return[function(r){"use strict";var e=t(this),i=void 0==r?void 0:r[n];return void 0!==i?i.call(r,e):new RegExp(r)[n](String(e))},r]})},function(t,n,r){r(119)("split",2,function(t,n,e){"use strict";var i=r(122),o=e,u=[].push,c="split",f="length",a="lastIndex";if("c"=="abbc"[c](/(b)*/)[1]||4!="test"[c](/(?:)/,-1)[f]||2!="ab"[c](/(?:ab)*/)[f]||4!="."[c](/(.?)(.?)/)[f]||"."[c](/()()/)[f]>1||""[c](/.?/)[f]){var s=void 0===/()??/.exec("")[1];e=function(t,n){var r=String(this);if(void 0===t&&0===n)return[];if(!i(t))return o.call(r,t,n);var e,c,l,h,v,p=[],d=(t.ignoreCase?"i":"")+(t.multiline?"m":"")+(t.unicode?"u":"")+(t.sticky?"y":""),y=0,g=void 0===n?4294967295:n>>>0,b=new RegExp(t.source,d+"g");for(s||(e=new RegExp("^"+b.source+"$(?!\\s)",d));(c=b.exec(r))&&!((l=c.index+c[0][f])>y&&(p.push(r.slice(y,c.index)),!s&&c[f]>1&&c[0].replace(e,function(){for(v=1;v<arguments[f]-2;v++)void 0===arguments[v]&&(c[v]=void 0)}),c[f]>1&&c.index<r[f]&&u.apply(p,c.slice(1)),h=c[0][f],y=l,p[f]>=g));)b[a]===c.index&&b[a]++;return y===r[f]?!h&&b.test("")||p.push(""):p.push(r.slice(y)),p[f]>g?p.slice(0,g):p}}else"0"[c](void 0,0)[f]&&(e=function(t,n){return void 0===t&&0===n?[]:o.call(this,t,n)});return[function(r,i){var o=t(this),u=void 0==r?void 0:r[n];return void 0!==u?u.call(r,o,i):e.call(String(o),r,i)},e]})},function(t,n,r){"use strict";r(184);var e=r(2),i=r(120),o=r(10),u="toString",c=/./[u],f=function(t){r(28)(RegExp.prototype,u,t,!0)};r(4)(function(){return"/a/b"!=c.call({source:"a",flags:"b"})})?f(function(){var t=e(this);return"/".concat(t.source,"/","flags"in t?t.flags:!o&&t instanceof RegExp?i.call(t):void 0)}):c.name!=u&&f(function(){return c.call(this)})},function(t,n,r){"use strict";r(29)("anchor",function(t){return function(n){return t(this,"a","name",n)}})},function(t,n,r){"use strict";r(29)("big",function(t){return function(){return t(this,"big","","")}})},function(t,n,r){"use strict";r(29)("blink",function(t){return function(){return t(this,"blink","","")}})},function(t,n,r){"use strict";r(29)("bold",function(t){return function(){return t(this,"b","","")}})},function(t,n,r){"use strict";var e=r(1),i=r(147)(!1);e(e.P,"String",{codePointAt:function(t){return i(this,t)}})},function(t,n,r){"use strict";var e=r(1),i=r(16),o=r(148),u="endsWith",c=""[u];e(e.P+e.F*r(134)(u),"String",{endsWith:function(t){var n=o(this,t,u),r=arguments.length>1?arguments[1]:void 0,e=i(n.length),f=void 0===r?e:Math.min(i(r),e),a=String(t);return c?c.call(n,a,f):n.slice(f-a.length,f)===a}})},function(t,n,r){"use strict";r(29)("fixed",function(t){return function(){return t(this,"tt","","")}})},function(t,n,r){"use strict";r(29)("fontcolor",function(t){return function(n){return t(this,"font","color",n)}})},function(t,n,r){"use strict";r(29)("fontsize",function(t){return function(n){return t(this,"font","size",n)}})},function(t,n,r){var e=r(1),i=r(75),o=String.fromCharCode,u=String.fromCodePoint;e(e.S+e.F*(!!u&&1!=u.length),"String",{fromCodePoint:function(t){for(var n,r=[],e=arguments.length,u=0;e>u;){if(n=+arguments[u++],i(n,1114111)!==n)throw RangeError(n+" is not a valid code point");r.push(n<65536?o(n):o(55296+((n-=65536)>>10),n%1024+56320))}return r.join("")}})},function(t,n,r){"use strict";var e=r(1),i=r(148),o="includes";e(e.P+e.F*r(134)(o),"String",{includes:function(t){return!!~i(this,t,o).indexOf(t,arguments.length>1?arguments[1]:void 0)}})},function(t,n,r){"use strict";r(29)("italics",function(t){return function(){return t(this,"i","","")}})},function(t,n,r){"use strict";var e=r(147)(!0);r(140)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,n=this._t,r=this._i;return r>=n.length?{value:void 0,done:!0}:(t=e(n,r),this._i+=t.length,{value:t,done:!1})})},function(t,n,r){"use strict";r(29)("link",function(t){return function(n){return t(this,"a","href",n)}})},function(t,n,r){var e=r(1),i=r(30),o=r(16);e(e.S,"String",{raw:function(t){for(var n=i(t.raw),r=o(n.length),e=arguments.length,u=[],c=0;r>c;)u.push(String(n[c++])),c<e&&u.push(String(arguments[c]));return u.join("")}})},function(t,n,r){var e=r(1);e(e.P,"String",{repeat:r(149)})},function(t,n,r){"use strict";r(29)("small",function(t){return function(){return t(this,"small","","")}})},function(t,n,r){"use strict";var e=r(1),i=r(16),o=r(148),u="startsWith",c=""[u];e(e.P+e.F*r(134)(u),"String",{startsWith:function(t){var n=o(this,t,u),r=i(Math.min(arguments.length>1?arguments[1]:void 0,n.length)),e=String(t);return c?c.call(n,e,r):n.slice(r,r+e.length)===e}})},function(t,n,r){"use strict";r(29)("strike",function(t){return function(){return t(this,"strike","","")}})},function(t,n,r){"use strict";r(29)("sub",function(t){return function(){return t(this,"sub","","")}})},function(t,n,r){"use strict";r(29)("sup",function(t){return function(){return t(this,"sup","","")}})},function(t,n,r){"use strict";r(82)("trim",function(t){return function(){return t(this,3)}})},function(t,n,r){"use strict";var e=r(3),i=r(24),o=r(10),u=r(1),c=r(28),f=r(65).KEY,a=r(4),s=r(126),l=r(81),h=r(76),v=r(7),p=r(182),d=r(153),y=r(206),g=r(205),b=r(138),m=r(2),x=r(30),w=r(50),S=r(66),_=r(70),O=r(174),E=r(31),P=r(11),j=r(72),F=E.f,M=P.f,A=O.f,N=e.Symbol,T=e.JSON,I=T&&T.stringify,k="prototype",L=v("_hidden"),R=v("toPrimitive"),C={}.propertyIsEnumerable,D=s("symbol-registry"),U=s("symbols"),W=s("op-symbols"),G=Object[k],B="function"==typeof N,V=e.QObject,z=!V||!V[k]||!V[k].findChild,q=o&&a(function(){return 7!=_(M({},"a",{get:function(){return M(this,"a",{value:7}).a}})).a})?function(t,n,r){var e=F(G,n);e&&delete G[n],M(t,n,r),e&&t!==G&&M(G,n,e)}:M,K=function(t){var n=U[t]=_(N[k]);return n._k=t,n},J=B&&"symbol"==typeof N.iterator?function(t){return"symbol"==typeof t}:function(t){return t instanceof N},Y=function(t,n,r){return t===G&&Y(W,n,r),m(t),n=w(n,!0),m(r),i(U,n)?(r.enumerable?(i(t,L)&&t[L][n]&&(t[L][n]=!1),r=_(r,{enumerable:S(0,!1)})):(i(t,L)||M(t,L,S(1,{})),t[L][n]=!0),q(t,n,r)):M(t,n,r)},H=function(t,n){m(t);for(var r,e=g(n=x(n)),i=0,o=e.length;o>i;)Y(t,r=e[i++],n[r]);return t},$=function(t,n){return void 0===n?_(t):H(_(t),n)},X=function(t){var n=C.call(this,t=w(t,!0));return!(this===G&&i(U,t)&&!i(W,t))&&(!(n||!i(this,t)||!i(U,t)||i(this,L)&&this[L][t])||n)},Q=function(t,n){if(t=x(t),n=w(n,!0),t!==G||!i(U,n)||i(W,n)){var r=F(t,n);return!r||!i(U,n)||i(t,L)&&t[L][n]||(r.enumerable=!0),r}},Z=function(t){for(var n,r=A(x(t)),e=[],o=0;r.length>o;)i(U,n=r[o++])||n==L||n==f||e.push(n);return e},tt=function(t){for(var n,r=t===G,e=A(r?W:x(t)),o=[],u=0;e.length>u;)!i(U,n=e[u++])||r&&!i(G,n)||o.push(U[n]);return o};B||(N=function(){if(this instanceof N)throw TypeError("Symbol is not a constructor!");var t=h(arguments.length>0?arguments[0]:void 0),n=function(r){this===G&&n.call(W,r),i(this,L)&&i(this[L],t)&&(this[L][t]=!1),q(this,t,S(1,r))};return o&&z&&q(G,t,{configurable:!0,set:n}),K(t)},c(N[k],"toString",function(){return this._k}),E.f=Q,P.f=Y,r(71).f=O.f=Z,r(116).f=X,r(125).f=tt,o&&!r(69)&&c(G,"propertyIsEnumerable",X,!0),p.f=function(t){return K(v(t))}),u(u.G+u.W+u.F*!B,{Symbol:N});for(var nt="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),rt=0;nt.length>rt;)v(nt[rt++]);for(var nt=j(v.store),rt=0;nt.length>rt;)d(nt[rt++]);u(u.S+u.F*!B,"Symbol",{for:function(t){return i(D,t+="")?D[t]:D[t]=N(t)},keyFor:function(t){if(J(t))return y(D,t);throw TypeError(t+" is not a symbol!")},useSetter:function(){z=!0},useSimple:function(){z=!1}}),u(u.S+u.F*!B,"Object",{create:$,defineProperty:Y,defineProperties:H,getOwnPropertyDescriptor:Q,getOwnPropertyNames:Z,getOwnPropertySymbols:tt}),T&&u(u.S+u.F*(!B||a(function(){var t=N();return"[null]"!=I([t])||"{}"!=I({a:t})||"{}"!=I(Object(t))})),"JSON",{stringify:function(t){if(void 0!==t&&!J(t)){for(var n,r,e=[t],i=1;arguments.length>i;)e.push(arguments[i++]);return n=e[1],"function"==typeof n&&(r=n),!r&&b(n)||(n=function(t,n){if(r&&(n=r.call(this,t,n)),!J(n))return n}),e[1]=n,I.apply(T,e)}}}),N[k][R]||r(27)(N[k],R,N[k].valueOf),l(N,"Symbol"),l(Math,"Math",!0),l(e.JSON,"JSON",!0)},function(t,n,r){"use strict";var e=r(1),i=r(127),o=r(152),u=r(2),c=r(75),f=r(16),a=r(6),s=r(3).ArrayBuffer,l=r(146),h=o.ArrayBuffer,v=o.DataView,p=i.ABV&&s.isView,d=h.prototype.slice,y=i.VIEW,g="ArrayBuffer";e(e.G+e.W+e.F*(s!==h),{ArrayBuffer:h}),e(e.S+e.F*!i.CONSTR,g,{isView:function(t){return p&&p(t)||a(t)&&y in t}}),e(e.P+e.U+e.F*r(4)(function(){return!new h(2).slice(1,void 0).byteLength}),g,{slice:function(t,n){if(void 0!==d&&void 0===n)return d.call(u(this),t);for(var r=u(this).byteLength,e=c(t,r),i=c(void 0===n?r:n,r),o=new(l(this,h))(f(i-e)),a=new v(this),s=new v(o),p=0;e<i;)s.setUint8(p++,a.getUint8(e++));return o}}),r(74)(g)},function(t,n,r){var e=r(1);e(e.G+e.W+e.F*!r(127).ABV,{DataView:r(152).DataView})},function(t,n,r){r(55)("Float32",4,function(t){return function(n,r,e){return t(this,n,r,e)}})},function(t,n,r){r(55)("Float64",8,function(t){return function(n,r,e){return t(this,n,r,e)}})},function(t,n,r){r(55)("Int16",2,function(t){return function(n,r,e){return t(this,n,r,e)}})},function(t,n,r){r(55)("Int32",4,function(t){return function(n,r,e){return t(this,n,r,e)}})},function(t,n,r){r(55)("Int8",1,function(t){return function(n,r,e){return t(this,n,r,e)}})},function(t,n,r){r(55)("Uint16",2,function(t){return function(n,r,e){return t(this,n,r,e)}})},function(t,n,r){r(55)("Uint32",4,function(t){return function(n,r,e){return t(this,n,r,e)}})},function(t,n,r){r(55)("Uint8",1,function(t){return function(n,r,e){return t(this,n,r,e)}})},function(t,n,r){r(55)("Uint8",1,function(t){return function(n,r,e){return t(this,n,r,e)}},!0)},function(t,n,r){"use strict";var e=r(166);r(118)("WeakSet",function(t){return function(){return t(this,arguments.length>0?arguments[0]:void 0)}},{add:function(t){return e.def(this,t,!0)}},e,!1,!0)},function(t,n,r){"use strict";var e=r(1),i=r(117)(!0);e(e.P,"Array",{includes:function(t){return i(this,t,arguments.length>1?arguments[1]:void 0)}}),r(78)("includes")},function(t,n,r){var e=r(1),i=r(143)(),o=r(3).process,u="process"==r(45)(o);e(e.G,{asap:function(t){var n=u&&o.domain;i(n?n.bind(t):t)}})},function(t,n,r){var e=r(1),i=r(45);e(e.S,"Error",{isError:function(t){return"Error"===i(t)}})},function(t,n,r){var e=r(1);e(e.P+e.R,"Map",{toJSON:r(165)("Map")})},function(t,n,r){var e=r(1);e(e.S,"Math",{iaddh:function(t,n,r,e){var i=t>>>0,o=n>>>0,u=r>>>0;return o+(e>>>0)+((i&u|(i|u)&~(i+u>>>0))>>>31)|0}})},function(t,n,r){var e=r(1);e(e.S,"Math",{imulh:function(t,n){var r=65535,e=+t,i=+n,o=e&r,u=i&r,c=e>>16,f=i>>16,a=(c*u>>>0)+(o*u>>>16);return c*f+(a>>16)+((o*f>>>0)+(a&r)>>16)}})},function(t,n,r){var e=r(1);e(e.S,"Math",{isubh:function(t,n,r,e){var i=t>>>0,o=n>>>0,u=r>>>0;return o-(e>>>0)-((~i&u|~(i^u)&i-u>>>0)>>>31)|0}})},function(t,n,r){var e=r(1);e(e.S,"Math",{umulh:function(t,n){var r=65535,e=+t,i=+n,o=e&r,u=i&r,c=e>>>16,f=i>>>16,a=(c*u>>>0)+(o*u>>>16);return c*f+(a>>>16)+((o*f>>>0)+(a&r)>>>16)}})},function(t,n,r){"use strict";var e=r(1),i=r(17),o=r(26),u=r(11);r(10)&&e(e.P+r(124),"Object",{__defineGetter__:function(t,n){u.f(i(this),t,{get:o(n),enumerable:!0,configurable:!0})}})},function(t,n,r){"use strict";var e=r(1),i=r(17),o=r(26),u=r(11);r(10)&&e(e.P+r(124),"Object",{__defineSetter__:function(t,n){u.f(i(this),t,{set:o(n),enumerable:!0,configurable:!0})}})},function(t,n,r){var e=r(1),i=r(176)(!0);e(e.S,"Object",{entries:function(t){return i(t)}})},function(t,n,r){var e=r(1),i=r(177),o=r(30),u=r(31),c=r(131);e(e.S,"Object",{getOwnPropertyDescriptors:function(t){for(var n,r=o(t),e=u.f,f=i(r),a={},s=0;f.length>s;)c(a,n=f[s++],e(r,n));return a}})},function(t,n,r){"use strict";var e=r(1),i=r(17),o=r(50),u=r(32),c=r(31).f;r(10)&&e(e.P+r(124),"Object",{__lookupGetter__:function(t){var n,r=i(this),e=o(t,!0);do{if(n=c(r,e))return n.get}while(r=u(r))}})},function(t,n,r){"use strict";var e=r(1),i=r(17),o=r(50),u=r(32),c=r(31).f;r(10)&&e(e.P+r(124),"Object",{__lookupSetter__:function(t){var n,r=i(this),e=o(t,!0);do{if(n=c(r,e))return n.set}while(r=u(r))}})},function(t,n,r){var e=r(1),i=r(176)(!1);e(e.S,"Object",{values:function(t){return i(t)}})},function(t,n,r){"use strict";var e=r(1),i=r(3),o=r(52),u=r(143)(),c=r(7)("observable"),f=r(26),a=r(2),s=r(68),l=r(73),h=r(27),v=r(79),p=v.RETURN,d=function(t){return null==t?void 0:f(t)},y=function(t){var n=t._c;n&&(t._c=void 0,n())},g=function(t){return void 0===t._o},b=function(t){g(t)||(t._o=void 0,y(t))},m=function(t,n){a(t),this._c=void 0,this._o=t,t=new x(this);try{var r=n(t),e=r;null!=r&&("function"==typeof r.unsubscribe?r=function(){e.unsubscribe()}:f(r),this._c=r)}catch(n){return void t.error(n)}g(this)&&y(this)};m.prototype=l({},{unsubscribe:function(){b(this)}});var x=function(t){this._s=t};x.prototype=l({},{next:function(t){var n=this._s;if(!g(n)){var r=n._o;try{var e=d(r.next);if(e)return e.call(r,t)}catch(t){try{b(n)}finally{throw t}}}},error:function(t){var n=this._s;if(g(n))throw t;var r=n._o;n._o=void 0;try{var e=d(r.error);if(!e)throw t;t=e.call(r,t)}catch(t){try{y(n)}finally{throw t}}return y(n),t},complete:function(t){var n=this._s;if(!g(n)){var r=n._o;n._o=void 0;try{var e=d(r.complete);t=e?e.call(r,t):void 0}catch(t){try{y(n)}finally{throw t}}return y(n),t}}});var w=function(t){s(this,w,"Observable","_f")._f=f(t)};l(w.prototype,{subscribe:function(t){return new m(t,this._f)},forEach:function(t){var n=this;return new(o.Promise||i.Promise)(function(r,e){f(t);var i=n.subscribe({next:function(n){try{return t(n)}catch(t){e(t),i.unsubscribe()}},error:e,complete:r})})}}),l(w,{from:function(t){var n="function"==typeof this?this:w,r=d(a(t)[c]);if(r){var e=a(r.call(t));return e.constructor===n?e:new n(function(t){return e.subscribe(t)})}return new n(function(n){var r=!1;return u(function(){if(!r){try{if(v(t,!1,function(t){if(n.next(t),r)return p})===p)return}catch(t){if(r)throw t;return void n.error(t)}n.complete()}}),function(){r=!0}})},of:function(){for(var t=0,n=arguments.length,r=Array(n);t<n;)r[t]=arguments[t++];return new("function"==typeof this?this:w)(function(t){var n=!1;return u(function(){if(!n){for(var e=0;e<r.length;++e)if(t.next(r[e]),n)return;t.complete()}}),function(){n=!0}})}}),h(w.prototype,c,function(){return this}),e(e.G,{Observable:w}),r(74)("Observable")},function(t,n,r){var e=r(54),i=r(2),o=e.key,u=e.set;e.exp({defineMetadata:function(t,n,r,e){u(t,n,i(r),o(e))}})},function(t,n,r){var e=r(54),i=r(2),o=e.key,u=e.map,c=e.store;e.exp({deleteMetadata:function(t,n){var r=arguments.length<3?void 0:o(arguments[2]),e=u(i(n),r,!1);if(void 0===e||!e.delete(t))return!1;if(e.size)return!0;var f=c.get(n);return f.delete(r),!!f.size||c.delete(n)}})},function(t,n,r){var e=r(185),i=r(161),o=r(54),u=r(2),c=r(32),f=o.keys,a=o.key,s=function(t,n){var r=f(t,n),o=c(t);if(null===o)return r;var u=s(o,n);return u.length?r.length?i(new e(r.concat(u))):u:r};o.exp({getMetadataKeys:function(t){return s(u(t),arguments.length<2?void 0:a(arguments[1]))}})},function(t,n,r){var e=r(54),i=r(2),o=r(32),u=e.has,c=e.get,f=e.key,a=function(t,n,r){if(u(t,n,r))return c(t,n,r);var e=o(n);return null!==e?a(t,e,r):void 0};e.exp({getMetadata:function(t,n){return a(t,i(n),arguments.length<3?void 0:f(arguments[2]))}})},function(t,n,r){var e=r(54),i=r(2),o=e.keys,u=e.key;e.exp({getOwnMetadataKeys:function(t){
+return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var e=r(54),i=r(2),o=e.get,u=e.key;e.exp({getOwnMetadata:function(t,n){return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){var e=r(54),i=r(2),o=r(32),u=e.has,c=e.key,f=function(t,n,r){if(u(t,n,r))return!0;var e=o(n);return null!==e&&f(t,e,r)};e.exp({hasMetadata:function(t,n){return f(t,i(n),arguments.length<3?void 0:c(arguments[2]))}})},function(t,n,r){var e=r(54),i=r(2),o=e.has,u=e.key;e.exp({hasOwnMetadata:function(t,n){return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){var e=r(54),i=r(2),o=r(26),u=e.key,c=e.set;e.exp({metadata:function(t,n){return function(r,e){c(t,n,(void 0!==e?i:o)(r),u(e))}}})},function(t,n,r){var e=r(1);e(e.P+e.R,"Set",{toJSON:r(165)("Set")})},function(t,n,r){"use strict";var e=r(1),i=r(147)(!0);e(e.P,"String",{at:function(t){return i(this,t)}})},function(t,n,r){"use strict";var e=r(1),i=r(46),o=r(16),u=r(122),c=r(120),f=RegExp.prototype,a=function(t,n){this._r=t,this._s=n};r(139)(a,"RegExp String",function(){var t=this._r.exec(this._s);return{value:t,done:null===t}}),e(e.P,"String",{matchAll:function(t){if(i(this),!u(t))throw TypeError(t+" is not a regexp!");var n=String(this),r="flags"in f?String(t.flags):c.call(t),e=new RegExp(t.source,~r.indexOf("g")?r:"g"+r);return e.lastIndex=o(t.lastIndex),new a(e,n)}})},function(t,n,r){"use strict";var e=r(1),i=r(181);e(e.P,"String",{padEnd:function(t){return i(this,t,arguments.length>1?arguments[1]:void 0,!1)}})},function(t,n,r){"use strict";var e=r(1),i=r(181);e(e.P,"String",{padStart:function(t){return i(this,t,arguments.length>1?arguments[1]:void 0,!0)}})},function(t,n,r){"use strict";r(82)("trimLeft",function(t){return function(){return t(this,1)}},"trimStart")},function(t,n,r){"use strict";r(82)("trimRight",function(t){return function(){return t(this,2)}},"trimEnd")},function(t,n,r){r(153)("asyncIterator")},function(t,n,r){r(153)("observable")},function(t,n,r){var e=r(1);e(e.S,"System",{global:r(3)})},function(t,n,r){for(var e=r(155),i=r(28),o=r(3),u=r(27),c=r(80),f=r(7),a=f("iterator"),s=f("toStringTag"),l=c.Array,h=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],v=0;v<5;v++){var p,d=h[v],y=o[d],g=y&&y.prototype;if(g){g[a]||u(g,a,l),g[s]||u(g,s,d),c[d]=l;for(p in e)g[p]||i(g,p,e[p],!0)}}},function(t,n,r){var e=r(1),i=r(151);e(e.G+e.B,{setImmediate:i.set,clearImmediate:i.clear})},function(t,n,r){var e=r(3),i=r(1),o=r(121),u=r(207),c=e.navigator,f=!!c&&/MSIE .\./.test(c.userAgent),a=function(t){return f?function(n,r){return t(o(u,[].slice.call(arguments,2),"function"==typeof n?n:Function(n)),r)}:t};i(i.G+i.B+i.F*f,{setTimeout:a(e.setTimeout),setInterval:a(e.setInterval)})},function(t,n,r){r(330),r(269),r(271),r(270),r(273),r(275),r(280),r(274),r(272),r(282),r(281),r(277),r(278),r(276),r(268),r(279),r(283),r(284),r(236),r(238),r(237),r(286),r(285),r(256),r(266),r(267),r(257),r(258),r(259),r(260),r(261),r(262),r(263),r(264),r(265),r(239),r(240),r(241),r(242),r(243),r(244),r(245),r(246),r(247),r(248),r(249),r(250),r(251),r(252),r(253),r(254),r(255),r(317),r(322),r(329),r(320),r(312),r(313),r(318),r(323),r(325),r(308),r(309),r(310),r(311),r(314),r(315),r(316),r(319),r(321),r(324),r(326),r(327),r(328),r(231),r(233),r(232),r(235),r(234),r(220),r(218),r(224),r(221),r(227),r(229),r(217),r(223),r(214),r(228),r(212),r(226),r(225),r(219),r(222),r(211),r(213),r(216),r(215),r(230),r(155),r(302),r(307),r(184),r(303),r(304),r(305),r(306),r(287),r(183),r(185),r(186),r(342),r(331),r(332),r(337),r(340),r(341),r(335),r(338),r(336),r(339),r(333),r(334),r(288),r(289),r(290),r(291),r(292),r(295),r(293),r(294),r(296),r(297),r(298),r(299),r(301),r(300),r(343),r(369),r(372),r(371),r(373),r(374),r(370),r(375),r(376),r(354),r(357),r(353),r(351),r(352),r(355),r(356),r(346),r(368),r(377),r(345),r(347),r(349),r(348),r(350),r(359),r(360),r(362),r(361),r(364),r(363),r(365),r(366),r(367),r(344),r(358),r(380),r(379),r(378),t.exports=r(52)},function(t,n){function r(t,n){if("string"==typeof n)return t.insertAdjacentHTML("afterend",n);var r=t.nextSibling;return r?t.parentNode.insertBefore(n,r):t.parentNode.appendChild(n)}t.exports=r},,,,,,,,,function(t,n,r){(function(n,r){!function(n){"use strict";function e(t,n,r,e){var i=n&&n.prototype instanceof o?n:o,u=Object.create(i.prototype),c=new p(e||[]);return u._invoke=s(t,r,c),u}function i(t,n,r){try{return{type:"normal",arg:t.call(n,r)}}catch(t){return{type:"throw",arg:t}}}function o(){}function u(){}function c(){}function f(t){["next","throw","return"].forEach(function(n){t[n]=function(t){return this._invoke(n,t)}})}function a(t){function n(r,e,o,u){var c=i(t[r],t,e);if("throw"!==c.type){var f=c.arg,a=f.value;return a&&"object"==typeof a&&m.call(a,"__await")?Promise.resolve(a.__await).then(function(t){n("next",t,o,u)},function(t){n("throw",t,o,u)}):Promise.resolve(a).then(function(t){f.value=t,o(f)},u)}u(c.arg)}function e(t,r){function e(){return new Promise(function(e,i){n(t,r,e,i)})}return o=o?o.then(e,e):e()}"object"==typeof r&&r.domain&&(n=r.domain.bind(n));var o;this._invoke=e}function s(t,n,r){var e=P;return function(o,u){if(e===F)throw new Error("Generator is already running");if(e===M){if("throw"===o)throw u;return y()}for(r.method=o,r.arg=u;;){var c=r.delegate;if(c){var f=l(c,r);if(f){if(f===A)continue;return f}}if("next"===r.method)r.sent=r._sent=r.arg;else if("throw"===r.method){if(e===P)throw e=M,r.arg;r.dispatchException(r.arg)}else"return"===r.method&&r.abrupt("return",r.arg);e=F;var a=i(t,n,r);if("normal"===a.type){if(e=r.done?M:j,a.arg===A)continue;return{value:a.arg,done:r.done}}"throw"===a.type&&(e=M,r.method="throw",r.arg=a.arg)}}}function l(t,n){var r=t.iterator[n.method];if(r===g){if(n.delegate=null,"throw"===n.method){if(t.iterator.return&&(n.method="return",n.arg=g,l(t,n),"throw"===n.method))return A;n.method="throw",n.arg=new TypeError("The iterator does not provide a 'throw' method")}return A}var e=i(r,t.iterator,n.arg);if("throw"===e.type)return n.method="throw",n.arg=e.arg,n.delegate=null,A;var o=e.arg;return o?o.done?(n[t.resultName]=o.value,n.next=t.nextLoc,"return"!==n.method&&(n.method="next",n.arg=g),n.delegate=null,A):o:(n.method="throw",n.arg=new TypeError("iterator result is not an object"),n.delegate=null,A)}function h(t){var n={tryLoc:t[0]};1 in t&&(n.catchLoc=t[1]),2 in t&&(n.finallyLoc=t[2],n.afterLoc=t[3]),this.tryEntries.push(n)}function v(t){var n=t.completion||{};n.type="normal",delete n.arg,t.completion=n}function p(t){this.tryEntries=[{tryLoc:"root"}],t.forEach(h,this),this.reset(!0)}function d(t){if(t){var n=t[w];if(n)return n.call(t);if("function"==typeof t.next)return t;if(!isNaN(t.length)){var r=-1,e=function n(){for(;++r<t.length;)if(m.call(t,r))return n.value=t[r],n.done=!1,n;return n.value=g,n.done=!0,n};return e.next=e}}return{next:y}}function y(){return{value:g,done:!0}}var g,b=Object.prototype,m=b.hasOwnProperty,x="function"==typeof Symbol?Symbol:{},w=x.iterator||"@@iterator",S=x.asyncIterator||"@@asyncIterator",_=x.toStringTag||"@@toStringTag",O="object"==typeof t,E=n.regeneratorRuntime;if(E)return void(O&&(t.exports=E));E=n.regeneratorRuntime=O?t.exports:{},E.wrap=e;var P="suspendedStart",j="suspendedYield",F="executing",M="completed",A={},N={};N[w]=function(){return this};var T=Object.getPrototypeOf,I=T&&T(T(d([])));I&&I!==b&&m.call(I,w)&&(N=I);var k=c.prototype=o.prototype=Object.create(N);u.prototype=k.constructor=c,c.constructor=u,c[_]=u.displayName="GeneratorFunction",E.isGeneratorFunction=function(t){var n="function"==typeof t&&t.constructor;return!!n&&(n===u||"GeneratorFunction"===(n.displayName||n.name))},E.mark=function(t){return Object.setPrototypeOf?Object.setPrototypeOf(t,c):(t.__proto__=c,_ in t||(t[_]="GeneratorFunction")),t.prototype=Object.create(k),t},E.awrap=function(t){return{__await:t}},f(a.prototype),a.prototype[S]=function(){return this},E.AsyncIterator=a,E.async=function(t,n,r,i){var o=new a(e(t,n,r,i));return E.isGeneratorFunction(n)?o:o.next().then(function(t){return t.done?t.value:o.next()})},f(k),k[_]="Generator",k.toString=function(){return"[object Generator]"},E.keys=function(t){var n=[];for(var r in t)n.push(r);return n.reverse(),function r(){for(;n.length;){var e=n.pop();if(e in t)return r.value=e,r.done=!1,r}return r.done=!0,r}},E.values=d,p.prototype={constructor:p,reset:function(t){if(this.prev=0,this.next=0,this.sent=this._sent=g,this.done=!1,this.delegate=null,this.method="next",this.arg=g,this.tryEntries.forEach(v),!t)for(var n in this)"t"===n.charAt(0)&&m.call(this,n)&&!isNaN(+n.slice(1))&&(this[n]=g)},stop:function(){this.done=!0;var t=this.tryEntries[0],n=t.completion;if("throw"===n.type)throw n.arg;return this.rval},dispatchException:function(t){function n(n,e){return o.type="throw",o.arg=t,r.next=n,e&&(r.method="next",r.arg=g),!!e}if(this.done)throw t;for(var r=this,e=this.tryEntries.length-1;e>=0;--e){var i=this.tryEntries[e],o=i.completion;if("root"===i.tryLoc)return n("end");if(i.tryLoc<=this.prev){var u=m.call(i,"catchLoc"),c=m.call(i,"finallyLoc");if(u&&c){if(this.prev<i.catchLoc)return n(i.catchLoc,!0);if(this.prev<i.finallyLoc)return n(i.finallyLoc)}else if(u){if(this.prev<i.catchLoc)return n(i.catchLoc,!0)}else{if(!c)throw new Error("try statement without catch or finally");if(this.prev<i.finallyLoc)return n(i.finallyLoc)}}}},abrupt:function(t,n){for(var r=this.tryEntries.length-1;r>=0;--r){var e=this.tryEntries[r];if(e.tryLoc<=this.prev&&m.call(e,"finallyLoc")&&this.prev<e.finallyLoc){var i=e;break}}i&&("break"===t||"continue"===t)&&i.tryLoc<=n&&n<=i.finallyLoc&&(i=null);var o=i?i.completion:{};return o.type=t,o.arg=n,i?(this.method="next",this.next=i.finallyLoc,A):this.complete(o)},complete:function(t,n){if("throw"===t.type)throw t.arg;return"break"===t.type||"continue"===t.type?this.next=t.arg:"return"===t.type?(this.rval=this.arg=t.arg,this.method="return",this.next="end"):"normal"===t.type&&n&&(this.next=n),A},finish:function(t){for(var n=this.tryEntries.length-1;n>=0;--n){var r=this.tryEntries[n];if(r.finallyLoc===t)return this.complete(r.completion,r.afterLoc),v(r),A}},catch:function(t){for(var n=this.tryEntries.length-1;n>=0;--n){var r=this.tryEntries[n];if(r.tryLoc===t){var e=r.completion;if("throw"===e.type){var i=e.arg;v(r)}return i}}throw new Error("illegal catch attempt")},delegateYield:function(t,n,r){return this.delegate={iterator:d(t),resultName:n,nextLoc:r},"next"===this.method&&(this.arg=g),A}}}("object"==typeof n?n:"object"==typeof window?window:"object"==typeof self?self:this)}).call(n,function(){return this}(),r(158))}])</script><script src="/./main.0cf68a.js"></script><script>!function(){!function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)}("/slider.e37972.js")}()</script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">机器学习与机器视觉</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">电路设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">测试</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">电赛笔记</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">C语言进阶</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、请确保node版本大于6.2<br/>2、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            3、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: false
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://dawncraft.cc/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>软院全栈dalao</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>广告位招租</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">这个天天摸鱼的微电人，&lt;br/&gt;  二刺螈（迫真），&lt;br/&gt;  因为学不懂编程改行硬件的菜b，&lt;br/&gt;  是谁呢？&lt;br/&gt;  没错就是我(即答)</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/image-20210111195057781.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/image-20210111195828703.png">
 <meta property="article:published_time" content="2021-11-19T08:03:19.000Z">
-<meta property="article:modified_time" content="2021-11-19T08:03:34.175Z">
+<meta property="article:modified_time" content="2021-11-23T13:22:28.774Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary">
@@ -225,6 +225,8 @@
 <li>处理器复位：仅复位处理器</li>
 </ol>
 <p> 上电复位和系统复位持续时间取决于MCU设计，在一些情况下，复位会持续数毫秒来等待晶振时钟稳定。在复位后、处理器运行程序之前，Cortex-M处理器将从内存中读取前两个字，即 位于中断向量表之前的<strong>主栈顶指针(MSP Main Stack Pointer)<strong>和</strong>复位向量</strong>初始值，其中复位向量就是复位句柄的起始地址。在这两个字被处理器读取以后，处理器会以这两个值建立主堆栈指针MSP和程序计数器PC</p>
+ <span id="more"></span>
+
 <p> 提前建立MSP的原因：上电后可能会出现系统错误以至于处理器调用NMI或硬件错误相关服务函数，就需要栈内存和MSP把一些处理器状态信息压栈来处理系统错误相关的中断</p>
 <p> 注意：Cortex-M4的SP初始化和传统ARM核的初始化不相同，它必须被在软件中初始化，而中断向量表存储的是中断向量的地址，因为M4的栈是自顶向下生长的，初始化的SP值应该被设置到栈顶以下的第一个内存，如下图所示：<strong>中断向量表之前的SP初始值是一个指向栈顶的指针</strong></p>
 <p> <img src="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/image-20210111171431355.png" alt="image-20210111171431355"></p>
@@ -929,7 +931,7 @@ MathJax.Hub.Queue(function() {
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>广告位招租</a>
+              <a href="https://redlightasl.github.io/about/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>广告位招租</a>
             </li>
           
         </ul>

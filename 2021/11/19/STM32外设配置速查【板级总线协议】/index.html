@@ -16,7 +16,7 @@
 <meta property="og:description" content="总线协议I2C （又称I^2^C、IIC等）I2C（Integrated Circuit）是两线式半双工串行总线 由数据线SDA和时钟SCL构成 一般可达400kbps以上 协议栈底层硬件SDA和SCL分别上拉到VCC，同时接入设备 主设备操纵SCL，可以接收&#x2F;发送SDA 从设备可以发送&#x2F;接收SDA 驱动空闲（释放总线）SDA&#x3D;1    SCL&#x3D;1 起止信号起始信号：SCL&#x3D;1    SDA下降沿">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T08:05:39.000Z">
-<meta property="article:modified_time" content="2021-11-19T08:06:02.659Z">
+<meta property="article:modified_time" content="2021-11-23T13:21:32.382Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary">
@@ -214,6 +214,8 @@
 <p>主设备要求：</p>
 <p>在==收到最后一个字节后发送一个NACK信号==以通知被控发送器结束数据发送，并SDA=1（释放SDA），以便从设备发送停止信号P</p>
 <h5 id="数据有效性确认"><a href="#数据有效性确认" class="headerlink" title="数据有效性确认"></a>数据有效性确认</h5><p>SCL=1期间，SDA上的数据必须保持稳定，只有在SCL=0时，SDA才允许变化</p>
+<span id="more"></span>
+
 <p>即<em><strong>数据在SCL上升沿到来前就要准备好，并在下降沿到来前必须稳定</strong></em></p>
 <h5 id="stm32实现"><a href="#stm32实现" class="headerlink" title="stm32实现"></a>stm32实现</h5><p>stm32自带I2C不稳定，通常使用GPIO模拟I2C</p>
 <p>iic.h</p>
@@ -868,7 +870,7 @@ MathJax.Hub.Queue(function() {
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>广告位招租</a>
+              <a href="https://redlightasl.github.io/about/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>广告位招租</a>
             </li>
           
         </ul>

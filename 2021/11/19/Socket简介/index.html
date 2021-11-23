@@ -16,7 +16,7 @@
 <meta property="og:description" content="SocketSocket即套接字，是由UNIX系统开发的网络通信接口，该接口API被纳入了POSIX标准，所有兼容POSIX的操作系统都可以使用该系列API，所以它成为了网络应用开发时最常用的API Socket简介Socket套接字是位于应用层和传输层之间的POSIX接口，应用程序可以直接通过Socket进行网络通信，然后由Socket将数据传递到传输层，Socket因此可以像文件一样以打开、读">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T07:58:38.000Z">
-<meta property="article:modified_time" content="2021-11-19T07:58:51.779Z">
+<meta property="article:modified_time" content="2021-11-23T13:23:15.685Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="IoT">
 <meta name="twitter:card" content="summary">
@@ -200,6 +200,8 @@
         <h1 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h1><p>Socket即<strong>套接字</strong>，是由UNIX系统开发的网络通信接口，该接口API被纳入了POSIX标准，所有兼容POSIX的操作系统都可以使用该系列API，所以它成为了<strong>网络应用开发时最常用的API</strong></p>
 <h2 id="Socket简介"><a href="#Socket简介" class="headerlink" title="Socket简介"></a>Socket简介</h2><p>Socket套接字是位于应用层和传输层之间的POSIX接口，应用程序可以直接通过Socket进行网络通信，然后由Socket将数据传递到传输层，Socket因此可以像文件一样以打开、读写、关闭的方式实现网络通信，这也是UNIX万物皆文件的思想体现。同时标准化的Socket接口使得应用程序具有良好的可移植性，目前不仅仅是Linux，一些RTOS像FreeRTOS、RT-Thread、uCOS和一些具有网络功能的SoC都实现了Socket API</p>
 <p>需要注意：<strong>Socket和Websocket并不是一个东西</strong>，Socket是工作在传输控制层的应用程序接口，WebSocket则是一个应用层协议。Socket将协议簇下层的内容封装起来供上层应用程序调用；而WebSocket作为一个成熟的连接应用解决方案可以单独工作或与其他应用程序共同使用</p>
+<span id="more"></span>
+
 <h2 id="Socket-API简介"><a href="#Socket-API简介" class="headerlink" title="Socket API简介"></a>Socket API简介</h2><h3 id="创建socket描述符"><a href="#创建socket描述符" class="headerlink" title="创建socket描述符"></a>创建socket描述符</h3><p>根据属性设置创建Socket描述符</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> protofamily, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br></pre></td></tr></table></figure>
 
@@ -651,7 +653,7 @@ MathJax.Hub.Queue(function() {
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>广告位招租</a>
+              <a href="https://redlightasl.github.io/about/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>广告位招租</a>
             </li>
           
         </ul>

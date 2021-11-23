@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/W25Q64(1).jpg">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/W25Q64(2).jpg">
 <meta property="article:published_time" content="2021-11-19T08:07:03.000Z">
-<meta property="article:modified_time" content="2021-11-19T08:07:15.074Z">
+<meta property="article:modified_time" content="2021-11-23T13:21:19.531Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary">
@@ -205,6 +205,8 @@
 <p>QSPI在SPI协议的基础上增加了<strong>队列传输机制</strong>。</p>
 <p>STM32将Queued SPI协议接口实现为QUADSPI接口。QSPI的实现和SPI基本相似，有部分不同点，在下面列出。</p>
 <h2 id="物理连接"><a href="#物理连接" class="headerlink" title="物理连接"></a>物理连接</h2><p>QSPI是标准的四信号线SPI，MCU与外设之间由六根线连接：NSS、IO0、IO1、IO2、IO3、SCLK，其中IO0-3是数据线；NSS又称CS，是片选信号线；SCLK又称SCK，是SPI/QSPI的同步时钟线</p>
+<span id="more"></span>
+
 <h2 id="通信规则"><a href="#通信规则" class="headerlink" title="通信规则"></a>通信规则</h2><h3 id="读写命令"><a href="#读写命令" class="headerlink" title="读写命令"></a>读写命令</h3><p><strong>有且仅有一条数据线工作</strong></p>
 <h3 id="读写数据"><a href="#读写数据" class="headerlink" title="读写数据"></a>读写数据</h3><p><strong>四条数据线同时工作</strong></p>
 <p>读写地址位时四条数据线发送不同的地址，从机自行分辨，引导向各自的地址；读写具体数据时根据对应的地址读写</p>
@@ -716,7 +718,7 @@ MathJax.Hub.Queue(function() {
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>广告位招租</a>
+              <a href="https://redlightasl.github.io/about/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>广告位招租</a>
             </li>
           
         </ul>

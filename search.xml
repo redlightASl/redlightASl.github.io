@@ -685,11 +685,13 @@ $$
 <li>励磁控制法：对励磁磁通进行控制</li>
 <li>电枢控制法：对电枢电压进行控制</li>
 </ul>
+<span id="more"></span>
+
 <p>励磁控制阀在低速状态下收到磁极饱和限制，在高速时受换向火花和换向器结构强度的限制，动态响应较差，因此很少使用；大多数应用场合都使用电枢电压控制法，在保证励磁恒定的情况下使用单片机或相关电子器件输出<strong>PWM</strong>来直接实现直流电动机调速</p>
 <h2 id="直流电机调速"><a href="#直流电机调速" class="headerlink" title="直流电机调速"></a>直流电机调速</h2><p>直流电机的调速思路就是“力大砖飞”，在电机控制线两端加适当电压，电压越高转速越快。可以通过功率半导体器件产生恒定的电压供给电机；对于数字器件而言很难控制电压精准保持在某一模拟值，因此使用PWM进行调速。</p>
 <p>无论是模拟方法还是数字方法，都需要使用功率半导体器件，只不过使用方式有所不同。模拟电路通过线性放大的驱动方式，输出波动小、线性好，对临近电路干扰小，但存在效率低和散热问题；而数字电路通过耦合器件发出PWM使功率器件输出方波加在电机两端，通过改变方波的占空比来实现调节电机转速，往往对临近电路存在干扰，但是更易于实现。</p>
 <p>基于PWM调速的电路往往包含三个部分</p>
-<span id="more"></span>
+<!-- more -->
 
 <h3 id="驱动电路"><a href="#驱动电路" class="headerlink" title="驱动电路"></a>驱动电路</h3><p>一般使用晶体管或场效应管构成的半桥、全桥、三相桥电路，或直接使用护照那用的电机驱动功率IC。</p>
 <p>常见的电机驱动芯片有L298N、ULN2003等</p>
@@ -937,6 +939,9 @@ $$
     <url>/2021/11/13/%E9%9A%8F%E7%AC%94/</url>
     <content><![CDATA[<h1 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h1><p>所有的随笔都会放在这里OvO</p>
 <p>可能还会扔些沙雕图……</p>
+<h2 id="随笔-49-64-x32-x30-50-x31-46-x31-49-x2e-50-x33"><a href="#随笔-49-64-x32-x30-50-x31-46-x31-49-x2e-50-x33" class="headerlink" title="随笔&#49;&#64;&#x32;&#x30;&#50;&#x31;&#46;&#x31;&#49;&#x2e;&#50;&#x33;"></a>随笔<a href="mailto:&#49;&#64;&#x32;&#x30;&#50;&#x31;&#46;&#x31;&#49;&#x2e;&#50;&#x33;">&#49;&#64;&#x32;&#x30;&#50;&#x31;&#46;&#x31;&#49;&#x2e;&#50;&#x33;</a></h2><p>早操签到</p>
+<p>不去就不发奖学金</p>
+<p>大二了搞这些东西属于是【数据删除】</p>
 ]]></content>
       <tags>
         <tag>随笔</tag>
@@ -4510,6 +4515,8 @@ $$
     <title>OpenWrt简单软件配置</title>
     <url>/2021/11/19/OpenWrt%E7%AE%80%E5%8D%95%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<h1 id="OpenWrt软件配置"><a href="#OpenWrt软件配置" class="headerlink" title="OpenWrt软件配置"></a>OpenWrt软件配置</h1><p>上一篇讲述过如何在硬件设备中部署OpenWrt并进行基础的网络使用，这里重点介绍OpenWrt的软件配置</p>
+<span id="more"></span>
+
 <h2 id="配置路由器"><a href="#配置路由器" class="headerlink" title="配置路由器"></a>配置路由器</h2><p>在笔者的项目中，需要实现以下功能：</p>
 <ul>
 <li>可以通过WAN口连接外网</li>
@@ -4607,6 +4614,8 @@ $$
 <li>处理器复位：仅复位处理器</li>
 </ol>
 <p> 上电复位和系统复位持续时间取决于MCU设计，在一些情况下，复位会持续数毫秒来等待晶振时钟稳定。在复位后、处理器运行程序之前，Cortex-M处理器将从内存中读取前两个字，即 位于中断向量表之前的<strong>主栈顶指针(MSP Main Stack Pointer)<strong>和</strong>复位向量</strong>初始值，其中复位向量就是复位句柄的起始地址。在这两个字被处理器读取以后，处理器会以这两个值建立主堆栈指针MSP和程序计数器PC</p>
+ <span id="more"></span>
+
 <p> 提前建立MSP的原因：上电后可能会出现系统错误以至于处理器调用NMI或硬件错误相关服务函数，就需要栈内存和MSP把一些处理器状态信息压栈来处理系统错误相关的中断</p>
 <p> 注意：Cortex-M4的SP初始化和传统ARM核的初始化不相同，它必须被在软件中初始化，而中断向量表存储的是中断向量的地址，因为M4的栈是自顶向下生长的，初始化的SP值应该被设置到栈顶以下的第一个内存，如下图所示：<strong>中断向量表之前的SP初始值是一个指向栈顶的指针</strong></p>
 <p> <img src="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/image-20210111171431355.png" alt="image-20210111171431355"></p>
@@ -4942,6 +4951,8 @@ $$
     <content><![CDATA[<h1 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h1><p>Socket即<strong>套接字</strong>，是由UNIX系统开发的网络通信接口，该接口API被纳入了POSIX标准，所有兼容POSIX的操作系统都可以使用该系列API，所以它成为了<strong>网络应用开发时最常用的API</strong></p>
 <h2 id="Socket简介"><a href="#Socket简介" class="headerlink" title="Socket简介"></a>Socket简介</h2><p>Socket套接字是位于应用层和传输层之间的POSIX接口，应用程序可以直接通过Socket进行网络通信，然后由Socket将数据传递到传输层，Socket因此可以像文件一样以打开、读写、关闭的方式实现网络通信，这也是UNIX万物皆文件的思想体现。同时标准化的Socket接口使得应用程序具有良好的可移植性，目前不仅仅是Linux，一些RTOS像FreeRTOS、RT-Thread、uCOS和一些具有网络功能的SoC都实现了Socket API</p>
 <p>需要注意：<strong>Socket和Websocket并不是一个东西</strong>，Socket是工作在传输控制层的应用程序接口，WebSocket则是一个应用层协议。Socket将协议簇下层的内容封装起来供上层应用程序调用；而WebSocket作为一个成熟的连接应用解决方案可以单独工作或与其他应用程序共同使用</p>
+<span id="more"></span>
+
 <h2 id="Socket-API简介"><a href="#Socket-API简介" class="headerlink" title="Socket API简介"></a>Socket API简介</h2><h3 id="创建socket描述符"><a href="#创建socket描述符" class="headerlink" title="创建socket描述符"></a>创建socket描述符</h3><p>根据属性设置创建Socket描述符</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">socket</span><span class="params">(<span class="keyword">int</span> protofamily, <span class="keyword">int</span> type, <span class="keyword">int</span> protocol)</span></span>;</span><br></pre></td></tr></table></figure>
 
@@ -5353,6 +5364,8 @@ $$
     <title>FPGA学习笔记2【基础概念】</title>
     <url>/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/</url>
     <content><![CDATA[<h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>Xilinx系FPGA使用vivado全家桶进行开发</p>
+<span id="more"></span>
+
 <p>性价比/低功耗：Spartan系列，常见Spartan-6、Spartan-7</p>
 <p>中端/性价比：Artix系列，常见Artix-6、Artix-7</p>
 <p>中高端：Kintex系列，常见Kintex-7</p>
@@ -5682,6 +5695,8 @@ $$
 <p>在Vivado的设计思想中，一个IP核就相当于一个函数，可以通过重用IP核做到模块化设计的效果</p>
 <p>可以参考Xilinx Vivado封装自定义IP参考手册【代号ug1118】来获得更详细的操作指示</p>
 <p>第一部分仅说明带AXI接口的自定义IP核封装方法</p>
+<span id="more"></span>
+
 <h2 id="创建与封装自定义IP的意义"><a href="#创建与封装自定义IP的意义" class="headerlink" title="创建与封装自定义IP的意义"></a>创建与封装自定义IP的意义</h2><p>在Vivado中含有一个IP Catalog流程，可以将下列源文档封装成自定义的IP</p>
 <ul>
 <li>RTL级HDL源文件</li>
@@ -5813,6 +5828,8 @@ $$
     <content><![CDATA[<h1 id="嵌套向量中断控制器NVIC"><a href="#嵌套向量中断控制器NVIC" class="headerlink" title="嵌套向量中断控制器NVIC"></a>嵌套向量中断控制器NVIC</h1><p>ARM内核标准规定了使用<strong>嵌套向量中断控制器NVIC</strong>控制异常和中断。对于STM32F407的Cortex-M4内核，NVIC具有16个可编程优先级、86个可屏蔽中断通道（ARM标准规定NVIC最多支持240个中断请求、1个不可屏蔽中断NMI、1个systick中断和多个系统异常，STM32只用到了一部分）</p>
 <p>为了继续执行被中断的程序，异常流程需要利用一些手段来保存被中断程序的状态（保护现场），并在异常处理完成后自动恢复（恢复现场），这个过程一般有硬件实现，但是也可以由硬件、软件共同操作。<strong>对于M4内核，当异常被接受后，有些寄存器会被自动保存到栈中，并在返回流程中自动回复，因此可以将异常处理写作普通的C函数，这并不会带来额外的软件开销</strong></p>
 <p>这段C函数就被称为<strong>中断服务程序</strong>（中断服务函数）</p>
+<span id="more"></span>
+
 <p>在STM32中实现了NVIC并设置了专门用于控制外部中断/事件的EXTI外设</p>
 <h3 id="NVIC设备与EXTI设备的概念梳理"><a href="#NVIC设备与EXTI设备的概念梳理" class="headerlink" title="NVIC设备与EXTI设备的概念梳理"></a>NVIC设备与EXTI设备的概念梳理</h3><p>NVIC是位于M4核内部的设备，负责处理<strong>来自内核外界的所有中断信号</strong>和<strong>来自内核的异常信号</strong></p>
 <p>这里的异常实际上是狭义的异常概念——广义上异常包括了中断：内部的异常信号称为狭义的异常，外部的异常信号称为中断</p>
@@ -5998,6 +6015,8 @@ $$
     <title>OpenWrt与嵌入式Linux</title>
     <url>/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/</url>
     <content><![CDATA[<h1 id="OpenWrt与嵌入式Linux"><a href="#OpenWrt与嵌入式Linux" class="headerlink" title="OpenWrt与嵌入式Linux"></a>OpenWrt与嵌入式Linux</h1><p>由于要接手学长留下来的一个项目，“被迫”要学习OpenWrt的配置方法——虽然对于一个five电工来说这事挺莫名其妙的，但还是硬着头皮上吧（我本想拒绝，但他给的是在太多了）</p>
+<span id="more"></span>
+
 <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>在<a href="https://openwrt.org/">官网</a>中这样描述OpenWrt</p>
 <blockquote>
 <p>OpenWrt项目是一个针对嵌入式设备的Linux操作系统。OpenWrt不是一个单一且不可更改的固件，而是提供了具有软件包管理功能的完全可写的文件系统。这使您可以从供应商提供的应用范围和配置中解脱出来，并且让您通过使用适配任何应用的软件包来定制设备。对于开发人员来说，OpenWrt是一个无需围绕它构建完整固件就能开发应用程序的框架; 对于普通用户来说，这意味着拥有了完全定制的能力，能以意想不到的方式使用该设备。</p>
@@ -6463,6 +6482,8 @@ $$
 <li>支持图像压缩，可输出JPEG图像数据</li>
 </ul>
 <h2 id="SCCB时序"><a href="#SCCB时序" class="headerlink" title="SCCB时序"></a>SCCB时序</h2><p>SCCB（Serial Camera Control Bus串行摄像头控制总线）总线是由OV（OmniVision）公司定义和发展的三线式串行总线。现在SCCB总线大多采用两线式接口总线，接口总线包括SIOC串行时钟输入线和SIOD串行双向数据线，分别相当于IIC协议的SCL信号线和SDA信号线。<strong>SCCB就是个简化版的IIC</strong>，可以直接使用IIC的软件驱动代码改编成SCCB的驱动</p>
+<span id="more"></span>
+
 <h3 id="基本概念简介"><a href="#基本概念简介" class="headerlink" title="基本概念简介"></a>基本概念简介</h3><table>
 <thead>
 <tr>
@@ -6760,6 +6781,8 @@ $$
 <p>主设备要求：</p>
 <p>在==收到最后一个字节后发送一个NACK信号==以通知被控发送器结束数据发送，并SDA=1（释放SDA），以便从设备发送停止信号P</p>
 <h5 id="数据有效性确认"><a href="#数据有效性确认" class="headerlink" title="数据有效性确认"></a>数据有效性确认</h5><p>SCL=1期间，SDA上的数据必须保持稳定，只有在SCL=0时，SDA才允许变化</p>
+<span id="more"></span>
+
 <p>即<em><strong>数据在SCL上升沿到来前就要准备好，并在下降沿到来前必须稳定</strong></em></p>
 <h5 id="stm32实现"><a href="#stm32实现" class="headerlink" title="stm32实现"></a>stm32实现</h5><p>stm32自带I2C不稳定，通常使用GPIO模拟I2C</p>
 <p>iic.h</p>
@@ -7046,6 +7069,8 @@ $$
 <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>FPGA即<strong>现场可编程门阵列</strong>（Field Programmable Gate Arry），与之对应的是FPAA<strong>现场可编程模拟阵列</strong>（Field Programmable Analog Array）。这是一种可以通过重新编程来实现用户所需<strong>逻辑电路</strong>的半导体器件</p>
 <h2 id="布尔代数"><a href="#布尔代数" class="headerlink" title="布尔代数"></a>布尔代数</h2><p>布尔运算是一种二值运算，在布尔运算中，运算数只有0或1，基本运算有<strong>与 ·</strong>、**或 +<strong>、</strong>非 ~**三种，可以通过这三种基本运算构造出异或、与非等等运算</p>
 <p>布尔运算遵循的定理如下：</p>
+<span id="more"></span>
+
 <ul>
 <li>零元：x·0=0，x+1=1</li>
 <li>单位元：x·1=x，x+0=x</li>
@@ -7690,6 +7715,8 @@ $$
 <p>QSPI在SPI协议的基础上增加了<strong>队列传输机制</strong>。</p>
 <p>STM32将Queued SPI协议接口实现为QUADSPI接口。QSPI的实现和SPI基本相似，有部分不同点，在下面列出。</p>
 <h2 id="物理连接"><a href="#物理连接" class="headerlink" title="物理连接"></a>物理连接</h2><p>QSPI是标准的四信号线SPI，MCU与外设之间由六根线连接：NSS、IO0、IO1、IO2、IO3、SCLK，其中IO0-3是数据线；NSS又称CS，是片选信号线；SCLK又称SCK，是SPI/QSPI的同步时钟线</p>
+<span id="more"></span>
+
 <h2 id="通信规则"><a href="#通信规则" class="headerlink" title="通信规则"></a>通信规则</h2><h3 id="读写命令"><a href="#读写命令" class="headerlink" title="读写命令"></a>读写命令</h3><p><strong>有且仅有一条数据线工作</strong></p>
 <h3 id="读写数据"><a href="#读写数据" class="headerlink" title="读写数据"></a>读写数据</h3><p><strong>四条数据线同时工作</strong></p>
 <p>读写地址位时四条数据线发送不同的地址，从机自行分辨，引导向各自的地址；读写具体数据时根据对应的地址读写</p>
@@ -7836,6 +7863,8 @@ $$
 <p>定时器是单片机的灵魂，学一个单片机，最先掌握的是GPIO，最容易掉坑的是中断控制器，最复杂的是那些总线协议，而最难掌握的就是定时器</p>
 <p>这里笔者通过阅读STM32F4xx官方参考手册，配合英文版和中文版整理了与STM32标准外设库有关的定时器知识点（其实大部分是摘抄/翻译原文），经过自己浅薄的经验（半年多的STM32学习经历）梳理得到以下内容，权当抛砖引玉</p>
 <p>将外设库源码摘抄附录在结尾，顺序与正文基本一致，可供参考</p>
+<span id="more"></span>
+
 <h2 id="内核定时器SYSTICK"><a href="#内核定时器SYSTICK" class="headerlink" title="内核定时器SYSTICK"></a>内核定时器SYSTICK</h2><blockquote>
 <p>我心永恒——SysTick</p>
 </blockquote>

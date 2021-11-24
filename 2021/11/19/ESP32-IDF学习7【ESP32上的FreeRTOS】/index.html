@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>ESP32_IDF学习7【ESP32上的FreeRTOS】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] BootloaderESP32的Bootloader（引导加载程序）主要执行以下任务：  内部模块的基础初始化配置 根据分区表和ota_data（如果存在）选择需要引导的应用程序（app）分区 将应用程序映像加载到 RAM（IRAM和DRAM）中 完成以上工作后把控制权转交给应用程序  引导加载程序位于Flash的偏移地址0x1000处 分区表每片ESP32的flash可以包含多个应用">
+  <meta name="description" content="[TOC] BootloaderESP32的Bootloader（引导加载程序）主要执行以下任务：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ESP32_IDF学习7【ESP32上的FreeRTOS】">
 <meta property="og:url" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="[TOC] BootloaderESP32的Bootloader（引导加载程序）主要执行以下任务：  内部模块的基础初始化配置 根据分区表和ota_data（如果存在）选择需要引导的应用程序（app）分区 将应用程序映像加载到 RAM（IRAM和DRAM）中 完成以上工作后把控制权转交给应用程序  引导加载程序位于Flash的偏移地址0x1000处 分区表每片ESP32的flash可以包含多个应用">
+<meta property="og:description" content="[TOC] BootloaderESP32的Bootloader（引导加载程序）主要执行以下任务：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/.%5CESP32_IDF%E5%AD%A6%E4%B9%A0_ESP32%E4%B8%8A%E7%9A%84FreeRTOS%5Cfreertos-ready-task-list.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/.%5CESP32_IDF%E5%AD%A6%E4%B9%A0_ESP32%E4%B8%8A%E7%9A%84FreeRTOS.assets%5Cfreertos-ready-task-list-smp-pxIndex.png">
 <meta property="article:published_time" content="2021-11-19T07:03:30.000Z">
-<meta property="article:modified_time" content="2021-11-19T07:41:49.580Z">
+<meta property="article:modified_time" content="2021-11-24T16:01:09.262Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -202,6 +202,8 @@
       
         <p>[TOC]</p>
 <h1 id="Bootloader"><a href="#Bootloader" class="headerlink" title="Bootloader"></a>Bootloader</h1><p>ESP32的Bootloader（引导加载程序）主要执行以下任务：</p>
+<span id="more"></span>
+
 <ol>
 <li>内部模块的基础初始化配置</li>
 <li>根据<strong>分区表</strong>和<strong>ota_data</strong>（如果存在）选择需要引导的应用程序（app）分区</li>

@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>ESP32_IDF学习6【HTTP服务器】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="TCP&#x2F;IP组件ESP系列提供了实现TCP&#x2F;IP协议栈的库函数，#include &lt;esp_netif.h&gt;即可使用这些库函数 特点如下：  提供TCP&#x2F;IP协议栈的应用抽象层 提供线程保护 目前只用于lwIP TCP&#x2F;IP协议栈（lwIP：Light Weight IP Protocol，支持在嵌入式设备中使用的小型TCP&#x2F;IP协议栈，占用内存较少） 具有丰富的API库函数 大多数情">
+  <meta name="description" content="TCP&#x2F;IP组件ESP系列提供了实现TCP&#x2F;IP协议栈的库函数，#include &lt;esp_netif.h&gt;即可使用这些库函数 特点如下：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ESP32_IDF学习6【HTTP服务器】">
 <meta property="og:url" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A06%E3%80%90HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="TCP&#x2F;IP组件ESP系列提供了实现TCP&#x2F;IP协议栈的库函数，#include &lt;esp_netif.h&gt;即可使用这些库函数 特点如下：  提供TCP&#x2F;IP协议栈的应用抽象层 提供线程保护 目前只用于lwIP TCP&#x2F;IP协议栈（lwIP：Light Weight IP Protocol，支持在嵌入式设备中使用的小型TCP&#x2F;IP协议栈，占用内存较少） 具有丰富的API库函数 大多数情">
+<meta property="og:description" content="TCP&#x2F;IP组件ESP系列提供了实现TCP&#x2F;IP协议栈的库函数，#include &lt;esp_netif.h&gt;即可使用这些库函数 特点如下：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T07:02:50.000Z">
-<meta property="article:modified_time" content="2021-11-19T07:03:06.459Z">
+<meta property="article:modified_time" content="2021-11-24T16:01:17.835Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -199,6 +199,8 @@
       
         <h1 id="TCP-IP组件"><a href="#TCP-IP组件" class="headerlink" title="TCP/IP组件"></a>TCP/IP组件</h1><p>ESP系列提供了实现TCP/IP协议栈的库函数，<code>#include &lt;esp_netif.h&gt;</code>即可使用这些库函数</p>
 <p>特点如下：</p>
+<span id="more"></span>
+
 <ul>
 <li>提供TCP/IP协议栈的应用抽象层</li>
 <li>提供线程保护</li>

@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>ESP32_IDF学习8【电源管理与低功耗模式】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="电源管理ESP-IDF中集成的电源管理算法可以根据应用程序组件的需求，调整外围总线 (APB) 频率、CPU 频率，并使芯片进入 Light-sleep 模式，尽可能减少运行应用程序的功耗 应用程序组件可以通过创建和获取电源管理锁来控制功耗 编译时可使用CONFIG_PM_ENABLE选项启用电源管理功能 电源管理配置（摘自官网）启用电源管理功能将会增加中断延迟。额外延迟与多个因素有关，例如CPU">
+  <meta name="description" content="电源管理ESP-IDF中集成的电源管理算法可以根据应用程序组件的需求，调整外围总线 (APB) 频率、CPU 频率，并使芯片进入 Light-sleep 模式，尽可能减少运行应用程序的功耗 应用程序组件可以通过创建和获取电源管理锁来控制功耗 编译时可使用CONFIG_PM_ENABLE选项启用电源管理功能">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ESP32_IDF学习8【电源管理与低功耗模式】">
 <meta property="og:url" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A08%E3%80%90%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BD%8E%E5%8A%9F%E8%80%97%E6%A8%A1%E5%BC%8F%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="电源管理ESP-IDF中集成的电源管理算法可以根据应用程序组件的需求，调整外围总线 (APB) 频率、CPU 频率，并使芯片进入 Light-sleep 模式，尽可能减少运行应用程序的功耗 应用程序组件可以通过创建和获取电源管理锁来控制功耗 编译时可使用CONFIG_PM_ENABLE选项启用电源管理功能 电源管理配置（摘自官网）启用电源管理功能将会增加中断延迟。额外延迟与多个因素有关，例如CPU">
+<meta property="og:description" content="电源管理ESP-IDF中集成的电源管理算法可以根据应用程序组件的需求，调整外围总线 (APB) 频率、CPU 频率，并使芯片进入 Light-sleep 模式，尽可能减少运行应用程序的功耗 应用程序组件可以通过创建和获取电源管理锁来控制功耗 编译时可使用CONFIG_PM_ENABLE选项启用电源管理功能">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T07:04:24.000Z">
-<meta property="article:modified_time" content="2021-11-19T07:04:49.027Z">
+<meta property="article:modified_time" content="2021-11-24T16:00:50.747Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -200,6 +200,8 @@
         <h1 id="电源管理"><a href="#电源管理" class="headerlink" title="电源管理"></a>电源管理</h1><p>ESP-IDF中集成的电源管理算法可以根据应用程序组件的需求，调整外围总线 (APB) 频率、CPU 频率，并使芯片进入 Light-sleep 模式，尽可能减少运行应用程序的功耗</p>
 <p>应用程序组件可以通过创建和获取电源管理锁来控制功耗</p>
 <p>编译时可使用CONFIG_PM_ENABLE选项启用电源管理功能</p>
+<span id="more"></span>
+
 <h2 id="电源管理配置"><a href="#电源管理配置" class="headerlink" title="电源管理配置"></a>电源管理配置</h2><p>（摘自官网）启用电源管理功能将会增加中断延迟。额外延迟与多个因素有关，例如CPU频率、单/双核模式、是否需要进行频率切换等（CPU 频率为 240 MHz 且未启用频率调节时，最小额外延迟为 0.2 us；如果启用频率调节，且在中断入口将频率由 40 MHz 调节至 80 MHz，则最大额外延迟为 40 us）</p>
 <p>应用程序可以通过调用esp_pm_configure()函数启用动态调频（DFS）功能和自动light-sleep模式。</p>
 <p>通过esp_pm_config_esp32_t结构体来设置相关参数，如下所示</p>

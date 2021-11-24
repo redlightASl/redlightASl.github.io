@@ -2763,6 +2763,8 @@ $$
 </li>
 </ol>
 <p>同时支持以上模式的安全模式（WPA、WPA2、WEP等），可以理解成<strong>安全蹭网</strong></p>
+<span id="more"></span>
+
 <h2 id="基本功能"><a href="#基本功能" class="headerlink" title="基本功能"></a>基本功能</h2><ol>
 <li>主动/被动扫描附近AP，<strong>主动找别人家网蹭</strong></li>
 <li>使用混杂模式监控IEEE802.11 Wi-Fi数据包，<strong>可以理解成ESP能看到你上了什么不可描述的网站</strong></li>
@@ -2850,6 +2852,8 @@ $$
     <url>/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A06%E3%80%90HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%91/</url>
     <content><![CDATA[<h1 id="TCP-IP组件"><a href="#TCP-IP组件" class="headerlink" title="TCP/IP组件"></a>TCP/IP组件</h1><p>ESP系列提供了实现TCP/IP协议栈的库函数，<code>#include &lt;esp_netif.h&gt;</code>即可使用这些库函数</p>
 <p>特点如下：</p>
+<span id="more"></span>
+
 <ul>
 <li>提供TCP/IP协议栈的应用抽象层</li>
 <li>提供线程保护</li>
@@ -2954,6 +2958,8 @@ $$
     <content><![CDATA[<h1 id="电源管理"><a href="#电源管理" class="headerlink" title="电源管理"></a>电源管理</h1><p>ESP-IDF中集成的电源管理算法可以根据应用程序组件的需求，调整外围总线 (APB) 频率、CPU 频率，并使芯片进入 Light-sleep 模式，尽可能减少运行应用程序的功耗</p>
 <p>应用程序组件可以通过创建和获取电源管理锁来控制功耗</p>
 <p>编译时可使用CONFIG_PM_ENABLE选项启用电源管理功能</p>
+<span id="more"></span>
+
 <h2 id="电源管理配置"><a href="#电源管理配置" class="headerlink" title="电源管理配置"></a>电源管理配置</h2><p>（摘自官网）启用电源管理功能将会增加中断延迟。额外延迟与多个因素有关，例如CPU频率、单/双核模式、是否需要进行频率切换等（CPU 频率为 240 MHz 且未启用频率调节时，最小额外延迟为 0.2 us；如果启用频率调节，且在中断入口将频率由 40 MHz 调节至 80 MHz，则最大额外延迟为 40 us）</p>
 <p>应用程序可以通过调用esp_pm_configure()函数启用动态调频（DFS）功能和自动light-sleep模式。</p>
 <p>通过esp_pm_config_esp32_t结构体来设置相关参数，如下所示</p>
@@ -3144,6 +3150,8 @@ $$
 <p>当场就傻了：ESP32我刚刚好就会一手Arduino；乐鑫那套ESPIDF太难啃，之前点了个灯就去快乐stm32了；micropython……刷完固件发现蓝牙支持跟【数据删除】一样，还不如用c写——一咬牙一跺脚，回头肝ESPIDF吧</p>
 <p><strong>==总体思路：资源少，跟着官方走准没错，硬啃就完事了==</strong></p>
 <p>这个系列笔记可以供只接触过单片机开发（STM32、51基础）和硬件相关知识但没有接触过网络相关知识的同学翻阅学习</p>
+<span id="more"></span>
+
 <h1 id="项目文件夹构建"><a href="#项目文件夹构建" class="headerlink" title="项目文件夹构建"></a>项目文件夹构建</h1><p>ESP-IDF项目由各种“组件”构成，你需要什么功能就要往里扔进去什么组件</p>
 <p>如果你的代码里用了一堆WiFi的库函数，但是没把WiFi组件加入进去，你是没办法用WiFi功能的</p>
 <p>项目保存在项目文件夹下，它的根目录如下所示：</p>
@@ -3324,6 +3332,8 @@ $$
 <p>SPI0和SPI1通过总线仲裁器共享一条信号总线，用于在模组内部访问FLASH（SoC FLASH），不会对用户开放</p>
 <p>SPI2和SPI3是<strong>通用SPI控制器</strong>，有时也被称为HSPI和VSPI，这里的HSPI和VSPI没有实际区别，只是为了标识两个SPI，他们都既可以作为主机使用也可以作为从机使用。SPI控制器拥有独立的信号总线，每条总线都有三条片选（CS）信号，也就是说每个控制器都能驱动最多3个SPI从器件。这两个SPI控制器对用户开放</p>
 <p>相关概念参考SPI协议，以下内容默认读者学习过SPI、QSPI基础知识。</p>
+<span id="more"></span>
+
 <p>表格翻译自官网</p>
 <table>
 <thead>
@@ -3631,6 +3641,8 @@ $$
     <title>ESP32_IDF学习5【SPIFFS与数据加密】</title>
     <url>/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A05%E3%80%90SPIFFS%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E3%80%91/</url>
     <content><![CDATA[<h1 id="VFS虚拟文件系统"><a href="#VFS虚拟文件系统" class="headerlink" title="VFS虚拟文件系统"></a>VFS虚拟文件系统</h1><p>虚拟文件系统 (VFS) 组件可为一些驱动提供一个统一接口。有了该接口，用户可像操作普通文件一样操作虚拟文件。这类驱动程序可以是 FAT、SPIFFS 等真实文件系统，也可以是有文件类接口的设备驱动程序——官方文档</p>
+<span id="more"></span>
+
 <p>说人话就是<strong>ESP32可以支持运行嵌入式文件系统</strong></p>
 <p>目前ESP-IDF实现的功能如下：</p>
 <ul>
@@ -3781,6 +3793,8 @@ $$
     <content><![CDATA[<p>[TOC]</p>
 <p>在这里着重记述低功耗蓝牙BLE相关内容，库函数部分翻译自乐鑫官网文档</p>
 <h1 id="低功耗蓝牙（BLE）协议栈"><a href="#低功耗蓝牙（BLE）协议栈" class="headerlink" title="低功耗蓝牙（BLE）协议栈"></a>低功耗蓝牙（BLE）协议栈</h1><p>低功耗蓝牙协议是蓝牙通信协议的一种，BLE协议栈就是实现低功耗蓝牙协议的代码</p>
+<span id="more"></span>
+
 <h2 id="层次协议"><a href="#层次协议" class="headerlink" title="层次协议"></a>层次协议</h2><p>蓝牙协议规定了两个层次的协议，分别为<strong>蓝牙核心协议</strong>（Bluetooth Core）和<strong>蓝牙应用层协议</strong>（Bluetooth Application）</p>
 <p>蓝牙核心协议就是对蓝牙技术本身的规范，不涉及其应用方式</p>
 <p>蓝牙应用层协议是在蓝牙核心协议的基础上，根据具体的应用需求定义出的特定策略</p>
@@ -4132,6 +4146,8 @@ $$
     <url>/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/</url>
     <content><![CDATA[<p>[TOC]</p>
 <h1 id="Bootloader"><a href="#Bootloader" class="headerlink" title="Bootloader"></a>Bootloader</h1><p>ESP32的Bootloader（引导加载程序）主要执行以下任务：</p>
+<span id="more"></span>
+
 <ol>
 <li>内部模块的基础初始化配置</li>
 <li>根据<strong>分区表</strong>和<strong>ota_data</strong>（如果存在）选择需要引导的应用程序（app）分区</li>

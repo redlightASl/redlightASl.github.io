@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>ESP32_IDF学习5【SPIFFS与数据加密】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="VFS虚拟文件系统虚拟文件系统 (VFS) 组件可为一些驱动提供一个统一接口。有了该接口，用户可像操作普通文件一样操作虚拟文件。这类驱动程序可以是 FAT、SPIFFS 等真实文件系统，也可以是有文件类接口的设备驱动程序——官方文档 说人话就是ESP32可以支持运行嵌入式文件系统 目前ESP-IDF实现的功能如下：  按名读取&#x2F;写入文件 兼容POSIX和C库函数文件操作 不会对路径中的点.或..进">
+  <meta name="description" content="VFS虚拟文件系统虚拟文件系统 (VFS) 组件可为一些驱动提供一个统一接口。有了该接口，用户可像操作普通文件一样操作虚拟文件。这类驱动程序可以是 FAT、SPIFFS 等真实文件系统，也可以是有文件类接口的设备驱动程序——官方文档">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ESP32_IDF学习5【SPIFFS与数据加密】">
 <meta property="og:url" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A05%E3%80%90SPIFFS%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="VFS虚拟文件系统虚拟文件系统 (VFS) 组件可为一些驱动提供一个统一接口。有了该接口，用户可像操作普通文件一样操作虚拟文件。这类驱动程序可以是 FAT、SPIFFS 等真实文件系统，也可以是有文件类接口的设备驱动程序——官方文档 说人话就是ESP32可以支持运行嵌入式文件系统 目前ESP-IDF实现的功能如下：  按名读取&#x2F;写入文件 兼容POSIX和C库函数文件操作 不会对路径中的点.或..进">
+<meta property="og:description" content="VFS虚拟文件系统虚拟文件系统 (VFS) 组件可为一些驱动提供一个统一接口。有了该接口，用户可像操作普通文件一样操作虚拟文件。这类驱动程序可以是 FAT、SPIFFS 等真实文件系统，也可以是有文件类接口的设备驱动程序——官方文档">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T07:02:08.000Z">
-<meta property="article:modified_time" content="2021-11-19T07:02:33.524Z">
+<meta property="article:modified_time" content="2021-11-24T16:01:25.255Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -198,6 +198,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="VFS虚拟文件系统"><a href="#VFS虚拟文件系统" class="headerlink" title="VFS虚拟文件系统"></a>VFS虚拟文件系统</h1><p>虚拟文件系统 (VFS) 组件可为一些驱动提供一个统一接口。有了该接口，用户可像操作普通文件一样操作虚拟文件。这类驱动程序可以是 FAT、SPIFFS 等真实文件系统，也可以是有文件类接口的设备驱动程序——官方文档</p>
+<span id="more"></span>
+
 <p>说人话就是<strong>ESP32可以支持运行嵌入式文件系统</strong></p>
 <p>目前ESP-IDF实现的功能如下：</p>
 <ul>

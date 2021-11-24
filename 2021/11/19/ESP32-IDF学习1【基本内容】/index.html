@@ -16,7 +16,7 @@
 <meta property="og:description" content="学校老师留了个作业，让用剩下一半的寒假学学ESP32，做蓝牙透传+STA&amp;AP模式下工作的http服务器，但是不准用Arduino 当场就傻了：ESP32我刚刚好就会一手Arduino；乐鑫那套ESPIDF太难啃，之前点了个灯就去快乐stm32了；micropython……刷完固件发现蓝牙支持跟【数据删除】一样，还不如用c写——一咬牙一跺脚，回头肝ESPIDF吧 &#x3D;&#x3D;总体思路：资源少，跟着">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T06:58:34.000Z">
-<meta property="article:modified_time" content="2021-11-19T06:59:10.203Z">
+<meta property="article:modified_time" content="2021-11-24T16:01:57.219Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -201,6 +201,8 @@
 <p>当场就傻了：ESP32我刚刚好就会一手Arduino；乐鑫那套ESPIDF太难啃，之前点了个灯就去快乐stm32了；micropython……刷完固件发现蓝牙支持跟【数据删除】一样，还不如用c写——一咬牙一跺脚，回头肝ESPIDF吧</p>
 <p><strong>==总体思路：资源少，跟着官方走准没错，硬啃就完事了==</strong></p>
 <p>这个系列笔记可以供只接触过单片机开发（STM32、51基础）和硬件相关知识但没有接触过网络相关知识的同学翻阅学习</p>
+<span id="more"></span>
+
 <h1 id="项目文件夹构建"><a href="#项目文件夹构建" class="headerlink" title="项目文件夹构建"></a>项目文件夹构建</h1><p>ESP-IDF项目由各种“组件”构成，你需要什么功能就要往里扔进去什么组件</p>
 <p>如果你的代码里用了一堆WiFi的库函数，但是没把WiFi组件加入进去，你是没办法用WiFi功能的</p>
 <p>项目保存在项目文件夹下，它的根目录如下所示：</p>

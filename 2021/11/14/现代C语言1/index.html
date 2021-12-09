@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%801/image-20210820192752213.png">
 <meta property="article:published_time" content="2021-11-14T09:36:11.000Z">
-<meta property="article:modified_time" content="2021-11-14T09:44:56.398Z">
+<meta property="article:modified_time" content="2021-12-09T16:18:11.308Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="C语言进阶">
 <meta name="twitter:card" content="summary">
@@ -381,7 +381,7 @@
 <p>使用<strong>config</strong>语句定义一组新的配置选项</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">config CONFIG_A</span><br><span class="line">    <span class="keyword">bool</span> <span class="string">&quot;Enable MyConfig&quot;</span></span><br><span class="line">    select SELECTED</span><br><span class="line">    <span class="keyword">default</span> y</span><br><span class="line">    help</span><br><span class="line">    My Config</span><br></pre></td></tr></table></figure>
 
-<p><strong>bool</strong>表示配置<strong>选项的类型</strong>，每个config菜单项都要有类型定义，变量有5种类型：<code>bool</code>布尔，也就是二选一（y或n）、<code>tristate</code>三态，也就是三选一、<code>string</code>字符串，也就是用户从给出的一堆字符串里选择一个、<code>hex</code>十六进制，也就是用户要选择一个十六进制数、<code>int</code>整型，也就是用户需要选择一个整数，需要注意：这里的<em>用户选择</em>是不严谨的，实际上==选项类型决定了Kconfig会生成什么样的#define语句提供给C源代码==；**”Enable MyConfig”<strong>表示该</strong>选项的名称<strong>；</strong>select<strong>表示如果当前配置选项被</strong>选中<strong>，则SELECTED就会被选中；</strong>default<strong>后面跟的参数表示配置选项的</strong>默认值**；help后面跟的语句会作为帮助信息提供给用户</p>
+<p><strong>bool</strong>表示配置<strong>选项的类型</strong>，每个config菜单项都要有类型定义，变量有5种类型：<code>bool</code>布尔，也就是二选一（y或n）、<code>tristate</code>三态，也就是三选一、<code>string</code>字符串，也就是用户从给出的一堆字符串里选择一个、<code>hex</code>十六进制，也就是用户要选择一个十六进制数、<code>int</code>整型，也就是用户需要选择一个整数，需要注意：这里的<em>用户选择</em>是不严谨的，实际上<strong>选项类型决定了Kconfig会生成什么样的#define语句提供给C源代码</strong>；**”Enable MyConfig”<strong>表示该</strong>选项的名称<strong>；</strong>select<strong>表示如果当前配置选项被</strong>选中<strong>，则SELECTED就会被选中；</strong>default<strong>后面跟的参数表示配置选项的</strong>默认值**；help后面跟的语句会作为帮助信息提供给用户</p>
 <p>使用<strong>menu/endmenu块</strong>来生成一个菜单，这个菜单里面可以包含复数个config语句，也可以包含子菜单</p>
 <p>使用<strong>if/endif块</strong>来实现条件判断</p>
 <p>使用<strong>menuconfig</strong>语句表示带菜单的配置项，也就是可展开的菜单</p>

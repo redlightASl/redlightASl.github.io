@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/.%5CESP32_IDF%E5%AD%A6%E4%B9%A0_ESP32%E4%B8%8A%E7%9A%84FreeRTOS%5Cfreertos-ready-task-list.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/.%5CESP32_IDF%E5%AD%A6%E4%B9%A0_ESP32%E4%B8%8A%E7%9A%84FreeRTOS.assets%5Cfreertos-ready-task-list-smp-pxIndex.png">
 <meta property="article:published_time" content="2021-11-19T07:03:30.000Z">
-<meta property="article:modified_time" content="2021-11-24T16:01:09.262Z">
+<meta property="article:modified_time" content="2021-12-09T16:16:13.200Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -361,7 +361,7 @@
 <h3 id="通信管理（消息队列、事件集、信号量、互斥量）"><a href="#通信管理（消息队列、事件集、信号量、互斥量）" class="headerlink" title="通信管理（消息队列、事件集、信号量、互斥量）"></a>通信管理（消息队列、事件集、信号量、互斥量）</h3><h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><p>使用FIFO队列的数据结构处理消息的存储和传输</p>
 <p>消息发出后被缓存到FIFO队尾，其他任务可以调用接收消息的API接收队首的消息，该消息被接收后，后面的消息会自动前进</p>
 <h3 id="事件集"><a href="#事件集" class="headerlink" title="事件集"></a>事件集</h3><p>用于取代全局变量标志，更加安全（但<strong>更慢</strong>）</p>
-<h1 id="ESP32上的FreeRTOS"><a href="#ESP32上的FreeRTOS" class="headerlink" title="ESP32上的FreeRTOS"></a>ESP32上的FreeRTOS</h1><p>【翻译自官网】==普通的FreeRTOS运行在单核上，不彳亍！我们的ESP32-FreeRTOS能运行在双核，彳亍！==</p>
+<h1 id="ESP32上的FreeRTOS"><a href="#ESP32上的FreeRTOS" class="headerlink" title="ESP32上的FreeRTOS"></a>ESP32上的FreeRTOS</h1><p>【翻译自官网】<code>普通的FreeRTOS运行在单核上，不彳亍！我们的ESP32-FreeRTOS能运行在双核，彳亍！</code></p>
 <p>众所周知，ESP32是物美价廉的双核SoC，CPU0和CPU1同时运行、共享内存。乐鑫修改了普通的FreeRTOS，让它能够支持SMP（symmetric multiprocessing对称多处理），所以ESP32的FreeRTOS变成了基于FreeRTOS v8.2.0的Xtensa架构移植版SMP RTOS</p>
 <p><strong>下面对移植版的FreeRTOS简称为SMP RTOS</strong>，</p>
 <p>【补充】对称多处理（SMP）架构是一种两个或多个CPU共享同一内存公共链路的计算机体系结构</p>
@@ -520,7 +520,7 @@
 <p>使用如下函数来声明和定义事件</p>
 <p>一个事件由两部分标识组成：<strong>事件类型</strong>和<strong>事件ID</strong></p>
 <p>事件类型标识了一个独立的事件组；事件ID区分在该组内的事件</p>
-<p>==可以将事件类型视为人的姓，事件ID是人的名==</p>
+<p><em>可以将事件类型视为人的姓，事件ID是人的名</em></p>
 <p>使用以下两个宏函数来声明、定义事件类型。一般地，在程序中使用XXX_EVENT的形式来定义一个事件类型</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ESP_EVENT_DECLARE_BASE(EVENT_BASE)<span class="comment">//声明事件类型</span></span><br><span class="line">ESP_EVENT_DEFINE_BASE(EVENT_BASE)<span class="comment">//定义事件类型</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//事件类型举例：WIFI_EVENT</span></span><br></pre></td></tr></table></figure>
 
@@ -566,7 +566,7 @@
 </tr>
 </tbody></table>
 <p>除了API区别和系统事件会自动发送到默认事件循环外，<strong>两者并没有更多差别</strong>，所以说用户可以将自定义的事件直接发送到默认事件循环，这比用户定义的事件循环更节约内存且<strong>更方便</strong>！</p>
-<p>==任务、队列和事件循环是ESP32中最常用也是最特殊的SMP FreeRTOS API==</p>
+<p><strong>任务、队列和事件循环是ESP32中最常用也是最特殊的SMP FreeRTOS API</strong></p>
 <h3 id="事件循环库API简介"><a href="#事件循环库API简介" class="headerlink" title="事件循环库API简介"></a>事件循环库API简介</h3><p>使用以下API控制事件循环</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_event_loop_create_default</span><span class="params">(<span class="keyword">void</span>)</span></span>;<span class="comment">//创建默认事件循环</span></span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_event_loop_delete_default</span><span class="params">(<span class="keyword">void</span>)</span></span>;<span class="comment">//删除默认事件循环</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建用户事件循环</span></span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_event_loop_create</span><span class="params">(<span class="keyword">const</span> <span class="keyword">esp_event_loop_args_t</span> *event_loop_args,<span class="comment">//事件循环参数</span></span></span></span><br><span class="line"><span class="params"><span class="function">                                <span class="keyword">esp_event_loop_handle_t</span> *event_loop)</span></span>;<span class="comment">//事件循环句柄</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//删除用户事件循环</span></span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_event_loop_delete</span><span class="params">(<span class="keyword">esp_event_loop_handle_t</span> event_loop)</span></span>;<span class="comment">//事件循环</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_event_loop_run</span><span class="params">(<span class="keyword">esp_event_loop_handle_t</span> event_loop, TickType_t ticks_to_run)</span></span>;</span><br><span class="line"><span class="comment">//将时间分配到一个事件循环，不常用，注意事项一大堆懒得看了——总之详细用法请参考官网API简介    </span></span><br></pre></td></tr></table></figure>
 

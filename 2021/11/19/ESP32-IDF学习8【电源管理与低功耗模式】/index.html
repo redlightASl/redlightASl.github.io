@@ -16,7 +16,7 @@
 <meta property="og:description" content="电源管理ESP-IDF中集成的电源管理算法可以根据应用程序组件的需求，调整外围总线 (APB) 频率、CPU 频率，并使芯片进入 Light-sleep 模式，尽可能减少运行应用程序的功耗 应用程序组件可以通过创建和获取电源管理锁来控制功耗 编译时可使用CONFIG_PM_ENABLE选项启用电源管理功能">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T07:04:24.000Z">
-<meta property="article:modified_time" content="2021-11-24T16:00:50.747Z">
+<meta property="article:modified_time" content="2021-12-09T16:16:38.816Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -240,10 +240,10 @@
 <p>（ULP协处理器见最后部分）</p>
 <h1 id="低功耗模式"><a href="#低功耗模式" class="headerlink" title="低功耗模式"></a>低功耗模式</h1><p>ESP32可以进入light-sleep和deep-sleep模式，还能进入一个用于相对较低功耗运行的modem-sleep模式</p>
 <p>注意：<strong>进入低功耗模式前，应用程序必须关闭wifi和蓝牙设备</strong>，如果需要维持wifi连接，应当使用modem-sleep模式，在这个模式下当需要wifi驱动执行时系统会自动唤醒来维持wifi连接</p>
-<h2 id="light-sleep"><a href="#light-sleep" class="headerlink" title="light-sleep"></a>light-sleep</h2><p>==CPU暂停运行，wifi/蓝牙基带和射频关闭。RTC、ULP运行，任何唤醒事件都会唤醒芯片==</p>
+<h2 id="light-sleep"><a href="#light-sleep" class="headerlink" title="light-sleep"></a>light-sleep</h2><p><strong>CPU暂停运行，wifi/蓝牙基带和射频关闭。RTC、ULP运行，任何唤醒事件都会唤醒芯片</strong></p>
 <p>在light-sleep模式下，数字外设、大部分内存和CPU都会被停用（停用时钟），电源功耗也会降低，从light-sleep模式下唤醒后外设和CPU会接回时钟源并继续工作，他们的外部状态会被保存</p>
 <p><strong>这个模式可以理解为电脑的挂起休眠</strong></p>
-<h2 id="deep-sleep"><a href="#deep-sleep" class="headerlink" title="deep-sleep"></a>deep-sleep</h2><p>==CPU、大部分外设掉电，wifi/蓝牙基带和射频关闭，进有RTC、ULP运行，wifi和蓝牙连接数据被转移到RTC内存中。仅有一部分中断源会唤醒芯片==</p>
+<h2 id="deep-sleep"><a href="#deep-sleep" class="headerlink" title="deep-sleep"></a>deep-sleep</h2><p><strong>CPU、大部分外设掉电，wifi/蓝牙基带和射频关闭，进有RTC、ULP运行，wifi和蓝牙连接数据被转移到RTC内存中。仅有一部分中断源会唤醒芯片</strong></p>
 <p>deep-sleep模式下，由APB_CLK时钟提供是时钟源的CPU、大部分内存和所有数字外设都会掉电；只有片上RTC控制器、RTC外设、ULP和RTC内存会被保留电源</p>
 <p><strong>这个模式可以理解为电脑的断电休眠</strong></p>
 <p>Deep-sleep模式下支持从以下唤醒源触发的设备唤醒</p>
@@ -277,7 +277,7 @@
 <p>在进入睡眠模式之前使用esp_sleep_enable_gio_wakeup()来使能该唤醒源</p>
 <h4 id="UART"><a href="#UART" class="headerlink" title="UART"></a>UART</h4><p><strong>在light-sleep下</strong>可以使用esp_sleep_enable_uart_wakeup()来启用UART触发唤醒</p>
 <p>若开启该触发源，当睡眠状态的ESP32收到来自外部设备的UART输入的数个上升沿时，会自动唤醒，该上升沿数目可以用uart_set_wakeup_threshold()函数配置；在这个触发信号被接收之前，所有信息不会被接收——这就意味着外部设备需要发送额外的字符给ESP32来让它唤醒</p>
-<h2 id="modem-sleep"><a href="#modem-sleep" class="headerlink" title="modem-sleep"></a>modem-sleep</h2><p>==CPU运行、可配置时钟，wifi/蓝牙基带和射频关闭，但会维持wifi连接==</p>
+<h2 id="modem-sleep"><a href="#modem-sleep" class="headerlink" title="modem-sleep"></a>modem-sleep</h2><p><strong>CPU运行、可配置时钟，wifi/蓝牙基带和射频关闭，但会维持wifi连接</strong></p>
 <h1 id="RTC外设"><a href="#RTC外设" class="headerlink" title="RTC外设"></a>RTC外设</h1><p>RTC外设不仅包括RTC，还包括了片上温度传感器、ADC、RTC-GPIO和touchpad外设</p>
 <h1 id="ULP协处理器-1"><a href="#ULP协处理器-1" class="headerlink" title="ULP协处理器"></a>ULP协处理器</h1><p>ULP（Ultra Low Power超低功耗）协处理器是一种简单的<strong>有限状态机</strong>（FSM）。在主处理器处于Deep-sleep深度睡眠模式时，它可以使用ADC、温度传感器和外部IIC传感器执行测量操作。ULP协处理器可以访问RTC慢速内存区域（RTC_SLOW_MEM）及RTC_CNTL、RTC_IO、SARADC等外设寄存器。ULP协处理器使用<strong>32位固定宽度的指令</strong>、<strong>32位内存寻址</strong>，配备<strong>4个16位通用寄存器</strong></p>
 <h2 id="ULP协处理器编程"><a href="#ULP协处理器编程" class="headerlink" title="ULP协处理器编程"></a>ULP协处理器编程</h2><p>ULP协处理器代码是用<strong>汇编</strong>语言编写的，并使用<strong>binutils-esp32ulp工具链</strong>进行编译</p>

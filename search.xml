@@ -955,6 +955,11 @@ $$
 <p>如果有时间的话肯定会加入很多自己的电路设计经验，包括看datasheet、电路的改进思路等等</p>
 <p>也应该会记录一些做题技巧</p>
 <p>不被量力和数学物理方程橄榄就是胜利！</p>
+<h1 id="随笔4-2021-12-10"><a href="#随笔4-2021-12-10" class="headerlink" title="随笔4 @2021.12.10"></a>随笔4 @2021.12.10</h1><p>好像量力结束了（及格就行，这玩意太难了……），但是数物方程有点难顶</p>
+<p>希望能早日脱离物理数学苦海</p>
+<p>我就一码电路的为什么要学物理系数学系的专业课（</p>
+<p>模电数电在写了，寒假以后会整理完一口气发上去</p>
+<p>CSDN同步更新（没办法，它的Typora兼容太好了）</p>
 ]]></content>
       <tags>
         <tag>随笔</tag>
@@ -1505,7 +1510,7 @@ $$
 <p>使用<strong>config</strong>语句定义一组新的配置选项</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">config CONFIG_A</span><br><span class="line">    <span class="keyword">bool</span> <span class="string">&quot;Enable MyConfig&quot;</span></span><br><span class="line">    select SELECTED</span><br><span class="line">    <span class="keyword">default</span> y</span><br><span class="line">    help</span><br><span class="line">    My Config</span><br></pre></td></tr></table></figure>
 
-<p><strong>bool</strong>表示配置<strong>选项的类型</strong>，每个config菜单项都要有类型定义，变量有5种类型：<code>bool</code>布尔，也就是二选一（y或n）、<code>tristate</code>三态，也就是三选一、<code>string</code>字符串，也就是用户从给出的一堆字符串里选择一个、<code>hex</code>十六进制，也就是用户要选择一个十六进制数、<code>int</code>整型，也就是用户需要选择一个整数，需要注意：这里的<em>用户选择</em>是不严谨的，实际上==选项类型决定了Kconfig会生成什么样的#define语句提供给C源代码==；**”Enable MyConfig”<strong>表示该</strong>选项的名称<strong>；</strong>select<strong>表示如果当前配置选项被</strong>选中<strong>，则SELECTED就会被选中；</strong>default<strong>后面跟的参数表示配置选项的</strong>默认值**；help后面跟的语句会作为帮助信息提供给用户</p>
+<p><strong>bool</strong>表示配置<strong>选项的类型</strong>，每个config菜单项都要有类型定义，变量有5种类型：<code>bool</code>布尔，也就是二选一（y或n）、<code>tristate</code>三态，也就是三选一、<code>string</code>字符串，也就是用户从给出的一堆字符串里选择一个、<code>hex</code>十六进制，也就是用户要选择一个十六进制数、<code>int</code>整型，也就是用户需要选择一个整数，需要注意：这里的<em>用户选择</em>是不严谨的，实际上<strong>选项类型决定了Kconfig会生成什么样的#define语句提供给C源代码</strong>；**”Enable MyConfig”<strong>表示该</strong>选项的名称<strong>；</strong>select<strong>表示如果当前配置选项被</strong>选中<strong>，则SELECTED就会被选中；</strong>default<strong>后面跟的参数表示配置选项的</strong>默认值**；help后面跟的语句会作为帮助信息提供给用户</p>
 <p>使用<strong>menu/endmenu块</strong>来生成一个菜单，这个菜单里面可以包含复数个config语句，也可以包含子菜单</p>
 <p>使用<strong>if/endif块</strong>来实现条件判断</p>
 <p>使用<strong>menuconfig</strong>语句表示带菜单的配置项，也就是可展开的菜单</p>
@@ -2904,7 +2909,7 @@ $$
 
 <p>两个API进行默认状态的wifi初始化，函数会返回对应的esp-netif实例</p>
 <p>注意：创建的实例如果不再运行时需要停止并释放内存空间，且不能被多次创建</p>
-<p>==如果需要使用AP+STA模式，两个接口都需要被创建==</p>
+<p><strong>如果需要使用AP+STA模式，两个接口都需要被创建</strong></p>
 <h2 id="相关库函数"><a href="#相关库函数" class="headerlink" title="相关库函数"></a>相关库函数</h2><ol>
 <li>初始化</li>
 </ol>
@@ -3011,10 +3016,10 @@ $$
 <p>（ULP协处理器见最后部分）</p>
 <h1 id="低功耗模式"><a href="#低功耗模式" class="headerlink" title="低功耗模式"></a>低功耗模式</h1><p>ESP32可以进入light-sleep和deep-sleep模式，还能进入一个用于相对较低功耗运行的modem-sleep模式</p>
 <p>注意：<strong>进入低功耗模式前，应用程序必须关闭wifi和蓝牙设备</strong>，如果需要维持wifi连接，应当使用modem-sleep模式，在这个模式下当需要wifi驱动执行时系统会自动唤醒来维持wifi连接</p>
-<h2 id="light-sleep"><a href="#light-sleep" class="headerlink" title="light-sleep"></a>light-sleep</h2><p>==CPU暂停运行，wifi/蓝牙基带和射频关闭。RTC、ULP运行，任何唤醒事件都会唤醒芯片==</p>
+<h2 id="light-sleep"><a href="#light-sleep" class="headerlink" title="light-sleep"></a>light-sleep</h2><p><strong>CPU暂停运行，wifi/蓝牙基带和射频关闭。RTC、ULP运行，任何唤醒事件都会唤醒芯片</strong></p>
 <p>在light-sleep模式下，数字外设、大部分内存和CPU都会被停用（停用时钟），电源功耗也会降低，从light-sleep模式下唤醒后外设和CPU会接回时钟源并继续工作，他们的外部状态会被保存</p>
 <p><strong>这个模式可以理解为电脑的挂起休眠</strong></p>
-<h2 id="deep-sleep"><a href="#deep-sleep" class="headerlink" title="deep-sleep"></a>deep-sleep</h2><p>==CPU、大部分外设掉电，wifi/蓝牙基带和射频关闭，进有RTC、ULP运行，wifi和蓝牙连接数据被转移到RTC内存中。仅有一部分中断源会唤醒芯片==</p>
+<h2 id="deep-sleep"><a href="#deep-sleep" class="headerlink" title="deep-sleep"></a>deep-sleep</h2><p><strong>CPU、大部分外设掉电，wifi/蓝牙基带和射频关闭，进有RTC、ULP运行，wifi和蓝牙连接数据被转移到RTC内存中。仅有一部分中断源会唤醒芯片</strong></p>
 <p>deep-sleep模式下，由APB_CLK时钟提供是时钟源的CPU、大部分内存和所有数字外设都会掉电；只有片上RTC控制器、RTC外设、ULP和RTC内存会被保留电源</p>
 <p><strong>这个模式可以理解为电脑的断电休眠</strong></p>
 <p>Deep-sleep模式下支持从以下唤醒源触发的设备唤醒</p>
@@ -3048,7 +3053,7 @@ $$
 <p>在进入睡眠模式之前使用esp_sleep_enable_gio_wakeup()来使能该唤醒源</p>
 <h4 id="UART"><a href="#UART" class="headerlink" title="UART"></a>UART</h4><p><strong>在light-sleep下</strong>可以使用esp_sleep_enable_uart_wakeup()来启用UART触发唤醒</p>
 <p>若开启该触发源，当睡眠状态的ESP32收到来自外部设备的UART输入的数个上升沿时，会自动唤醒，该上升沿数目可以用uart_set_wakeup_threshold()函数配置；在这个触发信号被接收之前，所有信息不会被接收——这就意味着外部设备需要发送额外的字符给ESP32来让它唤醒</p>
-<h2 id="modem-sleep"><a href="#modem-sleep" class="headerlink" title="modem-sleep"></a>modem-sleep</h2><p>==CPU运行、可配置时钟，wifi/蓝牙基带和射频关闭，但会维持wifi连接==</p>
+<h2 id="modem-sleep"><a href="#modem-sleep" class="headerlink" title="modem-sleep"></a>modem-sleep</h2><p><strong>CPU运行、可配置时钟，wifi/蓝牙基带和射频关闭，但会维持wifi连接</strong></p>
 <h1 id="RTC外设"><a href="#RTC外设" class="headerlink" title="RTC外设"></a>RTC外设</h1><p>RTC外设不仅包括RTC，还包括了片上温度传感器、ADC、RTC-GPIO和touchpad外设</p>
 <h1 id="ULP协处理器-1"><a href="#ULP协处理器-1" class="headerlink" title="ULP协处理器"></a>ULP协处理器</h1><p>ULP（Ultra Low Power超低功耗）协处理器是一种简单的<strong>有限状态机</strong>（FSM）。在主处理器处于Deep-sleep深度睡眠模式时，它可以使用ADC、温度传感器和外部IIC传感器执行测量操作。ULP协处理器可以访问RTC慢速内存区域（RTC_SLOW_MEM）及RTC_CNTL、RTC_IO、SARADC等外设寄存器。ULP协处理器使用<strong>32位固定宽度的指令</strong>、<strong>32位内存寻址</strong>，配备<strong>4个16位通用寄存器</strong></p>
 <h2 id="ULP协处理器编程"><a href="#ULP协处理器编程" class="headerlink" title="ULP协处理器编程"></a>ULP协处理器编程</h2><p>ULP协处理器代码是用<strong>汇编</strong>语言编写的，并使用<strong>binutils-esp32ulp工具链</strong>进行编译</p>
@@ -3161,7 +3166,7 @@ $$
     <url>/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A01%E3%80%90%E5%9F%BA%E6%9C%AC%E5%86%85%E5%AE%B9%E3%80%91/</url>
     <content><![CDATA[<p>学校老师留了个作业，让用剩下一半的寒假学学ESP32，做蓝牙透传+STA&amp;AP模式下工作的http服务器，但是不准用Arduino</p>
 <p>当场就傻了：ESP32我刚刚好就会一手Arduino；乐鑫那套ESPIDF太难啃，之前点了个灯就去快乐stm32了；micropython……刷完固件发现蓝牙支持跟【数据删除】一样，还不如用c写——一咬牙一跺脚，回头肝ESPIDF吧</p>
-<p><strong>==总体思路：资源少，跟着官方走准没错，硬啃就完事了==</strong></p>
+<p><strong>总体思路：资源少，跟着官方走准没错，硬啃就完事了</strong></p>
 <p>这个系列笔记可以供只接触过单片机开发（STM32、51基础）和硬件相关知识但没有接触过网络相关知识的同学翻阅学习</p>
 <span id="more"></span>
 
@@ -3192,7 +3197,7 @@ $$
 <h2 id="全局CMake编写"><a href="#全局CMake编写" class="headerlink" title="全局CMake编写"></a>全局CMake编写</h2><p>全局CMake文档应该至少包含如下三个部分：</p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.5</span>) <span class="comment">#必须放在第一行，设置构建该项目所需CMake的最小版本号</span></span><br><span class="line"><span class="keyword">include</span>($ENV&#123;IDF_PATH&#125;/tools/cmake/<span class="keyword">project</span>.cmake) <span class="comment">#用于导入CMake的其余功能来完成配置项目、检索组件等任务</span></span><br><span class="line"><span class="keyword">project</span>(myProject) <span class="comment">#指定项目名称并创建项目，改名成蕙作为最终输出的bin文件或elf文件的名字</span></span><br></pre></td></tr></table></figure>
 
-<p>==每个 CMakeLists 文件只能定义一个项目==</p>
+<p><strong>每个 CMakeLists 文件只能定义一个项目</strong></p>
 <p>还可以包含以下可选部分</p>
 <figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">COMPONENT_DIRS <span class="comment">#组件搜索目录，默认为$&#123;IDF_PATH&#125;/components、$&#123;PROJECT_PATH&#125;/components和EXTRA_COMPONENT_DIRS</span></span><br><span class="line">COMPONENTS <span class="comment">#要构建进项目中的组件名称列表，默认为COMPONENT_DIRS目录下检索到的所有组件</span></span><br><span class="line">EXTRA_COMPONENT_DIRS <span class="comment">#用于搜索组件的其它可选目录列表，可以是绝对路径也可以是相对路径</span></span><br><span class="line">COMPONENT_REQUIRES_COMMON <span class="comment">#每个组件都需要的通用组件列表，这些通用组件会自动添加到每个组件的COMPONENT_PRIV_REQUIRES列表和项目的COMPONENTS列表中</span></span><br></pre></td></tr></table></figure>
 
@@ -3607,7 +3612,7 @@ $$
 <li>使用spi_slave_queue_trans、spi_slave_get_trans_result、spi_slave_transmit三个API进行传输数据</li>
 <li>如果需要卸载SPI从设备驱动，使用spi_slave_free</li>
 </ol>
-<p>注意：==如果使用了DMA，需要保证使用pvPortMallocCaps(size, MALLOC_CAP_DMA)为缓冲区开辟内存，这样可以保障DMA能够访问到这些缓冲区==</p>
+<p>注意：<strong>如果使用了DMA，需要保证使用pvPortMallocCaps(size, MALLOC_CAP_DMA)为缓冲区开辟内存，这样可以保障DMA能够访问到这些缓冲区</strong></p>
 <p>DMA和初始化API的配置与主模式类似，驱动函数的使用方法也类似，在此不做介绍，关注API即可</p>
 <h2 id="目前存在的DMA缺陷（摘自官网）"><a href="#目前存在的DMA缺陷（摘自官网）" class="headerlink" title="目前存在的DMA缺陷（摘自官网）"></a>目前存在的DMA缺陷（摘自官网）</h2><blockquote>
 <h2 id="Restrictions-and-Known-Issues"><a href="#Restrictions-and-Known-Issues" class="headerlink" title="Restrictions and Known Issues"></a>Restrictions and Known Issues</h2><ol>
@@ -3768,7 +3773,7 @@ $$
 <li>如果已启用安全启动，则会加密安全启动引导加载程序摘要</li>
 <li>分区表中标有加密标记的分区</li>
 </ul>
-<p>注意：==启用 Flash 加密将限制后续 ESP32 更新==</p>
+<p>注意：<strong>启用 Flash 加密将限制后续 ESP32 更新</strong></p>
 <p>FLASH加密分为两种模式：开发模式和生产模式</p>
 <h2 id="使用FLASH加密"><a href="#使用FLASH加密" class="headerlink" title="使用FLASH加密"></a>使用FLASH加密</h2><p>一般地，<strong>只要在menuconfig中设置使用加密并使用加密方式烧录即可使用FLASH加密</strong></p>
 <ol>
@@ -3816,7 +3821,7 @@ $$
 <h2 id="蓝牙核心协议（Bluetooth-Core）"><a href="#蓝牙核心协议（Bluetooth-Core）" class="headerlink" title="蓝牙核心协议（Bluetooth Core）"></a>蓝牙核心协议（Bluetooth Core）</h2><p>蓝牙核心协议包含BLE Controller和BLE Host两部分</p>
 <p>Controller负责定义RF、Baseband等偏硬件的规范</p>
 <p>Host负责在逻辑链路的基础上，进行更为友好的封装，这样就可以屏蔽掉蓝牙技术的细节，让Bluetooth Application更为方便的使用</p>
-<p>==Controller是工作在物理层、数据链路层、网络层、传输层的协议，Host则是工作在传输层 、会话层、表示层、应用层的协议，Host将Controller封装成可被配置为函数的形式供程序使用==</p>
+<p><strong>Controller是工作在物理层、数据链路层、网络层、传输层的协议，Host则是工作在传输层 、会话层、表示层、应用层的协议，Host将Controller封装成可被配置为函数的形式供程序使用</strong></p>
 <p><img src="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145156859-489087209.png" alt="https://img2018.cnblogs.com/blog/653161/201912/653161-20191204145156859-489087209.png"></p>
 <h3 id="包含的层次简介"><a href="#包含的层次简介" class="headerlink" title="包含的层次简介"></a>包含的层次简介</h3><ol>
 <li>物理层（PHY）</li>
@@ -4025,7 +4030,7 @@ $$
 <p>常用的带request命令：所有read命令，writerequest，indication等</p>
 <p>常用的不带request命令：write command，notification等</p>
 <h2 id="通用属性协议GATT简述"><a href="#通用属性协议GATT简述" class="headerlink" title="通用属性协议GATT简述"></a>通用属性协议GATT简述</h2><p>GATT(Generic Attribute Profile)，描述了一种使用ATT的服务框架。该框架定义了服务(Server)和服务属性(characteristic)的过程(Procedure)及格式，负责处理具体数据段通过蓝牙连接的发送和接收</p>
-<p>**==现在的BLE大多建立在GATT协议之上==**，GATT建立在ATT和L2CAP之上，GATT需要使用通用访问协议GAP来确定设备的连接</p>
+<p><strong>现在的BLE大多建立在GATT协议之上</strong>，GATT建立在ATT和L2CAP之上，GATT需要使用通用访问协议GAP来确定设备的连接</p>
 <p><img src="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145156859-489087209.png" alt="https://img2018.cnblogs.com/blog/653161/201912/653161-20191204145156859-489087209.png"></p>
 <h3 id="通用访问协议GAP"><a href="#通用访问协议GAP" class="headerlink" title="通用访问协议GAP"></a>通用访问协议GAP</h3><p>GAP 使设备被其他设备可见，并决定了当前设备是否可以或者怎样与合同设备进行交互</p>
 <p>GAP中，设备被分为<strong>外围设备Peripheral</strong>和<strong>中心设备Central</strong></p>
@@ -4067,7 +4072,7 @@ $$
 <h3 id="蓝牙控制器"><a href="#蓝牙控制器" class="headerlink" title="蓝牙控制器"></a>蓝牙控制器</h3><p>使用esp_bt_controller_init()</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">esp_bt_controller_init(<span class="keyword">esp_bt_controller_config_t</span> *cfg);<span class="comment">//esp_bt_controller_config_t是蓝牙控制器配置结构体</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">esp_bt_controller_config_t</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">uint16_t</span> controller_task_stack_size;<span class="comment">//蓝牙控制器栈大小</span></span><br><span class="line">    <span class="keyword">uint8_t</span> controller_task_prio;<span class="comment">//蓝牙控制器任务优先级</span></span><br><span class="line">    <span class="keyword">uint8_t</span> hci_uart_no;<span class="comment">//使用哪个UART作为HCI的IO，仅能选择UART1或UART2串口</span></span><br><span class="line">	<span class="keyword">uint32_t</span> hci_uart_baudrate;<span class="comment">//HCI串口波特率</span></span><br><span class="line">    <span class="keyword">uint8_t</span> scan_duplicate_mode;<span class="comment">//重复扫描模式</span></span><br><span class="line">    <span class="keyword">uint8_t</span> scan_duplicate_type;<span class="comment">//重复扫描类型</span></span><br><span class="line">    <span class="keyword">uint16_t</span> normal_adv_size;<span class="comment">//普通广播报文大小</span></span><br><span class="line">    <span class="keyword">uint16_t</span> mesh_adv_size;<span class="comment">//mesh广播报文大小</span></span><br><span class="line">    <span class="keyword">uint16_t</span> send_adv_reserved_size;<span class="comment">//蓝牙控制器最小的内存大小（保留出发送报文所需的内存大小）</span></span><br><span class="line">    <span class="keyword">uint32_t</span> controller_debug_flag;<span class="comment">//蓝牙控制器debug log的属性</span></span><br><span class="line">    <span class="keyword">uint8_t</span> mode;<span class="comment">//BR/EDR/BLE/Dual模式选择</span></span><br><span class="line">	<span class="keyword">uint8_t</span> ble_max_conn;<span class="comment">//BLE模式最多连接个数</span></span><br><span class="line">    <span class="keyword">uint8_t</span> bt_max_acl_conn;<span class="comment">//BR或EDR最大的ACL连接个数</span></span><br><span class="line">    <span class="keyword">uint8_t</span> bt_sco_datapath;<span class="comment">//SCO数据路径 用于HCI或PCM模块</span></span><br><span class="line">	<span class="keyword">bool</span> auto_latency;<span class="comment">//BLE自动延迟，用于降低传统蓝牙的功耗</span></span><br><span class="line">    <span class="keyword">bool</span> bt_legacy_auth_vs_evt;<span class="comment">//BR/EDR传统的授权完毕事件，用于防止BIAS攻击</span></span><br><span class="line">    <span class="keyword">uint8_t</span> bt_max_sync_conn;<span class="comment">//BR/EDR最多的ACL连接数目，也可以在menuconfig中配配置</span></span><br><span class="line">    <span class="keyword">uint8_t</span> ble_sca;<span class="comment">//BLE晶振准确度指数</span></span><br><span class="line">    <span class="keyword">uint8_t</span> pcm_role;<span class="comment">//PCM角色，选择master或slave</span></span><br><span class="line">    <span class="keyword">uint8_t</span> pcm_polar;<span class="comment">//PCM触发极性，选择下降沿或上升沿</span></span><br><span class="line">    <span class="keyword">uint32_t</span> magic;<span class="comment">//神奇数字</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>初始化蓝牙控制器，==此函数只能被调用一次，且必须在其他蓝牙功能被调用之前调用==</p>
+<p>初始化蓝牙控制器，<strong>此函数只能被调用一次，且必须在其他蓝牙功能被调用之前调用</strong></p>
 <p>使用esp_bt_controller_deinit()来取消初始化，用于关闭蓝牙并清除其占用的内存，还会将蓝牙任务删除</p>
 <p>下面是蓝牙控制器的常用API</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">esp_bt_controller_enable(<span class="keyword">esp_bt_mode_t</span> mode);<span class="comment">//使能蓝牙控制器，mode是蓝牙模式，如果想要动态改变蓝牙模式不能直接调用该函数，应该先用下面的disable关闭蓝牙再使用该API来改变蓝牙模式</span></span><br><span class="line">esp_bt_controller_disable(<span class="keyword">void</span>);<span class="comment">//关闭蓝牙控制器</span></span><br><span class="line">sp_bt_controller_get_status(<span class="keyword">void</span>);<span class="comment">//获取蓝牙控制器状态</span></span><br><span class="line">esp_bt_get_mac(<span class="keyword">void</span>);<span class="comment">//获取蓝牙MAC地址</span></span><br><span class="line"></span><br><span class="line">esp_bt_controller_mem_release(<span class="keyword">esp_bt_mode_t</span> mode);<span class="comment">//释放蓝牙控制器的所有内存，包括BSS、数据和其他蓝牙使用的堆栈空间</span></span><br><span class="line"><span class="comment">//这个API仅仅应该再esp_bt_controller_init()或after esp_bt_controller_deinit()之前被调用</span></span><br><span class="line">esp_bt_mem_release(<span class="keyword">esp_bt_mode_t</span> mode);</span><br><span class="line"><span class="comment">//释放蓝牙控制器和蓝牙数据的所有内存，比esp_bt_controller_mem_release()更彻底</span></span><br><span class="line">esp_bt_sleep_enable(<span class="keyword">void</span>);<span class="comment">//让蓝牙进入睡眠模式，这个函数应该在esp_bt_controller_enable()被调用之后再调用</span></span><br></pre></td></tr></table></figure>
@@ -4318,7 +4323,7 @@ $$
 <h3 id="通信管理（消息队列、事件集、信号量、互斥量）"><a href="#通信管理（消息队列、事件集、信号量、互斥量）" class="headerlink" title="通信管理（消息队列、事件集、信号量、互斥量）"></a>通信管理（消息队列、事件集、信号量、互斥量）</h3><h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><p>使用FIFO队列的数据结构处理消息的存储和传输</p>
 <p>消息发出后被缓存到FIFO队尾，其他任务可以调用接收消息的API接收队首的消息，该消息被接收后，后面的消息会自动前进</p>
 <h3 id="事件集"><a href="#事件集" class="headerlink" title="事件集"></a>事件集</h3><p>用于取代全局变量标志，更加安全（但<strong>更慢</strong>）</p>
-<h1 id="ESP32上的FreeRTOS"><a href="#ESP32上的FreeRTOS" class="headerlink" title="ESP32上的FreeRTOS"></a>ESP32上的FreeRTOS</h1><p>【翻译自官网】==普通的FreeRTOS运行在单核上，不彳亍！我们的ESP32-FreeRTOS能运行在双核，彳亍！==</p>
+<h1 id="ESP32上的FreeRTOS"><a href="#ESP32上的FreeRTOS" class="headerlink" title="ESP32上的FreeRTOS"></a>ESP32上的FreeRTOS</h1><p>【翻译自官网】<code>普通的FreeRTOS运行在单核上，不彳亍！我们的ESP32-FreeRTOS能运行在双核，彳亍！</code></p>
 <p>众所周知，ESP32是物美价廉的双核SoC，CPU0和CPU1同时运行、共享内存。乐鑫修改了普通的FreeRTOS，让它能够支持SMP（symmetric multiprocessing对称多处理），所以ESP32的FreeRTOS变成了基于FreeRTOS v8.2.0的Xtensa架构移植版SMP RTOS</p>
 <p><strong>下面对移植版的FreeRTOS简称为SMP RTOS</strong>，</p>
 <p>【补充】对称多处理（SMP）架构是一种两个或多个CPU共享同一内存公共链路的计算机体系结构</p>
@@ -4477,7 +4482,7 @@ $$
 <p>使用如下函数来声明和定义事件</p>
 <p>一个事件由两部分标识组成：<strong>事件类型</strong>和<strong>事件ID</strong></p>
 <p>事件类型标识了一个独立的事件组；事件ID区分在该组内的事件</p>
-<p>==可以将事件类型视为人的姓，事件ID是人的名==</p>
+<p><em>可以将事件类型视为人的姓，事件ID是人的名</em></p>
 <p>使用以下两个宏函数来声明、定义事件类型。一般地，在程序中使用XXX_EVENT的形式来定义一个事件类型</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">ESP_EVENT_DECLARE_BASE(EVENT_BASE)<span class="comment">//声明事件类型</span></span><br><span class="line">ESP_EVENT_DEFINE_BASE(EVENT_BASE)<span class="comment">//定义事件类型</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//事件类型举例：WIFI_EVENT</span></span><br></pre></td></tr></table></figure>
 
@@ -4523,7 +4528,7 @@ $$
 </tr>
 </tbody></table>
 <p>除了API区别和系统事件会自动发送到默认事件循环外，<strong>两者并没有更多差别</strong>，所以说用户可以将自定义的事件直接发送到默认事件循环，这比用户定义的事件循环更节约内存且<strong>更方便</strong>！</p>
-<p>==任务、队列和事件循环是ESP32中最常用也是最特殊的SMP FreeRTOS API==</p>
+<p><strong>任务、队列和事件循环是ESP32中最常用也是最特殊的SMP FreeRTOS API</strong></p>
 <h3 id="事件循环库API简介"><a href="#事件循环库API简介" class="headerlink" title="事件循环库API简介"></a>事件循环库API简介</h3><p>使用以下API控制事件循环</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_event_loop_create_default</span><span class="params">(<span class="keyword">void</span>)</span></span>;<span class="comment">//创建默认事件循环</span></span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_event_loop_delete_default</span><span class="params">(<span class="keyword">void</span>)</span></span>;<span class="comment">//删除默认事件循环</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建用户事件循环</span></span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_event_loop_create</span><span class="params">(<span class="keyword">const</span> <span class="keyword">esp_event_loop_args_t</span> *event_loop_args,<span class="comment">//事件循环参数</span></span></span></span><br><span class="line"><span class="params"><span class="function">                                <span class="keyword">esp_event_loop_handle_t</span> *event_loop)</span></span>;<span class="comment">//事件循环句柄</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">//删除用户事件循环</span></span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_event_loop_delete</span><span class="params">(<span class="keyword">esp_event_loop_handle_t</span> event_loop)</span></span>;<span class="comment">//事件循环</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_event_loop_run</span><span class="params">(<span class="keyword">esp_event_loop_handle_t</span> event_loop, TickType_t ticks_to_run)</span></span>;</span><br><span class="line"><span class="comment">//将时间分配到一个事件循环，不常用，注意事项一大堆懒得看了——总之详细用法请参考官网API简介    </span></span><br></pre></td></tr></table></figure>
 
@@ -6053,7 +6058,7 @@ $$
 <p>OpenWrt项目是一个针对嵌入式设备的Linux操作系统。OpenWrt不是一个单一且不可更改的固件，而是提供了具有软件包管理功能的完全可写的文件系统。这使您可以从供应商提供的应用范围和配置中解脱出来，并且让您通过使用适配任何应用的软件包来定制设备。对于开发人员来说，OpenWrt是一个无需围绕它构建完整固件就能开发应用程序的框架; 对于普通用户来说，这意味着拥有了完全定制的能力，能以意想不到的方式使用该设备。</p>
 </blockquote>
 <p>听上去很高大上，实际上OpenWrt就和Ubuntu、CentOS、Raspbian等<em>GNU/Linux发行版</em>一样，是一个基于Linux内核的操作系统。只不过它具有<strong>高度模块化可定制</strong>的特点，并且自带一系列<strong>网络组件</strong>，因此常常被用于路由器、工控、智能家居、小型交换机中。笔者接手的这个项目就是基于OpenWrt实现<strong>路由器</strong>-交换机的应用，并配置一个<strong>网络摄像头</strong>和一个<strong>网口数据转串口</strong></p>
-<p>OpenWrt除了以上特点外，还有一个堪称嵌入式Linux杀手锏的特性：==超级大规模的开源社区==。可能是因为大家都很喜欢软路由，OpenWrt的软件包已经达到了好几千，这让它能秒掉一堆其他的嵌入式Linux发行版</p>
+<p>OpenWrt除了以上特点外，还有一个堪称嵌入式Linux杀手锏的特性：<em>超级大规模的开源社区</em>。可能是因为大家都很喜欢软路由，OpenWrt的软件包已经达到了好几千，这让它能秒掉一堆其他的嵌入式Linux发行版</p>
 <h3 id="OpenWrt与桌面Linux操作系统"><a href="#OpenWrt与桌面Linux操作系统" class="headerlink" title="OpenWrt与桌面Linux操作系统"></a>OpenWrt与桌面Linux操作系统</h3><p>可能大家无法理解OpenWrt这种发行版的独特之处，请允许我在这里为大家重新介绍一下桌面Linux操作系统</p>
 <p>一般的桌面操作系统都很难在低性能的嵌入式设备上运行，这是因为两点：</p>
 <ol>
@@ -6415,7 +6420,7 @@ $$
 <p>就可以登录到OpenWrt了</p>
 <h4 id="任何其他Linux发行版允许的登录方式"><a href="#任何其他Linux发行版允许的登录方式" class="headerlink" title="任何其他Linux发行版允许的登录方式"></a>任何其他Linux发行版允许的登录方式</h4><p>只要在内核里面使能了某个可行的登陆方式，并且硬件允许它运行，那么用户就能用这种方式进行登录OpenWrt</p>
 <p>毕竟这可是Linux啊！</p>
-<h3 id="联网"><a href="#联网" class="headerlink" title="联网"></a>联网</h3><p>强调一下：==如果是必须的kmod还是应该先想好然后在编译内核阶段完成安装==</p>
+<h3 id="联网"><a href="#联网" class="headerlink" title="联网"></a>联网</h3><p>强调一下：<strong>如果是必须的kmod还是应该先想好然后在编译内核阶段完成安装</strong></p>
 <p>一般来说正常安装了网络设备驱动和普通luci界面的设备直接插上网线或者通过luci界面配置好wifi以后就可以联网了，但是如果无法联网可能有以下几个原因：</p>
 <ol>
 <li>编译内核时没有把网络设备驱动编译进去（一般来说是默认添加且不能修改的，但是谁知道用户会做出什么逆天操作）</li>

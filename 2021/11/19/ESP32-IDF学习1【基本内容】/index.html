@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>ESP32_IDF学习1【基本内容】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="学校老师留了个作业，让用剩下一半的寒假学学ESP32，做蓝牙透传+STA&amp;AP模式下工作的http服务器，但是不准用Arduino 当场就傻了：ESP32我刚刚好就会一手Arduino；乐鑫那套ESPIDF太难啃，之前点了个灯就去快乐stm32了；micropython……刷完固件发现蓝牙支持跟【数据删除】一样，还不如用c写——一咬牙一跺脚，回头肝ESPIDF吧 &#x3D;&#x3D;总体思路：资源少，跟着">
+  <meta name="description" content="学校老师留了个作业，让用剩下一半的寒假学学ESP32，做蓝牙透传+STA&amp;AP模式下工作的http服务器，但是不准用Arduino 当场就傻了：ESP32我刚刚好就会一手Arduino；乐鑫那套ESPIDF太难啃，之前点了个灯就去快乐stm32了；micropython……刷完固件发现蓝牙支持跟【数据删除】一样，还不如用c写——一咬牙一跺脚，回头肝ESPIDF吧 总体思路：资源少，跟着官方">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ESP32_IDF学习1【基本内容】">
 <meta property="og:url" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A01%E3%80%90%E5%9F%BA%E6%9C%AC%E5%86%85%E5%AE%B9%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="学校老师留了个作业，让用剩下一半的寒假学学ESP32，做蓝牙透传+STA&amp;AP模式下工作的http服务器，但是不准用Arduino 当场就傻了：ESP32我刚刚好就会一手Arduino；乐鑫那套ESPIDF太难啃，之前点了个灯就去快乐stm32了；micropython……刷完固件发现蓝牙支持跟【数据删除】一样，还不如用c写——一咬牙一跺脚，回头肝ESPIDF吧 &#x3D;&#x3D;总体思路：资源少，跟着">
+<meta property="og:description" content="学校老师留了个作业，让用剩下一半的寒假学学ESP32，做蓝牙透传+STA&amp;AP模式下工作的http服务器，但是不准用Arduino 当场就傻了：ESP32我刚刚好就会一手Arduino；乐鑫那套ESPIDF太难啃，之前点了个灯就去快乐stm32了；micropython……刷完固件发现蓝牙支持跟【数据删除】一样，还不如用c写——一咬牙一跺脚，回头肝ESPIDF吧 总体思路：资源少，跟着官方">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T06:58:34.000Z">
-<meta property="article:modified_time" content="2021-11-24T16:01:57.219Z">
+<meta property="article:modified_time" content="2021-12-09T16:13:31.903Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -199,7 +199,7 @@
       
         <p>学校老师留了个作业，让用剩下一半的寒假学学ESP32，做蓝牙透传+STA&amp;AP模式下工作的http服务器，但是不准用Arduino</p>
 <p>当场就傻了：ESP32我刚刚好就会一手Arduino；乐鑫那套ESPIDF太难啃，之前点了个灯就去快乐stm32了；micropython……刷完固件发现蓝牙支持跟【数据删除】一样，还不如用c写——一咬牙一跺脚，回头肝ESPIDF吧</p>
-<p><strong>==总体思路：资源少，跟着官方走准没错，硬啃就完事了==</strong></p>
+<p><strong>总体思路：资源少，跟着官方走准没错，硬啃就完事了</strong></p>
 <p>这个系列笔记可以供只接触过单片机开发（STM32、51基础）和硬件相关知识但没有接触过网络相关知识的同学翻阅学习</p>
 <span id="more"></span>
 
@@ -230,7 +230,7 @@
 <h2 id="全局CMake编写"><a href="#全局CMake编写" class="headerlink" title="全局CMake编写"></a>全局CMake编写</h2><p>全局CMake文档应该至少包含如下三个部分：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.5</span>) <span class="comment">#必须放在第一行，设置构建该项目所需CMake的最小版本号</span></span><br><span class="line"><span class="keyword">include</span>($ENV&#123;IDF_PATH&#125;/tools/cmake/<span class="keyword">project</span>.cmake) <span class="comment">#用于导入CMake的其余功能来完成配置项目、检索组件等任务</span></span><br><span class="line"><span class="keyword">project</span>(myProject) <span class="comment">#指定项目名称并创建项目，改名成蕙作为最终输出的bin文件或elf文件的名字</span></span><br></pre></td></tr></table></figure>
 
-<p>==每个 CMakeLists 文件只能定义一个项目==</p>
+<p><strong>每个 CMakeLists 文件只能定义一个项目</strong></p>
 <p>还可以包含以下可选部分</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">COMPONENT_DIRS <span class="comment">#组件搜索目录，默认为$&#123;IDF_PATH&#125;/components、$&#123;PROJECT_PATH&#125;/components和EXTRA_COMPONENT_DIRS</span></span><br><span class="line">COMPONENTS <span class="comment">#要构建进项目中的组件名称列表，默认为COMPONENT_DIRS目录下检索到的所有组件</span></span><br><span class="line">EXTRA_COMPONENT_DIRS <span class="comment">#用于搜索组件的其它可选目录列表，可以是绝对路径也可以是相对路径</span></span><br><span class="line">COMPONENT_REQUIRES_COMMON <span class="comment">#每个组件都需要的通用组件列表，这些通用组件会自动添加到每个组件的COMPONENT_PRIV_REQUIRES列表和项目的COMPONENTS列表中</span></span><br></pre></td></tr></table></figure>
 

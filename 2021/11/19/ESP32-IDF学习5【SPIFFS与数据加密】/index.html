@@ -16,7 +16,7 @@
 <meta property="og:description" content="VFS虚拟文件系统虚拟文件系统 (VFS) 组件可为一些驱动提供一个统一接口。有了该接口，用户可像操作普通文件一样操作虚拟文件。这类驱动程序可以是 FAT、SPIFFS 等真实文件系统，也可以是有文件类接口的设备驱动程序——官方文档">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T07:02:08.000Z">
-<meta property="article:modified_time" content="2021-11-24T16:01:25.255Z">
+<meta property="article:modified_time" content="2021-12-09T16:15:25.545Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -312,7 +312,7 @@
 <li>如果已启用安全启动，则会加密安全启动引导加载程序摘要</li>
 <li>分区表中标有加密标记的分区</li>
 </ul>
-<p>注意：==启用 Flash 加密将限制后续 ESP32 更新==</p>
+<p>注意：<strong>启用 Flash 加密将限制后续 ESP32 更新</strong></p>
 <p>FLASH加密分为两种模式：开发模式和生产模式</p>
 <h2 id="使用FLASH加密"><a href="#使用FLASH加密" class="headerlink" title="使用FLASH加密"></a>使用FLASH加密</h2><p>一般地，<strong>只要在menuconfig中设置使用加密并使用加密方式烧录即可使用FLASH加密</strong></p>
 <ol>

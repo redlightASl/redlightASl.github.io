@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://docs.espressif.com/projects/esp-idf/zh_CN/release-v4.1/_images/spi_slave_miso_dma.png">
 <meta property="article:published_time" content="2021-11-19T07:01:22.000Z">
-<meta property="article:modified_time" content="2021-11-24T16:01:32.885Z">
+<meta property="article:modified_time" content="2021-12-09T16:15:10.473Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -468,7 +468,7 @@
 <li>使用spi_slave_queue_trans、spi_slave_get_trans_result、spi_slave_transmit三个API进行传输数据</li>
 <li>如果需要卸载SPI从设备驱动，使用spi_slave_free</li>
 </ol>
-<p>注意：==如果使用了DMA，需要保证使用pvPortMallocCaps(size, MALLOC_CAP_DMA)为缓冲区开辟内存，这样可以保障DMA能够访问到这些缓冲区==</p>
+<p>注意：<strong>如果使用了DMA，需要保证使用pvPortMallocCaps(size, MALLOC_CAP_DMA)为缓冲区开辟内存，这样可以保障DMA能够访问到这些缓冲区</strong></p>
 <p>DMA和初始化API的配置与主模式类似，驱动函数的使用方法也类似，在此不做介绍，关注API即可</p>
 <h2 id="目前存在的DMA缺陷（摘自官网）"><a href="#目前存在的DMA缺陷（摘自官网）" class="headerlink" title="目前存在的DMA缺陷（摘自官网）"></a>目前存在的DMA缺陷（摘自官网）</h2><blockquote>
 <h2 id="Restrictions-and-Known-Issues"><a href="#Restrictions-and-Known-Issues" class="headerlink" title="Restrictions and Known Issues"></a>Restrictions and Known Issues</h2><ol>

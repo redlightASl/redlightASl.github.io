@@ -44,7 +44,7 @@
 <meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B%E3%80%91/image-20211217221958778.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B%E3%80%91/image-20211218221625965.png">
 <meta property="article:published_time" content="2021-12-21T07:31:40.000Z">
-<meta property="article:modified_time" content="2021-12-21T07:52:52.237Z">
+<meta property="article:modified_time" content="2021-12-22T22:26:58.369Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="电路设计">
 <meta name="twitter:card" content="summary">
@@ -286,7 +286,7 @@
 <p>经过变换可以推导出<br>$$<br>I_C=\frac{\beta}{\beta+2}I_R<br>$$<br>也就是说当$\beta&gt;&gt;2$时，总有$I_C\approx I_R$，并且不受其他因素干扰</p>
 <p><strong>通过设置Vcc和IR的值就可以确定对管的c极电流，从而让处于c极这一支路上所有串联元件电流相等</strong></p>
 <blockquote>
-<p>考虑厄利尔电压时，c极电流要加入修正项；同时考虑c-e电压产生的c极电流变化，可确定如下公式<br>$$<br>I_C=I_S(e^{\frac{V_{BE}}{V_T}}-1)(1+\frac{V_{CE}}{V_A})\<br>\frac{I_{C1}}{I_{C0}}=\frac{1+\frac{V_{CE1}}{V_A}}{1+\frac{V_{CE0}}{V_A}}<br>$$<br>可以发现这个电路得交流小信号模型中诺顿等效电压<br>$$<br>V_{Th}=I_OR_o=I_{C1}\frac{V_A}{I_{C0}}=V_A<br>$$<br>则如果电流源输出为开路，会有$-V_A$这么强的电压出现在晶体管T0两端，很危险；但事实上不会发生这种情况，因为电流源两端电压达到0时晶体管会进入饱和态，上面的公式失效</p>
+<p>考虑厄利尔电压时，c极电流要加入修正项；同时考虑c-e电压产生的c极电流变化，可确定如下公式<br>$$<br>I_C=I_S(e^{\frac{V_{BE}}{V_T}}-1)(1+\frac{V_{CE}}{V_A})\newline<br>\frac{I_{C1}}{I_{C0}}=\frac{1+\frac{V_{CE1}}{V_A}}{1+\frac{V_{CE0}}{V_A}}<br>$$<br>可以发现这个电路得交流小信号模型中诺顿等效电压<br>$$<br>V_{Th}=I_OR_o=I_{C1}\frac{V_A}{I_{C0}}=V_A<br>$$<br>则如果电流源输出为开路，会有$-V_A$这么强的电压出现在晶体管T0两端，很危险；但事实上不会发生这种情况，因为电流源两端电压达到0时晶体管会进入饱和态，上面的公式失效</p>
 <p>需要额外注意，在集成电路中，使用超过MΩ级的电阻是很消耗硅片面积的，如果可能，尽量不要使用大电阻来获得某个值的电流，而应该换用电路拓扑，比如使用、<strong>改进型的基本电流源</strong>、<strong>Widlar电流源（微电流源）</strong>、<strong>威尔逊电流源</strong>、或者使用特殊制造工艺的<strong>多重电流源</strong></p>
 </blockquote>
 <p>当要求提供很小的静态电流，但无法使用大电阻时，可以采用<strong>微电流源</strong>拓扑作为替代方案</p>
@@ -302,7 +302,7 @@
 <p>在集成电路中，可以很方便地在三极管上制造多个集电极，于是就可以制造出这样的电路：</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B%E3%80%91/image-20211208093918020.png" alt="image-20211208093918020"></p>
 <p>它和这个电路等效：<img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B%E3%80%91/image-20211208093952095.png" alt="image-20211208093952095"></p>
-<p>三个集电区面积为$S_0、S_1、S_2$，则有<br>$$<br>\frac{I_{C1}}{I_{C0}}=\frac{S_1}{S_0} \<br>\frac{I_{C2}}{I_{C0}}=\frac{S_2}{S_0}<br>$$<br>所以常常通过这个结构利用c结面积变化来实现不同的恒定电流</p>
+<p>三个集电区面积为$S_0、S_1、S_2$，则有<br>$$<br>\frac{I_{C1}}{I_{C0}}=\frac{S_1}{S_0} \newline<br>\frac{I_{C2}}{I_{C0}}=\frac{S_2}{S_0}<br>$$<br>所以常常通过这个结构利用c结面积变化来实现不同的恒定电流</p>
 <blockquote>
 <p>简单介绍一下一些改进型的电流源</p>
 <p><strong>改进型基本电流源</strong>是在电流源镜像b极和镜像源三极管c极之间加入一个额外的三极管，可以把它较做加射极输出器的电流源</p>

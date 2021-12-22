@@ -2000,25 +2000,20 @@ $$
 <p>C预处理器就是C语言的灵魂，上能干涉程序实现，下能检查编译原理</p>
 <h3 id="预处理指令的特殊用法"><a href="#预处理指令的特殊用法" class="headerlink" title="预处理指令的特殊用法"></a>预处理指令的特殊用法</h3><ol>
 <li><h1 id><a href="#" class="headerlink" title></a></h1><p>预处理器对井号标记<code>#</code>有三种不同的用法：</p>
-<ol>
-<li><p>标记一个指令</p>
+<p><em>标记一个指令</em></p>
 <p>这是最常用的方法，#之前的空白会被忽略，因此各种头文件的格式总是防止重复包含-引用-宏定义-变量定义-函数定义</p>
-</li>
-<li><p>输入的字符串化</p>
+<p><em>输入的字符串化</em></p>
 <p><strong>使用#可以将一个变量转义为字符串，并且如果旁边有其它字符串相邻，会将他们合并在一起</strong></p>
 <p>这就是很多c程序处理字符串IO的方法</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Pevel(cmd) printf(#cmd <span class="meta-string">&quot;:%g\n&quot;</span>,cmd);</span></span><br></pre></td></tr></table></figure>
 
 <p>上面的代码会将输入的变量cmd转换成字符串，输出变量名并输出对应的值</p>
-</li>
-<li><p>把符号连接起来</p>
+<p><em>把符号连接起来</em></p>
 <p>使用两个##就可以将不是字符串的东西拼接在一起</p>
 <p>比如</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">name = LL;</span><br><span class="line">name##_list</span><br><span class="line"><span class="comment">//等效于</span></span><br><span class="line">LL_list</span><br></pre></td></tr></table></figure>
 
 <p>往往使用这种编程方法实现C语言的键值对（字典）轮子</p>
-</li>
-</ol>
 </li>
 <li><p>避免头文件包含</p>
 <p>这个用法很重要，懂得都懂。不懂的话自己写两个一模一样的.h文件碰几次报错就懂了</p>
@@ -2070,7 +2065,7 @@ $$
 <p>其中省略号表示可变的参数表，使用<code>__VA_ARGS__</code>就可以把参数传递给宏</p>
 <p>特别地，C++并不支持这一手段</p>
 <p>使用该手段可以构造出某些面向对象语言的遍历语句</p>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> foreach(__c_object, ...) \</span></span><br><span class="line"><span class="meta">for(char** __c_object = (char* []) &#123;__VA_ARGS__, NULL&#125;; *__c_object; __c_object++)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用例</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>** str = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    foreach(i, <span class="string">&quot;test&quot;</span>, str, <span class="string">&quot;over&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//该函数用于遍历并输出test、hello、over三个字符串，就像是python的for一样!</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> foreach(__c_object, ...) \</span></span><br><span class="line"><span class="meta">for(char** __c_object = (char* []) &#123;__VA_ARGS__, NULL&#125;; *__c_object; __c_object++)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用例</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span>** str = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	foreach(i, <span class="string">&quot;test&quot;</span>, str, <span class="string">&quot;over&quot;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//该函数用于遍历并输出test、hello、over三个字符串，就像是python的for一样!</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="指针与数组——C语言的底层"><a href="#指针与数组——C语言的底层" class="headerlink" title="指针与数组——C语言的底层"></a>指针与数组——C语言的底层</h2><h3 id="内存与变量"><a href="#内存与变量" class="headerlink" title="内存与变量"></a>内存与变量</h3><p>C语言提供了三种内存分配方式：</p>
 <ul>
@@ -8602,7 +8597,7 @@ $$
 <li><p>温度特性</p>
 <p> 三极管是半导体器件，说到半导体就必须提温度特性了</p>
 <p> <strong>温度升高，β值升高，导致I<del>B</del>不变时BE结电压U<del>BE</del>下降；或者U<del>BE</del>不变时I<del>B</del>升高</strong></p>
-<p> 就因为这个性质，需要在后续的放大电路中引入==补偿电阻（温度反馈电阻）==，相关内容会在下一篇涉及</p>
+<p> 就因为这个性质，需要在后续的放大电路中引入<strong>补偿电阻（温度反馈电阻）</strong>，相关内容会在下一篇涉及</p>
 <p> 同时，温度升高会导致三极管导通电压U<del>BE(ON)</del>降低，反向饱和电流I<del>CBO</del>增大。从图像上看，就是输入特性曲线左移，反向特性曲线下移。原理很简单，温度升高，PN结的温度漂移影响更加明显，导致更低的be结电压就能让三极管导通；同时截止电流会随温度漂移变大，这个过程和二极管的温度特性类似</p>
 </li>
 <li><p>性能参数</p>
@@ -8644,21 +8639,21 @@ $$
 <p>想看高频？</p>
 <p>别想了！下一篇再说!</p>
 </blockquote>
-<h2 id="三极管偏置"><a href="#三极管偏置" class="headerlink" title="三极管偏置"></a>三极管偏置</h2><p><strong>在阅读以下内容之前，强烈建议刚接触模电的新手先去阅读传统教材的放大电路部分，再对本教程的下一篇进行粗略阅读，至少掌握放大电路的基本拓扑结构</strong>，==否则可能会根本读不懂==</p>
+<h2 id="三极管偏置"><a href="#三极管偏置" class="headerlink" title="三极管偏置"></a>三极管偏置</h2><p><strong>在阅读以下内容之前，强烈建议刚接触模电的新手先去阅读传统教材的放大电路部分，再对本教程的下一篇进行粗略阅读，至少掌握放大电路的基本拓扑结构</strong>，否则可能会根本读不懂</p>
 <p>这部分内容其实应该放在放大电路部分讲，本教程将三极管偏置条件放在这里的原因是它更接近让三极管保持在放大区的一个性质，并且使用理论分析就可以得到很好的效果，而不需要放大电路设计经验或者什么玄学因素。</p>
 <p>三极管的偏置设计讲究两个基本要求：</p>
 <ol>
 <li>三极管能干活——保证三极管工作在放大区</li>
 <li>三极管偏置电阻尽量少且能耗低</li>
 </ol>
-<h3 id="理论计算"><a href="#理论计算" class="headerlink" title="理论计算"></a>理论计算</h3><p>为了满足上述两个要求，就需要根据规定的最大不失真输出电压$U_{OM}$设计电路，避免出现截止失真和饱和失真，根据下面的公式可以比较好地实现目的<br>$$<br>I_{CQ} \ge I_{CM}+ I_{CEO}\<br>U_{CEQ} \ge U_{OM}+U_{CES}<br>$$<br>其中$I_{CEO}$表示CE结漏电流，$I_{CM}$表示最大集电极电流，</p>
+<h3 id="理论计算"><a href="#理论计算" class="headerlink" title="理论计算"></a>理论计算</h3><p>为了满足上述两个要求，就需要根据规定的最大不失真输出电压$U_{OM}$设计电路，避免出现截止失真和饱和失真，根据下面的公式可以比较好地实现目的<br>$$<br>I_{CQ} \ge I_{CM}+ I_{CEO}\newline<br>U_{CEQ} \ge U_{OM}+U_{CES}<br>$$<br>其中$I_{CEO}$表示CE结漏电流，$I_{CM}$表示最大集电极电流，</p>
 <p>上面的电路分别说明：</p>
 <ul>
 <li>C极静态工作电压不小于CE结漏电流+最大集电极电流。这样就能保证三极管不出现截止失真</li>
 <li>CE极静态工作电压要不小于最大不失真输出电压+CE结饱和管压降（由U<del>OM</del>计算式反推而来）。这样可以保证三极管不出现饱和失真</li>
 </ul>
 <p>下面的公式给出了三极管放大电路最大不失真输出电压的计算方法<br>$$<br>U_{OM}=min{\frac{V_{CC}-U_{CEQ}}{\sqrt2},\frac{U_{CEQ}-U_{CES}}{\sqrt2}}<br>$$<br>此外还需要考虑偏置电阻的耗能情况，一般至少选用几千欧的电阻为三极管提供电压，或在集成电路中为了保证优良的功耗采用电流源电路为三极管提供偏置。在设计偏置电阻的过程中还需要考虑电阻对放大倍数的影响</p>
-<p>比如在常见的共射放大电路中，有以下公式描述电路基本性质<br>$$<br>\dot{A_u}-\beta\frac{R_C}{R_b+r_{be}} \<br>R_i=R_b+r_{be} \<br>R_o=R_C<br>$$<br>对应电路如下所示（建议参考第3部分内容）</p>
+<p>比如在常见的共射放大电路中，有以下公式描述电路基本性质<br>$$<br>\dot{A_u}-\beta\frac{R_C}{R_b+r_{be}} \newline<br>R_i=R_b+r_{be} \newline<br>R_o=R_C<br>$$<br>对应电路如下所示（建议参考第3部分内容）</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E4%B8%89%E6%9E%81%E7%AE%A1%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%E3%80%91/image-20211206220029190.png" alt="image-20211206220029190"></p>
 <h3 id="偏置电路设计方法"><a href="#偏置电路设计方法" class="headerlink" title="偏置电路设计方法"></a>偏置电路设计方法</h3><p>一般的三极管偏置电路需要三部分</p>
 <ul>
@@ -8761,11 +8756,14 @@ $$
 <blockquote>
 <p>这里需要补充一下：MOSFET的性质在模电教材中并未显著提及，可能是作为电路基础教材不应谈及过深入的内容；本博文对于MOSFET的讲述也会不甚深入，因为其中很多原理需要先了解半导体物理、量子力学基础知识后才能有效应用，这里仅作为补充引入一些概念（对于上篇博文中概念的定量公式补充）</p>
 <ul>
-<li><p>由于电子能量的玻尔兹曼分布，导致总有一些高能量电子能够穿透沟道并运动到漏极，因此在截止模式下，MOSFET中总是不可避免出现弱反转电流，遵循以下公式：<br>  $$<br>  I_D \approx I_{DO}e^{\frac{V_{GS}-V_{th}}{nV_T}} \<br>  n=1+\frac{C_D}{C_{ox}}<br>  $$</p>
+<li><p>由于电子能量的玻尔兹曼分布，导致总有一些高能量电子能够穿透沟道并运动到漏极，因此在截止模式下，MOSFET中总是不可避免出现弱反转电流，遵循以下公式：<br>  $$<br>  I_D \approx I_{DO}e^{\frac{V_{GS}-V_{th}}{nV_T}} \<br>  $$</p>
+<p>  $$<br>  n=1+\frac{C_D}{C_{ox}}<br>  $$</p>
 </li>
 <li><p>跨导-电流比的定义式：$\frac{g_m}{I_D}=\frac{1}{nV_T}$</p>
 </li>
-<li><p>经过整理的d-s电流公式<br>  $$<br>  I_D=K_n[2(V_{GS}-V_{th})V_{DS}-V_{DS}^2] \<br>  K_n=\frac{K_m}{2}=\frac{W\mu_n C_{ox}}{2L} \<br>  K_p=\mu_n C_{ox}=\mu_n \frac{\epsilon_{ox}}{t_{ox}}<br>  $$<br>  其中$K_n$是MOS常数，当且仅当W=2L时，$K_p=K_n$</p>
+<li><p>经过整理的d-s电流公式<br>  $$<br>  I_D=K_n[2(V_{GS}-V_{th})V_{DS}-V_{DS}^2] \<br>  $$<br>  $$<br>  K_n=\frac{K_m}{2}=\frac{W\mu_n C_{ox}}{2L} \<br>  $$</p>
+<p>  $$<br>  K_p=\mu_n C_{ox}=\mu_n \frac{\epsilon_{ox}}{t_{ox}}<br>  $$</p>
+<p>  其中$K_n$是MOS常数，当且仅当W=2L时，$K_p=K_n$</p>
 </li>
 <li><p>MOSFET的导电是通过一个较宽的二维或三维电流分布实现的，这个区域关断的开始称为夹断。</p>
 <p>  MOSFET和三极管类似，也存在由于结而形成的厄利尔电压$V_M$，由于厄利尔电压的存在，夹断情况附近漏极电流并不主要依赖漏极电压，而是按以下公式：<br>  $$<br>  I_D=\frac{\mu_n C_{ox}W}{2L}(V_{GS}-V_{th})^2(1+\lambda V_{DS})<br>  $$<br>  于是可以根据该公式推导出MOSFET跨导的半导体物理描述<br>  $$<br>  g_m=\frac{2I_D}{V_{OV}}=\frac{2I_D}{V_{GS}-V_{th}}=g_m=\frac{\partial i_D}{\partial v_{GS}}<br>  $$<br>  同时可以得到MOSFET得到输出阻抗<br>  $$<br>  r_O=\frac{1}{\lambda I_D}=\frac{\partial V_{DS}}{\partial I_{DS}}<br>  $$<br>  若$I_D$趋于0时，器件无限大的输出阻抗会让电路的预期行为变得不可靠，出现速度饱和、准弹道传输、势垒降低效应</p>
@@ -8792,7 +8790,8 @@ $$
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211205182641359.png" alt="image-20211205182641359"></p>
 <p> 下图是从模集教材中截取的内容，板级电路设计中通常需要考虑$C_{GS}$、$C_{DS}=(C_{DB}+C_{SB})//(C_{GB})$、$C_{GD}$，还需要额外注意D-B之间和B-S之间存在因为半导体结出现的寄生二极管</p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211205214630263.png" alt="image-20211205214630263"></p>
-<p> 在中低频中低压电路分析中常用的模型如上图所示，可以将gs端看作一个压控电流源，并有一个并联在ds端的电阻$r_{ds}$，可近似看成一个无穷大的电阻或一个无穷小的电导。这个电阻就是MOSFET的输出电阻，常常用以下公式描述<br> $$<br> r_o=\frac{\frac1\lambda +V_{DS}}{I_D}\approx \frac{V_E L}{I_D} \<br> 沟道调制长度\lambda =\frac{1}{V_E L}<br> $$<br> λ仅与工艺有关，在65nm节点，λ大约在4V/μm，对于板级使用，只要认为它是个与管型有关的系数就可以了，可以从datasheet直接查阅MOSFET的输出电阻参数</p>
+<p> 在中低频中低压电路分析中常用的模型如上图所示，可以将gs端看作一个压控电流源，并有一个并联在ds端的电阻$r_{ds}$，可近似看成一个无穷大的电阻或一个无穷小的电导。这个电阻就是MOSFET的输出电阻，常常用以下公式描述<br> $$<br> r_o=\frac{\frac1\lambda +V_{DS}}{I_D}\approx \frac{V_E L}{I_D} \<br> $$<br> $$<br> 沟道调制长度\lambda =\frac{1}{V_E L}<br> $$</p>
+<p> λ仅与工艺有关，在65nm节点，λ大约在4V/μm，对于板级使用，只要认为它是个与管型有关的系数就可以了，可以从datasheet直接查阅MOSFET的输出电阻参数</p>
 <p> 根据之前所说的MOSFET转移特性可推导出跨导$g_m=\frac{\partial i_D}{\partial v_{GS}}|<em>{v</em>{DS}=Const}$，这个方程描述了MOSFET在线性区的工作状态</p>
 <p> 电路设计中并不会使用该模型，因为它缺少细节，这个模型往往会在模电考试和<strong>定性分析电路</strong>中出现</p>
 </li>
@@ -8836,14 +8835,16 @@ $$
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211205223306771.png" alt="image-20211205223306771"></p>
 <p> 对应的交流等效电路如下（可以看到忽略了很多东西）</p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211108215956098.png" alt="image-20211108215956098"></p>
-<p> 不难看出，共源放大电路的特点就是输入电阻即答，输出电阻由“上拉电阻Rd”决定<br> $$<br> R_i=\infin \<br> R_o=R_d\<br> A_u=-g_m R_d<br> $$</p>
+<p> 不难看出，共源放大电路的特点就是输入电阻即答，输出电阻由“上拉电阻Rd”决定<br> $$<br> R_i=\infty \<br> R_o=R_d\<br> A_u=-g_m R_d<br> $$</p>
 </li>
 </ol>
 <h3 id="共漏放大电路"><a href="#共漏放大电路" class="headerlink" title="共漏放大电路"></a>共漏放大电路</h3><p>对应共集放大电路，拓扑如下所示</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211108220521743.png" alt="image-20211108220521743"></p>
 <p>对应的电路分析等效如下</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211205223557520.png" alt="image-20211205223557520"></p>
-<p>可以看到<br>$$<br>R_i=\infin \<br>R_o=R_s//r_{GS} \<br>A_u=\frac{g_m R_s}{1+g_m R_s}<br>$$</p>
+<p>可以看到<br>$$<br>R_i=\infty \<br>$$</p>
+<p>$$<br>R_o=R_s//r_{GS} \<br>$$</p>
+<p>$$<br>A_u=\frac{g_m R_s}{1+g_m R_s}<br>$$</p>
 <blockquote>
 <p>最后请读者重新阅读最开头的datasheet，看看能不能读明白</p>
 </blockquote>
@@ -8943,7 +8944,12 @@ $$
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211126193919573.png" alt="image-20211126193919573"></p>
 <p>显而易见，Re1和Re2还可以用一个电阻Re=Re1//Re2来等效，于是我们就得到了教科书里面常见的<strong>差分放大电路拓扑</strong>，如下所示：</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211126194055051.png" alt="image-20211126194055051"></p>
-<p>其中两个三极管放大电路的参数抑制，因此外电路支路量也一致，并且<strong>等于其中一个三极管放大电路支路量的2倍</strong><br>$$<br>I_{BQ1}=I_{BQ2}=I_{BQ}\<br>I_{CQ1}=I_{CQ2}=\frac12 I_{C}\<br>I_{EQ1}=I_{EQ2}=\frac12 I_{E}\<br>U_{CQ1}=U_{CQ2}=U_{CQ}\<br>u_{OC}=U_{CQ1}-U_{CQ2}=0\<br>$$<br>其中Uoc指<em>共模信号</em>（见下文解释）</p>
+<p>其中两个三极管放大电路的参数抑制，因此外电路支路量也一致，并且<strong>等于其中一个三极管放大电路支路量的2倍</strong><br>$$<br>I_{BQ1}=I_{BQ2}=I_{BQ}\<br>$$<br>$$<br>I_{CQ1}=I_{CQ2}=\frac12 I_{C}\<br>$$</p>
+<p>$$<br>I_{CQ1}=I_{CQ2}=\frac12 I_{C}\<br>$$</p>
+<p>$$<br>I_{EQ1}=I_{EQ2}=\frac12 I_{E}\<br>$$</p>
+<p>$$<br>U_{CQ1}=U_{CQ2}=U_{CQ}\<br>$$</p>
+<p>$$<br>u_{OC}=U_{CQ1}-U_{CQ2}=0\<br>$$</p>
+<p>其中Uoc指<em>共模信号</em>（见下文解释）</p>
 <p>为了对这个电路放大的信号进行区分，定义两类信号</p>
 <ul>
 <li>共模信号Uc（Common）：大小相等、极性相同的信号</li>
@@ -8991,7 +8997,7 @@ $$
 <h2 id="差分放大电路的接法"><a href="#差分放大电路的接法" class="headerlink" title="差分放大电路的接法"></a>差分放大电路的接法</h2><p>经过上述分析，已经能够基本得到差分放大电路的总体拓扑和原理，下面先介绍一下它的几个参数</p>
 <ul>
 <li><p>共模抑制比$K_{CMR}=\frac{A_d}{A_c}$：表述差分放大电路放大差模信号和抑制共模信号的能力</p>
-<p>  当差分放大电路参数理想对称时，$K_{CMR}=\infin$</p>
+<p>  当差分放大电路参数理想对称时，$K_{CMR}=\infty$</p>
 <p>  <strong>该参数越大，差分放大器性能越好</strong></p>
 </li>
 <li><p>差模放大倍数$A_d$</p>
@@ -9008,7 +9014,9 @@ $$
 <li><p>双入单出</p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211126215943041.png" alt="image-20211126215943041"></p>
 <p> 基本参数变化情况如下：</p>
-<p> 输入回路没有变化，Ieq、Ibq、Icq和双端输出时候一样，但是输出端发生了变化：<br> $$<br> U_{CQ2}=V_{CC}-I_{CQ}R_C\<br> U_{CQ1}=\frac{R_L}{R_C+R_L} V_{CC}-I_{CQ}(R_C//R_L)  \ \ \ \ 这里出现了变化<br> $$<br> 同时，差模信号下<br> $$<br> A_d=-\frac12 \frac{\beta(R_C //R_L)}{R_b+r_{be}}\<br> A_c=-\frac{\beta(R_C //R_L)}{R_b+r_{be}+2(1+\beta)R_e}<br> $$<br> 需要特别注意：</p>
+<p> 输入回路没有变化，Ieq、Ibq、Icq和双端输出时候一样，但是输出端发生了变化：<br> $$<br> U_{CQ2}=V_{CC}-I_{CQ}R_C\<br> $$<br> $$<br> U_{CQ1}=\frac{R_L}{R_C+R_L} V_{CC}-I_{CQ}(R_C//R_L) \cdot \cdot \cdot \cdot这里出现了变化<br> $$</p>
+<p> 同时，差模信号下<br> $$<br> A_d=-\frac12 \frac{\beta(R_C //R_L)}{R_b+r_{be}}\<br> $$<br> $$<br> A_c=-\frac{\beta(R_C //R_L)}{R_b+r_{be}+2(1+\beta)R_e}<br> $$</p>
+<p> 需要特别注意：</p>
 <p> 双端输出时的Ad<strong>不是</strong>单端输出时的两倍</p>
 <p> 单端：$A_d=-\frac{\beta (R_C // \frac{R_L}{2})}{R_b+r_{be}}$</p>
 <p> 双端：$A_d=-\frac12 \frac{\beta(R_C //R_L)}{R_b+r_{be}}$</p>
@@ -9044,7 +9052,8 @@ $$
 <p>为了弥补两个三极管不对称带来的误差电流，还可以在电流源和三极管e极之间接入一个<strong>调零电位器</strong>Rw</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211126222921976.png" alt="image-20211126222921976"></p>
 <p>其取指应当稍大，这样可以减少损耗电流</p>
-<p>引入这个电位器后，可以通过调节它的中点位置来平衡两边三极管e极流过的电流，使得差分电路完美对称，给电路带来以下参数变化：<br>$$<br>A_d=-\frac{\beta R_C}{R_b+r_{be}+(1+\beta)\frac{R_W}{2}}\<br>R_i=2(R_b+r_{be})+(1+\beta)R_W<br>$$<br>对于集成电路实现的差分放大电路，因为制作MOSFET比较方便，可以使用MOSFET制造差分放大电路，如下图所示</p>
+<p>引入这个电位器后，可以通过调节它的中点位置来平衡两边三极管e极流过的电流，使得差分电路完美对称，给电路带来以下参数变化：<br>$$<br>A_d=-\frac{\beta R_C}{R_b+r_{be}+(1+\beta)\frac{R_W}{2}}\<br>$$<br>$$<br>R_i=2(R_b+r_{be})+(1+\beta)R_W<br>$$</p>
+<p>对于集成电路实现的差分放大电路，因为制作MOSFET比较方便，可以使用MOSFET制造差分放大电路，如下图所示</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211126223230929.png" alt="image-20211126223230929"></p>
 <p>也有着不错的效果</p>
 ]]></content>
@@ -9212,7 +9221,7 @@ $$
 <p>经过变换可以推导出<br>$$<br>I_C=\frac{\beta}{\beta+2}I_R<br>$$<br>也就是说当$\beta&gt;&gt;2$时，总有$I_C\approx I_R$，并且不受其他因素干扰</p>
 <p><strong>通过设置Vcc和IR的值就可以确定对管的c极电流，从而让处于c极这一支路上所有串联元件电流相等</strong></p>
 <blockquote>
-<p>考虑厄利尔电压时，c极电流要加入修正项；同时考虑c-e电压产生的c极电流变化，可确定如下公式<br>$$<br>I_C=I_S(e^{\frac{V_{BE}}{V_T}}-1)(1+\frac{V_{CE}}{V_A})\<br>\frac{I_{C1}}{I_{C0}}=\frac{1+\frac{V_{CE1}}{V_A}}{1+\frac{V_{CE0}}{V_A}}<br>$$<br>可以发现这个电路得交流小信号模型中诺顿等效电压<br>$$<br>V_{Th}=I_OR_o=I_{C1}\frac{V_A}{I_{C0}}=V_A<br>$$<br>则如果电流源输出为开路，会有$-V_A$这么强的电压出现在晶体管T0两端，很危险；但事实上不会发生这种情况，因为电流源两端电压达到0时晶体管会进入饱和态，上面的公式失效</p>
+<p>考虑厄利尔电压时，c极电流要加入修正项；同时考虑c-e电压产生的c极电流变化，可确定如下公式<br>$$<br>I_C=I_S(e^{\frac{V_{BE}}{V_T}}-1)(1+\frac{V_{CE}}{V_A})\newline<br>\frac{I_{C1}}{I_{C0}}=\frac{1+\frac{V_{CE1}}{V_A}}{1+\frac{V_{CE0}}{V_A}}<br>$$<br>可以发现这个电路得交流小信号模型中诺顿等效电压<br>$$<br>V_{Th}=I_OR_o=I_{C1}\frac{V_A}{I_{C0}}=V_A<br>$$<br>则如果电流源输出为开路，会有$-V_A$这么强的电压出现在晶体管T0两端，很危险；但事实上不会发生这种情况，因为电流源两端电压达到0时晶体管会进入饱和态，上面的公式失效</p>
 <p>需要额外注意，在集成电路中，使用超过MΩ级的电阻是很消耗硅片面积的，如果可能，尽量不要使用大电阻来获得某个值的电流，而应该换用电路拓扑，比如使用、<strong>改进型的基本电流源</strong>、<strong>Widlar电流源（微电流源）</strong>、<strong>威尔逊电流源</strong>、或者使用特殊制造工艺的<strong>多重电流源</strong></p>
 </blockquote>
 <p>当要求提供很小的静态电流，但无法使用大电阻时，可以采用<strong>微电流源</strong>拓扑作为替代方案</p>
@@ -9228,7 +9237,7 @@ $$
 <p>在集成电路中，可以很方便地在三极管上制造多个集电极，于是就可以制造出这样的电路：</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B%E3%80%91/image-20211208093918020.png" alt="image-20211208093918020"></p>
 <p>它和这个电路等效：<img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B%E3%80%91/image-20211208093952095.png" alt="image-20211208093952095"></p>
-<p>三个集电区面积为$S_0、S_1、S_2$，则有<br>$$<br>\frac{I_{C1}}{I_{C0}}=\frac{S_1}{S_0} \<br>\frac{I_{C2}}{I_{C0}}=\frac{S_2}{S_0}<br>$$<br>所以常常通过这个结构利用c结面积变化来实现不同的恒定电流</p>
+<p>三个集电区面积为$S_0、S_1、S_2$，则有<br>$$<br>\frac{I_{C1}}{I_{C0}}=\frac{S_1}{S_0} \newline<br>\frac{I_{C2}}{I_{C0}}=\frac{S_2}{S_0}<br>$$<br>所以常常通过这个结构利用c结面积变化来实现不同的恒定电流</p>
 <blockquote>
 <p>简单介绍一下一些改进型的电流源</p>
 <p><strong>改进型基本电流源</strong>是在电流源镜像b极和镜像源三极管c极之间加入一个额外的三极管，可以把它较做加射极输出器的电流源</p>
@@ -9439,7 +9448,7 @@ $$
 </blockquote>
 <p>以上直流通路称为<strong>分压式电流负反馈工作点稳定电路</strong>，这个电路的特点就是通过引入直流负反馈补偿温度漂移，其实使用更直接的方法也可以——比如将R1、R2替换成热敏电阻，并放置在三极管旁边，这样就能根据三极管的温度来实时稳定电路输出，但是显然成本更高；还可以直接在b、e之间接入稳压二极管，这种方法也相当于引入了负反馈</p>
 <p>还应该注意<em>旁路电容C3</em>：<strong>这个电容主要用于提高引入负反馈后的交流信号放大倍数</strong>，如果不加这个电容，就相当于增大输入电阻为$R_i=R_1//R_2//[r_{be}+(1+\beta)R_e]$，进而可以算出放大倍数$A_u\approx -\frac{R_L}{R_e}$，可以发现没有旁路电容时，相当于输入回路和输出回路都并接了一个Re电阻——<strong>去掉旁路电容后，输入电阻会变大，输出电阻则不变</strong></p>
-<p>针对电路交流部分使用交流等效模型，得到电路参数：<br>$$<br>V_{BB}=\frac{R_1}{R_1R_2} V_{CC}\<br>R_b=R_1//R_2<br>$$</p>
+<p>针对电路交流部分使用交流等效模型，得到电路参数：<br>$$<br>V_{BB}=\frac{R_1}{R_1R_2} V_{CC} \newline<br>R_b=R_1//R_2<br>$$</p>
 <h3 id="放大电路动态参数"><a href="#放大电路动态参数" class="headerlink" title="放大电路动态参数"></a>放大电路动态参数</h3><p>最后说一下如何确定基本共射放大电路的参数，但是在此之前==需要读者先了解三极管的电路分析模型，可以复习上篇博文，并且参考本篇最后部分的等效电路法求解电路参数==</p>
 <blockquote>
 <p>开篇提过放大电路的主要性能参数，这些参数都是针对要放大的交流信号而言的，其中比较常用，且题中也比较常出现的参数有：</p>
@@ -9521,7 +9530,7 @@ $$
 <h3 id="直流通路和交流通路分解"><a href="#直流通路和交流通路分解" class="headerlink" title="直流通路和交流通路分解"></a>直流通路和交流通路分解</h3><p>为了便于实现、减少干扰，现代的放大电路都会将直流驱动信号和交流小信号分成<em>正交</em>（指的是互不影响）的两个部分，称为<strong>直流通路</strong>和<strong>交流通路</strong></p>
 <p>二者一般通过耦合电容、旁路电容、滤波电容进行隔离。对于直流通路，应保留R<del>S</del>，置U<del>S</del>=0，电容视为开路，电感视为短路或仅保留寄生电阻；对于交流通路，将大容量电容视为短路，直流电源视为短路或仅保留内阻，如果是较高频信号，可视情况保留容抗</p>
 <p>直流通路一般用于设置Q点，交流通路负责传输信号。因此直流通路关心的是Q点稳定性与整体功耗；交流通路则关心信号放大倍数、输入阻抗、输出阻抗、通频带、带载能力等</p>
-<h3 id="图解法静态分析"><a href="#图解法静态分析" class="headerlink" title="图解法静态分析"></a>图解法静态分析</h3><p>根据测量/仿真结果进行信号动态分析（扫频、扫相、输入输出采样）后，获取一个放大电路的输入特性和输出特性。之后根据V<del>BB</del>、R<del>b</del>在输入特性曲线上画出输入回路负载线；根据V<del>CC</del>、R<del>c</del>在输出特性曲线上画出负载线，即可得到两图中的交点，也就是静态工作点Q。两个负载线的函数如下：<br>$$<br>u_{BE}=V_{BB}-i_B R_b \<br>u_{CE}=V_{CC}-i_C R_c<br>$$<br>根据图像调整Q点位置就可以改善静态工作点</p>
+<h3 id="图解法静态分析"><a href="#图解法静态分析" class="headerlink" title="图解法静态分析"></a>图解法静态分析</h3><p>根据测量/仿真结果进行信号动态分析（扫频、扫相、输入输出采样）后，获取一个放大电路的输入特性和输出特性。之后根据V<del>BB</del>、R<del>b</del>在输入特性曲线上画出输入回路负载线；根据V<del>CC</del>、R<del>c</del>在输出特性曲线上画出负载线，即可得到两图中的交点，也就是静态工作点Q。两个负载线的函数如下：<br>$$<br>u_{BE}=V_{BB}-i_B R_b \newline<br>u_{CE}=V_{CC}-i_C R_c<br>$$<br>根据图像调整Q点位置就可以改善静态工作点</p>
 <p>同时，根据<strong>输出图像上的负载线斜率</strong>可以得到<strong>电压放大倍数</strong>。有A<del>i</del>/A<del>u</del>是图像变化时的斜率</p>
 <h3 id="电路失真分析与波形分析"><a href="#电路失真分析与波形分析" class="headerlink" title="电路失真分析与波形分析"></a>电路失真分析与波形分析</h3><p>使用示波器分别测量输入和输出信号的波形就可以得知电路失真情况和电路稳定性</p>
 <p>对应可以采用改变静态工作点的方法消除失真</p>
@@ -9537,7 +9546,7 @@ $$
 <p> 该模型适用于Q点分析，可以用于估算静态工作点，等效电路如下所示：</p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211003181631915.png" alt="image-20211003181631915"></p>
 <p> 这就是三极管最经典的<strong>流控电流源模型</strong>，但是有时候为了突出三极管的PN结特性，还会再I<del>B</del>、I<del>C</del>的位置上串接两个二极管（方向从P到N）</p>
-<p> 使用这个模型分析基本放大电路：<br> $$<br> I_{BE}=\frac{V_{BB}-U_{BEQ}}{R_b},U_{BEQ}随管类型变化,一般为0.7V\<br> I_{CQ}=\beta I_{BQ}\<br> U_{CEQ}=V_{CC}-I_{CQ}R_e<br> $$<br> 事实上就是刚开始使用的推导方式，输入回路等效于恒压源（0.7V），输出回路等效于流控电流源，二者共地</p>
+<p> 使用这个模型分析基本放大电路：<br> $$<br> I_{BE}=\frac{V_{BB}-U_{BEQ}}{R_b},U_{BEQ}随管类型变化,一般为0.7V\newline<br> I_{CQ}=\beta I_{BQ}\newline<br> U_{CEQ}=V_{CC}-I_{CQ}R_e<br> $$<br> 事实上就是刚开始使用的推导方式，输入回路等效于恒压源（0.7V），输出回路等效于流控电流源，二者共地</p>
 <p> 这个模型在精度要求不高的情况下适用性很广</p>
 </li>
 <li><p><strong>交直流EM模型与厄利尔效应</strong></p>
@@ -9550,11 +9559,13 @@ $$
 <p> 对于一般的电路分析，只要使用直流模型和低频小信号模型就足够了</p>
 </li>
 <li><p><strong>低频小信号模型</strong></p>
-<p> ==该模型只适用于低频小信号==</p>
-<p> 直接将三极管视为一个二端口网络，使用H参数矩阵进行描述<br> $$<br> u_{BE}=f(i_B,u_{CE}) \<br> i_C=f(i_B,u_{CE})<br> $$<br> 由上述方程可以得到交流等效模型</p>
+<p> <strong>该模型只适用于低频小信号</strong></p>
+<p> 直接将三极管视为一个二端口网络，使用H参数矩阵进行描述<br> $$<br> u_{BE}=f(i_B,u_{CE}) \newline<br> i_C=f(i_B,u_{CE})<br> $$<br> 由上述方程可以得到交流等效模型</p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211003182400056.png" alt="image-20211003182400056"></p>
 <p> 输入回路是一个U<del>CE</del>控制的压控电压源和输入电阻h<del>11</del>的串联；输出则还是和直流模型一样，只不过输出部分并联了一个跨导</p>
-<p> 可以写出这个二端口网络的H参数矩阵<br> $$<br> \left[ \begin{matrix}<br> 输入电阻R_{be} &amp; be动态电阻\frac{\partial u_{BE}}{\partial u_{CE}}|<em>{I_B} \<br> 放大倍数\beta &amp; 输出跨导G</em>{ce} \<br> \end{matrix} \right]<br> $$<br> 小信号等效模型应用在交流通路上，可以得到以下<strong>交流等效模型</strong></p>
+<p> 可以写出这个二端口网络的H参数矩阵</p>
+<p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211223062537147.png" alt="image-20211223062537147"></p>
+<p> 小信号等效模型应用在交流通路上，可以得到以下<strong>交流等效模型</strong></p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211003182908707.png" alt="image-20211003182908707"></p>
 <p> 这个模型的基本公式就是<br> $$<br> r_{be} \approx r_{bb’} + (1+\beta) \frac{U_T}{I_{EQ}}<br> $$<br> 小结论：<strong>在输入特性曲线上，Q点越高，r<del>be</del>越小</strong></p>
 </li>

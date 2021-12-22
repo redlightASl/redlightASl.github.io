@@ -16,7 +16,7 @@
 <meta property="og:description" content="C语言语法拾遗专门总结了一些C语言C99&#x2F;C11之后的新语法或冷门语法 预处理和宏——灵魂预处理器和宏可以说是面向对象语言独有的东西，这些特性发生在编译这个过程之前，使得C语言的编译过程变得“可控”，甚至可以说C语言编译本身就是一个开发者可编程的过程——或许这样说比较抽象，举个例子：java的宏并不对一般开发者开放，一般只有OpenJDK的开发者才会面对java宏和相关预编译指令；但是C语言的宏直">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-14T09:36:16.000Z">
-<meta property="article:modified_time" content="2021-11-14T09:45:15.748Z">
+<meta property="article:modified_time" content="2021-12-22T22:16:41.199Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="C语言进阶">
 <meta name="twitter:card" content="summary">
@@ -204,25 +204,20 @@
 <p>C预处理器就是C语言的灵魂，上能干涉程序实现，下能检查编译原理</p>
 <h3 id="预处理指令的特殊用法"><a href="#预处理指令的特殊用法" class="headerlink" title="预处理指令的特殊用法"></a>预处理指令的特殊用法</h3><ol>
 <li><h1 id><a href="#" class="headerlink" title></a></h1><p>预处理器对井号标记<code>#</code>有三种不同的用法：</p>
-<ol>
-<li><p>标记一个指令</p>
+<p><em>标记一个指令</em></p>
 <p>这是最常用的方法，#之前的空白会被忽略，因此各种头文件的格式总是防止重复包含-引用-宏定义-变量定义-函数定义</p>
-</li>
-<li><p>输入的字符串化</p>
+<p><em>输入的字符串化</em></p>
 <p><strong>使用#可以将一个变量转义为字符串，并且如果旁边有其它字符串相邻，会将他们合并在一起</strong></p>
 <p>这就是很多c程序处理字符串IO的方法</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Pevel(cmd) printf(#cmd <span class="meta-string">&quot;:%g\n&quot;</span>,cmd);</span></span><br></pre></td></tr></table></figure>
 
 <p>上面的代码会将输入的变量cmd转换成字符串，输出变量名并输出对应的值</p>
-</li>
-<li><p>把符号连接起来</p>
+<p><em>把符号连接起来</em></p>
 <p>使用两个##就可以将不是字符串的东西拼接在一起</p>
 <p>比如</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name = LL;</span><br><span class="line">name##_list</span><br><span class="line"><span class="comment">//等效于</span></span><br><span class="line">LL_list</span><br></pre></td></tr></table></figure>
 
 <p>往往使用这种编程方法实现C语言的键值对（字典）轮子</p>
-</li>
-</ol>
 </li>
 <li><p>避免头文件包含</p>
 <p>这个用法很重要，懂得都懂。不懂的话自己写两个一模一样的.h文件碰几次报错就懂了</p>
@@ -274,7 +269,7 @@
 <p>其中省略号表示可变的参数表，使用<code>__VA_ARGS__</code>就可以把参数传递给宏</p>
 <p>特别地，C++并不支持这一手段</p>
 <p>使用该手段可以构造出某些面向对象语言的遍历语句</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> foreach(__c_object, ...) \</span></span><br><span class="line"><span class="meta">for(char** __c_object = (char* []) &#123;__VA_ARGS__, NULL&#125;; *__c_object; __c_object++)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用例</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>** str = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">    foreach(i, <span class="string">&quot;test&quot;</span>, str, <span class="string">&quot;over&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//该函数用于遍历并输出test、hello、over三个字符串，就像是python的for一样!</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> foreach(__c_object, ...) \</span></span><br><span class="line"><span class="meta">for(char** __c_object = (char* []) &#123;__VA_ARGS__, NULL&#125;; *__c_object; __c_object++)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用例</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span>** str = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">	foreach(i, <span class="string">&quot;test&quot;</span>, str, <span class="string">&quot;over&quot;</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//该函数用于遍历并输出test、hello、over三个字符串，就像是python的for一样!</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="指针与数组——C语言的底层"><a href="#指针与数组——C语言的底层" class="headerlink" title="指针与数组——C语言的底层"></a>指针与数组——C语言的底层</h2><h3 id="内存与变量"><a href="#内存与变量" class="headerlink" title="内存与变量"></a>内存与变量</h3><p>C语言提供了三种内存分配方式：</p>
 <ul>

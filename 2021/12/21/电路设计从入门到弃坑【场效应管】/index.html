@@ -46,7 +46,7 @@
 <meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211108220521743.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211205223557520.png">
 <meta property="article:published_time" content="2021-12-21T07:30:52.000Z">
-<meta property="article:modified_time" content="2021-12-21T07:52:06.208Z">
+<meta property="article:modified_time" content="2021-12-22T22:22:47.521Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="电路设计">
 <meta name="twitter:card" content="summary">
@@ -307,11 +307,14 @@
 <blockquote>
 <p>这里需要补充一下：MOSFET的性质在模电教材中并未显著提及，可能是作为电路基础教材不应谈及过深入的内容；本博文对于MOSFET的讲述也会不甚深入，因为其中很多原理需要先了解半导体物理、量子力学基础知识后才能有效应用，这里仅作为补充引入一些概念（对于上篇博文中概念的定量公式补充）</p>
 <ul>
-<li><p>由于电子能量的玻尔兹曼分布，导致总有一些高能量电子能够穿透沟道并运动到漏极，因此在截止模式下，MOSFET中总是不可避免出现弱反转电流，遵循以下公式：<br>  $$<br>  I_D \approx I_{DO}e^{\frac{V_{GS}-V_{th}}{nV_T}} \<br>  n=1+\frac{C_D}{C_{ox}}<br>  $$</p>
+<li><p>由于电子能量的玻尔兹曼分布，导致总有一些高能量电子能够穿透沟道并运动到漏极，因此在截止模式下，MOSFET中总是不可避免出现弱反转电流，遵循以下公式：<br>  $$<br>  I_D \approx I_{DO}e^{\frac{V_{GS}-V_{th}}{nV_T}} \<br>  $$</p>
+<p>  $$<br>  n=1+\frac{C_D}{C_{ox}}<br>  $$</p>
 </li>
 <li><p>跨导-电流比的定义式：$\frac{g_m}{I_D}=\frac{1}{nV_T}$</p>
 </li>
-<li><p>经过整理的d-s电流公式<br>  $$<br>  I_D=K_n[2(V_{GS}-V_{th})V_{DS}-V_{DS}^2] \<br>  K_n=\frac{K_m}{2}=\frac{W\mu_n C_{ox}}{2L} \<br>  K_p=\mu_n C_{ox}=\mu_n \frac{\epsilon_{ox}}{t_{ox}}<br>  $$<br>  其中$K_n$是MOS常数，当且仅当W=2L时，$K_p=K_n$</p>
+<li><p>经过整理的d-s电流公式<br>  $$<br>  I_D=K_n[2(V_{GS}-V_{th})V_{DS}-V_{DS}^2] \<br>  $$<br>  $$<br>  K_n=\frac{K_m}{2}=\frac{W\mu_n C_{ox}}{2L} \<br>  $$</p>
+<p>  $$<br>  K_p=\mu_n C_{ox}=\mu_n \frac{\epsilon_{ox}}{t_{ox}}<br>  $$</p>
+<p>  其中$K_n$是MOS常数，当且仅当W=2L时，$K_p=K_n$</p>
 </li>
 <li><p>MOSFET的导电是通过一个较宽的二维或三维电流分布实现的，这个区域关断的开始称为夹断。</p>
 <p>  MOSFET和三极管类似，也存在由于结而形成的厄利尔电压$V_M$，由于厄利尔电压的存在，夹断情况附近漏极电流并不主要依赖漏极电压，而是按以下公式：<br>  $$<br>  I_D=\frac{\mu_n C_{ox}W}{2L}(V_{GS}-V_{th})^2(1+\lambda V_{DS})<br>  $$<br>  于是可以根据该公式推导出MOSFET跨导的半导体物理描述<br>  $$<br>  g_m=\frac{2I_D}{V_{OV}}=\frac{2I_D}{V_{GS}-V_{th}}=g_m=\frac{\partial i_D}{\partial v_{GS}}<br>  $$<br>  同时可以得到MOSFET得到输出阻抗<br>  $$<br>  r_O=\frac{1}{\lambda I_D}=\frac{\partial V_{DS}}{\partial I_{DS}}<br>  $$<br>  若$I_D$趋于0时，器件无限大的输出阻抗会让电路的预期行为变得不可靠，出现速度饱和、准弹道传输、势垒降低效应</p>
@@ -338,7 +341,8 @@
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211205182641359.png" alt="image-20211205182641359"></p>
 <p> 下图是从模集教材中截取的内容，板级电路设计中通常需要考虑$C_{GS}$、$C_{DS}=(C_{DB}+C_{SB})//(C_{GB})$、$C_{GD}$，还需要额外注意D-B之间和B-S之间存在因为半导体结出现的寄生二极管</p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211205214630263.png" alt="image-20211205214630263"></p>
-<p> 在中低频中低压电路分析中常用的模型如上图所示，可以将gs端看作一个压控电流源，并有一个并联在ds端的电阻$r_{ds}$，可近似看成一个无穷大的电阻或一个无穷小的电导。这个电阻就是MOSFET的输出电阻，常常用以下公式描述<br> $$<br> r_o=\frac{\frac1\lambda +V_{DS}}{I_D}\approx \frac{V_E L}{I_D} \<br> 沟道调制长度\lambda =\frac{1}{V_E L}<br> $$<br> λ仅与工艺有关，在65nm节点，λ大约在4V/μm，对于板级使用，只要认为它是个与管型有关的系数就可以了，可以从datasheet直接查阅MOSFET的输出电阻参数</p>
+<p> 在中低频中低压电路分析中常用的模型如上图所示，可以将gs端看作一个压控电流源，并有一个并联在ds端的电阻$r_{ds}$，可近似看成一个无穷大的电阻或一个无穷小的电导。这个电阻就是MOSFET的输出电阻，常常用以下公式描述<br> $$<br> r_o=\frac{\frac1\lambda +V_{DS}}{I_D}\approx \frac{V_E L}{I_D} \<br> $$<br> $$<br> 沟道调制长度\lambda =\frac{1}{V_E L}<br> $$</p>
+<p> λ仅与工艺有关，在65nm节点，λ大约在4V/μm，对于板级使用，只要认为它是个与管型有关的系数就可以了，可以从datasheet直接查阅MOSFET的输出电阻参数</p>
 <p> 根据之前所说的MOSFET转移特性可推导出跨导$g_m=\frac{\partial i_D}{\partial v_{GS}}|<em>{v</em>{DS}=Const}$，这个方程描述了MOSFET在线性区的工作状态</p>
 <p> 电路设计中并不会使用该模型，因为它缺少细节，这个模型往往会在模电考试和<strong>定性分析电路</strong>中出现</p>
 </li>
@@ -382,14 +386,16 @@
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211205223306771.png" alt="image-20211205223306771"></p>
 <p> 对应的交流等效电路如下（可以看到忽略了很多东西）</p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211108215956098.png" alt="image-20211108215956098"></p>
-<p> 不难看出，共源放大电路的特点就是输入电阻即答，输出电阻由“上拉电阻Rd”决定<br> $$<br> R_i=\infin \<br> R_o=R_d\<br> A_u=-g_m R_d<br> $$</p>
+<p> 不难看出，共源放大电路的特点就是输入电阻即答，输出电阻由“上拉电阻Rd”决定<br> $$<br> R_i=\infty \<br> R_o=R_d\<br> A_u=-g_m R_d<br> $$</p>
 </li>
 </ol>
 <h3 id="共漏放大电路"><a href="#共漏放大电路" class="headerlink" title="共漏放大电路"></a>共漏放大电路</h3><p>对应共集放大电路，拓扑如下所示</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211108220521743.png" alt="image-20211108220521743"></p>
 <p>对应的电路分析等效如下</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211205223557520.png" alt="image-20211205223557520"></p>
-<p>可以看到<br>$$<br>R_i=\infin \<br>R_o=R_s//r_{GS} \<br>A_u=\frac{g_m R_s}{1+g_m R_s}<br>$$</p>
+<p>可以看到<br>$$<br>R_i=\infty \<br>$$</p>
+<p>$$<br>R_o=R_s//r_{GS} \<br>$$</p>
+<p>$$<br>A_u=\frac{g_m R_s}{1+g_m R_s}<br>$$</p>
 <blockquote>
 <p>最后请读者重新阅读最开头的datasheet，看看能不能读明白</p>
 </blockquote>

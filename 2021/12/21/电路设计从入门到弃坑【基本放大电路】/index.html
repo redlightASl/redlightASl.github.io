@@ -26,9 +26,10 @@
 <meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211015235249128.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211003181631915.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211003182400056.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211223062537147.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211003182908707.png">
 <meta property="article:published_time" content="2021-12-21T07:31:14.000Z">
-<meta property="article:modified_time" content="2021-12-21T07:52:24.394Z">
+<meta property="article:modified_time" content="2021-12-22T22:25:38.645Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="电路设计">
 <meta name="twitter:card" content="summary">
@@ -291,7 +292,7 @@
 </blockquote>
 <p>以上直流通路称为<strong>分压式电流负反馈工作点稳定电路</strong>，这个电路的特点就是通过引入直流负反馈补偿温度漂移，其实使用更直接的方法也可以——比如将R1、R2替换成热敏电阻，并放置在三极管旁边，这样就能根据三极管的温度来实时稳定电路输出，但是显然成本更高；还可以直接在b、e之间接入稳压二极管，这种方法也相当于引入了负反馈</p>
 <p>还应该注意<em>旁路电容C3</em>：<strong>这个电容主要用于提高引入负反馈后的交流信号放大倍数</strong>，如果不加这个电容，就相当于增大输入电阻为$R_i=R_1//R_2//[r_{be}+(1+\beta)R_e]$，进而可以算出放大倍数$A_u\approx -\frac{R_L}{R_e}$，可以发现没有旁路电容时，相当于输入回路和输出回路都并接了一个Re电阻——<strong>去掉旁路电容后，输入电阻会变大，输出电阻则不变</strong></p>
-<p>针对电路交流部分使用交流等效模型，得到电路参数：<br>$$<br>V_{BB}=\frac{R_1}{R_1R_2} V_{CC}\<br>R_b=R_1//R_2<br>$$</p>
+<p>针对电路交流部分使用交流等效模型，得到电路参数：<br>$$<br>V_{BB}=\frac{R_1}{R_1R_2} V_{CC} \newline<br>R_b=R_1//R_2<br>$$</p>
 <h3 id="放大电路动态参数"><a href="#放大电路动态参数" class="headerlink" title="放大电路动态参数"></a>放大电路动态参数</h3><p>最后说一下如何确定基本共射放大电路的参数，但是在此之前==需要读者先了解三极管的电路分析模型，可以复习上篇博文，并且参考本篇最后部分的等效电路法求解电路参数==</p>
 <blockquote>
 <p>开篇提过放大电路的主要性能参数，这些参数都是针对要放大的交流信号而言的，其中比较常用，且题中也比较常出现的参数有：</p>
@@ -373,7 +374,7 @@
 <h3 id="直流通路和交流通路分解"><a href="#直流通路和交流通路分解" class="headerlink" title="直流通路和交流通路分解"></a>直流通路和交流通路分解</h3><p>为了便于实现、减少干扰，现代的放大电路都会将直流驱动信号和交流小信号分成<em>正交</em>（指的是互不影响）的两个部分，称为<strong>直流通路</strong>和<strong>交流通路</strong></p>
 <p>二者一般通过耦合电容、旁路电容、滤波电容进行隔离。对于直流通路，应保留R<del>S</del>，置U<del>S</del>=0，电容视为开路，电感视为短路或仅保留寄生电阻；对于交流通路，将大容量电容视为短路，直流电源视为短路或仅保留内阻，如果是较高频信号，可视情况保留容抗</p>
 <p>直流通路一般用于设置Q点，交流通路负责传输信号。因此直流通路关心的是Q点稳定性与整体功耗；交流通路则关心信号放大倍数、输入阻抗、输出阻抗、通频带、带载能力等</p>
-<h3 id="图解法静态分析"><a href="#图解法静态分析" class="headerlink" title="图解法静态分析"></a>图解法静态分析</h3><p>根据测量/仿真结果进行信号动态分析（扫频、扫相、输入输出采样）后，获取一个放大电路的输入特性和输出特性。之后根据V<del>BB</del>、R<del>b</del>在输入特性曲线上画出输入回路负载线；根据V<del>CC</del>、R<del>c</del>在输出特性曲线上画出负载线，即可得到两图中的交点，也就是静态工作点Q。两个负载线的函数如下：<br>$$<br>u_{BE}=V_{BB}-i_B R_b \<br>u_{CE}=V_{CC}-i_C R_c<br>$$<br>根据图像调整Q点位置就可以改善静态工作点</p>
+<h3 id="图解法静态分析"><a href="#图解法静态分析" class="headerlink" title="图解法静态分析"></a>图解法静态分析</h3><p>根据测量/仿真结果进行信号动态分析（扫频、扫相、输入输出采样）后，获取一个放大电路的输入特性和输出特性。之后根据V<del>BB</del>、R<del>b</del>在输入特性曲线上画出输入回路负载线；根据V<del>CC</del>、R<del>c</del>在输出特性曲线上画出负载线，即可得到两图中的交点，也就是静态工作点Q。两个负载线的函数如下：<br>$$<br>u_{BE}=V_{BB}-i_B R_b \newline<br>u_{CE}=V_{CC}-i_C R_c<br>$$<br>根据图像调整Q点位置就可以改善静态工作点</p>
 <p>同时，根据<strong>输出图像上的负载线斜率</strong>可以得到<strong>电压放大倍数</strong>。有A<del>i</del>/A<del>u</del>是图像变化时的斜率</p>
 <h3 id="电路失真分析与波形分析"><a href="#电路失真分析与波形分析" class="headerlink" title="电路失真分析与波形分析"></a>电路失真分析与波形分析</h3><p>使用示波器分别测量输入和输出信号的波形就可以得知电路失真情况和电路稳定性</p>
 <p>对应可以采用改变静态工作点的方法消除失真</p>
@@ -389,7 +390,7 @@
 <p> 该模型适用于Q点分析，可以用于估算静态工作点，等效电路如下所示：</p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211003181631915.png" alt="image-20211003181631915"></p>
 <p> 这就是三极管最经典的<strong>流控电流源模型</strong>，但是有时候为了突出三极管的PN结特性，还会再I<del>B</del>、I<del>C</del>的位置上串接两个二极管（方向从P到N）</p>
-<p> 使用这个模型分析基本放大电路：<br> $$<br> I_{BE}=\frac{V_{BB}-U_{BEQ}}{R_b},U_{BEQ}随管类型变化,一般为0.7V\<br> I_{CQ}=\beta I_{BQ}\<br> U_{CEQ}=V_{CC}-I_{CQ}R_e<br> $$<br> 事实上就是刚开始使用的推导方式，输入回路等效于恒压源（0.7V），输出回路等效于流控电流源，二者共地</p>
+<p> 使用这个模型分析基本放大电路：<br> $$<br> I_{BE}=\frac{V_{BB}-U_{BEQ}}{R_b},U_{BEQ}随管类型变化,一般为0.7V\newline<br> I_{CQ}=\beta I_{BQ}\newline<br> U_{CEQ}=V_{CC}-I_{CQ}R_e<br> $$<br> 事实上就是刚开始使用的推导方式，输入回路等效于恒压源（0.7V），输出回路等效于流控电流源，二者共地</p>
 <p> 这个模型在精度要求不高的情况下适用性很广</p>
 </li>
 <li><p><strong>交直流EM模型与厄利尔效应</strong></p>
@@ -402,11 +403,13 @@
 <p> 对于一般的电路分析，只要使用直流模型和低频小信号模型就足够了</p>
 </li>
 <li><p><strong>低频小信号模型</strong></p>
-<p> ==该模型只适用于低频小信号==</p>
-<p> 直接将三极管视为一个二端口网络，使用H参数矩阵进行描述<br> $$<br> u_{BE}=f(i_B,u_{CE}) \<br> i_C=f(i_B,u_{CE})<br> $$<br> 由上述方程可以得到交流等效模型</p>
+<p> <strong>该模型只适用于低频小信号</strong></p>
+<p> 直接将三极管视为一个二端口网络，使用H参数矩阵进行描述<br> $$<br> u_{BE}=f(i_B,u_{CE}) \newline<br> i_C=f(i_B,u_{CE})<br> $$<br> 由上述方程可以得到交流等效模型</p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211003182400056.png" alt="image-20211003182400056"></p>
 <p> 输入回路是一个U<del>CE</del>控制的压控电压源和输入电阻h<del>11</del>的串联；输出则还是和直流模型一样，只不过输出部分并联了一个跨导</p>
-<p> 可以写出这个二端口网络的H参数矩阵<br> $$<br> \left[ \begin{matrix}<br> 输入电阻R_{be} &amp; be动态电阻\frac{\partial u_{BE}}{\partial u_{CE}}|<em>{I_B} \<br> 放大倍数\beta &amp; 输出跨导G</em>{ce} \<br> \end{matrix} \right]<br> $$<br> 小信号等效模型应用在交流通路上，可以得到以下<strong>交流等效模型</strong></p>
+<p> 可以写出这个二端口网络的H参数矩阵</p>
+<p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211223062537147.png" alt="image-20211223062537147"></p>
+<p> 小信号等效模型应用在交流通路上，可以得到以下<strong>交流等效模型</strong></p>
 <p> <img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/image-20211003182908707.png" alt="image-20211003182908707"></p>
 <p> 这个模型的基本公式就是<br> $$<br> r_{be} \approx r_{bb’} + (1+\beta) \frac{U_T}{I_{EQ}}<br> $$<br> 小结论：<strong>在输入特性曲线上，Q点越高，r<del>be</del>越小</strong></p>
 </li>

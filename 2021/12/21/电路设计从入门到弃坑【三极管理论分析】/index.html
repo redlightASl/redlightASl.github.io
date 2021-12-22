@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E4%B8%89%E6%9E%81%E7%AE%A1%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%E3%80%91/image-20211206220029190.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E4%B8%89%E6%9E%81%E7%AE%A1%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%E3%80%91/image-20211206114357733.png">
 <meta property="article:published_time" content="2021-12-21T07:31:05.000Z">
-<meta property="article:modified_time" content="2021-12-21T07:53:01.492Z">
+<meta property="article:modified_time" content="2021-12-22T22:27:32.550Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="电路设计">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@
 <li><p>温度特性</p>
 <p> 三极管是半导体器件，说到半导体就必须提温度特性了</p>
 <p> <strong>温度升高，β值升高，导致I<del>B</del>不变时BE结电压U<del>BE</del>下降；或者U<del>BE</del>不变时I<del>B</del>升高</strong></p>
-<p> 就因为这个性质，需要在后续的放大电路中引入==补偿电阻（温度反馈电阻）==，相关内容会在下一篇涉及</p>
+<p> 就因为这个性质，需要在后续的放大电路中引入<strong>补偿电阻（温度反馈电阻）</strong>，相关内容会在下一篇涉及</p>
 <p> 同时，温度升高会导致三极管导通电压U<del>BE(ON)</del>降低，反向饱和电流I<del>CBO</del>增大。从图像上看，就是输入特性曲线左移，反向特性曲线下移。原理很简单，温度升高，PN结的温度漂移影响更加明显，导致更低的be结电压就能让三极管导通；同时截止电流会随温度漂移变大，这个过程和二极管的温度特性类似</p>
 </li>
 <li><p>性能参数</p>
@@ -274,21 +274,21 @@
 <p>想看高频？</p>
 <p>别想了！下一篇再说!</p>
 </blockquote>
-<h2 id="三极管偏置"><a href="#三极管偏置" class="headerlink" title="三极管偏置"></a>三极管偏置</h2><p><strong>在阅读以下内容之前，强烈建议刚接触模电的新手先去阅读传统教材的放大电路部分，再对本教程的下一篇进行粗略阅读，至少掌握放大电路的基本拓扑结构</strong>，==否则可能会根本读不懂==</p>
+<h2 id="三极管偏置"><a href="#三极管偏置" class="headerlink" title="三极管偏置"></a>三极管偏置</h2><p><strong>在阅读以下内容之前，强烈建议刚接触模电的新手先去阅读传统教材的放大电路部分，再对本教程的下一篇进行粗略阅读，至少掌握放大电路的基本拓扑结构</strong>，否则可能会根本读不懂</p>
 <p>这部分内容其实应该放在放大电路部分讲，本教程将三极管偏置条件放在这里的原因是它更接近让三极管保持在放大区的一个性质，并且使用理论分析就可以得到很好的效果，而不需要放大电路设计经验或者什么玄学因素。</p>
 <p>三极管的偏置设计讲究两个基本要求：</p>
 <ol>
 <li>三极管能干活——保证三极管工作在放大区</li>
 <li>三极管偏置电阻尽量少且能耗低</li>
 </ol>
-<h3 id="理论计算"><a href="#理论计算" class="headerlink" title="理论计算"></a>理论计算</h3><p>为了满足上述两个要求，就需要根据规定的最大不失真输出电压$U_{OM}$设计电路，避免出现截止失真和饱和失真，根据下面的公式可以比较好地实现目的<br>$$<br>I_{CQ} \ge I_{CM}+ I_{CEO}\<br>U_{CEQ} \ge U_{OM}+U_{CES}<br>$$<br>其中$I_{CEO}$表示CE结漏电流，$I_{CM}$表示最大集电极电流，</p>
+<h3 id="理论计算"><a href="#理论计算" class="headerlink" title="理论计算"></a>理论计算</h3><p>为了满足上述两个要求，就需要根据规定的最大不失真输出电压$U_{OM}$设计电路，避免出现截止失真和饱和失真，根据下面的公式可以比较好地实现目的<br>$$<br>I_{CQ} \ge I_{CM}+ I_{CEO}\newline<br>U_{CEQ} \ge U_{OM}+U_{CES}<br>$$<br>其中$I_{CEO}$表示CE结漏电流，$I_{CM}$表示最大集电极电流，</p>
 <p>上面的电路分别说明：</p>
 <ul>
 <li>C极静态工作电压不小于CE结漏电流+最大集电极电流。这样就能保证三极管不出现截止失真</li>
 <li>CE极静态工作电压要不小于最大不失真输出电压+CE结饱和管压降（由U<del>OM</del>计算式反推而来）。这样可以保证三极管不出现饱和失真</li>
 </ul>
 <p>下面的公式给出了三极管放大电路最大不失真输出电压的计算方法<br>$$<br>U_{OM}=min{\frac{V_{CC}-U_{CEQ}}{\sqrt2},\frac{U_{CEQ}-U_{CES}}{\sqrt2}}<br>$$<br>此外还需要考虑偏置电阻的耗能情况，一般至少选用几千欧的电阻为三极管提供电压，或在集成电路中为了保证优良的功耗采用电流源电路为三极管提供偏置。在设计偏置电阻的过程中还需要考虑电阻对放大倍数的影响</p>
-<p>比如在常见的共射放大电路中，有以下公式描述电路基本性质<br>$$<br>\dot{A_u}-\beta\frac{R_C}{R_b+r_{be}} \<br>R_i=R_b+r_{be} \<br>R_o=R_C<br>$$<br>对应电路如下所示（建议参考第3部分内容）</p>
+<p>比如在常见的共射放大电路中，有以下公式描述电路基本性质<br>$$<br>\dot{A_u}-\beta\frac{R_C}{R_b+r_{be}} \newline<br>R_i=R_b+r_{be} \newline<br>R_o=R_C<br>$$<br>对应电路如下所示（建议参考第3部分内容）</p>
 <p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E4%B8%89%E6%9E%81%E7%AE%A1%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%E3%80%91/image-20211206220029190.png" alt="image-20211206220029190"></p>
 <h3 id="偏置电路设计方法"><a href="#偏置电路设计方法" class="headerlink" title="偏置电路设计方法"></a>偏置电路设计方法</h3><p>一般的三极管偏置电路需要三部分</p>
 <ul>

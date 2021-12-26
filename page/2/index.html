@@ -180,7 +180,9 @@
 <!--显示阅读次数完毕 -->
 
         
-        <a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/" class="archive-article-date">
+        
+
+<a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/" class="archive-article-date">
   	<time datetime="2021-11-19T08:07:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
 </a>
         
@@ -192,8 +194,6 @@
 <p>QSPI在SPI协议的基础上增加了<strong>队列传输机制</strong>。</p>
 <p>STM32将Queued SPI协议接口实现为QUADSPI接口。QSPI的实现和SPI基本相似，有部分不同点，在下面列出。</p>
 <h2 id="物理连接"><a href="#物理连接" class="headerlink" title="物理连接"></a>物理连接</h2><p>QSPI是标准的四信号线SPI，MCU与外设之间由六根线连接：NSS、IO0、IO1、IO2、IO3、SCLK，其中IO0-3是数据线；NSS又称CS，是片选信号线；SCLK又称SCK，是SPI/QSPI的同步时钟线</p>
-        
-          <a class="article-more-a" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/#more">more >></a>
         
       
 
@@ -264,7 +264,9 @@
 <!--显示阅读次数完毕 -->
 
         
-        <a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%9D%BF%E7%BA%A7%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E3%80%91/" class="archive-article-date">
+        
+
+<a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%9D%BF%E7%BA%A7%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E3%80%91/" class="archive-article-date">
   	<time datetime="2021-11-19T08:05:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
 </a>
         
@@ -289,8 +291,6 @@
 <p>主设备要求：</p>
 <p>在==收到最后一个字节后发送一个NACK信号==以通知被控发送器结束数据发送，并SDA=1（释放SDA），以便从设备发送停止信号P</p>
 <h5 id="数据有效性确认"><a href="#数据有效性确认" class="headerlink" title="数据有效性确认"></a>数据有效性确认</h5><p>SCL=1期间，SDA上的数据必须保持稳定，只有在SCL=0时，SDA才允许变化</p>
-        
-          <a class="article-more-a" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%9D%BF%E7%BA%A7%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E3%80%91/#more">more >></a>
         
       
 
@@ -361,7 +361,9 @@
 <!--显示阅读次数完毕 -->
 
         
-        <a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%91%84%E5%83%8F%E5%A4%B4%E3%80%91/" class="archive-article-date">
+        
+
+<a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%91%84%E5%83%8F%E5%A4%B4%E3%80%91/" class="archive-article-date">
   	<time datetime="2021-11-19T08:04:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
 </a>
         
@@ -386,8 +388,6 @@
 <li>支持图像压缩，可输出JPEG图像数据</li>
 </ul>
 <h2 id="SCCB时序"><a href="#SCCB时序" class="headerlink" title="SCCB时序"></a>SCCB时序</h2><p>SCCB（Serial Camera Control Bus串行摄像头控制总线）总线是由OV（OmniVision）公司定义和发展的三线式串行总线。现在SCCB总线大多采用两线式接口总线，接口总线包括SIOC串行时钟输入线和SIOD串行双向数据线，分别相当于IIC协议的SCL信号线和SDA信号线。<strong>SCCB就是个简化版的IIC</strong>，可以直接使用IIC的软件驱动代码改编成SCCB的驱动</p>
-        
-          <a class="article-more-a" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%91%84%E5%83%8F%E5%A4%B4%E3%80%91/#more">more >></a>
         
       
 
@@ -458,7 +458,9 @@
 <!--显示阅读次数完毕 -->
 
         
-        <a href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/" class="archive-article-date">
+        
+
+<a href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/" class="archive-article-date">
   	<time datetime="2021-11-19T08:03:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
 </a>
         
@@ -483,8 +485,6 @@
 <li>处理器复位：仅复位处理器</li>
 </ol>
 <p> 上电复位和系统复位持续时间取决于MCU设计，在一些情况下，复位会持续数毫秒来等待晶振时钟稳定。在复位后、处理器运行程序之前，Cortex-M处理器将从内存中读取前两个字，即 位于中断向量表之前的<strong>主栈顶指针(MSP Main Stack Pointer)<strong>和</strong>复位向量</strong>初始值，其中复位向量就是复位句柄的起始地址。在这两个字被处理器读取以后，处理器会以这两个值建立主堆栈指针MSP和程序计数器PC</p></li></ol>
-        
-          <a class="article-more-a" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/#more">more >></a>
         
       
 
@@ -555,7 +555,9 @@
 <!--显示阅读次数完毕 -->
 
         
-        <a href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E3%80%91/" class="archive-article-date">
+        
+
+<a href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E3%80%91/" class="archive-article-date">
   	<time datetime="2021-11-19T08:02:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
 </a>
         
@@ -566,8 +568,6 @@
         <h1 id="嵌套向量中断控制器NVIC"><a href="#嵌套向量中断控制器NVIC" class="headerlink" title="嵌套向量中断控制器NVIC"></a>嵌套向量中断控制器NVIC</h1><p>ARM内核标准规定了使用<strong>嵌套向量中断控制器NVIC</strong>控制异常和中断。对于STM32F407的Cortex-M4内核，NVIC具有16个可编程优先级、86个可屏蔽中断通道（ARM标准规定NVIC最多支持240个中断请求、1个不可屏蔽中断NMI、1个systick中断和多个系统异常，STM32只用到了一部分）</p>
 <p>为了继续执行被中断的程序，异常流程需要利用一些手段来保存被中断程序的状态（保护现场），并在异常处理完成后自动恢复（恢复现场），这个过程一般有硬件实现，但是也可以由硬件、软件共同操作。<strong>对于M4内核，当异常被接受后，有些寄存器会被自动保存到栈中，并在返回流程中自动回复，因此可以将异常处理写作普通的C函数，这并不会带来额外的软件开销</strong></p>
 <p>这段C函数就被称为<strong>中断服务程序</strong>（中断服务函数）</p>
-        
-          <a class="article-more-a" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E3%80%91/#more">more >></a>
         
       
 
@@ -638,7 +638,9 @@
 <!--显示阅读次数完毕 -->
 
         
-        <a href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E5%AE%9A%E6%97%B6%E5%99%A8%E3%80%91/" class="archive-article-date">
+        
+
+<a href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E5%AE%9A%E6%97%B6%E5%99%A8%E3%80%91/" class="archive-article-date">
   	<time datetime="2021-11-19T08:01:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
 </a>
         
@@ -653,8 +655,6 @@
 <p>定时器是单片机的灵魂，学一个单片机，最先掌握的是GPIO，最容易掉坑的是中断控制器，最复杂的是那些总线协议，而最难掌握的就是定时器</p>
 <p>这里笔者通过阅读STM32F4xx官方参考手册，配合英文版和中文版整理了与STM32标准外设库有关的定时器知识点（其实大部分是摘抄/翻译原文），经过自己浅薄的经验（半年多的STM32学习经历）梳理得到以下内容，权当抛砖引玉</p>
 <p>将外设库源码摘抄附录在结尾，顺序与正文基本一致，可供参考</p>
-        
-          <a class="article-more-a" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E5%AE%9A%E6%97%B6%E5%99%A8%E3%80%91/#more">more >></a>
         
       
 
@@ -725,7 +725,9 @@
 <!--显示阅读次数完毕 -->
 
         
-        <a href="/2021/11/19/vim%E6%93%8D%E4%BD%9C%E7%AE%80%E4%BB%8B/" class="archive-article-date">
+        
+
+<a href="/2021/11/19/vim%E6%93%8D%E4%BD%9C%E7%AE%80%E4%BB%8B/" class="archive-article-date">
   	<time datetime="2021-11-19T08:00:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
 </a>
         
@@ -734,8 +736,6 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="vim输入模式介绍"><a href="#vim输入模式介绍" class="headerlink" title="vim输入模式介绍"></a>vim输入模式介绍</h1><p><strong>普通模式</strong>(esc)<br> 普通模式中，用户可执行一般的编辑器命令，如移动光标，删除文本等。这也是Vim启动后的默认模式。<br>普通模式命令往往需要一个操作符结尾。例如普通模式命令”dd”删除当前行，但是第一个”d”的后面可以跟另外的移动命令来代替第二个”d”，比如用移动到下一行的”j”键就可以删除当前行和下一行。另外还可以指定命令重复次数，“2dd”（重复”dd”两次），和”dj”的效果是一样的。<br> 在普通模式中，有很多方法可以进入插入模式。比较普通的方式是按<a>（append／追加）键或者<i>（insert／插入）键。</i></a></p>
-        
-          <a class="article-more-a" href="/2021/11/19/vim%E6%93%8D%E4%BD%9C%E7%AE%80%E4%BB%8B/#more">more >></a>
         
       
 
@@ -806,7 +806,9 @@
 <!--显示阅读次数完毕 -->
 
         
-        <a href="/2021/11/19/OpenWrt%E7%AE%80%E5%8D%95%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" class="archive-article-date">
+        
+
+<a href="/2021/11/19/OpenWrt%E7%AE%80%E5%8D%95%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" class="archive-article-date">
   	<time datetime="2021-11-19T07:59:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
 </a>
         
@@ -815,8 +817,6 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="OpenWrt软件配置"><a href="#OpenWrt软件配置" class="headerlink" title="OpenWrt软件配置"></a>OpenWrt软件配置</h1><p>上一篇讲述过如何在硬件设备中部署OpenWrt并进行基础的网络使用，这里重点介绍OpenWrt的软件配置</p>
-        
-          <a class="article-more-a" href="/2021/11/19/OpenWrt%E7%AE%80%E5%8D%95%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/#more">more >></a>
         
       
 
@@ -887,7 +887,9 @@
 <!--显示阅读次数完毕 -->
 
         
-        <a href="/2021/11/19/Socket%E7%AE%80%E4%BB%8B/" class="archive-article-date">
+        
+
+<a href="/2021/11/19/Socket%E7%AE%80%E4%BB%8B/" class="archive-article-date">
   	<time datetime="2021-11-19T07:58:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
 </a>
         
@@ -898,8 +900,6 @@
         <h1 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h1><p>Socket即<strong>套接字</strong>，是由UNIX系统开发的网络通信接口，该接口API被纳入了POSIX标准，所有兼容POSIX的操作系统都可以使用该系列API，所以它成为了<strong>网络应用开发时最常用的API</strong></p>
 <h2 id="Socket简介"><a href="#Socket简介" class="headerlink" title="Socket简介"></a>Socket简介</h2><p>Socket套接字是位于应用层和传输层之间的POSIX接口，应用程序可以直接通过Socket进行网络通信，然后由Socket将数据传递到传输层，Socket因此可以像文件一样以打开、读写、关闭的方式实现网络通信，这也是UNIX万物皆文件的思想体现。同时标准化的Socket接口使得应用程序具有良好的可移植性，目前不仅仅是Linux，一些RTOS像FreeRTOS、RT-Thread、uCOS和一些具有网络功能的SoC都实现了Socket API</p>
 <p>需要注意：<strong>Socket和Websocket并不是一个东西</strong>，Socket是工作在传输控制层的应用程序接口，WebSocket则是一个应用层协议。Socket将协议簇下层的内容封装起来供上层应用程序调用；而WebSocket作为一个成熟的连接应用解决方案可以单独工作或与其他应用程序共同使用</p>
-        
-          <a class="article-more-a" href="/2021/11/19/Socket%E7%AE%80%E4%BB%8B/#more">more >></a>
         
       
 
@@ -970,7 +970,9 @@
 <!--显示阅读次数完毕 -->
 
         
-        <a href="/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" class="archive-article-date">
+        
+
+<a href="/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" class="archive-article-date">
   	<time datetime="2021-11-19T07:56:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
 </a>
         
@@ -979,8 +981,6 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="OpenWrt与嵌入式Linux"><a href="#OpenWrt与嵌入式Linux" class="headerlink" title="OpenWrt与嵌入式Linux"></a>OpenWrt与嵌入式Linux</h1><p>由于要接手学长留下来的一个项目，“被迫”要学习OpenWrt的配置方法——虽然对于一个five电工来说这事挺莫名其妙的，但还是硬着头皮上吧（我本想拒绝，但他给的是在太多了）</p>
-        
-          <a class="article-more-a" href="/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/#more">more >></a>
         
       
 
@@ -1056,6 +1056,19 @@
     </div>
   </div>
 </footer>
+
+
+	<!-- 不蒜子统计 -->
+	<span id="busuanzi_container_site_pv">
+		本站总访问量<span id="busuanzi_value_site_pv"></span>次
+	</span>
+	<span class="post-meta-divider">|</span>
+	<span id="busuanzi_container_site_uv" style='display:none'>
+		本站访客数<span id="busuanzi_value_site_uv"></span>人
+	</span>
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
     </div>
     <script>
 	var yiliaConfig = {
@@ -1100,6 +1113,9 @@ MathJax.Hub.Queue(function() {
 </script>
 
 
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
     
 <div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
   <div class="tools-nav header-menu">

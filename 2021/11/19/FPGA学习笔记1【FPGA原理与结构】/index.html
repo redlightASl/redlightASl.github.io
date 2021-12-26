@@ -15,14 +15,16 @@
 <meta property="og:site_name" content="红光今天吃什么">
 <meta property="og:description" content="注意：本篇内容根据《FPGA原理和结构》（[日]天野英晴 著 赵谦 译）一书整理，作者也是初学者，有错漏请见谅 基础知识FPGA即现场可编程门阵列（Field Programmable Gate Arry），与之对应的是FPAA现场可编程模拟阵列（Field Programmable Analog Array）。这是一种可以通过重新编程来实现用户所需逻辑电路的半导体器件 布尔代数布尔运算是一种二值">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20211226165409317.png">
+<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20211226165341975.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20210404102541269.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20210404103243188.png">
 <meta property="article:published_time" content="2021-11-19T08:09:18.000Z">
-<meta property="article:modified_time" content="2021-11-23T13:20:54.977Z">
+<meta property="article:modified_time" content="2021-12-26T08:55:24.513Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="FPGA">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20210404102541269.png">
+<meta name="twitter:image" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20211226165409317.png">
   
     <link rel="alternative" href="/atom.xml" title="红光今天吃什么" type="application/atom+xml">
   
@@ -179,19 +181,6 @@
   
 
         
-<!-- 显示阅读次数-->
-<!-- 
-  <br/>
-  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
-  <span class="icon-sort"></span>
-  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
-    阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
-  </span>
-  </a>
- -->
-<!--显示阅读次数完毕 -->
-
-        
         <!-- 不蒜子统计 -->
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
@@ -206,7 +195,7 @@
       
         <p>注意：本篇内容根据《FPGA原理和结构》（[日]天野英晴 著 赵谦 译）一书整理，作者也是初学者，有错漏请见谅</p>
 <h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>FPGA即<strong>现场可编程门阵列</strong>（Field Programmable Gate Arry），与之对应的是FPAA<strong>现场可编程模拟阵列</strong>（Field Programmable Analog Array）。这是一种可以通过重新编程来实现用户所需<strong>逻辑电路</strong>的半导体器件</p>
-<h2 id="布尔代数"><a href="#布尔代数" class="headerlink" title="布尔代数"></a>布尔代数</h2><p>布尔运算是一种二值运算，在布尔运算中，运算数只有0或1，基本运算有<strong>与 ·</strong>、**或 +<strong>、</strong>非 ~**三种，可以通过这三种基本运算构造出异或、与非等等运算</p>
+<h2 id="布尔代数"><a href="#布尔代数" class="headerlink" title="布尔代数"></a>布尔代数</h2><p>布尔运算是一种二值运算，在布尔运算中，运算数只有0或1，基本运算有**与·、或 +、非 ~**三种，可以通过这三种基本运算构造出异或、与非等等运算</p>
 <p>布尔运算遵循的定理如下：</p>
 <span id="more"></span>
 
@@ -221,7 +210,7 @@
 <li>德摩根定律：~(x+y)=(~x)·(~y)，~(x·y)=(~x)+(~y)</li>
 </ul>
 <p>布尔代数中的函数用<strong>逻辑表达式</strong>来描述，描述同一逻辑函数的逻辑表达式可能有多个。逻辑表达式中，逻辑变量以原变量或反变量的形式出现，原变量和反变量统称<strong>字面量</strong>，字面量的逻辑与称为<strong>与项</strong>，与项的逻辑或运算叫做<strong>积之和</strong>，包含所有字面量的与项称为最小项，由最小项构成的积之和称为标准积之和（<strong>标准积</strong>），类似的存在或项（字面量的逻辑或）、和之积、最大项、标准和的概念</p>
-<p>逻辑函数还能通过<strong>真值表</strong>描述，针对逻辑函数所有可能的输入组合一一列出输出值就可以得到真值表。==一个逻辑函数的真值表唯一==，实现真值表定义的功能的电路称为<strong>查找表</strong>（LUT，Look-up Table），这就是FPGA的基本单元</p>
+<p>逻辑函数还能通过<strong>真值表</strong>描述，针对逻辑函数所有可能的输入组合一一列出输出值就可以得到真值表。<strong>一个逻辑函数的真值表唯一</strong>，实现真值表定义的功能的电路称为<strong>查找表</strong>（LUT，Look-up Table），这就是FPGA的基本单元</p>
 <p>写FPGA逻辑就是写其中的查找表逻辑</p>
 <h2 id="数字电路"><a href="#数字电路" class="headerlink" title="数字电路"></a>数字电路</h2><p>数字电路也可以叫做逻辑电路</p>
 <p>本质是用电路描述数字布尔逻辑。</p>
@@ -321,7 +310,7 @@
 <p>实际电路中还可能加入硬核处理器、DSP模块、块存储器等等其他具有固定功能的硬核电路</p>
 <p><strong>硬核</strong>：具有固定结构、无法使用硬件描述语言编程的电路</p>
 <p><strong>软核</strong>：具有一定结构，可以使用硬件描述语言编程的电路</p>
-<p>这三个部分一般呈==岛型==排布，每个“岛“占据一个格子，格子之间是布线要素</p>
+<p>这三个部分一般呈<strong>岛型</strong>排布，每个“岛“占据一个格子，格子之间是布线要素</p>
 <h2 id="FPGA可编程技术"><a href="#FPGA可编程技术" class="headerlink" title="FPGA可编程技术"></a>FPGA可编程技术</h2><p>FPGA通过闪存、反熔丝和静态存储器作为可编程的基础，目前市面上的FPGA多使用SRAM技术（静态存储器）制造，这三种技术各有特点</p>
 <h3 id="闪存"><a href="#闪存" class="headerlink" title="闪存"></a>闪存</h3><p>闪存（FLASH）是EEPROM的一种，属于非易失存储器，采用MOSFET（Metal-Oxide-Semiconductor Field Effect Transistor金属-氧化物-半导体场效应管）技术制造</p>
 <blockquote>
@@ -508,12 +497,10 @@
 <p>PLL即Phase Locked Loop锁相环，外部基准时钟输入<strong>鉴相器</strong>，鉴相器就是一个精密的时钟相位比较器，将PLL内部<strong>压控振荡器</strong>（Votage-Controlled Oscillator，VCO，可以根据所加的电压调整输出频率）生成的时钟与外部输入的基准时钟进行比较，如果两个时钟一致则维持VCO电压，否则调整控制电路对VCO电压进行调整（VCO主频过高则降低电压；反之升高电压），经过鉴相器得到的电压还存在一定的高频谐波，通过一个低通滤波器后输入VCO即可实现效果。整个电路呈现为</p>
 <p>基准时钟输入-鉴相器-低通滤波器-VCO-反馈输入-标准输出</p>
 <p>的状态。整个电路使用模拟电路实现，高频谐波由于反馈电路和后级电路耦合而产生</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line"></span><br><span class="line">A[输入]--&gt;B(鉴相器)</span><br><span class="line">C[反馈]--&gt;B</span><br><span class="line">B--&gt;D[低通滤波器]</span><br><span class="line">D--&gt;E[VCO]</span><br><span class="line">E--&gt;C</span><br><span class="line">E--&gt;F[输出]</span><br></pre></td></tr></table></figure>
-
+<p><img src="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20211226165409317.png" alt="image-20211226165409317"></p>
 <p>除了基本结构之外，PLL通常还会在输入输出阶段添加额外的分频器用于削减输出频率；同时在反馈阶段加入分频器用于增加输出频率</p>
 <p>流程框图如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line"></span><br><span class="line">INPUT(输入)--&gt;A[基准时钟预分频器N]</span><br><span class="line">A--&gt;B(鉴相器)</span><br><span class="line">C[反馈时钟分频器M]--&gt;B</span><br><span class="line">D--&gt;E[VCO]</span><br><span class="line">E--&gt;C</span><br><span class="line">B--&gt;D[低通滤波器]</span><br><span class="line">E--&gt;F[输出时钟分频器1]</span><br><span class="line">F--&gt;OUTPUTA(输出时钟1)</span><br><span class="line">E--&gt;G[输出时钟分频器2]</span><br><span class="line">G--&gt;OUTPUTB(输出时钟2)</span><br><span class="line">E--&gt;H[输出时钟分频器i]</span><br><span class="line">H--&gt;OUTPUTC(输出时钟i)</span><br></pre></td></tr></table></figure>
-
+<p><img src="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/image-20211226165341975.png" alt="image-20211226165341975"></p>
 <p>可以得到输出频率控制公式<br>$$<br>F_{vco}=\frac{M}{N \cdot K_i} F_{ref}<br>$$<br>式中M为反馈时钟分频器分频系数，N为基准时钟预分频器分频系数，K<del>i</del>为输出时钟分频器分频系数，最后对应输出时钟F<del>i</del></p>
 <p>虽然可以通过有限个预分频器调节时钟，但事实上各个分频器的分频比是有限制的，设定值不能超出规定</p>
 <p><strong>PLL实质上是一个以外部输入基准信号为目标，使用VCO为控制对象的线性反馈控制系统</strong>，在启动、复位或基准时钟大幅度变动时，无法做到立即响应，所以在PLL的输出时钟稳定前，由该时钟同步的用户电路可能会发生无法预测的动作。为了避免这种情况，常常使用PLL锁定机制，PLL通常会设置1位输出信号来表示PLL是否为锁定状态，外部电路可以利用该寄存器位来判断是否能使用时钟</p>
@@ -1029,6 +1016,7 @@
     <div id="footer-info">
     	<div class="footer-left">
     		&copy; 2021 RedlightASl
+			本站文章全部使用CC-BY-SA与GPL3.0协议开源
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1052,7 +1040,7 @@
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
-		open_in_new: true,
+		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,

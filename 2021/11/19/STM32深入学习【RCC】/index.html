@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/image-20210111195057781.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/image-20210111195828703.png">
 <meta property="article:published_time" content="2021-11-19T08:03:19.000Z">
-<meta property="article:modified_time" content="2021-11-23T13:22:28.774Z">
+<meta property="article:modified_time" content="2022-01-10T06:00:34.826Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary">
@@ -335,7 +335,7 @@
 <h3 id="其他外设时钟"><a href="#其他外设时钟" class="headerlink" title="其他外设时钟"></a>其他外设时钟</h3><p>其他所有外设时钟均由系统时钟SYSCLK提供</p>
 <p><img src="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/image-20210111184430333.png" alt="image-20210111184430333"></p>
 <p><img src="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/image-20210111184357362.png" alt="image-20210111184357362"></p>
-<h2 id="内部时钟信号"><a href="#内部时钟信号" class="headerlink" title="内部时钟信号"></a>内部时钟信号</h2><h3 id="高速外部时钟HSE-High-speed-Signal-Extern"><a href="#高速外部时钟HSE-High-speed-Signal-Extern" class="headerlink" title="高速外部时钟HSE(High-speed Signal Extern)"></a>高速外部时钟HSE(High-speed Signal Extern)</h3><p>==时钟源：HSE外部晶振 或 HSE外部用户时钟==</p>
+<h2 id="内部时钟信号"><a href="#内部时钟信号" class="headerlink" title="内部时钟信号"></a>内部时钟信号</h2><h3 id="高速外部时钟HSE-High-speed-Signal-Extern"><a href="#高速外部时钟HSE-High-speed-Signal-Extern" class="headerlink" title="高速外部时钟HSE(High-speed Signal Extern)"></a>高速外部时钟HSE(High-speed Signal Extern)</h3><p><strong>时钟源：HSE外部晶振 或 HSE外部用户时钟</strong></p>
 <ol>
 <li>外部源（HSE旁路）模式</li>
 </ol>
@@ -350,7 +350,7 @@
 <p>RCC_CR-&gt;HSERDY标志位指示高速外部振荡器是否稳定，该标志位为1时才能使用该时钟</p>
 <p>将RCC_CR-&gt;HSEON=1才能使用HSE晶振，即<strong>RCC_CR-&gt;HSEON=1和RCC_CR-&gt;HSERDY=1可使用此模式</strong></p>
 <p>特别地，可以在RCC时钟中断寄存器RCC_CIR中使能中断来开启此模式下的中断</p>
-<h3 id="高速内部时钟信号HSI-High-speed-Signal-Inner"><a href="#高速内部时钟信号HSI-High-speed-Signal-Inner" class="headerlink" title="高速内部时钟信号HSI(High-speed Signal Inner)"></a>高速内部时钟信号HSI(High-speed Signal Inner)</h3><p>==时钟源：内部16MHz频率RC振荡器==</p>
+<h3 id="高速内部时钟信号HSI-High-speed-Signal-Inner"><a href="#高速内部时钟信号HSI-High-speed-Signal-Inner" class="headerlink" title="高速内部时钟信号HSI(High-speed Signal Inner)"></a>高速内部时钟信号HSI(High-speed Signal Inner)</h3><p><strong>时钟源：内部16MHz频率RC振荡器</strong></p>
 <p>可以直接用做系统时钟或用作PLL的输入</p>
 <p>优点：成本低、起振速度较快    缺点：精度不如HSE</p>
 <p>ST会对器件进行出厂较准，可达到$T_A=25+273K$下1%的精度；复位后，工厂校准值将加载到RCC_CR-&gt;HSICAL[7:0]位中，用户可通过RCC_CR-&gt;HSITRIM[4:0]位进行HSI频率微调以适应各种电压或温度</p>
@@ -376,9 +376,9 @@
 <p> <img src="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/image-20210111191557599.png" alt="image-20210111191557599"></p>
 </li>
 </ol>
-<p>==注意：使能PLL后，PLL配置参数不可再更改，应先对PLL进行配置，然后再使能==</p>
+<p>注意：<strong>使能PLL后，PLL配置参数不可再更改，应先对PLL进行配置，然后再使能</strong></p>
 <p>进入停机或待机模式后，两个PLL将被硬件禁止；如将HSE或由HSE提供信号的PLL用作系统时钟时，HSE发生故障，则两个PLL也将由硬件禁止</p>
-<h3 id="低速外部时钟信号LSE-Low-speed-Signal-Extern"><a href="#低速外部时钟信号LSE-Low-speed-Signal-Extern" class="headerlink" title="低速外部时钟信号LSE(Low-speed Signal Extern)"></a>低速外部时钟信号LSE(Low-speed Signal Extern)</h3><p>==时钟源：LSE外部晶振 或 LSE外部用户时钟==</p>
+<h3 id="低速外部时钟信号LSE-Low-speed-Signal-Extern"><a href="#低速外部时钟信号LSE-Low-speed-Signal-Extern" class="headerlink" title="低速外部时钟信号LSE(Low-speed Signal Extern)"></a>低速外部时钟信号LSE(Low-speed Signal Extern)</h3><p><strong>时钟源：LSE外部晶振 或 LSE外部用户时钟</strong></p>
 <ol>
 <li>外部源（LSE旁路）模式</li>
 </ol>

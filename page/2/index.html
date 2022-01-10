@@ -507,7 +507,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="QSPI协议"><a href="#QSPI协议" class="headerlink" title="QSPI协议"></a>QSPI协议</h1><p>QSPI是Queued SPI（队列串行外围接口）的缩写，是由摩托罗拉公司推出的SPI协议的一个扩展，比SPI应用更加广泛，现在的FLASH、SRAM等存储器大多支持QSPI协议——QSPI是一种==专用==的通信接口，可连接单、双或四线SPI存储器</p>
+        <h1 id="QSPI协议"><a href="#QSPI协议" class="headerlink" title="QSPI协议"></a>QSPI协议</h1><p>QSPI是Queued SPI（队列串行外围接口）的缩写，是由摩托罗拉公司推出的SPI协议的一个扩展，比SPI应用更加广泛，现在的FLASH、SRAM等存储器大多支持QSPI协议——QSPI是一种<strong>专用</strong>的通信接口，可连接单、双或四线SPI存储器</p>
 <p>QSPI在SPI协议的基础上增加了<strong>队列传输机制</strong>。</p>
 <p>STM32将Queued SPI协议接口实现为QUADSPI接口。QSPI的实现和SPI基本相似，有部分不同点，在下面列出。</p>
 <h2 id="物理连接"><a href="#物理连接" class="headerlink" title="物理连接"></a>物理连接</h2><p>QSPI是标准的四信号线SPI，MCU与外设之间由六根线连接：NSS、IO0、IO1、IO2、IO3、SCLK，其中IO0-3是数据线；NSS又称CS，是片选信号线；SCLK又称SCK，是SPI/QSPI的同步时钟线</p>
@@ -601,9 +601,9 @@
 <p><strong>0为有效应答</strong>，ACK称为应答位，表示接收器已接收</p>
 <p><strong>1为非应答</strong>，NACK称为非应答位，表示接收器接收该字节没有成功</p>
 <p>从设备要求：</p>
-<p>在==第9个==时钟脉冲之前的低电平期间==将SDA拉低==，并确保在该时钟高电平期间位稳定的低电平</p>
+<p>在第9个时钟脉冲之前的低电平期间<strong>将SDA拉低</strong>，并确保在该时钟高电平期间位稳定的低电平</p>
 <p>主设备要求：</p>
-<p>在==收到最后一个字节后发送一个NACK信号==以通知被控发送器结束数据发送，并SDA=1（释放SDA），以便从设备发送停止信号P</p>
+<p>在<strong>收到最后一个字节后发送一个NACK信号</strong>以通知被控发送器结束数据发送，并SDA=1（释放SDA），以便从设备发送停止信号P</p>
 <h5 id="数据有效性确认"><a href="#数据有效性确认" class="headerlink" title="数据有效性确认"></a>数据有效性确认</h5><p>SCL=1期间，SDA上的数据必须保持稳定，只有在SCL=0时，SDA才允许变化</p>
         
       
@@ -950,8 +950,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<h1 id="定时器时钟"><a href="#定时器时钟" class="headerlink" title="定时器时钟"></a>定时器时钟</h1><blockquote>
+        <h1 id="定时器时钟"><a href="#定时器时钟" class="headerlink" title="定时器时钟"></a>定时器时钟</h1><blockquote>
 <p>单片机就是定时器！定时器就是单片机！——某个不愿透露姓名的学长</p>
 </blockquote>
 <p>定时器是单片机的灵魂，学一个单片机，最先掌握的是GPIO，最容易掉坑的是中断控制器，最复杂的是那些总线协议，而最难掌握的就是定时器</p>

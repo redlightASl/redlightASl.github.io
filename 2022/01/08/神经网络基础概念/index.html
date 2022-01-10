@@ -16,7 +16,7 @@
 <meta property="og:description" content="神经网络和深度学习人工智能的研究领域主要分成三个方向：  机器学习（Machine Learning，ML） 语音识别和自然语言处理（Natural Language Processing，NLP） 计算机视觉（Computer Vision，CV）  其中，机器学习专门研究计算机怎样模拟或实现人类的学习行为，传统上采用样本数据记录-人工设计特征-机器学习的方式实现，但随着神经网络的提出和完善，尤">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-08T13:38:00.000Z">
-<meta property="article:modified_time" content="2022-01-10T04:04:33.441Z">
+<meta property="article:modified_time" content="2022-01-10T06:51:23.036Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="机器学习与机器视觉">
 <meta name="twitter:card" content="summary">
@@ -283,7 +283,7 @@
 <p>将某时刻的f值和向后推迟一个微小时刻的g值相乘，在整个定义域上反复重复无限次这个过程，得到每个点上f(x)被g(x-t)作用过后的结果就是卷积了，这和图像的<strong>滑动</strong>很类似</p>
 <h3 id="反卷积算子"><a href="#反卷积算子" class="headerlink" title="反卷积算子"></a>反卷积算子</h3><p><strong>反卷积算子</strong>是一种上采样算子，它并不是卷积的逆过程，而是一种特殊的正向卷积。事实上，反卷积算子常常被称为<em>转置卷积</em>，它<strong>先对向量化的卷积核进行转置，得到一个列向量，再和向量化后特征图进行矩阵乘法</strong>，这样可以得到一个比特征图更大的图像。</p>
 <p>反卷积是从低分辨率映射到高分辨率的过程，常常用于扩大图像尺寸</p>
-<p>对于一般的卷积过程，输出特征图尺寸为<br>$$<br>O=1+<a href="%E5%90%91%E4%B8%8B%E5%8F%96%E6%95%B4">\frac{I-K+2P}{S}</a><br>$$<br>其中I为输入特征图尺寸，K为卷积核尺寸，P为填充像素数，S为滑动步长</p>
+<p>对于一般的卷积过程，输出特征图尺寸为<br>$$<br>O=1+(\frac{I-K+2P}{S})_{向下取整}<br>$$<br>其中I为输入特征图尺寸，K为卷积核尺寸，P为填充像素数，S为滑动步长</p>
 <p>而反卷积操作可等效于步长S&gt;1时的卷积，输出特征图尺寸为<br>$$<br>O’=S(I’-1)+K-2P<br>$$<br>可见它的输出尺寸比原图尺寸更大</p>
 <p>可以把卷积形象理解成“从原图中提取特征”；而反卷积则是“在原图中补充细节”</p>
 <h3 id="池化算子"><a href="#池化算子" class="headerlink" title="池化算子"></a>池化算子</h3><p><strong>池化算子</strong>是一种下采样算子，常常用于在网络结构中<strong>二次提取特征</strong></p>

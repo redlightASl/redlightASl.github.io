@@ -3,14 +3,8 @@
   <entry>
     <title>我的新博客</title>
     <url>/2021/11/13/%E6%88%91%E7%9A%84%E6%96%B0%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h1 id="搬家了！"><a href="#搬家了！" class="headerlink" title="搬家了！"></a>搬家了！</h1><p>准备逐步把博客写作从CSDN换到基于Github Pages和Hexo的自建站上（笑）</p>
-<p>CSDN😅</p>
-<p>顺便以后推广公众号恰烂钱（？）</p>
-<p>总之，不定期更新</p>
-<p>保障一个月两次的保底更新（大概）</p>
-<p><strong>Hexo还没用熟</strong></p>
-<p>支持Markdown和$\LaTeX$公式，至少比b乎那个好多了</p>
-<p>以后应该会再多整点活</p>
+    <content><![CDATA[<h1 id="欢迎来看红光今天吃什么"><a href="#欢迎来看红光今天吃什么" class="headerlink" title="欢迎来看红光今天吃什么"></a>欢迎来看红光今天吃什么</h1><p>红光将在这里持续高强度整活（指写博文）</p>
+<p>博文不定期更新，保障一个月两次的保底更新（大概）</p>
 <p>欢迎dalao们指出博文的问题，同时欢迎大家提供整活思路</p>
 <h3 id="活跃平台"><a href="#活跃平台" class="headerlink" title="活跃平台"></a>活跃平台</h3><ul>
 <li>Github：有空就上去看两眼，一般会及时回复</li>
@@ -30,8 +24,10 @@
   <entry>
     <title>Vivado中的Tcl脚本</title>
     <url>/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/</url>
-    <content><![CDATA[<p>本文章部分参考<a href="https://blog.csdn.net/long_fly/article/details/78897158%E6%80%BB%E7%BB%93">https://blog.csdn.net/long_fly/article/details/78897158总结</a></p>
+    <content><![CDATA[<p>本文章部分参考<a href="https://blog.csdn.net/long_fly/article/details/78897158">https://blog.csdn.net/long_fly/article/details/78897158</a> 总结</p>
 <p>Tcl是一种通用的脚本语言，它在<strong>几乎所有平台上都可以解释运行</strong>，很多软件都支持用Tcl脚本的方式执行，学会了用这个东西就相当于从GNOME、KDE换成了bash shell（确信）。Vivado也内置了Tcl解释器并提供Tcl命令行执行各种操作，更神奇的是Tcl脚本比GUI下操作VIVADO效率更高。而且Xilinx官网的文档很多都是用Tcl命令来完成操作</p>
+<span id="more"></span>
+
 <p>总结来说学习Tcl脚本语言的好处：</p>
 <ol>
 <li>标准语法，一通百通</li>

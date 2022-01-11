@@ -6,20 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
-  <title>FPGA学习笔记2【基础概念】 | 红光今天吃什么</title>
+  <title>Vivado中的Tcl脚本 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="基础概念Xilinx系FPGA使用vivado全家桶进行开发">
+  <meta name="description" content="本文章部分参考https:&#x2F;&#x2F;blog.csdn.net&#x2F;long_fly&#x2F;article&#x2F;details&#x2F;78897158总结 Tcl是一种通用的脚本语言，它在几乎所有平台上都可以解释运行，很多软件都支持用Tcl脚本的方式执行，学会了用这个东西就相当于从GNOME、KDE换成了bash shell（确信）。Vivado也内置了Tcl解释器并提供Tcl命令行执行各种操作，更神奇的是Tcl脚本比GU">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FPGA学习笔记2【基础概念】">
-<meta property="og:url" content="https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/">
+<meta property="og:title" content="Vivado中的Tcl脚本">
+<meta property="og:url" content="https://redlightasl.github.io/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="基础概念Xilinx系FPGA使用vivado全家桶进行开发">
+<meta property="og:description" content="本文章部分参考https:&#x2F;&#x2F;blog.csdn.net&#x2F;long_fly&#x2F;article&#x2F;details&#x2F;78897158总结 Tcl是一种通用的脚本语言，它在几乎所有平台上都可以解释运行，很多软件都支持用Tcl脚本的方式执行，学会了用这个东西就相当于从GNOME、KDE换成了bash shell（确信）。Vivado也内置了Tcl解释器并提供Tcl命令行执行各种操作，更神奇的是Tcl脚本比GU">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-19T08:09:38.000Z">
-<meta property="article:modified_time" content="2021-11-23T13:19:56.348Z">
+<meta property="og:image" content="https://redlightasl.github.io/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/image-20220111210440057.png">
+<meta property="og:image" content="https://redlightasl.github.io/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/image-20220111164131038.png">
+<meta property="article:published_time" content="2022-01-11T12:58:10.000Z">
+<meta property="article:modified_time" content="2022-01-11T13:06:20.407Z">
 <meta property="article:author" content="RedlightASl">
-<meta property="article:tag" content="FPGA">
+<meta property="article:tag" content="IC">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://redlightasl.github.io/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/image-20220111210440057.png">
   
     <link rel="alternative" href="/atom.xml" title="红光今天吃什么" type="application/atom+xml">
   
@@ -164,14 +167,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-FPGA学习笔记2【基础概念】" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Vivado中的Tcl脚本" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      FPGA学习笔记2【基础概念】
+      Vivado中的Tcl脚本
     </h1>
   
 
@@ -180,334 +183,259 @@
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T08:09:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+<a href="/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/" class="archive-article-date">
+  	<time datetime="2022-01-11T12:58:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>Xilinx系FPGA使用vivado全家桶进行开发</p>
-<span id="more"></span>
-
-<p>性价比/低功耗：Spartan系列，常见Spartan-6、Spartan-7</p>
-<p>中端/性价比：Artix系列，常见Artix-6、Artix-7</p>
-<p>中高端：Kintex系列，常见Kintex-7</p>
-<p>旗舰：Virtex系列，常见Virtex-7</p>
-<p>命名规则：以Spartan-7 xc7s15ftgb196-1为例</p>
-<table>
-<thead>
-<tr>
-<th>用途级别</th>
-<th>哪一代产品</th>
-<th>逻辑单元数</th>
-<th>封装类型</th>
-<th>RoHS</th>
-<th>封装元件号</th>
-<th>引脚数</th>
-<th>速度等级</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>xc</td>
-<td>7</td>
-<td>15</td>
-<td>ft</td>
-<td>g</td>
-<td>b</td>
-<td>196</td>
-<td>-1</td>
-</tr>
-<tr>
-<td>商业级</td>
-<td>第7代</td>
-<td>15k个逻辑单元（单位为k）</td>
-<td>1mm</td>
-<td>6/6</td>
-<td></td>
-<td>共196引脚</td>
-<td>慢速</td>
-</tr>
-</tbody></table>
-<p>速度等级如下</p>
-<table>
-<thead>
-<tr>
-<th>-1</th>
-<th>-L1</th>
-<th>-L2</th>
-<th>-2</th>
-<th>-3</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>慢速</td>
-<td>慢速低功耗</td>
-<td>中等速度低功耗</td>
-<td>中等速度</td>
-<td>高速</td>
-</tr>
-</tbody></table>
-<h2 id="FPGA内部资源简介"><a href="#FPGA内部资源简介" class="headerlink" title="FPGA内部资源简介"></a>FPGA内部资源简介</h2><p>常用可编程逻辑器件：</p>
-<ul>
-<li>CPLD：复杂可编程逻辑器件。基于<strong>乘积项</strong>的与或逻辑阵列，基于FLASH运行，逻辑写入后会一直保存，掉电不丢失</li>
-<li>FPGA：现场可编程门阵列。基于<strong>查找表</strong>的CLB阵列，基于SRAM运行，采用CMOS工艺制造，逻辑写入后需要上电才能保存，掉电丢失</li>
-</ul>
-<p>这两种器件都只能编程数字电路，无法在其上建立模拟电路</p>
-<p><strong>FPGA的编程数据实际上存储在其中的SRAM里</strong>，运行时将数据读出配置好片上硬件资源运行；很多FPGA会配有单独的PROM，在运行时先将PROM读入片内RAM，配置完成后，FPGA开始工作；掉电后FPGA内部逻辑关系清空</p>
-<p><strong>FPGA可以反复使用</strong>，一块Artix传祖孙三代天天用都不成问题；如果使用外接PROM的方法，FPGA的编程不需要专用的FPGA编程器，只要用通用的PROM编程器编程即可</p>
-<p>FPGA内部一般有以下硬件资源：</p>
-<ul>
-<li>可编程逻辑单元（Xilinx制造的FPGA中将其称为CLB可编程逻辑块，由多个基本的LUT查找表、REG寄存器、MUX多路选择器组成）</li>
-<li>可编程IO单元（用于可编程逻辑与外部引脚的连接）</li>
-<li>底层嵌入功能单元（包括但不限于PLL、ADC等数字/模拟电路器件）</li>
-<li>嵌入式块RAM（用于存储内部数据和可编程的硬件逻辑）</li>
-<li>布线资源（将各个功能模块之间连接起来）</li>
-<li>硬核（只有一部分FPGA才会嵌入，一般功能比较专用）</li>
-</ul>
-<p>其中<strong>CLB是组成FPGA的基本逻辑单元</strong>，<strong>LUT则是FPGA中逻辑表达式的基础</strong></p>
-<h2 id="常用电路结构"><a href="#常用电路结构" class="headerlink" title="常用电路结构"></a>常用电路结构</h2><p>FPGA不擅长顺序结构，更擅长并行结构，如果要使用FPGA处理顺序结构的算法，比较常用有限状态机模型（FSM）</p>
-<h3 id="有限状态机FSM（Finite-State-Machine）"><a href="#有限状态机FSM（Finite-State-Machine）" class="headerlink" title="有限状态机FSM（Finite State Machine）"></a>有限状态机FSM（Finite State Machine）</h3><p>有限状态机：在有限个状态之间按一定规律转换的时序电路</p>
-<p>在FPGA中经常使用<strong>mealy状态机，它由当前输入和当前状态共同决定其输出</strong></p>
-<p>状态机内部使用状态寄存器来存储当前状态：<strong>状态寄存器</strong>由一组触发器组成，用于记忆状态机当前所处的状态，这个状态的改变一般只发生在时钟信号跳变沿</p>
-<p>状态是否改变、如何改变都取决于当前输入和当前状态的组合逻辑F（<strong>F是当前状态和输入信号的函数</strong>）</p>
-<p>状态机的输出则由当前输入和当前状态的输出组合逻辑G决定（<strong>G也是当前状态和输入信号的函数</strong>）</p>
-<p>组合逻辑F是状态寄存器的激励，当时钟信号跳变时，组合逻辑被读入状态寄存器，同时当前状态被输出到组合逻辑G</p>
-<p><strong>输出只取决于当前状态的状态机称为moore状态机</strong></p>
-<h3 id="四段论法构建FSM"><a href="#四段论法构建FSM" class="headerlink" title="四段论法构建FSM"></a>四段论法构建FSM</h3><ol>
-<li>定义状态空间</li>
-</ol>
-<p>主要任务是<strong>构建状态寄存器和输出寄存器</strong></p>
-<p>所有状态的集合称为状态空间</p>
-<p>使用verilog对状态进行编码，使用一组二进制数表示状态的过程即为定义状态空间</p>
-<p>之后应当定义两个reg变量，分别用于存储当前状态和下一个状态；如果需要用到以前的状态，相关变量也应该在这时候进行定义</p>
-<p>推荐使用<code>独热码</code>进行编码</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">parameter</span> a=<span class="number">4&#x27;b0001</span>;</span><br><span class="line"><span class="keyword">parameter</span> a=<span class="number">4&#x27;b0010</span>;</span><br><span class="line"><span class="keyword">parameter</span> a=<span class="number">4&#x27;b0100</span>;</span><br><span class="line"><span class="keyword">parameter</span> a=<span class="number">4&#x27;b1000</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">reg</span>[<span class="number">3</span>:<span class="number">0</span>] current_state;</span><br><span class="line"><span class="keyword">reg</span>[<span class="number">3</span>:<span class="number">0</span>] next_state;</span><br></pre></td></tr></table></figure>
-
-<p>注意变量位宽与编码位宽一致</p>
-<ol start="2">
-<li>配置状态跳转规则（时序逻辑）</li>
-</ol>
-<p>主要任务是<strong>构建组合逻辑G的状态转移部分</strong></p>
-<p>一般使用<code>always块</code>配合posedge、negedge进行控制，敏感列表以时钟信号和复位边沿信号的组合进行定义</p>
-<p>在块中使用非阻塞赋值来保证电路实时性</p>
-<ol start="3">
-<li>判断下个状态（组合逻辑）</li>
-</ol>
-<p>主要任务是<strong>构建组合逻辑F的输出部分</strong></p>
-<p>使用当前状态和输入信号组成always块的敏感列表</p>
-<p>使用<code>case</code>语句通过当前状态的编码筛选出当前状态，<strong>在case语句内嵌套</strong><code>if..else...</code>语句，根据输入信号情况为下一状态进行赋值（注意：<strong>if和else一定要配对</strong>，否则可能产生latch）</p>
-<p>在块中使用阻塞赋值来保证电路不会出现时序错误</p>
-<ol start="4">
-<li>设置各个状态下的动作（组合逻辑）</li>
-</ol>
-<p>主要任务是<strong>构建组合逻辑G的输出寄存器</strong></p>
-<p>一般是使用<code>assign</code>语句或<code>always块</code>对动作进行赋值</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用assign语句</span></span><br><span class="line"><span class="keyword">wire</span> output_1;</span><br><span class="line"><span class="keyword">assign</span> output_1=(current_state == T) ? <span class="number">1&#x27;b0</span> :<span class="number">1&#x27;b1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用always块</span></span><br><span class="line"><span class="keyword">wire</span> output_1;</span><br><span class="line"><span class="keyword">always</span> @(current_state) <span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(current_state == T)</span><br><span class="line">        output_1=<span class="number">1&#x27;b1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        output_1=<span class="number">1&#x27;b0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-
-<p>不管使用哪种形式都应该以当前状态为基准进行判断</p>
-<p>第四个部分搭建的电路相当于在组合输出逻辑G后面再加了一层由clk为控制时钟的同步寄存器，可以将输出逻辑与外部电路隔离</p>
-<p>不加第四个部分的电路相当于由三段法构建，加上第四个部分的电路才是完整的四段法状态机</p>
-<p>第四个部分的作用如下：</p>
-<ul>
-<li>滤除组合逻辑输出的毛刺</li>
-<li>更有效地进行时序计算与约束</li>
-<li>更容易使总线数据对齐，减小总线数据间偏移（防止总线信号线到达时间的差距），减小接收端数据采样出错的频率</li>
-</ul>
-<h3 id="加法器与乘法器"><a href="#加法器与乘法器" class="headerlink" title="加法器与乘法器"></a>加法器与乘法器</h3><p>直接在verilog模块中使用普通加法、乘法运算，综合后就可以得到超前进位加法器、乘法器，可以通过设置综合优化项目获取更小面积或更高性能</p>
-<h1 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h1><p>以点灯程序为例</p>
-<h2 id="确定设计方向"><a href="#确定设计方向" class="headerlink" title="确定设计方向"></a>确定设计方向</h2><ol>
-<li>设计控制LED的GPIO，引出到外部引脚</li>
-<li>设计计数器，控制1s延时</li>
-<li>系统由50MHz时钟控制</li>
-<li>需要一个复位信号输入</li>
-</ol>
-<h2 id="使用vivado开发"><a href="#使用vivado开发" class="headerlink" title="使用vivado开发"></a>使用vivado开发</h2><p>vivado是xilinx推出的专用于自家FPGA、SoC的IDE，提供了包括可视化IDE、Tcl脚本、Tcl Shell、IDE内嵌Tcl控制台命令的使用方式。使用流程在vivado界面左端的目录中展示</p>
-<p>提供Tcl、AXI4、IP-XACT、Synopsys设计约束（SDC）等业界标准支持，Verilog HDL、VHDL、SystemVerilog三种硬件描述语言的支持，SystemC、C、C++三种软件语言高层次综合（HLS）的支持</p>
-<h3 id="vivado中的电路结构网表描述"><a href="#vivado中的电路结构网表描述" class="headerlink" title="vivado中的电路结构网表描述"></a>vivado中的电路结构网表描述</h3><p>网表由单元（Ceil）、引脚（Pin）、端口（Port）、网络（Net）组成</p>
-<p><strong>单元</strong>即设计单元，包括设计模块/实体、元件库中的基本元素（如LUT、FF、RAM、DSP等）、硬件功能的类属技术表示和黑盒</p>
-<p><strong>引脚</strong>是单元上的连接点</p>
-<p><strong>端口</strong>是设计的顶层端口</p>
-<p><strong>网络</strong>类似电路设计中的“节点”，连接引脚、端口</p>
-<h3 id="工程数据的目录结构"><a href="#工程数据的目录结构" class="headerlink" title="工程数据的目录结构"></a>工程数据的目录结构</h3><p><strong>和其他软件IDE一样</strong>，vivado中所有用户工程数据保存在当前工程目录中</p>
-<p>vivado将统一的数据模型贯穿于整个设计流程中，使用Design Checkpoint（包含逻辑网表、约束、物理数据）文件对开发进度进行管理，该文件会在开发过程中生成，后缀名为<code>.dcp</code></p>
-<p>项目目录下会包含以下内容</p>
-<ul>
-<li><p>工程名.xpr</p>
-<p>  工程设置文件</p>
-</li>
-<li><p>工程名.run目录</p>
-<p>  包含所有运行数据</p>
-</li>
-<li><p>工程名.srcs目录</p>
-<p>  包含所有导入的HDL源文件、网表和XDC文件</p>
-<p>  这些是设计过程中主要编写的文件</p>
-</li>
-<li><p>工程名.data目录</p>
-<p>  保存布局规划和网表数据</p>
-</li>
-</ul>
-<p>除此之外，vivado还会生成以下两种文件</p>
-<ul>
-<li><p>Journal文件（Vivado.jou）</p>
-<p>  只包含Vivado IDE中执行的Tcl命令</p>
-<p>  该文件会被保存在用户主目录下（如${HOME}或C:\Users\Administrator\AppData\Roaming\Xilinx\Vivado）</p>
-<p>  用这个文件实现类似shell中“记录历史命令”的功能</p>
-</li>
-<li><p>Log文件</p>
-<p>  包含Vivado IDE中所产生的所有消息（也会包含Tcl命令和结果、警告/错误信息）</p>
-<p>  一般会和Journal文件保存在一起</p>
-</li>
-</ul>
-<h3 id="vivado项目文件夹"><a href="#vivado项目文件夹" class="headerlink" title="vivado项目文件夹"></a>vivado项目文件夹</h3><p>一个vivado项目的文件夹通常包含以下几项：</p>
-<ul>
-<li>.xpr文件：Vivado IDE项目文件</li>
-<li>.runs目录：包含所有运行数据</li>
-<li>.srcs目录：包含所有被引用的HDL源文件和约束文件（网表文件、XDC文件等）</li>
-<li>.data目录：存储和网表数据</li>
-<li>.xdc目录：单独存储所有约束文件</li>
-<li>.sim目录：存储所有仿真文件和testbench</li>
-</ul>
-<h3 id="Vivado设计模式"><a href="#Vivado设计模式" class="headerlink" title="Vivado设计模式"></a>Vivado设计模式</h3><ol>
-<li><p>工程模式</p>
-<p> 就是上面所说的创建工程-按照左边的流程一点点完成</p>
-</li>
-<li><p>非工程模式</p>
-<p> 这是<strong>基于Tcl脚本的编译风格方法</strong>，用户需要自己管理源文件和设计流程</p>
-<p> 全部使用Tcl指令运行，可以精确到每一步，会很繁琐但可以精细控制设计过程</p>
-</li>
-</ol>
-<h3 id="XDC文件"><a href="#XDC文件" class="headerlink" title="XDC文件"></a>XDC文件</h3><p><strong>Vivado的一个特殊点就是它使用Xilinx设计约束（XDC）格式，不再支持ISE曾使用的用户约束文件（UCF）格式</strong></p>
-<p>XDC约束是业界标准Synopsys设计约束（SDC）和Xilinx专有物理约束的组合</p>
-<p>XDC文件是遵循Tcl语法的命令，使用vivado内置的Tcl解释器可以直接分析这些命令</p>
-<p>特别注意：XDC命令是<strong>顺序执行</strong>的</p>
-<h3 id="开发流程-1"><a href="#开发流程-1" class="headerlink" title="开发流程"></a>开发流程</h3><p>使用外部晶振作为时钟</p>
-<p>在高级应用中通常会再写一个分频器或倍频器用于稳定信号或用于控制电路频率</p>
-<h4 id="系统设计"><a href="#系统设计" class="headerlink" title="系统设计"></a>系统设计</h4><p>外部时钟为50MHz</p>
-<p>系统时钟部分</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> LED(</span><br><span class="line">    <span class="keyword">input</span> clk,<span class="comment">//外部晶振时钟输入</span></span><br><span class="line">    <span class="keyword">input</span> <span class="number">_</span>rst,<span class="comment">//复位引脚输入</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">output</span> [<span class="number">1</span>:<span class="number">0</span>] led<span class="comment">//输出引脚控制LED</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-
-<p>计数器部分</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reg</span> [<span class="number">25</span>:<span class="number">0</span>] counter;<span class="comment">//外部时钟50MHz，计时1s，需要26位计数器</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> <span class="number">_</span>rst)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="number">_</span>rst)<span class="comment">//如果复位引脚接地（按下复位按键）</span></span><br><span class="line">        counter&lt;=<span class="number">26&#x27;d0</span>;<span class="comment">//计数寄存器清零（复位）</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(counter&lt;<span class="number">26&#x27;d5000_0000</span>)</span><br><span class="line">        counter&lt;=counter+<span class="number">1&#x27;b1</span>;<span class="comment">//向上计数</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        counter&lt;=<span class="number">26&#x27;d0</span>;<span class="comment">//到达计数上限时清零</span></span><br></pre></td></tr></table></figure>
-
-<p>LED状态控制部分</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assign</span> led=(counter&lt;<span class="number">26&#x27;d2500_0000</span>) ? <span class="number">2&#x27;b01</span> : <span class="number">2&#x27;b10</span>;</span><br><span class="line"><span class="comment">//计数器小于计数位置时输出01，否则输出10</span></span><br></pre></td></tr></table></figure>
-
-<p>总文件如下所示</p>
-<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//`timescale 1ns / 1ps</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">module</span> LED(</span><br><span class="line">    <span class="keyword">input</span> clk,</span><br><span class="line">    <span class="keyword">input</span> <span class="number">_</span>rst,</span><br><span class="line"></span><br><span class="line">    <span class="keyword">output</span> [<span class="number">1</span>:<span class="number">0</span>] led</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">//时钟寄存器</span></span><br><span class="line"><span class="keyword">reg</span> [<span class="number">25</span>:<span class="number">0</span>] counter;</span><br><span class="line"></span><br><span class="line"><span class="comment">//IO输出部分</span></span><br><span class="line"><span class="keyword">assign</span> led=(counter&lt;<span class="number">26&#x27;d2500_0000</span>) ? <span class="number">2&#x27;b01</span> : <span class="number">2&#x27;b10</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//计数器部分</span></span><br><span class="line"><span class="keyword">always</span> @(<span class="keyword">posedge</span> clk <span class="keyword">or</span> <span class="keyword">negedge</span> <span class="number">_</span>rst)</span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">    <span class="keyword">if</span>(!<span class="number">_</span>rst)</span><br><span class="line">        counter&lt;=<span class="number">26&#x27;d0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(counter&lt;<span class="number">26&#x27;d5000_0000</span>)</span><br><span class="line">        counter&lt;=counter+<span class="number">1&#x27;b1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        counter&lt;=<span class="number">26&#x27;d0</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="调用-自行配置IP、DSP等内部电路"><a href="#调用-自行配置IP、DSP等内部电路" class="headerlink" title="调用/自行配置IP、DSP等内部电路"></a>调用/自行配置IP、DSP等内部电路</h4><p>在vivado创建工程界面中常使用以下工程种类：</p>
+        <p>本文章部分参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/long_fly/article/details/78897158%E6%80%BB%E7%BB%93">https://blog.csdn.net/long_fly/article/details/78897158总结</a></p>
+<p>Tcl是一种通用的脚本语言，它在<strong>几乎所有平台上都可以解释运行</strong>，很多软件都支持用Tcl脚本的方式执行，学会了用这个东西就相当于从GNOME、KDE换成了bash shell（确信）。Vivado也内置了Tcl解释器并提供Tcl命令行执行各种操作，更神奇的是Tcl脚本比GUI下操作VIVADO效率更高。而且Xilinx官网的文档很多都是用Tcl命令来完成操作</p>
+<p>总结来说学习Tcl脚本语言的好处：</p>
 <ol>
-<li><p>RTL工程</p>
-<p> 用户可以添加RTL源文件、Xilinx IP目录内的已有IP、用于层次化模块的EDIF网表、Vivado IP集成器内创建的块设计、数字信号处理的源文件到Vivado的<strong>RTL工程</strong>。其中使用已有IP可以包含Xilinx生成的XCI文件、由核生成器工具生成的已经过时的XCO文件、预编译的EDIF或者GNC格式的IP网表这些类型</p>
-</li>
-<li><p>Post-synthesis工程</p>
-<p> 使用综合后的网表创建工程</p>
-<p> 用户通过vivado、XST或第三方综合工具生成网表后选择这一工程选项，快速将其他平台的设计导入xilinx平台</p>
-</li>
-<li><p>I/O Planning工程</p>
-<p> 创建一个空的I/O规划工程，先分配I/O和约束，再创建CSV、XDC和RTL输出文件。这些文件可用于创建原理图符号或印制PCB</p>
-</li>
+<li>标准语法，一通百通</li>
+<li>快速执行，增加工作效率</li>
+<li>支持程序间通信</li>
 </ol>
-<h4 id="综合"><a href="#综合" class="headerlink" title="综合"></a>综合</h4><p><strong>综合</strong>：将RTL级设计描述转换成门级描述的过程</p>
-<p>vivado的综合是基于时间驱动的，为存储器利用率和性能做了优化。目前综合工具支持SystemVerilog、VHDL、Verilog三种语言及它们的混合，且支持XDC格式</p>
-<p>综合工具需要使用XDC约束驱动综合优化，所以<strong>必须存在XDC文件</strong></p>
-<h4 id="确定约束"><a href="#确定约束" class="headerlink" title="确定约束"></a>确定约束</h4><p>有两种类型的设计约束：</p>
-<ul>
-<li>物理约束：定义了引脚的位置和内部单元的绝对或相对位置，内部单元包括RAM、LUT、触发器和器件配置设置</li>
-<li>时序约束：定义设计要求的频率。如果没有时序约束，Vivado仅会对布线长度和布局阻塞进行优化</li>
-</ul>
-<p>选择【Option】-【Strategy】右侧的下拉框中用于运行综合的预定义综合策略，设计者可以定义优化的方向</p>
-<h4 id="执行综合"><a href="#执行综合" class="headerlink" title="执行综合"></a>执行综合</h4><p>RTL文件综合后将自动生成时序总结、时钟及其网络、DRC报告、噪声报告、利用率报告、功耗报告、原理图等选项，可以使用原理图查看综合后生成的完整网表结构</p>
-<p>综合后，设计会表示为模块（Verilog中的module）、实体（VHDL中的Entity）的实例与基本元素（LUT、触发器、进位链元素、多路复用器MUX、块RAM、DSP单元、时钟元素、IO元素等）的网表集合</p>
-<p>每个LUT表述的逻辑都能单独查看（真值表）</p>
-<p>在windows下vivado的综合速度较慢，开始综合后需要等待一段时间</p>
-<h4 id="行为级仿真"><a href="#行为级仿真" class="headerlink" title="行为级仿真"></a>行为级仿真</h4><p>在Simulation Sources目录下添加testbench文件，编写测试代码后就可以进行仿真</p>
-<p>在左侧从窗口内找到SIMULATION选项并展开，点击【Run Simulation】-【Run Behavioral Simulation】就可以开始仿真</p>
-<p>在Tcl Console中输入run命令可以控制仿真的运行时间；输入restart命令可以重新执行仿真</p>
-<h4 id="实现约束"><a href="#实现约束" class="headerlink" title="实现约束"></a>实现约束</h4><h5 id="I-O规划"><a href="#I-O规划" class="headerlink" title="I/O规划"></a>I/O规划</h5><p>使用I/O Planning进行FPGA的输出引脚规划</p>
-<p>可以使用Vivado的图形化界面添加引脚约束（点击I/O Planning选项），也可以在Constraints目录下添加约束文件并自行编写引脚约束</p>
-<p>==注意约束文件使用XDC格式==</p>
-<h5 id="设计实现"><a href="#设计实现" class="headerlink" title="设计实现"></a>设计实现</h5><p>在左侧选择【IMPLEMENTATION】，选择实现策略，可以自行调节设计实现优化的方向，包括以下内容：</p>
-<ul>
-<li>提高设计性能</li>
-<li>减少LUT个数</li>
-<li>添加整体功耗优化</li>
-<li>修改流程步骤</li>
-<li>减少阻塞和相关问题</li>
-</ul>
-<p>点击【Run Implementation】来执行设计实现</p>
-<p>待完成后可以打开设计实现来查看FPGA内部布线及实际使用的逻辑资源</p>
-<p>也可以查看相关报告</p>
-<h4 id="静态时序分析STA"><a href="#静态时序分析STA" class="headerlink" title="静态时序分析STA"></a>静态时序分析STA</h4><p>一个器件的性能由构成设计单元的延迟决定，它可以通过静态时序分析（Static Timing Analysis，STA）验证</p>
-<p>简单来说STA就是用来控制细化设备的延迟和时序的调试过程</p>
-<h5 id="时序仿真"><a href="#时序仿真" class="headerlink" title="时序仿真"></a>时序仿真</h5><ol>
-<li>选择需要使用的test-bench文件</li>
-<li>选择vivado界面左侧【Run Simulation】-【Run Post-Implementation Timing Simulation】（运行实现后时序仿真）</li>
-<li>执行时序仿真并观察仿真波形进行debug</li>
+<p>Tcl的语法都已经在之前的博文中讲述过，下面着重介绍Vivado中的Tcl命令</p>
+<h1 id="Vivado中的Tcl脚本"><a href="#Vivado中的Tcl脚本" class="headerlink" title="Vivado中的Tcl脚本"></a>Vivado中的Tcl脚本</h1><p>虽然已经品鉴过无数次，但还是先问一下，你听说过<del>侠客行</del>Tcl的语法吗</p>
+<h2 id="复习Tcl语法"><a href="#复习Tcl语法" class="headerlink" title="复习Tcl语法"></a>复习Tcl语法</h2><ol>
+<li><p>一条Tcl的命令串包含了多条命令时，用<strong>换行符</strong><code>\n</code>或<strong>分号</strong><code>;</code>来隔开，也就也是说Tcl可以<em>随便写</em>，后面加不加分号都没事 </p>
+</li>
+<li><p>一条命令就是一个域的集合，域使用<strong>空白</strong>分开，第一个域是命令的名字，其它的作为参数来传给它</p>
+</li>
+<li><p>Tcl只支持一种数据结构：<strong>字符串</strong>，所有东西都是字符串，把python的对象扔掉就成了Tcl（确信）</p>
+</li>
+<li><p>简单的示例</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#这是注释</span></span><br><span class="line"><span class="comment">#单行注释前要先用分号把命令结束掉，或者就换行注释</span></span><br><span class="line"><span class="keyword">set</span> a <span class="number">1</span></span><br><span class="line"><span class="comment">#将字符串1赋值给a</span></span><br><span class="line"><span class="keyword">unset</span> a<span class="comment">;#将a取消赋值</span></span><br><span class="line"><span class="keyword">set</span> b hello_1<span class="comment">;#将字符串hello_1赋值给b</span></span><br><span class="line"><span class="keyword">set</span> c <span class="string">&quot;ok sir&quot;</span><span class="comment">;#当字符串中间有空白时加双引号</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用<code>$v</code>来引用变量<code>v</code></p>
+</li>
+<li><p>数组使用很方便，可以随便乱用，并且Tcl支持任意维数的数组</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> i(<span class="number">1</span>) <span class="number">123</span>;</span><br><span class="line"><span class="keyword">set</span> i(<span class="number">16</span>) hi;</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> i(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) hi;<span class="keyword">set</span> i(<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>) hello<span class="comment">;#多维数组</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$i</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)<span class="comment">;#输出hi</span></span><br><span class="line"><span class="keyword">puts</span> <span class="variable">$i</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">4</span>)<span class="comment">;#输出hello</span></span><br></pre></td></tr></table></figure></li>
 </ol>
-<h4 id="生成比特流文件"><a href="#生成比特流文件" class="headerlink" title="生成比特流文件"></a>生成比特流文件</h4><p>比特流文件就是用于配置FPGA的编程文件，可以直接使用烧录器将比特流文件下载到目标FPGA中</p>
+<h2 id="配置开发环境"><a href="#配置开发环境" class="headerlink" title="配置开发环境"></a>配置开发环境</h2><p>如果想要一个单纯的Tcl环境，只要单独安装Tcl即可，Linux下使用<code>sudo apt install tcl</code>一键安装，照着别的教程随便写写helloworld就完事了，不过这里介绍的是在Vivado中使用特定的Tcl命令行，所以需要</p>
 <ol>
-<li><p>配置器件属性</p>
-<p> 选择器件型号并进一步选择生成比特流文件的硬件约束</p>
+<li><p> 安装好Vivado</p>
 </li>
-<li><p>生成可编程文件</p>
-<p> 在左侧窗口中选择【PROGRAM AND DEBUG】并右键选择【Bitstream Settings】即可打开比特流优化配置界面</p>
-<p> 默认只生成一个二进制比特流<code>.bit</code>文件</p>
-<p> 可以选择配置设定产生原始比特流<code>.rbt</code>文件、掩码文件、ASCII逻辑定位文件<code>.ll</code>、纯二进制文件<code>.bin</code>等选项</p>
+<li><p>在安装目录下找到Vivado Tcl Shell（或者找遍你的硬盘，总之找到这个东西就行）</p>
+<p>像下面这样：</p>
+<p><img src="/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/image-20220111210440057.png" alt="image-20220111210440057"></p>
+<p>其实还可以把它放到Windows Terminal中，这个就请自行翻阅其他教程罢！</p>
+</li>
+<li><p>在Vivado Tcl Shell中尝试输入以下命令</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> i hello,world;<span class="keyword">puts</span> i;<span class="keyword">puts</span> <span class="variable">$i</span></span><br></pre></td></tr></table></figure>
+
+<p>应该会输出</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">i</span><br><span class="line">hello,world</span><br></pre></td></tr></table></figure>
+
+<p>好的，开发环境准备完毕</p>
 </li>
 </ol>
-<h4 id="烧录使用"><a href="#烧录使用" class="headerlink" title="烧录使用"></a>烧录使用</h4><ol>
-<li>开发板正常上电</li>
-<li>开发板连接烧录器</li>
-<li>将烧录器连接到PC并使用vivado连接烧录器（点击Auto Connect）</li>
-<li>点击【Program Device】即可开始烧录</li>
-</ol>
-<h4 id="生成并烧录PROM文件"><a href="#生成并烧录PROM文件" class="headerlink" title="生成并烧录PROM文件"></a>生成并烧录PROM文件</h4><ol>
-<li>除了生成比特流文件外还需要再选中“-bin_file”生成纯二进制文件</li>
-<li>重新生成比特流文件和二进制文件</li>
-<li>按照上面步骤连接开发板并在【Add Configuration Memory Part】-【Select Configuration Memory Part】中设置可用的SPI FLASH</li>
-<li>正常烧录</li>
-<li>配置开发板使PROM上电后自动将逻辑配置文件加载到FPGA</li>
-</ol>
-<h3 id="vivado支持的特殊开发方式"><a href="#vivado支持的特殊开发方式" class="headerlink" title="vivado支持的特殊开发方式"></a>vivado支持的特殊开发方式</h3><p>vivado是<strong>以IP为核心</strong>的设计工具</p>
-<p>vivado具有一个<strong>共享的IP数据库</strong></p>
-<h4 id="高层次综合"><a href="#高层次综合" class="headerlink" title="高层次综合"></a>高层次综合</h4><p>使用Vivado HLS软件可以将c、c++、system c语言编写的算法代码直接综合生成RTL代码</p>
-<p>HLS从C语言中提取硬件结构的思路如下</p>
-<ol>
-<li>在顶层，从C代码中提取控制和数据通路</li>
-<li>在顶层控制流的一些点将控制传递到子程序中</li>
-<li>子程序可以与顶层或其他子程序并行执行</li>
-<li>通过调度和绑定过程将C代码映射到硬件逻辑资源</li>
-</ol>
-<p>C代码的关键属性</p>
+<h2 id="Tcl脚本常用命令与语法"><a href="#Tcl脚本常用命令与语法" class="headerlink" title="Tcl脚本常用命令与语法"></a>Tcl脚本常用命令与语法</h2><ul>
+<li><p>parray命令</p>
+<p>打印出一个数组的全部值</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> i(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>) h</span><br><span class="line"><span class="keyword">set</span> i(<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>) e</span><br><span class="line"><span class="keyword">set</span> i(<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>) l</span><br><span class="line"><span class="keyword">set</span> i(<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>) l</span><br><span class="line"><span class="keyword">set</span> i(<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>) o</span><br><span class="line"><span class="keyword">parray</span> i; </span><br></pre></td></tr></table></figure></li>
+<li><p>array命令</p>
+<p>用于对数组进行特殊操作</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#格式A：array option arrayName</span></span><br><span class="line"><span class="comment">#其中option是操作选项</span></span><br><span class="line"><span class="keyword">array</span> name i<span class="comment">;#返回数组中所有元素名称</span></span><br><span class="line"><span class="keyword">array</span> size i<span class="comment">;#返回数组长度</span></span><br><span class="line"><span class="keyword">array</span> startsearch i<span class="comment">;#初始化一次遍历，返回一个遍历标识符searchId，这个东西在下面用到</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#格式B：array option arrayName searchId</span></span><br><span class="line"><span class="keyword">array</span> nextelement i <span class="number">1</span><span class="comment">;#返回数组中下一个元素，如果没有则返回空</span></span><br><span class="line"><span class="keyword">array</span> anymore i <span class="number">1</span><span class="comment">;#如果接下来还有元素则返回1，否则返回0</span></span><br><span class="line"><span class="keyword">array</span> donesearch i <span class="number">1</span><span class="comment">;#结束遍历</span></span><br></pre></td></tr></table></figure></li>
+<li><p>append命令</p>
+<p>在字符串后面追加字符串</p>
+<p>可以无限拼接</p>
+</li>
+<li><p>split命令</p>
+<p>将字符串转换为列表</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">split</span> niconiconi i</span><br><span class="line"><span class="comment">#后面的字符为分隔符，需要从字符串中找，字符串会以它为分割裂开</span></span><br><span class="line"><span class="comment">#输出如下</span></span><br><span class="line">n con con &#123;&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>数字操作命令</p>
+<p>由于Tcl中只有字符串，所以在进行数字运算时需要使用特殊的命令</p>
 <ul>
-<li><p>函数</p>
-<p>  所有代码由函数组成，函数名被对应到RTL描述的模块</p>
+<li><p>incr</p>
+<p>变量自加</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> a <span class="number">0</span>;</span><br><span class="line"><span class="keyword">incr</span> a <span class="number">3</span><span class="comment">;#自增3</span></span><br><span class="line"><span class="keyword">incr</span> a <span class="number">-3</span><span class="comment">;#自增-3</span></span><br></pre></td></tr></table></figure>
+
+<p>最后a的值还是0</p>
 </li>
-<li><p>参数</p>
-<p>  顶层函数的参数决定了硬件RTL本身的端口</p>
+<li><p>expr</p>
+<p>用于识别各种表达式</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">expr</span> <span class="number">2</span>&gt;<span class="number">1</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">expr</span> <span class="number">10</span>/<span class="number">2.0</span></span><br><span class="line"><span class="number">5.0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> a [<span class="keyword">expr</span> <span class="number">1</span>?<span class="number">1</span>:<span class="number">0</span>]</span><br><span class="line"><span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> a [<span class="keyword">expr</span> ?<span class="number">1</span>:<span class="number">0</span>]</span><br><span class="line"><span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">expr</span> cos(<span class="number">0</span>)</span><br><span class="line"><span class="number">1.0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">expr</span> abs(<span class="number">-3</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">expr</span> round(<span class="number">3.456</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> pi <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">expr</span> sin(<span class="variable">$pi</span>);</span><br><span class="line"><span class="number">0.0015926529164868282</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 </li>
-<li><p>类型</p>
-<p>  变量类型越复杂，实现该变量所占用的面积越多</p>
+<li><p>判断、循环指令</p>
+<ul>
+<li><p>判断</p>
+<p>if语句、switch语句</p>
+<p>基本与C语言一致</p>
 </li>
 <li><p>循环</p>
-<p>  默认对于循环采用“回卷”的方式进行处理。对于每个C循环迭代，采用相同的状态或资源来实现。循环的处理分成三个部分：循环展开、循环平坦化和循环合并。默认情况下不展开循环，并将嵌套循环“平坦化”：将外层循环拆解为多个内层循环的组合；之后还会自动合并循环：将结果可以合并的多个循环在硬件层面上合并到统一的器件上</p>
+<p>for循环</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &#123;<span class="keyword">set</span> i <span class="number">0</span>&#125; &#123;<span class="variable">$i</span> &lt; <span class="number">4</span>&#125; &#123;<span class="keyword">incr</span> i&#125; &#123;</span><br><span class="line">	<span class="keyword">puts</span> <span class="variable">$i</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意这里的大括号间都要用空格隔开</strong></p>
+<p>while循环</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> i <span class="number">5</span>;</span><br><span class="line"><span class="keyword">while</span> &#123;<span class="variable">$i</span> != <span class="number">3</span>&#125; &#123;</span><br><span class="line">	<span class="keyword">puts</span> <span class="variable">$i</span>;</span><br><span class="line">	<span class="keyword">incr</span> i <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的大括号间也要用空白隔开</p>
+<p>特别地，Tcl支持foreach循环，用于遍历整个数组或给出的数</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> i &#123;<span class="number">0</span> <span class="number">2</span> <span class="number">3</span> x <span class="number">1</span> <span class="number">4</span>&#125; &#123;</span><br><span class="line">	<span class="keyword">switch</span> <span class="variable">$i</span> &#123;</span><br><span class="line">		<span class="number">0</span> &#123;<span class="keyword">puts</span> a&#125;</span><br><span class="line">		<span class="number">1</span> &#123;<span class="keyword">puts</span> b&#125;</span><br><span class="line">		<span class="number">2</span> &#123;<span class="keyword">puts</span> c&#125;</span><br><span class="line">		<span class="number">3</span> &#123;<span class="keyword">puts</span> d&#125;</span><br><span class="line">		<span class="number">4</span> &#123;<span class="keyword">puts</span> e&#125;</span><br><span class="line">		default &#123;<span class="keyword">puts</span> z&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#输出</span></span><br><span class="line">a</span><br><span class="line">c</span><br><span class="line">d</span><br><span class="line">z</span><br><span class="line">b</span><br><span class="line">e</span><br></pre></td></tr></table></figure>
+
+<p>这个东西比较常用，类似python中的for循环</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &#123;<span class="keyword">set</span> i <span class="number">0</span>&#125; &#123;<span class="variable">$i</span> &lt; <span class="number">4</span>&#125; &#123;<span class="keyword">incr</span> i&#125; &#123;</span><br><span class="line">	<span class="keyword">set</span> a[<span class="variable">$i</span>] [<span class="keyword">expr</span> <span class="variable">$i</span> + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">#下面这个代码是错误的</span></span><br><span class="line"><span class="comment">#注意分辨foreach的逻辑是一口气将i赋值成一套数组，再带入switch的控制变量中</span></span><br><span class="line"><span class="keyword">foreach</span> i &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125; &#123;</span><br><span class="line">	<span class="keyword">switch</span> <span class="variable">$a</span>(<span class="variable">$i</span>) &#123;</span><br><span class="line">		<span class="number">1</span> &#123;<span class="keyword">puts</span> a&#125;</span><br><span class="line">		<span class="number">2</span> &#123;<span class="keyword">puts</span> b&#125;</span><br><span class="line">		<span class="number">3</span> &#123;<span class="keyword">puts</span> c&#125;</span><br><span class="line">		<span class="number">4</span> &#123;<span class="keyword">puts</span> d&#125;</span><br><span class="line">		default &#123;<span class="keyword">puts</span> z&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#报错如下</span></span><br><span class="line"><span class="comment">#can&#x27;t read &quot;a(0,1,2,3)&quot;: no such element in array</span></span><br><span class="line"><span class="comment">#应该像下面这样使用</span></span><br><span class="line"><span class="keyword">for</span> &#123;<span class="keyword">set</span> i <span class="number">0</span>&#125; &#123;<span class="variable">$i</span> &lt; <span class="number">4</span>&#125; &#123;<span class="keyword">incr</span> i&#125; &#123;</span><br><span class="line">	<span class="keyword">switch</span> <span class="variable">$a</span>(<span class="variable">$i</span>) &#123;</span><br><span class="line">		<span class="number">1</span> &#123;<span class="keyword">puts</span> a&#125;</span><br><span class="line">		<span class="number">2</span> &#123;<span class="keyword">puts</span> b&#125;</span><br><span class="line">		<span class="number">3</span> &#123;<span class="keyword">puts</span> c&#125;</span><br><span class="line">		<span class="number">4</span> &#123;<span class="keyword">puts</span> d&#125;</span><br><span class="line">		default &#123;<span class="keyword">puts</span> z&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
 </li>
-<li><p>数组</p>
-<p>  C代码中的数组常常被映射到FPGA中的BRAM资源，会因为存储器的读写操作具有互斥性而使得它会变成设备的性能瓶颈</p>
+<li><p>输入/输出</p>
+<ul>
+<li><p><strong>format命令</strong></p>
+<p>格式化输入输出</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">format</span> <span class="string">&quot;%s %d&quot;</span> hello <span class="number">123</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>scan命令</strong></p>
+<p>把字符串拆分后格式化赋值给变量</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">scan</span> <span class="number">12.34</span><span class="number">.56</span><span class="number">.78</span> %d.%d.%d.%d a b c d</span><br><span class="line"><span class="comment">#将12.34.56.78拆分，并分别赋值给a b c d四个变量，命令返回赋值成功的变量的个数</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>puts命令</strong></p>
+<p>直接输出到屏幕/终端</p>
 </li>
-<li><p>操作符</p>
-<p>  C代码中的操作符可能要求共享，通过共享可以在满足性能的前提下以控制面积或指定的硬件实现来满足并行化要求</p>
+<li><p><strong>文件操作</strong></p>
+<ul>
+<li><p>cd</p>
+<p>和shell中的cd一样用于切换当前目录</p>
+<p>推荐在shell中而不是Tcl命令行中使用该操作</p>
+</li>
+<li><p>pwd</p>
+<p>查看当前目录</p>
+</li>
+<li><p>glob</p>
+<p>查看当前目录下的文件，类似shell中的ls命令，但是可以支持查询等高级功能</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">glob</span> *</span><br><span class="line"></span><br><span class="line"><span class="keyword">glob</span> *.c *.exe#查看当前目录下特定后缀的文件</span><br></pre></td></tr></table></figure></li>
+<li><p>open</p>
+<p>打开文件，该命令返回一个文件描述符</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#命令格式如下</span></span><br><span class="line"><span class="comment">#open 文件名 模式</span></span><br><span class="line"><span class="comment">#能使用r只读、r+可读写、w只写（文件存在则清空内容；文件不存在则创建文件）、a追加（文件不存在则创建；文件存在，则会在文件内容最后面追加写入的数据）</span></span><br><span class="line"><span class="keyword">set</span> f [<span class="keyword">open</span> hello.tcl w]</span><br></pre></td></tr></table></figure></li>
+<li><p>read和gets</p>
+<p>用于读取当前文件</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">read</span> <span class="variable">$f</span> <span class="number">65536</span>;</span><br><span class="line"><span class="comment">#从文件指针f指向的文件中读取65536个字节的数据</span></span><br><span class="line"><span class="keyword">read</span> <span class="variable">$f</span></span><br><span class="line"><span class="comment">#从文件中读取全部内容</span></span><br><span class="line"><span class="keyword">gets</span> <span class="variable">$f</span></span><br><span class="line"><span class="comment">#读取文件中的单行内容</span></span><br></pre></td></tr></table></figure></li>
+<li><p>close</p>
+<p>关闭当前文件</p>
+</li>
+<li><p>eof</p>
+<p>用于判断是否已经读完文件，读完返回1，否则返回0</p>
+</li>
+<li><p>flush</p>
+<p>刷新缓冲区</p>
 </li>
 </ul>
-<p>类似的，也可以使用C++算法描述并进行HLS</p>
-<h4 id="IP集成库"><a href="#IP集成库" class="headerlink" title="IP集成库"></a>IP集成库</h4><p>Vivado提供了一个图形化界面用于调用自定义IP核，也可以使用代码方式调用IP核。IP核类似编程中的函数库，提供了数学运算加速器、硬件信号处理等电路，可以直接调用，非常方便</p>
-<p>在左侧选择IP Catalog即可调用Vivado内置的一些IP核</p>
-<p>点击即可调用，有些IP核需要自行下载</p>
-<p>在弹出的窗口中调整IP核的相关约束，根据指示添加即可调用相关内容</p>
-<p>用户也可以自行封装IP核以及自行连接已有IP核</p>
+<p>总体上文件操作和C语言的不能说完全一致，至少是一模一样</p>
+</li>
+</ul>
+</li>
+<li><p><strong>time</strong></p>
+<p>计算某个命令执行的时间</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">time</span> <span class="string">&quot;set i 1&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p><strong>Tcl面向对象</strong>（？）</p>
+<p>Tcl支持命名空间的概念</p>
+<p><strong>命名空间是命令和变量的集合，可以看成一个丐版的类</strong></p>
+<p>通过封装命名空间，就可以保证它们不会影响其他命名空间的变量和命令——封装</p>
+<p>所有东西都是字符串——抽象</p>
+<p>——多态？不存在的！这不是c++，是Tcl哒！</p>
+<ul>
+<li><p>设置与删除命名空间</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#只要在命令之前加上&quot;namespace eval 名称&quot;就可以设置命名空间了</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="keyword">eval</span> test &#123;</span><br><span class="line">	pro hello &#123;&#125; &#123;</span><br><span class="line">		<span class="keyword">puts</span> hello;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> test::i <span class="number">123</span><span class="comment">;#设置命名空间内的私有变量</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#调用“方法”和“私有变量”</span></span><br><span class="line"><span class="keyword">puts</span> test::i;</span><br><span class="line">test::hello;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> delete test<span class="comment">;#删除命名空间</span></span><br></pre></td></tr></table></figure></li>
+<li><p>不同命名空间之间的过程共享（public类）</p>
+<p>使用<code>export</code>和<code>import</code>完成命名空间的导出和导入就可以实现过程共享</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Vivado的Tcl库"><a href="#Vivado的Tcl库" class="headerlink" title="Vivado的Tcl库"></a>Vivado的Tcl库</h2><p>本部分参考Xilinx官方文档<strong>ug894</strong> <code>vivado tcl脚本使用指南</code>编写，很多内容是对官方文档的翻译</p>
+<h3 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h3><p>Vivado支持Tcl指令运行各种基础的控制指令，所有GUI界面中的操作都可以通过Tcl指令替代</p>
+<p>Vivado处理方括号的方式与标准Tcl稍有不同。</p>
+<p>标准Tcl的方括号可以实现指令递归执行，而方括号在Verilog和VHDL名称中被视为标准字符（net、实例等），通常标识向量（寄存器reg或线网wire类型数组）的一个或多个元素，例如总线或实例数组。所以在Vivado的Tcl环境中，当方括号作为网表对象名称的一部分时，方括号不会以自底向上的递归方式计算。</p>
+<blockquote>
+<p>以下三个指令是等价的</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span> list_of_pins [get_pins transformLoop[<span class="number">0</span>].ct/xOutReg_reg/CARRYOUT[*] ]</span><br><span class="line"><span class="keyword">set</span> list_of_pins [get_pins &#123;transformLoop[<span class="number">0</span>].ct/xOutReg_reg/CARRYOUT[*] &#125; ]</span><br><span class="line"><span class="keyword">set</span> list_of_pins [get_pins transformLoop\[<span class="number">0</span>\].ct/xOutReg_reg/CARRYOUT\[*\] ]</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>Vivado的所有Tcl指令都支持<code>-help</code>参数，用户可以在任何指令后加入参数获得内置的提示信息</p>
+<p>同时还有<code>-syntax</code>参数可用：用一个指令加上该参数可以列举出某个指令的参数格式</p>
+<p>使用<code>-category</code>参数可以列出一个类型下面所有可用的指令，如下所示</p>
+<p><img src="/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/image-20220111164131038.png" alt="image-20220111164131038"></p>
+<p>需要注意：<strong>特殊情况下Vivado的Tcl指令中的数据长度等输出会依平台而变</strong>，比如64位平台的vivado和32位平台的vivado会输出不同的整型数据大小。在使用老平台和ISE的时候需要注意</p>
+<h3 id="无工程的Vivado使用"><a href="#无工程的Vivado使用" class="headerlink" title="无工程的Vivado使用"></a>无工程的Vivado使用</h3><p>Vivado允许通过Tcl指令进行不依靠工程文档的综合-实现-烧录流程，下面使用官方文档的例子</p>
+<p>总流程如下：</p>
+<ol>
+<li><p>定义一个输出目录变量$outputDir，并实际创建。这步规定了随后生成的文件保存路径</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># STEP#1: define the output directory area.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="keyword">set</span> outputDir ./Tutorial_Created_Data/cpu_output</span><br><span class="line"><span class="keyword">file</span> mkdir <span class="variable">$outputDir</span></span><br></pre></td></tr></table></figure></li>
+<li><p>读取包含设计描述的VHDL和Verilog源RTL文件，同时读取包含设计的布线约束/时序约束的XDC文件</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">read_verilog #用于读取verilog源文件</span><br><span class="line">read_vhdl #用于读取VHDL源文件</span><br><span class="line">read_edif #读取综合生成的网表文件（EDIF或NGC）</span><br><span class="line">read_xdc #读取将在综合和实现期间使用的XDC约束文件</span><br></pre></td></tr></table></figure>
+
+<p><strong>Vivado不支持旧版的UCF格式</strong>。</p>
+<p>上面的<code>read_*</code>命令用于在非工程模式下，允许直接从硬盘加载文件到Vivado中来构建一个内存中的数据库设计，不会像项目模式中那样构建一个固定的存储目录并向其中添加文件或创建依赖。</p>
+<p><strong>非工程工作模式相当于把Vivado作为一整套构建工具-综合器-布局布线器-编译器的集合，执行的所有操作都指向Vivado中的内存数据库，可以灵活安排任务执行。但开发者必须注意对源文件的任何更改，并根据需要及时更新设计</strong></p>
+<blockquote>
+<p>非工程模式相关内容可参考ug892设计流程指南</p>
+</blockquote>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># STEP#2: setup design sources and constraints</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">read_vhdl -library bftLib [ <span class="keyword">glob</span> ./Sources/hdl/bftLib/*.vhdl ]</span><br><span class="line">read_vhdl ./Sources/hdl/bft.vhdl</span><br><span class="line">read_verilog [ <span class="keyword">glob</span> ./Sources/hdl/*.v ]</span><br><span class="line">read_verilog [ <span class="keyword">glob</span> ./Sources/hdl/mgt/*.v ]</span><br><span class="line">read_verilog [ <span class="keyword">glob</span> ./Sources/hdl/or1200/*.v ]</span><br><span class="line">read_verilog [ <span class="keyword">glob</span> ./Sources/hdl/usbf/*.v ]</span><br><span class="line">read_verilog [ <span class="keyword">glob</span> ./Sources/hdl/wb_conmax/*.v ]</span><br><span class="line">read_xdc ./Sources/top_full.xdc</span><br></pre></td></tr></table></figure></li>
+<li><p>应用XDC文件中的时序约束，进行RTL综合</p>
+<p>所有RTL逻辑会被映射到Xilinx原语上以在内存中创建设计数据库。内存中的设计会保留在Vivado中，方便随后在其他模式下调用，可以图形形式与设计数据进行交互。综合完成后将保存一个检查点（checkpoint）供参考。</p>
+<p>这一步完成后设计就变成了具有时序和布线约束的未实现的网表。</p>
+<p>使用一个自定义命令<code>reportCriticalPaths</code>，将Notice/Warning/Violator输出到一个CSV文件中。通过查看这个文件可以快速识别哪些布线路径是改善时序的关键。</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># STEP#3: run synthesis, write design checkpoint, report timing,</span></span><br><span class="line"><span class="comment"># and utilization estimates</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">synth_design -top top -part xc7k70tfbg676<span class="number">-2</span> #这里使用了kintex<span class="number">-7</span>作为实现器件</span><br><span class="line">write_checkpoint -force <span class="variable">$outputDir</span>/post_synth.dcp #保存检查点</span><br><span class="line">report_timing_summary -<span class="keyword">file</span> <span class="variable">$outputDir</span>/post_synth_timing_summary.rpt #保存时序报告</span><br><span class="line">report_utilization -<span class="keyword">file</span> <span class="variable">$outputDir</span>/post_synth_util.rpt #保存硬件使用量报告</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Run custom script to report critical timing paths</span></span><br><span class="line">reportCriticalPaths <span class="variable">$outputDir</span>/post_synth_critpath_report.csv</span><br></pre></td></tr></table></figure>
+
+<p><strong>任何在本步骤（综合）之后使用的read_xdc或source命令引入的XDC文件都只会在实现步骤中使用</strong>，它们会与网表文件和检查点文件共同保存</p>
+</li>
+<li><p>执行实现（implement）前的逻辑和布线优化</p>
+<p>优化的目标是在将布线资源投入到目标前简化逻辑设计。每个步骤之后一般要运行<code>reportCriticalPaths</code>命令生成一个新的CSV文件。通过这些文件保存的数据，开发者可以进行时序/布局优化程度的可视化分析</p>
+<p>完成实现步骤后，脚本使用<code>get_timing_paths</code>命令检查最差时序路径的SLACK属性（延时），使用<code>report_timing</code>命令输出详细报告。而<code>get_timing_paths</code>命令返回与Tcl对象相同的时序路径，其属性对应于该路径的主要时序特征。说人话就是<em>用这两个指令输出总体的时序分析报告和某个路径的时序分析报告</em>。如果报告结果不好，脚本会尽可能优化布线以解决竞争冒险或其他延时。</p>
+<p>在本步骤结束时，将保存另一个检查点，并报告片上资源利用率以及设计时序分析</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># STEP#4: run logic optimization, placement and physical logic optimization,</span></span><br><span class="line"><span class="comment"># write design checkpoint, report utilization and timing estimates</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">opt_design #布线和时序处理</span><br><span class="line">reportCriticalPaths <span class="variable">$outputDir</span>/post_opt_critpath_report.csv</span><br><span class="line">place_design #实现implement</span><br><span class="line">report_clock_utilization -<span class="keyword">file</span> <span class="variable">$outputDir</span>/clock_util.rpt</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Optionally run optimization if there are timing violations after placement</span></span><br><span class="line"><span class="keyword">if</span> &#123;[get_property SLACK [get_timing_paths -max_paths <span class="number">1</span> -nworst <span class="number">1</span> -setup]] &lt; <span class="number">0</span>&#125; &#123;</span><br><span class="line"><span class="keyword">puts</span> <span class="string">&quot;Found setup timing violations =&gt; running physical optimization&quot;</span></span><br><span class="line">phys_opt_design #如果时序不好则进行优化</span><br><span class="line">&#125;</span><br><span class="line">write_checkpoint -force <span class="variable">$outputDir</span>/post_place.dcp #保存检查点</span><br><span class="line">report_utilization -<span class="keyword">file</span> <span class="variable">$outputDir</span>/post_place_util.rpt #输出片上资源利用率报告</span><br><span class="line">report_timing_summary -<span class="keyword">file</span> <span class="variable">$outputDir</span>/post_place_timing_summary.rpt #输出时序报告</span><br></pre></td></tr></table></figure></li>
+<li><p>进行最后的布线并输出各种报告</p>
+<p>可以将报告输出到文件中，以便以后查看；也可以将报告直接输出到Vivado中以便进行更多的基于UI的交互式检查。最后导出Verilog网表，用于时序仿真。</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># STEP#5: run the router, write the post-route design checkpoint, report the routing</span></span><br><span class="line"><span class="comment"># status, report timing, power, and DRC, and finally save the Verilog netlist.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">route_design #布线设计</span><br><span class="line">write_checkpoint -force <span class="variable">$outputDir</span>/post_route.dcp #保存检查点</span><br><span class="line">report_route_status -<span class="keyword">file</span> <span class="variable">$outputDir</span>/post_route_status.rpt #保存各种报告</span><br><span class="line">report_timing_summary -<span class="keyword">file</span> <span class="variable">$outputDir</span>/post_route_timing_summary.rpt</span><br><span class="line">report_power -<span class="keyword">file</span> <span class="variable">$outputDir</span>/post_route_power.rpt</span><br><span class="line">report_drc -<span class="keyword">file</span> <span class="variable">$outputDir</span>/post_imp_drc.rpt</span><br><span class="line">write_verilog -force <span class="variable">$outputDir</span>/cpu_impl_netlist.v -mode timesim -sdf_anno true #导出Verilog网表</span><br></pre></td></tr></table></figure></li>
+<li><p>输出比特流文件并进行烧录</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># STEP#6: generate a bitstream</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">write_bitstream -force <span class="variable">$outputDir</span>/cpu.bit</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="有工作流的Tcl指令"><a href="#有工作流的Tcl指令" class="headerlink" title="有工作流的Tcl指令"></a>有工作流的Tcl指令</h3><p>示例如下</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># STEP#1: define the output directory area.</span></span><br><span class="line"><span class="comment"># 设定工程文件</span></span><br><span class="line"><span class="keyword">set</span> outputDir ./Tutorial_Created_Data/cpu_project</span><br><span class="line"><span class="keyword">file</span> mkdir <span class="variable">$outputDir</span></span><br><span class="line">create_project project_cpu_project ./Tutorial_Created_Data/cpu_project \ #根据需要的器件创建工程文档</span><br><span class="line">-part xc7k70tfbg676<span class="number">-2</span> -force</span><br><span class="line"><span class="comment"># STEP#2: setup design sources and constraints</span></span><br><span class="line"><span class="comment"># 设置源RTL文件和XDC约束文件</span></span><br><span class="line">add_files -fileset sim_1 ./Sources/hdl/cpu_tb.v</span><br><span class="line">add_files [ <span class="keyword">glob</span> ./Sources/hdl/bftLib/*.vhdl ]</span><br><span class="line">add_files ./Sources/hdl/bft.vhdl</span><br><span class="line">add_files [ <span class="keyword">glob</span> ./Sources/hdl/*.v ]</span><br><span class="line">add_files [ <span class="keyword">glob</span> ./Sources/hdl/mgt/*.v ]</span><br><span class="line">add_files [ <span class="keyword">glob</span> ./Sources/hdl/or1200/*.v ]</span><br><span class="line">add_files [ <span class="keyword">glob</span> ./Sources/hdl/usbf/*.v ]</span><br><span class="line">add_files [ <span class="keyword">glob</span> ./Sources/hdl/wb_conmax/*.v ]</span><br><span class="line">add_files -fileset constrs_1 ./Sources/top_full.xdc</span><br><span class="line">set_property library bftLib [ get_files [ <span class="keyword">glob</span> ./Sources/hdl/bftLib/*.vhdl ]]</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Physically import the files under project_cpu.srcs/sources_1/imports directory</span></span><br><span class="line">import_files -force -norecurse #调用外部IP</span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Physically import bft_full.xdc under project_cpu.srcs/constrs_1/imports directory</span></span><br><span class="line">import_files -fileset constrs_1 -force -norecurse ./Sources/top_full.xdc #设置约束文件</span><br><span class="line"><span class="comment"># Update compile order for the fileset &#x27;sources_1&#x27;</span></span><br><span class="line">set_property top top [current_fileset]</span><br><span class="line">update_compile_order -fileset sources_1</span><br><span class="line">update_compile_order -fileset sim_1</span><br><span class="line"><span class="comment"># STEP#3: run synthesis and the default utilization report.</span></span><br><span class="line"><span class="comment"># 综合</span></span><br><span class="line">launch_runs synth_1</span><br><span class="line">wait_on_run synth_1</span><br><span class="line"><span class="comment"># STEP#4: run logic optimization, placement, physical logic optimization, route and</span></span><br><span class="line"><span class="comment"># bitstream generation. Generates design checkpoints, utilization and timing</span></span><br><span class="line"><span class="comment"># reports, plus custom reports.</span></span><br><span class="line"><span class="comment"># 逻辑优化、实现、布局布线优化、生成比特流、检查点、各种报告</span></span><br><span class="line">set_property STEPS.PHYS_OPT_DESIGN.IS_ENABLED true [get_runs impl_1]</span><br><span class="line">set_property STEPS.OPT_DESIGN.TCL.PRE [<span class="keyword">pwd</span>]/pre_opt_design.tcl [get_runs impl_1]</span><br><span class="line">set_property STEPS.OPT_DESIGN.TCL.POST [<span class="keyword">pwd</span>]/post_opt_design.tcl [get_runs impl_1]</span><br><span class="line">set_property STEPS.PLACE_DESIGN.TCL.POST [<span class="keyword">pwd</span>]/post_place_design.tcl [get_runs impl_1]</span><br><span class="line">set_property STEPS.PHYS_OPT_DESIGN.TCL.POST [<span class="keyword">pwd</span>]/post_phys_opt_design.tcl [get_runs impl_1]</span><br><span class="line">set_property STEPS.ROUTE_DESIGN.TCL.POST [<span class="keyword">pwd</span>]/post_route_design.tcl [get_runs impl_1]</span><br><span class="line">launch_runs impl_1 -to_step write_bitstream</span><br><span class="line">wait_on_run impl_1</span><br><span class="line"><span class="keyword">puts</span> <span class="string">&quot;Implementation done!&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>主要分为四步，与Vivado IDE中的操作流程一样</p>
+<p><strong>创建工程-设置源RTL文件、外部IP、XDC约束等文件-综合-运行实现并输出报告和检查点、比特流</strong></p>
+<p>在<strong>工程模式下，要求工作流必须按照这四个步骤依次执行</strong></p>
+<p>由于工程模式的严格要求，在【实现】步骤之前必须要定义好所有的tcl变量，通常可以有三种方式执行：在<code>Vivado_init.tcl</code>文件中定义好所有变量；在约束文件中添加一个tcl脚本文件；设置<code>STEPS.OPT_DESIGN.TCL.PRE</code>到保存有变量和指令的tcl脚本中，当且仅当<code>OPT_DESIGN</code>被使能时可用</p>
+<h3 id="在Vivado中使用Tcl脚本"><a href="#在Vivado中使用Tcl脚本" class="headerlink" title="在Vivado中使用Tcl脚本"></a>在Vivado中使用Tcl脚本</h3><p>Vivado提供了在设计会话期间加载和运行Tcl脚本的几种不同方法。开发者可以在<em>工具启动时自动加载脚本文件</em>，<em>从Tcl命令行中加载源脚本</em>，或者<em>将它们添加到Vivado IDE的菜单中</em>。</p>
+<p>Vivado可以自动加载在<code>Vivado_init.tcl</code>中定义的Tcl脚本。</p>
+<blockquote>
+<p>从Vivado 2017.1开始，Vivado设计套件的启动脚本已被重命名为Vivado_init.tcl，在早期的版本中，它被称为init.tcl</p>
+</blockquote>
+<p>启动Vivado时，它会在如下位置查找Tcl初始化脚本</p>
+<ul>
+<li><p>Vivado安装路径/Vivado/version/scripts/Vivado_init.tcl</p>
+</li>
+<li><p>本地用户home路径</p>
+<p>%APPDATA%/Xilinx/Vivado/Vivado对应版本号目录/Vivado_init.tcl（Windows）</p>
+<p>$HOME/.Xilinx/Vivado/Vivado对应版本号目录/Vivado_init.tcl（Linux）</p>
+</li>
+<li><p>独立的本地用户home路径</p>
+<p>%APPDATA%/Xilinx/Vivado/Vivado_init.tcl（Windows）</p>
+<p>$HOME/.Xilinx/Vivado/Vivado_init.tcl（Linux）</p>
+</li>
+</ul>
+<p>以上三个路径优先级从高到低</p>
+<p>也可以直接使用<code>source</code>指令从Tcl命令行中加载脚本，可以在执行某个检查点的同时运行某个脚本，实现从某个检查点重新开始执行指令</p>
+<figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vivado design.dcp -<span class="keyword">source</span> myscript.tcl</span><br></pre></td></tr></table></figure>
+
+<p>当在运行约束文件同时使用Tcl脚本的情况下，read_xdc和source命令的行为不同。通过命令read_xdc应用约束之后，约束总是保存在检查点中。为了保证检查点内的XDC约束与它们应用到设计中的顺序相同，请使用<code>read_xdc -unmanaged</code>而不是<code>source</code></p>
+<h3 id="编写Tcl脚本"><a href="#编写Tcl脚本" class="headerlink" title="编写Tcl脚本"></a>编写Tcl脚本</h3><blockquote>
+<p>When writing a Tcl script, the emphasis should be, whenever possible, on providing code that can enhance the user experience. This means writing scripts that provide the same type of user experience as the embedded Vivado commands such as providing embedded Help and interactive command line argument. It is also critical to consider all the corner cases that could happen, whether Vivado objects are empty or not after using the get_* commands and so forth. It is also common when writing Tcl code, to create some lower-level procedures that are used in the code. To avoid name collision of procedures and global variables, Xilinx recommends that you develop the code within its own namespace so that name collisions are minimized.</p>
+<p>官方建议自行编写的Tcl脚本尽可能优化用户体验，提供内嵌的帮助信息和交互式命令行参数很重要，还应该考虑到可能发生的错误。为了避免局部和全局变量的名称冲突，官方建议在自己的命名空间中开发代码以尽量减少名称冲突。</p>
+</blockquote>
+<h2 id="常用的Vivado-Tcl指令"><a href="#常用的Vivado-Tcl指令" class="headerlink" title="常用的Vivado-Tcl指令"></a>常用的Vivado-Tcl指令</h2><h3 id="将文件加入工作流"><a href="#将文件加入工作流" class="headerlink" title="将文件加入工作流"></a>将文件加入工作流</h3><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">add_files #用于在工程模式下添加文件，Vivado会自行组织文件</span><br><span class="line"></span><br><span class="line">read_verilog #用于读取verilog源文件</span><br><span class="line">read_vhdl #用于读取VHDL源文件</span><br><span class="line">read_edif #读取综合生成的网表文件（EDIF或NGC）</span><br><span class="line">read_xdc #读取将在综合和实现期间使用的XDC约束文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="综合"><a href="#综合" class="headerlink" title="综合"></a>综合</h3><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">synth_design -part &lt;器件型号&gt; -top &lt;顶层文件名&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上面是一个常用的综合指令，为-top后面的文件进行综合</p>
+<p>可以使用-help参数来获取参数帮助信息</p>
+<p>其中几个比较常用的优化参数如下：</p>
+<p>-fsm_extraction 对状态机进行优化，可支持独热码优化、是顺序状态机优化、johnson编码优化、gray编码优化、用户编码优化，自动优化等</p>
+<h3 id="实现与输出"><a href="#实现与输出" class="headerlink" title="实现与输出"></a>实现与输出</h3><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">opt_design #布线和时序处理</span><br><span class="line">place_design #实现</span><br><span class="line">write_bitstream -force <span class="variable">$outputDir</span>/bitstream.bit #输出比特流</span><br></pre></td></tr></table></figure>
+
+<h3 id="辅助功能"><a href="#辅助功能" class="headerlink" title="辅助功能"></a>辅助功能</h3><figure class="highlight tcl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">write_checkpoint -force <span class="variable">$outputDir</span>/checkpoint.dcp #保存检查点</span><br><span class="line">phys_opt_design #布局布线优化</span><br><span class="line">write_verilog -force <span class="variable">$outputDir</span>/netlist.v -mode timesim -sdf_anno true #导出Verilog网表</span><br></pre></td></tr></table></figure>
 
       
 
@@ -547,7 +475,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IC</a>
         		</li>
       		
 		</ul>
@@ -603,7 +531,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -617,18 +545,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E3%80%90%E5%9F%BA%E4%BA%8EVivado%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89IP%E3%80%91/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          FPGA学习笔记3【基于Vivado封装自定义IP】
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">FPGA学习笔记1【FPGA原理与结构】</div>
+    <a href="/2022/01/10/%E5%9F%BA%E4%BA%8EHexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">基于Hexo的个人博客搭建流程简述</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -655,7 +574,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-number">1.</span> <span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#FPGA%E5%86%85%E9%83%A8%E8%B5%84%E6%BA%90%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">FPGA内部资源简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%94%B5%E8%B7%AF%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">常用电路结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BAFSM%EF%BC%88Finite-State-Machine%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">有限状态机FSM（Finite State Machine）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E6%AE%B5%E8%AE%BA%E6%B3%95%E6%9E%84%E5%BB%BAFSM"><span class="toc-number">1.2.2.</span> <span class="toc-text">四段论法构建FSM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E6%B3%95%E5%99%A8%E4%B8%8E%E4%B9%98%E6%B3%95%E5%99%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">加法器与乘法器</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">开发流程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E8%AE%BE%E8%AE%A1%E6%96%B9%E5%90%91"><span class="toc-number">2.1.</span> <span class="toc-text">确定设计方向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8vivado%E5%BC%80%E5%8F%91"><span class="toc-number">2.2.</span> <span class="toc-text">使用vivado开发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vivado%E4%B8%AD%E7%9A%84%E7%94%B5%E8%B7%AF%E7%BB%93%E6%9E%84%E7%BD%91%E8%A1%A8%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.2.1.</span> <span class="toc-text">vivado中的电路结构网表描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">2.2.2.</span> <span class="toc-text">工程数据的目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vivado%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">2.2.3.</span> <span class="toc-text">vivado项目文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vivado%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.4.</span> <span class="toc-text">Vivado设计模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XDC%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.5.</span> <span class="toc-text">XDC文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B-1"><span class="toc-number">2.2.6.</span> <span class="toc-text">开发流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.2.6.1.</span> <span class="toc-text">系统设计</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E7%94%A8-%E8%87%AA%E8%A1%8C%E9%85%8D%E7%BD%AEIP%E3%80%81DSP%E7%AD%89%E5%86%85%E9%83%A8%E7%94%B5%E8%B7%AF"><span class="toc-number">2.2.6.2.</span> <span class="toc-text">调用&#x2F;自行配置IP、DSP等内部电路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%BC%E5%90%88"><span class="toc-number">2.2.6.3.</span> <span class="toc-text">综合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E5%AE%9A%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.2.6.4.</span> <span class="toc-text">确定约束</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E7%BB%BC%E5%90%88"><span class="toc-number">2.2.6.5.</span> <span class="toc-text">执行综合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E7%BA%A7%E4%BB%BF%E7%9C%9F"><span class="toc-number">2.2.6.6.</span> <span class="toc-text">行为级仿真</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%BA%A6%E6%9D%9F"><span class="toc-number">2.2.6.7.</span> <span class="toc-text">实现约束</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#I-O%E8%A7%84%E5%88%92"><span class="toc-number">2.2.6.7.1.</span> <span class="toc-text">I&#x2F;O规划</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.2.6.7.2.</span> <span class="toc-text">设计实现</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90STA"><span class="toc-number">2.2.6.8.</span> <span class="toc-text">静态时序分析STA</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%97%B6%E5%BA%8F%E4%BB%BF%E7%9C%9F"><span class="toc-number">2.2.6.8.1.</span> <span class="toc-text">时序仿真</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E6%AF%94%E7%89%B9%E6%B5%81%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.6.9.</span> <span class="toc-text">生成比特流文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%83%A7%E5%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-number">2.2.6.10.</span> <span class="toc-text">烧录使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%B9%B6%E7%83%A7%E5%BD%95PROM%E6%96%87%E4%BB%B6"><span class="toc-number">2.2.6.11.</span> <span class="toc-text">生成并烧录PROM文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vivado%E6%94%AF%E6%8C%81%E7%9A%84%E7%89%B9%E6%AE%8A%E5%BC%80%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="toc-number">2.2.7.</span> <span class="toc-text">vivado支持的特殊开发方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E5%B1%82%E6%AC%A1%E7%BB%BC%E5%90%88"><span class="toc-number">2.2.7.1.</span> <span class="toc-text">高层次综合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IP%E9%9B%86%E6%88%90%E5%BA%93"><span class="toc-number">2.2.7.2.</span> <span class="toc-text">IP集成库</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC"><span class="toc-number">1.</span> <span class="toc-text">Vivado中的Tcl脚本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E4%B9%A0Tcl%E8%AF%AD%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text">复习Tcl语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="toc-number">1.2.</span> <span class="toc-text">配置开发环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tcl%E8%84%9A%E6%9C%AC%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E4%B8%8E%E8%AF%AD%E6%B3%95"><span class="toc-number">1.3.</span> <span class="toc-text">Tcl脚本常用命令与语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vivado%E7%9A%84Tcl%E5%BA%93"><span class="toc-number">1.4.</span> <span class="toc-text">Vivado的Tcl库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%8C%87%E4%BB%A4"><span class="toc-number">1.4.1.</span> <span class="toc-text">基本指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E5%B7%A5%E7%A8%8B%E7%9A%84Vivado%E4%BD%BF%E7%94%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">无工程的Vivado使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%89%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%9A%84Tcl%E6%8C%87%E4%BB%A4"><span class="toc-number">1.4.3.</span> <span class="toc-text">有工作流的Tcl指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8Vivado%E4%B8%AD%E4%BD%BF%E7%94%A8Tcl%E8%84%9A%E6%9C%AC"><span class="toc-number">1.4.4.</span> <span class="toc-text">在Vivado中使用Tcl脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99Tcl%E8%84%9A%E6%9C%AC"><span class="toc-number">1.4.5.</span> <span class="toc-text">编写Tcl脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84Vivado-Tcl%E6%8C%87%E4%BB%A4"><span class="toc-number">1.5.</span> <span class="toc-text">常用的Vivado-Tcl指令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E6%96%87%E4%BB%B6%E5%8A%A0%E5%85%A5%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="toc-number">1.5.1.</span> <span class="toc-text">将文件加入工作流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%BC%E5%90%88"><span class="toc-number">1.5.2.</span> <span class="toc-text">综合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E4%B8%8E%E8%BE%93%E5%87%BA"><span class="toc-number">1.5.3.</span> <span class="toc-text">实现与输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%85%E5%8A%A9%E5%8A%9F%E8%83%BD"><span class="toc-number">1.5.4.</span> <span class="toc-text">辅助功能</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -671,7 +590,7 @@
   
 
   
-  <div id="SOHUCS" sid="FPGA学习笔记2【基础概念】" ></div> 
+  <div id="SOHUCS" sid="Vivado中的Tcl脚本" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({

@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 48 -->
+			<!-- 总文章数 58 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -163,14 +163,14 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-电路设计从入门到弃坑【三极管理论分析】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-RISC-V学习笔记【RISC-V简介】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E4%B8%89%E6%9E%81%E7%AE%A1%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%E3%80%91/">电路设计从入门到弃坑【三极管理论分析】</a>
+      <a class="article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90RISC-V%E7%AE%80%E4%BB%8B%E3%80%91/">RISC-V学习笔记【RISC-V简介】</a>
     </h1>
   
 
@@ -179,21 +179,19 @@
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E4%B8%89%E6%9E%81%E7%AE%A1%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-12-21T07:31:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-21</time>
+<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90RISC-V%E7%AE%80%E4%BB%8B%E3%80%91/" class="archive-article-date">
+  	<time datetime="2022-01-13T16:46:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="电路设计从入门到弃坑2【三极管理论分析】"><a href="#电路设计从入门到弃坑2【三极管理论分析】" class="headerlink" title="电路设计从入门到弃坑2【三极管理论分析】"></a>电路设计从入门到弃坑2【三极管理论分析】</h1><p>按理说结束对基本半导体器件介绍后就应该进入放大电路的环节</p>
-<p>但是在讨论放大电路之前，需要先了解三极管在放大区的工作特性——这一点在之前的介绍部分做的不是很详细，本篇作为补充（其实是重点）部分</p>
-<p>建议读者将本部分内容和下一篇博文3结合阅读，加深关于三极管基础知识理解</p>
-<h3 id="三极管放大区工作特性"><a href="#三极管放大区工作特性" class="headerlink" title="三极管放大区工作特性"></a>三极管放大区工作特性</h3><ol>
-<li><p>输入特性</p>
-<p> 三极管的U<del>BE</del>和I<del>B</del>之间的关系称为三极管的<strong>输入特性</strong>，描述了随BE结电压变化，b极电流的“输入”大小变化</p>
-<p> 一般来说U<del>BE</del>&gt;0.7V，也就是高于三极管导通电压时，I<del>B</del>才会出现，随后I<del>B</del>会呈现指数变化。这是由于U<del>BE</del>决定了b极能吸引到的电子数，U<del>BE</del>增大，电流也就会增大</p></li></ol>
+        <p>本学习笔记参考《手把手教你设计CPU——RISC-V处理器》一书，该书出版日期为2018年，可能部分内容已经过时，仅作为学习用途</p>
+<h1 id="RISC-V简介"><a href="#RISC-V简介" class="headerlink" title="RISC-V简介"></a>RISC-V简介</h1><p><strong>RISC-V的设计理念就是“简单”</strong>（有C语言内味了）</p>
+<p>RISC-V通过架构的定义使硬件的实现足够简单，实现“简单就是美”的设计哲学</p>
+<p>riscv的架构文档分成“<strong>非特权架构文档</strong>”（曾经被称为“指令集文档”）和“<strong>特权架构文档</strong>”，在需求高性能时，核心可以运行在特权+非特权的模式下；在需求高实时性时，核心可以只运行在非特权模式下。</p>
+<p>RISCV具有模块化的指令集，可以通过组合不同的指令集来满足不同场景下的使用，核心指令数仅有40多条，加上其他的模块化扩展指令总共有几十条</p>
         
       
 
@@ -207,7 +205,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
         		</li>
       		
 		</ul>
@@ -217,7 +215,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E4%B8%89%E6%9E%81%E7%AE%A1%E7%90%86%E8%AE%BA%E5%88%86%E6%9E%90%E3%80%91/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90RISC-V%E7%AE%80%E4%BB%8B%E3%80%91/">展开全文 >></a>
         </p>
       
 
@@ -247,14 +245,14 @@
 
 
   
-    <article id="post-电路设计从入门到弃坑【场效应管】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-Vivado中的Tcl脚本" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/">电路设计从入门到弃坑【场效应管】</a>
+      <a class="article-title" href="/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/">Vivado中的Tcl脚本</a>
     </h1>
   
 
@@ -263,17 +261,16 @@
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-12-21T07:30:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-21</time>
+<a href="/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/" class="archive-article-date">
+  	<time datetime="2022-01-11T12:58:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="电路设计从入门到弃坑2-5【场效应管】"><a href="#电路设计从入门到弃坑2-5【场效应管】" class="headerlink" title="电路设计从入门到弃坑2.5【场效应管】"></a>电路设计从入门到弃坑2.5【场效应管】</h1><p>在详细谈MOSFET之前，我们先通过一份datasheet回顾一下MOSFET的伏安特性</p>
-<p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/image-20211023112946344.png"></p>
-<p>这是通用功率MOSFET IRF220的datasheet，我们可以了解到它能承受4A@150V，有些型号能够承受5A@200V，比一般的功率三极管高到不知哪里去了，同时它的导通电阻（DS电阻）仅为0.8~1.2Ω，并且具有很高的输入阻抗（High Input Impedance）</p>
+        <p>本文章部分参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/long_fly/article/details/78897158">https://blog.csdn.net/long_fly/article/details/78897158</a> 总结</p>
+<p>Tcl是一种通用的脚本语言，它在<strong>几乎所有平台上都可以解释运行</strong>，很多软件都支持用Tcl脚本的方式执行，学会了用这个东西就相当于从GNOME、KDE换成了bash shell（确信）。Vivado也内置了Tcl解释器并提供Tcl命令行执行各种操作，更神奇的是Tcl脚本比GUI下操作VIVADO效率更高。而且Xilinx官网的文档很多都是用Tcl命令来完成操作</p>
         
       
 
@@ -287,7 +284,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">IC</a>
         		</li>
       		
 		</ul>
@@ -297,7 +294,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9C%BA%E6%95%88%E5%BA%94%E7%AE%A1%E3%80%91/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/01/11/Vivado%E4%B8%AD%E7%9A%84Tcl%E8%84%9A%E6%9C%AC/">展开全文 >></a>
         </p>
       
 
@@ -327,14 +324,14 @@
 
 
   
-    <article id="post-FPGA学习笔记3【基于Vivado封装自定义IP】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-基于Hexo的个人博客搭建流程简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E3%80%90%E5%9F%BA%E4%BA%8EVivado%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89IP%E3%80%91/">FPGA学习笔记3【基于Vivado封装自定义IP】</a>
+      <a class="article-title" href="/2022/01/10/%E5%9F%BA%E4%BA%8EHexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0/">基于Hexo的个人博客搭建流程简述</a>
     </h1>
   
 
@@ -343,18 +340,18 @@
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E3%80%90%E5%9F%BA%E4%BA%8EVivado%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89IP%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T08:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+<a href="/2022/01/10/%E5%9F%BA%E4%BA%8EHexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0/" class="archive-article-date">
+  	<time datetime="2022-01-10T04:23:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="封装带AXI接口的自定义IP核"><a href="#封装带AXI接口的自定义IP核" class="headerlink" title="封装带AXI接口的自定义IP核"></a>封装带AXI接口的自定义IP核</h1><p>为了更方便地使用外部接口驱动或进行系统级的设计时，可以考虑将RTL设计打包制作成自定义的IP核，Vivado会自动生成相关的IP核接口；或者为了在ZYNQ中使用AXI总线将硬核与FPGA硬件部分互联，可以将FPGA部分的RTL设计打包成自定义IP核，Vivado会自动将生成的IP核的接口制作好，使用图形化界面就能快速实现SoC设计。特别地，可以使用这种方法在硬核外挂载软核</p>
-<p>在Vivado的设计思想中，一个IP核就相当于一个函数，可以通过重用IP核做到模块化设计的效果</p>
-<p>可以参考Xilinx Vivado封装自定义IP参考手册【代号ug1118】来获得更详细的操作指示</p>
-<p>第一部分仅说明带AXI接口的自定义IP核封装方法</p>
+        <h1 id="基于Hexo搭建个人博客过程记录"><a href="#基于Hexo搭建个人博客过程记录" class="headerlink" title="基于Hexo搭建个人博客过程记录"></a>基于Hexo搭建个人博客过程记录</h1><p>某个高中同学最近搭了个很炫酷（二刺螈浓度巨高）的个人博客</p>
+<p>于是有点眼馋</p>
+<p>再加上CSDN越来越拉跨，现在钱都不发了，于是直接一波转移阵地。先在博客园传了点备份，但是页面是上世纪风格……还要改主题才能行，我一个臭焊工哪学过html、css、js这些高端东西，最多就会一手看控制台。看隔壁有julao用Hexo搭了一个博客，百度了一下发现不用配置太多东西，而且用node配置——这玩意在我放弃当码农之前尝试过——于是准备上一波黑车</p>
+<p>专门开个文档记录一下搭建个人博客的流程，为后来者提供方便</p>
         
       
 
@@ -368,7 +365,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
         		</li>
       		
 		</ul>
@@ -378,7 +375,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E3%80%90%E5%9F%BA%E4%BA%8EVivado%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89IP%E3%80%91/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/01/10/%E5%9F%BA%E4%BA%8EHexo%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B5%81%E7%A8%8B%E7%AE%80%E8%BF%B0/">展开全文 >></a>
         </p>
       
 
@@ -408,14 +405,14 @@
 
 
   
-    <article id="post-FPGA学习笔记2【基础概念】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-stm8开发环境搭建" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/">FPGA学习笔记2【基础概念】</a>
+      <a class="article-title" href="/2022/01/10/stm8%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">stm8开发环境搭建</a>
     </h1>
   
 
@@ -424,365 +421,23 @@
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T08:09:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+<a href="/2022/01/10/stm8%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="archive-article-date">
+  	<time datetime="2022-01-10T04:07:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>Xilinx系FPGA使用vivado全家桶进行开发</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-FPGA学习笔记1【FPGA原理与结构】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/">FPGA学习笔记1【FPGA原理与结构】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T08:09:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>注意：本篇内容根据《FPGA原理和结构》（[日]天野英晴 著 赵谦 译）一书整理，作者也是初学者，有错漏请见谅</p>
-<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>FPGA即<strong>现场可编程门阵列</strong>（Field Programmable Gate Arry），与之对应的是FPAA<strong>现场可编程模拟阵列</strong>（Field Programmable Analog Array）。这是一种可以通过重新编程来实现用户所需<strong>逻辑电路</strong>的半导体器件</p>
-<h2 id="布尔代数"><a href="#布尔代数" class="headerlink" title="布尔代数"></a>布尔代数</h2><p>布尔运算是一种二值运算，在布尔运算中，运算数只有0或1，基本运算有**与·、或 +、非 ~**三种，可以通过这三种基本运算构造出异或、与非等等运算</p>
-<p>布尔运算遵循的定理如下：</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-STM32外设配置速查【QSPI】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/">STM32外设配置速查【QSPI】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T08:07:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="QSPI协议"><a href="#QSPI协议" class="headerlink" title="QSPI协议"></a>QSPI协议</h1><p>QSPI是Queued SPI（队列串行外围接口）的缩写，是由摩托罗拉公司推出的SPI协议的一个扩展，比SPI应用更加广泛，现在的FLASH、SRAM等存储器大多支持QSPI协议——QSPI是一种<strong>专用</strong>的通信接口，可连接单、双或四线SPI存储器</p>
-<p>QSPI在SPI协议的基础上增加了<strong>队列传输机制</strong>。</p>
-<p>STM32将Queued SPI协议接口实现为QUADSPI接口。QSPI的实现和SPI基本相似，有部分不同点，在下面列出。</p>
-<h2 id="物理连接"><a href="#物理连接" class="headerlink" title="物理连接"></a>物理连接</h2><p>QSPI是标准的四信号线SPI，MCU与外设之间由六根线连接：NSS、IO0、IO1、IO2、IO3、SCLK，其中IO0-3是数据线；NSS又称CS，是片选信号线；SCLK又称SCK，是SPI/QSPI的同步时钟线</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-STM32外设配置速查【板级总线协议】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%9D%BF%E7%BA%A7%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E3%80%91/">STM32外设配置速查【板级总线协议】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%9D%BF%E7%BA%A7%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T08:05:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="总线协议"><a href="#总线协议" class="headerlink" title="总线协议"></a>总线协议</h1><h2 id="I2C-（又称I-2-C、IIC等）"><a href="#I2C-（又称I-2-C、IIC等）" class="headerlink" title="I2C （又称I^2^C、IIC等）"></a>I2C （又称I^2^C、IIC等）</h2><p>I2C（Integrated Circuit）是<strong>两线</strong>式<strong>半双工串行</strong>总线</p>
-<p>由数据线<strong>SDA</strong>和时钟<strong>SCL</strong>构成</p>
-<p>一般可达400kbps以上</p>
-<h3 id="协议栈"><a href="#协议栈" class="headerlink" title="协议栈"></a>协议栈</h3><h4 id="底层硬件"><a href="#底层硬件" class="headerlink" title="底层硬件"></a>底层硬件</h4><p>SDA和SCL分别上拉到VCC，同时接入设备</p>
-<p>主设备操纵SCL，可以接收/发送SDA</p>
-<p>从设备可以发送/接收SDA</p>
-<h3 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h3><h5 id="空闲（释放总线）"><a href="#空闲（释放总线）" class="headerlink" title="空闲（释放总线）"></a>空闲（释放总线）</h5><p>SDA=1    SCL=1</p>
-<h5 id="起止信号"><a href="#起止信号" class="headerlink" title="起止信号"></a>起止信号</h5><p>起始信号：SCL=1    SDA下降沿</p>
-<p>停止信号：SCL=1    SDA上升沿</p>
-<h5 id="应答信号ACK"><a href="#应答信号ACK" class="headerlink" title="应答信号ACK"></a>应答信号ACK</h5><p>发送器<strong>每发送一个字节</strong>，就在时钟9器件释放SDA，由接收器反馈一个应答信号</p>
-<p><strong>0为有效应答</strong>，ACK称为应答位，表示接收器已接收</p>
-<p><strong>1为非应答</strong>，NACK称为非应答位，表示接收器接收该字节没有成功</p>
-<p>从设备要求：</p>
-<p>在第9个时钟脉冲之前的低电平期间<strong>将SDA拉低</strong>，并确保在该时钟高电平期间位稳定的低电平</p>
-<p>主设备要求：</p>
-<p>在<strong>收到最后一个字节后发送一个NACK信号</strong>以通知被控发送器结束数据发送，并SDA=1（释放SDA），以便从设备发送停止信号P</p>
-<h5 id="数据有效性确认"><a href="#数据有效性确认" class="headerlink" title="数据有效性确认"></a>数据有效性确认</h5><p>SCL=1期间，SDA上的数据必须保持稳定，只有在SCL=0时，SDA才允许变化</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%9D%BF%E7%BA%A7%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-STM32外设配置速查【摄像头】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%91%84%E5%83%8F%E5%A4%B4%E3%80%91/">STM32外设配置速查【摄像头】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%91%84%E5%83%8F%E5%A4%B4%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T08:04:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="OV2640"><a href="#OV2640" class="headerlink" title="OV2640"></a>OV2640</h1><p>OV2640是OmniVision公司生产的1/4英寸CMOS UXGA(1632_1232分辨率)图像传感器</p>
-<p>特点：</p>
+        <h1 id="stm8l101f3p6配环境记录"><a href="#stm8l101f3p6配环境记录" class="headerlink" title="stm8l101f3p6配环境记录"></a>stm8l101f3p6配环境记录</h1><p>最近因为需要使用一个低成本、<strong>低功耗</strong>、<strong>小体积</strong>的mcu制作一套简单的spi-iic-uart转换板，综合比较了stc8（51架构）、stm8（st自研8位CISC架构）、atmel8（51架构）等单片机，最后选择了stm8l10x系列，因为</p>
 <ul>
-<li>体积小、工作电压低、灵敏度高</li>
-<li>具有单片UXGA摄像头和影像处理器的所有功能</li>
-<li>通过SCCB总线控制</li>
-<li>可输出整帧、子采样、缩放、取窗口等方式各种分辨率的8/10位影像数据</li>
-<li>最高帧数15帧/秒（SVGA可达30帧，CIF可达60帧）</li>
-<li>用户定义图像质量、数据格式、传输方式等</li>
-<li>所有图像处理功能都可以通过==SCCB接口==（行摄像机控制总线协议，相当于一个简易的I2C协议）编程</li>
-<li>==兼容I2C接口==</li>
-<li>支持RawRGB、RGB、GRB422、YUV和YCbCr输出格式</li>
-<li>内置DSP，<strong>支持UXGA、SXGA、SVGA以及按比例缩小到从SXGA到40*30的任何尺寸</strong>，支持图像缩放</li>
-<li>支持自动曝光控制、自动增益控制、自动白平衡、自动消除灯光条纹、自动黑电平校准等自动控制功能和色饱和度、色相、伽马、锐度等设置，支持闪光灯</li>
-<li>支持图像压缩，可输出JPEG图像数据</li>
+<li>成本可以接受（好贵啊，但是至少比msp那种诡异的东西便宜）</li>
+<li>体积最小（封装ssop20）</li>
+<li>外部电路最少（唯二不需要外部晶振的单片机）</li>
+<li>功耗相对低（虽然比不上TI的，但是它更便宜）</li>
+<li>外设最丰富（有硬件spi、iic、uart，完全满足需求）</li>
 </ul>
-<h2 id="SCCB时序"><a href="#SCCB时序" class="headerlink" title="SCCB时序"></a>SCCB时序</h2><p>SCCB（Serial Camera Control Bus串行摄像头控制总线）总线是由OV（OmniVision）公司定义和发展的三线式串行总线。现在SCCB总线大多采用两线式接口总线，接口总线包括SIOC串行时钟输入线和SIOD串行双向数据线，分别相当于IIC协议的SCL信号线和SDA信号线。<strong>SCCB就是个简化版的IIC</strong>，可以直接使用IIC的软件驱动代码改编成SCCB的驱动</p>
+<p>不过似乎这款MCU网上的资源较少，所以简单说一下配环境流程，供有需要的人参考</p>
         
       
 
@@ -796,7 +451,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">杂项</a>
         		</li>
       		
 		</ul>
@@ -806,7 +461,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%91%84%E5%83%8F%E5%A4%B4%E3%80%91/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/01/10/stm8%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">展开全文 >></a>
         </p>
       
 
@@ -836,14 +491,14 @@
 
 
   
-    <article id="post-STM32深入学习【RCC】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-神经网络基础概念" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/">STM32深入学习【RCC】</a>
+      <a class="article-title" href="/2022/01/08/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">神经网络基础概念</a>
     </h1>
   
 
@@ -852,31 +507,21 @@
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T08:03:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+<a href="/2022/01/08/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" class="archive-article-date">
+  	<time datetime="2022-01-08T13:38:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="复位"><a href="#复位" class="headerlink" title="复位"></a>复位</h1><h2 id="系统复位"><a href="#系统复位" class="headerlink" title="系统复位"></a>系统复位</h2><p>系统复位将所有寄存器复位，<strong>除了时钟控制寄存器CSR中的复位标志和备份域寄存器</strong></p>
-<p>复位条件：</p>
-<ol>
-<li><p><strong>外部复位：NRST引脚电平拉低</strong></p>
-</li>
-<li><p>WWDG复位：窗口看门狗计数结束</p>
-</li>
-<li><p>IWDG复位：独立看门狗计数结束</p>
-</li>
-<li><p><strong>软件复位(内核软复位)：将Cortex-M4内核的应用中断和复位控制寄存器(SCB_AIRCR)中的SYSRESEREQ(sys_reset_eq)位 置1</strong></p>
-<p> 在以下三种情况下会产生<strong>内核复位</strong>：</p>
-<ol>
-<li>上电复位：MCU通电时内核自动将所有组成部件复位</li>
-<li>系统复位：只复位处理器和外设，不会复位内核debug部分（常用来进行debug）</li>
-<li>处理器复位：仅复位处理器</li>
-</ol>
-<p> 上电复位和系统复位持续时间取决于MCU设计，在一些情况下，复位会持续数毫秒来等待晶振时钟稳定。在复位后、处理器运行程序之前，Cortex-M处理器将从内存中读取前两个字，即 位于中断向量表之前的<strong>主栈顶指针(MSP Main Stack Pointer)<strong>和</strong>复位向量</strong>初始值，其中复位向量就是复位句柄的起始地址。在这两个字被处理器读取以后，处理器会以这两个值建立主堆栈指针MSP和程序计数器PC</p></li></ol>
+        <h1 id="神经网络和深度学习"><a href="#神经网络和深度学习" class="headerlink" title="神经网络和深度学习"></a>神经网络和深度学习</h1><p>人工智能的研究领域主要分成三个方向：</p>
+<ul>
+<li><strong>机器学习</strong>（Machine Learning，<strong>ML</strong>）</li>
+<li><strong>语音识别和自然语言处理</strong>（Natural Language Processing，<strong>NLP</strong>）</li>
+<li><strong>计算机视觉</strong>（Computer Vision，<strong>CV</strong>）</li>
+</ul>
+<p>其中，机器学习专门研究计算机怎样模拟或实现人类的学习行为，传统上采用样本数据记录-人工设计特征-机器学习的方式实现，但随着神经网络的提出和完善，尤其是深度学习的发展，其实现方式变成了样本数据记录-机器学习特征-端到端学习的方式。深度学习因为应用在人工智能领域的方方面面而备受关注。深度学习是<strong>一种基于统计的概率模型，是通过多层非线性变换对某种高复杂度的数据模式进行建模的一种方法</strong>；它<strong>源于人工神经网络的研究，含多隐层的多层感知器就是一种深度学习结构</strong>，它通过组合底层特征形成更抽象的高层表示属性类别或特征，以发现数据的分布式特征表示；实际上深度学习指的就是“深度神经网络”，相对于早期的人工神经网络，它采用了更深层的图模型结构、每层容纳了更多的节点，使得它能进一步接近人类大脑结构</p>
         
       
 
@@ -890,7 +535,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习与机器视觉</a>
         		</li>
       		
 		</ul>
@@ -900,7 +545,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/">展开全文 >></a>
+          <a class="article-more-a" href="/2022/01/08/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">展开全文 >></a>
         </p>
       
 
@@ -930,14 +575,14 @@
 
 
   
-    <article id="post-STM32深入学习【中断控制】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-电路设计从入门到弃坑【集成运算放大器的构成】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E3%80%91/">STM32深入学习【中断控制】</a>
+      <a class="article-title" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90%E3%80%91/">电路设计从入门到弃坑【集成运算放大器的构成】</a>
     </h1>
   
 
@@ -946,17 +591,19 @@
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T08:02:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+<a href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-12-21T07:31:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="嵌套向量中断控制器NVIC"><a href="#嵌套向量中断控制器NVIC" class="headerlink" title="嵌套向量中断控制器NVIC"></a>嵌套向量中断控制器NVIC</h1><p>ARM内核标准规定了使用<strong>嵌套向量中断控制器NVIC</strong>控制异常和中断。对于STM32F407的Cortex-M4内核，NVIC具有16个可编程优先级、86个可屏蔽中断通道（ARM标准规定NVIC最多支持240个中断请求、1个不可屏蔽中断NMI、1个systick中断和多个系统异常，STM32只用到了一部分）</p>
-<p>为了继续执行被中断的程序，异常流程需要利用一些手段来保存被中断程序的状态（保护现场），并在异常处理完成后自动恢复（恢复现场），这个过程一般有硬件实现，但是也可以由硬件、软件共同操作。<strong>对于M4内核，当异常被接受后，有些寄存器会被自动保存到栈中，并在返回流程中自动回复，因此可以将异常处理写作普通的C函数，这并不会带来额外的软件开销</strong></p>
-<p>这段C函数就被称为<strong>中断服务程序</strong>（中断服务函数）</p>
+        <h1 id="电路设计从入门到弃坑7【集成运算放大器的构成】"><a href="#电路设计从入门到弃坑7【集成运算放大器的构成】" class="headerlink" title="电路设计从入门到弃坑7【集成运算放大器的构成】"></a>电路设计从入门到弃坑7【集成运算放大器的构成】</h1><p>在之前的运放简介部分，已经介绍过运算放大器的基本构成，这部分要结合电路原理推导来详细说明一下集成运放的构成</p>
+<p>在开始之前我们先来看一个经典运放LM358的datasheet</p>
+<p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90%E3%80%91/image-20211218204757164.png" alt="image-20211218204757164"></p>
+<p>如右上角图片所示，LMx58家族有三种主要封装：比较大体积的PDIP-8、小体积的SOIC-8和不常见的Micro8，一般来说个人DIY最常用的就是DIP-8封装，而如果制作PCB的话还是应该选择体积较小相对性能更好的SOIC-8</p>
+<p>左侧介绍也已经说了：LM358是LM324这个四路运放芯片的一半，也就是双运放IC，它们都属于<strong>通用运放</strong>，运放是分为各种特化类型的，相关内容会在之后介绍。</p>
         
       
 
@@ -970,7 +617,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
         		</li>
       		
 		</ul>
@@ -980,7 +627,322 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E3%80%91/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-电路设计从入门到弃坑【集成运算放大器简介】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B%E3%80%91/">电路设计从入门到弃坑【集成运算放大器简介】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-12-21T07:31:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="电路设计从入门到弃坑6【集成运算放大器简介】"><a href="#电路设计从入门到弃坑6【集成运算放大器简介】" class="headerlink" title="电路设计从入门到弃坑6【集成运算放大器简介】"></a>电路设计从入门到弃坑6【集成运算放大器简介】</h1><p>集成电路是以半导体单晶硅为芯片，采用专门的制造工艺，把晶体管、场效应管、二极管、电阻和电容等元件及其之间连线组成的完整电路制作在一起，使之具有特定功能的电路技术</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%AE%80%E4%BB%8B%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-电路设计从入门到弃坑【差分放大电路】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/">电路设计从入门到弃坑【差分放大电路】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-12-21T07:31:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="电路设计从入门到弃坑5【差分放大电路】"><a href="#电路设计从入门到弃坑5【差分放大电路】" class="headerlink" title="电路设计从入门到弃坑5【差分放大电路】"></a>电路设计从入门到弃坑5【差分放大电路】</h1><p>之前的博文里介绍了基本放大电路的拓扑和分析方法，并且利用这些电路构造出多级放大电路；多级放大器可以解决大多数信号处理中产生的问题——但是很多晶体管本身的问题并不能通过组合放大器来解决，而且一般的放大器组合以后很可能还会导致一些新问题出现（比如交越失真），需要进一步改进。在放大器出现早期，由于当时技术缺陷，晶体管受温度影响非常大，面对这种情况，很多电路都会使用外电路补偿，而随着控制理论的发展，差分放大电路应运而生，很大程度上解决了晶体管受温度影响大的问题</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-电路设计从入门到弃坑【多级放大电路】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%A4%9A%E7%BA%A7%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/">电路设计从入门到弃坑【多级放大电路】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%A4%9A%E7%BA%A7%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-12-21T07:31:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="电路设计从入门到弃坑4【多级放大电路】"><a href="#电路设计从入门到弃坑4【多级放大电路】" class="headerlink" title="电路设计从入门到弃坑4【多级放大电路】"></a>电路设计从入门到弃坑4【多级放大电路】</h1><p>基本放大电路可以应付常用的情景，但是在需要微小信号放大（要求A<del>u</del>&gt;=5000）、大输入阻抗、小输出阻抗、极宽通频带的时候，就难以应付了，因此引入了多级放大电路，通过组合多个单极放大电路的方式改进放大电路的参数特性。</p>
+<h2 id="多级放大电路的耦合方式"><a href="#多级放大电路的耦合方式" class="headerlink" title="多级放大电路的耦合方式"></a>多级放大电路的耦合方式</h2><p><strong>耦合</strong>：两个功能相关但拓扑不同电路之间连接的方式</p>
+<p>多级放大电路常采用以下的耦合方式</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%A4%9A%E7%BA%A7%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-电路设计从入门到弃坑【基本放大电路】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/">电路设计从入门到弃坑【基本放大电路】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-12-21T07:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="电路设计从入门到弃坑3【基本放大电路】"><a href="#电路设计从入门到弃坑3【基本放大电路】" class="headerlink" title="电路设计从入门到弃坑3【基本放大电路】"></a>电路设计从入门到弃坑3【基本放大电路】</h1><p>三极管在模电中的基本应用就是基本放大器，正像真空管曾经的功能一样，工作在放大区。而在数电中，三极管经常工作在截止区或饱和区，并且要求能够快速地通过放大器，这里暂不讨论。</p>
+<p>电子电路中放大的对象是变化量，也就是说，放大电路需要处理变化的信号，有时候是低频交流，有时候是高频脉动直流。任何放大电路都可以从信号的角度上抽象成一个二端口网络，可以使用H参数矩阵对其进行基本描述。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E5%9F%BA%E6%9C%AC%E6%94%BE%E5%A4%A7%E7%94%B5%E8%B7%AF%E3%80%91/">展开全文 >></a>
         </p>
       
 
@@ -1012,7 +974,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -1188,6 +1150,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">IC</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
               </li>
             
             <div class="clearfix"></div>

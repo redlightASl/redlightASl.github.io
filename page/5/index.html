@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 58 -->
+			<!-- 总文章数 59 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,90 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-ESP32-IDF学习4【SPI与外部存储器】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A04%E3%80%90SPI%E4%B8%8E%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8%E3%80%91/">ESP32_IDF学习4【SPI与外部存储器】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A04%E3%80%90SPI%E4%B8%8E%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-11-19T07:01:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<p>注意：<strong>所有SPI相关的API都不能在中断服务函数或上下文切换期间使用，因为SPI相关的API都调用了互斥量，可能会造成系统错误</strong></p>
+<h1 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h1><p>调用<code>#include &quot;driver/spi_master.h&quot;</code>或<code>#include &quot;driver/spi_slave.h&quot;</code>来使用API组件</p>
+<p>ESP32集成了<strong>4个SPI外设</strong></p>
+<p>SPI0和SPI1通过总线仲裁器共享一条信号总线，用于在模组内部访问FLASH（SoC FLASH），不会对用户开放</p>
+<p>SPI2和SPI3是<strong>通用SPI控制器</strong>，有时也被称为HSPI和VSPI，这里的HSPI和VSPI没有实际区别，只是为了标识两个SPI，他们都既可以作为主机使用也可以作为从机使用。SPI控制器拥有独立的信号总线，每条总线都有三条片选（CS）信号，也就是说每个控制器都能驱动最多3个SPI从器件。这两个SPI控制器对用户开放</p>
+<p>相关概念参考SPI协议，以下内容默认读者学习过SPI、QSPI基础知识。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A04%E3%80%90SPI%E4%B8%8E%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-ESP32-IDF学习3【经典蓝牙与BLE】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -864,86 +948,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/14/%E3%80%8A%E5%8F%AF%E5%AE%9A%E5%88%B6%E8%AE%A1%E7%AE%97%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-数模转换原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/">数模转换原理</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/" class="archive-article-date">
-  	<time datetime="2021-11-14T09:29:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="数模转换与模数转换"><a href="#数模转换与模数转换" class="headerlink" title="数模转换与模数转换"></a>数模转换与模数转换</h1><p>这里以STM32G474为例来介绍STM32中的ADC与DAC编程</p>
-<p>主要作为电赛的笔记</p>
-<h2 id="模数转换ADC"><a href="#模数转换ADC" class="headerlink" title="模数转换ADC"></a>模数转换ADC</h2>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电赛笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/14/%E6%95%B0%E6%A8%A1%E8%BD%AC%E6%8D%A2%E5%8E%9F%E7%90%86/">展开全文 >></a>
         </p>
       
 

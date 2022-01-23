@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>ESP32_IDF学习7【ESP32上的FreeRTOS】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] BootloaderESP32的Bootloader（引导加载程序）主要执行以下任务：">
+  <meta name="description" content="BootloaderESP32的Bootloader（引导加载程序）主要执行以下任务：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ESP32_IDF学习7【ESP32上的FreeRTOS】">
 <meta property="og:url" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="[TOC] BootloaderESP32的Bootloader（引导加载程序）主要执行以下任务：">
+<meta property="og:description" content="BootloaderESP32的Bootloader（引导加载程序）主要执行以下任务：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/.%5CESP32_IDF%E5%AD%A6%E4%B9%A0_ESP32%E4%B8%8A%E7%9A%84FreeRTOS%5Cfreertos-ready-task-list.png">
 <meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/.%5CESP32_IDF%E5%AD%A6%E4%B9%A0_ESP32%E4%B8%8A%E7%9A%84FreeRTOS.assets%5Cfreertos-ready-task-list-smp-pxIndex.png">
 <meta property="article:published_time" content="2021-11-19T07:03:30.000Z">
-<meta property="article:modified_time" content="2021-12-09T16:16:13.200Z">
+<meta property="article:modified_time" content="2022-01-23T17:56:22.587Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
@@ -70,7 +70,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 58 -->
+			<!-- 总文章数 59 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -191,8 +191,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<h1 id="Bootloader"><a href="#Bootloader" class="headerlink" title="Bootloader"></a>Bootloader</h1><p>ESP32的Bootloader（引导加载程序）主要执行以下任务：</p>
+        <h1 id="Bootloader"><a href="#Bootloader" class="headerlink" title="Bootloader"></a>Bootloader</h1><p>ESP32的Bootloader（引导加载程序）主要执行以下任务：</p>
 <span id="more"></span>
 
 <ol>
@@ -241,7 +240,7 @@
 
 <h2 id="出厂程序"><a href="#出厂程序" class="headerlink" title="出厂程序"></a>出厂程序</h2><p>出厂程序就是按下复位按钮后从串口喷涌而出的那一堆自检信息</p>
 <p>自定义出厂程序还可以把自己想要的图标通过字符画的形式扔进去，开机的时候就会刷出来，比如可以刷个Ubuntu字符画假装移植了linux（误）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">                         ./+o+-</span><br><span class="line">                 yyyyy- -yyyyyy+</span><br><span class="line">              ://+//////-yyyyyyo</span><br><span class="line">          .++ .:/++++++/-.+sss/`</span><br><span class="line">        .:++o:  /++++++++/:--:/-</span><br><span class="line">       o:+o+:++.`..```.-/oo+++++/</span><br><span class="line">      .:+o:+o/.          `+sssoo+/</span><br><span class="line"> .++/+:+oo+o:`             /sssooo.</span><br><span class="line">/+++//+:`oo+o               /::--:.</span><br><span class="line">\+/+o+++`o++o               ++////.</span><br><span class="line"> .++.o+++oo+:`             /dddhhh.</span><br><span class="line">      .+.o+oo:.          `oddhhhh+</span><br><span class="line">       \+.++o+o``-````.:ohdhhhhh+</span><br><span class="line">        `:o+++ `ohhhhhhhhyo++os:</span><br><span class="line">          .o:`.syhhhhhhh/.oo++o`</span><br><span class="line">              /osyyyyyyo++ooo+++/</span><br><span class="line">                  ````` +oo+++o\:</span><br><span class="line">                         `oo++.</span><br></pre></td></tr></table></figure>
+<figure class="highlight d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">                         .<span class="comment">/+o+-</span></span><br><span class="line"><span class="comment">                 yyyyy- -yyyyyy+</span></span><br><span class="line"><span class="comment">              :/<span class="comment">/+//////-yyyyyyo</span></span></span><br><span class="line"><span class="comment"><span class="comment">          .++ .:<span class="comment">/++++++/</span>-.+sss/`</span></span></span><br><span class="line"><span class="comment"><span class="comment">        .:++o:  <span class="comment">/++++++++/</span>:--:/-</span></span></span><br><span class="line"><span class="comment"><span class="comment">       o:+o+:++.`..```.-/oo+++++/</span></span></span><br><span class="line"><span class="comment">      .:+o:+o/.          `+sssoo+/</span></span><br><span class="line"> .++<span class="comment">/+:+oo+o:`             /sssooo.</span></span><br><span class="line"><span class="comment"><span class="comment">/+++/</span><span class="comment">/+:`oo+o               /::--:.</span></span></span><br><span class="line"><span class="comment"><span class="comment">\+/</span>+o+++`o++o               ++/</span><span class="comment">///.</span></span><br><span class="line"> .++.o+++oo+:<span class="string">`             /dddhhh.</span></span><br><span class="line"><span class="string">      .+.o+oo:.          `</span>oddhhhh+</span><br><span class="line">       \+.++o+o<span class="string">``</span>-<span class="string">``</span><span class="string">``</span>.:ohdhhhhh+</span><br><span class="line">        <span class="string">`:o+++ `</span>ohhhhhhhhyo++os:</span><br><span class="line">          .o:<span class="string">`.syhhhhhhh/.oo++o`</span></span><br><span class="line">              /osyyyyyyo++ooo+++/</span><br><span class="line">                  <span class="string">``</span><span class="string">``</span><span class="string">` +oo+++o\:</span></span><br><span class="line"><span class="string">                         `</span>oo++.</span><br></pre></td></tr></table></figure>
 
 <h2 id="恢复出厂设置"><a href="#恢复出厂设置" class="headerlink" title="恢复出厂设置"></a>恢复出厂设置</h2><p>通过设置CONFIG_BOOTLOADER_FACTORY_RESET来使能GPIO触发恢复出厂设置</p>
 <p>恢复出厂设置时将进行以下操作：</p>

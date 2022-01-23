@@ -6,16 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
-  <title>Archives: 2022 | 红光今天吃什么</title>
+  <title>ESP32-IDF学习9【HTTP客户端】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="想搞FPGA的微电人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="红光今天吃什么">
-<meta property="og:url" content="https://redlightasl.github.io/archives/2022/">
+  <meta name="description" content="本博文会简要介绍ESP-IDF下实现HTTP客户端的方法 TCP协议栈ESP使用lwIP作为嵌入式的TCP&#x2F;IP协议栈支持 lwIP是一套在MCU层级上用C实现的IP协议栈，可以运行在裸机&#x2F;RTOS&#x2F;嵌入式Linux，乐鑫为ESP32提供了相关移植包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ESP32-IDF学习9【HTTP客户端】">
+<meta property="og:url" content="https://redlightasl.github.io/2022/01/24/ESP32-IDF%E5%AD%A6%E4%B9%A09%E3%80%90HTTP%E5%AE%A2%E6%88%B7%E7%AB%AF%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="想搞FPGA的微电人博客">
+<meta property="og:description" content="本博文会简要介绍ESP-IDF下实现HTTP客户端的方法 TCP协议栈ESP使用lwIP作为嵌入式的TCP&#x2F;IP协议栈支持 lwIP是一套在MCU层级上用C实现的IP协议栈，可以运行在裸机&#x2F;RTOS&#x2F;嵌入式Linux，乐鑫为ESP32提供了相关移植包">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-23T17:55:43.000Z">
+<meta property="article:modified_time" content="2022-01-23T17:57:43.768Z">
 <meta property="article:author" content="RedlightASl">
+<meta property="article:tag" content="ESP32">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="红光今天吃什么" type="application/atom+xml">
@@ -161,40 +164,169 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-ESP32-IDF学习9【HTTP客户端】" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      ESP32-IDF学习9【HTTP客户端】
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2022" class="archive-year">2022</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<!-- 不蒜子统计 -->
+
+        
+        <!-- 不蒜子统计 -->
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
 <a href="/2022/01/24/ESP32-IDF%E5%AD%A6%E4%B9%A09%E3%80%90HTTP%E5%AE%A2%E6%88%B7%E7%AB%AF%E3%80%91/" class="archive-article-date">
   	<time datetime="2022-01-23T17:55:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-24</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/24/ESP32-IDF%E5%AD%A6%E4%B9%A09%E3%80%90HTTP%E5%AE%A2%E6%88%B7%E7%AB%AF%E3%80%91/">ESP32-IDF学习9【HTTP客户端】</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本博文会简要介绍ESP-IDF下实现HTTP客户端的方法</p>
+<h2 id="TCP协议栈"><a href="#TCP协议栈" class="headerlink" title="TCP协议栈"></a>TCP协议栈</h2><p>ESP使用lwIP作为嵌入式的TCP/IP协议栈支持</p>
+<p>lwIP是一套在MCU层级上用C实现的IP协议栈，可以运行在裸机/RTOS/嵌入式Linux，乐鑫为ESP32提供了相关移植包</p>
+<span id="more"></span>
 
-        <div class="article-info info-on-right">
-          
+<p>相关内容可以参考lwIP库函数，在LWIP和ESP-NETIF组件中得到支持</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_init</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_deinit</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_netif_t</span> *<span class="title">esp_netif_new</span><span class="params">(<span class="keyword">const</span> <span class="keyword">esp_netif_config_t</span> *esp_netif_config)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">esp_netif_destroy</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_set_driver_config</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">const</span> <span class="keyword">esp_netif_driver_ifconfig_t</span> *driver_config)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_attach</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, esp_netif_iodriver_handle driver_handle)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_receive</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">void</span> *buffer, <span class="keyword">size_t</span> len, <span class="keyword">void</span> *eb)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">esp_netif_action_start</span><span class="params">(<span class="keyword">void</span> *esp_netif, <span class="keyword">esp_event_base_t</span> base, <span class="keyword">int32_t</span> event_id, <span class="keyword">void</span> *data)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">esp_netif_action_stop</span><span class="params">(<span class="keyword">void</span> *esp_netif, <span class="keyword">esp_event_base_t</span> base, <span class="keyword">int32_t</span> event_id, <span class="keyword">void</span> *data)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">esp_netif_action_connected</span><span class="params">(<span class="keyword">void</span> *esp_netif, <span class="keyword">esp_event_base_t</span> base, <span class="keyword">int32_t</span> event_id, <span class="keyword">void</span> *data)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">esp_netif_action_disconnected</span><span class="params">(<span class="keyword">void</span> *esp_netif, <span class="keyword">esp_event_base_t</span> base, <span class="keyword">int32_t</span> event_id, <span class="keyword">void</span> *data)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">esp_netif_action_got_ip</span><span class="params">(<span class="keyword">void</span> *esp_netif, <span class="keyword">esp_event_base_t</span> base, <span class="keyword">int32_t</span> event_id, <span class="keyword">void</span> *data)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_set_mac</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">uint8_t</span> mac[])</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_set_hostname</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">const</span> <span class="keyword">char</span> *hostname)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_get_hostname</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">const</span> <span class="keyword">char</span> **hostname)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">esp_netif_is_netif_up</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_get_ip_info</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">esp_netif_ip_info_t</span> *ip_info)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_get_old_ip_info</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">esp_netif_ip_info_t</span> *ip_info)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_set_ip_info</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">const</span> <span class="keyword">esp_netif_ip_info_t</span> *ip_info)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_set_old_ip_info</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">const</span> <span class="keyword">esp_netif_ip_info_t</span> *ip_info)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">esp_netif_get_netif_impl_index</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_dhcps_option</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">esp_netif_dhcp_option_mode_t</span> opt_op, <span class="keyword">esp_netif_dhcp_option_id_t</span> opt_id, <span class="keyword">void</span> *opt_val, <span class="keyword">uint32_t</span> opt_len)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_dhcpc_option</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">esp_netif_dhcp_option_mode_t</span> opt_op, <span class="keyword">esp_netif_dhcp_option_id_t</span> opt_id, <span class="keyword">void</span> *opt_val, <span class="keyword">uint32_t</span> opt_len)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_dhcpc_start</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_dhcpc_stop</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_dhcpc_get_status</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">esp_netif_dhcp_status_t</span> *status)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_dhcps_get_status</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif, <span class="keyword">esp_netif_dhcp_status_t</span> *status)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_dhcps_start</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">esp_err_t</span> <span class="title">esp_netif_dhcps_stop</span><span class="params">(<span class="keyword">esp_netif_t</span> *esp_netif)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>esp_netif组件建立在lwip基础上，如上面的API所示，实现了</p>
+<ul>
+<li>TCP/IP协议初始化与内存分配</li>
+<li>建立基于IP协议的通信</li>
+<li>控制本机IP地址与查找目标IP</li>
+<li>DHCP功能</li>
+<li>收发TCP报文的底层实现</li>
+</ul>
+<p>注意：<strong>这个组件并没有实现DNS功能</strong>，需要使用单独的DNS组件才能实现DNS服务器/DNS解析功能</p>
+<h1 id="HTTP客户端"><a href="#HTTP客户端" class="headerlink" title="HTTP客户端"></a>HTTP客户端</h1><p>ESP-IDF提供了可以实现稳定链接的HTTP-Client组件<code>&lt;esp_http_client&gt;</code>，实现从ESP-IDF应用程序发出HTTP/S请求的API</p>
+<p>HTTP-Client可以理解成为一个没有画面的“浏览器”——它与服务器建立TCP/IP连接，并收发符合HTTP协议标准的TCP报文，其中包含消息头和数据包，数据包会以json格式传输</p>
+<p>综上我们可以知道，如果要在ESP-IDF设备和HTTP网站（服务器）之间建立稳定的连接，需要五个组件：</p>
+<ul>
+<li><strong>wifi或ethernet组件</strong>，提供底层联网功能</li>
+<li><strong>lwip组件</strong>，提供IP协议的MCU实现</li>
+<li><strong>netif组件</strong>，提供TCP协议的MCU实现</li>
+<li><strong>esp_http_client组件</strong>，提供HTTP-Client/Server数据解析和连接处理的实现，其中HTTP-Server组件在之前的博文中已经介绍过</li>
+<li><strong>cJSON组件</strong>，用于解析服务器回传的json数据/处理本地数据为json格式并POST到服务器</li>
+</ul>
+<p>如果有必要，还需要使用freertos组件以方便多任务处理</p>
+<p>使用HTTP-Client相关API的步骤如下：</p>
+<blockquote>
+<p>在开始之前，需要先建立NVS存储、连接WiFi、初始化netif网络接口</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">esp_err_t</span> ret = nvs_flash_init();</span><br><span class="line"><span class="keyword">if</span> (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_ERROR_CHECK(nvs_flash_erase());</span><br><span class="line">	ret = nvs_flash_init();</span><br><span class="line">&#125;</span><br><span class="line">ESP_ERROR_CHECK(ret);</span><br><span class="line">ESP_ERROR_CHECK(esp_netif_init());</span><br><span class="line">ESP_ERROR_CHECK(esp_event_loop_create_default());</span><br><span class="line">ESP_ERROR_CHECK(internet_connect()); <span class="comment">//连接wifi或ethernet</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<ol>
+<li><p><code>esp_http_client_init()</code></p>
+<p> 创建一个esp_http_client_config_t的实例（实例化对象），并配置HTTP-Client句柄</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">esp_http_client_config_t</span> config = &#123;</span><br><span class="line">	.host = WEB_SERVER,</span><br><span class="line">	.path = WEB_PATH_GET_TIME,</span><br><span class="line">    .query = WEB_QUERY,</span><br><span class="line">    .transport_type = HTTP_TRANSPORT_OVER_TCP,</span><br><span class="line">    .event_handler = _http_event_handler,</span><br><span class="line">    .user_data = local_response_buffer</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><p>执行HTTP客户端的各种操作</p>
+<p> 包括打开链接、进行数据交换、抑或是关闭链接</p>
+<p> 所有这些操作都可以通过封装好的函数配合上面步骤中指定的<strong>event_handler</strong>回调函数进行实现</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">esp_http_client_handle_t</span> client = esp_http_client_init(&amp;config);</span><br></pre></td></tr></table></figure>
+
+<p> 其中event_handler是基于状态机的，如下所示</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">esp_err_t</span> _http_event_handler(<span class="keyword">esp_http_client_event_t</span>* evt)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">char</span>* output_buffer; <span class="comment">// Buffer to store response of http request from event handler</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> output_len; <span class="comment">// Stores number of bytes read</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (evt-&gt;event_id)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">case</span> HTTP_EVENT_ERROR:</span><br><span class="line">        ESP_LOGD(TAG, <span class="string">&quot;HTTP_EVENT_ERROR&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> HTTP_EVENT_ON_CONNECTED:</span><br><span class="line">        ESP_LOGD(TAG, <span class="string">&quot;HTTP_EVENT_ON_CONNECTED&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> HTTP_EVENT_HEADER_SENT:</span><br><span class="line">        ESP_LOGD(TAG, <span class="string">&quot;HTTP_EVENT_HEADER_SENT&quot;</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> HTTP_EVENT_ON_HEADER:</span><br><span class="line">        ESP_LOGD(TAG, <span class="string">&quot;HTTP_EVENT_ON_HEADER, key=%s, value=%s&quot;</span>, evt-&gt;header_key, evt-&gt;header_value);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> HTTP_EVENT_ON_DATA:</span><br><span class="line">        ESP_LOGD(TAG, <span class="string">&quot;HTTP_EVENT_ON_DATA, len=%d&quot;</span>, evt-&gt;data_len);</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">         *  Check for chunked encoding is added as the URL for chunked encoding used in this example returns binary data.</span></span><br><span class="line"><span class="comment">         *  However, event handler can also be used in case chunked encoding is used.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="keyword">if</span> (!esp_http_client_is_chunked_response(evt-&gt;client))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// If user_data buffer is configured, copy the response into the buffer</span></span><br><span class="line">            <span class="keyword">if</span> (evt-&gt;user_data)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">memcpy</span>(evt-&gt;user_data + output_len, evt-&gt;data, evt-&gt;data_len);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (output_buffer == <span class="literal">NULL</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    output_buffer = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(esp_http_client_get_content_length(evt-&gt;client));</span><br><span class="line">                    output_len = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">if</span> (output_buffer == <span class="literal">NULL</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        ESP_LOGE(TAG, <span class="string">&quot;Failed to allocate memory for output buffer&quot;</span>);</span><br><span class="line">                        <span class="keyword">return</span> ESP_FAIL;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">memcpy</span>(output_buffer + output_len, evt-&gt;data, evt-&gt;data_len);</span><br><span class="line">            &#125;</span><br><span class="line">            output_len += evt-&gt;data_len;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> HTTP_EVENT_ON_FINISH:</span><br><span class="line">        ESP_LOGD(TAG, <span class="string">&quot;HTTP_EVENT_ON_FINISH&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (output_buffer != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Response is accumulated in output_buffer. Uncomment the below line to print the accumulated response</span></span><br><span class="line">            <span class="comment">// ESP_LOG_BUFFER_HEX(TAG, output_buffer, output_len);</span></span><br><span class="line">            <span class="built_in">free</span>(output_buffer);</span><br><span class="line">            output_buffer = <span class="literal">NULL</span>;</span><br><span class="line">            output_len = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> HTTP_EVENT_DISCONNECTED:</span><br><span class="line">        ESP_LOGI(TAG, <span class="string">&quot;HTTP_EVENT_DISCONNECTED&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> mbedtls_err = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">esp_err_t</span> err = esp_tls_get_and_clear_last_error(evt-&gt;data, &amp;mbedtls_err, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">if</span> (err != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (output_buffer != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">free</span>(output_buffer);</span><br><span class="line">                output_buffer = <span class="literal">NULL</span>;</span><br><span class="line">                output_len = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ESP_LOGI(TAG, <span class="string">&quot;Last esp error code: 0x%x&quot;</span>, err);</span><br><span class="line">            ESP_LOGI(TAG, <span class="string">&quot;Last mbedtls failure: 0x%x&quot;</span>, mbedtls_err);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ESP_OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>通过<code>esp_http_client_cleanup()</code>关闭链接，并释放系统资源</p>
+<p> 需要注意：<strong>这个函数必须是操作完成后调用的最后一个函数</strong></p>
+</li>
+</ol>
+<p>需要注意一点：esp_http_client_init()建立的连接是<strong>持久性</strong>的，因此HTTP客户端可以在多个交换中重用相同的连接，只要服务器没有使用报头<em>connection: close</em>强行关闭，或者没有使*用esp_http_client_cleanup()*关闭链接，设备的HTTP链接就会保持打开状态</p>
+<h2 id="常用的HTTP-Client操作"><a href="#常用的HTTP-Client操作" class="headerlink" title="常用的HTTP-Client操作"></a>常用的HTTP-Client操作</h2><h3 id="HTTP：GET"><a href="#HTTP：GET" class="headerlink" title="HTTP：GET"></a>HTTP：GET</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GET</span></span><br><span class="line"><span class="keyword">esp_err_t</span> err = esp_http_client_perform(client);</span><br><span class="line"><span class="keyword">if</span> (err == ESP_OK) </span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGI(TAG, <span class="string">&quot;HTTP GET Status = %d, content_length = %d&quot;</span>,</span><br><span class="line">    esp_http_client_get_status_code(client),</span><br><span class="line">    esp_http_client_get_content_length(client));</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;HTTP GET request failed: %s&quot;</span>, esp_err_to_name(err));</span><br><span class="line">&#125;</span><br><span class="line">ESP_LOG_BUFFER_HEX(TAG, local_response_buffer, <span class="built_in">strlen</span>(local_response_buffer)); </span><br><span class="line"><span class="comment">//数据会保存到之前注册在http-client对象中的数据缓存区中</span></span><br></pre></td></tr></table></figure>
+
+<p>这里展示了两个常用的API</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">esp_http_client_get_status_code(client) <span class="comment">//获取HTTP返回状态码</span></span><br><span class="line">esp_http_client_get_content_length(client) <span class="comment">//获取HTTP返回数据的长度</span></span><br></pre></td></tr></table></figure>
+
+<p>其中esp_http_client_get_content_length()比较特殊，仅能应用于返回数据长度定长的状态下，也就是HTTP报头中不能有<code>chunked</code>情况，如果想要接收非定长数据，需要使用专用的API：<code>esp_http_client_is_chunked_response(esp_http_client_handle_t client)</code>先获取报文长度，再针对这个长度在回调函数中接收数据到HTTP报文缓存区</p>
+<p>GitHub上的ESP-IDF repo中热心网友给出了下面的代码来实现简单快捷的request</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">http_request</span><span class="params">(<span class="keyword">char</span> *http_response, <span class="keyword">int</span> *http_response_length, <span class="keyword">int</span> range_start, <span class="keyword">int</span> range_end, <span class="keyword">int</span> client_id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> err = <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">char</span> range[<span class="number">64</span>];</span><br><span class="line">	<span class="keyword">int</span> len_received = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (range_end &gt; range_start) </span><br><span class="line">    &#123;</span><br><span class="line">            <span class="built_in">sprintf</span>(range, <span class="string">&quot;bytes=%d-%d&quot;</span>, range_start, range_end);</span><br><span class="line">            esp_http_client_set_header(ota_client[client_id], <span class="string">&quot;Range&quot;</span>, range);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    err = esp_http_client_open(ota_client[client_id], <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (err != ESP_OK) </span><br><span class="line">    &#123;</span><br><span class="line">            ESP_LOGE(LOG_TAG, <span class="string">&quot;Failed to open HTTP connection: %s&quot;</span>, esp_err_to_name(err));</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    &#123;</span><br><span class="line">		<span class="keyword">int</span> content_length = esp_http_client_fetch_headers(ota_client[client_id]);</span><br><span class="line">		<span class="keyword">if</span> (content_length &lt; <span class="number">0</span>) </span><br><span class="line">        &#123;</span><br><span class="line">        	ESP_LOGE(LOG_TAG, <span class="string">&quot;HTTP client fetch headers failed&quot;</span>);</span><br><span class="line">		&#125; </span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">        &#123;</span><br><span class="line">        	len_received = esp_http_client_read_response(ota_client[client_id], http_response, *http_response_length);</span><br><span class="line">			<span class="keyword">if</span> (len_received &gt;= <span class="number">0</span>) </span><br><span class="line">            &#123;</span><br><span class="line">                ESP_LOGI(LOG_TAG, <span class="string">&quot;HTTP Status = %d, content_length = %lld&quot;</span>,</span><br><span class="line">                                esp_http_client_get_status_code(ota_client[client_id]),</span><br><span class="line">                                esp_http_client_get_content_length(ota_client[client_id]));</span><br><span class="line">			&#125; </span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">            &#123;</span><br><span class="line">            	ESP_LOGE(LOG_TAG, <span class="string">&quot;Failed to read response&quot;</span>);    </span><br><span class="line">            &#125;</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    esp_http_client_close(ota_client[client_id]);</span><br><span class="line">    *http_response_length = len_received;</span><br><span class="line">    <span class="keyword">return</span> (err);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这段代码是基于esp_http_client_open的，速度也相对较快，推荐使用</p>
+<h3 id="HTTP：POST"><a href="#HTTP：POST" class="headerlink" title="HTTP：POST"></a>HTTP：POST</h3><p>如下面示例：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// POST</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *post_data = <span class="string">&quot;&#123;\&quot;field1\&quot;:\&quot;value1\&quot;&#125;&quot;</span>;</span><br><span class="line">esp_http_client_set_url(client, <span class="string">&quot;http://httpbin.org/post&quot;</span>);</span><br><span class="line">esp_http_client_set_method(client, HTTP_METHOD_POST); <span class="comment">//设置当前method为POST</span></span><br><span class="line">esp_http_client_set_header(client, <span class="string">&quot;Content-Type&quot;</span>, <span class="string">&quot;application/json&quot;</span>); <span class="comment">//设置请求报头</span></span><br><span class="line">esp_http_client_set_post_field(client, post_data, <span class="built_in">strlen</span>(post_data)); <span class="comment">//设置POST时使用的数据包</span></span><br><span class="line"><span class="comment">//这个数据包一般是用cJSON格式化后输出的字符串</span></span><br><span class="line">err = esp_http_client_perform(client);</span><br><span class="line"><span class="keyword">if</span> (err == ESP_OK) </span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGI(TAG, <span class="string">&quot;HTTP POST Status = %d, content_length = %d&quot;</span>,</span><br><span class="line">                esp_http_client_get_status_code(client),</span><br><span class="line">                esp_http_client_get_content_length(client));</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">else</span> </span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;HTTP POST request failed: %s&quot;</span>, esp_err_to_name(err));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意：这里面的数据包一定要设置为格式正确的字符串，推荐使用cJSON组件而不是手动格式化</p>
+<h3 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h3><p>可以查看官方示例代码&lt;esp-idf目录&gt;/example/protocols/esp_http_client来获得指令格式</p>
+<p>篇幅所限不再过多介绍</p>
+<h2 id="cJSON组件"><a href="#cJSON组件" class="headerlink" title="cJSON组件"></a>cJSON组件</h2><p>ESP32提供了cJSON的移植（如果不提供其实自己移植也很简单）</p>
+<p>cJSON是一套用于格式化处理JSON数据的C库，可以针对使用使用情景分为两类API：</p>
+<ul>
+<li>将字符串处理为JSON对象</li>
+<li>将JSON对象处理为字符串</li>
+</ul>
+<p>C中的字符串用char类型数组描述，而JSON对象则被cJSON定义为一个结构体，如下所示</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="comment">/* next/prev allow you to walk array/object chains. Alternatively, use GetArraySize/GetArrayItem/GetObjectItem */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span> *<span class="title">next</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span> *<span class="title">prev</span>;</span></span><br><span class="line">    <span class="comment">/* An array or object item will have a child pointer pointing to a chain of the items in the array/object. */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">cJSON</span> *<span class="title">child</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/* The type of the item, as above. */</span></span><br><span class="line">    <span class="keyword">int</span> type;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* The item&#x27;s string, if type==cJSON_String  and type == cJSON_Raw */</span></span><br><span class="line">    <span class="keyword">char</span> *valuestring;</span><br><span class="line">    <span class="comment">/* writing to valueint is DEPRECATED, use cJSON_SetNumberValue instead */</span></span><br><span class="line">    <span class="keyword">int</span> valueint;</span><br><span class="line">    <span class="comment">/* The item&#x27;s number, if type==cJSON_Number */</span></span><br><span class="line">    <span class="keyword">double</span> valuedouble;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* The item&#x27;s name string, if this item is the child of, or is in the list of subitems of an object. */</span></span><br><span class="line">    <span class="keyword">char</span> *<span class="built_in">string</span>;</span><br><span class="line">&#125; cJSON;</span><br></pre></td></tr></table></figure>
+
+<p>它的“基类”是一个双向链表，同时支持扩展更多子类</p>
+<p>type属性代表JSON的类型</p>
+<p>valuestring、valueint、valuedouble分别表示JSON中可能包含的三个数据类型：字符串、整型、浮点型</p>
+<p>string属性代表子类的名字或JSON实例化对象的名字</p>
+<p>在代码中使用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;cJSON.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>即可调用cJSON组件</p>
+<p>使用</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CJSON_PUBLIC(<span class="keyword">const</span> <span class="keyword">char</span>*) cJSON_Version(<span class="keyword">void</span>)</span><br><span class="line">    </span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> (defined(__GNUC__) || defined(__SUNPRO_CC) || defined (__SUNPRO_C)) &amp;&amp; defined(CJSON_API_VISIBILITY)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CJSON_PUBLIC(type)   __attribute__((visibility(<span class="meta-string">&quot;default&quot;</span>))) type</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CJSON_PUBLIC(type) type</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+<p>可以输出cJSON的版本号到一个指定字符串中，只要再将字符串输出就可以检查当前的cJSON版本是否符合要求</p>
+<h3 id="将字符串处理为JSON对象"><a href="#将字符串处理为JSON对象" class="headerlink" title="将字符串处理为JSON对象"></a>将字符串处理为JSON对象</h3><p>常用于从服务器获取数据后将数据保存在本地时候的解析工作</p>
+<p>json以<strong>嵌套的键值对</strong>或<strong>值的有序列表</strong>形式存在，通常如下</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;code&quot;</span>:<span class="number">0</span>,</span><br><span class="line">    <span class="attr">&quot;message&quot;</span>:<span class="literal">null</span>,</span><br><span class="line">    <span class="attr">&quot;data&quot;</span>:<span class="number">1642959073193</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//或</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;employees&quot;</span>:</span><br><span class="line">    &#123;</span><br><span class="line">		&#123; </span><br><span class="line">        	<span class="attr">&quot;firstName&quot;</span>:<span class="string">&quot;Bill&quot;</span>,</span><br><span class="line">        	<span class="attr">&quot;lastName&quot;</span>:<span class="string">&quot;Gates&quot;</span></span><br><span class="line">    	&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">    		<span class="attr">&quot;firstName&quot;</span>:<span class="string">&quot;George&quot;</span>,</span><br><span class="line">    		<span class="attr">&quot;lastName&quot;</span>:<span class="string">&quot;Bush&quot;</span></span><br><span class="line">		&#125;,</span><br><span class="line">		&#123;</span><br><span class="line">            <span class="attr">&quot;firstName&quot;</span>:<span class="string">&quot;Thomas&quot;</span>,</span><br><span class="line">    		<span class="attr">&quot;lastName&quot;</span>:<span class="string">&quot;Carter&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="string">&quot;message&quot;</span>: <span class="number">12345678</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它采用完全独立于语言的文本格式，但是也使用了类似于C语言家族的习惯（包括C/C++/C#、Java、JavaScript、Perl、Python等），很多语言都有自己的JSON库实现</p>
+<p><strong>嵌套的键值对</strong>在不同语言中都有自己的理解：对象（Object）、记录（Record）、结构体（struct）、字典（dictionary）、哈希表（hash table）、键值对（Key-Value）、关联数组（associative array）等等，但都具有<strong>一对一</strong>或<strong>一对多</strong>的形式</p>
+<p><strong>值的有序列表</strong>，大部分语言都将其理解为数组（array）</p>
+<p>这些常见的数据结构在同样基于这些结构的编程语言之间交换成为可能，这也是为什么JSON格式会在互联网中流行（甚至当今很多嵌入式设备也在考虑于实时性较低的应用中使用json）</p>
+<p>json自己的实现中，将每个json串视为<strong>json对象</strong>，它是一个<strong>无序</strong>的<strong>名称-值</strong>成对组合的集合（可嵌套的无序的键值对）。<strong>一个对象以左括号{开始，以右括号}结束，要求每个名称后都接一个冒号:，同时成对组合之间用逗号,分隔</strong></p>
+<p>cJSON解析API的基本使用可以参考以下示例代码（收取的json数据如上面给出的第一个json格式示例）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 确认从local_response_buffer（HTTP报文缓存区）获得的数据是否为JSON格式 */</span></span><br><span class="line">cJSON* response_json = cJSON_Parse(local_response_buffer);</span><br><span class="line"><span class="keyword">if</span> (response_json != <span class="literal">NULL</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">/* 获取data这个键对应的值，这里data传输的实际上是时间戳 */</span></span><br><span class="line">	cJSON* timestamp_json = cJSON_GetObjectItem(response_json, <span class="string">&quot;data&quot;</span>);</span><br><span class="line">    <span class="comment">/* 输出对应值到字符串 */</span></span><br><span class="line">	<span class="keyword">char</span>* timestamp_temp = cJSON_Print(timestamp_json);</span><br><span class="line">    <span class="comment">/* 打印输出字符串 */</span></span><br><span class="line">	ESP_LOGI(TAG, <span class="string">&quot;recv number:%s&quot;</span>, timestamp_temp);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 获取message这个键对应的值，这里的值固定为null */</span></span><br><span class="line">	cJSON* message_json = cJSON_GetObjectItem(response_json, <span class="string">&quot;message&quot;</span>);</span><br><span class="line">    <span class="comment">/* 输出对应值到字符串 */</span></span><br><span class="line">	<span class="keyword">char</span>* message = cJSON_Print(message_json);</span><br><span class="line">    <span class="comment">/* 打印输出字符串 */</span></span><br><span class="line">	ESP_LOGI(TAG, <span class="string">&quot;recv msg:%s&quot;</span>, message);</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(message, <span class="string">&quot;null&quot;</span>)) <span class="comment">//检验数据是否正确</span></span><br><span class="line">    &#123;</span><br><span class="line">    	ESP_LOGI(TAG, <span class="string">&quot;senting Queue msg:%s&quot;</span>, timestamp); <span class="comment">//用消息队列发送时间戳数据</span></span><br><span class="line">        xQueueSend(trans_timestamp_Queue, timestamp, <span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="将JSON对象处理为字符串"><a href="#将JSON对象处理为字符串" class="headerlink" title="将JSON对象处理为字符串"></a>将JSON对象处理为字符串</h3><p>上面说过，<strong>JSON对象是以链表为基础的</strong></p>
+<p>在创建JSON对象时要先创建一个”根节点“，再从这个根节点上”生长“出更多数据。每多一个节点，就意味着大括号多了一层，比如上面给出的两个JSON示例，第一个就有一个根节点；第二个则有一个根节点、三个message子节点</p>
+<p>可以参考以下示例代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">cJSON* cjson_root = cJSON_CreateObject(); <span class="comment">//创建JSON根节点</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 分别添加键和值对应的数据 */</span></span><br><span class="line"><span class="comment">/* 函数第一个参数是对应的根节点 */</span></span><br><span class="line"><span class="comment">/* 函数第二个参数是键 */</span></span><br><span class="line"><span class="comment">/* 函数第三个参数是值 */</span></span><br><span class="line">cJSON_AddStringToObject(cjson_root, <span class="string">&quot;value&quot;</span>, <span class="string">&quot;8399d88e3293cc89cacc1d735af12810&quot;</span>);</span><br><span class="line">cJSON_AddStringToObject(cjson_root, <span class="string">&quot;location&quot;</span>, <span class="string">&quot;classroom&quot;</span>);</span><br><span class="line">cJSON_AddNumberToObject(cjson_root, <span class="string">&quot;timestamp&quot;</span>, timestamp);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出JSON数据为字符串格式 */</span></span><br><span class="line"><span class="keyword">char</span>* post_data = cJSON_Print(cjson_root);</span><br><span class="line"><span class="comment">/* 删除之前为JSON对象创建的根节点 */</span></span><br><span class="line">cJSON_Delete(cjson_root);</span><br><span class="line"><span class="comment">/* 打印字符串格式的JSON数据 */</span></span><br><span class="line">ESP_LOGI(TAG, <span class="string">&quot;generate:%s&quot;</span>, post_data);</span><br></pre></td></tr></table></figure>
+
+<p>这里需要注意：<strong>建立了JSON对象就一定要记得删除，每建立一个就要记得删除对应的数据</strong>，C可没有内存管理机制，都是要手动分配回收的！</p>
+<p><em>如果存在多个子节点和一个根节点，要先从顶层的子节点删除，最后删除根节点</em></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>我本想大声斥责，但奈何给的太多了<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/give_me_money.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -206,400 +338,128 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2022/01/24/ESP32-IDF%E5%AD%A6%E4%B9%A09%E3%80%90HTTP%E5%AE%A2%E6%88%B7%E7%AB%AF%E3%80%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%85%8D%E5%A5%97SoC%E7%AE%80%E4%BB%8B%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-01-13T17:20:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
-</a>
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%85%8D%E5%A5%97SoC%E7%AE%80%E4%BB%8B%E3%80%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RISC-V学习笔记【配套SoC简介】</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E9%85%8D%E5%A5%97SoC%E7%AE%80%E4%BB%8B%E3%80%91/">RISC-V学习笔记【配套SoC简介】</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="toc-number">1.</span> <span class="toc-text">TCP协议栈</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number"></span> <span class="toc-text">HTTP客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84HTTP-Client%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">常用的HTTP-Client操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%EF%BC%9AGET"><span class="toc-number">1.1.</span> <span class="toc-text">HTTP：GET</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP%EF%BC%9APOST"><span class="toc-number">1.2.</span> <span class="toc-text">HTTP：POST</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.</span> <span class="toc-text">其他操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cJSON%E7%BB%84%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">cJSON组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86%E4%B8%BAJSON%E5%AF%B9%E8%B1%A1"><span class="toc-number">2.1.</span> <span class="toc-text">将字符串处理为JSON对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86JSON%E5%AF%B9%E8%B1%A1%E5%A4%84%E7%90%86%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.2.</span> <span class="toc-text">将JSON对象处理为字符串</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+        
+    </div>
+</aside>
 
-<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-01-13T16:49:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8%E3%80%91/">RISC-V学习笔记【中断和异常】</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%89%A7%E8%A1%8C%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-01-13T16:49:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%89%A7%E8%A1%8C%E3%80%91/">RISC-V学习笔记【执行】</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8D%8F%E5%A4%84%E7%90%86%E5%99%A8%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-01-13T16:49:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8D%8F%E5%A4%84%E7%90%86%E5%99%A8%E3%80%91/">RISC-V学习笔记【协处理器】</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%8E%E6%80%BB%E7%BA%BF%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-01-13T16:49:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%8E%E6%80%BB%E7%BA%BF%E3%80%91/">RISC-V学习笔记【存储器与总线】</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-01-13T16:48:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E3%80%91/">RISC-V学习笔记【系统设计】</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%B0%83%E8%AF%95%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-01-13T16:48:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E8%B0%83%E8%AF%95%E3%80%91/">RISC-V学习笔记【调试】</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%8C%87%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-01-13T16:48:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E5%8F%96%E6%8C%87%E3%80%91/">RISC-V学习笔记【取指】</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%86%99%E5%9B%9E%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-01-13T16:48:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%86%99%E5%9B%9E%E3%80%91/">RISC-V学习笔记【交付与写回】</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2022/page/2/">2</a><a class="extend next" rel="next" href="/archives/2022/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+  <div id="SOHUCS" sid="ESP32-IDF学习9【HTTP客户端】" ></div> 
+<script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: "cyvMsKu3U",
+        conf: "d1c218b5acc9b2dcb2a8c17ae7f3cd6c"
+    });
+</script>
+</script>
+  
+
+  
+
   
 
 
@@ -631,8 +491,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

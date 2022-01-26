@@ -4913,9 +4913,9 @@
 <li>内存映射模式下，将SPI FLASH视为STM32的片上FLASH，可以利用这个功能在片外SPI FLASH中存储程序。读取时使用指针即可，但SPI FLASH<strong>只读</strong></li>
 </ol>
 <h1 id="W25Qxx系列SPI-FLASH特性"><a href="#W25Qxx系列SPI-FLASH特性" class="headerlink" title="W25Qxx系列SPI FLASH特性"></a>W25Qxx系列SPI FLASH特性</h1><p>详见芯片手册</p>
-<p><img src="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/W25Q64(3).jpg" alt="W25Q64(3)"></p>
-<p><img src="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/W25Q64(1).jpg" alt="W25Q64(1)"></p>
-<p><img src="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/W25Q64(2).jpg" alt="W25Q64(2)"></p>
+<p><img src="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/W25Q64(1)-16431760779531.jpg" alt="W25Q64(1)"></p>
+<p><img src="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/W25Q64(2)-16431760845082.jpg" alt="W25Q64(2)"></p>
+<p><img src="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/W25Q64(3)-16431760944853.jpg" alt="W25Q64(3)"></p>
 <ul>
 <li>支持标准摩托罗拉SPI协议</li>
 <li>支持双线/四线SPI，通过写入IC内部的控制寄存器相关控制位，可将WP和Hold引脚作为IO2、IO3使用</li>

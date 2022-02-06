@@ -26,6 +26,8 @@
     <url>/2022/02/06/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04%E3%80%90AMBA%E6%80%BB%E7%BA%BF%E3%80%91/</url>
     <content><![CDATA[<h1 id="AMBA总线规范"><a href="#AMBA总线规范" class="headerlink" title="AMBA总线规范"></a>AMBA总线规范</h1><p>AMBA规范由ARM公司制定，用于SoC内IP互联</p>
 <p>AMBA即（Advanced Microcontroller Bus Architecture，AMBA）规范是一种开放式标准片上互联规范，用于连接和管理片上系统中的各个功能模块（IP）。显而易见，AMBA协议是一套片上总线协议，一般来说其信号线数量都比较多——ARM通过这套协议规定了各种信号线的作用，并没有规定信号线的位宽和具体实现，所以说每个芯片中的AMBA都可能具有不同的架构</p>
+<span id="more"></span>
+
 <p>AMBA中有以下几个主要接口：</p>
 <ul>
 <li>高级外设总线APB：用于低速低功耗外设连接</li>

@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>经典CV算法 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="OpenCV与经典视觉算法本博客参考《OpenCV3编程入门》（毛星云 冷雪飞 电子工业出版社）写成（还有来自毛星云dalao在csdn写成的系列博文），本篇内容旨在总结嵌入式设备中常用（基础）的机器视觉算法（上面书籍的前七章），代码主要使用OpenCV实现，部分代码可以直接在OpenMV或类似的嵌入式平台上部署  悼念浅默大佬，感谢他为我们带来的技术博客和教程  配环境与hello world代">
+  <meta name="description" content="OpenCV与经典视觉算法本博客参考《OpenCV3编程入门》（毛星云 冷雪飞 电子工业出版社）写成（还有来自毛星云dalao在csdn写成的系列博文），本篇内容旨在总结嵌入式设备中常用（基础）的机器视觉算法（上面书籍的前七章），代码主要使用OpenCV实现，部分代码可以直接在OpenMV或类似的嵌入式平台上部署">
 <meta property="og:type" content="article">
 <meta property="og:title" content="经典CV算法">
 <meta property="og:url" content="https://redlightasl.github.io/2022/02/25/%E7%BB%8F%E5%85%B8CV%E7%AE%97%E6%B3%95/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="OpenCV与经典视觉算法本博客参考《OpenCV3编程入门》（毛星云 冷雪飞 电子工业出版社）写成（还有来自毛星云dalao在csdn写成的系列博文），本篇内容旨在总结嵌入式设备中常用（基础）的机器视觉算法（上面书籍的前七章），代码主要使用OpenCV实现，部分代码可以直接在OpenMV或类似的嵌入式平台上部署  悼念浅默大佬，感谢他为我们带来的技术博客和教程  配环境与hello world代">
+<meta property="og:description" content="OpenCV与经典视觉算法本博客参考《OpenCV3编程入门》（毛星云 冷雪飞 电子工业出版社）写成（还有来自毛星云dalao在csdn写成的系列博文），本篇内容旨在总结嵌入式设备中常用（基础）的机器视觉算法（上面书籍的前七章），代码主要使用OpenCV实现，部分代码可以直接在OpenMV或类似的嵌入式平台上部署">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://redlightasl.github.io/2022/02/25/%E7%BB%8F%E5%85%B8CV%E7%AE%97%E6%B3%95/image-20220106095241596.png">
 <meta property="og:image" content="https://redlightasl.github.io/2022/02/25/%E7%BB%8F%E5%85%B8CV%E7%AE%97%E6%B3%95/image-20220106095306565.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://redlightasl.github.io/2022/02/25/%E7%BB%8F%E5%85%B8CV%E7%AE%97%E6%B3%95/image-20220224174205353.png">
 <meta property="og:image" content="https://redlightasl.github.io/2022/02/25/%E7%BB%8F%E5%85%B8CV%E7%AE%97%E6%B3%95/image-20220225144428365.png">
 <meta property="article:published_time" content="2022-02-25T07:42:37.000Z">
-<meta property="article:modified_time" content="2022-02-25T07:44:36.824Z">
+<meta property="article:modified_time" content="2022-02-25T09:10:54.460Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="机器学习与机器视觉">
 <meta name="twitter:card" content="summary">
@@ -212,6 +212,8 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="OpenCV与经典视觉算法"><a href="#OpenCV与经典视觉算法" class="headerlink" title="OpenCV与经典视觉算法"></a>OpenCV与经典视觉算法</h1><p>本博客参考《OpenCV3编程入门》（<em>毛星云</em> 冷雪飞 电子工业出版社）写成（还有来自毛星云dalao在csdn写成的系列博文），本篇内容旨在总结<em>嵌入式设备</em>中常用（基础）的机器视觉算法（上面书籍的前七章），代码主要使用OpenCV实现，部分代码可以直接在OpenMV或类似的嵌入式平台上部署</p>
+<span id="more"></span>
+
 <blockquote>
 <p>悼念浅默大佬，感谢他为我们带来的技术博客和教程</p>
 </blockquote>

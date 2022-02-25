@@ -16,7 +16,7 @@
 <meta property="og:description" content="OV2640OV2640是OmniVision公司生产的1&#x2F;4英寸CMOS UXGA(1632_1232分辨率)图像传感器 特点：  体积小、工作电压低、灵敏度高 具有单片UXGA摄像头和影像处理器的所有功能 通过SCCB总线控制 可输出整帧、子采样、缩放、取窗口等方式各种分辨率的8&#x2F;10位影像数据 最高帧数15帧&#x2F;秒（SVGA可达30帧，CIF可达60帧） 用户定义图像质量、数据格式、传输方式等">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-11-19T08:04:28.000Z">
-<meta property="article:modified_time" content="2021-11-23T13:21:43.991Z">
+<meta property="article:modified_time" content="2022-02-07T05:37:05.401Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="stm32">
 <meta name="twitter:card" content="summary">
@@ -67,7 +67,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 60 -->
+			<!-- 总文章数 61 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -197,8 +197,8 @@
 <li>可输出整帧、子采样、缩放、取窗口等方式各种分辨率的8/10位影像数据</li>
 <li>最高帧数15帧/秒（SVGA可达30帧，CIF可达60帧）</li>
 <li>用户定义图像质量、数据格式、传输方式等</li>
-<li>所有图像处理功能都可以通过==SCCB接口==（行摄像机控制总线协议，相当于一个简易的I2C协议）编程</li>
-<li>==兼容I2C接口==</li>
+<li>所有图像处理功能都可以通过<strong>SCCB接口</strong>（串行摄像机控制总线协议，相当于一个简易的I2C协议）编程</li>
+<li><strong>兼容I2C接口</strong></li>
 <li>支持RawRGB、RGB、GRB422、YUV和YCbCr输出格式</li>
 <li>内置DSP，<strong>支持UXGA、SXGA、SVGA以及按比例缩小到从SXGA到40*30的任何尺寸</strong>，支持图像缩放</li>
 <li>支持自动曝光控制、自动增益控制、自动白平衡、自动消除灯光条纹、自动黑电平校准等自动控制功能和色饱和度、色相、伽马、锐度等设置，支持闪光灯</li>
@@ -260,8 +260,8 @@
 </tr>
 </tbody></table>
 <p>ov2640的图像数据输出通过Y[9:0]寄存器输出，这里只使用一**字节(8位)**数据，再PCLK、VSYNC、HREF/HSYNC控制下进行</p>
-<p>==对于Raw格式数据，$1<em>t_p=1</em>T_{PCLK}$==</p>
-<p>==对于YUV/RGB格式数据，$1<em>t_p=2</em>T_{PCLK}$==</p>
+<p><strong>对于Raw格式数据，$1<em>t_p=1</em>T_{PCLK}$</strong></p>
+<p><strong>对于YUV/RGB格式数据，$1<em>t_p=2</em>T_{PCLK}$</strong></p>
 <h3 id="行输出时序"><a href="#行输出时序" class="headerlink" title="行输出时序"></a>行输出时序</h3><p><strong>HREF高电平</strong>期间的<strong>PCLK上升沿</strong>进行输出，每个PCLK上升沿从Y[9:0]输出一个**字节(8位)**数据</p>
 <p>PCLK最大可达36MHz</p>
 <p>例：以<strong>UXGA(1600*1200)<strong>时序，采用</strong>RGB565</strong>格式输出，每2字节组成一个像素的颜色，且低字节在前高字节在后。这样<strong>每行</strong>输出总共有<strong>1600*2个PCLK周期</strong>，<strong>输出1600*2个字节</strong></p>
@@ -424,7 +424,7 @@
 </tbody></table>
 <h3 id="时序"><a href="#时序" class="headerlink" title="时序"></a>时序</h3><p>数据与PIXCLK同步，并根据像素时钟的极性在像素时钟上升沿/下降沿发生变化</p>
 <p>HREF/HSYNC指示行的开始或结束，VSYNC指示帧的开始或结束</p>
-<p>DCMI时序与上述OV2640时序基本一致，但DCMI的PIXCLK有效沿可自定义，且<strong>HSYNC、VSYNC有效状态对应指示数据在并行接口上无效时，HSYNC/VSYNC引脚上的引脚电平</strong>（人话：==和OV2640的有效状态相反==）</p>
+<p>DCMI时序与上述OV2640时序基本一致，但DCMI的PIXCLK有效沿可自定义，且<strong>HSYNC、VSYNC有效状态对应指示数据在并行接口上无效时，HSYNC/VSYNC引脚上的引脚电平</strong>（人话：<em>和OV2640的有效状态相反</em>）</p>
 <h2 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h2><p>DCMI接收到的数据存储在DCMI_DR 32位寄存器内，接入OV2640模块时采用8位数据宽度，所以<strong>每4个像素时钟才捕获完32位数据</strong>，第一个字节存放在LSB位置，第四个字节存放在MSB位置遵守<strong>低字节在前，高字节在后</strong></p>
 <p>==<strong>DCMI支持DMA传输</strong>==，DCMI可被配置为每在其数据寄存器中收到一个完整的32位数据块时，发送一个DMA请求，由DMA将寄存器内的值搬运到目的地址（如LCD/SRAM）</p>
 <p>注意：DCMI的DMA请求映射在<strong>DMA2 Channel1 Stream1</strong>上；如果使用DCMI-&gt;DMA-&gt;LCD的传输路径，因为LCD是16位宽（RGB565），但DCMI_DR是32位宽，所以一次<strong>DCMI引起的DMA请求将引发往LCD写2次数据</strong></p>

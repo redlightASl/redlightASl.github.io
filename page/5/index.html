@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 61 -->
+			<!-- 总文章数 62 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,84 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-ESP32-IDF学习7【ESP32上的FreeRTOS】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/">ESP32_IDF学习7【ESP32上的FreeRTOS】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-11-19T07:03:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Bootloader"><a href="#Bootloader" class="headerlink" title="Bootloader"></a>Bootloader</h1><p>ESP32的Bootloader（引导加载程序）主要执行以下任务：</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-ESP32-IDF学习6【HTTP服务器】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -892,85 +970,6 @@
 
 
   
-    <article id="post-现代C语言2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%802/">现代C语言2</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%802/" class="archive-article-date">
-  	<time datetime="2021-11-14T09:36:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="C语言语法拾遗"><a href="#C语言语法拾遗" class="headerlink" title="C语言语法拾遗"></a>C语言语法拾遗</h1><p>专门总结了一些C语言C99/C11之后的新语法或冷门语法</p>
-<h2 id="预处理和宏——灵魂"><a href="#预处理和宏——灵魂" class="headerlink" title="预处理和宏——灵魂"></a>预处理和宏——灵魂</h2><p>预处理器和宏可以说是面向对象语言<em>独有</em>的东西，<strong>这些特性发生在编译这个过程之前</strong>，使得C语言的编译过程变得“可控”，甚至可以说C语言编译本身就是一个开发者可编程的过程——或许这样说比较抽象，举个例子：java的宏并不对一般开发者开放，一般只有OpenJDK的开发者才会面对java宏和相关预编译指令；但是C语言的宏直接出现在hello world程序中：“#include”指令本身就意味着对链接器进行调用——这些宏严格来说并不属于C语言的语法学习范畴，但是如果想靠C语言造轮子，这就是无法避开的</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C语言进阶</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/14/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%802/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1153,6 +1152,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
               </li>
             
             <div class="clearfix"></div>

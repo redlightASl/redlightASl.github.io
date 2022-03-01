@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 61 -->
+			<!-- 总文章数 62 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,100 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-STM32外设配置速查【板级总线协议】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%9D%BF%E7%BA%A7%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E3%80%91/">STM32外设配置速查【板级总线协议】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%9D%BF%E7%BA%A7%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-11-19T08:05:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="总线协议"><a href="#总线协议" class="headerlink" title="总线协议"></a>总线协议</h1><h2 id="I2C-（又称I-2-C、IIC等）"><a href="#I2C-（又称I-2-C、IIC等）" class="headerlink" title="I2C （又称I^2^C、IIC等）"></a>I2C （又称I^2^C、IIC等）</h2><p>I2C（Integrated Circuit）是<strong>两线</strong>式<strong>半双工串行</strong>总线</p>
+<p>由数据线<strong>SDA</strong>和时钟<strong>SCL</strong>构成</p>
+<p>一般可达400kbps以上</p>
+<h3 id="协议栈"><a href="#协议栈" class="headerlink" title="协议栈"></a>协议栈</h3><h4 id="底层硬件"><a href="#底层硬件" class="headerlink" title="底层硬件"></a>底层硬件</h4><p>SDA和SCL分别上拉到VCC，同时接入设备</p>
+<p>主设备操纵SCL，可以接收/发送SDA</p>
+<p>从设备可以发送/接收SDA</p>
+<h3 id="驱动"><a href="#驱动" class="headerlink" title="驱动"></a>驱动</h3><h5 id="空闲（释放总线）"><a href="#空闲（释放总线）" class="headerlink" title="空闲（释放总线）"></a>空闲（释放总线）</h5><p>SDA=1    SCL=1</p>
+<h5 id="起止信号"><a href="#起止信号" class="headerlink" title="起止信号"></a>起止信号</h5><p>起始信号：SCL=1    SDA下降沿</p>
+<p>停止信号：SCL=1    SDA上升沿</p>
+<h5 id="应答信号ACK"><a href="#应答信号ACK" class="headerlink" title="应答信号ACK"></a>应答信号ACK</h5><p>发送器<strong>每发送一个字节</strong>，就在时钟9器件释放SDA，由接收器反馈一个应答信号</p>
+<p><strong>0为有效应答</strong>，ACK称为应答位，表示接收器已接收</p>
+<p><strong>1为非应答</strong>，NACK称为非应答位，表示接收器接收该字节没有成功</p>
+<p>从设备要求：</p>
+<p>在第9个时钟脉冲之前的低电平期间<strong>将SDA拉低</strong>，并确保在该时钟高电平期间位稳定的低电平</p>
+<p>主设备要求：</p>
+<p>在<strong>收到最后一个字节后发送一个NACK信号</strong>以通知被控发送器结束数据发送，并SDA=1（释放SDA），以便从设备发送停止信号P</p>
+<h5 id="数据有效性确认"><a href="#数据有效性确认" class="headerlink" title="数据有效性确认"></a>数据有效性确认</h5><p>SCL=1期间，SDA上的数据必须保持稳定，只有在SCL=0时，SDA才允许变化</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%9D%BF%E7%BA%A7%E6%80%BB%E7%BA%BF%E5%8D%8F%E8%AE%AE%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-STM32外设配置速查【摄像头】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -908,84 +1002,6 @@
 
 
   
-    <article id="post-ESP32-IDF学习7【ESP32上的FreeRTOS】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/">ESP32_IDF学习7【ESP32上的FreeRTOS】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T07:03:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Bootloader"><a href="#Bootloader" class="headerlink" title="Bootloader"></a>Bootloader</h1><p>ESP32的Bootloader（引导加载程序）主要执行以下任务：</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A07%E3%80%90ESP32%E4%B8%8A%E7%9A%84FreeRTOS%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
@@ -1168,6 +1184,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
               </li>
             
             <div class="clearfix"></div>

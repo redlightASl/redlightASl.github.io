@@ -6,27 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
-  <title>ESP32_IDF学习3【经典蓝牙与BLE】 | 红光今天吃什么</title>
+  <title>一生一芯学习笔记1【Verilator】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] 在这里着重记述低功耗蓝牙BLE相关内容，库函数部分翻译自乐鑫官网文档 低功耗蓝牙（BLE）协议栈低功耗蓝牙协议是蓝牙通信协议的一种，BLE协议栈就是实现低功耗蓝牙协议的代码">
+  <meta name="description" content="Verilator入门今年2月底报名了22年第四期一生一芯，借着这个机会学学前端设计相关内容 个人目标暂且定为：  设计一个五级流水，可挂载协处理器的RV32IMF指令集处理器 在两到三期内完成一生一芯规定的基础流片指标 挂载一个可用于图像处理的加速器 使用AMBA总线在片上集成一套用于水下机器人控制的外设（包括GPIO、UART、PWM、DCMI、DMA、MAC） 将自制的RTOS开发完毕并部署">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ESP32_IDF学习3【经典蓝牙与BLE】">
-<meta property="og:url" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/">
+<meta property="og:title" content="一生一芯学习笔记1【Verilator】">
+<meta property="og:url" content="https://redlightasl.github.io/2022/03/01/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90Verilator%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="[TOC] 在这里着重记述低功耗蓝牙BLE相关内容，库函数部分翻译自乐鑫官网文档 低功耗蓝牙（BLE）协议栈低功耗蓝牙协议是蓝牙通信协议的一种，BLE协议栈就是实现低功耗蓝牙协议的代码">
+<meta property="og:description" content="Verilator入门今年2月底报名了22年第四期一生一芯，借着这个机会学学前端设计相关内容 个人目标暂且定为：  设计一个五级流水，可挂载协处理器的RV32IMF指令集处理器 在两到三期内完成一生一芯规定的基础流片指标 挂载一个可用于图像处理的加速器 使用AMBA总线在片上集成一套用于水下机器人控制的外设（包括GPIO、UART、PWM、DCMI、DMA、MAC） 将自制的RTOS开发完毕并部署">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145125985-356995077.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145156859-489087209.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145156859-489087209.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145156859-489087209.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/20190726193026779.png">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/image-20210205162726034.png">
-<meta property="article:published_time" content="2021-11-19T07:00:10.000Z">
-<meta property="article:modified_time" content="2021-12-09T16:14:38.930Z">
+<meta property="article:published_time" content="2022-03-01T10:55:24.000Z">
+<meta property="article:modified_time" content="2022-03-01T10:56:13.441Z">
 <meta property="article:author" content="RedlightASl">
-<meta property="article:tag" content="ESP32">
+<meta property="article:tag" content="一生一芯">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145125985-356995077.png">
   
     <link rel="alternative" href="/atom.xml" title="红光今天吃什么" type="application/atom+xml">
   
@@ -171,14 +164,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ESP32-IDF学习3【经典蓝牙与BLE】" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-一生一芯学习笔记1【Verilator】" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ESP32_IDF学习3【经典蓝牙与BLE】
+      一生一芯学习笔记1【Verilator】
     </h1>
   
 
@@ -187,360 +180,166 @@
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T07:00:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+<a href="/2022/03/01/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90Verilator%E3%80%91/" class="archive-article-date">
+  	<time datetime="2022-03-01T10:55:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>[TOC]</p>
-<p>在这里着重记述低功耗蓝牙BLE相关内容，库函数部分翻译自乐鑫官网文档</p>
-<h1 id="低功耗蓝牙（BLE）协议栈"><a href="#低功耗蓝牙（BLE）协议栈" class="headerlink" title="低功耗蓝牙（BLE）协议栈"></a>低功耗蓝牙（BLE）协议栈</h1><p>低功耗蓝牙协议是蓝牙通信协议的一种，BLE协议栈就是实现低功耗蓝牙协议的代码</p>
-<span id="more"></span>
-
-<h2 id="层次协议"><a href="#层次协议" class="headerlink" title="层次协议"></a>层次协议</h2><p>蓝牙协议规定了两个层次的协议，分别为<strong>蓝牙核心协议</strong>（Bluetooth Core）和<strong>蓝牙应用层协议</strong>（Bluetooth Application）</p>
-<p>蓝牙核心协议就是对蓝牙技术本身的规范，不涉及其应用方式</p>
-<p>蓝牙应用层协议是在蓝牙核心协议的基础上，根据具体的应用需求定义出的特定策略</p>
-<p>蓝牙协议栈框图如下所示：</p>
-<p><img src="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145125985-356995077.png" alt="https://img2018.cnblogs.com/blog/653161/201912/653161-20191204145125985-356995077.png"></p>
-<h2 id="蓝牙核心协议（Bluetooth-Core）"><a href="#蓝牙核心协议（Bluetooth-Core）" class="headerlink" title="蓝牙核心协议（Bluetooth Core）"></a>蓝牙核心协议（Bluetooth Core）</h2><p>蓝牙核心协议包含BLE Controller和BLE Host两部分</p>
-<p>Controller负责定义RF、Baseband等偏硬件的规范</p>
-<p>Host负责在逻辑链路的基础上，进行更为友好的封装，这样就可以屏蔽掉蓝牙技术的细节，让Bluetooth Application更为方便的使用</p>
-<p><strong>Controller是工作在物理层、数据链路层、网络层、传输层的协议，Host则是工作在传输层 、会话层、表示层、应用层的协议，Host将Controller封装成可被配置为函数的形式供程序使用</strong></p>
-<p><img src="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145156859-489087209.png" alt="https://img2018.cnblogs.com/blog/653161/201912/653161-20191204145156859-489087209.png"></p>
-<h3 id="包含的层次简介"><a href="#包含的层次简介" class="headerlink" title="包含的层次简介"></a>包含的层次简介</h3><ol>
-<li>物理层（PHY）</li>
-</ol>
-<p>用于指定BLE所用的无线频段、调制解调方式和方法等</p>
-<p>BLE工作在1Mbps自适应跳频的GFSK射频，免于许可证的2.4GHz ISM（工业、课学、医疗）频段</p>
-<p><strong>可以直观理解为规定了BLE的天线部分</strong></p>
-<ol start="2">
-<li>链路层（LL——Link Layer）</li>
-</ol>
-<p><strong>BLE协议栈的核心</strong></p>
-<p><strong>相当于TCP/IP协议中的数据链路层（负责选择哪个射频通道，管理当前链路）+网络层（负责识别和发送空中数据包）+传输层（负责保证数据包安全、完整的发送、接收、重传等）</strong></p>
-<ol start="3">
-<li>主机控制接口层（HCI——Host Controller Interface）</li>
-</ol>
-<p>这一层是<strong>可选</strong>的，HCI主要用于2颗IC实现BLE协议栈的场合，用于贵方两者的通信协议和通信命令等</p>
-<h2 id="蓝牙应用协议（Bluetooth-Application）"><a href="#蓝牙应用协议（Bluetooth-Application）" class="headerlink" title="蓝牙应用协议（Bluetooth Application）"></a>蓝牙应用协议（Bluetooth Application）</h2><h3 id="包含的层次简介-1"><a href="#包含的层次简介-1" class="headerlink" title="包含的层次简介"></a>包含的层次简介</h3><ol start="4">
-<li>通用访问配置文件层（GAP——Generic access profile）</li>
-</ol>
-<p><strong>实际配置中常接触到的一层</strong></p>
-<p>GAP是对LL层有效数据包（payload）进行解析的两种方式中最简单的一种，主要用于<strong>广播、扫描、发起连接</strong>这些具体行为</p>
-<ol start="5">
-<li>逻辑链路控制及自适应协议层（L2CAP——Logical Link Control and Adaptation Protocol）</li>
-</ol>
-<p>这一层是对LL的简单封装，在L2CAP中区分出是使用加密通道还是普通通道，同时负责连接间隔的管理</p>
-<ol start="6">
-<li>安全管理层（SM——Security Manager）</li>
-</ol>
-<p>负责管理BLE连接的加密、安全，需要兼顾安全性和用户使用的便利性</p>
-<ol start="7">
-<li>属性协议层（ATT——Attribute protocol）</li>
-</ol>
-<p><strong>实际配置中最常接触到的一层</strong></p>
-<p>负责定义用户命令和命令操作的数据（如读写数据等）</p>
-<p>详细内容见后文【BLE的两种模式】和【ATT简述】</p>
-<ol start="8">
-<li>通用属性配置文件层（GATT——Generic Attribute profile）</li>
-</ol>
-<p><strong>实际配置中常接触到的一层</strong></p>
-<p>用于规范attribute中的数据内容（attribute见后文【BLE的两种模式】），并使用分组（group）来对attribute进行分类管理</p>
-<p>一般地，BLE在没有GATT的情况下也能跑，只不过互联互通会出现问题</p>
-<p>BLE<strong>需要在GATT和各种应用profile的支持</strong>下才能实现最便捷高效稳定的通信</p>
-<h1 id="BT与BLE的区别"><a href="#BT与BLE的区别" class="headerlink" title="BT与BLE的区别"></a>BT与BLE的区别</h1><p>当前的蓝牙协议分为基础率/增强数据率（BR/EDR）和低耗能（LE）两种技术类型</p>
-<p>经典蓝牙统称BT，低功耗蓝牙称为BLE</p>
-<h2 id="经典蓝牙模块（BT）"><a href="#经典蓝牙模块（BT）" class="headerlink" title="经典蓝牙模块（BT）"></a>经典蓝牙模块（BT）</h2><blockquote>
-<p>泛指支持蓝牙协议在4.0以下的模块，一般用于数据量比较大的传输。</p>
+        <h1 id="Verilator入门"><a href="#Verilator入门" class="headerlink" title="Verilator入门"></a>Verilator入门</h1><p>今年2月底报名了22年第四期<a target="_blank" rel="noopener" href="https://docs.ysyx.org/">一生一芯</a>，借着这个机会学学前端设计相关内容</p>
+<p>个人目标暂且定为：</p>
+<ul>
+<li>设计一个五级流水，可挂载协处理器的RV32IMF指令集处理器</li>
+<li>在两到三期内完成一生一芯规定的基础流片指标</li>
+<li>挂载一个可用于图像处理的加速器</li>
+<li>使用AMBA总线在片上集成一套用于水下机器人控制的外设（包括GPIO、UART、PWM、DCMI、DMA、MAC）</li>
+<li>将自制的RTOS开发完毕并部署在SoC上</li>
+<li>将芯片部署在一台ROV中并实现完整的机器人控制、水下图像识别任务</li>
+</ul>
+<p>希望能在本科期间把这一套东西做完……</p>
+<p>22年第四期一生一芯要求在开始之前需要自己搭建基于verilator+gtkwave的验证环境（预学习阶段），这里简单记录一下这部分的要点内容（<strong>教程不允许将自己代码发布到公开网站，这里遵守要求仅记录知识点和bug解决思路</strong>）</p>
+<p>这系列博文与其说是笔记，不如说是对这段学习经历的总结？</p>
+<h2 id="如何科学的提问"><a href="#如何科学的提问" class="headerlink" title="如何科学的提问"></a>如何科学的提问</h2><p>要求阅读<a target="_blank" rel="noopener" href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md">提问的智慧</a>和<a target="_blank" rel="noopener" href="https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md">别像弱智一样提问</a>并写800字读后感</p>
+<blockquote>
+<p>我的评价是：<strong>切中要害</strong></p>
 </blockquote>
-<p><strong>经典蓝牙模块</strong>可再细分为：<strong>传统蓝牙模块和高速蓝牙模块</strong>。</p>
-<p><strong>传统蓝牙模块</strong>在2004年推出，主要代表是支持蓝牙2.1协议的模块，在智能手机爆发的</p>
-<p>时期得到广泛支持。</p>
-<p><strong>高速蓝牙模块</strong>在2009年推出，速率提高到约24Mbps，是传统蓝牙模块的八倍。</p>
-<h2 id="低功耗蓝牙模块（BLE）"><a href="#低功耗蓝牙模块（BLE）" class="headerlink" title="低功耗蓝牙模块（BLE）"></a>低功耗蓝牙模块（BLE）</h2><blockquote>
-<p>指支持蓝牙协议4.0或更高的模块，也称为BLE模块（Bluetooth Low Energy Module）,最大的特点是成功和功耗的降低。</p>
+<p>里面的STFW，RTFM，RTFSC即<code>Search The Fucking Web</code>、<code>Read The Fucking Manual</code>、<code>Read The Fucking Source Code</code>，基本上就是程序员/芯片工程师/硬件工程师解决问题的三个基本方法。</p>
+<h3 id="硬件工程师"><a href="#硬件工程师" class="headerlink" title="硬件工程师"></a>硬件工程师</h3><p>选型：STFW从官网选型工具找到合适的芯片，RTFM从器件特性获得选型参考</p>
+<p>设计：通过STFW获得官方的教程支持，然后就是猛抄手册的参考电路</p>
+<p>调试：RTFM，RTFM还是RTFM，板级设计最需要参考的就是各种各样的用户手册</p>
+<p>不过相对程序员或者芯片工程师来说，硬件工程师的工作更依赖有经验的老师傅指导，因为很多时候网络上的东西会过时、不准，手册根本没法提供有用信息，甚至参考书都会对同一电路给出截然不同的分析结果，而一个调试过更多板子的老师傅往往能通过实际解决方案给新手更好的经验。而且作为硬件工程师，使用各种仪器往往比查找资料更重要</p>
+<h3 id="芯片工程师-程序员"><a href="#芯片工程师-程序员" class="headerlink" title="芯片工程师/程序员"></a>芯片工程师/程序员</h3><p>学习：STFW和RTFSC是最主要的学习方式，正如那句古语<code>Talk is cheap,show me your code</code>（虽然这是调bug时候用的），对于和代码相关的东西最好的学习手段就是去读它！</p>
+<p>框架设计：软件工程的思维很重要，不过对于芯片工程师来说硬件逻辑思维更重要，这需要一点点积累，不过通过RTFM和STFW往往能让新手快速成长（尤其是阅读理解水平……）</p>
+<p>调试：这下需要三个F共用了，软件调试虽然没有硬件调试那样的危险性，但是往往更加折磨——你需要反复地在bug和资料之间跳转，中途还需要思考自己的程序逻辑。在软件调试中，一个老手往往远不如一个科学上网工具（仅供google、github、StackOverflow使用），因为很多bug老手都不一定见过，这不像遵循半导体物理逻辑的模拟电路，虽然数字逻辑很明显，但bug的更新迭代速度会大于一个人的知识积累速度（笑）</p>
+<blockquote>
+<p>话说上面的内容都快800字了，不如直接把这篇博文交上去罢！</p>
 </blockquote>
-<p>蓝牙低功耗技术采用可变连接时间间隔，这个间隔根据具体应用可以设置为几毫秒到几秒不等。</p>
-<p>另外，因为BLE技术采用非常快速的连接方式，因此可以处于“非连接”状态（节省能源），此时链路两端相互间仅能知晓对方，必要时可以才开启链路，然后在尽可能短的时间内关闭链路。</p>
-<h2 id="其他分类"><a href="#其他分类" class="headerlink" title="其他分类"></a>其他分类</h2><p>按用途来分：蓝牙模块有<strong>数据</strong>蓝牙模块，<strong>语音</strong>蓝牙模块，<strong>串口</strong>蓝牙模块和<strong>车载</strong>蓝牙模块</p>
-<p>按芯片设计来分：蓝牙模块有flash版本和ROM版本。前者一般是BGA封装（球栅阵列封装），外置flash；后者一般是LCC封装（表面贴装型封装），外接EEPROM。</p>
-<h1 id="BLE的两种模式"><a href="#BLE的两种模式" class="headerlink" title="BLE的两种模式"></a>BLE的两种模式</h1><ol>
-<li>客户端 Client</li>
-</ol>
-<p>请求数据服务</p>
-<p><strong>客户端</strong>可以主动搜索并连接附近的服务端</p>
-<p>客户端类似蹭网的</p>
-<ol start="2">
-<li>服务端Server</li>
-</ol>
-<p>提供数据服务</p>
-<p><strong>服务端</strong>不需要进行主动设置，只要开启广播就可以让附近的客户端搜索到，并提供连接</p>
-<p>服务端类似被蹭网的wifi</p>
-<p>如果想要让ESP处于别人随时可以搜索连接的情况要配置为服务端；如果想让ESP通过扫描连接周围可连接的蓝牙设备，需要把它设置成客户端，<strong>正好和WiFi模式的设定相反</strong></p>
-<p>Server通过<strong>characteristic</strong>对数据进行封装，多个characteristic组成一个Service——Server是一个基本的BLE应用，如果某个<em>Service</em>是一个蓝牙联盟定义的标准服务，也可以称其为<em>profile</em></p>
-<p>要具体了解这些内容需要先了解属性协议层ATT</p>
-<h2 id="ATT简述"><a href="#ATT简述" class="headerlink" title="ATT简述"></a>ATT简述</h2><p><img src="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145156859-489087209.png" alt="https://img2018.cnblogs.com/blog/653161/201912/653161-20191204145156859-489087209.png"></p>
-<p>属性协议层ATT（Attribute Protocol）是GATT和GAP的基础，它定义了BLE协议栈上层的数据结构和组织方式；在层内，它定义了属性（Attribute）的内容，规定了访问属性的方法和权限</p>
-<p>属性是一个数据结构，<strong>它包括了数据类型和数据值，可以像C语言的结构体那样构造</strong></p>
-<p>属性包括三种类型：<strong>服务项</strong>、<strong>特征值</strong>和<strong>描述符</strong>，三者呈包含关系：服务项包含一个或多个特征值，特征值包含一个或多个描述符，多个服务项组织在一起，构成<strong>属性规范（Attribute Profile）</strong></p>
-<h3 id="属性的种类和分组"><a href="#属性的种类和分组" class="headerlink" title="属性的种类和分组"></a>属性的种类和分组</h3><p>属性大致可以分为三种类型：<strong>服务项Profile</strong>、<strong>特征值Characteristic</strong>和<strong>描述符Descriptor</strong></p>
-<p>最顶级为Profile, 下面是多个服务项(Service), 服务项下面是多个特征值(Characteristic), 特征值下面是多个描述符(Descriptor)</p>
-<p>每个设备都包含以下必要的特征值和服务项：</p>
-<p>PROFILE</p>
+<h2 id="Linux安装与使用（PA0）"><a href="#Linux安装与使用（PA0）" class="headerlink" title="Linux安装与使用（PA0）"></a>Linux安装与使用（PA0）</h2><p>这里就是基本的Linux使用内容，如果之前看过一些Linux教程会很快上手</p>
+<p>感觉里面最好的地方是有全套的git使用指导。如果有机会我一定会把这部分内容推荐给实验室的学弟学妹。教程里面把获取模板和git教程放到了一起，亲手做一遍全流程的感觉和看网上教程的感觉真的完全不一样，这部分内容也让我巩固了很多git方面的知识</p>
+<p>需要批评的是：个人感觉里面对于vim吹太过了。。。</p>
+<p>当然也有可能是本人水平有限抑或是还没能体会到vim的高效开发方式（但是作为一个使用vim也有两年多的人我并不感觉是这样）</p>
+<blockquote>
+<p>程序设计课上你学会了使用Visual Studio, 然后你可能会认为, 程序员就是这样写代码的了. 其实并不是,  程序员会追求那些提高效率的方法. 不是GUI不好, 而是你只是用记事本的操作方式来写代码. 所以你需要改变,  去尝试一些可以帮助你提高开发效率的工具.</p>
+<p>在GNU/Linux中, 与记事本的操作方式相比, 学会<code>vim</code>的基本操作就已经可以大大提高开发效率. 还有各种插件来增强<code>vim</code>的功能, 比如可以在代码中变量跳转的<code>ctags</code>等等. 你可以花点时间去配置一下<code>vim</code>, 具体配置方式请STFW. 总之, “编辑器之神”可不是浪得虚名的.</p>
+</blockquote>
+<p>在Linux中也是存在不少更符合直觉（易于入门）的代码编辑器可供使用，比如<code>vscode</code>、<code>sublime</code>，甚至系统自带的笔记本工具因为有代码高亮功能也常常被实验室的学长拿来写python（完事以后吐槽还是pycharm好用）</p>
+<p>虽然本人也是一个vim信仰用户（并不喜欢emacs那套操作），但在没有命令行的情况下还是更习惯于使用vscode</p>
+<blockquote>
+<p>有个猜想不一定对，写这段的学长是FSF Supporter比较排斥那几个non-free的编辑器？</p>
+<p>不管怎样，感觉给初学者灌输vim很nb的思想会导致知乎问题增多（大悲）</p>
+</blockquote>
+<p>教程中间还介绍到一些gcc(gdb)、tmux工具，感觉太棒了</p>
+<p>最后贴一下自己的vim配置罢，如果有需要的可以参考参考（这段应该不算教程代码）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">call plug#begin(&#x27;~/.vim/plugged&#x27;)</span><br><span class="line">&quot;plug installation</span><br><span class="line">Plug &#x27;vim-airline/vim-airline&#x27;</span><br><span class="line">Plug &#x27;vim-airline/vim-airline-themes&#x27;</span><br><span class="line">Plug &#x27;w0rp/ale&#x27;</span><br><span class="line">Plug &#x27;neoclide/coc.nvim&#x27;,&#123;&#x27;branch&#x27;:&#x27;release&#x27;&#125;</span><br><span class="line">Plug &#x27;preservim/nerdtree&#x27;</span><br><span class="line">Plug &#x27;kien/ctrlp.vim&#x27;</span><br><span class="line">Plug &#x27;junegunn/fzf&#x27;,&#123;&#x27;dir&#x27;:&#x27;~/.fzf&#x27;,&#x27;do&#x27;:&#x27;./install --all&#x27;&#125;</span><br><span class="line">Plug &#x27;junegunn/fzf.vim&#x27;</span><br><span class="line">Plug &#x27;Yggdroot/LeaderF&#x27;,&#123;&#x27;do&#x27;:&#x27;./install.sh&#x27;&#125;</span><br><span class="line">Plug &#x27;jiangmiao/auto-pairs&#x27;</span><br><span class="line">Plug &#x27;preservim/nerdcommenter&#x27;</span><br><span class="line">call plug#end()</span><br><span class="line"></span><br><span class="line">&quot;plug settings</span><br><span class="line"></span><br><span class="line">let g:coc_disable_startup_warning = 1</span><br><span class="line"></span><br><span class="line">&quot;ale settings</span><br><span class="line">let g:ale_set_highlights=0</span><br><span class="line"></span><br><span class="line">let g:ale_sign_error=&#x27;❌&#x27;</span><br><span class="line">let g:ale_sign_warning=&#x27;⚠&#x27;</span><br><span class="line">let g:ale_statusline_format=[&#x27;❌ %&#x27;,&#x27;⚠ %d&#x27;,&#x27;√ OK&#x27;]</span><br><span class="line">let g:ale_echo_msg_error_str=&#x27;E&#x27;</span><br><span class="line">let g:ale_echo_msg_warning_srt=&#x27;W&#x27;</span><br><span class="line">let g:ale_echo_msg_format=&#x27;[%linter%] %s [% severity %]&#x27;</span><br><span class="line">let g:ale_lint_on_enter=0</span><br><span class="line"></span><br><span class="line">let g:NERDTreeIndicatorMapCustom=&#123;</span><br><span class="line">	\&quot;Modified&quot;:&quot;&quot;,</span><br><span class="line">	\&quot;Clean&quot;:&quot;√&quot;,</span><br><span class="line">	\&quot;Dirty&quot;:&quot;❌&quot;,</span><br><span class="line">	\&quot;Unknown&quot;:&quot;?&quot;</span><br><span class="line">\&#125;</span><br><span class="line"></span><br><span class="line">&quot;vim-airline settings</span><br><span class="line">&quot;set laststatus=2 &quot;show status forever</span><br><span class="line">&quot;let g:airline_poweline_fonts=1</span><br><span class="line">&quot;let g:airline#extensions#tabline#enabled=1 &quot;show window-tab and buffer</span><br><span class="line"></span><br><span class="line">&quot;nerdtree settings</span><br><span class="line">autocmd bufenter * if(winnr(&quot;$&quot;)==1 &amp;&amp; exists(&quot;b:NERDTree&quot;) &amp;&amp; b:NERDTree.isTabTree()) | q | endif</span><br><span class="line">let g:NERDTreeDirArrowExpandable=&#x27;→&#x27;</span><br><span class="line">let g:NERDTreeDirArrowCollapsible=&#x27;▼&#x27;</span><br><span class="line">let NERDTreeAutoCenter=1</span><br><span class="line">let NERDTreeShowLineNumbers=1</span><br><span class="line">let NERDTreeShowHidden=1</span><br><span class="line">let NERDTreeWinSize=40</span><br><span class="line">let g:nerdtree_tabs_open_on_console_startup=1</span><br><span class="line">let NERDTreeIgnore=[&#x27;\.pyc&#x27;,&#x27;\~$&#x27;,&#x27;.swp&#x27;]</span><br><span class="line"></span><br><span class="line">&quot;vim settings</span><br><span class="line">colorscheme slate</span><br><span class="line">syntax enable</span><br><span class="line">syntax on</span><br><span class="line">filetype on</span><br><span class="line">filetype plugin on</span><br><span class="line">filetype indent on</span><br><span class="line"></span><br><span class="line">&quot;encoding settings</span><br><span class="line">set encoding=utf-8</span><br><span class="line"></span><br><span class="line">&quot;parameter settings</span><br><span class="line">set sts=4</span><br><span class="line">set shiftwidth=4</span><br><span class="line">set backspace=2</span><br><span class="line">set tabstop=4</span><br><span class="line"></span><br><span class="line">&quot;basic states settings</span><br><span class="line">set autoindent</span><br><span class="line">set autochdir</span><br><span class="line">set smartindent</span><br><span class="line">set cindent</span><br><span class="line">set paste</span><br><span class="line">set showmode</span><br><span class="line">set ruler</span><br><span class="line">set wrap</span><br><span class="line">set foldenable</span><br><span class="line">set foldmethod=syntax</span><br><span class="line">set foldcolumn=0</span><br><span class="line"></span><br><span class="line">&quot;show line_number</span><br><span class="line">&quot;set nu</span><br><span class="line">set number</span><br><span class="line"></span><br><span class="line">&quot;set relativenumber</span><br><span class="line"></span><br><span class="line">&quot;mouse setting</span><br><span class="line">set mouse=a</span><br><span class="line">set selection=exclusive</span><br><span class="line">set selectmode=mouse,key</span><br><span class="line"></span><br><span class="line">&quot;highlight line</span><br><span class="line">&quot;set cursorline</span><br><span class="line">&quot;set cul</span><br><span class="line"></span><br><span class="line">&quot;highlight column</span><br><span class="line">&quot;set cursorcolumn</span><br><span class="line">&quot;set cuc</span><br><span class="line"></span><br><span class="line">&quot;show brackets</span><br><span class="line">set showmatch</span><br><span class="line">set matchtime=2</span><br><span class="line"></span><br><span class="line">set hlsearch</span><br><span class="line">set noerrorbells</span><br><span class="line">set novisualbell</span><br><span class="line">set t_vb=</span><br><span class="line"></span><br><span class="line">set magic</span><br></pre></td></tr></table></figure>
+
+<h2 id="搭建verilator仿真环境"><a href="#搭建verilator仿真环境" class="headerlink" title="搭建verilator仿真环境"></a>搭建verilator仿真环境</h2><p>通篇都在为读者灌输<strong>RTFM</strong>！</p>
+<p>不看手册根本做不了这些东西（看了以后也不一定做的来，因为需要反复实验去理解）</p>
+<p>这就是我作为iverilog初心者的唯一想法</p>
+<p>之前没接触过c++写testbench（大伙都是v/sv，也没碰过soc验证，不会有人写c++罢（激寒）），于是在按老思路写tb的时候就四处碰壁。悲从中来想到RTFM，然后视野一下子打开力！</p>
+<p>这段内容包括编译源码、使用双控开关测试程序、通过打印波形了解gtkwave（本人用的是vscode的<em>wavetrace</em>插件，在信号数量少的时候很好用）和接入nvboard来练习使用自己搭建的测试环境，中途还掺杂了不少Makefile私货，笔者从中学到了很多，最大的感触就是<del>CMake果然好难（错乱）</del></p>
+<p>值得一提的是笔者在编译verilator的时候首先用的是cygwin（只是因为懒得开linux），后来发现需要更改官方提供的shell script才能正常使用，于是就放弃了，希望以后能有其他更强的同学尝试为windows做一下移植罢，我还是比较胆小怕改坏东西影响后面进度的（</p>
+<p>不过本人感觉比较不方便的就是整体要求sim内的git追踪代码保持完整——这样真的不会导致垃圾提交过多吗？虽然本人一直喜欢垃圾提交（从本Note的git log中就可以看出来，我平常写代码都是写多少提交多少，而且一般不去清理branch），但是感觉对于新手来说回溯版本要从一大堆垃圾代码中找到有用的版本太难受了（悲）——即使之前有提示可以手动控制提交和查看特定的git log。考虑到一生一芯要求原创作品的特殊性，这样严格的追踪倒容易理解，只是感觉会让萌新很狂躁（是的就是我）</p>
+<blockquote>
+<p>笔者起初在官方Makefile上面大概特改的时候注释掉了代码追踪部分，等到双控开关全部测试ok以后再恢复的代码，结果发现就这一个commit很可能引起评审人员误会，于是决定之后就不再修改sim部分的代码追踪力</p>
+<p>希望以后的git log不会出现一大坨（悲）</p>
+</blockquote>
+<h3 id="verilator简介"><a href="#verilator简介" class="headerlink" title="verilator简介"></a>verilator简介</h3><p>以下内容均来自<a target="_blank" rel="noopener" href="https://verilator.org/guide/latest/index.html">官方文档</a></p>
+<p>Verilator是一个高性能的Verilog HDL模拟器（另外包含了lint系统），允许用户通过C++/SystemC对rtl进行验证，对应文件通过实例化用户顶层模块的“Verilate化”模型来让C程序能够调用rtl“程序”。工具会自动生成一系列C++/SystemC文件，这些文件由C++编译器（gcc/clang/MSVC++）进行编译，并通过最终生成的可执行文件执行设计模拟。</p>
+<p>上面这一系列流程都可以用verilator自带的参数来解决</p>
+<blockquote>
+<p>Verilator does not simply convert Verilog HDL to C++ or SystemC. Rather, Verilator compiles your code into a much faster optimized and optionally thread-partitioned model, which is in turn wrapped inside a C++/SystemC module. The results are a compiled Verilog model that executes even on a single-thread over 10x faster than standalone SystemC, and on a single thread is about 100 times faster than interpreted Verilog simulators such as <a target="_blank" rel="noopener" href="http://iverilog.icarus.com/">Icarus Verilog</a>. Another 2-10x speedup might be gained from multithreading (yielding 200-1000x total over interpreted simulators).</p>
+<p>Verilator has typically similar or better performance versus the closed-source Verilog simulators (Carbon Design Systems Carbonator, Modelsim, Cadence Incisive/NC-Verilog, Synopsys VCS, VTOC, and Pragmatic CVer/CVC). But, Verilator is open-sourced, so you can spend on computes rather than licenses. Thus Verilator gives you the best cycles/dollar.</p>
+<p>Verilator不会简单地将Verilog HDL转换为C++或SystemC。Verilator可以将代码编译为速度优化的与可选的线程分区模型，这些模型封装在C++/SystemC/Python模块中。经过编译的Verilog模型，即使在单线程上执行的速度也比独立SystemC快10倍以上，并且在单线程上的执行速度比诸如Icarus Verilog之类的解释Verilog模拟器快100倍。多线程可能还会使速度提高2-10倍（在解释型模拟器上总共可以提高200-1000倍）</p>
+<p>Verilator与同型号闭源Verilog模拟器具有相似甚至更好的性能表现（比如M家、S家、C家和大多数商业EDA工具）。但Verilator是开源的，所以用户可以直接在电脑上安装而不用考虑许可证。因此Verilator可以为用户提供最佳性价比选项</p>
+</blockquote>
+<h3 id="Verilator安装"><a href="#Verilator安装" class="headerlink" title="Verilator安装"></a>Verilator安装</h3><p>通过github可以获取到源码</p>
+<p>linux下面只要使用官网给出的指令安装好依赖工具即可；而在cygwin下需要先看好要使用哪些工具再提前安好</p>
+<p>在linux下可以通过autoconfig-make工具链完成安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd &lt;verilator-dir&gt;</span><br><span class="line">autoconfig</span><br><span class="line">./configure</span><br><span class="line">make #或make -j使用多核编译</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p>需要注意：如果硬在windows下安装工具，需要准备一个cygwin环境——因为automake需要这个环境，而Verilator并不支持CMake</p>
+<p>在cygwin安装后就可以直接通过windows下的make工具调用mingw-gcc进行构建</p>
+<p>群内还有老哥提供了WSL内安装的方式，总体流程和linux类似，笔者配完后用vscode的wsl远程功能跑了一下，verilator是能够正常运行的；不过没有测试后面的nvboard等能否正常运行</p>
+<p>安装成功是否可以用以下指令测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">verilator --version</span><br></pre></td></tr></table></figure>
+
+<p>官方提供了一个example</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">module</span> our;</span><br><span class="line"><span class="keyword">initial</span> <span class="keyword">begin</span> </span><br><span class="line">    <span class="built_in">$display</span>(<span class="string">&quot;Hello World&quot;</span>); </span><br><span class="line">    <span class="built_in">$finish</span>; </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Vour.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;verilated.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>** argv, <span class="keyword">char</span>** env)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	VerilatedContext* contextp = <span class="keyword">new</span> VerilatedContext;</span><br><span class="line">	contextp-&gt;<span class="built_in">commandArgs</span>(argc, argv);</span><br><span class="line">	Vour* top = <span class="keyword">new</span> Vour&#123;contextp&#125;;</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">while</span> (!contextp-&gt;<span class="built_in">gotFinish</span>()) </span><br><span class="line">    &#123; </span><br><span class="line">        top-&gt;<span class="built_in">eval</span>(); </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">delete</span> top;</span><br><span class="line">	<span class="keyword">delete</span> contextp;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>它可以在命令行上输出一个helloworld字符串</p>
+<p>其中<code>top-&gt;eval(); </code>语句是为了在每个时钟周期获取对应的输出数据</p>
+<p><code>contextp</code>是一个专门用来设置仿真环境的指针</p>
+<p>在使用c++编写testbench的时候，需要包含</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Include common routines</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;verilated.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Include model header, generated from Verilating &quot;top.v&quot;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Vtop.h&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>这两个头文件，其中Vtop.h是从verilog顶层封装文件中编译得到的，原文件名如果是a.v，那么得到的头文件应为Va.h；verilated.h文件则是verilator的头文件，包含了编写testbench所需的类封装</p>
+<p>需要用到以下参数：</p>
 <ul>
-<li>Generic Access Service（Primary Service）<ul>
-<li>Device Name（Characteristic）</li>
-<li>Appearance（Characteristic）</li>
+<li>-Wall：启用所有警告信息（Warning All）</li>
+<li>–cc：生成c++输出文件</li>
+<li>–exe：在目标程序有c/c++/systemc顶层封装（testbench）的时候输出一个可执行程序而不是c库文件。启用这个参数后verilator会生成一个Makefile</li>
+<li>–build：verilator会自动调用输出的Makefile完成编译</li>
 </ul>
-</li>
-<li>Generic Attribute Service（Primary Service）<ul>
-<li>Service Changed（Characteristic）<ul>
-<li>CCCD（Descriptor）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="服务项Service"><a href="#服务项Service" class="headerlink" title="服务项Service"></a>服务项Service</h3><p>服务项这种类型本身并不包含数据，仅仅相当于是一个<strong>容器</strong>，用来<strong>容纳特征值</strong></p>
-<h3 id="特征值characteristic"><a href="#特征值characteristic" class="headerlink" title="特征值characteristic"></a>特征值characteristic</h3><p>特征值用于<strong>保存用户数据</strong>，但它也有自己的UUID——可以把它看作一个变量，变量里存着数据（用户数据），也有自己的地址信息（UUID）</p>
-<p>使用特征值时，也要遵循“先声明再赋值”的步骤——先声明特征值自身，再声明它的项</p>
-<p>一个characteristic包含三种条目：</p>
-<ol>
-<li>characteristic声明：每个characteristic的分界符，解析时一旦遇到一个声明，就可以认为接下来又是一个新的characteristic；声明还包含了接下来characteristic值的读写属性等</li>
-<li>characteristic值：数据的值</li>
-<li>characteristic描述符：数据的额外信息</li>
-</ol>
-<p>一般BLE的属性体系在系统中以GattDB表示，即<strong>属性数据库</strong>，gattDB是BLE协议栈在内存中开辟的一段专有区域，会在特定的时候写入Flash进行保存，并在启动时读取出来回写到内存中去，但<strong>并非所有的BLE数据通信是操作gattDB</strong></p>
-<p>characteristic用<strong>Attribute</strong>数据结构来实现</p>
-<h3 id="属性Attribute的数据结构"><a href="#属性Attribute的数据结构" class="headerlink" title="属性Attribute的数据结构"></a>属性Attribute的数据结构</h3><p>Attribute由四部分组成：</p>
-<ol>
-<li><p>属性句柄Attribute handle：可以视为<strong>指向属性实体的指针</strong>，对端设备通过属性句柄来访问某个属性，大小2字节，起始于0x0001，系统初始化时，各属性的句柄逐步+1，但最大不超过0xFFFF</p>
-</li>
-<li><p>属性类型Attribute type：用以区分当前属性是服务项或是特征值等，用通用唯一识别码（<strong>UUID</strong>）标识的16字节十六进制字符串（形如f6257d37-34e5-41dd-8f40-e308210498b4，从网上抄来的示例，如有雷同那就是雷同）表示。一个合法的UUID，一定是随机的、全球唯一的，不应该出现两个相同的UUID。属性类型分类如下：</p>
+<h3 id="使用Make-CMake调用Verilator"><a href="#使用Make-CMake调用Verilator" class="headerlink" title="使用Make/CMake调用Verilator"></a>使用Make/CMake调用Verilator</h3><p>Verilator支持make/cmake工具，make工具只需要按照shell script那样写脚本即可，CMake比较特殊：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">project</span>(cmake_example)</span><br><span class="line"><span class="keyword">find_package</span>(verilator HINTS $ENV&#123;VERILATOR_ROOT&#125;)</span><br><span class="line"><span class="keyword">add_executable</span>(Vour sim_main.cpp)</span><br><span class="line">verilate(Vour SOURCES our.v)</span><br></pre></td></tr></table></figure>
+
+<p>上面是官网给出的示例，这里将verilator作为一个依赖包调入，并通过<code>verilate()</code>函数执行</p>
+<p>函数内可以后缀各种参数，详情可以查看<a target="_blank" rel="noopener" href="https://verilator.org/guide/latest/verilating.html#c-and-systemc-generation">官方文档对应页面</a></p>
+<blockquote>
+<p>笔者在Makefile里面写了四个Target：</p>
 <ul>
-<li>首要服务项Primary Service</li>
-<li>次要服务项Secondary Service</li>
-<li>包含服务项Include</li>
-<li>特征值Characteristic</li>
+<li>run：编译并输出</li>
+<li>sim：用于输出gtkwave仿真文件</li>
+<li>sim_nvboard：用于在nvboard上仿真</li>
+<li>clean：用于清除之前的编译结果</li>
 </ul>
-<p>他们与UUID的映射关系如下：</p>
+</blockquote>
+<h3 id="使用Verilator生成仿真文件"><a href="#使用Verilator生成仿真文件" class="headerlink" title="使用Verilator生成仿真文件"></a>使用Verilator生成仿真文件</h3><p>使用<code>--trace</code>参数来让verilator输出仿真文件</p>
+<p>需要注意：Verilator将rtl编译为C++对象，其端口编译为对象的属性，通过<code>-&gt;</code>运算符来调用</p>
+<p>这段内容摘自官网的FAQ</p>
+<blockquote>
+<p>不知为何这么重要的东西没有被写到正文里=-=</p>
+<p>是我没看仔细吗（恼）</p>
+</blockquote>
+<p>在c++的testbench里调用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;verilated_vcd_c.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">VerilatedVcdC* tfp = <span class="keyword">new</span> VerilatedVcdC; <span class="comment">//初始化VCD对象指针</span></span><br><span class="line">Verilated::<span class="built_in">traceEverOn</span>(<span class="literal">true</span>); <span class="comment">//打开追踪功能</span></span><br><span class="line">tfp-&gt;<span class="built_in">open</span>(<span class="string">&quot;testbench.vcd&quot;</span>); <span class="comment">//设置输出的文件</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就能使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tfp-&gt;<span class="built_in">dump</span>(contextp-&gt;<span class="built_in">time</span>());</span><br></pre></td></tr></table></figure>
+
+<p>来记录当前的信号值到VCD文件中了</p>
+<p>如果需要推进时间，可以使用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">contextp-&gt;<span class="built_in">timeInc</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>其中contextp是<code>VerilatedContext</code>指针，用于配置仿真文件的上下文</p>
+<blockquote>
+<p>需要强调一下：Verilator的思路是把rtl文件当作一个可以执行的“函数”，通过把他抽象为对象来执行各种操作</p>
+<p>在C++ testbench中的仿真并不是v/sv那样的并行化思路，而是串行的，所以每个时钟周期都需要调用timeInc()来推进时间轴</p>
+</blockquote>
+<p>官方例程中使用了智能指针来管理内存，如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span>const std::unique_ptr<span class="meta-string">&lt;VerilatedContext&gt;</span> contextp&#123;new VerilatedContext&#125;; <span class="comment">//智能指针，可以自动管理内存</span></span></span><br><span class="line"><span class="keyword">const</span> std::unique_ptr&lt;Vtop&gt; top&#123;<span class="keyword">new</span> Vtop&#123;contextp.<span class="built_in">get</span>(), <span class="string">&quot;TOP&quot;</span>&#125;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>例程中使用的参数为<code>-Wall -cc --exe -Os -x-assign 0 --assert --coverage --trace</code></p>
+<h3 id="Verilator优化"><a href="#Verilator优化" class="headerlink" title="Verilator优化"></a>Verilator优化</h3><p>Verilator支持下面这些参数来对rtl进行优化编译</p>
 <ul>
-<li>0x1800 – 0x26FF ：服务项类型</li>
-<li>0x2700 – 0x27FF ：单位</li>
-<li>0x2800 – 0x28FF ：属性类型</li>
-<li>0x2900 – 0x29FF ：描述符类型</li>
-<li>0x2A00 – 0x7FFF ：特征值类型</li>
+<li>O3：最优化编译结果，会导致编译rtl的时间变长</li>
+<li>–x-assign fast：优化rtl执行效率，可能会增加某些bug出现的风险</li>
+<li>–x-initial fast：优化rtl执行效率，可能会增加某些bug出现的风险</li>
+<li>–noassert：不启用断言功能</li>
 </ul>
-<p>为了减少传输的数据量，BLE协议做了一个转换约定，给定一个固定的16字节模板，只设置2个字节为变化量，其他为常量，2字节的UUID在系统内部会被替换，进而转换成标准的16字节UUID；反之，如果一个特征值的UUID是16字节的，在系统内部它的属性类型也可能写成第3、4字节组成的双字节</p>
-<p>示例如下：</p>
-<p>UUID模板为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0000XXXX-0000-1000-8000-00805F9B34FB</span><br></pre></td></tr></table></figure>
-
-<p>其中从左数第3、4个字节“XXXX”就是变化位，其他为固定位。如：UUID=0x2A00在系统内部会转换成00002A00-0000-1000-8000-00805F9B34FB。</p>
-</li>
-<li><p>属性值Attribute value：真正的数据值，大小为0-512字节。如果该属性是服务项类型或者是特征值声明类型，那么它的属性值就是UUID等信息；如果是普通的特征值，则属性值是用户的数据，属性值需要预留空间以保存用户数据，<strong>可以将属性值的预留空间看做I2C的数据空间，操作特征值里的用户数据，就是对那块内存空间进行读写</strong>，==所以启用蓝牙后会占用额外的内存==</p>
-</li>
-<li><p>属性权限Attribute permissions：Attribute的权限属性，主要有四种：</p>
-<ul>
-<li>访问权限（Access Permission）：只读或只写或读写</li>
-<li>加密权限（Encryption Permission）：加密或不加密</li>
-<li>认证权限（Authentication Permission）：需要认证或无需认证。指相互确认对方身份，BLE中所说的“认证”过程就是设备配对</li>
-<li>授权权限（Authorization Permission）：需要授权或无需授权。指对授信设备开放权利</li>
+<p>详细解释可以参考官方文档</p>
+<p>使用<code>--coverage</code>可以让Verilator支持SystemVerilog中的<em>代码覆盖率分析</em>功能</p>
+<p>如果不指定Ox参数，Verilator会默认使用Os，这只会让代码得到最基础的优化</p>
+<h3 id="其他常用Verilator参数"><a href="#其他常用Verilator参数" class="headerlink" title="其他常用Verilator参数"></a>其他常用Verilator参数</h3><ul>
+<li>–lint-only：使用verilator作为代码检查工具；如果使用该参数，verilator不会生成任何输出文件</li>
+<li>–sc：生成SystemC输出文件</li>
+<li>–xml-only：只生成xml文件，可以通过<code>--xml-output &lt;filename&gt;</code>参数指定生成的xml文件名。xml文件可用于提供给下级工具，从而跨工具链</li>
+<li>–assert：启用所有断言功能</li>
 </ul>
-<p>授权的管控等级要高于认证，认证的设备未必被授权，授权的设备一定是认证的——<strong>认证是授权的充分不必要条件</strong>。认证是设备配对，两边都符合协议规定就行，但是授权取决于Server设备对Client设备的主动许可。</p>
-<p>一个没有经过认证的设备，被称为<strong>未知设备（Unknown Device）</strong>；经过了认证，该设备会在绑定信息中被标记为Untrusted，被称为<strong>不可信设备（Untrusted Device）</strong>；经过了认证，并且在绑定信息中被标记为Trusted的设备被称为<strong>可信设备（Trusted Device）</strong></p>
-<p>具体的权限示例如下所示：</p>
-<ul>
-<li>Open（随意读写）</li>
-<li>No Access（禁止读写）</li>
-<li>Authentication（需要配对才能读写，分成很多子类型用于适配配对的类型）</li>
-<li>Authorization（允许应用在回调函数中读写）</li>
-<li>Signed（签名后才能随意读写）</li>
-</ul>
-</li>
-</ol>
-<h3 id="属性协议ATT-PDU"><a href="#属性协议ATT-PDU" class="headerlink" title="属性协议ATT PDU"></a>属性协议ATT PDU</h3><p>拥有一组属性的设备称为服务端（Server）；读写该属性值的设备称为客户端（Client）</p>
-<p>Client和Server之间通过<strong>ATT PDU</strong>通信</p>
-<p>属性协议ATT PDU共有6种，如下表所示：</p>
-<table>
-<thead>
-<tr>
-<th>ATT PDU种类</th>
-<th>发送方向</th>
-<th>触发响应</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>Command</td>
-<td>Client -&gt; Server</td>
-<td>–</td>
-<td>客户端发送Command，服务器无需任何返回</td>
-</tr>
-<tr>
-<td>Request</td>
-<td>Client -&gt; Server</td>
-<td>Response</td>
-<td>客户端发送Request，服务器需要返回一个Response，表明服务器收到</td>
-</tr>
-<tr>
-<td>Response</td>
-<td>Server -&gt; Client</td>
-<td>–</td>
-<td></td>
-</tr>
-<tr>
-<td>Notification</td>
-<td>Server -&gt; Client</td>
-<td>–</td>
-<td>服务器发送Notification，户端无需任何返回</td>
-</tr>
-<tr>
-<td>Indication</td>
-<td>Server -&gt; Client</td>
-<td>Confirmation</td>
-<td>服务器发送Indication，客户端需要返回一个Confirmation，表明客户端收到</td>
-</tr>
-<tr>
-<td>Confirmation</td>
-<td>Client -&gt; Server</td>
-<td>–</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>BLE下，所有命令都是“必达”的，每个命令发送完毕后，发送者会等待ACK信息（类似I2C），如果收到了ACK包，发起方认为命令完成；否则发起方会一直重传该命令直到超时导致BLE连接断开（类似CAN的出错重发机制），可以说<strong>只要数据包放到了协议栈射频FIFO中，蓝牙协议栈就能保证该数据包“必达”对方</strong>，但是没有回复相对有回复就是“不太可靠”，这时候就需要特殊的“有回复属性”</p>
-<h3 id="Request后缀"><a href="#Request后缀" class="headerlink" title="Request后缀"></a>Request后缀</h3><p>特别地，如果一个命令需要response，那么可以在相应命令后面加上request后缀，这个response包<strong>在应用层有回调事件</strong>，可以用于触发特殊的功能，这是默认的协议ACK恢复不具有的，采用request/response方式，应用层可以按顺序地发送一些数据包；如果一个命令只需要ACK而不需要response，那么它的后面就不会带request</p>
-<p>然而Request/response会大大降低通信的吞吐率，因为request/response必须在不同的连接间隔中出现，这就导致两个连接间隔最多只能发一个数据包，而不带request后缀的ATT命令就没有这个问题——一般情况下，在同一个连接间隔中可以同时发多个数据包，这样将大大提高数据的吞吐率</p>
-<p>常用的带request命令：所有read命令，writerequest，indication等</p>
-<p>常用的不带request命令：write command，notification等</p>
-<h2 id="通用属性协议GATT简述"><a href="#通用属性协议GATT简述" class="headerlink" title="通用属性协议GATT简述"></a>通用属性协议GATT简述</h2><p>GATT(Generic Attribute Profile)，描述了一种使用ATT的服务框架。该框架定义了服务(Server)和服务属性(characteristic)的过程(Procedure)及格式，负责处理具体数据段通过蓝牙连接的发送和接收</p>
-<p><strong>现在的BLE大多建立在GATT协议之上</strong>，GATT建立在ATT和L2CAP之上，GATT需要使用通用访问协议GAP来确定设备的连接</p>
-<p><img src="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/653161-20191204145156859-489087209.png" alt="https://img2018.cnblogs.com/blog/653161/201912/653161-20191204145156859-489087209.png"></p>
-<h3 id="通用访问协议GAP"><a href="#通用访问协议GAP" class="headerlink" title="通用访问协议GAP"></a>通用访问协议GAP</h3><p>GAP 使设备被其他设备可见，并决定了当前设备是否可以或者怎样与合同设备进行交互</p>
-<p>GAP中，设备被分为<strong>外围设备Peripheral</strong>和<strong>中心设备Central</strong></p>
-<p>外围设备：性能相对较弱、功耗相对低的设备，他们通常被连接到更加强大的中心设备</p>
-<p>中心设备：性能相对较强、功耗较高的设备</p>
-<h4 id="GAP广播"><a href="#GAP广播" class="headerlink" title="GAP广播"></a>GAP广播</h4><p>GAP 中外围设备不停向外广播以让中心设备知道它的存在。通过两种方式向外广播数据： </p>
-<p>广播数据（Advertising Data Payload）：<em>必须的</em>，外设需要以此来和中心设备取得连接</p>
-<p>扫描回复（Scan Response Data Payload）：<em>可选的</em>，中心设备可以向外围设备请求扫描回复，向其提供一些设备的额外信息</p>
-<p>外围设备会设定一个广播建个，每个间隔中，它会重新发送自己的广播数据，<strong>广播间隔越长约省电，但同时更不容易被扫描到</strong></p>
-<p>基于GATT广播的BLE连接只能是<strong>一个外围设备连接一个中心设备</strong>，可以理解成一个蓝牙耳机只能连接一台手机，不能同时连接两台手机</p>
-<h4 id="GATT协议"><a href="#GATT协议" class="headerlink" title="GATT协议"></a>GATT协议</h4><p>GATT协议建立在ATT协议的基础上。将ATT协议中的Service、Characteristic 及对应数据都保存在一个查找表中，查找表使用16位的ID作为索引。建立GATT连接前必须先经过GAP协议</p>
-<p><strong>GATT连接是独占的</strong>，也就是说同一个BLE外设（外部设备）同时只能被一个中心设备连接，一旦外设被连接，它就会停止GAP广播，对其它设备不可见；当设备断开时它又开始广播。</p>
-<p>如果中心设备和外设<strong>需要双向通信，唯一的方式就是建立GATT连接</strong>，GAP通信是单向的，只能让中心设备向外设发送信息</p>
-<p>GATT通信双方是C/S关系，外设作为GATT的Server，维持ATT查找表、Service、Characteristic定义；中心设备作为GATT的Client，向Server发起请求，所有通信事件都由中心设备Client发起，从Server接收响应。一旦连接建立，外设将会给中心设备建议一个<strong>连接间隔</strong>，中心设备<em>可以选择</em>在每个连接间隔尝试重新连接，检查是否有新数据，不过这个间隔只是建议，中心设备可以不严格按照这个间隔执行请求。</p>
-<h4 id="GATT结构"><a href="#GATT结构" class="headerlink" title="GATT结构"></a>GATT结构</h4><p>GATT结构建立在ATT的属性Attribute数据结构之上（其实和ATT的那些东西一模一样）</p>
-<p><strong>Attribute结构体组成种类不同的Characteristic，多个Characteristic被封装在Servce容器中，Characteristic和Service容器都有着自己的UUID（有官方认证的16位UUID和自定义的128位UUID），各种常用的Service集合成Profile</strong></p>
-<p>BLE外设的通信主要通过Characteristic，通过在Characteristic中读写数据就实现了双向通信，也可以通过实现类似串口的Service来配置TxCharacteristic和RxCharacteristic，这些都是具体项目的选择了</p>
-<h1 id="BLE从初始化到建立连接的过程简述"><a href="#BLE从初始化到建立连接的过程简述" class="headerlink" title="BLE从初始化到建立连接的过程简述"></a>BLE从初始化到建立连接的过程简述</h1><ol>
-<li>外围设备开始广播，发送完一个广播包后T_IFS，开启射频Rx窗口接收来自中心设备的数据包</li>
-<li>中心设备扫描到广播，在收取此广播T_IFS后如果开启了中心设备的扫描回复，中心设备将向外设发送回复</li>
-<li>外设收取到中心设备的回复，做好接收准备，并返回ACK包</li>
-<li>如果ACK包未被中心设备接收到，中心设备将一直发送回复直到超时，此期间内只要外设返回过一次ACK包就算连接成功</li>
-<li>开始建立通信，后续中心设备将以收取到外设广播的时间为原点，以Connection Interval为周期向外设发送数据包，数据包将具有两个作用：<strong>同步两设备时钟</strong>和<strong>建立主从模式通信</strong></li>
-</ol>
-<p>外设每收到中心设备的一个包，就会把自己的时序原点重新设置，以和中心设备同步（Service向Client同步）</p>
-<p>BLE通信在建立成功后变为主从模式，<strong>中心设备Central变为Master，外设Peripheral变为Slave</strong>，Slave只能在Master向它发送了一个包以后才能在规定的时间内把自己的数据回传给Master</p>
-<ol start="6">
-<li>连接建立成功</li>
-<li>外设自动停止广播，其他设备无法再查找到该外设</li>
-<li>按照以下时序进行通信，在中心设备发送包的间隔内，外设可以发送多个包</li>
-</ol>
-<p><img src="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/20190726193026779.png" alt="在这里插入图片描述"></p>
-<ol start="8">
-<li>需要连接断开时只需要中心设备停止连接（停止发送包）即可</li>
-<li>中心设备可以将外设的addr写入Flash或SRAM等存储器件，保持监听此addr，当再次收到外设广播时就可以建立通信。BLE Server设备为了省电，当一段时间内没有数据要发送时，可以不再发送包，双方就会因为连接超时（connection timeout）断开，这时需要中心设备启动监听，这样，当BLE Server设备需要发送数据时，就可以再次连接</li>
-</ol>
-<h1 id="ESP的蓝牙外设配置"><a href="#ESP的蓝牙外设配置" class="headerlink" title="ESP的蓝牙外设配置"></a>ESP的蓝牙外设配置</h1><h2 id="蓝牙配置相关库函数"><a href="#蓝牙配置相关库函数" class="headerlink" title="蓝牙配置相关库函数"></a>蓝牙配置相关库函数</h2><h3 id="相关头文件及其作用"><a href="#相关头文件及其作用" class="headerlink" title="相关头文件及其作用"></a>相关头文件及其作用</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;bt.h&quot;</span><span class="comment">//蓝牙控制器和VHCI设置头文件</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;esp_gap_ble_api.h&quot;</span><span class="comment">//GAP设置头文件，广播和连接相关参数配置</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;esp_gatts_api.h&quot;</span><span class="comment">//GATT配置头文件，创建Service和Characteristic</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;esp_bt_main.h&quot;</span><span class="comment">//蓝牙栈空间的初始化头文件</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="蓝牙控制器"><a href="#蓝牙控制器" class="headerlink" title="蓝牙控制器"></a>蓝牙控制器</h3><p>使用esp_bt_controller_init()</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">esp_bt_controller_init(<span class="keyword">esp_bt_controller_config_t</span> *cfg);<span class="comment">//esp_bt_controller_config_t是蓝牙控制器配置结构体</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">esp_bt_controller_config_t</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">uint16_t</span> controller_task_stack_size;<span class="comment">//蓝牙控制器栈大小</span></span><br><span class="line">    <span class="keyword">uint8_t</span> controller_task_prio;<span class="comment">//蓝牙控制器任务优先级</span></span><br><span class="line">    <span class="keyword">uint8_t</span> hci_uart_no;<span class="comment">//使用哪个UART作为HCI的IO，仅能选择UART1或UART2串口</span></span><br><span class="line">	<span class="keyword">uint32_t</span> hci_uart_baudrate;<span class="comment">//HCI串口波特率</span></span><br><span class="line">    <span class="keyword">uint8_t</span> scan_duplicate_mode;<span class="comment">//重复扫描模式</span></span><br><span class="line">    <span class="keyword">uint8_t</span> scan_duplicate_type;<span class="comment">//重复扫描类型</span></span><br><span class="line">    <span class="keyword">uint16_t</span> normal_adv_size;<span class="comment">//普通广播报文大小</span></span><br><span class="line">    <span class="keyword">uint16_t</span> mesh_adv_size;<span class="comment">//mesh广播报文大小</span></span><br><span class="line">    <span class="keyword">uint16_t</span> send_adv_reserved_size;<span class="comment">//蓝牙控制器最小的内存大小（保留出发送报文所需的内存大小）</span></span><br><span class="line">    <span class="keyword">uint32_t</span> controller_debug_flag;<span class="comment">//蓝牙控制器debug log的属性</span></span><br><span class="line">    <span class="keyword">uint8_t</span> mode;<span class="comment">//BR/EDR/BLE/Dual模式选择</span></span><br><span class="line">	<span class="keyword">uint8_t</span> ble_max_conn;<span class="comment">//BLE模式最多连接个数</span></span><br><span class="line">    <span class="keyword">uint8_t</span> bt_max_acl_conn;<span class="comment">//BR或EDR最大的ACL连接个数</span></span><br><span class="line">    <span class="keyword">uint8_t</span> bt_sco_datapath;<span class="comment">//SCO数据路径 用于HCI或PCM模块</span></span><br><span class="line">	<span class="keyword">bool</span> auto_latency;<span class="comment">//BLE自动延迟，用于降低传统蓝牙的功耗</span></span><br><span class="line">    <span class="keyword">bool</span> bt_legacy_auth_vs_evt;<span class="comment">//BR/EDR传统的授权完毕事件，用于防止BIAS攻击</span></span><br><span class="line">    <span class="keyword">uint8_t</span> bt_max_sync_conn;<span class="comment">//BR/EDR最多的ACL连接数目，也可以在menuconfig中配配置</span></span><br><span class="line">    <span class="keyword">uint8_t</span> ble_sca;<span class="comment">//BLE晶振准确度指数</span></span><br><span class="line">    <span class="keyword">uint8_t</span> pcm_role;<span class="comment">//PCM角色，选择master或slave</span></span><br><span class="line">    <span class="keyword">uint8_t</span> pcm_polar;<span class="comment">//PCM触发极性，选择下降沿或上升沿</span></span><br><span class="line">    <span class="keyword">uint32_t</span> magic;<span class="comment">//神奇数字</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>初始化蓝牙控制器，<strong>此函数只能被调用一次，且必须在其他蓝牙功能被调用之前调用</strong></p>
-<p>使用esp_bt_controller_deinit()来取消初始化，用于关闭蓝牙并清除其占用的内存，还会将蓝牙任务删除</p>
-<p>下面是蓝牙控制器的常用API</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">esp_bt_controller_enable(<span class="keyword">esp_bt_mode_t</span> mode);<span class="comment">//使能蓝牙控制器，mode是蓝牙模式，如果想要动态改变蓝牙模式不能直接调用该函数，应该先用下面的disable关闭蓝牙再使用该API来改变蓝牙模式</span></span><br><span class="line">esp_bt_controller_disable(<span class="keyword">void</span>);<span class="comment">//关闭蓝牙控制器</span></span><br><span class="line">sp_bt_controller_get_status(<span class="keyword">void</span>);<span class="comment">//获取蓝牙控制器状态</span></span><br><span class="line">esp_bt_get_mac(<span class="keyword">void</span>);<span class="comment">//获取蓝牙MAC地址</span></span><br><span class="line"></span><br><span class="line">esp_bt_controller_mem_release(<span class="keyword">esp_bt_mode_t</span> mode);<span class="comment">//释放蓝牙控制器的所有内存，包括BSS、数据和其他蓝牙使用的堆栈空间</span></span><br><span class="line"><span class="comment">//这个API仅仅应该再esp_bt_controller_init()或after esp_bt_controller_deinit()之前被调用</span></span><br><span class="line">esp_bt_mem_release(<span class="keyword">esp_bt_mode_t</span> mode);</span><br><span class="line"><span class="comment">//释放蓝牙控制器和蓝牙数据的所有内存，比esp_bt_controller_mem_release()更彻底</span></span><br><span class="line">esp_bt_sleep_enable(<span class="keyword">void</span>);<span class="comment">//让蓝牙进入睡眠模式，这个函数应该在esp_bt_controller_enable()被调用之后再调用</span></span><br></pre></td></tr></table></figure>
-
-<p>特别地，官方文档中给出了一套在线升级蓝牙设备软件时的关闭流程</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">esp_bluedroid_disable();</span><br><span class="line">esp_bluedroid_deinit();</span><br><span class="line">esp_bt_controller_disable();</span><br><span class="line">esp_bt_controller_deinit();</span><br><span class="line">esp_bt_mem_release(ESP_BT_MODE_BTDM);</span><br></pre></td></tr></table></figure>
-
-<h3 id="经典蓝牙"><a href="#经典蓝牙" class="headerlink" title="经典蓝牙"></a>经典蓝牙</h3><p>用于蓝牙运行的API如下所示</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">esp_bluedroid_get_status(<span class="keyword">void</span>);<span class="comment">//获取蓝牙当前状态</span></span><br><span class="line"><span class="comment">//可能的状态如下所示</span></span><br><span class="line">ESP_BLUEDROID_STATUS_UNINITIALIZED==<span class="number">0</span><span class="comment">//未初始化</span></span><br><span class="line">ESP_BLUEDROID_STATUS_INITIALIZED<span class="comment">//已被初始化但是未开启</span></span><br><span class="line">ESP_BLUEDROID_STATUS_ENABLED<span class="comment">//初始化并开启</span></span><br><span class="line">    </span><br><span class="line">esp_bluedroid_enable(<span class="keyword">void</span>);<span class="comment">//使能蓝牙</span></span><br><span class="line">esp_bluedroid_disable(<span class="keyword">void</span>);<span class="comment">//关闭蓝牙</span></span><br><span class="line">esp_bluedroid_init(<span class="keyword">void</span>);<span class="comment">//初始化蓝牙并分配系统资源，它应该被第一个调用</span></span><br><span class="line">esp_bluedroid_deinit(<span class="keyword">void</span>);<span class="comment">//取消初始化蓝牙并将系统资源释放，用于蓝牙结束工作后的收尾</span></span><br></pre></td></tr></table></figure>
-
-<p>用于设备蓝牙配置的API如下所示</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">esp_bt_dev_get_address(<span class="keyword">void</span>);<span class="comment">//获取当前设备蓝牙地址</span></span><br><span class="line">esp_bt_dev_set_device_name(<span class="keyword">const</span> <span class="keyword">char</span> *name);<span class="comment">//设置设备名</span></span><br></pre></td></tr></table></figure>
-
-<p>这些函数都应该在蓝牙启用后被调用</p>
-<h2 id="BLE-GAP相关库函数"><a href="#BLE-GAP相关库函数" class="headerlink" title="BLE-GAP相关库函数"></a>BLE-GAP相关库函数</h2><h3 id="外围设备库函数"><a href="#外围设备库函数" class="headerlink" title="外围设备库函数"></a>外围设备库函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">esp_ble_gap_start_advertising(<span class="keyword">esp_ble_adv_params_t</span> *adv_params);<span class="comment">//开始广播</span></span><br><span class="line">esp_ble_gap_stop_advertising(<span class="keyword">void</span>);<span class="comment">//停止广播</span></span><br><span class="line"></span><br><span class="line">esp_ble_gap_config_adv_data(<span class="keyword">esp_ble_adv_data_t</span> *adv_data);<span class="comment">//广播数据参数设置</span></span><br><span class="line"><span class="comment">//adv_data数据结构如下</span></span><br><span class="line"><span class="keyword">bool</span> set_scan_rsp<span class="comment">//设置是否需要扫描response</span></span><br><span class="line"><span class="keyword">bool</span> include_name<span class="comment">//广播内容是否包括设备名</span></span><br><span class="line"><span class="keyword">bool</span> include_txpower<span class="comment">//广播数据是否包括发射功率</span></span><br><span class="line"><span class="keyword">int</span> min_interval<span class="comment">//最小广播时间间隔</span></span><br><span class="line"><span class="comment">//计算公式：connIntervalmin = Conn_Interval_Min * 1.25 ms</span></span><br><span class="line"><span class="comment">//Conn_Interval_Min在0x0006到0x0C80之间，0xFFFF就是没有特定的最小值</span></span><br><span class="line"><span class="keyword">int</span> max_interval<span class="comment">//最大广播间隔</span></span><br><span class="line"><span class="comment">//计算公式：connIntervalmax = Conn_Interval_Max * 1.25 ms</span></span><br><span class="line"><span class="comment">//Conn_Interval_Max在0x0006到0x0C80之间，Conn_Interval_Max应大于等于Conn_Interval_Min</span></span><br><span class="line"><span class="comment">//0xFFFF代表没有特定的最大值</span></span><br><span class="line"><span class="keyword">int</span> appearance<span class="comment">//设备外形（External appearance）</span></span><br><span class="line"><span class="keyword">uint16_t</span> manufacturer_len<span class="comment">//生产商数据长度</span></span><br><span class="line"><span class="keyword">uint8_t</span> *p_manufacturer_data<span class="comment">//生产商数据指针</span></span><br><span class="line"><span class="keyword">uint16_t</span> service_data_len<span class="comment">//Service数据长度</span></span><br><span class="line"><span class="keyword">uint8_t</span> *p_service_data<span class="comment">//Service数据指针</span></span><br><span class="line"><span class="keyword">uint16_t</span> service_uuid_len<span class="comment">//Service的UUID长度</span></span><br><span class="line"><span class="keyword">uint8_t</span> *p_service_uuid<span class="comment">//Service的UUID数组指针</span></span><br><span class="line"><span class="keyword">uint8_t</span> flag<span class="comment">//广播属性（flag）</span></span><br><span class="line">    </span><br><span class="line">esp_ble_gap_config_adv_data_raw(<span class="keyword">uint8_t</span> *raw_data, <span class="keyword">uint32_t</span> raw_data_len);<span class="comment">//设置空的广播数据包，用户需要自行设置包的内容</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="中心设备库函数"><a href="#中心设备库函数" class="headerlink" title="中心设备库函数"></a>中心设备库函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">esp_ble_gap_start_scanning(<span class="keyword">uint32_t</span> duration);<span class="comment">//使用该函数让设备扫描附近正在广播的外设，duration为扫描间隔</span></span><br><span class="line">esp_ble_gap_stop_scanning(<span class="keyword">void</span>);<span class="comment">//停止扫描</span></span><br><span class="line"></span><br><span class="line">esp_ble_gap_set_scan_params(<span class="keyword">esp_ble_scan_params_t</span> *scan_params);<span class="comment">//设置扫描参数</span></span><br><span class="line">esp_ble_gap_register_callback(<span class="keyword">esp_gap_ble_cb_t</span> callback)<span class="comment">//间隔回调函数</span></span><br><span class="line">    </span><br><span class="line">esp_ble_gap_set_pkt_data_len(<span class="keyword">esp_bd_addr_t</span> remote_device, <span class="keyword">uint16_t</span> tx_data_length);<span class="comment">//设置最大数据包大小</span></span><br><span class="line"></span><br><span class="line">esp_ble_gap_set_prefer_conn_params(<span class="keyword">esp_bd_addr_t</span> bd_addr, <span class="keyword">uint16_t</span> min_conn_int, <span class="keyword">uint16_t</span> max_conn_int, <span class="keyword">uint16_t</span> slave_latency, <span class="keyword">uint16_t</span> supervision_tout);<span class="comment">//设置当默认连接参数无法使用时的优先连接参数，这个库函数只能用在中心设备master上</span></span><br><span class="line"></span><br><span class="line">esp_ble_gap_config_scan_rsp_data_raw(<span class="keyword">uint8_t</span> *raw_data, <span class="keyword">uint32_t</span> raw_data_len);<span class="comment">//设置空的response数据包，用户需要自行设置数据</span></span><br><span class="line"></span><br><span class="line">esp_ble_gap_read_rssi(<span class="keyword">esp_bd_addr_t</span> remote_addr);<span class="comment">//读取远程设备的RSSI，结果会在间隔回调函数中随ESP_GAP_BLE_READ_RSSI_COMPLETE_EVT事件返回</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="连接配置库函数"><a href="#连接配置库函数" class="headerlink" title="连接配置库函数"></a>连接配置库函数</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">esp_ble_gap_update_conn_params(<span class="keyword">esp_ble_conn_update_params_t</span> *params);<span class="comment">//在连接建立后更新连接参数</span></span><br><span class="line">esp_ble_gap_clear_rand_addr(<span class="keyword">void</span>);<span class="comment">//清空应用的随机地址</span></span><br><span class="line"></span><br><span class="line">esp_ble_gap_update_whitelist(<span class="keyword">bool</span> add_remove, <span class="keyword">esp_bd_addr_t</span> remote_bda, <span class="keyword">esp_ble_wl_addr_type_t</span> wl_addr_type);<span class="comment">//新建或移除白名单中的设备</span></span><br><span class="line">esp_ble_gap_get_whitelist_size(<span class="keyword">uint16_t</span> *length);<span class="comment">//获取白名单的大小</span></span><br><span class="line"></span><br><span class="line">esp_ble_gap_set_device_name(<span class="keyword">const</span> <span class="keyword">char</span> *name);<span class="comment">//设置本机设备名</span></span><br><span class="line">esp_ble_gap_get_local_used_addr(<span class="keyword">esp_bd_addr_t</span> local_used_addr, <span class="keyword">uint8_t</span> *addr_type);<span class="comment">//获取本机设备地址</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="GATT-Server的配置"><a href="#GATT-Server的配置" class="headerlink" title="GATT Server的配置"></a>GATT Server的配置</h2><h3 id="Server-Master"><a href="#Server-Master" class="headerlink" title="Server-Master"></a>Server-Master</h3><h4 id="基本设置"><a href="#基本设置" class="headerlink" title="基本设置"></a>基本设置</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">esp_err_t</span> ret;<span class="comment">//用于debug</span></span><br><span class="line"><span class="keyword">esp_bt_controller_config_t</span> bt_cfg = BT_CONTROLLER_INIT_CONFIG_DEFAULT();<span class="comment">//设置蓝牙为默认参数</span></span><br><span class="line"></span><br><span class="line">ret = nvs_flash_init();<span class="comment">//初始化NVS</span></span><br><span class="line"><span class="keyword">if</span> (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_ERROR_CHECK(nvs_flash_erase());</span><br><span class="line">	ret = nvs_flash_init();</span><br><span class="line">&#125;</span><br><span class="line">ESP_ERROR_CHECK(ret);</span><br><span class="line">ESP_LOGI(TAG, <span class="string">&quot;%s init NVS finished\n&quot;</span>, __func__);</span><br><span class="line"></span><br><span class="line">ESP_ERROR_CHECK(esp_bt_controller_mem_release(ESP_BT_MODE_BLE));<span class="comment">//释放蓝牙所需空间</span></span><br><span class="line"></span><br><span class="line">ret = esp_bt_controller_init(&amp;bt_cfg);<span class="comment">//初始化蓝牙控制器</span></span><br><span class="line"><span class="keyword">if</span> (ret)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;%s enable controller failed: %s\n&quot;</span>, __func__, esp_err_to_name(ret));</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">ret = esp_bt_controller_enable(ESP_BT_MODE_BLE);<span class="comment">//使能蓝牙控制器</span></span><br><span class="line"><span class="keyword">if</span> (ret)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;%s enable controller failed: %s\n&quot;</span>, __func__, esp_err_to_name(ret));</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">ret = esp_bluedroid_init();<span class="comment">//初始化蓝牙栈bluedroid stack</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">蓝牙栈bluedroid stack包括了BT和BLE使用的基本的define和API</span></span><br><span class="line"><span class="comment">初始化蓝牙栈以后并不能直接使用蓝牙功能，</span></span><br><span class="line"><span class="comment">还需要用FSM管理蓝牙连接情况</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">if</span> (ret)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;%s init bluetooth failed: %s\n&quot;</span>, __func__, esp_err_to_name(ret));</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">ret = esp_bluedroid_enable();<span class="comment">//使能蓝牙栈</span></span><br><span class="line"><span class="keyword">if</span> (ret) </span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;%s enable bluetooth failed: %s\n&quot;</span>, __func__, esp_err_to_name(ret));</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">ESP_LOGI(TAG, <span class="string">&quot;%s init bluetooth finished\n&quot;</span>, __func__);</span><br><span class="line"><span class="comment">//建立蓝牙的FSM</span></span><br><span class="line"><span class="comment">//这里使用回调函数来控制每个状态下的响应，需要将其在GATT和GAP层的回调函数注册</span></span><br><span class="line">ret = esp_ble_gatts_register_callback(BLE_gatts_event_handler);</span><br><span class="line"><span class="keyword">if</span> (ret)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;gatts register error, error code = %x&quot;</span>, ret);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">ret = esp_ble_gap_register_callback(BLE_gap_event_handler);</span><br><span class="line"><span class="keyword">if</span> (ret)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;gap register error, error code = %x&quot;</span>, ret);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*BLE_gatts_event_handler和BLE_gap_event_handler处理蓝牙栈可能发生的所有情况，达到FSM的效果*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面创建了两个BLE GATT profile，相当于两个独立的应用程序</span></span><br><span class="line">ret = esp_ble_gatts_app_register(GATT_APP_A_ID);</span><br><span class="line"><span class="keyword">if</span> (ret)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;gatts app register error, error code = %x&quot;</span>, ret);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">ret = esp_ble_gatts_app_register(GATT_APP_B_ID);</span><br><span class="line"><span class="keyword">if</span> (ret)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;gatts app register error, error code = %x&quot;</span>, ret);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>有限状态机FSM（finite state machine），或者说状态机SM（state machine）是一种特殊的控制算法，能够根据<strong>控制信号</strong>按照<strong>预先设定的状态</strong>进行状态转移</p>
-<p>若输出只和状态有关而与输入无关，则称为Moore状态机；若输出不仅和状态有关而且和输入有关系，则称为Mealy状态机</p>
-<p>控制蓝牙的状态机一般为Moore状态机，随蓝牙所处的状态进行不同的操作（代码中通过switch语句进行控制）</p>
-<p>Server的profile利用一个结构体来定义，结构体成员取决于在这个profile中执行的service和characteristic，如下所示</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">gatts_profile_inst</span> &#123;</span></span><br><span class="line">    <span class="keyword">esp_gatts_cb_t</span> gatts_cb;<span class="comment">//GATT回调函数</span></span><br><span class="line">    <span class="keyword">uint16_t</span> gatts_if;<span class="comment">//GATT接口</span></span><br><span class="line">    <span class="keyword">uint16_t</span> app_id;<span class="comment">//应用的ID</span></span><br><span class="line">    <span class="keyword">uint16_t</span> conn_id;<span class="comment">//连接的ID</span></span><br><span class="line">    <span class="keyword">uint16_t</span> service_handle;<span class="comment">//Service句柄</span></span><br><span class="line">    <span class="keyword">esp_gatt_srvc_id_t</span> service_id;<span class="comment">//Service ID</span></span><br><span class="line">    <span class="keyword">uint16_t</span> char_handle;<span class="comment">//Characteristic句柄</span></span><br><span class="line">    <span class="keyword">esp_bt_uuid_t</span> char_uuid;<span class="comment">//Characteristic的UUID</span></span><br><span class="line">    <span class="keyword">esp_gatt_perm_t</span> perm;<span class="comment">//属性Attribute 授权</span></span><br><span class="line">    <span class="keyword">esp_gatt_char_prop_t</span> property;<span class="comment">//Characteristic的优先级</span></span><br><span class="line">    <span class="keyword">uint16_t</span> descr_handle;<span class="comment">//Client的Characteristic配置句柄</span></span><br><span class="line">    <span class="keyword">esp_bt_uuid_t</span> descr_uuid;<span class="comment">//Client的Characteristic UUID</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>可以将这个结构体进一步组合为结构体数组</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">gatts_profile_inst</span> <span class="title">gl_profile_tab</span>[<span class="title">PROFILE_NUM</span>] =</span> &#123;</span><br><span class="line">    [PROFILE_A_APP_ID] = &#123;</span><br><span class="line">        .gatts_cb = gatts_profile_a_event_handler,</span><br><span class="line">        .gatts_if = ESP_GATT_IF_NONE,</span><br><span class="line">    [PROFILE_B_APP_ID] = &#123;</span><br><span class="line">        .gatts_cb = gatts_profile_b_event_handler,</span><br><span class="line">        .gatts_if = ESP_GATT_IF_NONE,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>这样使用类似<code>gl_profile_tab[i].gatts_if</code>的语句就可以访问结构体的成员，i用于指示第（i+1）个profile</p>
-<p>使用上面的结构体数组来定义每个profile对应的GATT回调函数（gatts_profile_a_event_handler()、gatts_profile_b_event_handler()），就使得每个不同的profile使用不同的接口；初始化时，将gatts_if = ESP_GATT_IF_NONE，在之后通过各自的处理函数将profile连接到接口</p>
-<p>最后使用esp_ble_gatts_app_register()这个API将应用的ID注册到GATT</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ret = esp_ble_gatts_app_register(GATT_APP_A_ID);<span class="comment">//run GATT app A register</span></span><br><span class="line"><span class="keyword">if</span> (ret)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;gatts app register error, error code = %x&quot;</span>, ret);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">ret = esp_ble_gatts_app_register(GATT_APP_B_ID);<span class="comment">//run GATT app B register</span></span><br><span class="line"><span class="keyword">if</span> (ret)</span><br><span class="line">&#123;</span><br><span class="line">	ESP_LOGE(TAG, <span class="string">&quot;gatts app register error, error code = %x&quot;</span>, ret);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="GAP设置"><a href="#GAP设置" class="headerlink" title="GAP设置"></a>GAP设置</h4><p>使用esp_ble_adv_data_t结构体来配置GAP广播情况，并使用esp_ble_gap_config_adv_data()函数进行广播</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">bool</span> set_scan_rsp;<span class="comment">//是否作为扫描的回应信号广播</span></span><br><span class="line">    <span class="keyword">bool</span> include_name;<span class="comment">//是否包括设备名</span></span><br><span class="line">    <span class="keyword">bool</span> include_txpower;<span class="comment">//是否包括信号的发射功率</span></span><br><span class="line">    <span class="keyword">int</span> min_interval;<span class="comment">//广播数据显示slave设备的连接最小时间间隔</span></span><br><span class="line">    <span class="keyword">int</span> max_interval;<span class="comment">//广播数据显示slave设备的连接最大时间间隔</span></span><br><span class="line">    <span class="keyword">int</span> appearance;<span class="comment">//设备外观（？）</span></span><br><span class="line">    <span class="keyword">uint16_t</span> manufacturer_len;<span class="comment">//附加数据长度</span></span><br><span class="line">    <span class="keyword">uint8_t</span> *p_manufacturer_data;<span class="comment">//附加数据指针</span></span><br><span class="line">    <span class="keyword">uint16_t</span> service_data_len;<span class="comment">//Service数据长度</span></span><br><span class="line">    <span class="keyword">uint8_t</span> *p_service_data;<span class="comment">//Service数据指针</span></span><br><span class="line">    <span class="keyword">uint16_t</span> service_uuid_len;<span class="comment">//Servic UUID长度</span></span><br><span class="line">    <span class="keyword">uint8_t</span> *p_service_uuid;<span class="comment">//Servic UUID指针</span></span><br><span class="line">    <span class="keyword">uint8_t</span> flag;<span class="comment">//广播的发现模式，可选BLE_ADV_DATA_FLAG枚举值</span></span><br><span class="line">&#125; <span class="keyword">esp_ble_adv_data_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置示例</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">esp_ble_adv_data_t</span> adv_data = &#123;</span><br><span class="line">    .set_scan_rsp = <span class="literal">false</span>,</span><br><span class="line">    .include_name = <span class="literal">true</span>,</span><br><span class="line">    .include_txpower = <span class="literal">false</span>,</span><br><span class="line">    .min_interval = <span class="number">0x0006</span>, <span class="comment">//slave connection min interval, Time = min_interval * 1.25 msec=7.5ms</span></span><br><span class="line">    .max_interval = <span class="number">0x0010</span>, <span class="comment">//slave connection max interval, Time = max_interval * 1.25 msec=20ms</span></span><br><span class="line">    .appearance = <span class="number">0x00</span>,</span><br><span class="line">    .manufacturer_len = <span class="number">0</span>, <span class="comment">//TEST_MANUFACTURER_DATA_LEN</span></span><br><span class="line">    .p_manufacturer_data = <span class="literal">NULL</span>, <span class="comment">//&amp;test_manufacturer[0]</span></span><br><span class="line">    .service_data_len = <span class="number">0</span>,</span><br><span class="line">    .p_service_data = <span class="literal">NULL</span>,</span><br><span class="line">    .service_uuid_len = <span class="keyword">sizeof</span>(adv_service_uuid128),</span><br><span class="line">    .p_service_uuid = adv_service_uuid128,</span><br><span class="line">    .flag = (ESP_BLE_ADV_FLAG_GEN_DISC | ESP_BLE_ADV_FLAG_BREDR_NOT_SPT),</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>一个广播的有效数据是31字节，如果超过会导致超出部分被截掉</p>
-<p>使用esp_ble_gap_config_adv_data_raw()和esp_ble_gap_config_scan_rsp_data_raw()函数可以广播自定义的空数据</p>
-<p>广播数据设置完毕后，会自动进入ESP_GAP_BLE_ADV_DATA_SET_COMPLETE_EVT()或ESP_GAP_BLE_ADV_DATA_RAW_SET_COMPLETE_EVT状态，此时可以在gap_event_handler()中设置FSM控制程序</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BLE_gap_event_handler</span><span class="params">(<span class="keyword">esp_gap_ble_cb_event_t</span> event, <span class="keyword">esp_ble_gap_cb_param_t</span>* param)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (event)</span><br><span class="line">    &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_SET_RAW_ADV_DATA</span></span><br><span class="line">    <span class="keyword">case</span> ESP_GAP_BLE_ADV_DATA_RAW_SET_COMPLETE_EVT:</span><br><span class="line">        adv_config_done &amp;= (~adv_config_flag);</span><br><span class="line">        <span class="keyword">if</span> (adv_config_done == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            esp_ble_gap_start_advertising(&amp;adv_params);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> ESP_GAP_BLE_SCAN_RSP_DATA_RAW_SET_COMPLETE_EVT:</span><br><span class="line">        adv_config_done &amp;= (~scan_rsp_config_flag);</span><br><span class="line">        <span class="keyword">if</span> (adv_config_done == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            esp_ble_gap_start_advertising(&amp;adv_params);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">    <span class="keyword">case</span> ESP_GAP_BLE_ADV_DATA_SET_COMPLETE_EVT:</span><br><span class="line">        adv_config_done &amp;= (~adv_config_flag);</span><br><span class="line">        <span class="keyword">if</span> (adv_config_done == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            esp_ble_gap_start_advertising(&amp;adv_params);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> ESP_GAP_BLE_SCAN_RSP_DATA_SET_COMPLETE_EVT:</span><br><span class="line">        adv_config_done &amp;= (~scan_rsp_config_flag);</span><br><span class="line">        <span class="keyword">if</span> (adv_config_done == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            esp_ble_gap_start_advertising(&amp;adv_params);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">case</span> ESP_GAP_BLE_ADV_START_COMPLETE_EVT:</span><br><span class="line">        <span class="comment">//advertising start complete event to indicate advertising start successfully or failed</span></span><br><span class="line">        <span class="keyword">if</span> (param-&gt;adv_start_cmpl.status != ESP_BT_STATUS_SUCCESS)</span><br><span class="line">        &#123;</span><br><span class="line">            ESP_LOGE(TAG, <span class="string">&quot;Advertising start failed\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> ESP_GAP_BLE_ADV_STOP_COMPLETE_EVT:</span><br><span class="line">        <span class="keyword">if</span> (param-&gt;adv_stop_cmpl.status != ESP_BT_STATUS_SUCCESS)</span><br><span class="line">        &#123;</span><br><span class="line">            ESP_LOGE(TAG, <span class="string">&quot;Advertising stop failed\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            ESP_LOGI(TAG, <span class="string">&quot;Stop adv successfully\n&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> ESP_GAP_BLE_UPDATE_CONN_PARAMS_EVT:</span><br><span class="line">        ESP_LOGI(TAG, <span class="string">&quot;update connection params status = %d, min_int = %d, max_int = %d,conn_int = %d,latency = %d, timeout = %d&quot;</span>,</span><br><span class="line">            param-&gt;update_conn_params.status,</span><br><span class="line">            param-&gt;update_conn_params.min_int,</span><br><span class="line">            param-&gt;update_conn_params.max_int,</span><br><span class="line">            param-&gt;update_conn_params.conn_int,</span><br><span class="line">            param-&gt;update_conn_params.latency,</span><br><span class="line">            param-&gt;update_conn_params.timeout);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>只要使用了esp_ble_gap_start_advertising()函数，GATT Server就会开始广播，在此之前还需要用esp_ble_adv_params_t结构体配置相关的参数</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//广播参数</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">uint16_t</span> adv_int_min;</span><br><span class="line">	<span class="comment">//非定向和循环定向广播的最小时间间隔</span></span><br><span class="line">    <span class="comment">//间隔设置在0x0020到0x4000，默认0x0800（1.28s），实际时间=N * 0.625 ms，时间范围在20ms到10.24s</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">uint16_t</span> adv_int_max;</span><br><span class="line">    <span class="comment">//非定向和循环定向广播的最大时间间隔</span></span><br><span class="line">    <span class="comment">//间隔设置在0x0020到0x4000，默认0x0800（1.28s），实际时间=N * 0.625 ms，时间范围在20ms到10.24s</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">esp_ble_adv_type_t</span> adv_type;<span class="comment">//广播类型</span></span><br><span class="line">    <span class="keyword">esp_ble_addr_type_t</span> own_addr_type;<span class="comment">//拥有者的蓝牙设备地址类型</span></span><br><span class="line">    <span class="keyword">esp_bd_addr_t</span> peer_addr;<span class="comment">//附近的蓝牙设备地址</span></span><br><span class="line">    <span class="keyword">esp_ble_addr_type_t</span> peer_addr_type;<span class="comment">//附近的蓝牙设备地址类型</span></span><br><span class="line">    <span class="keyword">esp_ble_adv_channel_t</span> channel_map;<span class="comment">//广播通道映射</span></span><br><span class="line">    <span class="keyword">esp_ble_adv_filter_t</span> adv_filter_policy;<span class="comment">//广播过滤器设置</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">esp_ble_adv_params_t</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置示例</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">esp_ble_adv_params_t</span> adv_params = &#123;</span><br><span class="line">    .adv_int_min        = <span class="number">0x20</span>,<span class="comment">//最小时间间隔</span></span><br><span class="line">    .adv_int_max        = <span class="number">0x40</span>,<span class="comment">//最大时间间隔</span></span><br><span class="line">    .adv_type           = ADV_TYPE_IND,</span><br><span class="line">    .own_addr_type      = BLE_ADDR_TYPE_PUBLIC,<span class="comment">//公共地址</span></span><br><span class="line">    <span class="comment">//.peer_addr            =默认</span></span><br><span class="line">    <span class="comment">//.peer_addr_type       =默认</span></span><br><span class="line">    .channel_map        = ADV_CHNL_ALL,<span class="comment">//全通道</span></span><br><span class="line">    .adv_filter_policy = ADV_FILTER_ALLOW_SCAN_ANY_CON_ANY,<span class="comment">//扫描所有连接</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>设置完毕后，可以使用esp_ble_gap_start_advertising()进行广播</p>
-<p>注意：<strong>esp_ble_gap_config_adv_data()使用esp_ble_adv_data_t结构体进行设置，配置的是广播出去的数据；而esp_ble_gap_start_advertising()使用esp_ble_adv_params_t结构体进行设置，配置的是该怎样广播</strong></p>
-<h1 id="经典蓝牙的子集SPP"><a href="#经典蓝牙的子集SPP" class="headerlink" title="经典蓝牙的子集SPP"></a>经典蓝牙的子集SPP</h1><p>蓝牙串口协议Serial Port Profile简写为SPP，SPP就是一种能在蓝牙设备之间创建串口进行数据传输的协议，最终目的是在两个不同设备（通信的两端）上的应用之间保证一条完整的通信路径</p>
-<p>SPP的协议栈示意图如下</p>
-<p><img src="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/image-20210205162726034.png" alt="image-20210205162726034"></p>
-<h3 id="连接流程"><a href="#连接流程" class="headerlink" title="连接流程"></a>连接流程</h3><ol>
-<li>创建虚拟连接</li>
-<li>接受虚拟串口连接</li>
-<li>在本地SDP数据上注册服务</li>
-</ol>
-<h3 id="SPP协议与GATT协议的对比"><a href="#SPP协议与GATT协议的对比" class="headerlink" title="SPP协议与GATT协议的对比"></a>SPP协议与GATT协议的对比</h3><table>
-<thead>
-<tr>
-<th>经典蓝牙BT-SPP</th>
-<th>低功耗蓝牙BLE-GATT</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>速率高</td>
-<td>灵活多变、集成很多profile</td>
-</tr>
-<tr>
-<td>兼容性好</td>
-<td>高速率传输时兼容性难以保障</td>
-</tr>
-<tr>
-<td>对IOS不友好</td>
-<td>对IOS很友好</td>
-</tr>
-<tr>
-<td>APP编程不方便</td>
-<td>开发资源丰富、接口多</td>
-</tr>
-</tbody></table>
 
       
 
@@ -580,7 +379,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">一生一芯</a>
         		</li>
       		
 		</ul>
@@ -636,7 +435,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A03%E3%80%90%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E4%B8%8EBLE%E3%80%91/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2022/03/01/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90Verilator%E3%80%91/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -650,18 +449,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A04%E3%80%90SPI%E4%B8%8E%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8%E3%80%91/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          ESP32_IDF学习4【SPI与外部存储器】
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A02%E3%80%90WiFi%E3%80%91/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ESP32_IDF学习2【WiFi】</div>
+    <a href="/2022/02/25/%E7%BB%8F%E5%85%B8CV%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">经典CV算法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -688,7 +478,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%8E%E5%8A%9F%E8%80%97%E8%93%9D%E7%89%99%EF%BC%88BLE%EF%BC%89%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="toc-number">1.</span> <span class="toc-text">低功耗蓝牙（BLE）协议栈</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.1.</span> <span class="toc-text">层次协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E6%A0%B8%E5%BF%83%E5%8D%8F%E8%AE%AE%EF%BC%88Bluetooth-Core%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">蓝牙核心协议（Bluetooth Core）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E5%90%AB%E7%9A%84%E5%B1%82%E6%AC%A1%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">包含的层次简介</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E5%BA%94%E7%94%A8%E5%8D%8F%E8%AE%AE%EF%BC%88Bluetooth-Application%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">蓝牙应用协议（Bluetooth Application）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E5%90%AB%E7%9A%84%E5%B1%82%E6%AC%A1%E7%AE%80%E4%BB%8B-1"><span class="toc-number">1.3.1.</span> <span class="toc-text">包含的层次简介</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BT%E4%B8%8EBLE%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">BT与BLE的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E6%A8%A1%E5%9D%97%EF%BC%88BT%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">经典蓝牙模块（BT）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8E%E5%8A%9F%E8%80%97%E8%93%9D%E7%89%99%E6%A8%A1%E5%9D%97%EF%BC%88BLE%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">低功耗蓝牙模块（BLE）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%88%86%E7%B1%BB"><span class="toc-number">2.3.</span> <span class="toc-text">其他分类</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BLE%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">BLE的两种模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ATT%E7%AE%80%E8%BF%B0"><span class="toc-number">3.1.</span> <span class="toc-text">ATT简述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E7%9A%84%E7%A7%8D%E7%B1%BB%E5%92%8C%E5%88%86%E7%BB%84"><span class="toc-number">3.1.1.</span> <span class="toc-text">属性的种类和分组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E9%A1%B9Service"><span class="toc-number">3.1.2.</span> <span class="toc-text">服务项Service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%80%BCcharacteristic"><span class="toc-number">3.1.3.</span> <span class="toc-text">特征值characteristic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7Attribute%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-number">3.1.4.</span> <span class="toc-text">属性Attribute的数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%8D%8F%E8%AE%AEATT-PDU"><span class="toc-number">3.1.5.</span> <span class="toc-text">属性协议ATT PDU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Request%E5%90%8E%E7%BC%80"><span class="toc-number">3.1.6.</span> <span class="toc-text">Request后缀</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%B1%9E%E6%80%A7%E5%8D%8F%E8%AE%AEGATT%E7%AE%80%E8%BF%B0"><span class="toc-number">3.2.</span> <span class="toc-text">通用属性协议GATT简述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AEGAP"><span class="toc-number">3.2.1.</span> <span class="toc-text">通用访问协议GAP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GAP%E5%B9%BF%E6%92%AD"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">GAP广播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GATT%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">GATT协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GATT%E7%BB%93%E6%9E%84"><span class="toc-number">3.2.1.3.</span> <span class="toc-text">GATT结构</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BLE%E4%BB%8E%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%B0%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E7%9A%84%E8%BF%87%E7%A8%8B%E7%AE%80%E8%BF%B0"><span class="toc-number">4.</span> <span class="toc-text">BLE从初始化到建立连接的过程简述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ESP%E7%9A%84%E8%93%9D%E7%89%99%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">ESP的蓝牙外设配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E9%85%8D%E7%BD%AE%E7%9B%B8%E5%85%B3%E5%BA%93%E5%87%BD%E6%95%B0"><span class="toc-number">5.1.</span> <span class="toc-text">蓝牙配置相关库函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E5%A4%B4%E6%96%87%E4%BB%B6%E5%8F%8A%E5%85%B6%E4%BD%9C%E7%94%A8"><span class="toc-number">5.1.1.</span> <span class="toc-text">相关头文件及其作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%93%9D%E7%89%99%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">5.1.2.</span> <span class="toc-text">蓝牙控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99"><span class="toc-number">5.1.3.</span> <span class="toc-text">经典蓝牙</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BLE-GAP%E7%9B%B8%E5%85%B3%E5%BA%93%E5%87%BD%E6%95%B0"><span class="toc-number">5.2.</span> <span class="toc-text">BLE-GAP相关库函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%96%E5%9B%B4%E8%AE%BE%E5%A4%87%E5%BA%93%E5%87%BD%E6%95%B0"><span class="toc-number">5.2.1.</span> <span class="toc-text">外围设备库函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E5%BF%83%E8%AE%BE%E5%A4%87%E5%BA%93%E5%87%BD%E6%95%B0"><span class="toc-number">5.2.2.</span> <span class="toc-text">中心设备库函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E9%85%8D%E7%BD%AE%E5%BA%93%E5%87%BD%E6%95%B0"><span class="toc-number">5.2.3.</span> <span class="toc-text">连接配置库函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GATT-Server%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">5.3.</span> <span class="toc-text">GATT Server的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Server-Master"><span class="toc-number">5.3.1.</span> <span class="toc-text">Server-Master</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%AE%BE%E7%BD%AE"><span class="toc-number">5.3.1.1.</span> <span class="toc-text">基本设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GAP%E8%AE%BE%E7%BD%AE"><span class="toc-number">5.3.1.2.</span> <span class="toc-text">GAP设置</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%8F%E5%85%B8%E8%93%9D%E7%89%99%E7%9A%84%E5%AD%90%E9%9B%86SPP"><span class="toc-number">6.</span> <span class="toc-text">经典蓝牙的子集SPP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%B5%81%E7%A8%8B"><span class="toc-number">6.0.1.</span> <span class="toc-text">连接流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SPP%E5%8D%8F%E8%AE%AE%E4%B8%8EGATT%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">6.0.2.</span> <span class="toc-text">SPP协议与GATT协议的对比</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Verilator%E5%85%A5%E9%97%A8"><span class="toc-number">1.</span> <span class="toc-text">Verilator入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%A7%91%E5%AD%A6%E7%9A%84%E6%8F%90%E9%97%AE"><span class="toc-number">1.1.</span> <span class="toc-text">如何科学的提问</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88"><span class="toc-number">1.1.1.</span> <span class="toc-text">硬件工程师</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%AF%E7%89%87%E5%B7%A5%E7%A8%8B%E5%B8%88-%E7%A8%8B%E5%BA%8F%E5%91%98"><span class="toc-number">1.1.2.</span> <span class="toc-text">芯片工程师&#x2F;程序员</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8%EF%BC%88PA0%EF%BC%89"><span class="toc-number">1.2.</span> <span class="toc-text">Linux安装与使用（PA0）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BAverilator%E4%BB%BF%E7%9C%9F%E7%8E%AF%E5%A2%83"><span class="toc-number">1.3.</span> <span class="toc-text">搭建verilator仿真环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#verilator%E7%AE%80%E4%BB%8B"><span class="toc-number">1.3.1.</span> <span class="toc-text">verilator简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Verilator%E5%AE%89%E8%A3%85"><span class="toc-number">1.3.2.</span> <span class="toc-text">Verilator安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Make-CMake%E8%B0%83%E7%94%A8Verilator"><span class="toc-number">1.3.3.</span> <span class="toc-text">使用Make&#x2F;CMake调用Verilator</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8Verilator%E7%94%9F%E6%88%90%E4%BB%BF%E7%9C%9F%E6%96%87%E4%BB%B6"><span class="toc-number">1.3.4.</span> <span class="toc-text">使用Verilator生成仿真文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Verilator%E4%BC%98%E5%8C%96"><span class="toc-number">1.3.5.</span> <span class="toc-text">Verilator优化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8Verilator%E5%8F%82%E6%95%B0"><span class="toc-number">1.3.6.</span> <span class="toc-text">其他常用Verilator参数</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -704,7 +494,7 @@
   
 
   
-  <div id="SOHUCS" sid="ESP32-IDF学习3【经典蓝牙与BLE】" ></div> 
+  <div id="SOHUCS" sid="一生一芯学习笔记1【Verilator】" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({

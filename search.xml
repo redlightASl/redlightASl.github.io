@@ -15,7 +15,7 @@
 <li>微信公众号：日常不看，大概一两个月会发一次公众号推送，以最近沙雕图和技术博文（搬运）为主</li>
 <li>神秘网站：一个月可能会上去看一看，正经人谁看推啊（</li>
 </ul>
-<p>推荐使用QQ或邮箱<code>dddbbbdd@foxmail.com</code>联系我</p>
+<p>推荐使用QQ<code>1429129330</code>或邮箱<code>dddbbbdd@foxmail.com</code>联系我</p>
 ]]></content>
       <tags>
         <tag>测试</tag>
@@ -37,6 +37,8 @@
 <p>希望能在本科期间把这一套东西做完……</p>
 <p>22年第四期一生一芯要求在开始之前需要自己搭建基于verilator+gtkwave的验证环境（预学习阶段），这里简单记录一下这部分的要点内容（<strong>教程不允许将自己代码发布到公开网站，这里遵守要求仅记录知识点和bug解决思路</strong>）</p>
 <p>这系列博文与其说是笔记，不如说是对这段学习经历的总结？</p>
+<span id="more"></span>
+
 <h2 id="如何科学的提问"><a href="#如何科学的提问" class="headerlink" title="如何科学的提问"></a>如何科学的提问</h2><p>要求阅读<a href="https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md">提问的智慧</a>和<a href="https://github.com/tangx/Stop-Ask-Questions-The-Stupid-Ways/blob/master/README.md">别像弱智一样提问</a>并写800字读后感</p>
 <blockquote>
 <p>我的评价是：<strong>切中要害</strong></p>

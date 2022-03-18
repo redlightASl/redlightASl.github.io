@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 62 -->
+			<!-- 总文章数 63 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,87 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-STM32外设配置速查【QSPI】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/">STM32外设配置速查【QSPI】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-11-19T08:07:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="QSPI协议"><a href="#QSPI协议" class="headerlink" title="QSPI协议"></a>QSPI协议</h1><p>QSPI是Queued SPI（队列串行外围接口）的缩写，是由摩托罗拉公司推出的SPI协议的一个扩展，比SPI应用更加广泛，现在的FLASH、SRAM等存储器大多支持QSPI协议——QSPI是一种<strong>专用</strong>的通信接口，可连接单、双或四线SPI存储器</p>
+<p>QSPI在SPI协议的基础上增加了<strong>队列传输机制</strong>。</p>
+<p>STM32将Queued SPI协议接口实现为QUADSPI接口。QSPI的实现和SPI基本相似，有部分不同点，在下面列出。</p>
+<h2 id="物理连接"><a href="#物理连接" class="headerlink" title="物理连接"></a>物理连接</h2><p>QSPI是标准的四信号线SPI，MCU与外设之间由六根线连接：NSS、IO0、IO1、IO2、IO3、SCLK，其中IO0-3是数据线；NSS又称CS，是片选信号线；SCLK又称SCK，是SPI/QSPI的同步时钟线</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-STM32外设配置速查【板级总线协议】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -893,86 +974,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ESP32-IDF学习8【电源管理与低功耗模式】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A08%E3%80%90%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BD%8E%E5%8A%9F%E8%80%97%E6%A8%A1%E5%BC%8F%E3%80%91/">ESP32_IDF学习8【电源管理与低功耗模式】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A08%E3%80%90%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BD%8E%E5%8A%9F%E8%80%97%E6%A8%A1%E5%BC%8F%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T07:04:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="电源管理"><a href="#电源管理" class="headerlink" title="电源管理"></a>电源管理</h1><p>ESP-IDF中集成的电源管理算法可以根据应用程序组件的需求，调整外围总线 (APB) 频率、CPU 频率，并使芯片进入 Light-sleep 模式，尽可能减少运行应用程序的功耗</p>
-<p>应用程序组件可以通过创建和获取电源管理锁来控制功耗</p>
-<p>编译时可使用CONFIG_PM_ENABLE选项启用电源管理功能</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A08%E3%80%90%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BD%8E%E5%8A%9F%E8%80%97%E6%A8%A1%E5%BC%8F%E3%80%91/">展开全文 >></a>
         </p>
       
 

@@ -25,6 +25,8 @@
     <title>经典排序算法</title>
     <url>/2022/03/18/%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</url>
     <content><![CDATA[<p><img src="/2022/03/18/%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/1.png" alt="img"></p>
+<span id="more"></span>
+
 <h1 id="直接插入排序（Insertion-Sort）"><a href="#直接插入排序（Insertion-Sort）" class="headerlink" title="直接插入排序（Insertion Sort）"></a>直接插入排序（Insertion Sort）</h1><h3 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h3><p>将待排序的无序数列看成是一个仅含有<strong>一个元素的有序数列和一个无序数列</strong>，将无序数列中的元素逐次插入到有序数列中，从而获得最终的有序数列。</p>
 <h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><ol>
 <li>初始时，a[0]自成一个有序区，无序区为a[1,…,n-1]，令i=1</li>

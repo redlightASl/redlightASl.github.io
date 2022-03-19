@@ -6,22 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
-  <title>OpenWrt与嵌入式Linux | 红光今天吃什么</title>
+  <title>现代C语言3 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="OpenWrt与嵌入式Linux由于要接手学长留下来的一个项目，“被迫”要学习OpenWrt的配置方法——虽然对于一个five电工来说这事挺莫名其妙的，但还是硬着头皮上吧（我本想拒绝，但他给的是在太多了）">
+  <meta name="description" content="使用C语言进行嵌入式开发C语言语法简单、容易上手，因此常被各大高校用于编程教学或与电子信息专业结合作为单片机的主要开发语言。通常的编程是指在桌面级平台、服务器平台、PC或其他通用计算机上进行程序编写，在现代的编程环境下，C常常被诟病“老套、不美观、面向过程、难以使用”，但事实上C11标准引入以来，Linux生态中C语言扮演着重要角色。同时，在更广阔的嵌入式开发领域，C语言作为一个有着靠近底层、高效">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OpenWrt与嵌入式Linux">
-<meta property="og:url" content="https://redlightasl.github.io/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/">
+<meta property="og:title" content="现代C语言3">
+<meta property="og:url" content="https://redlightasl.github.io/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="OpenWrt与嵌入式Linux由于要接手学长留下来的一个项目，“被迫”要学习OpenWrt的配置方法——虽然对于一个five电工来说这事挺莫名其妙的，但还是硬着头皮上吧（我本想拒绝，但他给的是在太多了）">
+<meta property="og:description" content="使用C语言进行嵌入式开发C语言语法简单、容易上手，因此常被各大高校用于编程教学或与电子信息专业结合作为单片机的主要开发语言。通常的编程是指在桌面级平台、服务器平台、PC或其他通用计算机上进行程序编写，在现代的编程环境下，C常常被诟病“老套、不美观、面向过程、难以使用”，但事实上C11标准引入以来，Linux生态中C语言扮演着重要角色。同时，在更广阔的嵌入式开发领域，C语言作为一个有着靠近底层、高效">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://redlightasl.github.io/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/image-20210817004039321.png">
-<meta property="article:published_time" content="2021-11-19T07:56:34.000Z">
-<meta property="article:modified_time" content="2021-12-09T16:17:09.481Z">
+<meta property="og:image" content="https://redlightasl.github.io/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/image-20220319124606523-16476685924391.png">
+<meta property="og:image" content="https://redlightasl.github.io/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/SouthEast-16476685924402.jpeg">
+<meta property="og:image" content="https://redlightasl.github.io/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/finsh-16476685924403.png">
+<meta property="og:image" content="https://redlightasl.github.io/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/image-20210715234007974-16476685924404.png">
+<meta property="og:image" content="https://redlightasl.github.io/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/image-20210904104126760-16476685924405.png">
+<meta property="article:published_time" content="2022-03-19T05:40:30.000Z">
+<meta property="article:modified_time" content="2022-03-19T05:43:27.023Z">
 <meta property="article:author" content="RedlightASl">
-<meta property="article:tag" content="嵌入式Linux">
+<meta property="article:tag" content="C语言进阶">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://redlightasl.github.io/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/image-20210817004039321.png">
+<meta name="twitter:image" content="https://redlightasl.github.io/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/image-20220319124606523-16476685924391.png">
   
     <link rel="alternative" href="/atom.xml" title="红光今天吃什么" type="application/atom+xml">
   
@@ -166,14 +170,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-OpenWrt与嵌入式Linux" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-现代C语言3" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      OpenWrt与嵌入式Linux
+      现代C语言3
     </h1>
   
 
@@ -182,457 +186,500 @@
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" class="archive-article-date">
-  	<time datetime="2021-11-19T07:56:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+<a href="/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/" class="archive-article-date">
+  	<time datetime="2022-03-19T05:40:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="OpenWrt与嵌入式Linux"><a href="#OpenWrt与嵌入式Linux" class="headerlink" title="OpenWrt与嵌入式Linux"></a>OpenWrt与嵌入式Linux</h1><p>由于要接手学长留下来的一个项目，“被迫”要学习OpenWrt的配置方法——虽然对于一个five电工来说这事挺莫名其妙的，但还是硬着头皮上吧（我本想拒绝，但他给的是在太多了）</p>
+        <h1 id="使用C语言进行嵌入式开发"><a href="#使用C语言进行嵌入式开发" class="headerlink" title="使用C语言进行嵌入式开发"></a>使用C语言进行嵌入式开发</h1><p>C语言语法简单、容易上手，因此常被各大高校用于编程教学或与电子信息专业结合作为单片机的主要开发语言。通常的编程是指在桌面级平台、服务器平台、PC或其他通用计算机上进行程序编写，在现代的编程环境下，C常常被诟病“老套、不美观、面向过程、难以使用”，但事实上C11标准引入以来，Linux生态中C语言扮演着重要角色。同时，在更广阔的嵌入式开发领域，C语言作为一个有着靠近底层、高效率，而又不依靠汇编实现的编程语言发挥着重要作用</p>
+<p>以上都是废话</p>
+<p><strong>这篇博文主要介绍使用C语言进行嵌入式开发的一些基础要点，并简要介绍常用的工具</strong></p>
+<p>本篇建立在前两篇《现代C语言》的基础上，不再介绍gcc、make、cmake、kconfig等工具</p>
 <span id="more"></span>
 
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>在<a target="_blank" rel="noopener" href="https://openwrt.org/">官网</a>中这样描述OpenWrt</p>
-<blockquote>
-<p>OpenWrt项目是一个针对嵌入式设备的Linux操作系统。OpenWrt不是一个单一且不可更改的固件，而是提供了具有软件包管理功能的完全可写的文件系统。这使您可以从供应商提供的应用范围和配置中解脱出来，并且让您通过使用适配任何应用的软件包来定制设备。对于开发人员来说，OpenWrt是一个无需围绕它构建完整固件就能开发应用程序的框架; 对于普通用户来说，这意味着拥有了完全定制的能力，能以意想不到的方式使用该设备。</p>
-</blockquote>
-<p>听上去很高大上，实际上OpenWrt就和Ubuntu、CentOS、Raspbian等<em>GNU/Linux发行版</em>一样，是一个基于Linux内核的操作系统。只不过它具有<strong>高度模块化可定制</strong>的特点，并且自带一系列<strong>网络组件</strong>，因此常常被用于路由器、工控、智能家居、小型交换机中。笔者接手的这个项目就是基于OpenWrt实现<strong>路由器</strong>-交换机的应用，并配置一个<strong>网络摄像头</strong>和一个<strong>网口数据转串口</strong></p>
-<p>OpenWrt除了以上特点外，还有一个堪称嵌入式Linux杀手锏的特性：<em>超级大规模的开源社区</em>。可能是因为大家都很喜欢软路由，OpenWrt的软件包已经达到了好几千，这让它能秒掉一堆其他的嵌入式Linux发行版</p>
-<h3 id="OpenWrt与桌面Linux操作系统"><a href="#OpenWrt与桌面Linux操作系统" class="headerlink" title="OpenWrt与桌面Linux操作系统"></a>OpenWrt与桌面Linux操作系统</h3><p>可能大家无法理解OpenWrt这种发行版的独特之处，请允许我在这里为大家重新介绍一下桌面Linux操作系统</p>
-<p>一般的桌面操作系统都很难在低性能的嵌入式设备上运行，这是因为两点：</p>
-<ol>
-<li><p>它们需要占用大量的系统资源，尤其是内存用于支持各种deamon的运行</p>
-<p> 一般的GNU/Linux发行版都采用Bash乃至更人性化也更占用资源的Zshell作为终端；而OpenWrt为了适应低性能的处理器，采用更简单的<strong>Ash</strong>作为默认shell。此外，OpenWrt使用的C库是<strong>uClibc</strong>而不是glibc，这是一个面向嵌入式系统的小型C标准库，也有很多RTOS比如FreeRTOS和RT-Thread都采用了这个C库</p>
-</li>
-<li><p>它们的体积都比较大，一个典型的桌面操作系统占用的存储空间至少在1GB以上</p>
-<p> Ubuntu已经膨胀到了2GB，Debian也往往需要占据1GB的硬盘/SD卡/Flash空间；但OpenWrt具有很强的可裁减性，其内核、驱动、自带软件都可以方便地通过menuconfig进行配置，它的运行内存最小只要32M，存放代码数据的Flash空间最小只要8M，但支持使用完备的Linux内核，支持无线、有线网络应用</p>
-</li>
-</ol>
-<p><strong>OpenWrt牺牲了兼容性</strong>，但是由于庞大的开源社区资源，他能够<strong>对大多数网络嵌入式设备提供支持</strong></p>
-<p><strong>OpenWrt优化了效率和资源占用</strong>，然而因为难以支持更高性能开销的应用导致<strong>其工作范围局限在嵌入式领域</strong></p>
-<h3 id="OpenWrt与一般的嵌入式Linux"><a href="#OpenWrt与一般的嵌入式Linux" class="headerlink" title="OpenWrt与一般的嵌入式Linux"></a>OpenWrt与一般的嵌入式Linux</h3><p>一般的嵌入式Linux都具有上面所说的特点，一些介于桌面Linux操作系统和嵌入式Linux操作系统之间并经过特殊优化的操作系统如Raspbian甚至能够提供更高的性能-资源占用比，但是OpenWrt相比一般的嵌入式Linux系统具有强大的多的网络应用：</p>
+<h2 id="交叉编译器与编译工具"><a href="#交叉编译器与编译工具" class="headerlink" title="交叉编译器与编译工具"></a>交叉编译器与编译工具</h2><p>开发嵌入式程序最重要的就是使用交叉编译器和支持对应硬件平台的IDE。嵌入式平台往往无法运行完整的代码编辑器、编译器，所以必须使用交叉编译器在PC端对本地写好的程序进行编译，然后将生成的.hex、.bin、.elf二进制文件烧录到嵌入式平台，在这个过程中常用如下的工具</p>
+<h3 id="arm-gcc"><a href="#arm-gcc" class="headerlink" title="arm-gcc"></a>arm-gcc</h3><p>arm-gcc是编译ARM指令集程序gcc的统称。对于GNU交叉编译器（GCC面向交叉编译的成果）来说会采用如下命名格式：</p>
+<p><code>&lt;arch&gt;-&lt;vendor&gt;-&lt;os&gt;-&lt;(gnu)eabi&gt;</code></p>
+<p>arch：CPU架构、指令集</p>
+<p>vendor：工具链提供商</p>
+<p>os：目标操作系统</p>
+<p>eabi：是否支持嵌入式应用二进制接口EABI</p>
+<p>作为例子，arm-gcc下有几个主要软件：</p>
 <ul>
-<li><p>默认自带SSH</p>
+<li><p>arm-none-linux-gnueabi-gcc</p>
+<p>  即ARM architecture，no vendor，creates binaries that run on the Linux operating system，uses the GNU EABI</p>
+<p>  用于基于ARM架构的Linux系统，用于编译ARM架构的uboot、Linux内核、在Linux系统上运行的应用程序。</p>
+<p>  它基于gcc，<strong>使用Glibc库</strong>，EABI也是基于GNU支持的。</p>
+<blockquote>
+<p>提到GNU，那懂得都懂，喜闻乐见的GPL猎杀时刻，编译出来的东西都要带GPL啦！</p>
+</blockquote>
+<p>  需要提以下EABI和ABI的概念：ABI即二进制应用程序接口（Application Binary Interface）。ABI描述了应用程序（或者其他类型程序）和操作系统之间或其他应用程序之间的低级接口。</p>
+<p>  EABI即嵌入式ABI（Embedded Application Binary Interface）。它指定了文件格式、数据类型、使用、堆组织优化和嵌入式软件中重要参数的标准约定。EABI是在ABI概念发展之后出现的，相当于ABI的一个特化版，支持软件浮点和硬件浮点功能混用，系统调用的效率更高，和今后的工具更兼容，并且软件浮点情况下，EABI的软件浮点的效率要比OABI（老式的ABI）高很多</p>
 </li>
-<li><p>可选的图形化网络操作界面Luci（Lua Configuration Interface）</p>
-<p>  这是一个使用Lua脚本语言编写的mvc架构的web框架，包含了openwrt的配置界面和一套扩展API。安装luci-core后只要在浏览器中输入OpenWrt设备的IP地址，即可出现其登录界面，可以通过安装luci扩展app实现对OpenWrt设备方方面面的管理</p>
-<p>  这个操作界面是对OpenWrt没有图形界面的有效弥补，也是它不同于其他嵌入式Linux的特殊点，这也<strong>使OpenWrt相当好上手</strong></p>
+<li><p>arm-linux-gcc</p>
+<p>  即ARM architecture，creates binaries that run on the Linux operating system</p>
+<p>  最基本的ARM平台上Linux开发的gcc</p>
 </li>
-<li><p>自带软路由模块和交换机模块，可配合硬件实现软/硬件路由功能</p>
+<li><p>arm-none-eabi-gcc</p>
+<p>  这个gcc是没有操作系统设备使用的，<strong>不支持跟操作系统关系密切的函数</strong>，POSIX的pthread是别想了。并且这个编译器使用的是<strong>newlib</strong>这个专用于嵌入式系统的C库。写嵌入式软件的人最常打交道的编译器应该就是它了，几乎所有ARM设备都可以用它写程序</p>
+<p>  stm32的CubeIDE就是使用了这个软件作为编译器，如果要进行底层的linux移植也要使用它编译linux源码</p>
 </li>
-<li><p>可选搭建VPN</p>
-</li>
-<li><p>可运行轻量级服务器软件</p>
-</li>
-<li><p>可运行轻量级流量整形与捕获分析软件</p>
-<p>  OpenWrt常常被用于搭建软路由，很大程度上就是因为<strong>它支持各种控制网络流量和数据包的应用扩展</strong></p>
+<li><p>arm-eabi-gcc</p>
+<p>  用于编译安卓程序的gcc，如果要编写安卓程序那就离不开他了</p>
 </li>
 </ul>
-<p>除了以上网络特性，OpenWrt还支持嵌入式Linux所具有的基本能力，包括对POSIX的兼容和VFS等</p>
-<h3 id="OpenWrt与LEDE"><a href="#OpenWrt与LEDE" class="headerlink" title="OpenWrt与LEDE"></a>OpenWrt与LEDE</h3><p>LEDE是一个源于OpenWrt的分支嵌入式Linux系统，最初一批OpenWrt开发者觉得OpenWrt规则太老套，于是fork了OpenWrt的源码，然后创建了LEDE的分支，在里面添加了很多新开发流程和新功能，然后越来越多OpenWrt开发者转移到LEDE，最后二者又在2018年合并，形成了现在的OpenWrt</p>
-<p>有的时候OpenWrt源里面会注明LEDE package，其实和OpenWrt一样，把它看成OpenWrt的某个版本即可</p>
-<p>官网这样<a target="_blank" rel="noopener" href="https://openwrt.org/zh/about">解释</a>：</p>
-<blockquote>
-<p>OpenWrt/LEDE是一个为嵌入式设备（通常是无线路由器）开发的高扩展度的GNU/Linux发行版。与许多其他路由器的发行版不同，OpenWrt是一个完全为嵌入式设备构建的功能全面、易于修改的由现代Linux内核驱动的操作系统。在实践中，这意味着您可以得到您需要的所有功能，却仍能避免臃肿。</p>
-<p>在2016年，LEDE项目作为OpenWrt项目的副产品而诞生，与OpenWrt共享很多相同的目标。该项目旨在成为一个嵌入式Linux版本，能让开发者、系统管理员或其他Linux爱好者轻松的为嵌入式设备特别是无线路由器构建或定制软件。<em>LEDE</em>这一名称代表<em>Linux Embedded Development Environment</em>。</p>
-<p>项目成员与OpenWrt社区活跃成员高度重合，他们计划通过建立一个高度透明、注重协作和去中心化的社区为嵌入式Linux的开发带来新生。</p>
-<p>LEDE已公布的目标包括:</p>
+<h3 id="EIDE"><a href="#EIDE" class="headerlink" title="EIDE"></a>EIDE</h3><p>EIDE即Embedded IDE，是一款基于vscode开发的小型嵌入式平台IDE，能够实现对8051、arm、risc-v、stm8等平台进行编程</p>
+<p>在vscode的插件中搜索Embedded IDE，再根据<a target="_blank" rel="noopener" href="https://docs.em-ide.com/#/">官方文档</a>的操作步骤就可以实现部署</p>
+<p>特别方便的是EIDE支持一键配环境，这样就不用费事去官网找SDCC、gcc-arm等编译器安装了，同时也会一并把openocd或flashtools安装好，支持直接烧录和调试</p>
+<h3 id="Keil"><a href="#Keil" class="headerlink" title="Keil"></a>Keil</h3><p>经典的嵌入式编程IDE，只要写各种32位MCU就逃不开的东西（写51也常用）</p>
+<p>缺点一大堆，唯一的优点就是调试功能强大。几乎所有上古IDE的缺点它都占全了，但是就他能调试（EIDE那种拉跨调试还是算了吧），属于是市场垄断了。</p>
+<h3 id="riscv-gcc"><a href="#riscv-gcc" class="headerlink" title="riscv-gcc"></a>riscv-gcc</h3><p>随着RISC-V指令集出现的GCC，使用下面的指令安装RISC-V工具链</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone --recursive https://github.com/riscv/riscv-gnu-toolchain</span><br></pre></td></tr></table></figure>
+
+<p>里面的一个子仓库就包含了riscv-gcc工具</p>
+<p>专门用来给risc-v架构的设备做交叉编译，主要分为下面几个版本：</p>
 <ul>
-<li>构造一个的伟大的嵌入式Linux发行版，运行稳定且功能实用</li>
-<li>伴随社区设备测试反馈，形成定期、可预期的版本迭代</li>
-<li>通过广泛的社区参与和公开会议，建立透明的决策机制</li>
-</ul>
-<p>LEDE项目的形成是为解决那些被OpenWrt项目或社区认为无法解决的长远问题</p>
-<ol>
-<li> 活跃核心开发者数量一直很低，而且无法吸引新面孔加入项目。</li>
-<li> 不可依赖的基础设施，内部不同意和单点故障阻碍了错误修复。</li>
-<li> 在OpenWrt项目中缺少沟通交流、透明度和协调, 无论是在核心团队内部还是在核心团队和其他团队之间。</li>
-<li> 没有足够拥有权限的人处理补丁来流，很少关注测试和定期版本。</li>
-<li> 不重视对稳定性和文档。</li>
-</ol>
-<p>为解决这些问题，LEDE项目采用了与OpenWrt不同的组织架构：</p>
-<ol>
-<li> 所有交流频道均是公开的，对非成员只读的频道控制在一个很好的信噪比。</li>
-<li> 决策过程更公开，拥有投票权的开发者和重度用户数量接近50比50。</li>
-<li> 大大简化基础设施，确保减少我们的维护工作量。</li>
-<li> 更开明的合并政策，基于我们在处理Github上OpenWrt软件包反馈信息的经验。</li>
-<li> 高度重视与简化发布流程合并的自动化测试。</li>
-</ol>
-<p>2018年1月，OpenWrt和以前的LEDE项目同意以OpenWrt这一名称进行合并。</p>
-<p>新的、统一的OpenWrt项目将按照 <a target="_blank" rel="noopener" href="https://openwrt.org/zh/rules">由前LEDE项目建立的章程</a> 进行管理。以前的LEDE和OpenWrt项目的积极成员将继续在统一的OpenWrt上工作。</p>
-</blockquote>
-<h2 id="OpenWrt慢速上手"><a href="#OpenWrt慢速上手" class="headerlink" title="OpenWrt慢速上手"></a>OpenWrt慢速上手</h2><p>之所以这部分名叫《慢速上手》，是因为笔者要从底层开始到建立OpenWrt开发环境的全过程进行梳理，至于为什么——这就是我接手这个项目时遇到的窘境：学长跑路，给我留下了一堆残缺的资料，还有一个时灵时不灵的远程支援（虽然在前期的嵌入式开发debug部分确实给我帮了很大忙，但是怎么还在我滚挂系统的时候幸灾乐祸……这对青少年造成的坏影响，不可估量），于是只能从底层开始</p>
-<p>所有我遇到的问题都会在</p>
-<blockquote>
-<p>引用栏</p>
-</blockquote>
-<p>中说明，避免后来者掉到坑里</p>
-<h3 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h3><p>硬件设备使用的是海凌科的MT7621模块，基于联发科7621A SoC开发</p>
-<ul>
-<li>MIPS架构CPU 1004Kc，双核主频880MHz</li>
-<li>256MB内存，32MB片上Flash，16位DDR2</li>
-<li>自带片上、板载晶振</li>
-<li>3.3V、500mA工作电压电流</li>
-<li>JTAG调试接口</li>
-<li>双WiFi接口</li>
-<li>1个WAN口，4个LAN口，全千兆</li>
-<li>2路SPI、1路IIC</li>
-<li>I2S、PCM等组成的音频接口</li>
-<li>2路USB2.0、3.0接口</li>
-<li>3路UART接口</li>
-<li>GPIO引出</li>
-</ul>
-<h4 id="GPIO"><a href="#GPIO" class="headerlink" title="GPIO"></a>GPIO</h4><p>手头的MT7621 SoC带有GPIO外设，可以通过控制<strong>GPIO_MODE寄存器</strong>来使能对应引脚，默认情况下会直接将GPIO复用到其他外设。GPIO是32位的，每个寄存器控制32个IO</p>
-<p>常用寄存器如下所示：</p>
-<ul>
-<li>GPIO_CTRL_X 方向控制寄存器，用于控制GPIO状态为1输出，0输入，2高阻态</li>
-<li>GPIO_POL_X 极性控制寄存器</li>
-<li>GPIO_DATA_X 数据寄存器，通过读取这个寄存器来获取当前GPIO的值</li>
-<li>GPIO_DSET_X 设置寄存器，置1进行使能GPIO</li>
-<li>GPIO_DCLR_X 清除寄存器，置1进行失能GPIO</li>
-</ul>
-<p>使用方法如下：</p>
-<ol>
-<li><p>登录OpenWrt，使用</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reg s 0</span><br><span class="line">reg w 60 0x48258</span><br></pre></td></tr></table></figure>
+<li><p><strong>riscv32-unknown-elf-gcc</strong></p>
+<p>  针对于RV32架构的编译器，使用<strong>newlib</strong></p>
+<p>  可以添加参数来支持指令子集</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--with-arch=rv64imc</span><br></pre></td></tr></table></figure>
 
-<p>读取GPIO_MODE寄存器值，<strong>将要配置为GPIO的引脚位设为1</strong></p>
-<p>使用<code>reg r 60</code>查看是否配置成功</p>
+<p>  支持裸机，不支持RISC-V平台的Linux</p>
 </li>
-<li><p>对应datasheet按照寄存器顺序使用指令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reg w &lt;寄存器位&gt; &lt;要写入的寄存器值&gt;</span><br></pre></td></tr></table></figure>
-
-<p>进行配置</p>
+<li><p>riscv64-unknown-elf-gcc</p>
+<p>  RV64版本的编译器，特性同上</p>
 </li>
-</ol>
-<p>特别地，有些系统中提供了脚本控制的方法，这会使GPIO配置异常简单：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;13&quot; &gt; /sys/class/gpio/export #要设置的引脚</span><br><span class="line">echo &quot;out&quot; &gt; /sys/class/gpio/gpio13/direction #引脚模式</span><br><span class="line">echo &quot;1&quot; &gt; /sys/class/gpio/fpio13/value #设置GPIO输出值</span><br></pre></td></tr></table></figure>
-
-<p>当然如果你要给OpenWrt写一套串口驱动，那就必须按照Linux驱动标准来了，这里不再赘述</p>
-<h4 id="SPI与IIC"><a href="#SPI与IIC" class="headerlink" title="SPI与IIC"></a>SPI与IIC</h4><p>OpenWrt是支持SPI、IIC的，只要硬件支持就可以调用这俩东西</p>
-<p>相对应的驱动随设备不同而不同，甚至需要在编译时单独加入</p>
-<p>特别地，很多屏幕需要使用SPI驱动；很多摄像头需要使用IIC驱动（用来支持SCCB接口），因此最好在编译内核的时候将二者添加进去（占用空间并不是很大）</p>
-<h4 id="LAN口"><a href="#LAN口" class="headerlink" title="LAN口"></a>LAN口</h4><p>路由器LAN口用来连接局域网，也就是内网，路由器可以<strong>为LAN口设备提供互联网接入</strong>或<strong>将所有LAN口设备连接到一个VLAN实现交换机目的</strong></p>
-<p>相关的内容等到之后的配置OpenWrt再说</p>
-<h4 id="WAN口"><a href="#WAN口" class="headerlink" title="WAN口"></a>WAN口</h4><p>路由器WAN口用于连接外网，通常会通过某个外部路由器接入互联网</p>
-<p>WAN口是路由器的灵魂，没有WAN口的路由器就是个死交换机，有了WAN口，它才能从外网下载程序、实现路由功能等</p>
-<p>一般路由器的配置都是单WAN口多LAN口</p>
-<p>这里使用的路由模块配备了1WAN口4LAN口</p>
-<blockquote>
-<p>很可惜，在硬件组装初期，笔者的路由器WAN口完全连不上，不仅仅无法ping通，甚至ifconfig根本看不到有这个接口</p>
-<p>在这种情况下如果想安装软件包就必须使用LAN口，在路由器端使用SCP协议拉取上位机提供的软件包，然后用opkg进行安装（opkg是OpenWrt里面类似dpkg的一个软件包管理器，可以很方便地安装、更新、删除软件包、切换软件源）</p>
-<p>解决方法在后文给出</p>
-</blockquote>
-<h4 id="网络变压器与Bob-Smith电路"><a href="#网络变压器与Bob-Smith电路" class="headerlink" title="网络变压器与Bob-Smith电路"></a>网络变压器与Bob-Smith电路</h4><p>在网络硬件设计中经常接触到RJ-45网口，现在的RJ45网口很多都自带了网络变压器，因此只要正常接入并记得使用75欧或50欧电阻进行阻抗匹配就可以了；但是对于这里的路由模块，它使用杜邦线-排针代替RJ45网口（别问为什么，问就是特殊领域），因此需要仔细设计网络变压器部分的电路，它被称为<strong>Bob-Smith电路</strong></p>
-<p><img src="/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/image-20210817004039321.png" alt="image-20210817004039321"></p>
-<p>他有如下几个关键作用：</p>
-<ol>
-<li><p>信号传输</p>
-<p> Bob-Smith电路分为<strong>电流型</strong>和<strong>电压型</strong>，根据驱动网络变压器的是电流为主还是电压为主区分</p>
-<p> 电流型：<strong>网络变压器输入侧</strong>（接PHY芯片或SoC的那一侧）<strong>需要在每个变压器抽头处上拉到电源</strong>，如果EMC要求更加严格，还会使用一个高频（75MHz-200MHz）电感跨接在抽头和电源之间，上拉电源可以是1.8、2.5、3.3等，这是为了<strong>增强网络变压器的驱动能力</strong></p>
-<p> 同时需要在输入侧变压器正负端跨接50-100欧姆（常用75欧姆）的分流电阻，用于调整信号驱动强度</p>
-<p> 电压型：<strong>输入侧变压器抽头接到一起再通过100nF电容到地</strong>，这是为了提高网络变压器的EMC性能；正负端则分别接入50-100欧分压电阻到PHY芯片或SoC，用于调整信号驱动强度</p>
+<li><p>riscv-none-embed-gcc</p>
+<p>  专用于riscv嵌入式交叉编译的gcc，</p>
 </li>
-<li><p>阻抗匹配</p>
-<p> <strong>阻抗匹配</strong>：当传输路径上阻抗不连续时，会有反射发生，阻抗匹配的作用就是通过端接元器件时，保证传输路线上的阻抗连续以去除传输链路上产生的反射。</p>
-<p> 网络变压器的输出端要接共模双绞线，双绞线上传输的是差分信号，因此需要使用100-150欧的阻抗匹配</p>
-<p> <strong>网络变压器输出端的抽头都需要接50欧或75欧</strong>（根据线缆长度不同决定，也可以改为100欧，但25欧因为阻值太低不常用）<strong>到线缆，同时需要一个100nF的电容用于旁路</strong>（滤波）</p>
-<p> 这几个电阻就起到了阻抗匹配作用，计算公式如下<br> $$<br> Z=\sqrt{R-j\frac{1}{\omega C}}<br> $$</p>
+<li><p>riscv32-unknown-linux-gnu-gcc</p>
+<p>  支持32位Linux的riscv-gcc</p>
+<p>  使用<strong>GLibc</strong>库</p>
 </li>
-<li><p>波形修复</p>
-<p> 输出端的旁路电容可以有效对外传输线路上的噪声实现滤除</p>
+<li><p>riscv64-unknown-linux-gnu-gcc</p>
+<p>  同上，支持64位Linux的riscv-gcc</p>
 </li>
-<li><p>抑制杂波</p>
-<p> 电压型BS电路通过下拉到地的100nF滤波电容实现了滤出高频噪声的作用，而两个串联在变压器上的分压电阻配合变压器寄生电感可以提高电路对差模信号的抑制能力，从而滤除高频杂波，保证网口通信正常</p>
-<p> 电流型BS电路则直接使用较高电流驱动的方式削弱从控制端输出的高频杂波影响。但是因为电流型电路会导致整体功耗较大，所以正在被电压型取代（不过在大功率信号传输的领域还是有一定应用）</p>
+<li><p>riscv64-multilib-elf-gcc</p>
+<p>  在裸机编译riscv工具链的时候可以选择编译multilib版本的gcc</p>
+<p>  同时支持32位和64位</p>
 </li>
-<li><p>隔离高压</p>
-<p> 这一条也可以称为<strong>共模-差模防护</strong>，电路可以通过一系列泻放路径抵抗从网络变压器输出端而来的浪涌电压电流。</p>
-<p> 具体实现出于篇幅所限不在这里列出，大致思路就是<em>共模浪涌会被变压器和输出端电阻自行抵消，最多可能付出电容被击穿的代价，并不会伤害到控制端；而差模信号会被变压器引入到输入端，之后直接通过抽头的电容或上拉电阻被滤除，能够很大程度地减少对输入端和信号的影响</em></p>
-</li>
-</ol>
-<blockquote>
-<p>在配置过程中发现：WAN口无法使用</p>
-<p>重新刷入三次系统，反复调试一周后发现还是这样，基本上排除了所有可能的软件问题。于是决定回到硬件检查是否网络变压器或引脚出问题。首先用万用表通断档依次检测电容两端对地是否导通，发现WAN口的输入电容两端都对地为0——短路了；之后换用电阻档断电测量输入输出电阻，原本电路中使用75欧电阻，但测量中发现有两个电阻阻值不对，一个是偏小到50欧，另一个则无穷大。换掉电容电阻，上电接网线，成功秒杀</p>
-</blockquote>
-<h3 id="自定制并编译内核"><a href="#自定制并编译内核" class="headerlink" title="自定制并编译内核"></a>自定制并编译内核</h3><p><a target="_blank" rel="noopener" href="https://github.com/openwrt/openwrt">openwrt</a>整个项目在github上可以找到</p>
-<p>也可以通过<a target="_blank" rel="noopener" href="https://git.openwrt.org/openwrt/openwrt.git">官方OpenWrt源码</a>下载</p>
-<p>于是直接用git下载或下载压缩包到linux系统就可以使用了</p>
-<p>一般来说可以使用虚拟机搭建环境，但是如果你习惯了使用桌面端linux，可以直接在你的双系统/纯linux环境中搭建openwrt的开发环境</p>
-<h4 id="配环境"><a href="#配环境" class="headerlink" title="配环境"></a>配环境</h4><p>根据openwrt项目中的README文档就可以简单地配好整个环境，这里摘录一下在ubuntu20中所需要安装的一些关键软件包</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gcc g++ make gettext libncurses5-dev patch binutils flex bison subversion build-essential autoconf bzip2 libz-dev zlib1g-dev gawk git ccache gettext asciidoc libssl-dev sphinxsearch xsltproc sphinx-common libtool libssl-dev unzip</span><br></pre></td></tr></table></figure>
-
-<p>安装完依赖以后还要下载一些openwrt主分支中没有加入的源代码，这些都是诸如kernel、package之类的大号源码，需要从官方<strong>对应的版本库</strong>中拉取到本地</p>
-<p>这里需要注意：版本！</p>
-<p>在拉取之前应该确定你想要编译的内核版本</p>
-<p>常用的大版本有14、15、16、17、18、19，小版本从.1到.9不等，各个版本差异都比较大，大版本之间软件包基本是不可能通用的，小版本之间的软件包安装也存在各种问题，所以<strong>选版本的时候尽量考虑清楚</strong></p>
-<p>使用指令<code>git checkout openwrt-xx.xx</code>来切换到某个指定的内核版本，可以通过<strong>git指令</strong>查看各个版本间的不同</p>
-<p>选择版本后就要添加软件扩展包了：</p>
-<p>首先</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp feeds.conf.default feeds.conf</span><br></pre></td></tr></table></figure>
-
-<p>设置所需要使用的源，然后</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./scripts/feeds update -a</span><br><span class="line">./scripts/feeds install -a</span><br></pre></td></tr></table></figure>
-
-<p>更新并安装扩展程序</p>
-<p>完成后应该可以看到OpenWrt目录如下：</p>
-<ul>
-<li>config 编译选项配置文件目录: 包含全局编译设置，开发人员设置和内核编译设置</li>
-<li>include 就是普通的头文件目录，但是也包含了各种脚本和Makefile</li>
-<li>package 软件包目录</li>
-<li>scripts 环境脚本、下载补丁脚本、Makefile等</li>
-<li>target 嵌入式平台移植包</li>
-<li>toolchain 编译器和C库工具链</li>
-<li>tools 用于生成固件的辅助工具</li>
-<li>dl 下载的软件包目录</li>
-</ul>
-<p>顺带一提，在编译完成时还能看到build_dir和staging_dir，二者分别是中间文件目录和编译安装目录</p>
-<p>在完成配置后可以使用<code>make defconfig</code>来测试编译环境是否配置正确</p>
-<blockquote>
-<p>千万注意不要被老版本的配环境资料误导，包括本篇！不要看见一个差不多的资料就从里面复制粘贴指令！</p>
-<p>一定要选择适合自己系统的配环境资料，最好查阅官方文档！虽然会麻烦一点但是可以很大程度上避免滚挂系统！</p>
-<p>不要问我怎么知道的，我只能说linux双系统有风险，滚挂系统重装好麻烦的！</p>
-</blockquote>
-<h4 id="menuconfig"><a href="#menuconfig" class="headerlink" title="menuconfig"></a>menuconfig</h4><p>配完环境以后就可以进行半可视化配置内核、应用程序的menuconfig了</p>
-<p>先使用</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make menuconfig</span><br></pre></td></tr></table></figure>
-
-<p><strong>打开menuconfig半图形化配置界面，在里面添加需要选用的组件</strong></p>
-<p>操作：键盘上下移动光标，左右选择底部按键，回车是确认，空格是设置选择模式，选项最前面的选择模式有[*]表示编译进固件，[M]表示编译成安装包，[ ]表示不选择，esc是返回上级菜单，按?是帮助，按/是搜索</p>
-<p>注意一般应用程序编译成安装包等进入系统后再安装，kmod内核驱动要编译进固件，带opkg字样的东西一定要编译进固件，不然没法安其他包</p>
-<p><strong>配置选项定义</strong></p>
-<table>
-<thead>
-<tr>
-<th align="center">配置选项</th>
-<th align="left">含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">Target System</td>
-<td align="left">目标平台，对应目录openwrt/target/linux 里的目录</td>
-</tr>
-<tr>
-<td align="center">Subtarget</td>
-<td align="left">目录 openwrt/target/linux/(目标) 里的子目录，定义特定目标</td>
-</tr>
-<tr>
-<td align="center">Target Profile</td>
-<td align="left">目标描述文件，在subtarget目录下面的profile目录中</td>
-</tr>
-<tr>
-<td align="center">Target Images</td>
-<td align="left">编译生成目标固件的控制选项</td>
-</tr>
-<tr>
-<td align="center">Global build settings</td>
-<td align="left">全局编译设置，按默认设置进行编译就可以</td>
-</tr>
-<tr>
-<td align="center">Advanced configuration options</td>
-<td align="left">高级配置选项，无需理会</td>
-</tr>
-<tr>
-<td align="center">Build the OpenWrt Image Builder</td>
-<td align="left">可以编译出一个编译系统供其它主机安装</td>
-</tr>
-<tr>
-<td align="center">Build the OpenWrt SDK</td>
-<td align="left">编译生成SDK开发包，提供给其它主机进行应用开发</td>
-</tr>
-<tr>
-<td align="center">Package the OpenWrt-based Toolchain</td>
-<td align="left">生成开发工具链包，提供给其它主机进行应用开发</td>
-</tr>
-<tr>
-<td align="center">Image configuration</td>
-<td align="left">控制是否打开feed.conf中的模块</td>
-</tr>
-<tr>
-<td align="center">Base system</td>
-<td align="left">基本软件包选择，主要是busybox组件</td>
-</tr>
-<tr>
-<td align="center">Boot Loaders</td>
-<td align="left">引导系统的系统，不用管它</td>
-</tr>
-<tr>
-<td align="center">Development</td>
-<td align="left">开发包、开发工具，如gcc、gdb之类</td>
-</tr>
-<tr>
-<td align="center">Firmware</td>
-<td align="left">特定硬件的固件</td>
-</tr>
-<tr>
-<td align="center">Kernel modules</td>
-<td align="left">内核模块、内核配置选项</td>
-</tr>
-<tr>
-<td align="center">Languages</td>
-<td align="left">软件开发语言选择</td>
-</tr>
-<tr>
-<td align="center">Libraries</td>
-<td align="left">动态链接库选择</td>
-</tr>
-<tr>
-<td align="center">Network</td>
-<td align="left">网络功能模块选择</td>
-</tr>
-<tr>
-<td align="center">Utillities</td>
-<td align="left">一些实用工具模块</td>
-</tr>
-</tbody></table>
-<p>（上面内容摘录自<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/e2b5a292392e%EF%BC%89">https://www.jianshu.com/p/e2b5a292392e）</a></p>
-<p>完成选择后就可以保存退出了，生成的文件会让你命名，一般直接保持默认<code>.config</code>即可</p>
-<blockquote>
-<p>在这个项目里，我遇到的最大问题就是在menuconfig的时候安装进模块的软件包无法使用，于是只能和OpenWrt内核版本、底层硬件驱动、网口配置斗智斗勇……在一般情况下面对嵌入式设备一定要首先考虑在menuconfig的时候安装软件包，否则后续的操作有可能反而比menuconfig复杂——尤其是在安装额外的kmod，也就是内核驱动时。自行编译的内核是具有独立的md5码的，并不能和官方的bin文件对应的md5码吻合，这就导致下载软件包的时候kmod无法匹配内核，所以要使用强制安装，而又因为你的内核是自行编译的，所以很有可能会出现因为内核版本不对而很多程序无法运行，甚至运行时崩溃的情况</p>
-</blockquote>
-<h4 id="漫长的编译"><a href="#漫长的编译" class="headerlink" title="漫长的编译"></a>漫长的编译</h4><p>make就完事了，make的时候可以换各种姿势</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">make V=s #输出编译信息，第一次编译一般用这个，单核编译小水管不得不品尝</span><br><span class="line">make V=99 #上面这个的老版本用法</span><br><span class="line"></span><br><span class="line">make -j12 #j后面跟你的cpu核心数，对amd cpu很友好，但是不会输出编译信息，如果要反复编译还是比较适合的，省时间</span><br><span class="line">make clean #重新编译之前记得用一下，不然下次编译可能出现莫名其妙的错误</span><br></pre></td></tr></table></figure>
-
-<p>特别地，现在GitHub有一个叫Actions的服务，有人利用这个服务制作了一套<a target="_blank" rel="noopener" href="https://github.com/P3TERX/Actions-OpenWrt">在线编译OpenWrt的系统</a></p>
-<p>主要有以下特色：</p>
-<ul>
-<li><strong>免费！快速！一次编译成功率高！</strong></li>
-<li>一键快速自动多线程编译</li>
-<li>无需搭建编译环境，上手就用，用完就扔</li>
-</ul>
-<p>根据<a target="_blank" rel="noopener" href="https://p3terx.com/archives/build-openwrt-with-github-actions.html">项目的中文介绍页面</a>里面的介绍一步步来就可以实现在线编译了（记得提前准备一个GitHub账号）</p>
-<p>其中比较友好的是可以支持SSH连接到GitHub Actions虚拟服务器环境，直接在服务器上menuconfig</p>
-<blockquote>
-<p>编译的时候出现了很多错误，不要嫌麻烦，挨个查看改正就行，第一次编译难免出错，正常情况下改一天肯定是能编译出来的</p>
-<p>不过后续烧录能不能识别嘛……祈祷自己的设备比较常见吧；特种设备采用特殊器件装特殊系统……自求多福，运气好总能成功的</p>
-</blockquote>
-<h3 id="上位机连接到OpenWrt"><a href="#上位机连接到OpenWrt" class="headerlink" title="上位机连接到OpenWrt"></a>上位机连接到OpenWrt</h3><p>终于完成了整个系统的编译，接下来就能尝试烧录并连接到设备了。烧录过程和设备具体硬件配置有关</p>
-<h3 id="烧录"><a href="#烧录" class="headerlink" title="烧录"></a>烧录</h3><p>如果你使用的是普通路由器，一般来说连上LAN口，登录网关地址，里面的选项里会有一个更新固件，直接把bin文件上传，点击烧录就可以了；如果使用的是一般的嵌入式设备，一般可以选择使用openocd配合jtag进行烧录，只要900+rmb氪入一套jlink基本可以完美烧录（笑）上面两个方法都太简单（没钱买设备是个人问题，有钱人烧录都很简单的）。下面介绍一下常用的三种烧录方法：</p>
-<ol>
-<li><p><strong>uBoot烧录</strong></p>
-<p>一般来说设备出厂以后都会烧录<strong>uBoot</strong>，这个东西和grub有点像，但是它工作在嵌入式领域，可以支持Linux、安卓、FreeBSD等系统的引导，支持MIPS、x86、ARM、RISC-V等等各种架构的CPU，而OpenWrt对应使用的uBoot往往会着重增强网络能力，因此一般OpenWrt设备的uBoot都会自带TFTP协议的功能，并且会打开一个操作界面，因此可以直接参考厂商给出的说明，按以下步骤启动设备</p>
-<ul>
-<li>连接LAN口到上位机</li>
-<li>修改上位机IP为厂商指定的静态IP地址，并按照地址设定子网掩码</li>
-<li>下位机设备断电，按住Boot按键（或者叫WPS按键）（当然如果没有这个按键应该从Boot引脚到地焊接一根跳线）</li>
-<li>将设备上电</li>
-<li>保持按键一段时间，等待设备从uBoot启动（类似于按住进入键盘上某个键进入BIOS设置界面）</li>
-<li>松开按键并在上位机打开厂商指定的IP地址（浏览器打开，别想着用什么奇奇怪怪的软件）</li>
-<li>选择固件、上传、等待</li>
-<li>等到足够长时间以后（具体多长要参考厂商说明）修改LAN口为dhcp或默认设置的静态IP</li>
-<li>尝试正常连接路由器</li>
-</ul>
-<p>如果中间没有操作界面，可以尝试反复ping要连接的uBoot地址，如果能ping通那就是连上了，之后使用类似下面的uboot命令（由厂商决定）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tftp 固件保存地址 要上传的固件</span><br><span class="line">erase 固件启动地址 + $固件大小</span><br><span class="line">cp 固件保存地址 固件启动地址 $固件大小</span><br><span class="line">set bootcmd 固件启动地址</span><br><span class="line">save</span><br><span class="line">boot</span><br></pre></td></tr></table></figure>
-
-<p>总体过程就是：上传-擦除原本固件-复制上传的固件到启动位置-设置固件启动位置-保存-重启设备</p>
-<p>uBoot功能很强大，在某种程度上说它就像桌面版linux的livecd一样，只要uboot不刷坏，设备就可以说是不死的，一直可以通过重新进入uboot的方式刷新系统</p>
-<blockquote>
-<p>顺便提一下，对于14.07版本的内核，应用在MT7621上时，安装kmod-usb-ehci与kmod-usb-hid可能会导致冲突让系统崩溃，就是因为同时安装了他俩让我不得不重新刷机好几次</p>
-</blockquote>
-</li>
-<li><p><strong>luci界面升级</strong></p>
-<p>就是上面说过的登入网关以后从配置界面上传固件升级的过程，但是一般来说会保留原来系统的配置，所以最好刷更新的固件，而不是刷老版本固件，否则会有可能变砖，还需要用第一种方法再刷一次</p>
-</li>
-<li><p><strong>烧录器烧录</strong></p>
-<p>如果uBoot损坏、网口有问题甚至Flash挂了，那就必须使用这种方法了。</p>
-<p>一般来说需要使用专门的Flash烧录器配合上位机软件对准Flash的引脚进行烧录，Flash烧录器有1.8V、3.3V、5V三种，一般来说现在的SPI Flash（最典型的W25Q128）使用3.3V烧录器就可以，但是很多设备都用上了低功耗Flash，这就需要一个电平转换板或者直接使用1.8V烧录器进行烧录。如果是最为极端的情况，Flash挂了，那就必须把Flash拆下来，换一个新Flash上去再烧录</p>
-</li>
-</ol>
-<blockquote>
-<p>在艰难的配环境过程中，某个不愿透露姓名的学长就把Flash整废了，好巧不巧那块Flash还是特殊封装的贴片元件，极其难焊接，于是只能购入巨贵的专用烧录板，烧录新的Flash以后再装上去。由于没碰见过这种情况+快递速度缓慢，流程整整走了一周。</p>
-<p>笔者接手项目以后，还遇到了uBoot死活不启动的情况，检查电路以后发现是板上的Boot线路被莫名划坏一道，于是补好了铜线才得以启动uBoot</p>
-<p><strong>新手注意：遇到uBoot不启动不要慌，较大可能是你按的时间不够久或者操作有疏忽导致uBoot启动被跳过了，只要认真多试几遍总能成功，在期间善用百度很关键</strong></p>
-</blockquote>
-<h4 id="Luci"><a href="#Luci" class="headerlink" title="Luci"></a>Luci</h4><p>完成系统烧录以后，上电，上位机连上LAN口，等待几分钟，浏览器打开网关地址（一般是<code>192.168.1.1</code>），一般来说就能进入一个登陆界面，这就是OpenWrt的<strong>Luci界面</strong></p>
-<p>通过这个界面可以对设备的大多数设置进行调整，这里不多作介绍，都是很直接了当的东西</p>
-<p>在某些角落会留着language的设置栏，在这里可以选择语言，省去啃生肉的烦恼</p>
-<h4 id="串口终端"><a href="#串口终端" class="headerlink" title="串口终端"></a>串口终端</h4><p>最传统登录Linux的方法当然是串口终端——不论嵌入式linux还是服务器linux</p>
-<blockquote>
-<p>TTL串口是人类的好朋友</p>
-</blockquote>
-<p>这种方法不必多说，折腾过树莓派的人都懂，串口调试器连接UART Tx、Rx、GND，重启设备，开启Putty或者XShell，之后开机信息就会从界面喷涌而出</p>
-<h4 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h4><p>这种方法很适合具有WiFi功能的OpenWrt设备，能够省掉一根网线。不过有网线连接的时候也很实用，对于linux来说命令行总是比可视化可靠。</p>
-<p>连上网线ping通后，直接</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh 用户名(一般是root)@目标设备IP</span><br></pre></td></tr></table></figure>
-
-<p>就可以登录到OpenWrt了</p>
-<h4 id="任何其他Linux发行版允许的登录方式"><a href="#任何其他Linux发行版允许的登录方式" class="headerlink" title="任何其他Linux发行版允许的登录方式"></a>任何其他Linux发行版允许的登录方式</h4><p>只要在内核里面使能了某个可行的登陆方式，并且硬件允许它运行，那么用户就能用这种方式进行登录OpenWrt</p>
-<p>毕竟这可是Linux啊！</p>
-<h3 id="联网"><a href="#联网" class="headerlink" title="联网"></a>联网</h3><p>强调一下：<strong>如果是必须的kmod还是应该先想好然后在编译内核阶段完成安装</strong></p>
-<p>一般来说正常安装了网络设备驱动和普通luci界面的设备直接插上网线或者通过luci界面配置好wifi以后就可以联网了，但是如果无法联网可能有以下几个原因：</p>
-<ol>
-<li>编译内核时没有把网络设备驱动编译进去（一般来说是默认添加且不能修改的，但是谁知道用户会做出什么逆天操作）</li>
-<li>外部设备不支持联网（一般是硬件坏了，弄个交换机上OpenWrt还不如多花点钱买个带千/万兆网口的）</li>
-<li>配置问题</li>
-</ol>
-<p>1、2点需要重新编译或者检查硬件甚至重新选型，非常难以解决，所以一定要避免这两种问题出现；第三种相对容易解决一些，根据百度到的教程一步步来即可，一般来说都是因为路由器接口/netif/wpa/交换机接口配置出错，依次排除不要着急</p>
-<blockquote>
-<p>在我调试这个板子的时候发生了一件很绝望的事情：板子无法联网，但是能够在内网登录luci界面并ssh。刚开始我以为是软件问题，先去查找了一遍OpenWrt的官方文档，通过luci界面配置了一遍接口，但是无济于事；然后又ssh进去通过vi查找配置文件，无果；因为项目进度逼的比较紧，于是只能换用离线装软件包的方法。等到折腾了一大通硬装软件包以后才想起来检查硬件问题，最后发现是开头说的网络变压器电路问题导致无法联网</p>
-<p>所以嵌入式编程<strong>一定要先排除硬件问题</strong>！</p>
-</blockquote>
-<h3 id="包管理器"><a href="#包管理器" class="headerlink" title="包管理器"></a>包管理器</h3><p>OpenWrt最与众不同的一点就是它配备了<strong>opkg</strong>包管理器，它和apt、yum、pacman等指令使用方式类似，能够<em>不是很智能地智能解决</em>软件包依赖问题：<em>只能解决一点点</em>。一般来说自动解决需要一层依赖的软件包安装还是可以的，但是为了安全起见还是一步一步的安装软件包吧。opkg常用指令如下</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">opkg install </span><br><span class="line">opkg remove</span><br><span class="line">opkg update</span><br><span class="line">opkg upgrade</span><br></pre></td></tr></table></figure>
-
-<p>软件包管理器的设置位于<code>/etc/opkg</code>中</p>
-<p>这个包管理器也是支持<strong>换源</strong>的，如果某个软件源不好连接，完全可以更换当前使用的软件源，使用luci界面就可以轻松换源，如果非要使用命令行也可以像ubuntu那样直接编辑设置文件来换源</p>
-<p>具体操作网上有很多，不再赘述，特别指出善用下面的指令可以快速更换软件源的域名</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i</span><br></pre></td></tr></table></figure>
-
-<p>特别地，安装软件包时如果碰到了kmod字样的软件包，就说明这是一个内核驱动包，在安装它的时候很可能会遇到内核版本不正确的情况——因为自行编译的OpenWrt生成时会自动携带一个经过修改的md5码，它往往和已有的内核驱动应该对应的验证码不一致，因此会出现报错，这种情况下在安装指令后面加上如下参数就可以解决问题了</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--force-depends</span><br></pre></td></tr></table></figure>
-
-<p>如果还是不行，甚至出现系统崩溃、变砖的情况，就要考虑是否是自己的软件源选错抑或是自己编译的内核版本不对了</p>
-<p>这就是为什么在上面反复强调要注意内核版本与内核驱动</p>
-<p><strong>snapshot版本和release版本区别</strong></p>
-<p>我们经常会看到软件源中的某些项目版本以release或snapshots结尾，一般来说snapshots版本代表正在开发中的版本（快照版本,一般处于开发阶段），release代表比较稳定的发布版本（这次迭代的所有功能都已经完成）</p>
-<blockquote>
-<p>换源的操作对于嵌入式Linux，或者说OpenWrt来说不是很重要，但是在面对很难处理的软件bug时可以考虑换源来解决，我在处理项目时通过多次换源解决了一些软件包的依赖问题，使用到的源如下：</p>
-<p>清华源 src/gz barrier_breaker_base <a target="_blank" rel="noopener" href="http://mirrors.tuna.tsinghua.edu.cn/openwrt/barrier_breaker/14.07/ramips/mt7621/packages/base">http://mirrors.tuna.tsinghua.edu.cn/openwrt/barrier_breaker/14.07/ramips/mt7621/packages/base</a></p>
-<p>稳定版官方源 src/gz barrier_breaker_base <a target="_blank" rel="noopener" href="http://downloads.openwrt.org/snapshots/trunk/ramips/mt7621/packages/base">http://downloads.openwrt.org/snapshots/trunk/ramips/mt7621/packages/base</a></p>
-<p>快照版官方源 src/gz barrier_breaker_base <a target="_blank" rel="noopener" href="http://downloads.openwrt.org/snapshots/trunk/ramips/mt7621/packages/base">http://downloads.openwrt.org/snapshots/trunk/ramips/mt7621/packages/base</a></p>
-<p>存档版官方源src/gz barrier_breaker_base <a target="_blank" rel="noopener" href="https://archive.openwrt.org/snapshots/trunk/ramips/mt7621/packages/base">https://archive.openwrt.org/snapshots/trunk/ramips/mt7621/packages/base</a></p>
-<p><strong>主要的思路就是查看自己要安装的软件包都需要什么依赖，然后对照依赖版本寻找对应的md5码，再根据md5码选择支持的官方源</strong></p>
-<p>在换源的时候可能会遇到下面的报错：Package xxx version xxx has no valid architecture, ignoring.</p>
-<p>这是因为源指定的系统和设备上刷入的系统md5码不符合，可以直接在/etc/opkg.conf文件中加入对系统支持的architecture的设置，也就是在文件中添加下面的内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arch all 100</span><br><span class="line">arch &lt;arch类型1&gt; 200</span><br><span class="line">arch &lt;arch类型2&gt; 300</span><br></pre></td></tr></table></figure>
-
-<p>arch类型可以在源下面的package目录内配置文件中查找到，我使用的配置如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arch all 100</span><br><span class="line">arch mips 200</span><br><span class="line">arch ramips 300</span><br><span class="line">arch unkown 400</span><br></pre></td></tr></table></figure>
-
-<p>换用<a target="_blank" rel="noopener" href="https://archive.openwrt.org/">官方archive源</a>也可以帮助解决一些老版本不兼容的问题</p>
-</blockquote>
-<h3 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h3><p>只要登陆进luci界面，再让设备联网就可以轻松地进行可视化安装，并且luci界面还会将软件包依赖关系列出来，非常简便；命令行下的安装过程也不算复杂，和ubuntu、centos等发行版的软件安装方法类似</p>
-<p>一般我们用opkg安装软件有两种方式：</p>
-<ul>
-<li><p>是连上网络后从官方网站安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install xxx</span><br></pre></td></tr></table></figure></li>
-<li><p>把软件下载到上位机（直接进入软件源网页，通过ftp下载即可），通过winscp或者linux下使用scp指令传到路由器tmp目录，再使用指令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg install xxx.ipk</span><br></pre></td></tr></table></figure>
-
-<p>安装</p>
+<li><p>riscv64-liunx-multilib-gcc</p>
+<p>  同上，但是用于Linux下的程序编译</p>
 </li>
 </ul>
-<p>如果路由暂时上不了网，就无法使用前一种方法，后一种方法又有些麻烦，其实除此之外还可以通过上位机开启ftp/http服务，让设备接入来实现“在内网”安装：</p>
-<ol>
-<li><p>在本机上开ftp/http/其他网络服务</p>
-</li>
-<li><p>修改/etc/opkgconfig，将第一行的网址（也就是软件源地址）改成上位机服务器放安装包的服务目录</p>
-</li>
-<li><p>从软件源下载需要的安装包到服务目录</p>
-</li>
-<li><p>把软件源的packages文件下载到服务目录</p>
-</li>
-<li><p>使用指令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install xxx</span><br></pre></td></tr></table></figure>
+<h3 id="ST-CubeIDE"><a href="#ST-CubeIDE" class="headerlink" title="ST-CubeIDE"></a>ST-CubeIDE</h3><p>意法半导体专用于本家STM32的IDE，基于Eclipse开发，使用<code>arm-none-eabi-gcc</code>作为编译器，使用<code>gdb</code>作为调试器，使用<code>openoc</code>作为烧录器</p>
+<p>使用体验要比keil好很多，至少支持代码高亮和跳转更舒服了</p>
+<h2 id="串口工具"><a href="#串口工具" class="headerlink" title="串口工具"></a>串口工具</h2><h3 id="Minicom简介"><a href="#Minicom简介" class="headerlink" title="Minicom简介"></a>Minicom简介</h3><p>minicom是在linux环境下常使用的串口工具，它提供了命令行中访问串口的功能</p>
+<p>安装（ubuntu为例）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install minicom</span><br></pre></td></tr></table></figure>
 
-<p>安装软件</p>
+<p>基本操作如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">minicom -s # 进入设置</span><br><span class="line">minicom # 进入软件</span><br></pre></td></tr></table></figure>
+
+<p>在软件中先按【Ctrl】 +【a】，再按【z】即可进入设置模式，再按【x】可退出</p>
+<p>进入设置模式后可以按上面显示的按键操作进入对应的选项</p>
+<p>按【o】可进入串口的具体设置，包括调节波特率、选择端口都可以在这里完成</p>
+<p>minicom默认读取<code>/dev/modem</code>，如果提示找不到，可以先使用下面的指令创建软链接到<code>/dev/modem</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /dev/modem 你接入串口对应的文件</span><br></pre></td></tr></table></figure>
+
+<p>或先使用参数进入minicom的设置界面，更改要读取的文件并保存后再正式进入软件</p>
+<h3 id="Putty简介"><a href="#Putty简介" class="headerlink" title="Putty简介"></a>Putty简介</h3><p>Putty是一个多平台兼容的虚拟命令行软件</p>
+<p>可以支持SSH、串口终端、Telnet协议、Raw数据等登陆方式</p>
+<p>有Win、Linux、MacOS多操作系统支持</p>
+<p>配合百度就可以轻松使用，算是非常常用的终端软件了（如果不喜欢它也可以试试<strong>XShell</strong>）</p>
+<h2 id="调试与OpenOCD"><a href="#调试与OpenOCD" class="headerlink" title="调试与OpenOCD"></a>调试与OpenOCD</h2><p>以STM32为例，整套调试系统的架构如下所示</p>
+<p><img src="/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/image-20220319124606523-16476685924391.png" alt="image-20220319124606523"></p>
+<p>主要包含以下几个部分：</p>
+<ul>
+<li>片上JTAG接口：位于MCU内部的JTAG接口电路，与CPU的调试组件相连，以状态机的形式提供对MCU的调试功能</li>
+<li>JTAG转接器：又称为调试器/仿真器或硬件加密狗，提供USB到JTAG协议的转换功能，也可以提供基于硬件的仿真功能</li>
+<li>调试器驱动：为上位机操作系统提供的调试器USB驱动，用于上层软件通过操作系统对硬件仿真器进行控制</li>
+<li>调试器软件：主要包含各种IDE里面闭源的调试器软件和开源的OpenOCD，提供一个GDB服务器，接收GDB客户端发送的指令，同时也兼容基于Telnet或各种私有协议（比如远程调试协议）的上位机连接。对仿真器数据的解码工作也在该软件内部完成</li>
+<li>GDB：一个C调试软件，GNU DeBugger，用于提供基于二进制文件的断点调试、内存查看等功能。各种IDE中的断点、寄存器查看、变量显示等功能都是基于GDB完成的，它作为GDB客户端发送指令给下位机</li>
+<li>Tcl/Python脚本：可用于OpenOCD执行的脚本文件，常用于烧录、清除FLASH等</li>
+</ul>
+<h3 id="JTAG接口协议"><a href="#JTAG接口协议" class="headerlink" title="JTAG接口协议"></a>JTAG接口协议</h3><p><strong>JTAG</strong>（<strong>Joint Test Action Group</strong>，联合测试工作组）是一种国际通用的标准化芯片内部测试协议，现在大多数可编程器件都支持JTAG协议，通用处理器、DSP设备、FPGA器件、大多数MCU-SoC等</p>
+<p>标准JTAG是4数据线：</p>
+<ul>
+<li><strong>TMS</strong>：测试模式选择（Test Mode Switch），用来设置JTAG接口处于某种特定的测试模式</li>
+<li><strong>TCK</strong>：测试时钟输入（Test Clock），用于设置JTAG总线时钟</li>
+<li><strong>TDI</strong>：测试数据输入（Test Data In），数据通过TDI引脚输入JTAG接口</li>
+<li><strong>TDO</strong>：测试数据输出（Test Data Out），数据通过TDO引脚从JTAG接口输出</li>
+</ul>
+<p>由于JTAG在定义初期，计算机设备都使用并口传输数据，因此它保留了2*8并口的标准，现在能看到的牛角座接入JTAG标准也是从并口演变而来的，只不过把一些并口数据线设为接地，一些数据线设为空脚</p>
+<p>在传统的并口JTAG中，存在TRST、TDI、TMS、TCLK、TDO、RTCK、RESET这些数据线，因此比较冗余，在要求体积的设备上不推荐使用，但好处在于市面上大部分JTAG调试器都默认支持这个协议</p>
+<p><strong>为了支持JTAG协议，需要现在器件内部定义一个TAP（Test Access Port，测试访问口），并在CPU内核里设置专门的调试指令</strong>。TAP是一个通用的端口，要求通过使用TAP访问芯片中所有数据寄存器和指令寄存器，整个过程通过独立的TAP控制器完成，这个控制器一般使用较为复杂的状态机实现，独立于CPU内核，甚至CPU的通用寄存器都可以由它访问，因此TAP控制器一般被称为<strong>TAP状态机</strong>。</p>
+<p>除了调试，JTAG还可以进行ISP在线编程；多个器件可以通过JTAG接口以菊花链的形式链接到一起，实现对多个器件分别测试</p>
+<p><strong>SWD与JTAG</strong></p>
+<p><img src="/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/SouthEast-16476685924402.jpeg" alt="这里写图片描述"></p>
+<p>SWD是ST公司在JTAG之外开发的独立的调试总线，即串行调试线（Serial Wire Debug），它只需要2条数据线即可实现高速调试：</p>
+<ul>
+<li><strong>SWDIO</strong>：串行调试数据线</li>
+<li><strong>SWCLK</strong>：SWD时钟数据线</li>
+</ul>
+<h3 id="JLINK与ST-LINK"><a href="#JLINK与ST-LINK" class="headerlink" title="JLINK与ST-LINK"></a>JLINK与ST-LINK</h3><p>J-Link是德国SEGGER公司推出基于JTAG的仿真器，其实就是一个USB转JTAG的适配器，但是它做到了跨平台、高速高效、稳定性极强，配合上位机调试软件可以实现最高速的调试</p>
+<p>ST-LINK是ST公司专门针对STM8和STM32系列芯片推出的仿真器。ST-LINK/V2可指定使用SWIM接口或JTAG或SWD标准接口对设备进行调试</p>
+<h3 id="JTAG片上硬件调试原理"><a href="#JTAG片上硬件调试原理" class="headerlink" title="JTAG片上硬件调试原理"></a>JTAG片上硬件调试原理</h3><p>JTAG片上设备，也就是TAP状态机，需要实现以下数据线：</p>
+<ul>
+<li><strong>TCK</strong>：TAP总线时钟。由于JTAG总线时钟是独立的，TAP时钟不会由片内总线提供，而是由片外的JTAG引脚接入</li>
+<li><strong>TMS</strong>：模式选择信号，用于<em>控制TAP状态机的转换</em>。</li>
+<li><strong>TDI</strong>：数据输入信号。</li>
+<li><strong>TDO</strong>：数据输出信号。由上面两个数据线实现全双工数据传输</li>
+<li><strong>TRST</strong>：复位信号，用来对TAP状态机进行复位（初始化）。这个信号接口在IEEE 1149.1标准里<em>并不是强制要求的</em>，因为通过TMS也可以对TAP状态机进行复位</li>
+<li><strong>STCK</strong>：时钟返回信号，在IEEE 1149.1标准里非强制要求，这个信号用于确认指令完成状态</li>
+</ul>
+<p>整个状态机的运作过程如下：</p>
+<ol>
+<li><p>系统上电后，TAP状态机进入<strong>Test-LogicReset</strong>（复位）状态</p>
+</li>
+<li><p>根据TCK信号上升沿依次进行状态转移</p>
+<p> 一般情况下会按照以下顺序进行默认检测</p>
+<ol>
+<li><strong>Run-Test/Idle</strong>：如果之前没有指令插入，此状态下为空闲</li>
+<li><strong>Select-DR- Scan</strong>：扫描设备里所有的数据寄存器</li>
+<li><strong>Select-IR-Scan</strong>：扫描设备里所有的指令寄存器</li>
+<li><strong>Capture-IR</strong>：某个特定的逻辑序列被加载到指令寄存器中（指令插入预备）</li>
+<li><strong>Shift-IR</strong>：将一条特定的指令送到指令寄存器中（强制指令插入）</li>
+<li><strong>Exitl-IR</strong>：TAP状态机退出访问指令寄存器状态</li>
+<li><strong>Update-IR</strong>：强制更新指令寄存器来执行刚才插入的指令</li>
+<li><strong>Run-Test/Idle</strong>：如果之前又指令插入，此状态下会完成对指令寄存器的访问</li>
+</ol>
+</li>
+<li><p>通过TMS信号对TAP状态进行切换</p>
+</li>
+<li><p>通过TDl和TDO数据线，将新的数据加载到数据寄存器中；经过一个周期后，就可以捕获数据寄存器中的数据，完成对与数据寄存器的每个寄存器单元相连的芯片引脚的数据更新</p>
 </li>
 </ol>
-<blockquote>
-<p>上面提到了本地安装软件包的方法，所以在这里特别提一下，<strong>实际上安装非常麻烦</strong>，所以尽量不要使用这种方法</p>
+<p>正是由于JLINK使用了Cortex-A内核搭配FPGA来实现最快速的TAP状态机，因此才能获得高速性能</p>
+<h3 id="JTAG电路原理"><a href="#JTAG电路原理" class="headerlink" title="JTAG电路原理"></a>JTAG电路原理</h3><p>JTAG依靠<strong>边界扫描</strong>（Boundary-Scan）电路完成调试</p>
+<p>在芯片的每个IO管脚上都增加一个移位寄存器单元，因为这些移位寄存器单元分布在芯片的边界上，所以被称为<strong>边界扫描寄存器</strong>（Boundary-Scan Register）。当需要调试芯片时，这些寄存器<em>将芯片与外围电路隔离</em>，实现对芯片输入输出信号的观察和控制</p>
+<p>对于输入管脚，可以通过与之相连的边界扫描寄存器单元把数据加载到该管脚中；对于输出管脚，可以通过与之相连的边界扫描寄存器捕获该管脚上的输出信号。正常运行状态下这些BS（边界扫描）寄存器单元对芯片是一套旁路电路，正常运行不受影响</p>
+<p>另外，边界扫描寄存器单元可以相互连接起来，在芯片的周围形成一个<strong>边界扫描链</strong>（Boundary-Scan Chain），它可以<em>实现串行输入输出</em>，当有信号输入的时候，边界扫描链就能获取信号，当CPU要输出信号的时候，边界扫描链也能获取要输出的信号。这样通过相应的时钟信号和控制信号，实现对处在调试状态下的芯片的输入和输出状态的观察和控制。TDI、TDO两个引脚就是负责执行这个工作的</p>
+<p>整体数据流向就是TDI-&gt;边界扫描链-&gt;TDO</p>
+<p>CPU跟外界通信的引脚上的数据无非就是<strong>指令</strong>和<strong>数据信号</strong>（包括地址跟数据） 两种。但是这两者的结合形成了一个完整的程序，能对它们进行监控就表明我们能进行程序的调试。大多数支持JTAG的芯片都会提供多条独立的边界扫描链，而TAP控制器就是用于控制这些边界扫描链的</p>
+<p>上面提到<strong>TAP是一个通用的端口</strong>，通过TAP，开发者得以访问芯片提供的所有数据寄存器（DR）和指令寄存器（IR）。暂且不提负责数据输入输出的TDI和TDO，先来看看其他几个信号：</p>
+<ul>
+<li>TCK：时钟信号，为TAP的操作提供了一个独立的、基本的时钟信号。</li>
+<li>TMS：模式选择信号，用于控制TAP状态机的转换。</li>
+<li>TRST：复位信号，可以用来对TAP控制器进行复位。这个信号接口在IEEE1149.1标准里并不是强制要求的，因为通过TMS也可以对TAP控制器进行复位。</li>
+<li>STCK：时钟返回信号，在IEEE1149.1标准里非强制要求。</li>
+</ul>
+<p>TAP控制器的状态机工作已经在上面的简介部分提过，这里主要强调一下片上硬件实现直接在RTL层面实现状态机即可，但是板级硬件还需要考虑高速传输和与软件兼容的问题，所以调试环节一般需要上位机开发者、板级硬件开发者、片上硬件开发者共同实现。</p>
+<p>片上硬件开发者负责TAP控制器的实现，板级硬件开发者负责实现USB到JTAG协议转换，上位机开发者则负责将软件调试接口与JTAG调试协议实现对接。</p>
+<p>Keil、IAR、DS-5、ADS开发工具软件等都有一个公共的调试接口<strong>RDI</strong>，可以通过两种方法实现转换：</p>
+<ul>
+<li>在电脑上写一个服务程序，把RDI指令解析成能实现的JTAG指令，然后通过一个物理转换接口（这个转换就是板级硬件开发者负责实现的，仅仅起到电气物理层上的转换）发送到目标板。最典型的实现就是<code>H-JTAG</code></li>
+<li>制作一个转接板，直接接收来自上位机软件的RDI指令（一般通过USB总线传输），通过板上的转换芯片将其转换成JTAG指令，再发送给目标板。最典型的实现就是<code>JLink</code></li>
+</ul>
+<p>第二种方法相对来说速度较快，虽然硬件实现更复杂一些，但是很多公司都有相应的转换芯片，有些特种设备为了可控性和实时性会考虑使用一个高速MCU甚至FPGA作为转换器，相对应用更加广泛</p>
+<p>下面要介绍的一个软件和一个硬件分别是<strong>调试器上位机</strong>OpenOCD和<strong>USB-JTAG转接板</strong>DAP-Link。使用这两个开源的调试组件配合就可以对大多数ARM设备进行调试了</p>
+<h3 id="OpenOCD"><a href="#OpenOCD" class="headerlink" title="OpenOCD"></a>OpenOCD</h3><blockquote>
+<p>参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/41517198">OpenOCD教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://openocd.org/">官网</a></p>
 </blockquote>
+<p>OpenOCD是一款开源的调试器软件适配器，旨在提供针对嵌入式设备的调试、系统编程和边界扫描功能。说人话就是OpenOCD是在GDB和JTAG调试器之间的一个桥梁，它需要基于仿真器（JTAG调试器）运行，因为运行OpenOCD的主机往往无法直接解析JTAG信号</p>
+<blockquote>
+<p>有例外，在某些嵌入式Linux设备上，生产商会提供JTAG设备驱动，从而在主机内集成一个JTAG适配器，这类设备往往是脱机烧录器的主控</p>
+</blockquote>
+<p>由于一个仿真器只能支持一个或有限多个传输协议，每个协议涉及不同的电信号，且使用不同的协议栈进行消息传递，底层的设备不能通用，这也就导致了上面的ST-Link和下面的DAP-Link等多种不同的调试器。各大硬件厂商都会推出适用于自己设备的JTAG调试器（比如Xilinx的USB Cable、Espressif的ESP-Prog、ARM的DAP-Link等）。仿真器有时候会被封装成独立的加密狗，这种称为<strong>硬件接口加密狗</strong>。一些开发板上面直接集成了硬件接口加密狗，这样可以使开发板通过USB直接连到主机上进行调试。常见的芯片包括FTDI的FT2232和一些基于8/16/32位单片机的实现。</p>
+<blockquote>
+<p>目前来看，FTDI出品的FT2232对于OpenOCD的支持比较完善，因此很多厂商都选择这个芯片作为自己的USB转JTAG芯片</p>
+</blockquote>
+<p><strong>OpenOCD可以理解成GDB的底层驱动，GDB必须通过它才能驱动调试器。</strong></p>
+<p>OpenOCD可以在官网下载，安装步骤如文件包的INSTALL所述，用automake工具（<code>./configure</code>）就可以完成安装了</p>
+<p>安装完毕后只需要配合各个不同型号外设的脚本文件就可以实现调试了。脚本文件一般由硬件厂商提供，如果是自己搭建的硬件平台则需要按照OpenOCD脚本语法编写。</p>
+<p>常用的参数如下：</p>
+<ul>
+<li><code>-h</code>：等效于<code>--help</code>用于获取帮助信息</li>
+<li><code>--version</code>：显示openocd版本信息</li>
+<li><code>-d</code>：显示debug等级，可以接从0到3的值</li>
+<li><code>-c</code>：等于<code>--command</code>，运行后面接的命令</li>
+<li><code>-f</code>：读取后面的配置文件，如果未输入该参数则默认读取openocd.cfg这个文件</li>
+<li><code>-s</code>：等于<code>--search</code>，后面接要从中寻找配置文件和脚本的目录</li>
+</ul>
+<p>OpenOCD使用<strong>Jim-Tcl</strong>作为自己的脚本解释器，这是一个精简版的Tcl解释器，实现了基本的Tcl命令</p>
+<p>部分厂商为OpenOCD提供了python兼容包，这样就能使用Python开发OpenOCD脚本了，不过需要根据情况选择——很多芯片对这种兼容包的支持并不完善</p>
+<h3 id="DAPLink"><a href="#DAPLink" class="headerlink" title="DAPLink"></a>DAPLink</h3><blockquote>
+<p>本节内容参考<a target="_blank" rel="noopener" href="https://github.com/LGG001/DAPLink-Brochure%E7%BC%96%E5%86%99">https://github.com/LGG001/DAPLink-Brochure编写</a></p>
+</blockquote>
+<p><strong>DAPLink</strong>是ARM官方推出的一款开源调试器，在之前叫CMSIS-DAP，市面上很多stm32的调试器都基于它设计。DAPLink的软件和硬件都在Github上开源：<a target="_blank" rel="noopener" href="https://github.com/ARMmbed/DAPLink">软件开源</a>；<a target="_blank" rel="noopener" href="https://github.com/ARMmbed/mbed-HDK">硬件开源</a></p>
+<p>支持以下四个主要功能：</p>
+<ul>
+<li>MSC-拖拽式编程FLASH：将一个DAPLink支持的格式文件保存到DAPLink的虚拟U盘中，DAPLink会自动将文件烧录到连接设备上，完成后DAPLink设备重启并完成烧录。如果发生错误，错误的信息会存放在FAIL.TXT中。支持.bin和.hex文件烧录</li>
+<li>CDC-日志打印、追踪和终端仿真的虚拟串口：DAPLink支持普通的串口IC功能，串行端口直接连接到目标MCU，允许双向通信。它还允许通过在串口上发送中断命令来重置调试设备。支持市面上常见的波特率（从9600到115200）</li>
+<li>HID-CMSIS-DAP兼容式调试接口：可以在任何支持CMSISI-DAP协议的IDE中进行调试，包括openOCD、pyOCD、keil UV、IAR等常见调试软件</li>
+<li>WEBUSB HID-CMSIS-DAP兼容式调试接口：可以使用网页端进行远程调试</li>
+</ul>
+<p>目前成熟的DAPLink硬件方案有三个，分别基于以下两种主控</p>
+<ul>
+<li>NXP LPC11U35：官方给出的DAPLink实现，市面上大多数方案都基于该主控</li>
+<li>ST STM32F103CBT6：比较便宜，但是官方还未给出完善的支持，大都是散户自制并开源出来的版本</li>
+</ul>
+<p>DAPLink的CMSIS-DAP接口是用于ARM Cortex内核MCU调试仿真的，<strong>只要IDE支持CMSIS-DAP协议接口即可使用DAPLink</strong></p>
+<p>DAPLink允许通过MSD接口执行简单命令。MSD命令有两种：</p>
+<ul>
+<li><p>对于.act文件，触发DAPLink一个Action（动作）</p>
+<p>  <code>start_bl.act</code> 该文件将强制进入Bootloader，相当于拔下DAPLink，按住K1再插上。如果DAPlink已经处于Bootloader，则该命令无效</p>
+<p>  <code>start_if.act</code> 该文件将强制DAPLink重新进入DAPLink接口模式。相当于拔下USB并重新将其插入。如果已经处于DAPLink接口模式，则此命令无效</p>
+<p>  <code>assert.act</code> 该文件可以用来测试DAPLink的assert实用程序。将该文件复制到DAPLink MSD驱动器时，DAPLink将生成对util_assert()方法的调用。assert调用导致DAPLink MSD驱动器重新加载一个附加文件ASSERT.TXT，出现在驱动器的根部。这个文件详细说明了断言失败发生的地方(源文件，行号)</p>
+<p>  <code>refresh.act</code> 该文件强制重新加载DAPLink MSD驱动器</p>
+<p>  <code>erase.act</code> 该文件触发对目标FLASH的擦除</p>
+</li>
+<li><p>对于.cfg文件，配置DAPLink一个Configuration（设置）</p>
+<p>  <code>auto_rst.cfg</code> 该文件用于配置自动复位模式，默认情况下自动复位是禁止的</p>
+<p>  <code>hard_rst.cfg</code> 该文件用于关闭自动复位模式，默认情况下自动复位是禁止的</p>
+<p>  <code>auto_on.cfg</code>  该文件用于打开automation-allowed模式，再该模式下可以出发DAPLink的MSD命令，而不需要按住K1案件。此外，Bootloader更新只允许再该模式下运行</p>
+<p>  <code>auto_off.cfg</code> 该文件用于关闭automation-allowed模式，automation-allowed模式默认是关闭的</p>
+<p>  <code>ovfl_on.cfg</code> 该文件用于打开串口溢出报告。再串口通讯过程中，如果主机PC没有以足够快的速度从DAPLink读取数据，并且发生溢出，则文本&lt;DAPLink: overflow &gt;将出现在串行数据中。串行溢出报告默认关闭</p>
+<p>  <code>ovfl_off.cfg</code> 该文件用于关闭串口溢出报告</p>
+</li>
+</ul>
+<p>下面简要介绍如何移植一个DAPLink</p>
+<p>首先要搭建开发环境，安装下面三个软件：</p>
+<ul>
+<li><strong>Python2</strong>，版本2.7.9以上，需要将其添加到环境变量，注意不能是python3</li>
+<li><strong>Git</strong>，需要将其添加到环境变量</li>
+<li><strong>Keil MDK-ARM</strong>，用于测试环境</li>
+</ul>
+<p>然后使用git将官方软件包复制到本地</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/mbedmicro/DAPLink</span><br></pre></td></tr></table></figure>
+
+<p><strong>在DAPLink目录下</strong>安装python的虚拟环境</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install virtualenv</span><br><span class="line">virtualenv venv</span><br></pre></td></tr></table></figure>
+
+<p>然后启动虚拟环境并执行requirements脚本安装python包依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">venv/Scripts/activate</span><br><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>最后生成新的MDK工程即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">progen generate -t uvision</span><br></pre></td></tr></table></figure>
+
+<p>这样就获得了一个新的DAPLink工程，可用于移植</p>
+<p>接下来就要针对某个平台使用keil的编译器编译官方源码了</p>
+<p>首先打开<em>DAPLink\projectfiles\uvision</em>目录下的工程文件，选择一个自己需要的平台</p>
+<p>打开后要安装相应的固件包，安装完成后编译生成.bin文件即可</p>
+<p>最后将.bin文件烧录到MCU，进行验证即可</p>
+<h2 id="总线工具"><a href="#总线工具" class="headerlink" title="总线工具"></a>总线工具</h2><h3 id="传统总线调试方法"><a href="#传统总线调试方法" class="headerlink" title="传统总线调试方法"></a>传统总线调试方法</h3><h3 id="树莓派spi与iic调试工具"><a href="#树莓派spi与iic调试工具" class="headerlink" title="树莓派spi与iic调试工具"></a>树莓派spi与iic调试工具</h3><p>树莓派上可以使用<code>sudo apt-get install i2c-tools</code>安装<strong>i2c-tools</strong>工具包，可以使用树莓派调试IIC总线设备——前提是树莓派要开启iic接口</p>
+<ol>
+<li><p><code>i2cdetect -y 1</code></p>
+<p> 查看挂载在i2c1上的设备</p>
+<p> 对应后面数字是几就查看树莓派的哪个i2c</p>
+</li>
+<li><p><code>i2cdetect -l</code></p>
+<p> 检测几组i2c总线在系统上</p>
+</li>
+<li><p><code>i2cdump -f -y &lt;iic外设号&gt; &lt;某个寄存器地址&gt;</code></p>
+<p> 查看连接iic器件所有寄存器的值</p>
+<p> 例如<code>i2cdump -f -y 1 0x20</code></p>
+</li>
+<li><p><code>i2cset -y &lt;iic外设号&gt; &lt;寄存器地址&gt; &lt;寄存器输入值&gt;</code></p>
+<p> 设置单个寄存器值</p>
+</li>
+<li><p><code>i2cget -y &lt;iic外设号&gt; &lt;寄存器地址&gt; </code></p>
+<p> 读取单个寄存器值</p>
+</li>
+</ol>
+<h2 id="嵌入式C语言编码推荐规则"><a href="#嵌入式C语言编码推荐规则" class="headerlink" title="嵌入式C语言编码推荐规则"></a>嵌入式C语言编码推荐规则</h2><p>注意：==<strong>这里的所有编码规则都只是个人推荐！请一定要选择适合自己的统一易读的编码风格！不要被随意影响！</strong>===</p>
+<h3 id="一般规则"><a href="#一般规则" class="headerlink" title="一般规则"></a>一般规则</h3><ol>
+<li><p>使用C99标准</p>
+<p> 虽然C11支持了一些对开发者友好的新特性，但是C11的某些特性在特殊的交叉编译器上可能难以实现，为了保证代码统一性，目前还是应该使用旧一代的C99标准</p>
+<p> 而且更重要的，可能不是所有人都熟悉C11标准，使用C99这个大部分国内院校教授的C标准有助于工作对接</p>
+</li>
+<li><p>每个缩进使用4个空格，不要混用tab和空格</p>
+<p> 主要为了在各个代码编辑器下实现统一规范的代码样式</p>
+</li>
+<li><p>在关键字和左括号之间使用一个空格，在函数名和左括号之间不使用空格</p>
+<p> 有助于区分函数和关键字（某些代码编辑器并没有函数/关键字高亮——不针对keil）</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 示例 */</span></span><br><span class="line"><span class="keyword">if</span> (t != <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int32_t</span> a = sum(<span class="number">1</span>,<span class="number">4</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>尽量不在变量/函数/宏中使用下划线或前缀，除非有意保留统一的编码格式或用于头文件编译</p>
+<p> C语言和库的保留参数，懂得都懂</p>
+</li>
+<li><p>可以适当使用前缀标注特殊的变量性质</p>
+<p> 例如<code>interrupt_LED_ON</code>表示一个用于中断服务函数和主程序通信的全局变量</p>
+<p> 但注意风格一定要统一！</p>
+</li>
+<li><p>采用统一的分行大括号或同行大括号，不要混杂使用</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;N;i++)</span><br><span class="line">&#123;</span><br><span class="line">    p++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//文件内采用统一格式</span></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;N;i++)&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//不要两种格式混用，否则可能会被打</span></span><br></pre></td></tr></table></figure></li>
+<li><p>对于一般的变量，使用驼峰命名或下划线命名或其他适合规范的命名法，<strong>一定不要使用汉语拼音！一定不要使用汉语拼音！一定不要使用汉语拼音！</strong></p>
+<p> 例如<code>HelloWorld</code>、<code>test_parameter</code></p>
+<p> 杜绝<code>xiaozhanbihu</code>、<code>cha_bu_duo_de_le</code>这种诡异的东西</p>
+</li>
+<li><p>在合适的地方采用空格拉大代码间距</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 示例 */</span></span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">&#123;</span><br><span class="line">    a = <span class="number">3</span> + <span class="number">4</span>;</span><br><span class="line">    p++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 这个规范可用可不用，但注意一旦使用了这个格式化方法，一定要保持整个文件都用！否则代码会<em>很丑</em>！</p>
+</li>
+<li><p>逗号之后使用单空格拉大间距</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test(<span class="number">1</span>, <span class="number">5</span>);</span><br><span class="line">ches(p, q, *r);</span><br></pre></td></tr></table></figure>
+
+<p> 在调用库函数的时候适合使用这个规则，有助于增加代码可读性和美观程度</p>
+</li>
+<li><p>不要初始化静态和全局变量为<code>0</code>或<code>NULL</code></p>
+<p>编译器会自动完成静态变量、全局变量的初始化工作，不显式写出是为了保证静态变量可以被很明显地看出来</p>
+</li>
+<li><p>静态变量、全局变量、宏要大写</p>
+<p>非常重要的一条规则</p>
+<p>这些变量通常都是用于线程/函数/任务之间通信或用于指示系统资源或到处都要用的重要变量，一定要明显标明</p>
+<p>有些代码编辑器还会针对大写变量进行高亮</p>
+</li>
+<li><p>声明要按照以下顺序</p>
+<ul>
+<li>结构体</li>
+<li>枚举</li>
+<li>整数和无符号数</li>
+<li>浮点数</li>
+<li>函数</li>
+</ul>
+</li>
+<li><p>尽量在块/函数的开头声明局部变量</p>
+<p>有助于读者快速判断自己需要寻找的变量</p>
+</li>
+<li><p>尽量在for循环内部声明计数变量</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 示例 */</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;N;i++)</span><br><span class="line">&#123;</span><br><span class="line">    p--;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>尽量使用<code>&lt;stdint.h&gt;</code>中定义的整数类型</p>
+<p>这是为了保证嵌入式设备中的变量位数确定，这个规范非常重要，通常可以避免一些恶性bug</p>
+<p>char、float、double是例外，因为char是4字节，float、double不是整数，所以可以不管</p>
+</li>
+<li><p>不使用<code>&lt;stdbool.h&gt;</code>库，应分别使用1和0表示真假</p>
+<p>干嵌入式，连1和0都搞不明白就别干了（无慈悲）</p>
+</li>
+<li><p>如果是接手他人代码，应该保持原有代码风格</p>
+<p>除非你自己用自己的代码风格重写一遍</p>
+</li>
+<li><p><code>if else</code>语句应该单独成行并保持大括号</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 示例 */</span></span><br><span class="line"><span class="keyword">if</span> (a)</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (b)</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>switch语句中的break应和case保持相同的缩进</p>
+<p>这个规范有助于避免忘记写break</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (k)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        abc;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">        def;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    dafault:</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p><code>do-while</code>语句孩子能够的while应和do部分的右大括号在同一行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">	p++;    </span><br><span class="line">&#125; <span class="keyword">while</span> (k);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="Linux风格的代码规范"><a href="#Linux风格的代码规范" class="headerlink" title="Linux风格的代码规范"></a>Linux风格的代码规范</h3><ol>
+<li><p>使用doxygen注释格式</p>
+<p> 其实个人编写的代码并不需要这个，但是如果在大工程或是团队协作中使用这个注释风格将会对工作交接（尤其是后期编写文档和展示PPT）很有帮助</p>
+</li>
+<li><p>所有注释使用<code>/* */</code>，即使是单行注释</p>
+<p> 对于需要特殊注明的语句使用<code>//</code></p>
+</li>
+<li><p>不一定要扔掉<code>goto</code>语句</p>
+<p> <code>goto</code>在单函数内进行条件返回的情况很好用</p>
+<p> 但是要注意：对应的标记不论周围代码缩进如何，总保持不缩进状态</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 示例 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Test</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    xxx;</span><br><span class="line">    xxx;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (i)</span><br><span class="line">    &#123;</span><br><span class="line">    	xxx;    </span><br><span class="line">FLAG: <span class="comment">//不要缩进</span></span><br><span class="line">        yyy;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    yyy;</span><br><span class="line">    xxx;</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">if</span> (j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">goto</span> FLAG; <span class="comment">//这里使用了goto</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">   	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> goto代码旁边最好也通过注释显式强调</p>
+</li>
+<li><p>使用&lt;&gt;尖括号来引用C标准库的头文件，使用””双引号来引用自定义头文件</p>
+</li>
+<li><p>使用以下指针风格</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 示例 */</span></span><br><span class="line"><span class="keyword">int</span>* p; <span class="comment">//C++风格指针，用于声明很简单的指针</span></span><br><span class="line"><span class="keyword">float</span> *check_pointer; <span class="comment">//C风格指针，用于一般指针的声明</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">uint8_t</span> *t = (<span class="keyword">uint8_t</span>*)check_pointer; <span class="comment">//指针强制类型转换</span></span><br></pre></td></tr></table></figure></li>
+<li><p>使用以下风格的注释</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 示例 */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//多行注释</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * comment</span></span><br><span class="line"><span class="comment"> * comment</span></span><br><span class="line"><span class="comment"> * comment</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * comment</span></span><br><span class="line"><span class="comment"> * comment</span></span><br><span class="line"><span class="comment"> * comment</span></span><br><span class="line"><span class="comment"> * comment</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//单行注释</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * comment</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure></li>
+<li><p>普通函数固定采用下划线命名法，对结构体进行操作的函数固定采用驼峰命名法，结构体变量应固定采用驼峰命名法</p>
+<p> 这是为了和C++的对象和方法统一风格</p>
+</li>
+<li><p>函数返回值独立成行</p>
+</li>
+<li><p>所有局部指针变量声明在同一行，用逗号隔开</p>
+<p> 这个是Linux编码的一个风格，可用可不用</p>
+</li>
+<li><p>结构体使用typedef再命名后可以使用<code>_t</code>后缀，但是原有的结构体名称不能使用后缀</p>
+</li>
+<li><p>应该使用C99的结构体初始化风格，避免使用C11风格的初始化器</p>
+<p>主要用于保持代码风格统一和简洁易读</p>
+</li>
+<li><p>函数句柄应该使用<code>_t</code>后缀</p>
+</li>
+<li><p>大括号一定要保持良好缩进</p>
+</li>
+<li><p>空while循环、do-while循环都要包含花括号，空for循环要用分号结束</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;&#125;</span><br><span class="line"><span class="keyword">do</span> &#123;&#125; <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line"><span class="keyword">for</span> (;;) ;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="个人常用有助于避免bug的编码习惯"><a href="#个人常用有助于避免bug的编码习惯" class="headerlink" title="个人常用有助于避免bug的编码习惯"></a>个人常用有助于避免bug的编码习惯</h3><ol>
+<li><p>使用指针后加入对指针非空的检查</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 示例 */</span></span><br><span class="line"><span class="keyword">int</span>* p;</span><br><span class="line"></span><br><span class="line">p=(<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line"><span class="keyword">if</span> (p == <span class="literal">NULL</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>调用有提供返回值检查的库函数后对返回值进行检查，如果出错就返回报错信息</p>
+</li>
+<li><p>分清前增量和后增量的差别</p>
+</li>
+<li><p>使用<code>size_t</code>作为长度或大小指示变量</p>
+</li>
+<li><p>在自己写的库里多使用<code>const</code>保证不会被nt误用函数</p>
+</li>
+<li><p>多使用括号和<code>sizeof</code>来避免计算顺序和变量长度问题</p>
+</li>
+<li><p>头文件的变量一定要用extern声明并在对应的.c文件中定义</p>
+</li>
+<li><p>头文件中最好使用C++检查来警惕有人把C库放进C++里调用</p>
+</li>
+<li><p>如果没有对算法部分的优化或特殊考量，千万不要使用递归函数！</p>
+</li>
+<li><p>定义宏函数时可以使用以下保护方法</p>
+<ul>
+<li>加入圆括号保护变量和结果</li>
+<li>使用do…while(0)保护多语句</li>
+<li>不要使用分号结尾</li>
+</ul>
+</li>
+<li><p>对宏语句和预处理语句不要进行缩进！</p>
+</li>
+<li><p>文件末尾留下一个空行</p>
+<p>用于应对某些讨厌的编译器/IDE报错</p>
+</li>
+<li><p>在头文件中包含许可证</p>
+<p>在个人项目中能保护自己的版权，在大型项目中能够保护自己和同伙的版权</p>
+</li>
+<li><p>使用<code>#program once</code>或<code>#ifndef</code>保护头文件</p>
+</li>
+<li><p>头文件应该只声明公共变量/结构体/枚举/函数</p>
+</li>
+<li><p>避免重复包含</p>
+</li>
+<li><p>千万不要包含.c文件！</p>
+</li>
+</ol>
+<h3 id="Doxygen"><a href="#Doxygen" class="headerlink" title="Doxygen"></a>Doxygen</h3><p>这是一个为所有函数、结构或其他代码段落添加描述的辅助系统</p>
+<p>使用Doxygen可以直接通过代码中的注释输出API文档。基本语法如下所示：</p>
+<ol>
+<li><p>由两个星开始的代码注释会被Doxygen解析，但带一个星号的注释会被忽略</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 会被解析的注释内容  */</span></span><br><span class="line"><span class="comment">/* 不会被解析的注释内容 */</span></span><br></pre></td></tr></table></figure></li>
+<li><p>注释应放在函数和结构体前面</p>
+</li>
+<li><p>文件头部需要使用以下格式</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** \file */</span></span><br></pre></td></tr></table></figure>
+
+<p> 否则文件不会被Doxygen解析</p>
+</li>
+<li><p>使用<code>\param</code>来输入参数</p>
+<p> 使用<code>\return</code>来列出返回值</p>
+<p> 使用<code>\ref</code>来指向其他文档元素（包括函数和文件）的交叉参考</p>
+<p> （这其实是对LaTex的模仿）</p>
+</li>
+<li><p>可以使用<code>@</code>来替代<code>\</code>完成上述设置（对JavaDoc的模仿）</p>
+</li>
+</ol>
+<p>使用指令<code>doxygen -g</code>来获得一个配置文件</p>
+<p>STM32的标准库、HAL库和LL库，RT-Thread的源码，lwIP的源码等都遵循了Doxygen原则，很多基于Eclipse的IDE也都内置了Doxygen格式化器。一个典型的Doxygen文档如下所示（摘自STM32F407标准库）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  ******************************************************************************</span></span><br><span class="line"><span class="comment">  * @file    stm32h7xx_hal_gpio.c</span></span><br><span class="line"><span class="comment">  * @author  MCD Application Team</span></span><br><span class="line"><span class="comment">  * @brief   GPIO HAL module driver.</span></span><br><span class="line"><span class="comment">  *          This file provides firmware functions to manage the following </span></span><br><span class="line"><span class="comment">  *          functionalities of the General Purpose Input/Output (GPIO) peripheral:</span></span><br><span class="line"><span class="comment">  *           + Initialization and de-initialization functions</span></span><br><span class="line"><span class="comment">  *           + IO operation functions</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  @verbatim</span></span><br><span class="line"><span class="comment">  ==============================================================================</span></span><br><span class="line"><span class="comment">                    ##### GPIO Peripheral features #####</span></span><br><span class="line"><span class="comment">  ==============================================================================</span></span><br><span class="line"><span class="comment">  [..] </span></span><br><span class="line"><span class="comment">  Subject to the specific hardware characteristics of each I/O port listed in the datasheet, each</span></span><br><span class="line"><span class="comment">  port bit of the General Purpose IO (GPIO) Ports, can be individually configured by software</span></span><br><span class="line"><span class="comment">  in several modes:</span></span><br><span class="line"><span class="comment">  (+) Input mode </span></span><br><span class="line"><span class="comment">  (+) Analog mode</span></span><br><span class="line"><span class="comment">  (+) Output mode</span></span><br><span class="line"><span class="comment">  (+) Alternate function mode</span></span><br><span class="line"><span class="comment">  (+) External interrupt/event lines</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  [..]  </span></span><br><span class="line"><span class="comment">  During and just after reset, the alternate functions and external interrupt  </span></span><br><span class="line"><span class="comment">        lines are not active and the I/O ports are configured in input floating mode.</span></span><br><span class="line"><span class="comment">     </span></span><br><span class="line"><span class="comment">  [..]   </span></span><br><span class="line"><span class="comment">  All GPIO pins have weak internal pull-up and pull-down resistors, which can be </span></span><br><span class="line"><span class="comment">        activated or not.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  [..]</span></span><br><span class="line"><span class="comment">  In Output or Alternate mode, each IO can be configured on open-drain or push-pull</span></span><br><span class="line"><span class="comment">        type and the IO speed can be selected depending on the VDD value.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  [..]  </span></span><br><span class="line"><span class="comment">  All ports have external interrupt/event capability. To use external interrupt </span></span><br><span class="line"><span class="comment">        lines, the port must be configured in input mode. All available GPIO pins are </span></span><br><span class="line"><span class="comment">        connected to the 16 external interrupt/event lines from EXTI0 to EXTI15.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  [..]</span></span><br><span class="line"><span class="comment">  The external interrupt/event controller consists of up to 23 edge detectors </span></span><br><span class="line"><span class="comment">        (16 lines are connected to GPIO) for generating event/interrupt requests (each </span></span><br><span class="line"><span class="comment">        input line can be independently configured to select the type (interrupt or event) </span></span><br><span class="line"><span class="comment">        and the corresponding trigger event (rising or falling or both). Each line can </span></span><br><span class="line"><span class="comment">        also be masked independently. </span></span><br><span class="line"><span class="comment">       以下省略 </span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  ******************************************************************************</span></span><br><span class="line"><span class="comment">  */</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief  Initializes the GPIOx peripheral according to the specified parameters in the GPIO_Init.</span></span><br><span class="line"><span class="comment">  * @param  GPIOx: where x can be (A..K) to select the GPIO peripheral.</span></span><br><span class="line"><span class="comment">  * @param  GPIO_Init: pointer to a GPIO_InitTypeDef structure that contains</span></span><br><span class="line"><span class="comment">  *         the configuration information for the specified GPIO peripheral.</span></span><br><span class="line"><span class="comment">  * @retval None</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HAL_GPIO_Init</span><span class="params">(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">uint32_t</span> position = <span class="number">0x00</span>;</span><br><span class="line">  <span class="keyword">uint32_t</span> ioposition = <span class="number">0x00</span>;</span><br><span class="line">  <span class="keyword">uint32_t</span> iocurrent = <span class="number">0x00</span>;</span><br><span class="line">  <span class="keyword">uint32_t</span> temp = <span class="number">0x00</span>;</span><br><span class="line">  EXTI_Core_TypeDef * EXTI_Ptr = EXTI_D1; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Check the parameters */</span></span><br><span class="line">  assert_param(IS_GPIO_ALL_INSTANCE(GPIOx));</span><br><span class="line">  assert_param(IS_GPIO_PIN(GPIO_Init-&gt;Pin));</span><br><span class="line">  assert_param(IS_GPIO_MODE(GPIO_Init-&gt;Mode));</span><br><span class="line">  assert_param(IS_GPIO_PULL(GPIO_Init-&gt;Pull));</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* Configure the port pins */</span></span><br><span class="line">  <span class="keyword">for</span>(position = <span class="number">0</span>; position &lt; GPIO_NUMBER; position++)</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">/* Get the IO position */</span></span><br><span class="line">    ioposition = ((<span class="keyword">uint32_t</span>)<span class="number">0x01</span>) &lt;&lt; position;</span><br><span class="line">    <span class="comment">/* Get the current IO position */</span></span><br><span class="line">    iocurrent = (<span class="keyword">uint32_t</span>)(GPIO_Init-&gt;Pin) &amp; ioposition;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(iocurrent == ioposition)</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="comment">/*--------------------- GPIO Mode Configuration ------------------------*/</span></span><br><span class="line">      <span class="comment">/* In case of Alternate function mode selection */</span></span><br><span class="line">      <span class="keyword">if</span>((GPIO_Init-&gt;Mode == GPIO_MODE_AF_PP) || (GPIO_Init-&gt;Mode == GPIO_MODE_AF_OD))</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">/* Check the Alternate function parameter */</span></span><br><span class="line">        assert_param(IS_GPIO_AF(GPIO_Init-&gt;Alternate));</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/* Configure Alternate function mapped with the current IO */</span></span><br><span class="line">        temp = GPIOx-&gt;AFR[position &gt;&gt; <span class="number">3</span>];</span><br><span class="line">        temp &amp;= ~((<span class="keyword">uint32_t</span>)<span class="number">0xF</span> &lt;&lt; ((<span class="keyword">uint32_t</span>)(position &amp; (<span class="keyword">uint32_t</span>)<span class="number">0x07</span>) * <span class="number">4</span>)) ;</span><br><span class="line">        temp |= ((<span class="keyword">uint32_t</span>)(GPIO_Init-&gt;Alternate) &lt;&lt; (((<span class="keyword">uint32_t</span>)position &amp; (<span class="keyword">uint32_t</span>)<span class="number">0x07</span>) * <span class="number">4</span>));</span><br><span class="line">        GPIOx-&gt;AFR[position &gt;&gt; <span class="number">3</span>] = temp;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/* Configure IO Direction mode (Input, Output, Alternate or Analog) */</span></span><br><span class="line">      temp = GPIOx-&gt;MODER;</span><br><span class="line">      temp &amp;= ~(GPIO_MODER_MODER0 &lt;&lt; (position * <span class="number">2</span>));</span><br><span class="line">      temp |= ((GPIO_Init-&gt;Mode &amp; GPIO_MODE) &lt;&lt; (position * <span class="number">2</span>));</span><br><span class="line">      GPIOx-&gt;MODER = temp;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/* In case of Output or Alternate function mode selection */</span></span><br><span class="line">      <span class="keyword">if</span>((GPIO_Init-&gt;Mode == GPIO_MODE_OUTPUT_PP) || (GPIO_Init-&gt;Mode == GPIO_MODE_AF_PP) ||</span><br><span class="line">         (GPIO_Init-&gt;Mode == GPIO_MODE_OUTPUT_OD) || (GPIO_Init-&gt;Mode == GPIO_MODE_AF_OD))</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">/* Check the Speed parameter */</span></span><br><span class="line">        assert_param(IS_GPIO_SPEED(GPIO_Init-&gt;Speed));</span><br><span class="line">        <span class="comment">/* Configure the IO Speed */</span></span><br><span class="line">        temp = GPIOx-&gt;OSPEEDR; </span><br><span class="line">        temp &amp;= ~(GPIO_OSPEEDER_OSPEEDR0 &lt;&lt; (position * <span class="number">2</span>));</span><br><span class="line">        temp |= (GPIO_Init-&gt;Speed &lt;&lt; (position * <span class="number">2</span>));</span><br><span class="line">        GPIOx-&gt;OSPEEDR = temp;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Configure the IO Output Type */</span></span><br><span class="line">        temp = GPIOx-&gt;OTYPER;</span><br><span class="line">        temp &amp;= ~(GPIO_OTYPER_OT_0 &lt;&lt; position) ;</span><br><span class="line">        temp |= (((GPIO_Init-&gt;Mode &amp; GPIO_OUTPUT_TYPE) &gt;&gt; <span class="number">4</span>) &lt;&lt; position);</span><br><span class="line">        GPIOx-&gt;OTYPER = temp;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/* Activate the Pull-up or Pull down resistor for the current IO */</span></span><br><span class="line">      temp = GPIOx-&gt;PUPDR;</span><br><span class="line">      temp &amp;= ~(GPIO_PUPDR_PUPDR0 &lt;&lt; (position * <span class="number">2</span>));</span><br><span class="line">      temp |= ((GPIO_Init-&gt;Pull) &lt;&lt; (position * <span class="number">2</span>));</span><br><span class="line">      GPIOx-&gt;PUPDR = temp;</span><br><span class="line"></span><br><span class="line">      <span class="comment">/*--------------------- EXTI Mode Configuration ------------------------*/</span></span><br><span class="line">      <span class="comment">/* Configure the External Interrupt or event for the current IO */</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span>((GPIO_Init-&gt;Mode &amp; EXTI_MODE) == EXTI_MODE)</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="comment">/* Enable SYSCFG Clock */</span></span><br><span class="line">        __HAL_RCC_SYSCFG_CLK_ENABLE();</span><br><span class="line"></span><br><span class="line">        temp = SYSCFG-&gt;EXTICR[position &gt;&gt; <span class="number">2</span>];</span><br><span class="line">        temp &amp;= ~(((<span class="keyword">uint32_t</span>)<span class="number">0x0F</span>) &lt;&lt; (<span class="number">4</span> * (position &amp; <span class="number">0x03</span>)));</span><br><span class="line">        temp |= ((<span class="keyword">uint32_t</span>)(GPIO_GET_INDEX(GPIOx)) &lt;&lt; (<span class="number">4</span> * (position &amp; <span class="number">0x03</span>)));</span><br><span class="line">        SYSCFG-&gt;EXTICR[position &gt;&gt; <span class="number">2</span>] = temp;</span><br><span class="line">     </span><br><span class="line">        <span class="comment">/* Clear EXTI line configuration */</span></span><br><span class="line">        temp = EXTI_Ptr-&gt;IMR1;</span><br><span class="line">        temp &amp;= ~((<span class="keyword">uint32_t</span>)iocurrent);</span><br><span class="line">        <span class="keyword">if</span>((GPIO_Init-&gt;Mode &amp; GPIO_MODE_IT) == GPIO_MODE_IT)</span><br><span class="line">        &#123;</span><br><span class="line">          temp |= iocurrent;</span><br><span class="line">        &#125;</span><br><span class="line">        EXTI_Ptr-&gt;IMR1 = temp;</span><br><span class="line"></span><br><span class="line">        temp = EXTI_Ptr-&gt;EMR1;</span><br><span class="line">        temp &amp;= ~((<span class="keyword">uint32_t</span>)iocurrent);</span><br><span class="line">        <span class="keyword">if</span>((GPIO_Init-&gt;Mode &amp; GPIO_MODE_EVT) == GPIO_MODE_EVT)</span><br><span class="line">        &#123;</span><br><span class="line">          temp |= iocurrent;</span><br><span class="line">        &#125;</span><br><span class="line">        EXTI_Ptr-&gt;EMR1 = temp;</span><br><span class="line">             </span><br><span class="line">        <span class="comment">/* Clear Rising Falling edge configuration */</span></span><br><span class="line">        temp = EXTI-&gt;RTSR1;</span><br><span class="line">        temp &amp;= ~((<span class="keyword">uint32_t</span>)iocurrent);</span><br><span class="line">        <span class="keyword">if</span>((GPIO_Init-&gt;Mode &amp; RISING_EDGE) == RISING_EDGE)</span><br><span class="line">        &#123;</span><br><span class="line">          temp |= iocurrent;</span><br><span class="line">        &#125;</span><br><span class="line">        EXTI-&gt;RTSR1 = temp;</span><br><span class="line"></span><br><span class="line">        temp = EXTI-&gt;FTSR1;</span><br><span class="line">        temp &amp;= ~((<span class="keyword">uint32_t</span>)iocurrent);</span><br><span class="line">        <span class="keyword">if</span>((GPIO_Init-&gt;Mode &amp; FALLING_EDGE) == FALLING_EDGE)</span><br><span class="line">        &#123;</span><br><span class="line">          temp |= iocurrent;</span><br><span class="line">        &#125;</span><br><span class="line">        EXTI-&gt;FTSR1 = temp;</span><br><span class="line">      &#125;      </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Doxygen生成的文档如下所示（摘自RT-Thread）</p>
+<p><img src="/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/finsh-16476685924403.png" alt="finsh"></p>
+<p><img src="/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/image-20210715234007974-16476685924404.png" alt="image-20210715234007974"></p>
+<h2 id="使用命令行调用keil的API"><a href="#使用命令行调用keil的API" class="headerlink" title="使用命令行调用keil的API"></a>使用命令行调用keil的API</h2><p>keil提供了Windows下CMD的API，只要把keil安装目录加入环境变量Path或使用绝对路径即可</p>
+<h3 id="基础指令"><a href="#基础指令" class="headerlink" title="基础指令"></a>基础指令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;UV4&gt; &lt;command&gt; &lt;project_file&gt; &lt;options&gt;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;UV4&gt;表示keil的UV4.exe文件，注意使用绝对路径</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;<span class="built_in">command</span>&gt;表示要执行的指令</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;project_file&gt;表示工程名，这个可以使用相对路径</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;options&gt;表示参数</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>编译示例</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d:\Keil\MDK\UV4.exe -r Template.uvproj -o Build_output.bin</span><br></pre></td></tr></table></figure>
+
+<p>这里编译出的文件保存为<code>Build_output.bin</code></p>
+<p><strong>烧录示例</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d:\Keil\MDK\UV4.exe -f Template.uvproj -o Build_output.bin</span><br></pre></td></tr></table></figure>
+
+<p>这里将以MDK里选定/默认的烧录方式烧录bin文件</p>
+<h3 id="使用VSCode直接调用keil指令"><a href="#使用VSCode直接调用keil指令" class="headerlink" title="使用VSCode直接调用keil指令"></a>使用VSCode直接调用keil指令</h3><p>VSCode中下载插件<code>Cortex-Debug</code>和<code>keil assistant</code>即可直接使用插件控制keil工程</p>
+<p><img src="/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/image-20210904104126760-16476685924405.png" alt="image-20210904104126760"></p>
+<p>如上图填写keil的exe文件目录即可使用</p>
 
       
 
@@ -672,7 +719,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">嵌入式Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C语言进阶</a>
         		</li>
       		
 		</ul>
@@ -728,7 +775,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2021/11/19/OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2022/03/19/%E7%8E%B0%E4%BB%A3C%E8%AF%AD%E8%A8%803/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -742,18 +789,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/11/19/Socket%E7%AE%80%E4%BB%8B/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Socket简介
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A08%E3%80%90%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86%E4%B8%8E%E4%BD%8E%E5%8A%9F%E8%80%97%E6%A8%A1%E5%BC%8F%E3%80%91/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">ESP32_IDF学习8【电源管理与低功耗模式】</div>
+    <a href="/2022/03/18/%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">经典排序算法</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -780,7 +818,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenWrt%E4%B8%8E%E5%B5%8C%E5%85%A5%E5%BC%8FLinux"><span class="toc-number">1.</span> <span class="toc-text">OpenWrt与嵌入式Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.0.1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenWrt%E4%B8%8E%E6%A1%8C%E9%9D%A2Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.0.2.</span> <span class="toc-text">OpenWrt与桌面Linux操作系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenWrt%E4%B8%8E%E4%B8%80%E8%88%AC%E7%9A%84%E5%B5%8C%E5%85%A5%E5%BC%8FLinux"><span class="toc-number">1.0.3.</span> <span class="toc-text">OpenWrt与一般的嵌入式Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenWrt%E4%B8%8ELEDE"><span class="toc-number">1.0.4.</span> <span class="toc-text">OpenWrt与LEDE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenWrt%E6%85%A2%E9%80%9F%E4%B8%8A%E6%89%8B"><span class="toc-number">1.1.</span> <span class="toc-text">OpenWrt慢速上手</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A1%AC%E4%BB%B6"><span class="toc-number">1.1.1.</span> <span class="toc-text">硬件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GPIO"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">GPIO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SPI%E4%B8%8EIIC"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">SPI与IIC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LAN%E5%8F%A3"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">LAN口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#WAN%E5%8F%A3"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">WAN口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%8F%98%E5%8E%8B%E5%99%A8%E4%B8%8EBob-Smith%E7%94%B5%E8%B7%AF"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">网络变压器与Bob-Smith电路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E5%88%B6%E5%B9%B6%E7%BC%96%E8%AF%91%E5%86%85%E6%A0%B8"><span class="toc-number">1.1.2.</span> <span class="toc-text">自定制并编译内核</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%8E%AF%E5%A2%83"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">配环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#menuconfig"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">menuconfig</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BC%AB%E9%95%BF%E7%9A%84%E7%BC%96%E8%AF%91"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">漫长的编译</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%BD%8D%E6%9C%BA%E8%BF%9E%E6%8E%A5%E5%88%B0OpenWrt"><span class="toc-number">1.1.3.</span> <span class="toc-text">上位机连接到OpenWrt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%A7%E5%BD%95"><span class="toc-number">1.1.4.</span> <span class="toc-text">烧录</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Luci"><span class="toc-number">1.1.4.1.</span> <span class="toc-text">Luci</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E7%BB%88%E7%AB%AF"><span class="toc-number">1.1.4.2.</span> <span class="toc-text">串口终端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SSH"><span class="toc-number">1.1.4.3.</span> <span class="toc-text">SSH</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%BB%E4%BD%95%E5%85%B6%E4%BB%96Linux%E5%8F%91%E8%A1%8C%E7%89%88%E5%85%81%E8%AE%B8%E7%9A%84%E7%99%BB%E5%BD%95%E6%96%B9%E5%BC%8F"><span class="toc-number">1.1.4.4.</span> <span class="toc-text">任何其他Linux发行版允许的登录方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%94%E7%BD%91"><span class="toc-number">1.1.5.</span> <span class="toc-text">联网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8"><span class="toc-number">1.1.6.</span> <span class="toc-text">包管理器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="toc-number">1.1.7.</span> <span class="toc-text">安装软件包</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8C%E8%AF%AD%E8%A8%80%E8%BF%9B%E8%A1%8C%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91"><span class="toc-number">1.</span> <span class="toc-text">使用C语言进行嵌入式开发</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E5%99%A8%E4%B8%8E%E7%BC%96%E8%AF%91%E5%B7%A5%E5%85%B7"><span class="toc-number">1.1.</span> <span class="toc-text">交叉编译器与编译工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#arm-gcc"><span class="toc-number">1.1.1.</span> <span class="toc-text">arm-gcc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EIDE"><span class="toc-number">1.1.2.</span> <span class="toc-text">EIDE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keil"><span class="toc-number">1.1.3.</span> <span class="toc-text">Keil</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#riscv-gcc"><span class="toc-number">1.1.4.</span> <span class="toc-text">riscv-gcc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ST-CubeIDE"><span class="toc-number">1.1.5.</span> <span class="toc-text">ST-CubeIDE</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%B2%E5%8F%A3%E5%B7%A5%E5%85%B7"><span class="toc-number">1.2.</span> <span class="toc-text">串口工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Minicom%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">Minicom简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Putty%E7%AE%80%E4%BB%8B"><span class="toc-number">1.2.2.</span> <span class="toc-text">Putty简介</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E8%AF%95%E4%B8%8EOpenOCD"><span class="toc-number">1.3.</span> <span class="toc-text">调试与OpenOCD</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JTAG%E6%8E%A5%E5%8F%A3%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.1.</span> <span class="toc-text">JTAG接口协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JLINK%E4%B8%8EST-LINK"><span class="toc-number">1.3.2.</span> <span class="toc-text">JLINK与ST-LINK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JTAG%E7%89%87%E4%B8%8A%E7%A1%AC%E4%BB%B6%E8%B0%83%E8%AF%95%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.3.</span> <span class="toc-text">JTAG片上硬件调试原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JTAG%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.4.</span> <span class="toc-text">JTAG电路原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenOCD"><span class="toc-number">1.3.5.</span> <span class="toc-text">OpenOCD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DAPLink"><span class="toc-number">1.3.6.</span> <span class="toc-text">DAPLink</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BA%BF%E5%B7%A5%E5%85%B7"><span class="toc-number">1.4.</span> <span class="toc-text">总线工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%80%BB%E7%BA%BF%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.1.</span> <span class="toc-text">传统总线调试方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%91%E8%8E%93%E6%B4%BEspi%E4%B8%8Eiic%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7"><span class="toc-number">1.4.2.</span> <span class="toc-text">树莓派spi与iic调试工具</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5%E5%BC%8FC%E8%AF%AD%E8%A8%80%E7%BC%96%E7%A0%81%E6%8E%A8%E8%8D%90%E8%A7%84%E5%88%99"><span class="toc-number">1.5.</span> <span class="toc-text">嵌入式C语言编码推荐规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E8%A7%84%E5%88%99"><span class="toc-number">1.5.1.</span> <span class="toc-text">一般规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E9%A3%8E%E6%A0%BC%E7%9A%84%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="toc-number">1.5.2.</span> <span class="toc-text">Linux风格的代码规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E5%B8%B8%E7%94%A8%E6%9C%89%E5%8A%A9%E4%BA%8E%E9%81%BF%E5%85%8Dbug%E7%9A%84%E7%BC%96%E7%A0%81%E4%B9%A0%E6%83%AF"><span class="toc-number">1.5.3.</span> <span class="toc-text">个人常用有助于避免bug的编码习惯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Doxygen"><span class="toc-number">1.5.4.</span> <span class="toc-text">Doxygen</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%B0%83%E7%94%A8keil%E7%9A%84API"><span class="toc-number">1.6.</span> <span class="toc-text">使用命令行调用keil的API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4"><span class="toc-number">1.6.1.</span> <span class="toc-text">基础指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8VSCode%E7%9B%B4%E6%8E%A5%E8%B0%83%E7%94%A8keil%E6%8C%87%E4%BB%A4"><span class="toc-number">1.6.2.</span> <span class="toc-text">使用VSCode直接调用keil指令</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -796,7 +834,7 @@
   
 
   
-  <div id="SOHUCS" sid="OpenWrt与嵌入式Linux" ></div> 
+  <div id="SOHUCS" sid="现代C语言3" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({

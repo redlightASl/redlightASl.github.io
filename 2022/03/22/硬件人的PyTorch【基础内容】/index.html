@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>硬件人的PyTorch【基础内容】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="&#x3D;&#x3D;本系列博文主要根据开源的thorough-pytorch项目编写，感谢datawhalechina团队的dalao们分享学习经验&#x3D;&#x3D; PyTorch基础简介PyTorch是由Facebook人工智能研究小组开发的一种基于Lua编写的Torch库的Python实现的深度学习库，目前被广泛应用于学术界和工业界，由于Caffe2（一个简单易用基于python的深度学习框架）并入了PyTorch，它的">
+  <meta name="description" content="本系列博文主要根据开源的thorough-pytorch项目编写，感谢datawhalechina团队的dalao们分享学习经验 PyTorch基础简介PyTorch是由Facebook人工智能研究小组开发的一种基于Lua编写的Torch库的Python实现的深度学习库，目前被广泛应用于学术界和工业界，由于Caffe2（一个简单易用基于python的深度学习框架）并入了PyTorch，它的社区逐渐">
 <meta property="og:type" content="article">
 <meta property="og:title" content="硬件人的PyTorch【基础内容】">
 <meta property="og:url" content="https://redlightasl.github.io/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="&#x3D;&#x3D;本系列博文主要根据开源的thorough-pytorch项目编写，感谢datawhalechina团队的dalao们分享学习经验&#x3D;&#x3D; PyTorch基础简介PyTorch是由Facebook人工智能研究小组开发的一种基于Lua编写的Torch库的Python实现的深度学习库，目前被广泛应用于学术界和工业界，由于Caffe2（一个简单易用基于python的深度学习框架）并入了PyTorch，它的">
+<meta property="og:description" content="本系列博文主要根据开源的thorough-pytorch项目编写，感谢datawhalechina团队的dalao们分享学习经验 PyTorch基础简介PyTorch是由Facebook人工智能研究小组开发的一种基于Lua编写的Torch库的Python实现的深度学习库，目前被广泛应用于学术界和工业界，由于Caffe2（一个简单易用基于python的深度学习框架）并入了PyTorch，它的社区逐渐">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://redlightasl.github.io/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9%E3%80%91/3.4.1.png">
 <meta property="og:image" content="https://redlightasl.github.io/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9%E3%80%91/3.4.2.png">
 <meta property="article:published_time" content="2022-03-22T12:14:17.000Z">
-<meta property="article:modified_time" content="2022-03-22T12:17:30.846Z">
+<meta property="article:modified_time" content="2022-03-22T12:32:26.295Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="机器学习与机器视觉">
 <meta name="twitter:card" content="summary">
@@ -191,7 +191,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>==<strong>本系列博文主要根据开源的<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/thorough-pytorch">thorough-pytorch</a>项目编写，感谢datawhalechina团队的dalao们分享学习经验</strong>==</p>
+        <p><strong>本系列博文主要根据开源的<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/thorough-pytorch">thorough-pytorch</a>项目编写，感谢datawhalechina团队的dalao们分享学习经验</strong></p>
 <h1 id="PyTorch基础简介"><a href="#PyTorch基础简介" class="headerlink" title="PyTorch基础简介"></a>PyTorch基础简介</h1><p><strong>PyTorch</strong>是由Facebook人工智能研究小组开发的一种基于<strong>Lua</strong>编写的Torch库的<strong>Python实现</strong>的<strong>深度学习库</strong>，目前被广泛应用于学术界和工业界，由于Caffe2（一个简单易用基于python的深度学习框架）并入了PyTorch，它的社区逐渐膨胀并开始影响到TensorFlow在深度学习应用框架领域的统治地位。<em>PyTorch自从提出就获得巨大的关注以及用户数量的剧增</em></p>
 <blockquote>
 <p>时代变了，大人</p>
@@ -199,6 +199,8 @@
 <p>PyTorch提供类似NumPy的接口和调试方法，这使它容易上手且方便易用</p>
 </blockquote>
 <p>对于现在的边缘计算设备，跑一个由PyTorch实现的深度学习模型已经不是天方夜谭，而PyTorch除了能够实现深度学习模型的开发，还可以作为前向软件框架将一个完整的模型跑在嵌入式平台</p>
+<span id="more"></span>
+
 <p>最常见的嵌入式AI平台有下面几个：</p>
 <ul>
 <li><p>Nvidia Jetson TX2与Nvidia Jetson NX：Nvidia Jetson是老牌嵌入式AI设备之一，提供高性能的ARM Cortex-A57及以上内核，跑一个Ubuntu，再利用Cuda资源部署模型很顺滑。Nano已经很难应付一些大算力需求的模型了，因此需要使用更高端的版本</p>

@@ -27,6 +27,8 @@
     <content><![CDATA[<h1 id="基于PyTorch部署YOLO算法"><a href="#基于PyTorch部署YOLO算法" class="headerlink" title="基于PyTorch部署YOLO算法"></a>基于PyTorch部署YOLO算法</h1><p>本篇博文主要参考<a href="https://github.com/bubbliiiing/yolo3-pytorch">Github开源代码</a>及对应教程总结</p>
 <p>参考教程列在最后</p>
 <h2 id="YOLO算法原理简介"><a href="#YOLO算法原理简介" class="headerlink" title="YOLO算法原理简介"></a>YOLO算法原理简介</h2><p>YOLO即<strong>You Only Look Once</strong>算法，到目前为止共有五个基本版本：从YOLO到YOLOv5，除此之外还有一些系列衍生版本，比较出名的就是旷视科技的YOLOx</p>
+<span id="more"></span>
+
 <p>其最大的特点是<strong>运行速度很快</strong>，可以用于实时系统——这一点和古老的RCNN算法相反，RCNN虽然很准但是太慢了</p>
 <h3 id="YOLO基础原理"><a href="#YOLO基础原理" class="headerlink" title="YOLO基础原理"></a>YOLO基础原理</h3><p>对于目标检测任务，一直以来有两个流派：一个思路是将其分解为两个任务，先找到图片中某个存在对象的区域，然后再识别出该区域中具体是哪个对象，对于对象识别问题可以由很多经典的CNN算法完成，但对于寻找图像中目标所在区域却不好实现。一个最简单的想法就是遍历图片中所有可能的位置，逐一检测其中是否存在某个对象，挑选其中概率最大的作为输出——显然效率低得离谱</p>
 <p>后来Fast RCNN/Faster RCNN出现了，先从图片中选出这些<strong>候选区</strong>（Region Proposals），再对其中的对象进行识别，最后还需要对候选区进行微调来让它们更接近真实的bounding box，这个过程称为<strong>边框回归</strong>。循规蹈矩的遍历-回归也正是它慢的原因。虽然Faster RCNN能将图片识别加快到5帧，但显然完全没有办法适应工业环境</p>
@@ -376,6 +378,8 @@
 <li><strong>更新权重</strong>（一般使用简单的规则，如<code>weight = weight - learning_rate * gradient</code>）</li>
 </ol>
 <p>下面来分别介绍其中的关键流程在PyTorch上的实现</p>
+<span id="more"></span>
+
 <h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>损失函数可以被理解成模型训练结果的负反馈，即数据输入到模型当中产生的结果与真实标签的评价指标，模型可以按照损失函数的目标来做出改进</p>
 <p>通过<code>torch.nn</code>可以调用PyTorch中内置的损失函数，也可以自行搭建模型的损失函数</p>
 <h3 id="二分类交叉熵损失函数"><a href="#二分类交叉熵损失函数" class="headerlink" title="二分类交叉熵损失函数"></a>二分类交叉熵损失函数</h3><p>使用下面的函数计算二分类任务时的<strong>交叉熵（Cross Entropy）</strong></p>
@@ -383,7 +387,7 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.BCELoss(</span><br><span class="line">    weight=<span class="literal">None</span>, <span class="comment">#每个类别的loss设置权值</span></span><br><span class="line">    size_average=<span class="literal">None</span>, <span class="comment">#为True时，返回的loss为平均值；为False时，返回的各样本的loss之和</span></span><br><span class="line">    reduce=<span class="literal">None</span>, <span class="comment">#为True时，loss的返回是标量</span></span><br><span class="line">    reduction=<span class="string">&#x27;mean&#x27;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 <p>一般来说，input为sigmoid激活层的输出，或者softmax的输出</p>
-<p>计算公式如下：<br>$$<br>\ell(x, y)=\left{\begin{array}{ll}<br>\operatorname{mean}(L), &amp; \text { if reduction }=\text { ‘mean’ } \<br>\operatorname{sum}(L), &amp; \text { if reduction }=\text { ‘sum’ }<br>\end{array}\right.<br>$$</p>
+<p>计算公式如下：<br>$$<br>\ell(x, y)=\left{\begin{array}{ll}<br>\operatorname{mean}(L), &amp; \text { if reduction }=\text { ‘mean’ } \newline<br>\operatorname{sum}(L), &amp; \text { if reduction }=\text { ‘sum’ }<br>\end{array}\right.<br>$$</p>
 <h3 id="交叉熵损失函数"><a href="#交叉熵损失函数" class="headerlink" title="交叉熵损失函数"></a>交叉熵损失函数</h3><p>上面二分类交叉熵损失函数的推广</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.CrossEntropyLoss(</span><br><span class="line">    weight=<span class="literal">None</span>, </span><br><span class="line">    size_average=<span class="literal">None</span>, </span><br><span class="line">    ignore_index=-<span class="number">100</span>, <span class="comment">#忽略某个类的损失函数</span></span><br><span class="line">    reduce=<span class="literal">None</span>, </span><br><span class="line">    reduction=<span class="string">&#x27;mean&#x27;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
@@ -408,7 +412,7 @@
 <h3 id="平滑L1损失函数"><a href="#平滑L1损失函数" class="headerlink" title="平滑L1损失函数"></a>平滑L1损失函数</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.SmoothL1Loss(</span><br><span class="line">    size_average=<span class="literal">None</span>, </span><br><span class="line">    reduce=<span class="literal">None</span>, </span><br><span class="line">    reduction=<span class="string">&#x27;mean&#x27;</span>, </span><br><span class="line">    beta=<span class="number">1.0</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 <p>是L1的平滑输出，能够减轻离群点带来的影响</p>
-<p>计算公式如下：<br>$$<br>\operatorname{loss}(x, y)=\frac{1}{n} \sum_{i=1}^{n} z_{i}<br>$$<br>其中，<br>$$<br>z_{i}=\left{\begin{array}{ll}<br>0.5\left(x_{i}-y_{i}\right)^{2}, &amp; \text { if }\left|x_{i}-y_{i}\right|&lt;1 \<br>\left|x_{i}-y_{i}\right|-0.5, &amp; \text { otherwise }<br>\end{array}\right.<br>$$</p>
+<p>计算公式如下：<br>$$<br>\operatorname{loss}(x, y)=\frac{1}{n} \sum_{i=1}^{n} z_{i}<br>$$<br>其中，<br>$$<br>z_{i}=\left{\begin{array}{ll}<br>0.5\left(x_{i}-y_{i}\right)^{2}, &amp; \text { if }\left|x_{i}-y_{i}\right|&lt;1 \newline<br>\left|x_{i}-y_{i}\right|-0.5, &amp; \text { otherwise }<br>\end{array}\right.<br>$$</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">loss = nn.SmoothL1Loss()</span><br><span class="line"><span class="built_in">input</span> = torch.randn(<span class="number">3</span>, <span class="number">5</span>, requires_grad=<span class="literal">True</span>)</span><br><span class="line">target = torch.randn(<span class="number">3</span>, <span class="number">5</span>)</span><br><span class="line">output = loss(<span class="built_in">input</span>, target)</span><br><span class="line">output.backward()</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;SmoothL1Loss损失函数的计算结果为&#x27;</span>,output)</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">输出</span></span><br><span class="line"><span class="string">SmoothL1Loss损失函数的计算结果为 tensor(0.7808, grad_fn=&lt;SmoothL1LossBackward&gt;)</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>通过可视化两种损失函数曲线来对比平滑L1和L1两种损失函数的区别</p>
@@ -418,7 +422,7 @@
 <p><img src="/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E3%80%91/3.5.2.png" alt="png"></p>
 <p>可以看得出来，对于smoothL1来说，在0这个尖端处，过度更为平滑。</p>
 <h3 id="余弦相似度"><a href="#余弦相似度" class="headerlink" title="余弦相似度"></a>余弦相似度</h3><p>计算公式：</p>
-<p>$$<br>\operatorname{loss}(x, y)=\left{\begin{array}{ll}<br>1-\cos \left(x_{1}, x_{2}\right), &amp; \text { if } y=1 \<br>\max \left{0, \cos \left(x_{1}, x_{2}\right)-\text { margin }\right}, &amp; \text { if } y=-1<br>\end{array}\right.<br>$$<br>其中,<br>$$<br>\cos (\theta)=\frac{A \cdot B}{|A||B|}=\frac{\sum_{i=1}^{n} A_{i} \times B_{i}}{\sqrt{\sum_{i=1}^{n}\left(A_{i}\right)^{2}} \times \sqrt{\sum_{i=1}^{n}\left(B_{i}\right)^{2}}}<br>$$</p>
+<p>$$<br>\operatorname{loss}(x, y)=\left{\begin{array}{ll}<br>1-\cos \left(x_{1}, x_{2}\right), &amp; \text { if } y=1 \newline<br>\max \left{0, \cos \left(x_{1}, x_{2}\right)-\text { margin }\right}, &amp; \text { if } y=-1<br>\end{array}\right.<br>$$<br>其中,<br>$$<br>\cos (\theta)=\frac{A \cdot B}{|A||B|}=\frac{\sum_{i=1}^{n} A_{i} \times B_{i}}{\sqrt{\sum_{i=1}^{n}\left(A_{i}\right)^{2}} \times \sqrt{\sum_{i=1}^{n}\left(B_{i}\right)^{2}}}<br>$$</p>
 <p>这个损失函数应该是最广为人知道的，即<strong>对于两个向量做余弦相似度</strong>，如果两个向量的距离近，则损失函数值小，反之亦然。</p>
 <p>这个函数可以有效确定向量之间推广的欧式距离</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch.nn.CosineEmbeddingLoss(</span><br><span class="line">    margin=<span class="number">0.0</span>, </span><br><span class="line">    size_average=<span class="literal">None</span>, </span><br><span class="line">    reduce=<span class="literal">None</span>, </span><br><span class="line">    reduction=<span class="string">&#x27;mean&#x27;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
@@ -513,7 +517,7 @@
   <entry>
     <title>硬件人的PyTorch【基础内容】</title>
     <url>/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9%E3%80%91/</url>
-    <content><![CDATA[<p>==<strong>本系列博文主要根据开源的<a href="https://github.com/datawhalechina/thorough-pytorch">thorough-pytorch</a>项目编写，感谢datawhalechina团队的dalao们分享学习经验</strong>==</p>
+    <content><![CDATA[<p><strong>本系列博文主要根据开源的<a href="https://github.com/datawhalechina/thorough-pytorch">thorough-pytorch</a>项目编写，感谢datawhalechina团队的dalao们分享学习经验</strong></p>
 <h1 id="PyTorch基础简介"><a href="#PyTorch基础简介" class="headerlink" title="PyTorch基础简介"></a>PyTorch基础简介</h1><p><strong>PyTorch</strong>是由Facebook人工智能研究小组开发的一种基于<strong>Lua</strong>编写的Torch库的<strong>Python实现</strong>的<strong>深度学习库</strong>，目前被广泛应用于学术界和工业界，由于Caffe2（一个简单易用基于python的深度学习框架）并入了PyTorch，它的社区逐渐膨胀并开始影响到TensorFlow在深度学习应用框架领域的统治地位。<em>PyTorch自从提出就获得巨大的关注以及用户数量的剧增</em></p>
 <blockquote>
 <p>时代变了，大人</p>
@@ -521,6 +525,8 @@
 <p>PyTorch提供类似NumPy的接口和调试方法，这使它容易上手且方便易用</p>
 </blockquote>
 <p>对于现在的边缘计算设备，跑一个由PyTorch实现的深度学习模型已经不是天方夜谭，而PyTorch除了能够实现深度学习模型的开发，还可以作为前向软件框架将一个完整的模型跑在嵌入式平台</p>
+<span id="more"></span>
+
 <p>最常见的嵌入式AI平台有下面几个：</p>
 <ul>
 <li><p>Nvidia Jetson TX2与Nvidia Jetson NX：Nvidia Jetson是老牌嵌入式AI设备之一，提供高性能的ARM Cortex-A57及以上内核，跑一个Ubuntu，再利用Cuda资源部署模型很顺滑。Nano已经很难应付一些大算力需求的模型了，因此需要使用更高端的版本</p>
@@ -2058,6 +2064,8 @@
     <url>/2022/02/06/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B04%E3%80%90AMBA%E6%80%BB%E7%BA%BF%E3%80%91/</url>
     <content><![CDATA[<h1 id="AMBA总线规范"><a href="#AMBA总线规范" class="headerlink" title="AMBA总线规范"></a>AMBA总线规范</h1><p>AMBA规范由ARM公司制定，用于SoC内IP互联</p>
 <p>AMBA即（Advanced Microcontroller Bus Architecture，AMBA）规范是一种开放式标准片上互联规范，用于连接和管理片上系统中的各个功能模块（IP）。显而易见，AMBA协议是一套片上总线协议，一般来说其信号线数量都比较多——ARM通过这套协议规定了各种信号线的作用，并没有规定信号线的位宽和具体实现，所以说每个芯片中的AMBA都可能具有不同的架构</p>
+<span id="more"></span>
+
 <p>AMBA中有以下几个主要接口：</p>
 <ul>
 <li>高级外设总线APB：用于低速低功耗外设连接</li>

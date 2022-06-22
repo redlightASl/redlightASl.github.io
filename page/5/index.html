@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 68 -->
+			<!-- 总文章数 69 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,86 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-STM32深入学习【中断控制】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E3%80%91/">STM32深入学习【中断控制】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-11-19T08:02:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="嵌套向量中断控制器NVIC"><a href="#嵌套向量中断控制器NVIC" class="headerlink" title="嵌套向量中断控制器NVIC"></a>嵌套向量中断控制器NVIC</h1><p>ARM内核标准规定了使用<strong>嵌套向量中断控制器NVIC</strong>控制异常和中断。对于STM32F407的Cortex-M4内核，NVIC具有16个可编程优先级、86个可屏蔽中断通道（ARM标准规定NVIC最多支持240个中断请求、1个不可屏蔽中断NMI、1个systick中断和多个系统异常，STM32只用到了一部分）</p>
+<p>为了继续执行被中断的程序，异常流程需要利用一些手段来保存被中断程序的状态（保护现场），并在异常处理完成后自动恢复（恢复现场），这个过程一般有硬件实现，但是也可以由硬件、软件共同操作。<strong>对于M4内核，当异常被接受后，有些寄存器会被自动保存到栈中，并在返回流程中自动回复，因此可以将异常处理写作普通的C函数，这并不会带来额外的软件开销</strong></p>
+<p>这段C函数就被称为<strong>中断服务程序</strong>（中断服务函数）</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90%E4%B8%AD%E6%96%AD%E6%8E%A7%E5%88%B6%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-STM32深入学习【定时器】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -846,90 +926,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A05%E3%80%90SPIFFS%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ESP32-IDF学习4【SPI与外部存储器】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A04%E3%80%90SPI%E4%B8%8E%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8%E3%80%91/">ESP32_IDF学习4【SPI与外部存储器】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A04%E3%80%90SPI%E4%B8%8E%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T07:01:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<p>注意：<strong>所有SPI相关的API都不能在中断服务函数或上下文切换期间使用，因为SPI相关的API都调用了互斥量，可能会造成系统错误</strong></p>
-<h1 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h1><p>调用<code>#include &quot;driver/spi_master.h&quot;</code>或<code>#include &quot;driver/spi_slave.h&quot;</code>来使用API组件</p>
-<p>ESP32集成了<strong>4个SPI外设</strong></p>
-<p>SPI0和SPI1通过总线仲裁器共享一条信号总线，用于在模组内部访问FLASH（SoC FLASH），不会对用户开放</p>
-<p>SPI2和SPI3是<strong>通用SPI控制器</strong>，有时也被称为HSPI和VSPI，这里的HSPI和VSPI没有实际区别，只是为了标识两个SPI，他们都既可以作为主机使用也可以作为从机使用。SPI控制器拥有独立的信号总线，每条总线都有三条片选（CS）信号，也就是说每个控制器都能驱动最多3个SPI从器件。这两个SPI控制器对用户开放</p>
-<p>相关概念参考SPI协议，以下内容默认读者学习过SPI、QSPI基础知识。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A04%E3%80%90SPI%E4%B8%8E%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8%E5%99%A8%E3%80%91/">展开全文 >></a>
         </p>
       
 

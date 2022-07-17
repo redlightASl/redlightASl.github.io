@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 69 -->
+			<!-- 总文章数 70 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,100 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-STM32深入学习【RCC】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/">STM32深入学习【RCC】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-11-19T08:03:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="复位"><a href="#复位" class="headerlink" title="复位"></a>复位</h1><h2 id="系统复位"><a href="#系统复位" class="headerlink" title="系统复位"></a>系统复位</h2><p>系统复位将所有寄存器复位，<strong>除了时钟控制寄存器CSR中的复位标志和备份域寄存器</strong></p>
+<p>复位条件：</p>
+<ol>
+<li><p><strong>外部复位：NRST引脚电平拉低</strong></p>
+</li>
+<li><p>WWDG复位：窗口看门狗计数结束</p>
+</li>
+<li><p>IWDG复位：独立看门狗计数结束</p>
+</li>
+<li><p><strong>软件复位(内核软复位)：将Cortex-M4内核的应用中断和复位控制寄存器(SCB_AIRCR)中的SYSRESEREQ(sys_reset_eq)位 置1</strong></p>
+<p> 在以下三种情况下会产生<strong>内核复位</strong>：</p>
+<ol>
+<li>上电复位：MCU通电时内核自动将所有组成部件复位</li>
+<li>系统复位：只复位处理器和外设，不会复位内核debug部分（常用来进行debug）</li>
+<li>处理器复位：仅复位处理器</li>
+</ol>
+<p> 上电复位和系统复位持续时间取决于MCU设计，在一些情况下，复位会持续数毫秒来等待晶振时钟稳定。在复位后、处理器运行程序之前，Cortex-M处理器将从内存中读取前两个字，即 位于中断向量表之前的<strong>主栈顶指针(MSP Main Stack Pointer)<strong>和</strong>复位向量</strong>初始值，其中复位向量就是复位句柄的起始地址。在这两个字被处理器读取以后，处理器会以这两个值建立主堆栈指针MSP和程序计数器PC</p></li></ol>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/19/STM32%E6%B7%B1%E5%85%A5%E5%AD%A6%E4%B9%A0%E3%80%90RCC%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-STM32深入学习【中断控制】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -848,84 +942,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A06%E3%80%90HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ESP32-IDF学习5【SPIFFS与数据加密】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A05%E3%80%90SPIFFS%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E3%80%91/">ESP32_IDF学习5【SPIFFS与数据加密】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A05%E3%80%90SPIFFS%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T07:02:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="VFS虚拟文件系统"><a href="#VFS虚拟文件系统" class="headerlink" title="VFS虚拟文件系统"></a>VFS虚拟文件系统</h1><p>虚拟文件系统 (VFS) 组件可为一些驱动提供一个统一接口。有了该接口，用户可像操作普通文件一样操作虚拟文件。这类驱动程序可以是 FAT、SPIFFS 等真实文件系统，也可以是有文件类接口的设备驱动程序——官方文档</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A05%E3%80%90SPIFFS%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%8A%A0%E5%AF%86%E3%80%91/">展开全文 >></a>
         </p>
       
 

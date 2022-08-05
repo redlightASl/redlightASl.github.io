@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 70 -->
+			<!-- 总文章数 71 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,100 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-STM32外设配置速查【摄像头】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%91%84%E5%83%8F%E5%A4%B4%E3%80%91/">STM32外设配置速查【摄像头】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%91%84%E5%83%8F%E5%A4%B4%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-11-19T08:04:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="OV2640"><a href="#OV2640" class="headerlink" title="OV2640"></a>OV2640</h1><p>OV2640是OmniVision公司生产的1/4英寸CMOS UXGA(1632_1232分辨率)图像传感器</p>
+<p>特点：</p>
+<ul>
+<li>体积小、工作电压低、灵敏度高</li>
+<li>具有单片UXGA摄像头和影像处理器的所有功能</li>
+<li>通过SCCB总线控制</li>
+<li>可输出整帧、子采样、缩放、取窗口等方式各种分辨率的8/10位影像数据</li>
+<li>最高帧数15帧/秒（SVGA可达30帧，CIF可达60帧）</li>
+<li>用户定义图像质量、数据格式、传输方式等</li>
+<li>所有图像处理功能都可以通过<strong>SCCB接口</strong>（串行摄像机控制总线协议，相当于一个简易的I2C协议）编程</li>
+<li><strong>兼容I2C接口</strong></li>
+<li>支持RawRGB、RGB、GRB422、YUV和YCbCr输出格式</li>
+<li>内置DSP，<strong>支持UXGA、SXGA、SVGA以及按比例缩小到从SXGA到40*30的任何尺寸</strong>，支持图像缩放</li>
+<li>支持自动曝光控制、自动增益控制、自动白平衡、自动消除灯光条纹、自动黑电平校准等自动控制功能和色饱和度、色相、伽马、锐度等设置，支持闪光灯</li>
+<li>支持图像压缩，可输出JPEG图像数据</li>
+</ul>
+<h2 id="SCCB时序"><a href="#SCCB时序" class="headerlink" title="SCCB时序"></a>SCCB时序</h2><p>SCCB（Serial Camera Control Bus串行摄像头控制总线）总线是由OV（OmniVision）公司定义和发展的三线式串行总线。现在SCCB总线大多采用两线式接口总线，接口总线包括SIOC串行时钟输入线和SIOD串行双向数据线，分别相当于IIC协议的SCL信号线和SDA信号线。<strong>SCCB就是个简化版的IIC</strong>，可以直接使用IIC的软件驱动代码改编成SCCB的驱动</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90%E6%91%84%E5%83%8F%E5%A4%B4%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-STM32深入学习【RCC】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -892,88 +986,9 @@
 
 
   
-    <article id="post-ESP32-IDF学习6【HTTP服务器】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A06%E3%80%90HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%91/">ESP32_IDF学习6【HTTP服务器】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A06%E3%80%90HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T07:02:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="TCP-IP组件"><a href="#TCP-IP组件" class="headerlink" title="TCP/IP组件"></a>TCP/IP组件</h1><p>ESP系列提供了实现TCP/IP协议栈的库函数，<code>#include &lt;esp_netif.h&gt;</code>即可使用这些库函数</p>
-<p>特点如下：</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">ESP32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/ESP32-IDF%E5%AD%A6%E4%B9%A06%E3%80%90HTTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
     </nav>
   
 

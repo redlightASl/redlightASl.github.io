@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 70 -->
+			<!-- 总文章数 71 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -229,6 +229,92 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/13/%E6%88%91%E7%9A%84%E6%96%B0%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-硬件人的PyTorch【mobilenet】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/08/05/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90mobilenet%E3%80%91/">硬件人的PyTorch【mobilenet】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2022/08/05/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90mobilenet%E3%80%91/" class="archive-article-date">
+  	<time datetime="2022-08-05T08:32:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="MobileNet的原理与PyTorch实现"><a href="#MobileNet的原理与PyTorch实现" class="headerlink" title="MobileNet的原理与PyTorch实现"></a>MobileNet的原理与PyTorch实现</h1><p>Mobilenet和ShuffleNet是目前应用比较广泛的两种轻量级卷积神经网络，轻量级网络参数少、计算量小、推理时间短，更适用于存储空间和功耗受限的边缘端和嵌入式平台。其中ShuffleNet是Face++在2017提出的轻量级网络，通过引入<strong>group和Channel Shuffle</strong>操作来让神经网络运算量大大减小。MobileNet是谷歌团队在同年提出的专注于移动端或者嵌入式设备中的轻量级CNN网络，提出了<strong>Inverted Residual Block</strong>结构，在此基础上能大大降低卷积层的消耗。二者的核心目标都是<strong>在尽可能减小准确率损失的条件下大量减少参数与运算量</strong>。到目前为止，MobileNet已经出现了三个版本，MobileNetv1、v2、v3；ShuffleNet也出现了两个版本：v1和v2。</p>
+<p>由于MobileNetv2版本中也借鉴ShuffleNet使用了group操作，所以这里主要基于MobileNet介绍其结构和PyTorch官方实现（v2版本）</p>
+<blockquote>
+<p>MobileNetv2已经被官方收录到PyTorch库中，可以直接调用；MobileNetv3还只有一个简单的个人实现。二者的GitHub仓库如下：</p>
+<ul>
+<li>V2：<a target="_blank" rel="noopener" href="https://github.com/pytorch/vision/blob/6db1569c89094cf23f3bc41f79275c45e9fcb3f3/torchvision/models/mobilenet.py#L77">https://github.com/pytorch/vision/blob/6db1569c89094cf23f3bc41f79275c45e9fcb3f3/torchvision/models/mobilenet.py#L77</a></li>
+<li>V3：<a target="_blank" rel="noopener" href="https://github.com/xiaolai-sqlai/mobilenetv3/blob/adc0ca87e1dd8136cd000ae81869934060171689/mobilenetv3.py#L75">https://github.com/xiaolai-sqlai/mobilenetv3/blob/adc0ca87e1dd8136cd000ae81869934060171689/mobilenetv3.py#L75</a></li>
+</ul>
+</blockquote>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习与机器视觉</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/08/05/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90mobilenet%E3%80%91/">展开全文 >></a>
         </p>
       
 
@@ -963,99 +1049,9 @@
 
 
   
-    <article id="post-一生一芯学习笔记1【Verilator】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/01/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90Verilator%E3%80%91/">一生一芯学习笔记1【Verilator】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2022/03/01/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90Verilator%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-03-01T10:55:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Verilator入门"><a href="#Verilator入门" class="headerlink" title="Verilator入门"></a>Verilator入门</h1><p>今年2月底报名了22年第四期<a target="_blank" rel="noopener" href="https://docs.ysyx.org/">一生一芯</a>，借着这个机会学学前端设计相关内容</p>
-<p>个人目标暂且定为：</p>
-<ul>
-<li>设计一个五级流水，可挂载协处理器的RV32IMF指令集处理器</li>
-<li>在两到三期内完成一生一芯规定的基础流片指标</li>
-<li>挂载一个可用于图像处理的加速器</li>
-<li>使用AMBA总线在片上集成一套用于水下机器人控制的外设（包括GPIO、UART、PWM、DCMI、DMA、MAC）</li>
-<li>将自制的RTOS开发完毕并部署在SoC上</li>
-<li>将芯片部署在一台ROV中并实现完整的机器人控制、水下图像识别任务</li>
-</ul>
-<p>希望能在本科期间把这一套东西做完……</p>
-<p>22年第四期一生一芯要求在开始之前需要自己搭建基于verilator+gtkwave的验证环境（预学习阶段），这里简单记录一下这部分的要点内容（<strong>教程不允许将自己代码发布到公开网站，这里遵守要求仅记录知识点和bug解决思路</strong>）</p>
-<p>这系列博文与其说是笔记，不如说是对这段学习经历的总结？</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">一生一芯</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/03/01/%E4%B8%80%E7%94%9F%E4%B8%80%E8%8A%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90Verilator%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
     </nav>
   
 

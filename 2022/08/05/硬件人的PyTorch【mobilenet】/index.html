@@ -24,7 +24,7 @@
 <meta property="og:image" content="https://redlightasl.github.io/2022/08/05/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90mobilenet%E3%80%91/image-20220805141304008.png">
 <meta property="og:image" content="https://redlightasl.github.io/2022/08/05/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90mobilenet%E3%80%91/image-20220805123313902.png">
 <meta property="article:published_time" content="2022-08-05T08:32:28.000Z">
-<meta property="article:modified_time" content="2022-08-05T08:33:50.774Z">
+<meta property="article:modified_time" content="2022-08-15T01:20:29.230Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="机器学习与机器视觉">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,13 @@
 <p>传统的卷积直接将多个卷积核作用到多个特征图，得到多个输出特征图；MobileNet使用的<strong>深度可分离卷积（Depth-wise Separable Convolution）</strong>将这个过程拆分成两部分：<strong>depthwise卷积将与输入通道等量个滤波器对应作用到输入通道，pointwise卷积再使用与输出通道等量个1x1卷积核合并depthwise卷积的输出</strong></p>
 <p><img src="/2022/08/05/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90mobilenet%E3%80%91/image-20220805101721360.png" alt="image-20220805101721360"></p>
 <p>如上图，左边是传统的3x3卷积核卷积，右图是3x3卷积核深度可分离卷积</p>
-<p>标准卷积的计算量为<br>$$<br>输入特征图尺寸<em>输入特征图数量</em>输出特征图数量<em>卷积核尺寸<br>$$<br>而深度可分离卷积的计算量为<br>$$<br>dw卷积+pw卷积=dw输入特征图尺寸</em>dw输入特征图数量<em>dw卷积核尺寸+pw输入特征图数尺寸</em>pw输入特征图数量*输出特征图数量<br>$$<br>二者作比可得到<br>$$<br>\frac{深度可分离卷积}{标准卷积}=\frac{1}{输出特征图数量} + \frac{1}{卷积核尺寸}<br>$$<br>对于3x3卷积核情况下， 可以得到8~9倍计算量的减少，需要付出的只是微小的准确率</p>
+<p>标准卷积的计算量为</p>
+<p><strong>输入特征图尺寸*输入特征图数量*输出特征图数量*卷积核尺寸</strong></p>
+<p>而深度可分离卷积的计算量为</p>
+<p><strong>dw卷积+pw卷积=dw输入特征图尺寸*dw输入特征图数量*dw卷积核尺寸+pw输入特征图数尺寸*pw输入特征图数量*输出特征图数量</strong></p>
+<p>二者作比可得到</p>
+<p>深度可分离卷积/标准卷积=1/输出特征图数量+1/卷积核尺寸</p>
+<p>对于3x3卷积核情况下， 可以得到8~9倍计算量的减少，需要付出的只是微小的准确率</p>
 <h3 id="ReLU6激活函数"><a href="#ReLU6激活函数" class="headerlink" title="ReLU6激活函数"></a>ReLU6激活函数</h3><p>MobileNetv2引入了<strong>ReLU6</strong>来取代ReLU，因为ReLU在低维度情况下会导致较大的特征损失，后面我们会提到MobileNet使用了先升维再降维的InvertedResidualBlock方法，因此ReLU不再适合作为降维后的激活函数</p>
 <p>ReLU6函数实际上就是对ReLU作限幅，当输入数据大于6时，将其限制在6</p>
 <p>下面是MobileNet中用到基本Conv-BN-ReLU6模块的构建</p>

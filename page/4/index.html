@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 72 -->
+			<!-- 总文章数 73 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,88 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-电路设计从入门到弃坑【集成运算放大器的构成】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90%E3%80%91/">电路设计从入门到弃坑7【集成运算放大器的构成】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-12-21T07:31:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="电路设计从入门到弃坑7【集成运算放大器的构成】"><a href="#电路设计从入门到弃坑7【集成运算放大器的构成】" class="headerlink" title="电路设计从入门到弃坑7【集成运算放大器的构成】"></a>电路设计从入门到弃坑7【集成运算放大器的构成】</h1><p>在之前的运放简介部分，已经介绍过运算放大器的基本构成，这部分要结合电路原理推导来详细说明一下集成运放的构成</p>
+<p>在开始之前我们先来看一个经典运放LM358的datasheet</p>
+<p><img src="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90%E3%80%91/image-20211218204757164.png" alt="image-20211218204757164"></p>
+<p>如右上角图片所示，LMx58家族有三种主要封装：比较大体积的PDIP-8、小体积的SOIC-8和不常见的Micro8，一般来说个人DIY最常用的就是DIP-8封装，而如果制作PCB的话还是应该选择体积较小相对性能更好的SOIC-8</p>
+<p>左侧介绍也已经说了：LM358是LM324这个四路运放芯片的一半，也就是双运放IC，它们都属于<strong>通用运放</strong>，运放是分为各种特化类型的，相关内容会在之后介绍。</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">电路设计</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/12/21/%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E5%BC%83%E5%9D%91%E3%80%90%E9%9B%86%E6%88%90%E8%BF%90%E7%AE%97%E6%94%BE%E5%A4%A7%E5%99%A8%E7%9A%84%E6%9E%84%E6%88%90%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-电路设计从入门到弃坑【集成运算放大器简介】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -853,87 +935,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B01%E3%80%90FPGA%E5%8E%9F%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%84%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-STM32外设配置速查【QSPI】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/">STM32外设配置速查【QSPI】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/" class="archive-article-date">
-  	<time datetime="2021-11-19T08:07:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="QSPI协议"><a href="#QSPI协议" class="headerlink" title="QSPI协议"></a>QSPI协议</h1><p>QSPI是Queued SPI（队列串行外围接口）的缩写，是由摩托罗拉公司推出的SPI协议的一个扩展，比SPI应用更加广泛，现在的FLASH、SRAM等存储器大多支持QSPI协议——QSPI是一种<strong>专用</strong>的通信接口，可连接单、双或四线SPI存储器</p>
-<p>QSPI在SPI协议的基础上增加了<strong>队列传输机制</strong>。</p>
-<p>STM32将Queued SPI协议接口实现为QUADSPI接口。QSPI的实现和SPI基本相似，有部分不同点，在下面列出。</p>
-<h2 id="物理连接"><a href="#物理连接" class="headerlink" title="物理连接"></a>物理连接</h2><p>QSPI是标准的四信号线SPI，MCU与外设之间由六根线连接：NSS、IO0、IO1、IO2、IO3、SCLK，其中IO0-3是数据线；NSS又称CS，是片选信号线；SCLK又称SCK，是SPI/QSPI的同步时钟线</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">stm32</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/STM32%E5%A4%96%E8%AE%BE%E9%85%8D%E7%BD%AE%E9%80%9F%E6%9F%A5%E3%80%90QSPI%E3%80%91/">展开全文 >></a>
         </p>
       
 

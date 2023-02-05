@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
   <title>FPGA学习笔记8【FPGA底层CLB】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文主要参考官方文档UG471、UG472、UG473、UG474编写 Xilinx的CLBXilinx官方文档中将可配置逻辑块CLB（Configurable Logic Block）作为FPGA的逻辑资源的最小单元。但CLB实际是由多个Slice构成，因此工程应用中常常把Slice作为最小逻辑单元，很少提起CLB。本篇博文主要介绍Xilinx FPGA的CLB和Slice结构 区分Cells、">
+  <meta name="description" content="本文主要参考官方文档UG471、UG472、UG473、UG474编写 Xilinx的CLBXilinx官方文档中将可配置逻辑块CLB（Configurable Logic Block）作为FPGA的逻辑资源的最小单元。但CLB实际是由多个Slice构成，因此工程应用中常常把Slice作为最小逻辑单元，很少提起CLB。本篇博文主要介绍Xilinx FPGA的CLB和Slice结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FPGA学习笔记8【FPGA底层CLB】">
 <meta property="og:url" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="本文主要参考官方文档UG471、UG472、UG473、UG474编写 Xilinx的CLBXilinx官方文档中将可配置逻辑块CLB（Configurable Logic Block）作为FPGA的逻辑资源的最小单元。但CLB实际是由多个Slice构成，因此工程应用中常常把Slice作为最小逻辑单元，很少提起CLB。本篇博文主要介绍Xilinx FPGA的CLB和Slice结构 区分Cells、">
+<meta property="og:description" content="本文主要参考官方文档UG471、UG472、UG473、UG474编写 Xilinx的CLBXilinx官方文档中将可配置逻辑块CLB（Configurable Logic Block）作为FPGA的逻辑资源的最小单元。但CLB实际是由多个Slice构成，因此工程应用中常常把Slice作为最小逻辑单元，很少提起CLB。本篇博文主要介绍Xilinx FPGA的CLB和Slice结构">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221213104438867.png">
 <meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221213104942912.png">
@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224224132794.png">
 <meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224230255069.png">
 <meta property="article:published_time" content="2023-02-05T03:06:57.000Z">
-<meta property="article:modified_time" content="2023-02-05T03:07:26.770Z">
+<meta property="article:modified_time" content="2023-02-05T03:08:32.871Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="FPGA">
 <meta name="twitter:card" content="summary">
@@ -215,6 +215,8 @@
       
         <p>本文主要参考官方文档UG471、UG472、UG473、UG474编写</p>
 <h1 id="Xilinx的CLB"><a href="#Xilinx的CLB" class="headerlink" title="Xilinx的CLB"></a>Xilinx的CLB</h1><p>Xilinx官方文档中将<strong>可配置逻辑块CLB</strong>（Configurable Logic Block）作为FPGA的逻辑资源的最小单元。但CLB实际是由多个Slice构成，因此工程应用中常常把Slice作为最小逻辑单元，很少提起CLB。本篇博文主要介绍Xilinx FPGA的CLB和Slice结构</p>
+<span id="more"></span>
+
 <h2 id="区分Cells、CLB和Slice"><a href="#区分Cells、CLB和Slice" class="headerlink" title="区分Cells、CLB和Slice"></a>区分Cells、CLB和Slice</h2><p>Vivado的资源利用率（Utilization）列表往往像下面这样</p>
 <p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221213104438867.png" alt="image-20221213104438867"></p>
 <p>Slice和组成Slice的LUT、FF、BRAM是主要的显示项，也是工程中最为常用的资源；而在官方手册中，我们经常能看到Xilinx与友商通过逻辑单元（Logic Cells）进行比较；官方文档中又把CLB作为最基本逻辑单元。我们下面来详细区分一下三者</p>

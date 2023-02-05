@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 74 -->
+			<!-- 总文章数 75 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,84 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-FPGA学习笔记2【基础概念】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/">FPGA学习笔记2【基础概念】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-11-19T08:09:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h1><p>Xilinx系FPGA使用vivado全家桶进行开发</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B02%E3%80%90%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-FPGA学习笔记1【FPGA原理与结构】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -926,86 +1004,6 @@
 
 
   
-    <article id="post-Socket简介" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/Socket%E7%AE%80%E4%BB%8B/">Socket简介</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/Socket%E7%AE%80%E4%BB%8B/" class="archive-article-date">
-  	<time datetime="2021-11-19T07:58:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h1><p>Socket即<strong>套接字</strong>，是由UNIX系统开发的网络通信接口，该接口API被纳入了POSIX标准，所有兼容POSIX的操作系统都可以使用该系列API，所以它成为了<strong>网络应用开发时最常用的API</strong></p>
-<h2 id="Socket简介"><a href="#Socket简介" class="headerlink" title="Socket简介"></a>Socket简介</h2><p>Socket套接字是位于应用层和传输层之间的POSIX接口，应用程序可以直接通过Socket进行网络通信，然后由Socket将数据传递到传输层，Socket因此可以像文件一样以打开、读写、关闭的方式实现网络通信，这也是UNIX万物皆文件的思想体现。同时标准化的Socket接口使得应用程序具有良好的可移植性，目前不仅仅是Linux，一些RTOS像FreeRTOS、RT-Thread、uCOS和一些具有网络功能的SoC都实现了Socket API</p>
-<p>需要注意：<strong>Socket和Websocket并不是一个东西</strong>，Socket是工作在传输控制层的应用程序接口，WebSocket则是一个应用层协议。Socket将协议簇下层的内容封装起来供上层应用程序调用；而WebSocket作为一个成熟的连接应用解决方案可以单独工作或与其他应用程序共同使用</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">IoT</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/Socket%E7%AE%80%E4%BB%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/">Next &amp;raquo;</a>
@@ -1135,7 +1133,31 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1155,11 +1177,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">IC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1167,31 +1189,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

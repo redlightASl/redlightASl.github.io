@@ -6,44 +6,44 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://redlightasl.github.io">
-  <title>FPGA学习笔记7【基本输入输出逻辑】 | 红光今天吃什么</title>
+  <title>FPGA学习笔记7【FPGA底层IO】 | 红光今天吃什么</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文主要参考官方文档UG471编写，更多内容可以参考官方手册 FPGA学习笔记7【基本输入输出逻辑】7000系FPGA提供了丰富的IO资源。FPGA内部，晶圆中间部分是由CLB构成的岛型阵列，外围环绕着用于将信号引出的IO块，被称为IO Block，即IOB。所有IOB都按照bank分组，主要分成两大类：高性能（High Performance，HP）和高电压范围（High Range，HR）">
+  <meta name="description" content="本文主要参考官方文档UG471编写，更多内容可以参考官方手册 基本输入输出逻辑资源7000系FPGA提供了丰富的IO资源。FPGA内部，晶圆中间部分是由CLB构成的岛型阵列，外围环绕着用于将信号引出的IO块，被称为IO Block，即IOB。所有IOB都按照bank分组，主要分成两大类：高性能（High Performance，HP）和高电压范围（High Range，HR）   二者主要差别如上">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FPGA学习笔记7【基本输入输出逻辑】">
-<meta property="og:url" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/">
+<meta property="og:title" content="FPGA学习笔记7【FPGA底层IO】">
+<meta property="og:url" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/">
 <meta property="og:site_name" content="红光今天吃什么">
-<meta property="og:description" content="本文主要参考官方文档UG471编写，更多内容可以参考官方手册 FPGA学习笔记7【基本输入输出逻辑】7000系FPGA提供了丰富的IO资源。FPGA内部，晶圆中间部分是由CLB构成的岛型阵列，外围环绕着用于将信号引出的IO块，被称为IO Block，即IOB。所有IOB都按照bank分组，主要分成两大类：高性能（High Performance，HP）和高电压范围（High Range，HR）">
+<meta property="og:description" content="本文主要参考官方文档UG471编写，更多内容可以参考官方手册 基本输入输出逻辑资源7000系FPGA提供了丰富的IO资源。FPGA内部，晶圆中间部分是由CLB构成的岛型阵列，外围环绕着用于将信号引出的IO块，被称为IO Block，即IOB。所有IOB都按照bank分组，主要分成两大类：高性能（High Performance，HP）和高电压范围（High Range，HR）   二者主要差别如上">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224152427320.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224152535298.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224164742255.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224164810711.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224153940429.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224153952247.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224154004155.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224154015405.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115756037.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115408735.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115621256.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226120053383.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224160836505.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224160907027.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224161356493.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162207759.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224161634962.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162528406.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162746935.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162818855.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162919471.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224163014457.png">
-<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224163123078.png">
-<meta property="article:published_time" content="2023-02-05T02:17:44.000Z">
-<meta property="article:modified_time" content="2023-02-05T02:17:30.231Z">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224152427320.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224152535298.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224164742255.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224164810711.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224153940429.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224153952247.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224154004155.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224154015405.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226115756037.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226115408735.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226115621256.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226120053383.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224160836505.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224160907027.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224161356493.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162207759.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224161634962.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162528406.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162746935.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162818855.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162919471.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224163014457.png">
+<meta property="og:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224163123078.png">
+<meta property="article:published_time" content="2023-02-05T03:04:49.000Z">
+<meta property="article:modified_time" content="2023-02-05T03:06:36.099Z">
 <meta property="article:author" content="RedlightASl">
 <meta property="article:tag" content="FPGA">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224152427320.png">
+<meta name="twitter:image" content="https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224152427320.png">
   
     <link rel="alternative" href="/atom.xml" title="红光今天吃什么" type="application/atom+xml">
   
@@ -91,7 +91,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 74 -->
+			<!-- 总文章数 75 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -188,14 +188,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-FPGA学习笔记7【基本输入输出逻辑】" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-FPGA学习笔记7【FPGA底层IO】" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      FPGA学习笔记7【基本输入输出逻辑】
+      FPGA学习笔记7【FPGA底层IO】
     </h1>
   
 
@@ -204,8 +204,8 @@
 <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
 	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
 
-<a href="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/" class="archive-article-date">
-  	<time datetime="2023-02-05T02:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-05</time>
+<a href="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/" class="archive-article-date">
+  	<time datetime="2023-02-05T03:04:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-05</time>
 </a>
         
       </header>
@@ -213,17 +213,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>本文主要参考官方文档<strong>UG471</strong>编写，更多内容可以参考官方手册</p>
-<h1 id="FPGA学习笔记7【基本输入输出逻辑】"><a href="#FPGA学习笔记7【基本输入输出逻辑】" class="headerlink" title="FPGA学习笔记7【基本输入输出逻辑】"></a>FPGA学习笔记7【基本输入输出逻辑】</h1><p>7000系FPGA提供了丰富的IO资源。FPGA内部，晶圆中间部分是由CLB构成的岛型阵列，外围环绕着用于将信号引出的IO块，被称为IO Block，即<strong>IOB</strong>。所有IOB都按照<strong>bank</strong>分组，主要分成两大类：<strong>高性能</strong>（High Performance，HP）和<strong>高电压范围</strong>（High Range，HR）</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224152427320.png" alt="image-20221224152427320"></p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224152535298.png" alt="image-20221224152535298"></p>
+<h1 id="基本输入输出逻辑资源"><a href="#基本输入输出逻辑资源" class="headerlink" title="基本输入输出逻辑资源"></a>基本输入输出逻辑资源</h1><p>7000系FPGA提供了丰富的IO资源。FPGA内部，晶圆中间部分是由CLB构成的岛型阵列，外围环绕着用于将信号引出的IO块，被称为IO Block，即<strong>IOB</strong>。所有IOB都按照<strong>bank</strong>分组，主要分成两大类：<strong>高性能</strong>（High Performance，HP）和<strong>高电压范围</strong>（High Range，HR）</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224152427320.png" alt="image-20221224152427320"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224152535298.png" alt="image-20221224152535298"></p>
 <p>二者主要差别如上图所示</p>
-<span id="more"></span>
-
 <p>HR Bank具有更低的延迟和较小的驱动电流以及一些额外功能；HR Bank能支持更高的电压标准（2.5V和3.3V）。在板级硬件设计中，需要根据外围电路电平标准优先考虑使用哪种bank</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224164742255.png" alt="image-20221224164742255"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224164742255.png" alt="image-20221224164742255"></p>
 <p>上图是HP Bank结构图</p>
 <p>下图是HR Bank结构图，可以发现HR Bank不能控制输出Delay</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224164810711.png" alt="image-20221224164810711"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224164810711.png" alt="image-20221224164810711"></p>
 <h2 id="IO-Bank"><a href="#IO-Bank" class="headerlink" title="IO Bank"></a>IO Bank</h2><p>一个IO Bank由50个<strong>IOB</strong>（IO Block）组成，器件的封装和型号决定了有多少bank可用。<strong>每个bank的最末端两个IO只能适用于单端I/O标准</strong>；剩下的48个的引脚可以使用单端或差分标准——两个IO引脚能组成差分对。</p>
 <p>最末端两个IO被称为<em>单端IO</em>（Single-Ended IO）；其他的IO被称为<em>普通IO</em>（Regular IO）或差分IO</p>
 <p>支持的IO电平标准如下</p>
@@ -232,10 +230,10 @@
 <li>差分I/O标准：<strong>LVDS</strong>、Mini_LVDS、RSDS、PPDS、BLVDS、差分HSTL、SSTL</li>
 </ul>
 <p>单端、差分情况下的每种bank内部电路如下图所示</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224153940429.png" alt="image-20221224153940429"></p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224153952247.png" alt="image-20221224153952247"></p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224154004155.png" alt="image-20221224154004155"></p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224154015405.png" alt="image-20221224154015405"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224153940429.png" alt="image-20221224153940429"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224153952247.png" alt="image-20221224153952247"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224154004155.png" alt="image-20221224154004155"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224154015405.png" alt="image-20221224154015405"></p>
 <p>可以看出，单端IOB和普通IOB基本上是等同的，每个IOB都包含输入O、输出I和三态驱动器T以及一些内部缓冲器电路。只不过单端IO没有连接来产生差分输出信号；而HR Bank相较HP Bank缺少了<code>DCI Term Disable</code>端口来进行片上终端使能控制</p>
 <h3 id="DCI"><a href="#DCI" class="headerlink" title="DCI"></a>DCI</h3><p>随着FPGA越来越大，系统时钟速度越来越快，PCB的设计和制造变得更加困难，信号完整性SI成为一个关键问题。PCB上的导线必须被正确端接以避免反射或振铃。</p>
 <p>一般来说需要在传输线两端接入匹配电阻，使输出和输入与接收器或驱动器的阻抗相匹配。然而，由于设备I/O的增加，在设备引脚附近添加电阻会增加电路板面积和元件数量。为了解决这些问题并实现更好的信号完整性，Xilinx在7000系FPGA内提供了<strong>数字控制阻抗</strong>（Digitally Controlled Impedance，<strong>DCI</strong>）技术。根据不同的I/O标准，DCI可以主动调整I/O内部驱动器的输出阻抗，从而准确<em>匹配传输线VRN和VRP上外部精密参考电阻</em>的特性阻抗，这样就<strong>不需要在电路板上安装多余的终端电阻</strong>，减少了电路板的布线困难和元件数量</p>
@@ -272,48 +270,48 @@
 </ul>
 <p>其中<strong>MIO是PS端对片外的接口</strong>，<strong>EMIO是PS端与PL端的接口</strong>，GPIO则是具有IO功能外设的统称，在PS端集成了一套GPIO，同样可以在PL端用HDL写出一个GPIO外设</p>
 <p>观察系统框图可以发现PS部分的所有外设都需要先复用到MIO再引出片外。而部分外设可以选择先通过EMIO连接到PL端，再引出片外</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115756037.png" alt="image-20220226115756037"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226115756037.png" alt="image-20220226115756037"></p>
 <blockquote>
 <p>Zynq的核心是PS端的ARM核，将FPGA视为它的一个外设</p>
 <p>从这个EMIO也可以反映出这个观点</p>
 </blockquote>
 <p>PS端的引脚信号如下所示</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115408735.png" alt="image-20220226115408735"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226115408735.png" alt="image-20220226115408735"></p>
 <p>Clock、Reset、DDR三个部分都是固定的，暂且不看，可以发现MIO有三组引脚，其中PS_MIO_VREF引脚是MIO1电源域的参考引脚；PS_MIO引脚被分成了两组，分别使用MIO0电源域和MIO1电源域的参考电压，分组信息如下所示：</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115621256.png" alt="image-20220226115621256"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226115621256.png" alt="image-20220226115621256"></p>
 <p>ug585手册中还给出了PS-PL-MIO-EMIO的接口框图</p>
 <blockquote>
 <p>MIO是PS端的基础IO外设，不过IO外设信号也可以通过EMIO连接到PL端</p>
 </blockquote>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226120053383.png" alt="image-20220226120053383"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226120053383.png" alt="image-20220226120053383"></p>
 <p>从上面的系统框图中可以看出，PS端内核通过AHB、APB总线控制PS IO外设控制器（<strong>IOP</strong>），从而驱动MIO或EMIO。IOP可以同时管理MIO、EMIO的复用器。</p>
 <p>需要注意：IOP就是传统意义上的GPIO，它通过复用连接到诸如I2C控制器、SPI控制器、SDIO控制器等外设上，从而为这些外设提供输出驱动，与此同时该设备不能像FPGA或者说FPIOA那样可以任意分配引脚，每个外设都被分配了固定的几组引脚，限制相对较大</p>
 <p>与PS部分的AXI接口不同，EMIO只能将来自IOP的信号连接到PL端，并不能形成完整的总线架构</p>
 <h2 id="IO原语（SelectIO-Primitives）"><a href="#IO原语（SelectIO-Primitives）" class="headerlink" title="IO原语（SelectIO Primitives）"></a>IO原语（SelectIO Primitives）</h2><p>在编写RTL中，可以选择直接调用Xilinx提供的IOB原语来使用某些具有特殊功能的IO，可用的单端IO原语如下所示</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224160836505.png" alt="image-20221224160836505"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224160836505.png" alt="image-20221224160836505"></p>
 <p>可用的差分IO原语如下所示</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224160907027.png" alt="image-20221224160907027"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224160907027.png" alt="image-20221224160907027"></p>
 <p>下面来简单介绍几个常用的原语</p>
 <h3 id="IBUF和IBUFG"><a href="#IBUF和IBUFG" class="headerlink" title="IBUF和IBUFG"></a>IBUF和IBUFG</h3><p><code>IBUFG</code>原语用于时钟输入，综合器会调用一个输入缓冲器来实现电路，从而保证时钟的低抖动</p>
 <p><code>IBUF_IBUFDISABLE</code>原语用于禁用一个IBUF，并强制O引脚输出高电平，尝尝用于关闭不需要的输入缓冲器降低功耗</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224161356493.png" alt="image-20221224161356493"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224161356493.png" alt="image-20221224161356493"></p>
 <p><code>IBUF_INTERMDISABLE</code>只能在HR Bank中使用，使用这个原语可以禁用输入缓冲器，并在USE_IBUFDISABLE属性被设置为1且IBUFDISABLE信号被断定为1时，将O输出到结构中</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162207759.png" alt="image-20221224162207759"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162207759.png" alt="image-20221224162207759"></p>
 <p><code>IBUFDS</code>和<code>IBUFGDS</code>是IBUF的差分版本，常用于差分时钟信号的输入控制</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224161634962.png" alt="image-20221224161634962"></p>
-<h3 id="IBUFDS-DIFF-OUT和IBUFGDS-DIFF-OUT"><a href="#IBUFDS-DIFF-OUT和IBUFGDS-DIFF-OUT" class="headerlink" title="IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT"></a>IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT</h3><p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162528406.png" alt="image-20221224162528406"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224161634962.png" alt="image-20221224161634962"></p>
+<h3 id="IBUFDS-DIFF-OUT和IBUFGDS-DIFF-OUT"><a href="#IBUFDS-DIFF-OUT和IBUFGDS-DIFF-OUT" class="headerlink" title="IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT"></a>IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT</h3><p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162528406.png" alt="image-20221224162528406"></p>
 <p>这个原语用于接收差分形式输入的信号，并将其转换成一对互补输出O和OB</p>
 <p>它也可以使用<code>IBUFDISABLE</code>和<code>INTERMDISABLE</code></p>
 <h3 id="IOBUF"><a href="#IOBUF" class="headerlink" title="IOBUF"></a>IOBUF</h3><p>同时具有输入和输出功能的缓冲器原语，结构如下所示</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162746935.png" alt="image-20221224162746935"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162746935.png" alt="image-20221224162746935"></p>
 <p>它也可以使用<code>IBUFDISABLE</code>和<code>INTERMDISABLE</code>功能端</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162818855.png" alt="image-20221224162818855"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162818855.png" alt="image-20221224162818855"></p>
 <p>也有用于差分信号的原语<code>IOBUFDS</code></p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162919471.png" alt="image-20221224162919471"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162919471.png" alt="image-20221224162919471"></p>
 <h3 id="OBUF"><a href="#OBUF" class="headerlink" title="OBUF"></a>OBUF</h3><p>只能用于输出的缓冲器原语，常用于各种信号从FPGA内向引脚输出</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224163014457.png" alt="image-20221224163014457"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224163014457.png" alt="image-20221224163014457"></p>
 <p>调用<code>OBUFTDS</code>可以实现三态输出</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224163123078.png" alt="image-20221224163123078"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224163123078.png" alt="image-20221224163123078"></p>
 <h3 id="原语调用"><a href="#原语调用" class="headerlink" title="原语调用"></a>原语调用</h3><p>使用下面语句即可调用IOBUF</p>
 <figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">IOBUF #(</span><br><span class="line">    <span class="variable">.DRIVE</span>(<span class="number">12</span>), <span class="comment">// 输出驱动强度</span></span><br><span class="line">    <span class="variable">.IBUF_LOW_PWR</span>(<span class="string">&quot;TRUE&quot;</span>), <span class="comment">// HR = &quot;TRUE&quot;, HP = &quot;FALSE&quot; </span></span><br><span class="line">    <span class="variable">.IOSTANDARD</span>(<span class="string">&quot;DEFAULT&quot;</span>), <span class="comment">// IO标准</span></span><br><span class="line">    <span class="variable">.SLEW</span>(<span class="string">&quot;SLOW&quot;</span>) <span class="comment">// 速率等级</span></span><br><span class="line">) IOBUF_inst (</span><br><span class="line">    <span class="variable">.O</span>(user_out), <span class="comment">// IOBUF输出端（用户信号输入端）</span></span><br><span class="line">    <span class="variable">.IO</span>(user_io), <span class="comment">// IOBUF输入输出端（直连到顶层模块）</span></span><br><span class="line">    <span class="variable">.I</span>(user_in), <span class="comment">// IOBUF输入端（用户信号输出端）</span></span><br><span class="line">    <span class="variable">.T</span>(user_tri) <span class="comment">// 三态控制端, 高电平输入, 低电平输出 </span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
@@ -411,7 +409,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://redlightasl.github.io/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -424,6 +422,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          FPGA学习笔记8【FPGA底层CLB】
+        
+      </div>
+    </a>
   
   
     <a href="/2022/09/18/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B06%E3%80%90%E5%AF%B9%E7%8A%B6%E6%80%81%E6%9C%BA%E7%9A%84%E8%AE%A8%E8%AE%BA%E3%80%91/" id="article-nav-older" class="article-nav-link-wrap">
@@ -454,7 +461,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91"><span class="toc-number">1.</span> <span class="toc-text">FPGA学习笔记7【基本输入输出逻辑】</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IO-Bank"><span class="toc-number">1.1.</span> <span class="toc-text">IO Bank</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DCI"><span class="toc-number">1.1.1.</span> <span class="toc-text">DCI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO-Bank%E7%94%B5%E6%BA%90"><span class="toc-number">1.1.2.</span> <span class="toc-text">IO Bank电源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MIO%E3%80%81EMIO%E4%B8%8EGPIO"><span class="toc-number">1.2.</span> <span class="toc-text">MIO、EMIO与GPIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO%E5%8E%9F%E8%AF%AD%EF%BC%88SelectIO-Primitives%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">IO原语（SelectIO Primitives）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IBUF%E5%92%8CIBUFG"><span class="toc-number">1.3.1.</span> <span class="toc-text">IBUF和IBUFG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IBUFDS-DIFF-OUT%E5%92%8CIBUFGDS-DIFF-OUT"><span class="toc-number">1.3.2.</span> <span class="toc-text">IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IOBUF"><span class="toc-number">1.3.3.</span> <span class="toc-text">IOBUF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OBUF"><span class="toc-number">1.3.4.</span> <span class="toc-text">OBUF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E8%AF%AD%E8%B0%83%E7%94%A8"><span class="toc-number">1.3.5.</span> <span class="toc-text">原语调用</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E8%B5%84%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">基本输入输出逻辑资源</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#IO-Bank"><span class="toc-number">1.1.</span> <span class="toc-text">IO Bank</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DCI"><span class="toc-number">1.1.1.</span> <span class="toc-text">DCI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IO-Bank%E7%94%B5%E6%BA%90"><span class="toc-number">1.1.2.</span> <span class="toc-text">IO Bank电源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MIO%E3%80%81EMIO%E4%B8%8EGPIO"><span class="toc-number">1.2.</span> <span class="toc-text">MIO、EMIO与GPIO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO%E5%8E%9F%E8%AF%AD%EF%BC%88SelectIO-Primitives%EF%BC%89"><span class="toc-number">1.3.</span> <span class="toc-text">IO原语（SelectIO Primitives）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IBUF%E5%92%8CIBUFG"><span class="toc-number">1.3.1.</span> <span class="toc-text">IBUF和IBUFG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IBUFDS-DIFF-OUT%E5%92%8CIBUFGDS-DIFF-OUT"><span class="toc-number">1.3.2.</span> <span class="toc-text">IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IOBUF"><span class="toc-number">1.3.3.</span> <span class="toc-text">IOBUF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OBUF"><span class="toc-number">1.3.4.</span> <span class="toc-text">OBUF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E8%AF%AD%E8%B0%83%E7%94%A8"><span class="toc-number">1.3.5.</span> <span class="toc-text">原语调用</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -470,7 +477,7 @@
   
 
   
-  <div id="SOHUCS" sid="FPGA学习笔记7【基本输入输出逻辑】" ></div> 
+  <div id="SOHUCS" sid="FPGA学习笔记7【FPGA底层IO】" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
@@ -608,7 +615,31 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,11 +659,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">IC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -640,31 +671,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

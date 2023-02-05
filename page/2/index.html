@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 74 -->
+			<!-- 总文章数 75 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,94 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-硬件人的PyTorch【模型训练】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E3%80%91/">硬件人的PyTorch【模型训练】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E3%80%91/" class="archive-article-date">
+  	<time datetime="2022-03-22T12:14:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>本系列博文主要根据开源的<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/thorough-pytorch">thorough-pytorch</a>项目编写，感谢datawhalechina团队的dalao们分享学习经验</strong></p>
+<h1 id="PyTorch训练模型"><a href="#PyTorch训练模型" class="headerlink" title="PyTorch训练模型"></a>PyTorch训练模型</h1><p>一个神经网络的典型训练过程如下：</p>
+<ol>
+<li>定义包含一些可学习参数（或者叫权重）的<strong>神经网络</strong></li>
+<li>在输入<strong>数据集</strong>上迭代</li>
+<li>通过网络<strong>处理</strong>输入</li>
+<li>计算<strong>损失函数</strong><code>loss</code>（输出和正确答案的距离）</li>
+<li>将梯度<strong>反向传播</strong>给网络的参数</li>
+<li><strong>更新权重</strong>（一般使用简单的规则，如<code>weight = weight - learning_rate * gradient</code>）</li>
+</ol>
+<p>下面来分别介绍其中的关键流程在PyTorch上的实现</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习与机器视觉</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-硬件人的PyTorch【基础内容】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -892,85 +980,6 @@
 
 
   
-    <article id="post-RISC-V学习笔记【执行】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%89%A7%E8%A1%8C%E3%80%91/">RISC-V学习笔记【执行】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%89%A7%E8%A1%8C%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-01-13T16:49:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-01-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="蜂鸟E200的EXU单元"><a href="#蜂鸟E200的EXU单元" class="headerlink" title="蜂鸟E200的EXU单元"></a>蜂鸟E200的EXU单元</h1><p>蜂鸟E200系列CPU是两级流水线架构，<strong>其译码、执行、交付、写回功能全部处于流水线的第二级</strong></p>
-<p>这些功能使用执行单元EXU完成，EXU功能如下</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">RISCV</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/01/14/RISC-V%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%90%E6%89%A7%E8%A1%8C%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">Next &amp;raquo;</a>
@@ -1100,7 +1109,31 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1120,11 +1153,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">IC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1132,31 +1165,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

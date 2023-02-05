@@ -67,7 +67,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 74 -->
+			<!-- 总文章数 75 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -197,7 +197,7 @@
 <h1 id="项目文件夹构建"><a href="#项目文件夹构建" class="headerlink" title="项目文件夹构建"></a>项目文件夹构建</h1><p>ESP-IDF项目由各种“组件”构成，你需要什么功能就要往里扔进去什么组件</p>
 <p>如果你的代码里用了一堆WiFi的库函数，但是没把WiFi组件加入进去，你是没办法用WiFi功能的</p>
 <p>项目保存在项目文件夹下，它的根目录如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── CMakeLists.txt				Cmake使用的文件</span><br><span class="line">├── other_documents				其他文件</span><br><span class="line">├── main						存储主程序</span><br><span class="line">│   ├── CMakeLists.txt			</span><br><span class="line">│   ├── component.mk           组件的make file</span><br><span class="line">│   └── main.c</span><br><span class="line">└── Makefile                   由传统的GNU make程序使用的Makefile</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── CMakeLists<span class="selector-class">.txt</span>				Cmake使用的文件</span><br><span class="line">├── other_documents				其他文件</span><br><span class="line">├── <span class="selector-tag">main</span>						存储主程序</span><br><span class="line">│   ├── CMakeLists<span class="selector-class">.txt</span>			</span><br><span class="line">│   ├── component<span class="selector-class">.mk</span>           组件的make file</span><br><span class="line">│   └── <span class="selector-tag">main</span><span class="selector-class">.c</span></span><br><span class="line">└── Makefile                   由传统的GNU make程序使用的Makefile</span><br></pre></td></tr></table></figure>
 
 <p>需要注意的是：<strong>ESP-IDF并不是项目文件夹的一部分</strong>，它更像是一个自助编译器，项目文件夹通过idf.py esptools等工具和${IDF_PATH}与ESP-IDF目录建立联系；同样，esp的开发工具链也独立于项目存在，通过${PATH}对项目进行作用</p>
 <p>项目建立前，esp-idf会通过idf.py menuconfig配置出Makefile，这些配置保存在sdkconfig中。sdkconfig会被保存在项目文件夹的根目录</p>
@@ -660,7 +660,31 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -680,11 +704,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">IC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -692,31 +716,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

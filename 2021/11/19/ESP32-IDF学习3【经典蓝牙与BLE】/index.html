@@ -74,7 +74,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 74 -->
+			<!-- 总文章数 75 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -337,7 +337,7 @@
 <p>为了减少传输的数据量，BLE协议做了一个转换约定，给定一个固定的16字节模板，只设置2个字节为变化量，其他为常量，2字节的UUID在系统内部会被替换，进而转换成标准的16字节UUID；反之，如果一个特征值的UUID是16字节的，在系统内部它的属性类型也可能写成第3、4字节组成的双字节</p>
 <p>示例如下：</p>
 <p>UUID模板为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0000XXXX-0000-1000-8000-00805F9B34FB</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">0000XXXX</span>-<span class="number">0000</span>-<span class="number">1000</span>-<span class="number">8000</span>-<span class="number">00805</span>F<span class="number">9</span>B<span class="number">34</span>FB</span><br></pre></td></tr></table></figure>
 
 <p>其中从左数第3、4个字节“XXXX”就是变化位，其他为固定位。如：UUID=0x2A00在系统内部会转换成00002A00-0000-1000-8000-00805F9B34FB。</p>
 </li>
@@ -842,7 +842,31 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -862,11 +886,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">IC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -874,31 +898,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

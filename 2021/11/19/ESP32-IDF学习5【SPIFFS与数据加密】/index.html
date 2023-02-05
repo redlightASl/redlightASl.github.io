@@ -67,7 +67,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 74 -->
+			<!-- 总文章数 75 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -205,10 +205,10 @@
 <p>此外，VFS还为输入和输出提供可选的换行符转换功能，可以通过menuconfig来设置输出结尾的换行符</p>
 <h3 id="标准流IO与移植的FreeRTOS"><a href="#标准流IO与移植的FreeRTOS" class="headerlink" title="标准流IO与移植的FreeRTOS"></a>标准流IO与移植的FreeRTOS</h3><p><strong>stdin、stdout和stderr的FILE指针（对象句柄）在所有FreeRTOS任务之间共享</strong>，指向这些对象的指针分别存储在每个任务的<code>struct _reent</code>中</p>
 <p>为了处理各个任务之间的文件指针临界区，预处理器把如下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fprintf(stderr, &quot;42\n&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">fprintf</span>(stderr, <span class="string">&quot;42\n&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <p>解释为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fprintf(__getreent()-&gt;_stderr, &quot;42\n&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fprintf<span class="function"><span class="params">(__getreent()-&gt;_stderr, <span class="string">&quot;42\n&quot;</span>)</span>;</span></span><br></pre></td></tr></table></figure>
 
 <p>__getreent函数返回一个指向struct _reent的指针</p>
 <p><strong>每个任务的TCB都拥有一个struct _reent结构体，用于在本任务内处理文件而不影响其他任务</strong></p>
@@ -272,7 +272,7 @@
 <p>CMake配置自动传递给spiffsgen.py工具生成映像。单独调用 <code>spiffsgen.py</code> 时需要用到 <em>image_size</em> 参数，但在CMake中调用<code>spiffs_create_partition_image</code>时仅需要 <em>partition</em> 参数，<strong>映像大小将直接从当前工程的分区表中获取</strong>。</p>
 <p>注意：在CMake中使用<code>spiffs_create_partition_image</code>，需从组件CMakeLists.txt文件调用</p>
 <p>下面是一个标准的SPIFFS分区表示例</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Name,   Type, SubType, Offset,  Size, Flags</span><br><span class="line"># Note: if you have increased the bootloader size, make sure to update the offsets to avoid overlap</span><br><span class="line">nvs,      data, nvs,     0x9000,  0x6000,</span><br><span class="line">phy_init, data, phy,     0xf000,  0x1000,</span><br><span class="line">factory,  app,  factory, 0x10000, 1M,</span><br><span class="line">storage,  data, spiffs,  ,        0xF0000, </span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Name,   Type, SubType, Offset,  Size, Flags</span></span><br><span class="line"><span class="comment"># <span class="doctag">Note:</span> if you have increased the bootloader size, make sure to update the offsets to avoid overlap</span></span><br><span class="line"><span class="attribute">nvs</span>,      data, nvs,     <span class="number">0</span>x<span class="number">9000</span>,  <span class="number">0</span>x<span class="number">6000</span>,</span><br><span class="line"><span class="attribute">phy_init</span>, data, phy,     <span class="number">0</span>xf<span class="number">000</span>,  <span class="number">0</span>x<span class="number">1000</span>,</span><br><span class="line"><span class="attribute">factory</span>,  app,  factory, <span class="number">0</span>x<span class="number">10000</span>, <span class="number">1</span>M,</span><br><span class="line"><span class="attribute">storage</span>,  data, spiffs,  ,        <span class="number">0</span>xF<span class="number">0000</span>, </span><br></pre></td></tr></table></figure>
 
 <p><strong>需要使用SubType=spiffs标识出某一分区是SPIFFS存储分区</strong></p>
 <h2 id="SPIFFS配置与API参考"><a href="#SPIFFS配置与API参考" class="headerlink" title="SPIFFS配置与API参考"></a>SPIFFS配置与API参考</h2><p>在文件中调用<code>#include &quot;esp_spiffs.h&quot;</code>就可以使用相关API</p>
@@ -317,7 +317,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Name,   Type, SubType, Offset,  Size, Flags</span><br><span class="line">nvs,        data, nvs,      <span class="number">0x9000</span>,  <span class="number">0x6000</span>,</span><br><span class="line"># Extra partition to demonstrate reading/writing of encrypted flash</span><br><span class="line">storage,    data, <span class="number">0xff</span>,     <span class="number">0xf000</span>,  <span class="number">0x1000</span>, encrypted</span><br><span class="line">factory,    app,  factory,  <span class="number">0x10000</span>, <span class="number">1</span>M,</span><br></pre></td></tr></table></figure>
 
 <p>如果所有分区都需以加密格式更新，则可使用以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idf.py encrypted-flash monitor</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idf.py <span class="keyword">encrypted</span>-flash monitor</span><br></pre></td></tr></table></figure>
 
 <p>只要 <code>FLASH_CRYPT_CNT</code> eFuse 设置为奇数位的值，所有通过MMU的FLASH缓存访问的FLASH内容都将被透明解密：MMU FLASH缓存将无条件解密所有数据</p>
 <ol start="3">
@@ -631,7 +631,31 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,11 +675,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">IC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -663,31 +687,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

@@ -67,7 +67,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 74 -->
+			<!-- 总文章数 75 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -201,7 +201,7 @@
 <li>不兼容idf4.1以下使用的TCP/IP适配器相关函数，需修改代码进行迁移</li>
 </ul>
 <p>ESP-NETIF结构如下（摘自官方文档）</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">                 |          (A) USER CODE                 |</span><br><span class="line">                 |                                        |</span><br><span class="line">    .............| init          settings      events     |</span><br><span class="line">    .            +----------------------------------------+</span><br><span class="line">    .               .                |           *</span><br><span class="line">    .               .                |           *</span><br><span class="line">--------+        +===========================+   *     +-----------------------+</span><br><span class="line">        |        | new/config     get/set    |   *     |                       |</span><br><span class="line">        |        |                           |...*.....| init                  |</span><br><span class="line">        |        |---------------------------|   *     |                       |</span><br><span class="line">  init  |        |                           |****     |                       |</span><br><span class="line">  start |********|  event handler            |*********|  DHCP                 |</span><br><span class="line">  stop  |        |                           |         |                       |</span><br><span class="line">        |        |---------------------------|         |                       |</span><br><span class="line">        |        |                           |         |    NETIF              |</span><br><span class="line">  +-----|        |                           |         +-----------------+     |</span><br><span class="line">  | glue|----&lt;---|  esp_netif_transmit       |--&lt;------| netif_output    |     |</span><br><span class="line">  |     |        |                           |         |                 |     |</span><br><span class="line">  |     |----&gt;---|  esp_netif_receive        |--&gt;------| netif_input     |     |</span><br><span class="line">  |     |        |                           |         + ----------------+     |</span><br><span class="line">  |     |....&lt;...|  esp_netif_free_rx_buffer |...&lt;.....| packet buffer         |</span><br><span class="line">  +-----|        |                           |         |                       |</span><br><span class="line">        |        |                           |         |         (D)           |</span><br><span class="line">  (B)   |        |          (C)              |         +-----------------------+</span><br><span class="line">--------+        +===========================+</span><br><span class="line">communication                                                NETWORK STACK</span><br><span class="line">DRIVER                   ESP-NETIF</span><br></pre></td></tr></table></figure>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">                 |<span class="string">          (A) USER CODE                 </span>|</span><br><span class="line">                 |<span class="string">                                        </span>|</span><br><span class="line">    .............|<span class="string"> init          settings      events     </span>|</span><br><span class="line">    .            +----------------------------------------+</span><br><span class="line">    .               .                |<span class="string">           *</span></span><br><span class="line"><span class="string">    .               .                </span>|<span class="string">           *</span></span><br><span class="line"><span class="string">--------+        +===========================+   *     +-----------------------+</span></span><br><span class="line"><span class="string">        </span>|<span class="string">        </span>|<span class="string"> new/config     get/set    </span>|<span class="string">   *     </span>|<span class="string">                       </span>|</span><br><span class="line">        |<span class="string">        </span>|<span class="string">                           </span>|<span class="string">...*.....</span>|<span class="string"> init                  </span>|</span><br><span class="line">        |<span class="string">        </span>|<span class="string">---------------------------</span>|<span class="string">   *     </span>|<span class="string">                       </span>|</span><br><span class="line">  init  |<span class="string">        </span>|<span class="string">                           </span>|<span class="string">****     </span>|<span class="string">                       </span>|</span><br><span class="line">  start |<span class="string">********</span>|<span class="string">  event handler            </span>|<span class="string">*********</span>|<span class="string">  DHCP                 </span>|</span><br><span class="line">  stop  |<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         </span>|<span class="string">                       </span>|</span><br><span class="line">        |<span class="string">        </span>|<span class="string">---------------------------</span>|<span class="string">         </span>|<span class="string">                       </span>|</span><br><span class="line">        |<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         </span>|<span class="string">    NETIF              </span>|</span><br><span class="line">  +-----|<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         +-----------------+     </span>|</span><br><span class="line">  |<span class="string"> glue</span>|<span class="string">----&lt;---</span>|<span class="string">  esp_netif_transmit       </span>|<span class="string">--&lt;------</span>|<span class="string"> netif_output    </span>|<span class="string">     </span>|</span><br><span class="line">  |<span class="string">     </span>|<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         </span>|<span class="string">                 </span>|<span class="string">     </span>|</span><br><span class="line">  |<span class="string">     </span>|<span class="string">----&gt;---</span>|<span class="string">  esp_netif_receive        </span>|<span class="string">--&gt;------</span>|<span class="string"> netif_input     </span>|<span class="string">     </span>|</span><br><span class="line">  |<span class="string">     </span>|<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         + ----------------+     </span>|</span><br><span class="line">  |<span class="string">     </span>|<span class="string">....&lt;...</span>|<span class="string">  esp_netif_free_rx_buffer </span>|<span class="string">...&lt;.....</span>|<span class="string"> packet buffer         </span>|</span><br><span class="line">  +-----|<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         </span>|<span class="string">                       </span>|</span><br><span class="line">        |<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         </span>|<span class="string">         (D)           </span>|</span><br><span class="line">  (B)   |<span class="string">        </span>|<span class="string">          (C)              </span>|<span class="string">         +-----------------------+</span></span><br><span class="line"><span class="string">--------+        +===========================+</span></span><br><span class="line"><span class="string">communication                                                NETWORK STACK</span></span><br><span class="line"><span class="string">DRIVER                   ESP-NETIF</span></span><br></pre></td></tr></table></figure>
 
 <p>其中……代表初始化；—-&gt;—或—&lt;—-代表数据包走向；******代表操作系统的事件调用；|代表用户代码的设置和运行时的配置</p>
 <h2 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><ol>
@@ -586,7 +586,31 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">杂项</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -606,11 +630,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">IC</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">stm32</a>
+                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -618,31 +642,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">ESP32</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">IoT</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">FPGA</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">IC</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RISCV</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">一生一芯</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>

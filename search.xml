@@ -22,20 +22,157 @@
       </tags>
   </entry>
   <entry>
-    <title>FPGA学习笔记7【基本输入输出逻辑】</title>
-    <url>/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/</url>
-    <content><![CDATA[<p>本文主要参考官方文档<strong>UG471</strong>编写，更多内容可以参考官方手册</p>
-<h1 id="FPGA学习笔记7【基本输入输出逻辑】"><a href="#FPGA学习笔记7【基本输入输出逻辑】" class="headerlink" title="FPGA学习笔记7【基本输入输出逻辑】"></a>FPGA学习笔记7【基本输入输出逻辑】</h1><p>7000系FPGA提供了丰富的IO资源。FPGA内部，晶圆中间部分是由CLB构成的岛型阵列，外围环绕着用于将信号引出的IO块，被称为IO Block，即<strong>IOB</strong>。所有IOB都按照<strong>bank</strong>分组，主要分成两大类：<strong>高性能</strong>（High Performance，HP）和<strong>高电压范围</strong>（High Range，HR）</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224152427320.png" alt="image-20221224152427320"></p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224152535298.png" alt="image-20221224152535298"></p>
-<p>二者主要差别如上图所示</p>
-<span id="more"></span>
+    <title>FPGA学习笔记8【FPGA底层CLB】</title>
+    <url>/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/</url>
+    <content><![CDATA[<p>本文主要参考官方文档UG471、UG472、UG473、UG474编写</p>
+<h1 id="Xilinx的CLB"><a href="#Xilinx的CLB" class="headerlink" title="Xilinx的CLB"></a>Xilinx的CLB</h1><p>Xilinx官方文档中将<strong>可配置逻辑块CLB</strong>（Configurable Logic Block）作为FPGA的逻辑资源的最小单元。但CLB实际是由多个Slice构成，因此工程应用中常常把Slice作为最小逻辑单元，很少提起CLB。本篇博文主要介绍Xilinx FPGA的CLB和Slice结构</p>
+<h2 id="区分Cells、CLB和Slice"><a href="#区分Cells、CLB和Slice" class="headerlink" title="区分Cells、CLB和Slice"></a>区分Cells、CLB和Slice</h2><p>Vivado的资源利用率（Utilization）列表往往像下面这样</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221213104438867.png" alt="image-20221213104438867"></p>
+<p>Slice和组成Slice的LUT、FF、BRAM是主要的显示项，也是工程中最为常用的资源；而在官方手册中，我们经常能看到Xilinx与友商通过逻辑单元（Logic Cells）进行比较；官方文档中又把CLB作为最基本逻辑单元。我们下面来详细区分一下三者</p>
+<h3 id="Logic-Cells"><a href="#Logic-Cells" class="headerlink" title="Logic Cells"></a>Logic Cells</h3><p>首先看最为广义的Logic Cells概念</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221213104942912.png" alt="image-20221213104942912"></p>
+<p>Logic Cells是Xilinx为了和友商对线创造出的一个市场说法，1个LC代表无任何附加功能的LUT4（4输入LUT）。</p>
+<p>我们拿紫光同创的资源举例</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221213105226439.png" alt="image-20221213105226439"></p>
+<p>紫光的Logos FPGA使用自研的多功能LUT5作为基本逻辑单元，将其等效为1.2个LUT4，那么我们可以用1个LUT5等效成1.2个LC，从而与Xilinx的芯片对比：7000系FPGA使用LUT6作为基本LUT单元，并基于LUT6组合成Slice，因此采用系数<strong>1.6</strong>，即1个LUT6可以等效成1.6个LC，于是我们可以发现1个紫光同创的多功能LUT5=1.2/1.6个Xilinx的LUT6。这样就能横向比较两个公司的器件了</p>
+<blockquote>
+<p>商业宣传，懂得都懂。在合理范围内营造一定水分XD</p>
+</blockquote>
+<h3 id="CLB"><a href="#CLB" class="headerlink" title="CLB"></a>CLB</h3><p>下面是来自手册UG474的CLB介绍</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221213104201385.png" alt="image-20221213104201385"></p>
+<p>可以知道<strong>一个CLB里面包含2个Slice</strong>，每个CLB都连接到一个互联交换矩阵（Switch Matrix），这些交换矩阵被统一的通用路由矩阵连接起来</p>
+<p><strong>CLB资源是对开发者不可见的</strong>，它会被综合器和布局布线工具在底层调用，也就没有在RTL文件中实例化的必要。综合器会将RTL解析成以CLB为层次安排的Slice网表（网表中所有原语都调用Slice，但这些Slice符合CLB的布局要求）</p>
+<p>CLB要么<em>被配置过</em>，要么<em>被复位</em>。设计者不能同时使用设置和复位CLB</p>
+<p>下图描述了一个CLB的等效逻辑资源</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224205435630.png" alt="image-20221224205435630"></p>
+<h3 id="Slice"><a href="#Slice" class="headerlink" title="Slice"></a>Slice</h3><p>Slice是实际上能被调用的FPGA最小组成单元。7000系列FPGA的Slice具有四种功能：</p>
+<ul>
+<li><strong>逻辑单元</strong>，即LUT6，1个Slice里包含<strong>4个LUT6</strong></li>
+<li><strong>存储单元</strong>，也就是常说的触发器（Flip-Flop，FF）。1个Slice里包含<strong>8个触发器</strong>。每4个触发器为一组，可配置成锁存器。</li>
+<li><strong>多路复用器</strong>，也就是<strong>1位宽的数据选择器</strong>（MUX），每个Slice里面都会配有海量MUX</li>
+<li><strong>进位逻辑</strong>，每个Slice都有负责处理算术运算的<strong>进位逻辑</strong>，与本列的上下Slice的进位逻辑相连</li>
+</ul>
+<p>7000系FPGA中的一个LUT可以被配置成<em>一个具有6输入1输出的LUT6</em>或被配置成<em>两个具有独立输出但使用共同地址或逻辑输入的5输入1输出LUT5</em>。可以选择利用一个LUT5的输出恰好构成一个触发器（Flip-Flop，FF）。四个LUT6和对应配置为双路LUT5时候能最多使用的8个触发器、多路复用器以及额外的算术运算逻辑构成一个Slice，再由两个Slice构成一个CLB。每个Slice中的四个FF可以选择配置为锁存器（Latch），在这种情况下，该片中剩余的四个FF必须保持不使用。</p>
+<blockquote>
+<p>1个Slice等于4个6输入LUT+8个FF+MUX+算数进位逻辑</p>
+<p>每个Slice的4个触发器（虽然有8个FF，但是每个LUT会被唯一地分配一个FF）可以配置成Latch，这样会有4个FF不能使用——<em>因为它们对应的LUT资源被用在了配置另外四个FF为Latch上面</em></p>
+</blockquote>
+<p>此外，FPGA里的Slice有2种，一种被称为<strong>SliceL</strong>，另一种被称为<strong>SliceM</strong>，有的CLB由2个sliceL构成，有的则是由1个sliceL和一个sliceM构成。</p>
+<blockquote>
+<p>大约有三分之二的片子是SliceL逻辑片，其余的是SliceM</p>
+</blockquote>
+<p>SliceM除了基本功能外，还可以实现<strong>分布式64位RAM</strong>或<strong>32位移位寄存器</strong>或<strong>两个16位移位寄存器</strong>的功能，这三种功能都可以通过调用Xilinx提供原语来在RTL文件中调用</p>
+<h2 id="CLB和ASMBL架构"><a href="#CLB和ASMBL架构" class="headerlink" title="CLB和ASMBL架构"></a>CLB和ASMBL架构</h2><p>Xilinx设计了<strong>高级硅模块块（Advanced Silicon Modular Block，ASMBL）</strong>架构，以使具有不同功能组合的FPGA平台能够针对不同的应用领域进行优化。为了增加集成度，7000系FPGA还采用了特殊的<strong>堆叠硅互联（Stacked Silicon Interconnect，SSI）</strong>技术使多个超级逻辑区域（Super Logic Regions，<em>SLRs</em>）在无源内电层上组合起来，创建一个具有超过一万个SLR间连接的FPGA整体</p>
+<blockquote>
+<p>这里是翻译官方文档原文，大意就是在吹自己的岛型架构和别家的架构更强集成度更高</p>
+</blockquote>
+<p>FPGA内部的逻辑资源按照岛型排列，每个岛以竖列（Column）布局，如下图所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224204758984.png" alt="image-20221224204758984"></p>
+<p>ASMBL架构中CLB之间结构如下图所示，一个CLB包含两个Slice，竖列CLB之间通过Slice的进位逻辑相连接</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224205300229.png" alt="image-20221224205300229"></p>
+<h3 id="Slice结构"><a href="#Slice结构" class="headerlink" title="Slice结构"></a>Slice结构</h3><p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224205609107.png" alt="image-20221224205609107"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224205624900.png" alt="image-20221224205624900"></p>
+<h3 id="LUT"><a href="#LUT" class="headerlink" title="LUT"></a>LUT</h3><p>7000系FPGA中的基本逻辑函数单元被实现为六输入查找表（<strong>LUT6</strong>）</p>
+<p>一个标准的LUT6可以构造出：</p>
+<ul>
+<li>任何任意定义的六输入布尔函数</li>
+<li>有共同输入的两个任意定义的五输入的布尔函数</li>
+<li>两个任意定义的3和2输入或更少输入的布尔函数</li>
+</ul>
+<p>大体功能已经在上面的Slice介绍中提到过，这里不再赘述</p>
+<h3 id="存储单元"><a href="#存储单元" class="headerlink" title="存储单元"></a>存储单元</h3><p>每个Slice包含8个FF。其中四个可以被配置为边沿触发的D型触发器或电平敏感锁存器。D输入可以由LUT直接驱动，也可以通过AFFMUX、BFFMUX、CFFMUX、DFFMUX由旁路的Slice输入驱动。结构如下所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224210156867.png" alt="image-20221224210156867"></p>
+<p>左边4个FF不能进行额外配置；右侧4个FF可以被选择配置成锁存器Latch，在这种情况下，左侧那四个FF不能使用</p>
+<p>信号时钟CLK、时钟使能CE和设置/复位SR对一个Slice中的所有FF是共用的。当一个Slice中的一个触发器启用了SR或CE，Slice中使用的其他触发器也会启用SR或CE。</p>
+<p>CLK信号具有可编程的极性，通过一个MUX可以选择触发电平。CE和SR信号则都是固定高电平有效。</p>
+<h3 id="Distributed-RAM"><a href="#Distributed-RAM" class="headerlink" title="Distributed RAM"></a>Distributed RAM</h3><p>前面提到过，SliceM中的LUT可以实现<strong>分布式64位RAM</strong>或<strong>32位移位寄存器</strong>或<strong>两个16位移位寄存器</strong>的功能</p>
+<p>这种由Slice逻辑资源构成的RAM称为分布式RAM（<strong>Distributed RAM</strong>），可用的组合有：</p>
+<ul>
+<li>单口32/64/128/256位1比特RAM</li>
+<li>双口32/64/128位1比特RAM</li>
+<li>四口32位2比特RAM</li>
+<li>四口64位1比特RAM</li>
+<li>简单双口32位6比特RAM</li>
+<li>简单双口64位3比特RAM</li>
+</ul>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224214711796.png" alt="image-20221224214711796"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224215338994.png" alt="image-20221224215338994"></p>
+<h3 id="Distributed-ROM"><a href="#Distributed-ROM" class="headerlink" title="Distributed ROM"></a>Distributed ROM</h3><p>SliceM和SliceL中的LUT都可以实现64位1比特的分布式ROM。</p>
+<p>可以选择三种配置：ROM64x1、ROM128x1、ROM256x1，如下表所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224215754095.png" alt="image-20221224215754095"></p>
+<h3 id="移位寄存器SR"><a href="#移位寄存器SR" class="headerlink" title="移位寄存器SR"></a>移位寄存器SR</h3><p>SliceM中的LUT可以配置成<strong>32位移位寄存器</strong>或<strong>两个16位移位寄存器</strong>，这个配置方式不需要用到Slice中的FF</p>
+<p>更进一步，可将多个SR级联来形成更大的SR。一个SliceM中的4个LUT被级联起来可以产生128个时钟周期的延迟。</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224221203503.png" alt="image-20221224221203503"></p>
+<p>一个由SliceM构造的32位SR的结构如上图所示，能够实现动态读写操作（32位中的任何一位都可以被异步读出、同步写入）、与时钟输入和可选时钟使能的同步</p>
+<p>LUT地址的LSB是未使用的，软件会自动将其连接到逻辑高电平；外部电路可以使用5位地址线A[4:0]来控制访问地址</p>
+<p>移位寄存器的应用包括：</p>
+<ul>
+<li>延迟或延时补偿</li>
+<li>同步FIFO和内容寻址存储器（CAM）</li>
+</ul>
+<p>使用相同的资源也可以构造双16位SR，结构如下所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224221729792.png" alt="image-20221224221729792"></p>
+<p>使用MUX和级联可以构造更多位宽的SR，如下图所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224221841567.png" alt="image-20221224221841567"></p>
+<h3 id="多路选择器MUX"><a href="#多路选择器MUX" class="headerlink" title="多路选择器MUX"></a>多路选择器MUX</h3><p>除了Slice内部自带的1bit MUX外，使用LUT资源还可以构造下面的MUX：</p>
+<ul>
+<li>1个LUT可构造4路MUX，每个Slice可以构造4组</li>
+<li>2个LUT可构造8路MUX，每个Slice可以构造2组</li>
+<li>4个LUT可构造16路MUX，每个Slice可以构造1组</li>
+</ul>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224222633226.png" alt="image-20221224222633226"></p>
+<p>这些宽输入多路复用器是通过使用专用的F7AMUX和F8MUX多路复用器在一级LUT中实现的。由于这些MUX的特殊性，在一个Slice中最多有4个LUT的组合，并且在2个LUT中最多有13个输入，或在4个LUT中有27个输入（一个Slice中）</p>
+<p><em>尽管多路复用器是组合逻辑，但它们实际上是利用CLB的存储单元来实现的</em></p>
+<h3 id="进位逻辑Carry-Logic"><a href="#进位逻辑Carry-Logic" class="headerlink" title="进位逻辑Carry Logic"></a>进位逻辑Carry Logic</h3><p>Slice中还提供了专门的快速前传进位逻辑，这可以加速Slice之间的算术运算。如果使用多个Slice构造多个加法器、除法器这样的网状逻辑电路，就可以用到这些进位逻辑形成运算链。硬件结构如下图所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224222942111.png" alt="image-20221224222942111"></p>
+<p>进位链向上运行，每个Slice有4位的Carry位（被称为<strong>CARRY4</strong>），对每一位都配备了一个进位复用器MUXCY和一个专用的异或门XOR，用于将操作数与选定的进位相加或相减。进位路径和进位复用器也可以用来级联LUT以实现更宽逻辑的功能</p>
+<p>一个CARRY4有下面的10路独立输入信号端口</p>
+<ul>
+<li>传递信号S0~S3：来自LUT6输出端口的信号</li>
+<li>前导生成信号DI1~DI4：来自LUT5输出端口的输入/外部乘法器的输出/外部加法器的输出/来自外部Slice的输入</li>
+<li>CYINIT：置为0时执行加运算，1则执行减运算，也可以当作AX的动态进位位</li>
+<li>CIN：来自更长进位链的进位输入</li>
+</ul>
+<p>还有8路独立的输出信号端口</p>
+<ul>
+<li>O0~O3：加减法算术运算的结构输出位</li>
+<li>CO0~CO3：用于级联多个Slice构造更长的进位链的进位信号前传位</li>
+</ul>
+<p>使用一个Slice中的CARRY4可以恰好实现<em>超前进位</em>加法/减法运算电路</p>
+<h2 id="Slice原语"><a href="#Slice原语" class="headerlink" title="Slice原语"></a>Slice原语</h2><h3 id="FF"><a href="#FF" class="headerlink" title="FF"></a>FF</h3><figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">FDRE #(</span><br><span class="line">    <span class="variable">.INIT</span> (INITIALISE[<span class="number">0</span>]) <span class="comment">// 初始数据</span></span><br><span class="line">) fdre_inst (</span><br><span class="line">    <span class="variable">.C</span>(clk), <span class="comment">// 同步时钟</span></span><br><span class="line">    <span class="variable">.D</span>(data_sync0), <span class="comment">// 异步数据输入</span></span><br><span class="line">    <span class="variable">.Q</span>(data_sync1), <span class="comment">// 同步数据输出</span></span><br><span class="line">    <span class="variable">.CE</span>(CE), <span class="comment">// 时钟使能信号，高电平有效</span></span><br><span class="line">    <span class="variable">.R</span>(R) <span class="comment">// 复位信号输入，高电平有效</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224230320572.png" alt="image-20221224230320572"></p>
+<h3 id="MUX"><a href="#MUX" class="headerlink" title="MUX"></a>MUX</h3><p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224224053252.png" alt="image-20221224224053252"></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">MUXF7 MUXF7_inst (</span><br><span class="line">	<span class="variable">.O</span>(O), <span class="comment">// MUX输出</span></span><br><span class="line">    <span class="variable">.I0</span>(I0), <span class="comment">// MUX输入</span></span><br><span class="line">    <span class="variable">.I1</span>(I1), <span class="comment">// MUX输入</span></span><br><span class="line">    <span class="variable">.S</span>(S) <span class="comment">// MUX输入选择信号</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224225629097.png" alt="image-20221224225629097"></p>
+<h3 id="CARRY4"><a href="#CARRY4" class="headerlink" title="CARRY4"></a>CARRY4</h3><p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224225651526.png" alt="image-20221224225651526"></p>
+<figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">CARRY4 carry4_inst (</span><br><span class="line">    <span class="variable">.CO</span>(CO),</span><br><span class="line">    <span class="variable">.O</span>(O),</span><br><span class="line">    <span class="variable">.CI</span>(CI),</span><br><span class="line">    <span class="variable">.CYINIT</span>(CYINIT),</span><br><span class="line">    <span class="variable">.DI</span>(DI),</span><br><span class="line">    <span class="variable">.S</span>(S)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Distributed-RAM-1"><a href="#Distributed-RAM-1" class="headerlink" title="Distributed RAM"></a>Distributed RAM</h3><figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">RAM16X1S #(</span><br><span class="line">    <span class="variable">.INIT</span>(<span class="number">16&#x27;h0000</span>) <span class="comment">// RAM内容初始值</span></span><br><span class="line">) RAM16X1S_inst (</span><br><span class="line">    <span class="variable">.O</span>(O), <span class="comment">// RAM输出端口</span></span><br><span class="line">    <span class="variable">.A0</span>(A0), <span class="comment">// RAM地址线0</span></span><br><span class="line">    <span class="variable">.A1</span>(A1), <span class="comment">// RAM地址线1</span></span><br><span class="line">    <span class="variable">.A2</span>(A2), <span class="comment">// RAM地址线2</span></span><br><span class="line">    <span class="variable">.A3</span>(A3), <span class="comment">// RAM地址线3</span></span><br><span class="line">    <span class="variable">.D</span>(D), <span class="comment">// RAM输入端口</span></span><br><span class="line">    <span class="variable">.WCLK</span>(WCLK), <span class="comment">// 写时钟输入</span></span><br><span class="line">    <span class="variable">.WE</span>(WE) <span class="comment">// 写使能输入</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224224132794.png" alt="image-20221224224132794"></p>
+<h3 id="SLICEM-SRL"><a href="#SLICEM-SRL" class="headerlink" title="SLICEM SRL"></a>SLICEM SRL</h3><figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">SRL16 #(</span><br><span class="line">	<span class="variable">.INIT</span>(<span class="number">16&#x27;h0000</span>) <span class="comment">// 初始化移位寄存器的值，可以为 16 比特任意整数</span></span><br><span class="line">) SRL16_inst (</span><br><span class="line">	<span class="variable">.Q</span>(Q), <span class="comment">// SRL16 的数据输出信号</span></span><br><span class="line">	<span class="variable">.A0</span>(A0), <span class="comment">// 选择[0]输入</span></span><br><span class="line">	<span class="variable">.A1</span>(A1), <span class="comment">// 选择[1]输入</span></span><br><span class="line">	<span class="variable">.A2</span>(A2), <span class="comment">// 选择[2]输入</span></span><br><span class="line">	<span class="variable">.A3</span>(A3), <span class="comment">// 选择[3]输入</span></span><br><span class="line">	<span class="variable">.CLK</span>(CLK), <span class="comment">// 时钟输入信号</span></span><br><span class="line">	<span class="variable">.D</span>(D) <span class="comment">// SRL16 的数据输入信号</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B08%E3%80%90FPGA%E5%BA%95%E5%B1%82CLB%E3%80%91/image-20221224230255069.png" alt="image-20221224230255069"></p>
+]]></content>
+      <tags>
+        <tag>FPGA</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>FPGA学习笔记7【FPGA底层IO】</title>
+    <url>/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/</url>
+    <content><![CDATA[<p>本文主要参考官方文档<strong>UG471</strong>编写，更多内容可以参考官方手册</p>
+<h1 id="基本输入输出逻辑资源"><a href="#基本输入输出逻辑资源" class="headerlink" title="基本输入输出逻辑资源"></a>基本输入输出逻辑资源</h1><p>7000系FPGA提供了丰富的IO资源。FPGA内部，晶圆中间部分是由CLB构成的岛型阵列，外围环绕着用于将信号引出的IO块，被称为IO Block，即<strong>IOB</strong>。所有IOB都按照<strong>bank</strong>分组，主要分成两大类：<strong>高性能</strong>（High Performance，HP）和<strong>高电压范围</strong>（High Range，HR）</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224152427320.png" alt="image-20221224152427320"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224152535298.png" alt="image-20221224152535298"></p>
+<p>二者主要差别如上图所示</p>
 <p>HR Bank具有更低的延迟和较小的驱动电流以及一些额外功能；HR Bank能支持更高的电压标准（2.5V和3.3V）。在板级硬件设计中，需要根据外围电路电平标准优先考虑使用哪种bank</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224164742255.png" alt="image-20221224164742255"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224164742255.png" alt="image-20221224164742255"></p>
 <p>上图是HP Bank结构图</p>
 <p>下图是HR Bank结构图，可以发现HR Bank不能控制输出Delay</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224164810711.png" alt="image-20221224164810711"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224164810711.png" alt="image-20221224164810711"></p>
 <h2 id="IO-Bank"><a href="#IO-Bank" class="headerlink" title="IO Bank"></a>IO Bank</h2><p>一个IO Bank由50个<strong>IOB</strong>（IO Block）组成，器件的封装和型号决定了有多少bank可用。<strong>每个bank的最末端两个IO只能适用于单端I/O标准</strong>；剩下的48个的引脚可以使用单端或差分标准——两个IO引脚能组成差分对。</p>
 <p>最末端两个IO被称为<em>单端IO</em>（Single-Ended IO）；其他的IO被称为<em>普通IO</em>（Regular IO）或差分IO</p>
 <p>支持的IO电平标准如下</p>
@@ -44,10 +181,10 @@
 <li>差分I/O标准：<strong>LVDS</strong>、Mini_LVDS、RSDS、PPDS、BLVDS、差分HSTL、SSTL</li>
 </ul>
 <p>单端、差分情况下的每种bank内部电路如下图所示</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224153940429.png" alt="image-20221224153940429"></p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224153952247.png" alt="image-20221224153952247"></p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224154004155.png" alt="image-20221224154004155"></p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224154015405.png" alt="image-20221224154015405"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224153940429.png" alt="image-20221224153940429"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224153952247.png" alt="image-20221224153952247"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224154004155.png" alt="image-20221224154004155"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224154015405.png" alt="image-20221224154015405"></p>
 <p>可以看出，单端IOB和普通IOB基本上是等同的，每个IOB都包含输入O、输出I和三态驱动器T以及一些内部缓冲器电路。只不过单端IO没有连接来产生差分输出信号；而HR Bank相较HP Bank缺少了<code>DCI Term Disable</code>端口来进行片上终端使能控制</p>
 <h3 id="DCI"><a href="#DCI" class="headerlink" title="DCI"></a>DCI</h3><p>随着FPGA越来越大，系统时钟速度越来越快，PCB的设计和制造变得更加困难，信号完整性SI成为一个关键问题。PCB上的导线必须被正确端接以避免反射或振铃。</p>
 <p>一般来说需要在传输线两端接入匹配电阻，使输出和输入与接收器或驱动器的阻抗相匹配。然而，由于设备I/O的增加，在设备引脚附近添加电阻会增加电路板面积和元件数量。为了解决这些问题并实现更好的信号完整性，Xilinx在7000系FPGA内提供了<strong>数字控制阻抗</strong>（Digitally Controlled Impedance，<strong>DCI</strong>）技术。根据不同的I/O标准，DCI可以主动调整I/O内部驱动器的输出阻抗，从而准确<em>匹配传输线VRN和VRP上外部精密参考电阻</em>的特性阻抗，这样就<strong>不需要在电路板上安装多余的终端电阻</strong>，减少了电路板的布线困难和元件数量</p>
@@ -84,48 +221,48 @@
 </ul>
 <p>其中<strong>MIO是PS端对片外的接口</strong>，<strong>EMIO是PS端与PL端的接口</strong>，GPIO则是具有IO功能外设的统称，在PS端集成了一套GPIO，同样可以在PL端用HDL写出一个GPIO外设</p>
 <p>观察系统框图可以发现PS部分的所有外设都需要先复用到MIO再引出片外。而部分外设可以选择先通过EMIO连接到PL端，再引出片外</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115756037.png" alt="image-20220226115756037"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226115756037.png" alt="image-20220226115756037"></p>
 <blockquote>
 <p>Zynq的核心是PS端的ARM核，将FPGA视为它的一个外设</p>
 <p>从这个EMIO也可以反映出这个观点</p>
 </blockquote>
 <p>PS端的引脚信号如下所示</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115408735.png" alt="image-20220226115408735"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226115408735.png" alt="image-20220226115408735"></p>
 <p>Clock、Reset、DDR三个部分都是固定的，暂且不看，可以发现MIO有三组引脚，其中PS_MIO_VREF引脚是MIO1电源域的参考引脚；PS_MIO引脚被分成了两组，分别使用MIO0电源域和MIO1电源域的参考电压，分组信息如下所示：</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115621256.png" alt="image-20220226115621256"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226115621256.png" alt="image-20220226115621256"></p>
 <p>ug585手册中还给出了PS-PL-MIO-EMIO的接口框图</p>
 <blockquote>
 <p>MIO是PS端的基础IO外设，不过IO外设信号也可以通过EMIO连接到PL端</p>
 </blockquote>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226120053383.png" alt="image-20220226120053383"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20220226120053383.png" alt="image-20220226120053383"></p>
 <p>从上面的系统框图中可以看出，PS端内核通过AHB、APB总线控制PS IO外设控制器（<strong>IOP</strong>），从而驱动MIO或EMIO。IOP可以同时管理MIO、EMIO的复用器。</p>
 <p>需要注意：IOP就是传统意义上的GPIO，它通过复用连接到诸如I2C控制器、SPI控制器、SDIO控制器等外设上，从而为这些外设提供输出驱动，与此同时该设备不能像FPGA或者说FPIOA那样可以任意分配引脚，每个外设都被分配了固定的几组引脚，限制相对较大</p>
 <p>与PS部分的AXI接口不同，EMIO只能将来自IOP的信号连接到PL端，并不能形成完整的总线架构</p>
 <h2 id="IO原语（SelectIO-Primitives）"><a href="#IO原语（SelectIO-Primitives）" class="headerlink" title="IO原语（SelectIO Primitives）"></a>IO原语（SelectIO Primitives）</h2><p>在编写RTL中，可以选择直接调用Xilinx提供的IOB原语来使用某些具有特殊功能的IO，可用的单端IO原语如下所示</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224160836505.png" alt="image-20221224160836505"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224160836505.png" alt="image-20221224160836505"></p>
 <p>可用的差分IO原语如下所示</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224160907027.png" alt="image-20221224160907027"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224160907027.png" alt="image-20221224160907027"></p>
 <p>下面来简单介绍几个常用的原语</p>
 <h3 id="IBUF和IBUFG"><a href="#IBUF和IBUFG" class="headerlink" title="IBUF和IBUFG"></a>IBUF和IBUFG</h3><p><code>IBUFG</code>原语用于时钟输入，综合器会调用一个输入缓冲器来实现电路，从而保证时钟的低抖动</p>
 <p><code>IBUF_IBUFDISABLE</code>原语用于禁用一个IBUF，并强制O引脚输出高电平，尝尝用于关闭不需要的输入缓冲器降低功耗</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224161356493.png" alt="image-20221224161356493"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224161356493.png" alt="image-20221224161356493"></p>
 <p><code>IBUF_INTERMDISABLE</code>只能在HR Bank中使用，使用这个原语可以禁用输入缓冲器，并在USE_IBUFDISABLE属性被设置为1且IBUFDISABLE信号被断定为1时，将O输出到结构中</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162207759.png" alt="image-20221224162207759"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162207759.png" alt="image-20221224162207759"></p>
 <p><code>IBUFDS</code>和<code>IBUFGDS</code>是IBUF的差分版本，常用于差分时钟信号的输入控制</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224161634962.png" alt="image-20221224161634962"></p>
-<h3 id="IBUFDS-DIFF-OUT和IBUFGDS-DIFF-OUT"><a href="#IBUFDS-DIFF-OUT和IBUFGDS-DIFF-OUT" class="headerlink" title="IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT"></a>IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT</h3><p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162528406.png" alt="image-20221224162528406"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224161634962.png" alt="image-20221224161634962"></p>
+<h3 id="IBUFDS-DIFF-OUT和IBUFGDS-DIFF-OUT"><a href="#IBUFDS-DIFF-OUT和IBUFGDS-DIFF-OUT" class="headerlink" title="IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT"></a>IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT</h3><p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162528406.png" alt="image-20221224162528406"></p>
 <p>这个原语用于接收差分形式输入的信号，并将其转换成一对互补输出O和OB</p>
 <p>它也可以使用<code>IBUFDISABLE</code>和<code>INTERMDISABLE</code></p>
 <h3 id="IOBUF"><a href="#IOBUF" class="headerlink" title="IOBUF"></a>IOBUF</h3><p>同时具有输入和输出功能的缓冲器原语，结构如下所示</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162746935.png" alt="image-20221224162746935"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162746935.png" alt="image-20221224162746935"></p>
 <p>它也可以使用<code>IBUFDISABLE</code>和<code>INTERMDISABLE</code>功能端</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162818855.png" alt="image-20221224162818855"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162818855.png" alt="image-20221224162818855"></p>
 <p>也有用于差分信号的原语<code>IOBUFDS</code></p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162919471.png" alt="image-20221224162919471"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224162919471.png" alt="image-20221224162919471"></p>
 <h3 id="OBUF"><a href="#OBUF" class="headerlink" title="OBUF"></a>OBUF</h3><p>只能用于输出的缓冲器原语，常用于各种信号从FPGA内向引脚输出</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224163014457.png" alt="image-20221224163014457"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224163014457.png" alt="image-20221224163014457"></p>
 <p>调用<code>OBUFTDS</code>可以实现三态输出</p>
-<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224163123078.png" alt="image-20221224163123078"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90FPGA%E5%BA%95%E5%B1%82IO%E3%80%91/image-20221224163123078.png" alt="image-20221224163123078"></p>
 <h3 id="原语调用"><a href="#原语调用" class="headerlink" title="原语调用"></a>原语调用</h3><p>使用下面语句即可调用IOBUF</p>
 <figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">IOBUF #(</span><br><span class="line">    <span class="variable">.DRIVE</span>(<span class="number">12</span>), <span class="comment">// 输出驱动强度</span></span><br><span class="line">    <span class="variable">.IBUF_LOW_PWR</span>(<span class="string">&quot;TRUE&quot;</span>), <span class="comment">// HR = &quot;TRUE&quot;, HP = &quot;FALSE&quot; </span></span><br><span class="line">    <span class="variable">.IOSTANDARD</span>(<span class="string">&quot;DEFAULT&quot;</span>), <span class="comment">// IO标准</span></span><br><span class="line">    <span class="variable">.SLEW</span>(<span class="string">&quot;SLOW&quot;</span>) <span class="comment">// 速率等级</span></span><br><span class="line">) IOBUF_inst (</span><br><span class="line">    <span class="variable">.O</span>(user_out), <span class="comment">// IOBUF输出端（用户信号输入端）</span></span><br><span class="line">    <span class="variable">.IO</span>(user_io), <span class="comment">// IOBUF输入输出端（直连到顶层模块）</span></span><br><span class="line">    <span class="variable">.I</span>(user_in), <span class="comment">// IOBUF输入端（用户信号输出端）</span></span><br><span class="line">    <span class="variable">.T</span>(user_tri) <span class="comment">// 三态控制端, 高电平输入, 低电平输出 </span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 ]]></content>
@@ -883,8 +1020,8 @@
 <p>使用sv编写，包含了主机、从机接口与对应的内部互联架构，代码较多就不列出了，每个接口内部都使用了一个状态机实现AHB协议逻辑。使用中需要注意：总线矩阵的主从机接口应该与设备的主从机接口互补，也就是主机的master连到interconnect的slave，interconnect的master连到从机的slave</p>
 ]]></content>
       <tags>
-        <tag>stm32</tag>
         <tag>FPGA</tag>
+        <tag>stm32</tag>
       </tags>
   </entry>
   <entry>
@@ -11259,7 +11396,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sed -i</span><br></pre></td></tr></table></figure>
 
 <p>特别地，安装软件包时如果碰到了kmod字样的软件包，就说明这是一个内核驱动包，在安装它的时候很可能会遇到内核版本不正确的情况——因为自行编译的OpenWrt生成时会自动携带一个经过修改的md5码，它往往和已有的内核驱动应该对应的验证码不一致，因此会出现报错，这种情况下在安装指令后面加上如下参数就可以解决问题了</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">--force-depends</span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line"><span class="comment">--force-depends</span></span><br></pre></td></tr></table></figure>
 
 <p>如果还是不行，甚至出现系统崩溃、变砖的情况，就要考虑是否是自己的软件源选错抑或是自己编译的内核版本不对了</p>
 <p>这就是为什么在上面反复强调要注意内核版本与内核驱动</p>
@@ -11908,7 +12045,7 @@
 <li>不兼容idf4.1以下使用的TCP/IP适配器相关函数，需修改代码进行迁移</li>
 </ul>
 <p>ESP-NETIF结构如下（摘自官方文档）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">                 |          (A) USER CODE                 |</span><br><span class="line">                 |                                        |</span><br><span class="line">    .............| init          settings      events     |</span><br><span class="line">    .            +----------------------------------------+</span><br><span class="line">    .               .                |           *</span><br><span class="line">    .               .                |           *</span><br><span class="line">--------+        +===========================+   *     +-----------------------+</span><br><span class="line">        |        | new/config     get/set    |   *     |                       |</span><br><span class="line">        |        |                           |...*.....| init                  |</span><br><span class="line">        |        |---------------------------|   *     |                       |</span><br><span class="line">  init  |        |                           |****     |                       |</span><br><span class="line">  start |********|  event handler            |*********|  DHCP                 |</span><br><span class="line">  stop  |        |                           |         |                       |</span><br><span class="line">        |        |---------------------------|         |                       |</span><br><span class="line">        |        |                           |         |    NETIF              |</span><br><span class="line">  +-----|        |                           |         +-----------------+     |</span><br><span class="line">  | glue|----&lt;---|  esp_netif_transmit       |--&lt;------| netif_output    |     |</span><br><span class="line">  |     |        |                           |         |                 |     |</span><br><span class="line">  |     |----&gt;---|  esp_netif_receive        |--&gt;------| netif_input     |     |</span><br><span class="line">  |     |        |                           |         + ----------------+     |</span><br><span class="line">  |     |....&lt;...|  esp_netif_free_rx_buffer |...&lt;.....| packet buffer         |</span><br><span class="line">  +-----|        |                           |         |                       |</span><br><span class="line">        |        |                           |         |         (D)           |</span><br><span class="line">  (B)   |        |          (C)              |         +-----------------------+</span><br><span class="line">--------+        +===========================+</span><br><span class="line">communication                                                NETWORK STACK</span><br><span class="line">DRIVER                   ESP-NETIF</span><br></pre></td></tr></table></figure>
+<figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">                 |<span class="string">          (A) USER CODE                 </span>|</span><br><span class="line">                 |<span class="string">                                        </span>|</span><br><span class="line">    .............|<span class="string"> init          settings      events     </span>|</span><br><span class="line">    .            +----------------------------------------+</span><br><span class="line">    .               .                |<span class="string">           *</span></span><br><span class="line"><span class="string">    .               .                </span>|<span class="string">           *</span></span><br><span class="line"><span class="string">--------+        +===========================+   *     +-----------------------+</span></span><br><span class="line"><span class="string">        </span>|<span class="string">        </span>|<span class="string"> new/config     get/set    </span>|<span class="string">   *     </span>|<span class="string">                       </span>|</span><br><span class="line">        |<span class="string">        </span>|<span class="string">                           </span>|<span class="string">...*.....</span>|<span class="string"> init                  </span>|</span><br><span class="line">        |<span class="string">        </span>|<span class="string">---------------------------</span>|<span class="string">   *     </span>|<span class="string">                       </span>|</span><br><span class="line">  init  |<span class="string">        </span>|<span class="string">                           </span>|<span class="string">****     </span>|<span class="string">                       </span>|</span><br><span class="line">  start |<span class="string">********</span>|<span class="string">  event handler            </span>|<span class="string">*********</span>|<span class="string">  DHCP                 </span>|</span><br><span class="line">  stop  |<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         </span>|<span class="string">                       </span>|</span><br><span class="line">        |<span class="string">        </span>|<span class="string">---------------------------</span>|<span class="string">         </span>|<span class="string">                       </span>|</span><br><span class="line">        |<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         </span>|<span class="string">    NETIF              </span>|</span><br><span class="line">  +-----|<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         +-----------------+     </span>|</span><br><span class="line">  |<span class="string"> glue</span>|<span class="string">----&lt;---</span>|<span class="string">  esp_netif_transmit       </span>|<span class="string">--&lt;------</span>|<span class="string"> netif_output    </span>|<span class="string">     </span>|</span><br><span class="line">  |<span class="string">     </span>|<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         </span>|<span class="string">                 </span>|<span class="string">     </span>|</span><br><span class="line">  |<span class="string">     </span>|<span class="string">----&gt;---</span>|<span class="string">  esp_netif_receive        </span>|<span class="string">--&gt;------</span>|<span class="string"> netif_input     </span>|<span class="string">     </span>|</span><br><span class="line">  |<span class="string">     </span>|<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         + ----------------+     </span>|</span><br><span class="line">  |<span class="string">     </span>|<span class="string">....&lt;...</span>|<span class="string">  esp_netif_free_rx_buffer </span>|<span class="string">...&lt;.....</span>|<span class="string"> packet buffer         </span>|</span><br><span class="line">  +-----|<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         </span>|<span class="string">                       </span>|</span><br><span class="line">        |<span class="string">        </span>|<span class="string">                           </span>|<span class="string">         </span>|<span class="string">         (D)           </span>|</span><br><span class="line">  (B)   |<span class="string">        </span>|<span class="string">          (C)              </span>|<span class="string">         +-----------------------+</span></span><br><span class="line"><span class="string">--------+        +===========================+</span></span><br><span class="line"><span class="string">communication                                                NETWORK STACK</span></span><br><span class="line"><span class="string">DRIVER                   ESP-NETIF</span></span><br></pre></td></tr></table></figure>
 
 <p>其中……代表初始化；—-&gt;—或—&lt;—-代表数据包走向；******代表操作系统的事件调用；|代表用户代码的设置和运行时的配置</p>
 <h2 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h2><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><ol>
@@ -12017,10 +12154,10 @@
 <p>此外，VFS还为输入和输出提供可选的换行符转换功能，可以通过menuconfig来设置输出结尾的换行符</p>
 <h3 id="标准流IO与移植的FreeRTOS"><a href="#标准流IO与移植的FreeRTOS" class="headerlink" title="标准流IO与移植的FreeRTOS"></a>标准流IO与移植的FreeRTOS</h3><p><strong>stdin、stdout和stderr的FILE指针（对象句柄）在所有FreeRTOS任务之间共享</strong>，指向这些对象的指针分别存储在每个任务的<code>struct _reent</code>中</p>
 <p>为了处理各个任务之间的文件指针临界区，预处理器把如下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fprintf(stderr, &quot;42\n&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">fprintf</span>(stderr, <span class="string">&quot;42\n&quot;</span>);</span><br></pre></td></tr></table></figure>
 
 <p>解释为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">fprintf(__getreent()-&gt;_stderr, &quot;42\n&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight livescript"><table><tr><td class="code"><pre><span class="line">fprintf<span class="function"><span class="params">(__getreent()-&gt;_stderr, <span class="string">&quot;42\n&quot;</span>)</span>;</span></span><br></pre></td></tr></table></figure>
 
 <p>__getreent函数返回一个指向struct _reent的指针</p>
 <p><strong>每个任务的TCB都拥有一个struct _reent结构体，用于在本任务内处理文件而不影响其他任务</strong></p>
@@ -12084,7 +12221,7 @@
 <p>CMake配置自动传递给spiffsgen.py工具生成映像。单独调用 <code>spiffsgen.py</code> 时需要用到 <em>image_size</em> 参数，但在CMake中调用<code>spiffs_create_partition_image</code>时仅需要 <em>partition</em> 参数，<strong>映像大小将直接从当前工程的分区表中获取</strong>。</p>
 <p>注意：在CMake中使用<code>spiffs_create_partition_image</code>，需从组件CMakeLists.txt文件调用</p>
 <p>下面是一个标准的SPIFFS分区表示例</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Name,   Type, SubType, Offset,  Size, Flags</span><br><span class="line"># Note: if you have increased the bootloader size, make sure to update the offsets to avoid overlap</span><br><span class="line">nvs,      data, nvs,     0x9000,  0x6000,</span><br><span class="line">phy_init, data, phy,     0xf000,  0x1000,</span><br><span class="line">factory,  app,  factory, 0x10000, 1M,</span><br><span class="line">storage,  data, spiffs,  ,        0xF0000, </span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Name,   Type, SubType, Offset,  Size, Flags</span></span><br><span class="line"><span class="comment"># <span class="doctag">Note:</span> if you have increased the bootloader size, make sure to update the offsets to avoid overlap</span></span><br><span class="line"><span class="attribute">nvs</span>,      data, nvs,     <span class="number">0</span>x<span class="number">9000</span>,  <span class="number">0</span>x<span class="number">6000</span>,</span><br><span class="line"><span class="attribute">phy_init</span>, data, phy,     <span class="number">0</span>xf<span class="number">000</span>,  <span class="number">0</span>x<span class="number">1000</span>,</span><br><span class="line"><span class="attribute">factory</span>,  app,  factory, <span class="number">0</span>x<span class="number">10000</span>, <span class="number">1</span>M,</span><br><span class="line"><span class="attribute">storage</span>,  data, spiffs,  ,        <span class="number">0</span>xF<span class="number">0000</span>, </span><br></pre></td></tr></table></figure>
 
 <p><strong>需要使用SubType=spiffs标识出某一分区是SPIFFS存储分区</strong></p>
 <h2 id="SPIFFS配置与API参考"><a href="#SPIFFS配置与API参考" class="headerlink" title="SPIFFS配置与API参考"></a>SPIFFS配置与API参考</h2><p>在文件中调用<code>#include &quot;esp_spiffs.h&quot;</code>就可以使用相关API</p>
@@ -12129,7 +12266,7 @@
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"># Name,   Type, SubType, Offset,  Size, Flags</span><br><span class="line">nvs,        data, nvs,      <span class="number">0x9000</span>,  <span class="number">0x6000</span>,</span><br><span class="line"># Extra partition to demonstrate reading/writing of encrypted flash</span><br><span class="line">storage,    data, <span class="number">0xff</span>,     <span class="number">0xf000</span>,  <span class="number">0x1000</span>, encrypted</span><br><span class="line">factory,    app,  factory,  <span class="number">0x10000</span>, <span class="number">1</span>M,</span><br></pre></td></tr></table></figure>
 
 <p>如果所有分区都需以加密格式更新，则可使用以下命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">idf.py encrypted-flash monitor</span><br></pre></td></tr></table></figure>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">idf.py <span class="keyword">encrypted</span>-flash monitor</span><br></pre></td></tr></table></figure>
 
 <p>只要 <code>FLASH_CRYPT_CNT</code> eFuse 设置为奇数位的值，所有通过MMU的FLASH缓存访问的FLASH内容都将被透明解密：MMU FLASH缓存将无条件解密所有数据</p>
 <ol start="3">
@@ -12607,7 +12744,7 @@
 <p>为了减少传输的数据量，BLE协议做了一个转换约定，给定一个固定的16字节模板，只设置2个字节为变化量，其他为常量，2字节的UUID在系统内部会被替换，进而转换成标准的16字节UUID；反之，如果一个特征值的UUID是16字节的，在系统内部它的属性类型也可能写成第3、4字节组成的双字节</p>
 <p>示例如下：</p>
 <p>UUID模板为</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">0000XXXX-0000-1000-8000-00805F9B34FB</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">0000XXXX</span>-<span class="number">0000</span>-<span class="number">1000</span>-<span class="number">8000</span>-<span class="number">00805</span>F<span class="number">9</span>B<span class="number">34</span>FB</span><br></pre></td></tr></table></figure>
 
 <p>其中从左数第3、4个字节“XXXX”就是变化位，其他为固定位。如：UUID=0x2A00在系统内部会转换成00002A00-0000-1000-8000-00805F9B34FB。</p>
 </li>
@@ -12926,7 +13063,7 @@
 <h1 id="项目文件夹构建"><a href="#项目文件夹构建" class="headerlink" title="项目文件夹构建"></a>项目文件夹构建</h1><p>ESP-IDF项目由各种“组件”构成，你需要什么功能就要往里扔进去什么组件</p>
 <p>如果你的代码里用了一堆WiFi的库函数，但是没把WiFi组件加入进去，你是没办法用WiFi功能的</p>
 <p>项目保存在项目文件夹下，它的根目录如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">├── CMakeLists.txt				Cmake使用的文件</span><br><span class="line">├── other_documents				其他文件</span><br><span class="line">├── main						存储主程序</span><br><span class="line">│   ├── CMakeLists.txt			</span><br><span class="line">│   ├── component.mk           组件的make file</span><br><span class="line">│   └── main.c</span><br><span class="line">└── Makefile                   由传统的GNU make程序使用的Makefile</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">├── CMakeLists<span class="selector-class">.txt</span>				Cmake使用的文件</span><br><span class="line">├── other_documents				其他文件</span><br><span class="line">├── <span class="selector-tag">main</span>						存储主程序</span><br><span class="line">│   ├── CMakeLists<span class="selector-class">.txt</span>			</span><br><span class="line">│   ├── component<span class="selector-class">.mk</span>           组件的make file</span><br><span class="line">│   └── <span class="selector-tag">main</span><span class="selector-class">.c</span></span><br><span class="line">└── Makefile                   由传统的GNU make程序使用的Makefile</span><br></pre></td></tr></table></figure>
 
 <p>需要注意的是：<strong>ESP-IDF并不是项目文件夹的一部分</strong>，它更像是一个自助编译器，项目文件夹通过idf.py esptools等工具和${IDF_PATH}与ESP-IDF目录建立联系；同样，esp的开发工具链也独立于项目存在，通过${PATH}对项目进行作用</p>
 <p>项目建立前，esp-idf会通过idf.py menuconfig配置出Makefile，这些配置保存在sdkconfig中。sdkconfig会被保存在项目文件夹的根目录</p>
@@ -13247,39 +13384,39 @@
 <span id="more"></span>
 
 <h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>使用 # 号可表示 1-6 级标题，一级标题对应一个 # 号，二级标题对应两个 # 号，以此类推。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">##### 五级标题</span><br><span class="line">###### 六级标题</span><br></pre></td></tr></table></figure>
 
 <p>例：</p>
 <h1 id="你好"><a href="#你好" class="headerlink" title="你好"></a>你好</h1><h2 id="你好-1"><a href="#你好-1" class="headerlink" title="你好"></a>你好</h2><h3 id="你好-2"><a href="#你好-2" class="headerlink" title="你好"></a>你好</h3><h4 id="你好-3"><a href="#你好-3" class="headerlink" title="你好"></a>你好</h4><h5 id="你好-4"><a href="#你好-4" class="headerlink" title="你好"></a>你好</h5><h6 id="你不好"><a href="#你不好" class="headerlink" title="你不好"></a>你不好</h6><h2 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h2><p>Markdown 可以使用以下几种字体：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*斜体*</span><br><span class="line">_斜体_</span><br><span class="line">**粗体**</span><br><span class="line">__粗体__</span><br><span class="line">***粗斜体***</span><br><span class="line">___粗斜体___</span><br></pre></td></tr></table></figure>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="strong">*斜体*</span></span><br><span class="line"><span class="emphasis">_斜体_</span></span><br><span class="line"><span class="strong">**粗体**</span></span><br><span class="line"><span class="emphasis">__粗体__</span></span><br><span class="line"><span class="strong">***粗斜体**</span>*</span><br><span class="line"><span class="emphasis">___粗斜体__</span>_</span><br></pre></td></tr></table></figure>
 
 <p>为了方便可以统一记为*是强调符号，一对为斜体，两对为更加强调的粗体，三对是非常强调的粗斜体</p>
 <p>例：<br><em>苍茫的天涯是我的爱</em><br><em>月亮之上</em><br><strong>无他，唯手熟耳</strong><br><strong>1d100=100【大失败】</strong><br><em><strong>提桶跑路</strong></em><br><em><strong>讲个笑话，钓鱼佬今天没空军</strong></em></p>
 <h2 id="高亮强调"><a href="#高亮强调" class="headerlink" title="高亮强调"></a>高亮强调</h2><p>用四个等于号=包围需要强调的内容即可实现</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">==独轮车 tskk 独轮车==</span><br></pre></td></tr></table></figure>
+<figure class="highlight haml"><table><tr><td class="code"><pre><span class="line">=<span class="ruby">=独轮车 tskk 独轮车==</span></span><br></pre></td></tr></table></figure>
 
 <p>例：</p>
 <p>==独轮车 tskk 独轮车==</p>
 <p>注意：Hexo暂不支持高亮强调功能，所以上面的内容会显示错误，实际内容应该是下图所示</p>
 <p><img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/image-20211114175616156.png" alt="image-20211114175616156"></p>
 <h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><p>用三个或以上*号单独成行表示分割线</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">***</span><br></pre></td></tr></table></figure>
+<figure class="highlight asciidoc"><table><tr><td class="code"><pre><span class="line"><span class="strong">***</span></span><br></pre></td></tr></table></figure>
 <p>例：</p>
 <hr>
 <p>下面是【数据删除】个星号*写的，猜猜有什么特殊的地方？</p>
 <hr>
 <p>显然 用很多*写出分割线可以在代码层面增加你文章的气势，具体原因留给读者自行证明</p>
 <h2 id="上标与下标"><a href="#上标与下标" class="headerlink" title="上标与下标"></a>上标与下标</h2><p>用两个^表示上标<br>用两个~表示下标</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1919^114514^</span><br><span class="line"> 今天~也是好天气~</span><br></pre></td></tr></table></figure>
+<figure class="highlight dns"><table><tr><td class="code"><pre><span class="line"><span class="number">1919^114514</span>^</span><br><span class="line"> 今天~也是好天气~</span><br></pre></td></tr></table></figure>
 <p>例：<br><img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/image-20211114180249618.png" alt="image-20211114180249618"></p>
 <h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;!--注释内容--&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!--注释内容--&gt;</span></span><br></pre></td></tr></table></figure>
 <p>表示注释<br>例：</p>
 <!--肖战必糊-->
 <p>虽然什么也没有显示<br>但这里确实有注释，我也并没有在注释里骂人</p>
 <h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>Markdown 支持有序列表和无序列表。</p>
 <p>无序列表使用星号(*)、加号(+)或是减号(-)作为列表标记，这些标记后面要添加一个空格，然后再填写内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">* 第二项</span><br><span class="line">* 第三项</span><br><span class="line"></span><br><span class="line">+ 第一项</span><br><span class="line">+ 第二项</span><br><span class="line">+ 第三项</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 第一项</span><br><span class="line">- 第二项</span><br><span class="line">- 第三项</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">*</span> 第一项</span><br><span class="line"><span class="bullet">*</span> 第二项</span><br><span class="line"><span class="bullet">*</span> 第三项</span><br><span class="line"></span><br><span class="line"><span class="bullet">+</span> 第一项</span><br><span class="line"><span class="bullet">+</span> 第二项</span><br><span class="line"><span class="bullet">+</span> 第三项</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> 第一项</span><br><span class="line"><span class="bullet">-</span> 第二项</span><br><span class="line"><span class="bullet">-</span> 第三项</span><br></pre></td></tr></table></figure>
 <p>例：</p>
 <ul>
 <li>第一项</li>
@@ -13293,7 +13430,7 @@
 <p>为了记忆简单，可统一记为*后面接空格意味着一个无序列表项</p>
 <hr>
 <p>有序列表使用数字并加上 . 号来表示，如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 第一项</span><br><span class="line">2. 第二项</span><br><span class="line">3. 第三项</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">1.</span> 第一项</span><br><span class="line"><span class="bullet">2.</span> 第二项</span><br><span class="line"><span class="bullet">3.</span> 第三项</span><br></pre></td></tr></table></figure>
 <p>例：</p>
 <ol>
 <li>amdyes!</li>
@@ -13301,14 +13438,14 @@
 <li>intel还在做cpu？</li>
 </ol>
 <h2 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h2><p>Markdown 区块引用是在段落开头使用 &gt; 符号 ，然后后面紧跟一个<strong>空格</strong>符号：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; 区块引用</span><br><span class="line">&gt; 衬衫的价格是9镑15便士</span><br><span class="line">&gt; 下面你将听到</span><br></pre></td></tr></table></figure>
+<figure class="highlight node-repl"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;</span> <span class="javascript">区块引用</span></span><br><span class="line"><span class="meta">&gt;</span> <span class="javascript">衬衫的价格是<span class="number">9</span>镑<span class="number">15</span>便士</span></span><br><span class="line"><span class="meta">&gt;</span> <span class="javascript">下面你将听到</span></span><br></pre></td></tr></table></figure>
 
 <p>另外区块是可以嵌套的，一个 &gt; 符号是最外层，两个 &gt; 符号是第一层嵌套，以此类推：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt; 最外层</span><br><span class="line">&gt;&gt; 第一层嵌套</span><br><span class="line">&gt;&gt;&gt; 第二层嵌套</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> 最外层</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt; 第一层嵌套</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;&gt; 第二层嵌套</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="列表中使用区块"><a href="#列表中使用区块" class="headerlink" title="列表中使用区块"></a>列表中使用区块</h3><p>如果要在列表项目内放进区块，那么就需要在 &gt; 前添加四个空格的缩进</p>
 <p>例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">    &gt; 传统markdown要讲码德</span><br><span class="line">    &gt; 在这里劝这位年轻码农耗子尾汁</span><br><span class="line">* 第二项</span><br><span class="line">	&gt; 芜湖</span><br><span class="line">	&gt; &gt; 起飞 &lt;!--中间加不加空格都行--&gt;</span><br><span class="line">	&gt;&gt;&gt; 飞飞飞</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">* 第一项</span><br><span class="line">    &gt; 传统markdown要讲码德</span><br><span class="line">    &gt; 在这里劝这位年轻码农耗子尾汁</span><br><span class="line">* 第二项</span><br><span class="line">	&gt; 芜湖</span><br><span class="line">	&gt; &gt; 起飞 <span class="comment">&lt;!--中间加不加空格都行--&gt;</span></span><br><span class="line">	&gt;&gt;&gt; 飞飞飞</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>第一项<blockquote>
@@ -13327,35 +13464,35 @@
 </li>
 </ul>
 <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>如果是段落上的一个函数或片段的代码可以用反引号把它包起来（`），例如：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">`printf()` 函数</span><br></pre></td></tr></table></figure>
+<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line">`printf()` 函数</span><br></pre></td></tr></table></figure>
 
 <h3 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h3><p>代码区块使用 <strong>4 个空格</strong>或者一个<strong>制表符（Tab 键）</strong>。</p>
 <p>也可以用 ```包裹一段代码，并指定一种语言（也可以不指定）：</p>
 <p>在大多数Markdown编辑器中，```旁边可以加语言名字添加对应的语法高亮</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">```javascript</span><br><span class="line">$(document).ready(function () &#123;</span><br><span class="line">    alert(&#x27;RUNOOB&#x27;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 链接</span><br><span class="line"></span><br><span class="line">链接使用方法如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">```<span class="javascript">javascript</span></span><br><span class="line"><span class="javascript">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    alert(<span class="string">&#x27;RUNOOB&#x27;</span>);</span></span><br><span class="line"><span class="javascript">&#125;);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight clean"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 链接</span><br><span class="line"></span><br><span class="line">链接使用方法如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接名称</a></p>
 <p>或者</p>
 <p>&lt;链接地址&gt;</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p> 哦我的老伙计，瞧瞧这条链接<br>  <a href="https://www.runoob.com/">感谢菜鸟教程提供部分资料（其实是大部分）</a><br> 或<a href="https://wosuibianzhaogewangzhan.com/">https://wosuibianzhaogewangzhan.com</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[感谢菜鸟教程提供部分资料（其实是大部分）](https://www.runoob.com)</span><br><span class="line"></span><br><span class="line">或&lt;https://wosuibianzhaogewangzhan.com&gt;</span><br><span class="line"></span><br><span class="line">### 高级链接</span><br><span class="line"></span><br><span class="line">可以通过变量来设置一个链接，变量赋值在文档末尾进行：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">[感谢菜鸟教程提供部分资料（其实是大部分）](https:<span class="regexp">//</span>www.runoob.com)</span><br><span class="line"></span><br><span class="line">或&lt;https:<span class="regexp">//</span>wosuibianzhaogewangzhan.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">### 高级链接</span></span><br><span class="line"></span><br><span class="line">可以通过变量来设置一个链接，变量赋值在文档末尾进行：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>用 1 作为网址变量 <a href="http://www.pornhub.com/">pxxnhub</a><br>用 rua 作为网址变量 <a href="https://space.bilibili.com/15810">Rua</a><br>然后在文档的结尾为变量赋值（网址）</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">[pxxnhub][1]</span><br><span class="line">[Rua][rua]</span><br><span class="line"></span><br><span class="line">[1]: http://www.pornhub.com/</span><br><span class="line">[rua]: https://space.bilibili.com/15810</span><br><span class="line">## 图片</span><br><span class="line"></span><br><span class="line">Markdown 图片语法格式如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-attr">[pxxnhub]</span><span class="selector-attr">[1]</span></span><br><span class="line"><span class="selector-attr">[Rua]</span><span class="selector-attr">[rua]</span></span><br><span class="line"></span><br><span class="line"><span class="selector-attr">[1]</span>: <span class="selector-tag">http</span>:<span class="comment">//www.pornhub.com/</span></span><br><span class="line"><span class="selector-attr">[rua]</span>: <span class="selector-tag">https</span>:<span class="comment">//space.bilibili.com/15810</span></span><br><span class="line">## 图片</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">Markdown</span> 图片语法格式如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/%E6%88%91%E4%B9%9F%E4%B8%8D%E7%9F%A5%E9%81%93%E8%AF%A5%E6%94%BE%E4%BB%80%E4%B9%88%EF%BC%8C%E7%9E%8E%E5%86%99%E5%90%A7" alt="介写了个嘛玩意"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 开头一个感叹号 !</span><br><span class="line">- 接着一个方括号，里面放上图片的替代文字</span><br><span class="line">- 接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上选择性的 &#x27;title&#x27; 属性的文字。</span><br><span class="line"></span><br><span class="line">//抱歉没有例子，奇怪的图片发出来的话，人生就要结束了（悲）</span><br><span class="line"></span><br><span class="line">Markdown 还没有办法指定图片的高度与宽度，如果需要的话，可以使用普通的 \&lt;img\&gt; 标签。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight haml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">-<span class="ruby"> 开头一个感叹号 !</span></span><br><span class="line"><span class="ruby"></span>-<span class="ruby"> 接着一个方括号，里面放上图片的替代文字</span></span><br><span class="line"><span class="ruby"></span>-<span class="ruby"> 接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上选择性的 <span class="string">&#x27;title&#x27;</span> 属性的文字。</span></span><br><span class="line"><span class="ruby"></span><span class="comment"></span></span><br><span class="line"><span class="comment">//抱歉没有例子，奇怪的图片发出来的话，人生就要结束了（悲）</span></span><br><span class="line"></span><br><span class="line">Markdown 还没有办法指定图片的高度与宽度，如果需要的话，可以使用普通的 \&lt;img\&gt; 标签。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/原文这里是runoob的一张图" width="50%">
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 表格</span><br><span class="line"></span><br><span class="line">Markdown 制作表格使用 | 来分隔不同的单元格，使用 - 来分隔表头和其他行。</span><br><span class="line"></span><br><span class="line">语法格式如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">## 表格</span></span><br><span class="line"></span><br><span class="line">Markdown 制作表格使用 <span class="string">| 来分隔不同的单元格，使用 - 来分隔表头和其他行。</span></span><br><span class="line"></span><br><span class="line">语法格式如下：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 ![image-20211114180218183](Markdown基本语法.assets/image-20211114180218183.png)
 
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 对齐方式</span><br><span class="line"></span><br><span class="line">**我们可以设置表格的对齐方式：**</span><br><span class="line"></span><br><span class="line">* -: 设置内容和标题栏居右对齐。</span><br><span class="line">* :- 设置内容和标题栏居左对齐。</span><br><span class="line">* :-: 设置内容和标题栏居中对齐。</span><br><span class="line">例：</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="section">### 对齐方式</span></span><br><span class="line"></span><br><span class="line"><span class="strong">**我们可以设置表格的对齐方式：**</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> -: 设置内容和标题栏居右对齐。</span><br><span class="line"><span class="bullet">*</span> :- 设置内容和标题栏居左对齐。</span><br><span class="line"><span class="bullet">*</span> :-: 设置内容和标题栏居中对齐。</span><br><span class="line">例：</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/11/14/Markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/image-20211114180140933.png" alt="image-20211114180140933"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">| 左对齐 | 右对齐 | 居中对齐 |</span><br><span class="line">| :-----| ----: | :----: |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line">| 单元格 | 单元格 | 单元格 |</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## HTML 元素</span><br><span class="line"></span><br><span class="line">不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。</span><br><span class="line"></span><br><span class="line">目前支持的 HTML 元素有：`&lt;kbd&gt; &lt;b&gt; &lt;i&gt; &lt;em&gt; &lt;sup&gt; &lt;sub&gt; &lt;br&gt;`等 ，如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">|<span class="string"> 左对齐 </span>|<span class="string"> 右对齐 </span>|<span class="string"> 居中对齐 </span>|</span><br><span class="line">|<span class="string"> :-----</span>|<span class="string"> ----: </span>|<span class="string"> :----: </span>|</span><br><span class="line">|<span class="string"> 单元格 </span>|<span class="string"> 单元格 </span>|<span class="string"> 单元格 </span>|</span><br><span class="line">|<span class="string"> 单元格 </span>|<span class="string"> 单元格 </span>|<span class="string"> 单元格 </span>|</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## HTML 元素</span></span><br><span class="line"></span><br><span class="line">不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。</span><br><span class="line"></span><br><span class="line">目前支持的 HTML 元素有：`<span class="variable">&lt;kbd&gt;</span> <span class="variable">&lt;b&gt;</span> <span class="variable">&lt;i&gt;</span> <span class="variable">&lt;em&gt;</span> <span class="variable">&lt;sup&gt;</span> <span class="variable">&lt;sub&gt;</span> <span class="variable">&lt;br&gt;</span>`等 ，如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>使用 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Del</kbd> 重启电脑</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">使用 &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;Alt&lt;/kbd&gt;+&lt;kbd&gt;Del&lt;/kbd&gt; 重启电脑</span><br><span class="line"></span><br><span class="line">## 转义</span><br><span class="line"></span><br><span class="line">Markdown 使用了很多特殊符号来表示特定的意义，如果需要显示特定的符号则需要使用转义字符，Markdown 使用反斜杠转义特殊字符：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">使用 &lt;<span class="selector-tag">kbd</span>&gt;Ctrl&lt;/<span class="selector-tag">kbd</span>&gt;+&lt;<span class="selector-tag">kbd</span>&gt;Alt&lt;/<span class="selector-tag">kbd</span>&gt;+&lt;<span class="selector-tag">kbd</span>&gt;<span class="selector-tag">Del</span>&lt;/<span class="selector-tag">kbd</span>&gt; 重启电脑</span><br><span class="line"></span><br><span class="line">## 转义</span><br><span class="line"></span><br><span class="line">Markdown 使用了很多特殊符号来表示特定的意义，如果需要显示特定的符号则需要使用转义字符，Markdown 使用反斜杠转义特殊字符：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><strong>文本加粗</strong><br>** 正常显示星号 **</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attribute">Markdown</span> 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>\   反斜线<br>`   反引号</p>
 <ul>
 <li>  星号<br>_   下划线<br>{}  花括号<br>[]  方括号<br>()  小括号<h1 id="井字号"><a href="#井字号" class="headerlink" title="井字号"></a>井字号</h1></li>
@@ -13364,7 +13501,7 @@
 <li>  加号</li>
 </ul>
 <ul>
-<li>  减号<br>.   英文句点<br>!   感叹号<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 公式</span><br><span class="line"></span><br><span class="line">当你需要在编辑器中插入数学公式时，可以使用两个美元符 $$ 包裹 TeX 或 LaTeX 格式的数学公式来实现。提交后，问答和文章页会根据需要加载 Mathjax 对数学公式进行渲染。</span><br><span class="line"></span><br><span class="line">不过这个东西和渲染器有关，对于不同编辑器可能会不支持某些latex特性</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<li>  减号<br>.   英文句点<br>!   感叹号<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">## 公式</span></span><br><span class="line"></span><br><span class="line">当你需要在编辑器中插入数学公式时，可以使用两个美元符 <span class="variable">$</span><span class="variable">$</span> 包裹 TeX 或 LaTeX 格式的数学公式来实现。提交后，问答和文章页会根据需要加载 Mathjax 对数学公式进行渲染。</span><br><span class="line"></span><br><span class="line">不过这个东西和渲染器有关，对于不同编辑器可能会不支持某些latex特性</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 $$<br>思考题：\lim_{x\rarr 0}\frac{tanx}{x+sinx} =?<br>$$</li>
 </ul>
 <p>$$<br>\frac{dx}{dt}=v<br>\mathbf{V}_1 \times \mathbf{V}_2<br>$$</p>
@@ -15505,13 +15642,13 @@ $$
 <p>主要分以下型号：</p>
 <ul>
 <li>专注低功耗的<strong>1xx</strong>通用型，配备1KB-60KB FLASH、512B-10KB RAM，工作时耗电仅达200uA/MIPS，RAM保持模式耗电0.1uA，RTC模式耗电0.7uA；可在6us之内快速唤醒。搭载10/12位斜率SAR ADC，集成模拟比较器、DMA、硬件乘法器、BOR、SVS、12位DAC</li>
-<li>能耗比高的<strong>F2xx</strong>通用型，性能<a href="mailto:&#49;&#x36;&#77;&#x49;&#80;&#x53;&#64;&#51;&#46;&#x33;&#x56;">&#49;&#x36;&#77;&#x49;&#80;&#x53;&#64;&#51;&#46;&#x33;&#x56;</a>，配备1-120KB FLASH，8-128KB RAM，工作耗电220uA，配备10/12位斜率SAR ADC，集成16位Σ-ΔADC，基本上等于1xx的升级版</li>
-<li><strong>性价比</strong>高的<strong>G2xx</strong>经济型，性能<a href="mailto:&#49;&#54;&#77;&#73;&#80;&#x53;&#x40;&#x33;&#x2e;&#x33;&#x56;">&#49;&#54;&#77;&#73;&#80;&#x53;&#x40;&#x33;&#x2e;&#x33;&#x56;</a>，对标友商stm32l，主打模拟外设和低功耗</li>
+<li>能耗比高的<strong>F2xx</strong>通用型，性能<a href="mailto:&#49;&#x36;&#x4d;&#x49;&#x50;&#83;&#64;&#x33;&#x2e;&#51;&#x56;">&#49;&#x36;&#x4d;&#x49;&#x50;&#83;&#64;&#x33;&#x2e;&#51;&#x56;</a>，配备1-120KB FLASH，8-128KB RAM，工作耗电220uA，配备10/12位斜率SAR ADC，集成16位Σ-ΔADC，基本上等于1xx的升级版</li>
+<li><strong>性价比</strong>高的<strong>G2xx</strong>经济型，性能<a href="mailto:&#49;&#x36;&#x4d;&#73;&#80;&#83;&#x40;&#51;&#x2e;&#x33;&#86;">&#49;&#x36;&#x4d;&#73;&#80;&#83;&#x40;&#51;&#x2e;&#x33;&#86;</a>，对标友商stm32l，主打模拟外设和低功耗</li>
 <li>面向计量和智能电网的AFE2xx专用型：性能略低于以上两个2xx系列，但是集成了1-3个独立的24位Σ-ΔADC，一个16位定时器、一个16位硬件乘法器、USART控制器、看门狗和GPIO</li>
 <li>停产的老型号3xx</li>
 <li>面向低功耗<strong>多媒体</strong>的<strong>4xx</strong>控制型，8-16MIPS处理性能，<strong>配备LCD控制器</strong>、<strong>FLL、SVS</strong>，针对低功耗测量和医疗应用，功耗和1xx相近，4-120KB FLASH、8-256KB RAM，引脚丰富最多可达80Pin，配备10/12位斜率SAR、16位Σ-ΔADC，同样集成了12位ADC、DMA、硬件乘法器、运放、USCI模块等</li>
-<li><strong>超高能耗比的5xx超低功耗型</strong>，能达到<a href="mailto:&#x32;&#53;&#77;&#73;&#x50;&#x53;&#x40;&#51;&#x2e;&#x33;&#x56;">&#x32;&#53;&#77;&#73;&#x50;&#x53;&#x40;&#51;&#x2e;&#x33;&#x56;</a>，工作模式功耗165uA/MIPS，RTC模式2.5uA，RAM保持模式可达1uA，待机唤醒时间极短，小于5ms，配备256KB FLASH、18KB RAM，额外集成了USB、模拟比较器</li>
-<li>高性能、低功耗的6xx系列旗舰型，达到<a href="mailto:&#50;&#53;&#x4d;&#x49;&#80;&#83;&#x40;&#51;&#46;&#x33;&#86;">&#50;&#53;&#x4d;&#x49;&#80;&#83;&#x40;&#51;&#46;&#x33;&#86;</a>，配备功耗优化的创新电源管理模块和USB控制器，配备LCD控制器，有256KB FLASH、18KB RAM，74Pin引脚，功耗与5xx系列相同，还额外集成了电压管理模块</li>
+<li><strong>超高能耗比的5xx超低功耗型</strong>，能达到<a href="mailto:&#50;&#x35;&#x4d;&#73;&#80;&#x53;&#64;&#51;&#x2e;&#51;&#86;">&#50;&#x35;&#x4d;&#73;&#80;&#x53;&#64;&#51;&#x2e;&#51;&#86;</a>，工作模式功耗165uA/MIPS，RTC模式2.5uA，RAM保持模式可达1uA，待机唤醒时间极短，小于5ms，配备256KB FLASH、18KB RAM，额外集成了USB、模拟比较器</li>
+<li>高性能、低功耗的6xx系列旗舰型，达到<a href="mailto:&#x32;&#x35;&#77;&#x49;&#80;&#83;&#64;&#x33;&#46;&#x33;&#86;">&#x32;&#x35;&#77;&#x49;&#80;&#83;&#64;&#x33;&#46;&#x33;&#86;</a>，配备功耗优化的创新电源管理模块和USB控制器，配备LCD控制器，有256KB FLASH、18KB RAM，74Pin引脚，功耗与5xx系列相同，还额外集成了电压管理模块</li>
 <li>基于<strong>FRAM</strong>技术的<strong>FRxx</strong>系列，和主要的F系列差别在于使用了FRAM存储技术，能够达到更快的FLASH访问速度并在所有功率模式下实现零功率状态保持，即使发生功率损耗的情况也可以保证写入操作，写入寿命能达到100M个周期，不再需要EEPROM</li>
 <li>低电压C、L系列，两个谢列都可以在0.9-1.65V电压范围内工作并提供4MIPS的性能</li>
 <li>集成射频基带的CC无线系列，具有低于1GHz的片上射频收发器，工作电压为1.8-3.3V，处理性能20MIPS</li>

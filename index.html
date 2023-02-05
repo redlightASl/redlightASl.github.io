@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 73 -->
+			<!-- 总文章数 74 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -229,6 +229,185 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/13/%E6%88%91%E7%9A%84%E6%96%B0%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-FPGA学习笔记7【基本输入输出逻辑】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/">FPGA学习笔记7【基本输入输出逻辑】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/" class="archive-article-date">
+  	<time datetime="2023-02-05T02:17:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2023-02-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文主要参考官方文档<strong>UG471</strong>编写，更多内容可以参考官方手册</p>
+<h1 id="FPGA学习笔记7【基本输入输出逻辑】"><a href="#FPGA学习笔记7【基本输入输出逻辑】" class="headerlink" title="FPGA学习笔记7【基本输入输出逻辑】"></a>FPGA学习笔记7【基本输入输出逻辑】</h1><p>7000系FPGA提供了丰富的IO资源。FPGA内部，晶圆中间部分是由CLB构成的岛型阵列，外围环绕着用于将信号引出的IO块，被称为IO Block，即<strong>IOB</strong>。所有IOB都按照<strong>bank</strong>分组，主要分成两大类：<strong>高性能</strong>（High Performance，HP）和<strong>高电压范围</strong>（High Range，HR）</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224152427320.png" alt="image-20221224152427320"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224152535298.png" alt="image-20221224152535298"></p>
+<p>二者主要差别如上图所示</p>
+<p>HR Bank具有更低的延迟和较小的驱动电流以及一些额外功能；HR Bank能支持更高的电压标准（2.5V和3.3V）。在板级硬件设计中，需要根据外围电路电平标准优先考虑使用哪种bank</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224164742255.png" alt="image-20221224164742255"></p>
+<p>上图是HP Bank结构图</p>
+<p>下图是HR Bank结构图，可以发现HR Bank不能控制输出Delay</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224164810711.png" alt="image-20221224164810711"></p>
+<h2 id="IO-Bank"><a href="#IO-Bank" class="headerlink" title="IO Bank"></a>IO Bank</h2><p>一个IO Bank由50个<strong>IOB</strong>（IO Block）组成，器件的封装和型号决定了有多少bank可用。<strong>每个bank的最末端两个IO只能适用于单端I/O标准</strong>；剩下的48个的引脚可以使用单端或差分标准——两个IO引脚能组成差分对。</p>
+<p>最末端两个IO被称为<em>单端IO</em>（Single-Ended IO）；其他的IO被称为<em>普通IO</em>（Regular IO）或差分IO</p>
+<p>支持的IO电平标准如下</p>
+<ul>
+<li>单端I/O标准：<strong>LVCMOS</strong>、<strong>LVTTL</strong>、HSTL、PCI、SSTL</li>
+<li>差分I/O标准：<strong>LVDS</strong>、Mini_LVDS、RSDS、PPDS、BLVDS、差分HSTL、SSTL</li>
+</ul>
+<p>单端、差分情况下的每种bank内部电路如下图所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224153940429.png" alt="image-20221224153940429"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224153952247.png" alt="image-20221224153952247"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224154004155.png" alt="image-20221224154004155"></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224154015405.png" alt="image-20221224154015405"></p>
+<p>可以看出，单端IOB和普通IOB基本上是等同的，每个IOB都包含输入O、输出I和三态驱动器T以及一些内部缓冲器电路。只不过单端IO没有连接来产生差分输出信号；而HR Bank相较HP Bank缺少了<code>DCI Term Disable</code>端口来进行片上终端使能控制</p>
+<h3 id="DCI"><a href="#DCI" class="headerlink" title="DCI"></a>DCI</h3><p>随着FPGA越来越大，系统时钟速度越来越快，PCB的设计和制造变得更加困难，信号完整性SI成为一个关键问题。PCB上的导线必须被正确端接以避免反射或振铃。</p>
+<p>一般来说需要在传输线两端接入匹配电阻，使输出和输入与接收器或驱动器的阻抗相匹配。然而，由于设备I/O的增加，在设备引脚附近添加电阻会增加电路板面积和元件数量。为了解决这些问题并实现更好的信号完整性，Xilinx在7000系FPGA内提供了<strong>数字控制阻抗</strong>（Digitally Controlled Impedance，<strong>DCI</strong>）技术。根据不同的I/O标准，DCI可以主动调整I/O内部驱动器的输出阻抗，从而准确<em>匹配传输线VRN和VRP上外部精密参考电阻</em>的特性阻抗，这样就<strong>不需要在电路板上安装多余的终端电阻</strong>，减少了电路板的布线困难和元件数量</p>
+<p>DCI还会不断调整阻抗以补偿温度和电源电压的变化。</p>
+<p>注意：<strong>DCI只适用于7000系FPGA的HP Bank</strong></p>
+<p>在每个Bank中，使用两个多用途的参考引脚来确定这组IO Bank要匹配的终端阻抗。将N参考引脚（VRN）通过一个精密参考电阻拉高到VCCO；而P参考引脚（VRP）通过另一个参考电阻拉低到地。<strong>每个参考电阻的值应等于IO对应PCB导线的特性阻抗或其两倍</strong></p>
+<p>完成硬件设计后，只需要在FPGA物理约束中确定DCI电平标准即可使用</p>
+<h3 id="IO-Bank电源"><a href="#IO-Bank电源" class="headerlink" title="IO Bank电源"></a>IO Bank电源</h3><ol>
+<li><p><strong>VCCO电源</strong></p>
+<p> VCCO电源是7000系FPGA里IOB的主要电源。一个IO Bank里的所有VCCO引脚都必须连接到电路板上相同的外部电源，因此一个特定的I/O组中的所有I/O都必须与外部电源共享相同的VCCO电平。不正确的VCCO电压可能会导致IO功能失效甚至损坏器件</p>
+<blockquote>
+<p>HP Bank中，若IO电压低于1.8V但VCCO大于2.5V，器件会进入过压保护模式，用正确的VCCO电平重新配置器件才能恢复正常</p>
+</blockquote>
+</li>
+<li><p><strong>VREF</strong></p>
+<p> 带有差分输入缓冲器的单端I/O需要一个输入参考电压VREF。当一个IO组内需要VREF时，该组的两个多功能VREF引脚必须用作VREF电源输入。</p>
+<p> 通过启用INTERNAL_VREF约束，可以选择使用内部产生的参考电压</p>
+</li>
+<li><p><strong>VCCAUX</strong></p>
+<p> 全局辅助电源VCCAUX主要用于为7000系FPGA内的各种块的互连逻辑（也就是连线资源）提供电源</p>
+<p> VCCAUX也被用来为某些IO标准的输入缓冲电路供电——包括所有1.8V或低于1.8V的单端I/O标准，在HR Bank使用2.5V的IO标准时，也会使用VCCAUX获取供电</p>
+<p> I/O Bank的差分输入缓冲器也使用VCCAUX供电</p>
+</li>
+<li><p><strong>VCCAUX_IO</strong></p>
+<p> 辅助I/O电源VCCAUX_IO只存在于HP Bank，负责为高速I/O电路提供电源。使用独立供电可以满足某些类型内存接口的更高频率性能</p>
+<p> LVDS使用的驱动电路与单端驱动不同，后者受VCCAUX_IO的影响更大。因此对于LVDS接口来说VCCAUX_IO的电压影响不大</p>
+</li>
+</ol>
+<h2 id="MIO、EMIO与GPIO"><a href="#MIO、EMIO与GPIO" class="headerlink" title="MIO、EMIO与GPIO"></a>MIO、EMIO与GPIO</h2><p>Xilinx Zynq-7000设备中搭载了三个功能类似的片上外设：</p>
+<ul>
+<li>MIO：Multiuse-IO</li>
+<li>EMIO：Extendable Multiuse-IO</li>
+<li>GPIO：General Purpose IO</li>
+</ul>
+<p>其中<strong>MIO是PS端对片外的接口</strong>，<strong>EMIO是PS端与PL端的接口</strong>，GPIO则是具有IO功能外设的统称，在PS端集成了一套GPIO，同样可以在PL端用HDL写出一个GPIO外设</p>
+<p>观察系统框图可以发现PS部分的所有外设都需要先复用到MIO再引出片外。而部分外设可以选择先通过EMIO连接到PL端，再引出片外</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115756037.png" alt="image-20220226115756037"></p>
+<blockquote>
+<p>Zynq的核心是PS端的ARM核，将FPGA视为它的一个外设</p>
+<p>从这个EMIO也可以反映出这个观点</p>
+</blockquote>
+<p>PS端的引脚信号如下所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115408735.png" alt="image-20220226115408735"></p>
+<p>Clock、Reset、DDR三个部分都是固定的，暂且不看，可以发现MIO有三组引脚，其中PS_MIO_VREF引脚是MIO1电源域的参考引脚；PS_MIO引脚被分成了两组，分别使用MIO0电源域和MIO1电源域的参考电压，分组信息如下所示：</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226115621256.png" alt="image-20220226115621256"></p>
+<p>ug585手册中还给出了PS-PL-MIO-EMIO的接口框图</p>
+<blockquote>
+<p>MIO是PS端的基础IO外设，不过IO外设信号也可以通过EMIO连接到PL端</p>
+</blockquote>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20220226120053383.png" alt="image-20220226120053383"></p>
+<p>从上面的系统框图中可以看出，PS端内核通过AHB、APB总线控制PS IO外设控制器（<strong>IOP</strong>），从而驱动MIO或EMIO。IOP可以同时管理MIO、EMIO的复用器。</p>
+<p>需要注意：IOP就是传统意义上的GPIO，它通过复用连接到诸如I2C控制器、SPI控制器、SDIO控制器等外设上，从而为这些外设提供输出驱动，与此同时该设备不能像FPGA或者说FPIOA那样可以任意分配引脚，每个外设都被分配了固定的几组引脚，限制相对较大</p>
+<p>与PS部分的AXI接口不同，EMIO只能将来自IOP的信号连接到PL端，并不能形成完整的总线架构</p>
+<h2 id="IO原语（SelectIO-Primitives）"><a href="#IO原语（SelectIO-Primitives）" class="headerlink" title="IO原语（SelectIO Primitives）"></a>IO原语（SelectIO Primitives）</h2><p>在编写RTL中，可以选择直接调用Xilinx提供的IOB原语来使用某些具有特殊功能的IO，可用的单端IO原语如下所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224160836505.png" alt="image-20221224160836505"></p>
+<p>可用的差分IO原语如下所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224160907027.png" alt="image-20221224160907027"></p>
+<p>下面来简单介绍几个常用的原语</p>
+<h3 id="IBUF和IBUFG"><a href="#IBUF和IBUFG" class="headerlink" title="IBUF和IBUFG"></a>IBUF和IBUFG</h3><p><code>IBUFG</code>原语用于时钟输入，综合器会调用一个输入缓冲器来实现电路，从而保证时钟的低抖动</p>
+<p><code>IBUF_IBUFDISABLE</code>原语用于禁用一个IBUF，并强制O引脚输出高电平，尝尝用于关闭不需要的输入缓冲器降低功耗</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224161356493.png" alt="image-20221224161356493"></p>
+<p><code>IBUF_INTERMDISABLE</code>只能在HR Bank中使用，使用这个原语可以禁用输入缓冲器，并在USE_IBUFDISABLE属性被设置为1且IBUFDISABLE信号被断定为1时，将O输出到结构中</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162207759.png" alt="image-20221224162207759"></p>
+<p><code>IBUFDS</code>和<code>IBUFGDS</code>是IBUF的差分版本，常用于差分时钟信号的输入控制</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224161634962.png" alt="image-20221224161634962"></p>
+<h3 id="IBUFDS-DIFF-OUT和IBUFGDS-DIFF-OUT"><a href="#IBUFDS-DIFF-OUT和IBUFGDS-DIFF-OUT" class="headerlink" title="IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT"></a>IBUFDS_DIFF_OUT和IBUFGDS_DIFF_OUT</h3><p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162528406.png" alt="image-20221224162528406"></p>
+<p>这个原语用于接收差分形式输入的信号，并将其转换成一对互补输出O和OB</p>
+<p>它也可以使用<code>IBUFDISABLE</code>和<code>INTERMDISABLE</code></p>
+<h3 id="IOBUF"><a href="#IOBUF" class="headerlink" title="IOBUF"></a>IOBUF</h3><p>同时具有输入和输出功能的缓冲器原语，结构如下所示</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162746935.png" alt="image-20221224162746935"></p>
+<p>它也可以使用<code>IBUFDISABLE</code>和<code>INTERMDISABLE</code>功能端</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162818855.png" alt="image-20221224162818855"></p>
+<p>也有用于差分信号的原语<code>IOBUFDS</code></p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224162919471.png" alt="image-20221224162919471"></p>
+<h3 id="OBUF"><a href="#OBUF" class="headerlink" title="OBUF"></a>OBUF</h3><p>只能用于输出的缓冲器原语，常用于各种信号从FPGA内向引脚输出</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224163014457.png" alt="image-20221224163014457"></p>
+<p>调用<code>OBUFTDS</code>可以实现三态输出</p>
+<p><img src="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/image-20221224163123078.png" alt="image-20221224163123078"></p>
+<h3 id="原语调用"><a href="#原语调用" class="headerlink" title="原语调用"></a>原语调用</h3><p>使用下面语句即可调用IOBUF</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">IOBUF #(</span><br><span class="line">    <span class="variable">.DRIVE</span>(<span class="number">12</span>), <span class="comment">// 输出驱动强度</span></span><br><span class="line">    <span class="variable">.IBUF_LOW_PWR</span>(<span class="string">&quot;TRUE&quot;</span>), <span class="comment">// HR = &quot;TRUE&quot;, HP = &quot;FALSE&quot; </span></span><br><span class="line">    <span class="variable">.IOSTANDARD</span>(<span class="string">&quot;DEFAULT&quot;</span>), <span class="comment">// IO标准</span></span><br><span class="line">    <span class="variable">.SLEW</span>(<span class="string">&quot;SLOW&quot;</span>) <span class="comment">// 速率等级</span></span><br><span class="line">) IOBUF_inst (</span><br><span class="line">    <span class="variable">.O</span>(user_out), <span class="comment">// IOBUF输出端（用户信号输入端）</span></span><br><span class="line">    <span class="variable">.IO</span>(user_io), <span class="comment">// IOBUF输入输出端（直连到顶层模块）</span></span><br><span class="line">    <span class="variable">.I</span>(user_in), <span class="comment">// IOBUF输入端（用户信号输出端）</span></span><br><span class="line">    <span class="variable">.T</span>(user_tri) <span class="comment">// 三态控制端, 高电平输入, 低电平输出 </span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2023/02/05/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B07%E3%80%90%E5%9F%BA%E6%9C%AC%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%80%BB%E8%BE%91%E3%80%91/">展开全文 >></a>
         </p>
       
 
@@ -966,91 +1145,6 @@
 
 
   
-    <article id="post-硬件人的PyTorch【基础内容】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9%E3%80%91/">硬件人的PyTorch【基础内容】</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9%E3%80%91/" class="archive-article-date">
-  	<time datetime="2022-03-22T12:14:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-03-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>本系列博文主要根据开源的<a target="_blank" rel="noopener" href="https://github.com/datawhalechina/thorough-pytorch">thorough-pytorch</a>项目编写，感谢datawhalechina团队的dalao们分享学习经验</strong></p>
-<h1 id="PyTorch基础简介"><a href="#PyTorch基础简介" class="headerlink" title="PyTorch基础简介"></a>PyTorch基础简介</h1><p><strong>PyTorch</strong>是由Facebook人工智能研究小组开发的一种基于<strong>Lua</strong>编写的Torch库的<strong>Python实现</strong>的<strong>深度学习库</strong>，目前被广泛应用于学术界和工业界，由于Caffe2（一个简单易用基于python的深度学习框架）并入了PyTorch，它的社区逐渐膨胀并开始影响到TensorFlow在深度学习应用框架领域的统治地位。<em>PyTorch自从提出就获得巨大的关注以及用户数量的剧增</em></p>
-<blockquote>
-<p>时代变了，大人</p>
-<p>到现在为止PyTorch还是有不如别的框架的地方，但是框架只是给我们提供了轮子，让我们造汽车更加方便，最重要的还是我们个人的科学素养的提升</p>
-<p>PyTorch提供类似NumPy的接口和调试方法，这使它容易上手且方便易用</p>
-</blockquote>
-<p>对于现在的边缘计算设备，跑一个由PyTorch实现的深度学习模型已经不是天方夜谭，而PyTorch除了能够实现深度学习模型的开发，还可以作为前向软件框架将一个完整的模型跑在嵌入式平台</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">机器学习与机器视觉</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/03/22/%E7%A1%AC%E4%BB%B6%E4%BA%BA%E7%9A%84PyTorch%E3%80%90%E5%9F%BA%E7%A1%80%E5%86%85%E5%AE%B9%E3%80%91/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1065,7 +1159,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 RedlightASl
+    		&copy; 2023 RedlightASl
 			本站文章全部使用CC-BY-SA与GPL3.0协议开源
     	</div>
       	<div class="footer-right">

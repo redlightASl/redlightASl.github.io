@@ -64,7 +64,7 @@
 			</ul>
 		</nav>
 		<!-- <nav> -->
-			<!-- 总文章数 75 -->
+			<!-- 总文章数 76 -->
 		<!-- </nav>		 -->
 		<nav class="header-smart-menu">
     		
@@ -162,6 +162,87 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-FPGA学习笔记3【基于Vivado封装自定义IP】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E3%80%90%E5%9F%BA%E4%BA%8EVivado%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89IP%E3%80%91/">FPGA学习笔记3【基于Vivado封装自定义IP】</a>
+    </h1>
+  
+
+        
+        <!-- 不蒜子统计 -->
+<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
+
+<a href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E3%80%90%E5%9F%BA%E4%BA%8EVivado%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89IP%E3%80%91/" class="archive-article-date">
+  	<time datetime="2021-11-19T08:11:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="封装带AXI接口的自定义IP核"><a href="#封装带AXI接口的自定义IP核" class="headerlink" title="封装带AXI接口的自定义IP核"></a>封装带AXI接口的自定义IP核</h1><p>为了更方便地使用外部接口驱动或进行系统级的设计时，可以考虑将RTL设计打包制作成自定义的IP核，Vivado会自动生成相关的IP核接口；或者为了在ZYNQ中使用AXI总线将硬核与FPGA硬件部分互联，可以将FPGA部分的RTL设计打包成自定义IP核，Vivado会自动将生成的IP核的接口制作好，使用图形化界面就能快速实现SoC设计。特别地，可以使用这种方法在硬核外挂载软核</p>
+<p>在Vivado的设计思想中，一个IP核就相当于一个函数，可以通过重用IP核做到模块化设计的效果</p>
+<p>可以参考Xilinx Vivado封装自定义IP参考手册【代号ug1118】来获得更详细的操作指示</p>
+<p>第一部分仅说明带AXI接口的自定义IP核封装方法</p>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">FPGA</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/11/19/FPGA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B03%E3%80%90%E5%9F%BA%E4%BA%8EVivado%E5%B0%81%E8%A3%85%E8%87%AA%E5%AE%9A%E4%B9%89IP%E3%80%91/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-FPGA学习笔记2【基础概念】" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -897,84 +978,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2021/11/19/vim%E6%93%8D%E4%BD%9C%E7%AE%80%E4%BB%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-OpenWrt简单软件配置" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/11/19/OpenWrt%E7%AE%80%E5%8D%95%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/">OpenWrt简单软件配置</a>
-    </h1>
-  
-
-        
-        <!-- 不蒜子统计 -->
-<span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-	<i class="icon-smile icon"></i> 本文阅读数:<span id="busuanzi_value_page_pv"></span>次</span>
-
-<a href="/2021/11/19/OpenWrt%E7%AE%80%E5%8D%95%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/" class="archive-article-date">
-  	<time datetime="2021-11-19T07:59:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="OpenWrt软件配置"><a href="#OpenWrt软件配置" class="headerlink" title="OpenWrt软件配置"></a>OpenWrt软件配置</h1><p>上一篇讲述过如何在硬件设备中部署OpenWrt并进行基础的网络使用，这里重点介绍OpenWrt的软件配置</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">IoT</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/11/19/OpenWrt%E7%AE%80%E5%8D%95%E8%BD%AF%E4%BB%B6%E9%85%8D%E7%BD%AE/">展开全文 >></a>
         </p>
       
 
